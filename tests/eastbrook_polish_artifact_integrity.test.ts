@@ -724,9 +724,6 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // with the release branch's organized renderer imports. Both parents move
 // renderer.ts, so the rendererIntegration leaf mints a value matching neither
 // parent. No capture was retaken.
-// Re-minted for the Grimtusk the Ironhide Boar mount PR: extracting the
-// ambient-mount-fx dispatch out of renderer.ts into src/render/mount_fx.ts
-// moves the rendererIntegration leaf. No capture was retaken.
 // Re-minted after the point-light adoption seam moved the fire-light budget
 // pass out of renderer.ts into fire_light_registry.ts. renderer.ts is a
 // provenance input, so the composite moves and the swept evidence bytes follow.
@@ -739,11 +736,22 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // both parents move renderer.ts, so the composite mints a value matching neither
 // parent and this metadata authority sha follows the swept bytes. No capture was
 // retaken.
-// Re-minted for the merge of release/v0.38.0 into feature/veil-wraith-courser-mount:
-// both parents move renderer.ts (this branch's mount_fx.ts extraction, the
-// release's fire-light-registry extraction and moon-phase grade threading), so
-// the composite mints a value matching neither parent and this metadata
-// authority sha follows the swept bytes. No capture was retaken.
+// Re-minted for PR #3339's healGlowAt view-eviction fix on the newer release
+// renderer. The rendererIntegration leaf and swept evidence bytes move; no
+// capture was retaken.
+// Re-minted for PR #3344 after removing the unused Eastbrook civic-beacon
+// preload test hook. The civicShader leaf and swept evidence bytes move; no
+// capture was retaken.
+// Re-minted after applying the PR #3339 review repair atop PR #3344. The
+// rendererIntegration and civicShader leaves both survive, and the swept
+// evidence follows the combined inputs. No capture was retaken.
+// Re-minted for final PR #3345 integration. The reviewed offscreen-heal
+// renderer bytes remain while the Three.js patch, lockfile, and accepted GLBs
+// join the provenance inputs. No capture was retaken.
+// Re-minted after extracting entity-view policy from renderer.ts to satisfy
+// the release monolith ratchet. Behavior is unchanged; no capture was retaken.
+// Re-minted again after registering the extracted policy as its own provenance
+// leaf. The captures remain unchanged and were not retaken.
 // Re-minted for the quest-collectable spawn gate: this branch's renderer.ts
 // edits (the view gate call sites and the ground-object pool key move) shift
 // the runtimeRender.renderer leaf, the only leaf that moved. No Eastbrook
@@ -755,29 +763,51 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // live body can take, plus the lazy form-visual fold): the first-order
 // composite follows renderer.ts, then this seal follows the swept evidence
 // bytes. No capture was retaken.
-// Re-minted for the merge of the Windrend the Stormveil Shadewolf mount branch
-// (mount_fx.ts's frost-trail dispatch case) with the release branch's further
-// renderer.ts extractions: both parents move renderer.ts, so the composite
-// mints a value matching neither parent and this metadata authority sha
-// follows the swept bytes. No capture was retaken.
 // Re-minted for the r185 frozen-camera aim fix: the first-order composite
 // follows renderer.ts, then this seal follows the swept evidence bytes. No
 // capture was retaken.
-// Re-minted for the merge of release/v0.39.0 into the Windrend the Stormveil
-// Shadewolf mount branch: the first-order composite mints anew and this
-// metadata authority sha follows the swept bytes. No capture was retaken.
-// Re-minted for the mounted-rider frame update extraction into
-// src/render/mount_rider_lock.ts (#3365 rider-lock follow-up): the first-order
-// composite follows renderer.ts, then this seal follows the swept evidence
-// bytes. No capture was retaken.
-// Re-minted for rebasing feature/veil-wraith-courser-mount (#3365) onto the
-// latest release/v0.39.0: renderer.ts moved on both sides since this branch
-// last synced, so the composite mints a value matching neither and this
-// metadata authority sha follows the swept bytes. No capture was retaken.
+// Re-minted again after extracting the delve interior build-cache scheduling
+// into src/render/delve_interior_tracker.ts (renderer.ts moved, no capture retaken).
+// Re-minted again for the login preview/self-spirit prewarm merge with the
+// delve interior tracker extraction. Renderer/prewarm bytes moved; captures
+// were adopted verbatim.
+// Re-minted for the sky KTX2 UASTC HDR conversion: the first-order composite
+// follows renderer.ts, then this seal follows the swept evidence bytes. No
+// capture was retaken.
+// Re-minted for the corrected PR #3446 merge: the v0.39 wrapper renderer and
+// prewarm repairs combine with the sky KTX2 renderer bytes, then this seal
+// follows the swept evidence bytes. No capture was retaken.
+// Re-minted for the vfx.mount-programs prewarm entry (#2571): the first-order
+// composite follows renderer.ts and prewarm_policy.ts, then this seal follows
+// the swept evidence bytes. No capture was retaken.
+// Re-minted for the vfx.mount-programs review fixes (scene-reparent bug,
+// honest desktop-path progress, depth compile, timeout-bounded fetch,
+// constrained-device removal): the first-order composite follows renderer.ts
+// and prewarm_policy.ts, then this seal follows the swept evidence bytes. No
+// capture was retaken.
+// Re-minted for the PR #3447 merge: the first-order composite follows the
+// combined v0.39 wrapper, corrected PR #3446 sky KTX2 renderer bytes, and
+// mount-program prewarm bytes, then this seal follows the swept evidence bytes.
+// No capture was retaken.
+// Re-minted for the moved-base v0.39 wrapper refresh: the first-order
+// composite follows the combined castle renderer bytes and v0.39 wrapper
+// bytes, then this seal follows the swept evidence bytes. No capture was
+// retaken.
+// Re-minted for the approved PR #3425 merge into the v0.39 wrapper: the
+// first-order composite follows the resolved renderer bytes, then this seal
+// follows the swept evidence bytes. No capture was retaken.
+// Re-minted after syncing current release/v0.39.0 into the v0.39 wrapper: the
+// first-order composite follows the retained self-spirit prewarm and delve
+// rebuild renderer bytes, then this seal follows the swept evidence bytes. No
+// capture was retaken.
+// Re-minted for the merge of release/v0.40.0 into feature/veil-wraith-courser-mount
+// (#3365): the first-order composite follows the merged renderer.ts and
+// prewarm_policy.ts bytes, then this seal follows the swept evidence bytes.
+// No capture was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  '97df3088c5274685ca24bf679a731bbae087ce34b51d82c5a744604721d582fc';
+  'a0520593b35807ad3f95a32746ea096e6c275572de85c8875e453ba7c3f7c34d';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  'abbcf3b7ec90806ce4d5862c643051c7d9b71e44751360131d3d22ee392b80cd';
+  '14c911250bf9cf9916253733e472f35647c3de394efba7d213eaf3034dbbf6d1';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -1742,20 +1772,26 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // composite follows the merged renderer.ts bytes, then this second-order
     // performance seal follows the swept evidence bytes. No capture was
     // retaken.
-    // Re-pinned for the Grimtusk the Ironhide Boar mount PR: the first-order
-    // composite follows the ambient-mount-fx dispatch extraction out of
-    // renderer.ts into src/render/mount_fx.ts, then this second-order
-    // performance seal follows the swept evidence bytes. No capture was
-    // retaken.
     // Re-minted for the merge of release/v0.38.0 into the night-lighting branch:
     // both parents move renderer.ts, so the first-order composite mints anew and
     // this second-order seal follows the swept evidence bytes. No capture was
     // retaken.
-    // Re-minted for the merge of release/v0.38.0 into feature/veil-wraith-courser-mount:
-    // both parents move renderer.ts (this branch's mount_fx.ts extraction, the
-    // release's fire-light-registry extraction and moon-phase grade threading), so
-    // the first-order composite mints anew and this second-order seal follows the
-    // swept evidence bytes. No capture was retaken.
+    // Re-pinned for PR #3339's healGlowAt view-eviction fix on the newer release
+    // renderer. The first-order composite follows renderer.ts, then this
+    // second-order seal follows the swept evidence bytes. No capture was retaken.
+    // Re-pinned for PR #3344 after removing the unused Eastbrook civic-beacon
+    // preload test hook. The first-order composite follows the civicShader leaf,
+    // then this second-order seal follows the swept bytes. No capture was retaken.
+    // Re-pinned after applying the PR #3339 review repair atop PR #3344. The
+    // first-order composite follows both retained leaves, then this second-order
+    // seal follows the swept evidence bytes. No capture was retaken.
+    // Re-pinned for final PR #3345 integration. The first-order composite follows
+    // the combined renderer, lockfile, and GLBs, then this seal follows the swept
+    // evidence bytes. No capture was retaken.
+    // Re-pinned after extracting entity-view policy from renderer.ts for the
+    // monolith ratchet. The seal follows the swept bytes; no capture was retaken.
+    // Re-pinned again after the policy became an explicit provenance leaf. The
+    // performance records changed only in their swept provenance blocks.
     // Re-minted for the merge of release/v0.38.0 into the Armory warming
     // branch: the first-order composite follows the merged renderer.ts bytes,
     // then this second-order performance seal follows the swept evidence
@@ -1771,31 +1807,47 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // a live body can take, plus the lazy form-visual fold): the first-order
     // composite follows renderer.ts, then this seal follows the swept evidence
     // bytes. No capture was retaken.
-    // Re-minted for the merge of the Windrend the Stormveil Shadewolf mount
-    // branch (mount_fx.ts's frost-trail dispatch case) with the release
-    // branch's further renderer.ts extractions: the first-order composite
-    // mints anew and this second-order seal follows the swept evidence bytes.
-    // No capture was retaken.
     // Re-minted for the r185 frozen-camera aim fix. The first-order composite
     // follows renderer.ts, then this second-order performance seal follows the
     // swept evidence bytes. No capture was retaken.
-    // Re-minted for the merge of release/v0.39.0 into the Windrend the
-    // Stormveil Shadewolf mount branch: the first-order composite mints anew
-    // and this second-order seal follows the swept evidence bytes. No capture
-    // was retaken.
-    // Re-minted for the mounted-rider frame update extraction into
-    // src/render/mount_rider_lock.ts (#3365 rider-lock follow-up): the
-    // first-order composite follows renderer.ts, then this second-order seal
+    // Re-minted again after extracting the delve interior build-cache
+    // scheduling into src/render/delve_interior_tracker.ts. No capture retaken.
+    // Re-minted again for the merged prewarm and delve-tracker runtime inputs.
+    // No capture retaken.
+    // Re-minted for the vfx.mount-programs prewarm entry (#2571). The
+    // first-order composite follows renderer.ts and prewarm_policy.ts, then
+    // this second-order performance seal follows the swept evidence bytes. No
+    // capture was retaken.
+    // Re-minted for the vfx.mount-programs review fixes (scene-reparent bug,
+    // honest desktop-path progress, depth compile, timeout-bounded fetch,
+    // constrained-device removal). The first-order composite follows
+    // renderer.ts and prewarm_policy.ts, then this second-order performance
+    // seal follows the swept evidence bytes. No capture was retaken.
+    // Re-minted for the PR #3447 merge. The first-order composite follows the
+    // combined v0.39 wrapper, corrected PR #3446 sky KTX2 renderer bytes, and
+    // mount-program prewarm bytes, then this second-order performance seal
     // follows the swept evidence bytes. No capture was retaken.
-    // Re-minted for rebasing feature/veil-wraith-courser-mount (#3365) onto
-    // the latest release/v0.39.0: renderer.ts moved on both sides since this
-    // branch last synced, so the first-order composite mints anew and this
-    // second-order seal follows the swept evidence bytes. No capture was
-    // retaken.
+    // Re-minted for the moved-base v0.39 wrapper refresh. The first-order
+    // composite follows the combined castle renderer bytes and v0.39 wrapper
+    // bytes, then this second-order performance seal follows the swept
+    // evidence bytes. No capture was retaken.
+    // Re-minted for the approved PR #3425 merge into the v0.39 wrapper. The
+    // first-order composite follows the resolved renderer bytes, then this
+    // second-order performance seal follows the swept evidence bytes. No
+    // capture was retaken.
+    // Re-minted after syncing current release/v0.39.0 into the v0.39 wrapper.
+    // The first-order composite follows the retained self-spirit prewarm and
+    // delve rebuild renderer bytes, then this second-order performance seal
+    // follows the swept evidence bytes. No capture was retaken.
+    // Re-minted for the merge of release/v0.40.0 into
+    // feature/veil-wraith-courser-mount (#3365). The first-order composite
+    // follows the merged renderer.ts and prewarm_policy.ts bytes, then this
+    // second-order performance seal follows the swept evidence bytes. No
+    // capture was retaken.
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
-    ).toBe('7c0c6d4fc3c44bd039ecb86bba584688216e1da151fe8a717c3c74c19fb61789');
+    ).toBe('a27f4a876fd4601ab22112ac1c17d39028af82ed253421fbc526c10f995d8344');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {

@@ -145,9 +145,6 @@ interface AttributionTargetFixture {
 // (evictFarZoneIfConstrained) with the release branch's organized renderer
 // imports. Both parents move renderer.ts, so the rendererIntegration leaf
 // mints a value matching neither parent. No capture was retaken.
-// Re-minted for the Grimtusk the Ironhide Boar mount PR: extracting the
-// ambient-mount-fx dispatch out of renderer.ts into src/render/mount_fx.ts
-// moves the rendererIntegration leaf. No capture was retaken.
 // Re-minted after the point-light adoption seam moved the fire-light budget
 // pass out of renderer.ts into fire_light_registry.ts. renderer.ts is a
 // provenance input, so its bytes move the composite. No capture was retaken.
@@ -158,10 +155,19 @@ interface AttributionTargetFixture {
 // both parents move renderer.ts (the release's point-light seam, this branch's
 // moon-phase grade threading), so the merged tree mints a value matching
 // neither parent. No capture was retaken.
-// Re-minted for the merge of release/v0.38.0 into feature/veil-wraith-courser-mount:
-// both parents move renderer.ts (this branch's mount_fx.ts extraction, the
-// release's fire-light-registry extraction and moon-phase grade threading), so
-// the merged tree mints a value matching neither parent. No capture was retaken.
+// Re-minted for PR #3339's healGlowAt view-eviction fix on the newer release
+// renderer. The rendererIntegration leaf moves; no capture was retaken.
+// Re-minted for PR #3344 after removing the unused Eastbrook civic-beacon
+// preload test hook. The civicShader leaf moves; no capture was retaken.
+// Re-minted after applying the PR #3339 review repair atop PR #3344. The
+// rendererIntegration and civicShader leaves both survive; no capture was retaken.
+// Re-minted for final PR #3345 integration. The reviewed offscreen-heal
+// renderer bytes remain while the new lockfile and accepted GLBs join the
+// provenance inputs. No capture was retaken.
+// Re-minted after extracting entity-view policy from renderer.ts to satisfy
+// the release monolith ratchet. Behavior is unchanged; no capture was retaken.
+// Re-minted again after making that extracted policy an explicit provenance
+// leaf. The evidence now follows policy-only changes; no capture was retaken.
 // Re-minted for the merge of release/v0.38.0 into the Armory warming branch:
 // both parents move renderer.ts, so the merged tree mints a value matching
 // neither parent. No capture was retaken.
@@ -175,25 +181,44 @@ interface AttributionTargetFixture {
 // Re-minted for the review fixes on this branch (Soul Rend warms every rig a
 // live body can take, plus the lazy form-visual fold): renderer.ts moves
 // again, so the composite follows its bytes. No capture was retaken.
-// Re-minted for the merge of the Windrend the Stormveil Shadewolf mount branch
-// (mount_fx.ts's frost-trail dispatch case) with the release branch's further
-// renderer.ts extractions: both parents move renderer.ts, so the merged tree
-// mints a value matching neither parent. No capture was retaken.
 // Re-minted for the r185 frozen-camera aim fix: updateCamera now aims through
 // lookAtFrozen, so renderer.ts moves and the composite follows its bytes. No
 // capture was retaken.
-// Re-minted for the merge of release/v0.39.0 into the Windrend the Stormveil
-// Shadewolf mount branch: both parents move renderer.ts, so the merged tree
+// Re-minted after extracting the delve interior build-cache scheduling into
+// src/render/delve_interior_tracker.ts (renderer.ts moved again, no capture retaken).
+// Re-minted again for the login preview/self-spirit prewarm merge with the
+// delve interior tracker extraction. Renderer/prewarm bytes moved; captures
+// were adopted verbatim.
+// Re-minted for the sky KTX2 UASTC HDR conversion: the renderer publishes the
+// sky module's held textures into the residency table and its idle sky upload
+// comment follows the compressed path, so renderer.ts moves and the composite
+// follows its bytes. No capture was retaken.
+// Re-minted for the corrected PR #3446 merge: the v0.39 wrapper renderer and
+// prewarm repairs combine with the sky KTX2 renderer bytes, so the merged tree
 // mints a value matching neither parent. No capture was retaken.
-// Re-minted for the mounted-rider frame update extraction into
-// src/render/mount_rider_lock.ts (#3365 rider-lock follow-up): renderer.ts
-// moves and the composite follows its bytes. No capture was retaken.
-// Re-minted for rebasing feature/veil-wraith-courser-mount (#3365) onto the
-// latest release/v0.39.0: renderer.ts moved on both sides since this branch
-// last synced, so the merged tree mints a value matching neither parent. No
+// Re-minted for the vfx.mount-programs prewarm entry (#2571): renderer.ts and
+// prewarm_policy.ts both move, so the composite follows their bytes. No
 // capture was retaken.
+// Re-minted for the vfx.mount-programs review fixes (scene-reparent bug,
+// honest desktop-path progress, depth compile, timeout-bounded fetch,
+// constrained-device removal): renderer.ts and prewarm_policy.ts both move
+// again, so the composite follows their bytes. No capture was retaken.
+// Re-minted for the PR #3447 merge: the v0.39 wrapper, corrected PR #3446 sky
+// KTX2 renderer bytes, and mount-program prewarm bytes combine in one tree. No
+// capture was retaken.
+// Re-minted for the moved-base v0.39 wrapper refresh: the castle renderer bytes
+// and v0.39 wrapper bytes combine in one tree. No capture was retaken.
+// Re-minted for the approved PR #3425 merge into the v0.39 wrapper: the
+// resolved renderer bytes combine the delve tracker extraction with later
+// wrapper fixes. No capture was retaken.
+// Re-minted after syncing current release/v0.39.0 into the v0.39 wrapper: the
+// resolved renderer bytes retain the queued self-spirit prewarm and delve
+// rebuild repair. No capture was retaken.
+// Re-minted for the merge of release/v0.40.0 into feature/veil-wraith-courser-mount
+// (#3365): both parents move renderer.ts and prewarm_policy.ts, so the merged
+// tree mints a value matching neither parent. No capture was retaken.
 const PINNED_POLISH_COMPOSITE_FINGERPRINT =
-  'abbcf3b7ec90806ce4d5862c643051c7d9b71e44751360131d3d22ee392b80cd';
+  '14c911250bf9cf9916253733e472f35647c3de394efba7d213eaf3034dbbf6d1';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [
