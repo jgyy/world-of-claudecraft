@@ -8116,6 +8116,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.crafting.commissionToggle'
   | 'hudChrome.crafting.commissionToggleHint'
   | 'hudChrome.crafting.commissionUnbound'
+  | 'hudChrome.crafting.craftFeeLine'
   | 'hudChrome.crafting.craftedToast'
   | 'hudChrome.crafting.craftedToastQty'
   | 'hudChrome.crafting.crafting'
