@@ -75,6 +75,16 @@ smoke-test a packaged build against a local server:
 value: baked into the bundle and stamped into the app; such a build lands on the
 `dev` update channel automatically and cannot produce production feed files).
 
+For a fast CSP regression check without packaging at all, run
+`node scripts/csp_shell_smoke.mjs` against a running dev server: it attaches the real
+`buildContentSecurityPolicy()` output (electron/shell_guards.cjs) to the dev document,
+drives offline world entry AND a live graphics-settings-apply cycle in a real browser, and
+fails on any first-party CSP violation. Only packaged builds serve the CSP, so this is the
+only pre-pack way to see a policy break like the zstd KTX2 hang (world entry, and separately
+the Options > Graphics > Apply loading curtain). Its unit-level twin,
+`tests/gltf_decoder_csp.test.ts`, welds the CSP to the vendored three decoder sources and
+runs in every CI test pass.
+
 Build each OS on its own runner (mac artifacts on macOS, Windows artifacts on Windows,
 Linux artifacts on Linux). Cross-building is not part of this runbook.
 
