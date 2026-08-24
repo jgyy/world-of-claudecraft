@@ -172,6 +172,7 @@ import {
   type CivicServicePlacementsReader,
   createCivicServicePlacementsReader,
 } from './civic_service_placements';
+import { reanchorDecision } from './entity_reanchor';
 import { decodeGuildBankLogFrame, GUILD_BANK_LOG_TTL_MS } from './guild_bank_log_wire';
 import { INPUT_SEND_TIMER_INTERVAL_MS, inputFlushGateOpen } from './input_send_cadence';
 import { createNativeAttestationProof } from './native_attestation';
@@ -1233,11 +1234,6 @@ function copyPos(
   dst.y = src.y;
   dst.z = src.z;
 }
-
-// A single position update never moves an entity more than a few yards by
-// walking; anything past this is a teleport (arena pit, dungeon portal,
-// graveyard release). Those are snapped, not interpolated — see applyWire.
-const TELEPORT_SNAP_DIST_SQ = 40 * 40;
 
 // Despawn grace (anti-flicker, entity-map churn). The server keeps known
 // entities in interest out to a drop radius (100yd players / 130yd npcs) that is
@@ -3084,30 +3080,26 @@ export class ClientWorld implements IWorld {
             )
           : contAlpha;
       const entFacingAlpha = Math.min(1, entAlpha);
-      // per-entity update clock: distant entities are sent below snapshot
-      // rate, so each one interpolates over its own measured cadence. Only
-      // gaps within the slowest legitimate cadence count — records also
-      // pause while an entity's state is unchanged, and folding an idle
-      // period into the estimate would smear its next steps in slow motion
-      if (prevUpdatedAt !== undefined) {
-        const gap = now - prevUpdatedAt;
-        if (gap > 5 && gap < 450) {
-          e.netInterval = prevInterval === undefined ? gap : prevInterval * 0.7 + gap * 0.3;
-        }
-      }
-      e.netUpdatedAt = now;
-      // A teleport (arena pit, dungeon portal, graveyard release) jumps an
-      // entity far further than any single walking update could. Interpolating
-      // across that gap streaks it across the map — and when its per-entity
-      // interpolation clock isn't established yet, the renderer falls back to
-      // the global alpha and the entity sticks at its old pose until its next
-      // real update (e.g. taking damage). Snap both poses to the destination so
-      // it appears exactly where the server placed it.
+      // Snap-vs-glide and per-entity update-clock learning both live in
+      // entity_reanchor.ts (reanchorDecision): a distance/gap combination no
+      // real movement could explain still snaps (a teleport: arena pit,
+      // dungeon portal, graveyard release); everything else glides on the
+      // entity's own measured cadence, now gap-aware so a legitimately fast
+      // mover crossing the old flat distance during a network stall is not
+      // mistaken for a teleport.
       const teleDx = w.x - e.pos.x,
         teleDz = w.z - e.pos.z;
       const wasDead = e.dead;
       const nowDead = !!w.dead;
-      if ((wasDead && !nowDead) || teleDx * teleDx + teleDz * teleDz > TELEPORT_SNAP_DIST_SQ) {
+      const { snap, netInterval: learnedInterval } = reanchorDecision({
+        gapMs: prevUpdatedAt !== undefined ? now - prevUpdatedAt : undefined,
+        deltaSq: teleDx * teleDx + teleDz * teleDz,
+        prevInterval,
+        reviveEdge: wasDead && !nowDead,
+      });
+      if (learnedInterval !== undefined) e.netInterval = learnedInterval;
+      e.netUpdatedAt = now;
+      if (snap) {
         e.prevPos = { x: w.x, y: w.y, z: w.z };
         e.prevFacing = w.f;
       } else {
