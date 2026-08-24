@@ -15,8 +15,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
-import { remoteEntityAlpha } from '../src/render/net_interp_core.ts';
 import { reanchorDecision } from '../src/net/entity_reanchor.ts';
+import { remoteEntityAlpha } from '../src/render/net_interp_core.ts';
 import { BROWSER_PATH } from './browser_path.mjs';
 
 // --- The removed pre-fix reanchor logic (src/net/online.ts, before this PR) ---
@@ -139,7 +139,8 @@ const maxT = Math.max(...before.map((p) => p.t), ...after.map((p) => p.t));
 const maxX = Math.max(...before.map((p) => p.x), ...after.map((p) => p.x)) * 1.05;
 const sx = (t) => padL + (t / maxT) * (W - padL - padR);
 const sy = (x) => H - padB - (x / maxX) * (H - padT - padB);
-const toPath = (pts) => pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${sx(p.t).toFixed(1)},${sy(p.x).toFixed(1)}`).join(' ');
+const toPath = (pts) =>
+  pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${sx(p.t).toFixed(1)},${sy(p.x).toFixed(1)}`).join(' ');
 
 const gridLinesY = Array.from({ length: 6 }, (_, i) => (maxX / 5) * i);
 const legendY = padT - 46;
