@@ -21,10 +21,15 @@
 // the two needs a connection-level signal (the whole snapshot was late, not
 // just this one entity's record), which is a bigger change than this fix.
 
-// yd/s, safely above the fastest sim-authored SUSTAINED speed (warrior
-// Charge: RUN_SPEED * CHARGE_SPEED_MULT = 7 * 3 = 21 yd/s in src/sim/sim.ts),
-// so only an actual server-side teleport (portal, graveyard release) can
-// exceed the plausibility window below.
+// yd/s. Charge (RUN_SPEED * CHARGE_SPEED_MULT = 7 * 3 = 21 yd/s in
+// src/sim/sim.ts) is not actually the worst case: moveSpeedMult
+// (src/sim/player_motion.ts) adds a mount bonus to the strongest speed buff,
+// so a +80% mount under a 2.5x buff_speed (src/sim/content/
+// paladin_core_abilities.ts) computes to 7 * (2.5 + 0.8) = 23.1 yd/s, the real
+// margin below this threshold is 0.9 yd/s, not the 3 yd/s a Charge-only
+// comparison implies. Still under 24, so only an actual server-side teleport
+// (portal, graveyard release) can exceed the plausibility window below, but a
+// future speed buff should check its worst case against 23.1, not 21.
 export const MAX_PLAUSIBLE_ENTITY_SPEED = 24;
 
 // Caps how far the plausibility window grows for a very long gap, so a

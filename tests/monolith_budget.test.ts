@@ -312,7 +312,12 @@ const MONOLITHS: MonolithRow[] = [
     // then re-pinned when the mirror gained the trust-boundary row
     // validation and the 404-vs-transport-failure split, plus the roster
     // class field. Exact count, zero slack.
-    ceiling: 5855,
+    // Lowered after extracting the remote-entity reanchor decision into
+    // src/net/entity_reanchor.ts (a pure sibling module with its own tests):
+    // the extraction is the whole point of the ratchet, so the ceiling
+    // follows the file down to its new exact count rather than keeping the
+    // old headroom.
+    ceiling: 5847,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
