@@ -276,7 +276,22 @@ const MONOLITHS: MonolithRow[] = [
     // the player-frame bar lock) predate this ratchet; folding them behind a
     // src/game/ settings-application seam is flagged follow-up work. Exact
     // merged count.
-    ceiling: 11629,
+    // Raised 11629 -> 11633 (+4) for the auraBarBelowFrame settings-dispatch
+    // case (the buff-placement fix): a single boolean's applySetting case,
+    // the same three-line shape as its aurasOnPlayerFrame sibling immediately
+    // above it, plus one import line. The toggle itself DID move out to its
+    // own module (src/ui/aura_bar_side.ts, applyAuraBarSide) so it has a real
+    // behavioral Vitest instead of a source-text scan on this file (which has
+    // no lightweight instantiation seam), but that extraction could only ever
+    // be import-plus-one-line-neutral here: it is purely presentational (no
+    // DOM reparenting, no device/manager state), so there is nothing left for
+    // a sibling module to own the way createGamepadSettingApplier owns the
+    // multi-key gamepad group behind one pre-switch guard. No clean
+    // branch-owned extraction exists that nets fewer lines than this. It is
+    // still worth the +4 over the previous raise: a real test beats a fragile
+    // string pin. Maintainer decision, exact merged count: any further growth
+    // reds again.
+    ceiling: 11633,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {

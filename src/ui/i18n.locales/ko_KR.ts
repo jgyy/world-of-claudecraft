@@ -816,6 +816,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.options.playerFrameScale': '플레이어 프레임 크기',
   'hudChrome.options.targetFrameScale': '대상 프레임 크기',
   'hudChrome.options.aurasOnPlayerFrame': '버프를 플레이어 프레임에 표시',
+  'hudChrome.options.auraBarBelowFrame': '버프를 플레이어 프레임 아래에 표시',
   'hud.core.mapCanvasLabel': '지도',
   'hud.core.mapSummary': '{zone}의 지도.',
   'hud.core.mapMarkerDescription': '{area}. {markers}',
@@ -12999,6 +13000,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'guide.riftsPage.whatHeading': '균열이란',
   'guide.settingsPage.advancedLadder': '그중 하나라도 움직이면 품질 프리셋이 고급으로 바뀌고, 방금 보고 있던 단계 그대로를 씨앗 삼아 시작하므로 나만의 조합이 백지가 아니라 이미 본 화면에서 출발합니다. 마음에 들면 적용을 누르세요. 고급이 프리셋 목록 맨 끝에 놓인 이유도 그것입니다. 나만의 조합이 사는 전문가용 프로필이니까요.',
   'guide.settingsPage.ifAurasOnPlayerFrame': '내 강화 효과와 약화 효과를 오라 막대뿐 아니라 내 유닛 프레임에도 표시합니다.',
+  'guide.settingsPage.ifAuraBarBelowFrame':
+    '강화 효과 줄을 유닛 프레임 위가 아니라 아래로 옮깁니다. 강화 효과가 플레이어 프레임에 표시되어 있을 때만 적용됩니다.',
   'guide.settingsPage.ifChatFontScale': '채팅 글자 크기입니다.',
   'guide.settingsPage.ifChatIntro': '채팅 창이 어떻게 읽히는지를 다룹니다. 채팅 창 자체를 처음 상태로 되돌리는 초기화도 여기에 있습니다.',
   'guide.settingsPage.ifChatOpacity': '채팅 배경이 얼마나 불투명한지 정합니다.',

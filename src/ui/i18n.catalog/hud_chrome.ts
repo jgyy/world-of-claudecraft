@@ -1840,6 +1840,10 @@ export const hudChromeStrings = {
     // of the classic two-row top-right corner (wordy, M16: the five non-Latin
     // fills land in this same change).
     aurasOnPlayerFrame: 'Buffs on the Player Frame',
+    // Interface panel toggle, disabled unless aurasOnPlayerFrame is on: flips
+    // the anchored buff row to the other side of the player frame (wordy, M16:
+    // the five non-Latin fills land in this same change).
+    auraBarBelowFrame: 'Buffs Below the Player Frame',
     highContrastBackground: 'High-Contrast Background',
     // Interface panel toggle: also engage auto-attack when using an offensive
     // ability, so white swings start without a separate Attack press (on by default).
