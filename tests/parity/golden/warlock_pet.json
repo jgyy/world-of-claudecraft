@@ -197,7 +197,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 1000,
-      "state": "7f9ad9df",
+      "state": "e7b5a0bc",
       "events": "34b1947c",
       "rng": {
         "draws": 677,
@@ -208,7 +208,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 1000,
-      "state": "a7bd55d0",
+      "state": "b0d853bf",
       "events": "a2056792",
       "rng": {
         "draws": 902,
@@ -219,7 +219,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 1000,
-      "state": "e02a41b7",
+      "state": "2f8d68c8",
       "events": "16917bf5",
       "rng": {
         "draws": 1147,
@@ -230,7 +230,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 1000,
-      "state": "1a758840",
+      "state": "b01422db",
       "events": "5971d4da",
       "rng": {
         "draws": 1423,
@@ -241,7 +241,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 1000,
-      "state": "e147ab72",
+      "state": "933ad207",
       "events": "7b2dc2ae",
       "rng": {
         "draws": 1692,
@@ -252,7 +252,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 1000,
-      "state": "9bbd9209",
+      "state": "d17d7a04",
       "events": "e9d40351",
       "rng": {
         "draws": 1853,
@@ -263,7 +263,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 1000,
-      "state": "2317ab36",
+      "state": "9a284ab1",
       "events": "741638a5",
       "rng": {
         "draws": 1853,
@@ -366,6 +366,7 @@
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
+          "facing": 1.570796,
           "fallStartY": -2,
           "fiveSecondRule": 6.05,
           "hp": 50000,
@@ -527,7 +528,7 @@
       "tick": 224,
       "time": 11.2,
       "nextId": 1000,
-      "state": "df1602a0",
+      "state": "10f74403",
       "events": "a1832f77",
       "rng": {
         "draws": 1890,
@@ -630,6 +631,7 @@
           "critChance": 0.056,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.056,
+          "facing": 1.570796,
           "fallStartY": -2,
           "fiveSecondRule": 6.25,
           "hp": 50000,

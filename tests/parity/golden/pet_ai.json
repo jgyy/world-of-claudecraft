@@ -139,7 +139,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 1002,
-      "state": "1d1d5cf3",
+      "state": "a661029b",
       "events": "cceb1c79",
       "rng": {
         "draws": 15,
@@ -150,7 +150,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1002,
-      "state": "f0a9a4be",
+      "state": "6122c4e4",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -161,7 +161,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 1002,
-      "state": "fcfccbe4",
+      "state": "fa618b5c",
       "events": "2b259bf0",
       "rng": {
         "draws": 189,
@@ -172,7 +172,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 1002,
-      "state": "7a54416f",
+      "state": "2b96d5b9",
       "events": "741638a5",
       "rng": {
         "draws": 359,
@@ -183,7 +183,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 1002,
-      "state": "c6bccdfb",
+      "state": "a5cdd68b",
       "events": "f514060f",
       "rng": {
         "draws": 552,
@@ -194,7 +194,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 1002,
-      "state": "eddefc0c",
+      "state": "5d80865e",
       "events": "741638a5",
       "rng": {
         "draws": 743,
@@ -205,7 +205,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 1002,
-      "state": "987144c0",
+      "state": "b55b45ce",
       "events": "741638a5",
       "rng": {
         "draws": 743,
@@ -299,6 +299,7 @@
           "critChance": 0.079,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.079,
+          "facing": -1.570796,
           "fallStartY": 2.40097,
           "fiveSecondRule": 105,
           "hp": 50000,
@@ -566,7 +567,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 1002,
-      "state": "436c508b",
+      "state": "b69b3f3e",
       "events": "741638a5",
       "rng": {
         "draws": 963,
@@ -577,7 +578,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 1002,
-      "state": "c41556d6",
+      "state": "f6a4384b",
       "events": "741638a5",
       "rng": {
         "draws": 1185,
@@ -588,7 +589,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 1002,
-      "state": "278c3701",
+      "state": "b6b12f50",
       "events": "741638a5",
       "rng": {
         "draws": 1435,
@@ -599,7 +600,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 1002,
-      "state": "278c3701",
+      "state": "b6b12f50",
       "events": "741638a5",
       "rng": {
         "draws": 1435,
@@ -693,6 +694,7 @@
           "critChance": 0.079,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.079,
+          "facing": 1.454526,
           "fallStartY": 2.40097,
           "fiveSecondRule": 108,
           "hp": 50000,

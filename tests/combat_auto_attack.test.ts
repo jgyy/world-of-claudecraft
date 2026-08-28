@@ -18,7 +18,15 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { advancePendingProjectiles } from '../src/sim/projectile_travel';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
-import { type Aura, DT, type Entity, type PlayerClass, type SimEvent } from '../src/sim/types';
+import {
+  type Aura,
+  angleTo,
+  DT,
+  type Entity,
+  normAngle,
+  type PlayerClass,
+  type SimEvent,
+} from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
 
 type DamageEvent = Extract<SimEvent, { type: 'damage' }>;
@@ -465,6 +473,64 @@ describe('auto_attack updatePlayerAutoAttack: ranged-vs-melee dispatch', () => {
     p.swingTimer = 1;
     updatePlayerAutoAttack(sim.ctx, p, meta);
     expect(p.swingTimer).toBeLessThan(1); // the decrement runs before the !autoAttack bail
+  });
+});
+
+describe('auto_attack facing: self-corrects onto a target that circled behind the player', () => {
+  // A player who never manually re-turns (target aggroed/circled from behind) used
+  // to have every swing silently no-op forever: updatePlayerAutoAttack gated on
+  // MELEE_ARC with no correction, unlike the mob melee driver (mob/combat_profile.ts
+  // tryMobMeleeSwingInRange) and /follow (Sim.updateFollowMovement), which both
+  // self-correct facing every tick via steadyAngleTo before acting.
+  it('a melee target directly behind the player still connects and the player turns onto it', () => {
+    const { sim, p, meta } = makeSim('warrior', 12);
+    const mob = spawnDummy(sim, p, 1, 2); // far below level -> floor miss chance
+    p.facing = normAngle(p.facing + Math.PI); // face directly AWAY from the target
+    p.autoAttack = true;
+    p.swingTimer = 0;
+    const events = capture(sim);
+    updatePlayerAutoAttack(sim.ctx, p, meta);
+    expect(
+      events.some((e) => e.type === 'damage' && e.school === 'physical' && e.sourceId === p.id),
+    ).toBe(true);
+    expect(p.facing).toBeCloseTo(angleTo(p.pos, mob.pos));
+  });
+
+  it('a ranged (Auto Shot) target behind the player still fires', () => {
+    const { sim, p, meta } = makeSim('hunter', 12);
+    const mob = spawnDummy(sim, p, 8, 20); // beyond the 8yd dead zone, within 35
+    p.facing = normAngle(p.facing + Math.PI);
+    p.autoAttack = true;
+    p.swingTimer = 0;
+    const shots = (evs: SimEvent[]): SimEvent[] =>
+      evs.filter((e) => e.type === 'spellfx' && e.fx === 'projectile' && e.sourceId === p.id);
+    const events = capture(sim);
+    updatePlayerAutoAttack(sim.ctx, p, meta);
+    expect(shots(events)).toHaveLength(1);
+    expect(p.facing).toBeCloseTo(angleTo(p.pos, mob.pos));
+  });
+
+  it('does not turn (or swing) while stunned: the positional lock (issue #2426) still holds', () => {
+    const { sim, p, meta } = makeSim('warrior', 12);
+    spawnDummy(sim, p, 1, 2);
+    const away = normAngle(p.facing + Math.PI);
+    p.facing = away;
+    p.autoAttack = true;
+    p.swingTimer = 0;
+    p.auras.push({
+      id: 'test_stun',
+      name: 'Test Stun',
+      kind: 'stun',
+      remaining: 5,
+      duration: 5,
+      value: 0,
+      sourceId: p.id,
+      school: 'physical',
+    });
+    const events = capture(sim);
+    updatePlayerAutoAttack(sim.ctx, p, meta);
+    expect(events.some((e) => e.type === 'damage')).toBe(false);
+    expect(p.facing).toBe(away);
   });
 });
 
