@@ -142,7 +142,23 @@ const MONOLITHS: MonolithRow[] = [
     // pure core interface_unlock_menu_core.ts. What remains on coordinator
     // state (dimension-mode mover wiring, the edit-preview painter closure,
     // the player-frame bar lock) is the live-hooks half. Exact merged count.
-    ceiling: 19002,
+    // Raised 19002 -> 19042 (+40) for the freed Attack-slot render fix (reopen
+    // of #3548): the eligibility/display logic itself is the new
+    // freedAttackSlotDisplayAbility in src/ui/hud/action_bar/hotbar.ts. What
+    // remains here is thin-consumer wiring that could not move: one import; a
+    // memoized freedAttackSlotAbility() (a private per-slot cache keyed by
+    // action id, the same idiom action_bar_painter's lastIcon and
+    // unit_portrait_painter's imgCache already use, needed so the per-frame
+    // ability() descriptor accessor never allocates a fresh object per
+    // ActionBarSlotDescriptor's own contract); the tooltip's "Unavailable"
+    // fallback branch; the action-bar descriptor's slot-0 fallback in the
+    // ability() accessor; and a castSlot() arm so a press on the now-visibly-
+    // assigned slot refuses out loud instead of eating the click silently
+    // (the same courtesy a stale item binding already gets, castCrossHotbarAction's
+    // tSim('error.noItem')). No further clean extraction exists without
+    // hollowing out abilityForSlot()'s own casting-relevant contract, which
+    // every other caller depends on staying strict. Exact count.
+    ceiling: 19042,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
