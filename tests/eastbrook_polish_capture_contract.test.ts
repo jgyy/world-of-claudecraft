@@ -323,8 +323,11 @@ interface AttributionTargetFixture {
 // Re-minted for the v0.40.0 sync merge into the guild pledge branch (the
 // OSSBrain v0.40 batch landed on the release arm; renderer inputs moved on
 // both sides). No capture was retaken.
+// Re-minted for the weapon-stow overlay fix (renderer.ts: single-writer
+// removal + the mount sheathe clause): the renderer integration leaf moved.
+// No capture was retaken.
 const PINNED_POLISH_COMPOSITE_FINGERPRINT =
-  'b4f994b0a5d52ffce488667a7768739838207796dc4eaa331ebd980ab3fe8ba4';
+  'f143ec5592fde717a4e64a7b147acebd046ab332bf3f827de28a4d6958f93b41';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [

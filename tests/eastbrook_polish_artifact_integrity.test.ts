@@ -1025,10 +1025,13 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // Re-minted for the v0.40.0 sync merge into the guild pledge branch (the
 // OSSBrain v0.40 batch landed on the release arm; renderer inputs moved on
 // both sides). No capture was retaken.
+// Re-minted for the weapon-stow overlay fix (renderer.ts: single-writer
+// removal + the mount sheathe clause): the renderer integration leaf moved.
+// No capture was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  'b7f20268e9d15b01de7034b18d451f23367b13576506daae0f486b086554df42';
+  '5686d2b757ba68967972b8f17ff8dd51c022042d38ff1c6f2d6fe74dfe7921f4';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  'b4f994b0a5d52ffce488667a7768739838207796dc4eaa331ebd980ab3fe8ba4';
+  'f143ec5592fde717a4e64a7b147acebd046ab332bf3f827de28a4d6958f93b41';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -2175,10 +2178,12 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // OSSBrain v0.40 batch landed on the release arm; renderer inputs moved on
     // both sides): same order, the composite first, then this seal. No capture
     // was retaken.
+    // Re-minted for the weapon-stow overlay fix (renderer.ts): same order,
+    // the composite first, then this seal. No capture was retaken.
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
-    ).toBe('5bae1eefcdba32613ca7fe8ac5db78be891da7b08a56b66c2085e816c903f31f');
+    ).toBe('8a70529ac8891886748f0f548f8150bce3ce8d3f633ddafe3b229aec24b00080');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {
