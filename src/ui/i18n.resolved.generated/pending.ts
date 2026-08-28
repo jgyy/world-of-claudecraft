@@ -10,6 +10,7 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -54,6 +55,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -78,6 +80,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "es_ES": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -122,6 +125,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -146,6 +150,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "fr_FR": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -190,6 +195,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -214,6 +220,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "fr_CA": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -258,6 +265,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -283,6 +291,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -327,6 +336,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -351,6 +361,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "de_DE": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -395,6 +406,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -451,6 +463,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.walletUsdBalance"
   ],
   "pt_BR": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -495,6 +508,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -527,6 +541,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.walletUsdBalance"
   ],
   "cs_CZ": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -571,6 +586,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -595,6 +611,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "nl_NL": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -639,6 +656,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -663,6 +681,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "pl_PL": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -707,6 +726,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -731,6 +751,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "id_ID": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -775,6 +796,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -799,6 +821,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "tr_TR": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -843,6 +866,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -867,6 +891,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "sv_SE": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -911,6 +936,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -935,6 +961,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "vi_VN": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -979,6 +1006,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
@@ -1003,6 +1031,7 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "da_DK": [
+    "guide.settingsPage.ifAuraBarBelowFrame",
     "hudChrome.actionBar.conflictAccept",
     "hudChrome.actionBar.conflictBody",
     "hudChrome.actionBar.conflictTitle",
@@ -1047,6 +1076,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.snapToGrid",
     "hudChrome.interfaceUnlock.unlock",
     "hudChrome.interfaceUnlock.unlockFrame",
+    "hudChrome.options.auraBarBelowFrame",
     "hudChrome.options.combineActionBars",
     "hudChrome.partyFrames.optionsSection",
     "hudChrome.steam.wishlist",
