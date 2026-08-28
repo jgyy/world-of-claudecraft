@@ -10,6 +10,14 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -17,6 +25,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "es_ES": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -24,6 +40,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "fr_FR": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -31,6 +55,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "fr_CA": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -39,6 +71,14 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -46,6 +86,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "de_DE": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -65,6 +113,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.walletUsdBalance"
   ],
   "pt_BR": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -75,6 +131,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.walletUsdBalance"
   ],
   "cs_CZ": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -82,6 +146,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "nl_NL": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -89,6 +161,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "pl_PL": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -96,6 +176,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "id_ID": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -103,6 +191,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "tr_TR": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -110,6 +206,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "sv_SE": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -117,6 +221,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "vi_VN": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
@@ -124,6 +236,14 @@ export const pending: Record<string, readonly string[]> = {
     "wallet.browser.stepUpBody"
   ],
   "da_DK": [
+    "hudChrome.finder.mech.ancestral_sap",
+    "hudChrome.finder.mech.beast_pit_quake",
+    "hudChrome.finder.mech.bloodmane_rend",
+    "hudChrome.finder.mech.call_of_the_hunt",
+    "hudChrome.finder.mech.jaguar_roar",
+    "hudChrome.finder.mech.thickhide_ward",
+    "hudChrome.finder.mech.tusk_sweep",
+    "hudChrome.finder.mech.wildheart_pulse",
     "hudChrome.wocMarket.walletLinkedConnected",
     "hudChrome.wocMarket.walletLinkedDisconnected",
     "hudChrome.wocMarket.walletUsdBalance",
