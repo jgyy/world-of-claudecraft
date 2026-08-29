@@ -389,10 +389,52 @@ describe('context-loss restore story', () => {
     setKtx2MipRederive(async () => ({ mipmaps: freshMips, format: tex.format as number }));
     const { queue, drain } = makeStepQueue();
 
-    ktx2MipsOnContextLost(queue);
+    ktx2MipsOnContextLost(() => queue);
     // Let the (immediately-resolved) transcode's microtask chain settle. The
     // re-upload is now sitting in the queue, not yet applied.
     await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(mipsOf(tex)[0]?.data.byteLength).toBe(0);
+    expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('restoring');
+
+    drain();
+    expect(tex.mipmaps as unknown).toBe(freshMips);
+    expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('armed');
+  });
+
+  it('paces a rebuild-path straggler through the NEW renderer queue, read live at apply time, not the (gone) queue live at contextlost', async () => {
+    // The graphics-rebuild reviewer finding: ktx2MipsOnContextLost fires from
+    // the recycle's own webglcontextlost, before the new renderer (and its
+    // queue) exists. A snapshotted `queue` argument would freeze at whatever
+    // was live THEN (undefined, mid-rebuild); a getter re-reads the caller's
+    // own live binding at the point the transcode actually resolves instead,
+    // which src/main.ts holds across the rebuild (renderer/rendererReady are
+    // reassigned at commit, well after this fires). Model that here: the
+    // getter answers undefined until the transcode settles, then flips to a
+    // real queue right before the settle's continuation runs, standing in
+    // for "the rebuild's commit landed while this restore was in flight".
+    const tex = armedTexture(2);
+    simulateUpload(tex);
+    const freshMips = makeMips(2);
+    let resolveTranscode: (result: { mipmaps: Ktx2MipLevel[]; format: number }) => void;
+    setKtx2MipRederive(
+      () =>
+        new Promise((resolve) => {
+          resolveTranscode = resolve;
+        }),
+    );
+    const { queue: newRendererQueue, drain } = makeStepQueue();
+    let live: BackgroundGpuQueue | undefined; // "no renderer yet" at contextlost time
+
+    ktx2MipsOnContextLost(() => live);
+    expect(live).toBeUndefined();
+    // The rebuild's commit lands while the transcode is still in flight.
+    live = newRendererQueue;
+    resolveTranscode!({ mipmaps: freshMips, format: tex.format as number });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    // A snapshotted-at-contextlost queue would have applied immediately
+    // (undefined at that moment); this must instead be sitting paced in the
+    // new renderer's queue, proving the getter was consulted late.
     expect(mipsOf(tex)[0]?.data.byteLength).toBe(0);
     expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('restoring');
 
@@ -408,7 +450,7 @@ describe('context-loss restore story', () => {
     setKtx2MipRederive(async () => ({ mipmaps: freshMips, format: tex.format as number }));
     const { queue, drain } = makeStepQueue();
 
-    ktx2MipsOnContextLost(queue);
+    ktx2MipsOnContextLost(() => queue);
     let settled = false;
     void ktx2MipsRestored().then(() => {
       settled = true;
@@ -428,7 +470,7 @@ describe('context-loss restore story', () => {
     simulateUpload(tex);
     setKtx2MipRederive(async () => ({ mipmaps: makeMips(2), format: tex.format as number }));
     const { queue, run } = makeStepQueue();
-    ktx2MipsOnContextLost(queue);
+    ktx2MipsOnContextLost(() => queue);
     await new Promise((resolve) => setTimeout(resolve, 0));
     expect(run).toHaveBeenCalledTimes(1);
     const [, priority, label] = run.mock.calls[0] as [unknown, number, string];
@@ -445,7 +487,7 @@ describe('context-loss restore story', () => {
       run: () => Promise.reject(new Error('Background GPU queue is shut down')),
     } as unknown as BackgroundGpuQueue;
 
-    ktx2MipsOnContextLost(queue);
+    ktx2MipsOnContextLost(() => queue);
     await ktx2MipsRestored();
     expect(tex.mipmaps as unknown).toBe(freshMips);
     expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('armed');
@@ -457,7 +499,7 @@ describe('context-loss restore story', () => {
     setKtx2MipRederive(async () => ({ mipmaps: makeMips(2), format: tex.format as number }));
     const { queue, drain } = makeStepQueue();
 
-    ktx2MipsOnContextLost(queue);
+    ktx2MipsOnContextLost(() => queue);
     await new Promise((resolve) => setTimeout(resolve, 0));
     tex.dispose(); // fires the 'dispose' listener, dropping the registry entry
     expect(() => drain()).not.toThrow();
@@ -796,12 +838,16 @@ describe('wiring pins (source scans, anchor style per docs/qa-gate.md)', () => {
     expect(enableAt).toBeLessThan(deferredAt);
     // (2) The re-transcode kick must sit INSIDE the canvas webglcontextlost
     // listener (it serves both in-place loss and the rebuild recycle), and
-    // must pass the CURRENT renderer's queue so restores pace their re-upload
-    // (see the module header's "Upload pacing" section) rather than always
-    // taking the immediate/unpaced fallback.
+    // must pass a LIVE GETTER over the current renderer's queue, not a
+    // snapshotted value, so a restore still pending after a graphics rebuild
+    // reassigns `renderer` paces through the NEW renderer's queue instead of
+    // always taking the immediate/unpaced fallback (see the module header's
+    // "Upload pacing" section).
     expect(
       between(mainSrc, "addEventListener('webglcontextlost'", 'webglcontextrestored'),
-    ).toContain('ktx2MipsOnContextLost(rendererReady ? renderer.backgroundGpuWork : undefined)');
+    ).toContain(
+      'ktx2MipsOnContextLost(() => (rendererReady ? renderer.backgroundGpuWork : undefined))',
+    );
     // (3) The curtain gate must sit INSIDE the rebuild prewarm step, after the
     // far-vista hold, so the reveal normally shows no stub-black world
     // textures (bounded by KTX2_RESTORE_MAX_WAIT_MS: a large session-wide

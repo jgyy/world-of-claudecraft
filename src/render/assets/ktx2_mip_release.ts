@@ -41,7 +41,7 @@
 // world props while the workers catch up: a designed, self-healing transient
 // on an exceptional recovery path.
 //
-// Upload pacing: when the caller passes a BackgroundGpuQueue to
+// Upload pacing: when the caller passes a queue GETTER to
 // ktx2MipsOnContextLost, each restore's re-upload (the mipmap swap-in plus
 // needsUpdate) runs as one queued unit at GPU_WORK_PRIORITY.BACKGROUND
 // instead of firing the moment its transcode resolves. A shared 4-worker
@@ -53,11 +53,20 @@
 // context loss. Queuing spreads that cost across frames under the same
 // admission budget every other GPU producer answers to (see
 // "GPU work: every new producer is a client of the scheduler" in
-// src/render/CLAUDE.md). No queue (the caller has none, or none is live)
-// falls back to the pre-existing immediate behavior, and a queue that
-// refuses or has been shut down (a renderer rebuild mid-restore) does too:
-// this stage is a self-healing cosmetic transient, never worth stranding a
-// texture on stubs over.
+// src/render/CLAUDE.md).
+//
+// The getter, not a snapshotted instance, is load-bearing on the
+// graphics-rebuild path: a transcode can still be in flight well after the
+// recycle that started it, and by the time it resolves the OLD renderer's
+// queue may be gone while the NEW one (built later in the rebuild, see
+// src/main.ts) already exists. Resolving the queue at the point of
+// application instead of at contextlost-fire time is what lets a past-bound
+// straggler still find a live queue rather than always taking the
+// immediate-apply fallback. No queue (the caller has none, the getter is
+// omitted, or it currently returns none) falls back to the pre-existing
+// immediate behavior, and a queue that refuses or has been shut down (a
+// renderer rebuild mid-restore) does too: this stage is a self-healing
+// cosmetic transient, never worth stranding a texture on stubs over.
 //
 // Retention bounds: both registries hold their textures WEAKLY. A texture the
 // world never references again (for example the normal/roughness maps a
@@ -342,13 +351,15 @@ function releaseAfterUpload(tex: ReleasableCompressedTexture, entry: ReleaseEntr
  *  its own restore), only which finish before an unrelated caller stops
  *  awaiting them.
  *
- *  `queue` is the CURRENT renderer's background_gpu_queue, read at call time
- *  (src/main.ts holds the live renderer across a rebuild, so it always passes
- *  the instance that owns the canvas right now) rather than latched into
- *  module state: it paces each restore's re-upload once its transcode
- *  resolves (see the module header's "Upload pacing" section). Omit it (or
- *  pass none) to keep the pre-existing immediate-upload behavior. */
-export function ktx2MipsOnContextLost(queue?: BackgroundGpuQueue): void {
+ *  `queueGetter` reads the CURRENT renderer's background_gpu_queue, called at
+ *  the point each restore's re-upload is actually applied rather than latched
+ *  once here (src/main.ts passes a closure over its own live `renderer`
+ *  binding, which a graphics rebuild reassigns partway through this
+ *  restore's lifetime): see the module header's "Upload pacing" section for
+ *  why the getter, not a snapshotted instance, is what makes pacing actually
+ *  reach a rebuild's past-bound stragglers. Omit it (or have it return
+ *  undefined) to keep the pre-existing immediate-upload behavior. */
+export function ktx2MipsOnContextLost(queueGetter?: () => BackgroundGpuQueue | undefined): void {
   if (!rederive) return;
   const released: [ReleasableCompressedTexture, ReleaseEntry][] = [];
   for (const pair of entries.entries()) {
@@ -356,7 +367,7 @@ export function ktx2MipsOnContextLost(queue?: BackgroundGpuQueue): void {
   }
   for (let i = released.length - 1; i >= 0; i--) {
     const [tex, entry] = released[i] as [ReleasableCompressedTexture, ReleaseEntry];
-    startRestore(tex, entry, queue);
+    startRestore(tex, entry, queueGetter);
   }
 }
 
@@ -429,7 +440,7 @@ export function ktx2RetainedSourceBytes(): number {
 function startRestore(
   tex: ReleasableCompressedTexture,
   entry: ReleaseEntry,
-  queue?: BackgroundGpuQueue,
+  queueGetter?: () => BackgroundGpuQueue | undefined,
 ): void {
   if (!rederive) return;
   entry.state = 'restoring';
@@ -458,6 +469,10 @@ function startRestore(
         // Re-upload on the next render; that upload's onUpdate re-releases.
         tex.needsUpdate = true;
       };
+      // Resolved HERE, not at ktx2MipsOnContextLost's call time: see the
+      // module header's "Upload pacing" section for why a rebuild's
+      // past-bound stragglers need the queue read live, at application time.
+      const queue = queueGetter?.();
       if (!queue) {
         applyRestore();
         return;
