@@ -599,7 +599,15 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // Re-baselined for the Fiesta Feat conversion: renown dropped to 0 on the
   // seven pvp_fiesta_* deeds (5+10*6 = 65 Renown), a deliberate renown
   // change per the Ravenrift PvP-window merge retiring Fiesta from the
-  // queueable bracket list; no trigger changed on any deed.
+  // queueable bracket list. ONE deliberate shipped-trigger change the hash
+  // correctly caught, the feat_book_complete class again: BOOK_COMPLETE_REQUIREMENTS
+  // is derived from every non-feat, non-hidden id, so feat-flagging the seven
+  // Fiesta deeds shrinks feat_book_complete's meta.deedIds from 263 to 256
+  // entries. This un-strands the capstone rather than re-scoping it: those
+  // seven sat inside the requirement as ordinary deeds before this change,
+  // dead-ending The Whole Book for anyone who had not earned them
+  // pre-retirement (see "un-strands the capstone" below). No other trigger
+  // changed on any deed.
   const FROZEN_CATALOG_SHA256 = 'a82610414600e3449dfd117a2a73eaa6bfaeea2778b515dabd9e48c5800ba692';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
@@ -866,6 +874,24 @@ describe('table shape', () => {
     // items only ever dropped from retired Brightwood content); players who
     // read a stuck 0/1 without this caveat report it as a broken achievement.
     expect(DEEDS.feat_brightwood_relic.desc).toContain('no longer drop');
+  });
+
+  it('every retired Fiesta feat desc states the bracket is no longer offered', () => {
+    // The feat_brightwood_relic precedent again: a Fiesta deed sitting on the
+    // PvP and Sport shelf with no explanation is exactly what got reported as
+    // "the mode was removed" (a stuck 0/1 read as a broken achievement). A
+    // future copy edit that drops this sentence silently regresses the fix.
+    for (const id of [
+      'pvp_fiesta_first_bout',
+      'pvp_fiesta_first_win',
+      'pvp_fiesta_double',
+      'pvp_fiesta_shutdown',
+      'pvp_fiesta_full_build',
+      'pvp_fiesta_powerups',
+      'pvp_fiesta_five_kills',
+    ]) {
+      expect(DEEDS[id].desc, id).toContain('no longer offered in the Arena queue');
+    }
   });
 
   it('the Peaks chapter descs carry the renamed Thornpeak chronicler', () => {
@@ -1229,6 +1255,28 @@ describe('the completionist feat', () => {
       'col_reliquary_illum_gravewyrm_heroic',
     ]) {
       expect(t.deedIds, `${id} is earnable and belongs in the Book`).toContain(id);
+    }
+  });
+
+  it('un-strands the capstone for the seven retired Fiesta deeds, the same doctrine', () => {
+    // Before the Fiesta Feat conversion, the seven pvp_fiesta_* deeds sat
+    // inside BOOK_COMPLETE_REQUIREMENTS as ordinary non-feat deeds, which
+    // dead-ended The Whole Book for every player who had not earned them
+    // pre-retirement (the same failure the Reliquary capstone case above
+    // documents). The feat flag fixes this as a side effect; this arm reds
+    // if a future change drops it and re-strands the capstone.
+    const t = DEEDS.feat_book_complete.trigger;
+    if (t.kind !== 'meta') throw new Error('feat_book_complete lost its meta trigger');
+    for (const id of [
+      'pvp_fiesta_first_bout',
+      'pvp_fiesta_first_win',
+      'pvp_fiesta_double',
+      'pvp_fiesta_shutdown',
+      'pvp_fiesta_full_build',
+      'pvp_fiesta_powerups',
+      'pvp_fiesta_five_kills',
+    ]) {
+      expect(t.deedIds, `${id} is unearnable and must not block the capstone`).not.toContain(id);
     }
   });
 });

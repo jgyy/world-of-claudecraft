@@ -6246,8 +6246,9 @@ export const TARGETS = [
       const ready = await pollForSize(page, '#deeds-window');
       if (!ready) return { skip: 'the deeds window never became visible' };
       // The arrival note can render on its own timer after entry, sometimes
-      // landing on top of the already-open Book of Deeds; keep dismissing it
-      // through a short settle window rather than a single early click.
+      // landing on top of the already-open Book of Deeds; poll for it across
+      // a short settle window and dismiss it once, rather than assuming a
+      // single early click (before it exists) is enough.
       for (let i = 0; i < 6; i++) {
         const dismissed = await page.evaluate(() => {
           const btn = document.querySelector('button.cd-ok[data-close]');
