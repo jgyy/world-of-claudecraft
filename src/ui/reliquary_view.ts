@@ -17,6 +17,7 @@
 // carry, so a player searches the names their own client shows them.
 
 import { DEEDS } from '../sim/content/deeds';
+import { type DelveShopGate, delveShopGateForItem } from '../sim/content/delves';
 import {
   type ReliquaryClearSource,
   type ReliquaryPageDef,
@@ -159,7 +160,10 @@ export type ReliquarySourceLinePlan =
   | { kind: 'zone'; zoneId: string }
   | { kind: 'profession'; professionId: string }
   | { kind: 'deed'; deedId: string }
-  | { kind: 'vendor'; npcId: string }
+  // `gate` is omitted for an ungated ('available') or unstocked vendor row, so
+  // a plain "Sold by {vendor}" line is unaffected: only a real DelveShopGate
+  // ('heroicClear' or 'clears:N') ever reaches the localized text.
+  | { kind: 'vendor'; npcId: string; gate?: DelveShopGate }
   | { kind: 'delve'; delveId: string }
   | { kind: 'rift'; rank: string }
   | { kind: 'quest'; questId: string }
@@ -177,6 +181,7 @@ const NO_SOURCE_LINES: readonly ReliquarySourceLinePlan[] = Object.freeze([]);
 function sourceLineForHint(
   hint: ReliquarySourceHint,
   clearSource: ReliquaryClearSource | undefined,
+  vendorGate: DelveShopGate | undefined,
 ): ReliquarySourceLinePlan {
   switch (hint.sourceKind) {
     case 'boss':
@@ -190,7 +195,9 @@ function sourceLineForHint(
     case 'deed':
       return { kind: 'deed', deedId: hint.sourceId };
     case 'vendor':
-      return { kind: 'vendor', npcId: hint.sourceId };
+      return vendorGate !== undefined && vendorGate !== 'available'
+        ? { kind: 'vendor', npcId: hint.sourceId, gate: vendorGate }
+        : { kind: 'vendor', npcId: hint.sourceId };
     case 'delve':
       return { kind: 'delve', delveId: hint.sourceId };
     case 'rift':
@@ -229,10 +236,16 @@ function sourceLineForHint(
  * line. One line per door is the pattern everywhere else in this function, and
  * a reader who has learned to count doors by counting lines should not have to
  * unlearn it for the one shape where the doors happen to share a roof.
+ *
+ * `vendorGate` is the relic's static DELVE_SHOPS gate (undefined for a relic
+ * with no vendor hint, or one no shop table stocks): it rides every 'vendor'
+ * line this call produces, so the caller resolves it once per relic rather
+ * than per hint.
  */
 export function reliquarySourceLinePlan(
   hints: readonly ReliquarySourceHint[],
   clearSource: ReliquaryClearSource | undefined,
+  vendorGate?: DelveShopGate,
 ): readonly ReliquarySourceLinePlan[] {
   if (hints.length === 0) return NO_SOURCE_LINES;
   let soleBoss: ReliquarySourceHint | null = null;
@@ -271,7 +284,7 @@ export function reliquarySourceLinePlan(
         continue;
       }
     }
-    lines.push(sourceLineForHint(hint, clearSource));
+    lines.push(sourceLineForHint(hint, clearSource, vendorGate));
   }
   return lines;
 }
@@ -622,7 +635,15 @@ export function buildReliquaryPageCells(
     // that precedence (reliquaryRelicSource). It takes the INJECTED page def,
     // never a catalog lookup by id, so a synthetic test page resolves its own
     // sourceDefault instead of a live RELIQUARY_PAGES row that shares its id.
-    const plans = reliquarySourceLinePlan(reliquaryRelicSource(page, relic), page.clearSource);
+    // The vendor gate is a live DELVE_SHOPS lookup by item id (only an item
+    // relic can be delve-shop stock), so a missing/relabeled shop row silently
+    // drops the gate note rather than ever lying about one.
+    const vendorGate = relic.kind === 'item' ? delveShopGateForItem(relic.itemId) : undefined;
+    const plans = reliquarySourceLinePlan(
+      reliquaryRelicSource(page, relic),
+      page.clearSource,
+      vendorGate,
+    );
     if (plans.length > 0) cell.sourcePlans = plans;
     if (owned && relic.kind === 'item') {
       const clears = opts.firstFind?.[id]?.clears;

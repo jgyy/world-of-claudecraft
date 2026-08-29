@@ -20,7 +20,7 @@ import { CURATOR_RANK_DEFS, type CuratorRankDef } from '../src/sim/reliquary';
 import type { DeedDef } from '../src/sim/types';
 import { deedName } from '../src/ui/deed_i18n';
 import { dungeonDisplayName, tEntity, zoneDisplayName } from '../src/ui/entity_i18n';
-import { getLanguage, languageTag } from '../src/ui/i18n';
+import { getLanguage, languageTag, t } from '../src/ui/i18n';
 import { MOUNT_NAME_KEYS } from '../src/ui/mount_labels';
 import {
   reliquaryRelicDisplayName,
@@ -2187,6 +2187,33 @@ describe('reliquarySourceLinePlan', () => {
     ).toEqual([{ kind: 'activity', activityId: 'corpse_harvest' }]);
   });
 
+  it('rides the vendor line only when the gate is a real restriction', () => {
+    const hints = [{ sourceKind: 'vendor', sourceId: 'brother_halven_marsh' }] as const;
+    expect(reliquarySourceLinePlan(hints, undefined, 'heroicClear')).toEqual([
+      { kind: 'vendor', npcId: 'brother_halven_marsh', gate: 'heroicClear' },
+    ]);
+    expect(reliquarySourceLinePlan(hints, undefined, 'clears:3')).toEqual([
+      { kind: 'vendor', npcId: 'brother_halven_marsh', gate: 'clears:3' },
+    ]);
+    // 'available' is not a restriction worth naming, and neither is an item no
+    // shop table stocks (undefined): both must leave the plain vendor line
+    // untouched, not append a hollow gate.
+    expect(reliquarySourceLinePlan(hints, undefined, 'available')).toEqual([
+      { kind: 'vendor', npcId: 'brother_halven_marsh' },
+    ]);
+    expect(reliquarySourceLinePlan(hints, undefined)).toEqual([
+      { kind: 'vendor', npcId: 'brother_halven_marsh' },
+    ]);
+    // A non-vendor hint in the same call must never pick up the gate.
+    expect(
+      reliquarySourceLinePlan(
+        [{ sourceKind: 'boss', sourceId: 'thunzharr' }],
+        undefined,
+        'heroicClear',
+      ),
+    ).toEqual([{ kind: 'boss', bossId: 'thunzharr' }]);
+  });
+
   it('answers the empty list with no hints (an un-authored source renders no line)', () => {
     const empty = reliquarySourceLinePlan([], { kind: 'dungeon', dungeonId: 'crypt' });
     expect(empty).toEqual([]);
@@ -2379,11 +2406,73 @@ describe('grid cell source plans', () => {
     expect(cells[0].sourcePlans).toEqual([{ kind: 'zone', zoneId: 'synthetic_zone' }]);
   });
 
+  it("resolves an item relic's live DELVE_SHOPS gate onto its vendor plan", () => {
+    // A relic itemId that a real shop table stocks behind heroicClear picks up
+    // the gate automatically; one no shop stocks does not.
+    const gated: ReliquaryPageDef = {
+      ...page,
+      id: 'gated_vendor_page',
+      relics: [
+        {
+          kind: 'item',
+          itemId: 'sister_nhalia_choir_plate',
+          source: { sourceKind: 'vendor', sourceId: 'brother_halven_marsh' },
+        },
+        { kind: 'item', itemId: 'own_hint', source: { sourceKind: 'vendor', sourceId: 'vex' } },
+      ],
+    };
+    const cells = buildReliquaryPageCells(gated, { itemsDiscovered: ownedSet() });
+    expect(cells[0].sourcePlans).toEqual([
+      { kind: 'vendor', npcId: 'brother_halven_marsh', gate: 'heroicClear' },
+    ]);
+    // 'vex' stocks nothing under 'own_hint': unaffected, same as before.
+    expect(cells[1].sourcePlans).toEqual([{ kind: 'vendor', npcId: 'vex' }]);
+  });
+
   it('omits the plans entirely for an un-hinted relic on an un-hinted page', () => {
     // Undefined, never an empty array: a truthiness test and a length test on
     // the cell have to agree (the painter stamps the count off this field).
     const bare = buildReliquaryPageCells(sizedPage('bare', 1), { itemsDiscovered: ownedSet() });
     expect(bare[0].sourcePlans).toBeUndefined();
+  });
+});
+
+describe('The Drowned Litany reliquary page names the Marks vendor gate (live catalog)', () => {
+  // Closes the loop on a real player report: the page's "Sold by Brother
+  // Halven" line for the two Marks-only signature rares read as an ordinary,
+  // always-buyable row even though both sit behind a Heroic clear on the
+  // ACTUAL vendor. Once the Litany shop also started stocking eight
+  // Heroic-gated tool items on that same price rung (0991d68e78), a player
+  // who had not cleared Heroic could not find either rare among a wall of
+  // "Requires a Heroic clear" tool rows and read it as removed. The catalog
+  // and shop data were never wrong (tests/reliquary_content.test.ts,
+  // tests/delve_shop.test.ts); this pins the missing UX signal on the page.
+  const page = RELIQUARY_PAGES_BY_ID.conquerors_drowned_litany;
+
+  it('names the Heroic clear on the two Marks-only relics, missing or owned', () => {
+    const cells = buildReliquaryPageCells(page, { itemsDiscovered: ownedSet() });
+    for (const id of ['sister_nhalia_choir_plate', 'drowned_choir_fang']) {
+      const cell = cells.find((c) => c.id === id)!;
+      expect(cell.sourcePlans, id).toEqual([
+        { kind: 'vendor', npcId: 'brother_halven_marsh', gate: 'heroicClear' },
+      ]);
+      expect(reliquarySourceLines(cell.sourcePlans)[0], id).toContain(t('delveUi.shop.reqHeroic'));
+    }
+  });
+
+  it('leaves the six delve-drop relics on this page unaffected', () => {
+    const cells = buildReliquaryPageCells(page, { itemsDiscovered: ownedSet() });
+    for (const id of [
+      'nhalias_bell_maul',
+      'widow_silk_hood',
+      'nhalias_litany_rod',
+      'blackwater_vanguard_chest',
+      'siltstep_leggings',
+      'sunken_reliquary_hood',
+    ]) {
+      const cell = cells.find((c) => c.id === id)!;
+      expect(cell.sourcePlans, id).toEqual([{ kind: 'delve', delveId: 'drowned_litany' }]);
+    }
   });
 });
 
@@ -2683,6 +2772,33 @@ describe('reliquarySourceLineText', () => {
     expect(reliquarySourceLineText({ kind: 'deed', deedId })).toBe(
       `Awarded by the deed ${deedName(deedId)}`,
     );
+  });
+
+  it("names the unlock condition on a gated vendor line, in the shop badge's own words", () => {
+    const vendor = tEntity({ kind: 'npc', id: 'heroic_quartermaster', field: 'name' });
+    expect(
+      reliquarySourceLineText({
+        kind: 'vendor',
+        npcId: 'heroic_quartermaster',
+        gate: 'heroicClear',
+      }),
+    ).toBe(`Sold by ${vendor} (${t('delveUi.shop.reqHeroic')})`);
+    expect(
+      reliquarySourceLineText({ kind: 'vendor', npcId: 'heroic_quartermaster', gate: 'clears:3' }),
+    ).toBe(`Sold by ${vendor} (${t('delveUi.shop.reqClears', { count: '3' })})`);
+    // 'available' and no gate at all both fall back to the plain line, never a
+    // hollow "()" suffix.
+    expect(
+      reliquarySourceLineText({ kind: 'vendor', npcId: 'heroic_quartermaster', gate: 'available' }),
+    ).toBe(`Sold by ${vendor}`);
+    expect(reliquarySourceLineText({ kind: 'vendor', npcId: 'heroic_quartermaster' })).toBe(
+      `Sold by ${vendor}`,
+    );
+    // An unresolvable vendor id stays silent regardless of gate: the id, not
+    // the gate, decides whether the relic gets a line at all.
+    expect(
+      reliquarySourceLineText({ kind: 'vendor', npcId: 'merchant_nobody', gate: 'heroicClear' }),
+    ).toBe('');
   });
 
   it('names a craft and a gathering profession, and stays silent off both tables', () => {

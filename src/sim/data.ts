@@ -299,6 +299,7 @@ export {
   DELVE_AFFIXES,
   DELVE_COMPANIONS,
   DELVE_SHOPS,
+  delveShopGateForItem,
   delveShopGateUnlocked,
   resolveDelveShopOffers,
 } from './content/delves';

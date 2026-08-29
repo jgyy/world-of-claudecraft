@@ -143,6 +143,22 @@ export const DELVE_SHOPS: Record<string, DelveShopEntry[]> = {
   drowned_litany: DROWNED_LITANY_SHOP,
 };
 
+// Static lookup, player-independent: which gate (if any) a shop item sits
+// behind, regardless of which delve's shop stocks it. Consumed by the
+// Reliquary source-line resolver (src/ui/reliquary_labels.ts) so a relic's
+// "Sold by {vendor}" line can also name the unlock condition: without it, a
+// gated signature rare (e.g. the Drowned Litany's sister_nhalia_choir_plate)
+// reads as an ordinary, always-available vendor row, and a player who has not
+// met the gate finds nothing to buy there and wrongly concludes the item was
+// removed. Returns undefined for an item no DELVE_SHOPS table stocks.
+export function delveShopGateForItem(itemId: string): DelveShopGate | undefined {
+  for (const shop of Object.values(DELVE_SHOPS)) {
+    const entry = shop.find((e) => e.itemId === itemId);
+    if (entry) return entry.gate;
+  }
+  return undefined;
+}
+
 // Pure gate check, shared by the Sim (server-authoritative buy) and the client UI
 // (ClientWorld, for the lock badge) so the lock state the player sees matches what
 // the purchase will actually allow. `clears` is the player's persisted

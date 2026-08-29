@@ -3,6 +3,7 @@
 // in the Sim).
 import { describe, expect, it } from 'vitest';
 import { bagCapacity } from '../src/sim/bags';
+import { delveShopGateForItem } from '../src/sim/content/delves';
 import { isCataloguedRelicItem } from '../src/sim/content/reliquary';
 import { DELVE_SHOPS, DELVES, ITEMS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
@@ -316,5 +317,21 @@ describe('Drowned Litany shop stock (data pins)', () => {
     const tiers = (entries: typeof reliquary) =>
       [...new Set(entries.map((e) => e.marks))].sort((a, b) => a - b);
     expect(tiers(litany)).toEqual(tiers(reliquary).map((m) => m * 2));
+  });
+});
+
+describe('delveShopGateForItem (static, player-independent lookup)', () => {
+  it('finds the gate on whichever delve shop stocks the item', () => {
+    expect(delveShopGateForItem('litany_legs')).toBe('available');
+    expect(delveShopGateForItem('litany_helm')).toBe('clears:3');
+    expect(delveShopGateForItem('sister_nhalia_choir_plate')).toBe('heroicClear');
+    expect(delveShopGateForItem('drowned_choir_fang')).toBe('heroicClear');
+    // Same gate vocabulary, a different shop table entirely.
+    expect(delveShopGateForItem('deacon_reliquary_helm')).toBe('heroicClear');
+  });
+
+  it('returns undefined for an item no DELVE_SHOPS table stocks', () => {
+    expect(delveShopGateForItem('worn_sword')).toBeUndefined();
+    expect(delveShopGateForItem('not_a_real_item_id')).toBeUndefined();
   });
 });
