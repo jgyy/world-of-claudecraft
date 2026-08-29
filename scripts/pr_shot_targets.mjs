@@ -6233,6 +6233,10 @@ export const TARGETS = [
         document.querySelector('#gpu-notice')?.remove();
         document.querySelector('.camera-prompt-confirm')?.click();
         document.querySelector('.tut-skip')?.click();
+        // The Proving Shore's one-time Ferryman Odo arrival note (the shared
+        // Card Duel modal shell, hudChrome.tutorialGreeting), which otherwise
+        // pops over the freshly opened Book of Deeds.
+        document.querySelector('button.cd-ok[data-close]')?.click();
         const game = window.__game;
         if (!game?.hud) return { ok: false, reason: 'offline world is unavailable' };
         game.hud.openDeeds('pvp');
@@ -6241,6 +6245,19 @@ export const TARGETS = [
       if (!opened.ok) return { skip: opened.reason };
       const ready = await pollForSize(page, '#deeds-window');
       if (!ready) return { skip: 'the deeds window never became visible' };
+      // The arrival note can render on its own timer after entry, sometimes
+      // landing on top of the already-open Book of Deeds; keep dismissing it
+      // through a short settle window rather than a single early click.
+      for (let i = 0; i < 6; i++) {
+        const dismissed = await page.evaluate(() => {
+          const btn = document.querySelector('button.cd-ok[data-close]');
+          if (!(btn instanceof HTMLElement)) return false;
+          btn.click();
+          return true;
+        });
+        if (dismissed) break;
+        await wait(300);
+      }
       const scrolled = await page.evaluate(() => {
         const card = document.querySelector('.deed-card[data-deed="pvp_fiesta_first_bout"]');
         if (!card) return false;
