@@ -63,18 +63,21 @@ const PREFIX_CATEGORY: Record<string, DeedCategory> = {
 };
 
 describe('audited launch totals (literals: update deliberately with the catalog)', () => {
-  it('ships exactly 276 deeds worth 3190 total Renown', () => {
+  it('ships exactly 276 deeds worth 3125 total Renown', () => {
     // MEASURED across the release/v0.41.0 merge rather than reconciled by
     // arithmetic, because each arm can only count its own additions. The
     // release arm ships 274 deeds worth 3160; this branch adds the bank socket
     // pair (soc_strongbox_outfitter 5 and soc_four_bags_deep 25, Bank Storage
-    // phase 06) and removes none, so the merged catalog is 276 worth 3190.
+    // phase 06) and removes none, so the merged catalog was 276 worth 3190,
+    // then the seven pvp_fiesta_* deeds became Feats (renown 0, feat: true)
+    // when Fiesta retired from the queueable bracket list, dropping 65 Renown
+    // (5 + 10*6) to 3125. The deed count is unchanged: a Feat still ships.
     //
     // The NAME carries the numbers too, deliberately: vitest prints it in the
     // failure header, and a stale name there is the one part of this pin a
     // reader can act on without seeing the diff. It went stale once already.
     expect(DEED_ORDER.length).toBe(276);
-    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(3190);
+    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(3125);
   });
 
   it('ships the audited per-category counts', () => {
@@ -593,7 +596,11 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // on the new bankSocketsUnlocked meter) and the Proving Shore graduation
   // deed (on the new tutorialGraduations stat) at the tail; no shipped
   // trigger or renown changed on either side. MEASURED on the merged tree.
-  const FROZEN_CATALOG_SHA256 = '9d39a3715925fc1232cfb4be7a1a7caffdc0a303e91655f224a30dbe9f4f380e';
+  // Re-baselined for the Fiesta Feat conversion: renown dropped to 0 on the
+  // seven pvp_fiesta_* deeds (5+10*6 = 65 Renown), a deliberate renown
+  // change per the Ravenrift PvP-window merge retiring Fiesta from the
+  // queueable bracket list; no trigger changed on any deed.
+  const FROZEN_CATALOG_SHA256 = 'a82610414600e3449dfd117a2a73eaa6bfaeea2778b515dabd9e48c5800ba692';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
     const canonical = JSON.stringify(
@@ -810,15 +817,29 @@ describe('table shape', () => {
   });
 
   it('every feat has renown 0 and the feat/hidden flags stay on their prefixes, disjoint', () => {
-    // The ONE sanctioned off-prefix feat: the Reliquary completion capstone
+    // The sanctioned off-prefix feats: the Reliquary completion capstone
     // keeps its col_ id and Collection shelf beside its ladder, but carries
     // feat: true because it is a dynamic meta over a growing catalog (the
     // feat_book_complete class) and the flag is what keeps it out of
     // BOOK_COMPLETE_REQUIREMENTS: three catalog slots are owner-pended today
     // (masterwork:engineering, both pending reins), so a non-feat capstone
-    // would dead-end The Whole Book for every player. Growing this set is a
-    // deliberate design act; prefer the feat_ prefix for anything new.
-    const OFF_PREFIX_FEATS = new Set(['col_reliquary_complete']);
+    // would dead-end The Whole Book for every player. The seven pvp_fiesta_*
+    // deeds joined it when the Ravenrift PvP-window merge retired Fiesta from
+    // the queueable bracket list (deeds.md rule 5, the feat_brightwood_relic
+    // class): renaming to a feat_ id would silently drop the deed from every
+    // veteran's earned set, since PlayerMeta.deedsEarned keys on the id
+    // verbatim. Growing this set is a deliberate design act; prefer the
+    // feat_ prefix for anything new.
+    const OFF_PREFIX_FEATS = new Set([
+      'col_reliquary_complete',
+      'pvp_fiesta_first_bout',
+      'pvp_fiesta_first_win',
+      'pvp_fiesta_double',
+      'pvp_fiesta_shutdown',
+      'pvp_fiesta_full_build',
+      'pvp_fiesta_powerups',
+      'pvp_fiesta_five_kills',
+    ]);
     for (const def of ALL) {
       const expectFeat = def.id.startsWith('feat_') || OFF_PREFIX_FEATS.has(def.id);
       expect(def.feat === true, def.id).toBe(expectFeat);
