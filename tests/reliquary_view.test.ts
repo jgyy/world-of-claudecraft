@@ -2406,12 +2406,13 @@ describe('grid cell source plans', () => {
     expect(cells[0].sourcePlans).toEqual([{ kind: 'zone', zoneId: 'synthetic_zone' }]);
   });
 
-  it("resolves an item relic's live DELVE_SHOPS gate onto its vendor plan", () => {
-    // A relic itemId that a real shop table stocks behind heroicClear picks up
-    // the gate automatically; one no shop stocks does not.
+  it("resolves an item relic's live DELVE_SHOPS gate onto its vendor plan, on the page's OWN delve", () => {
+    // A relic itemId that the page's OWN delve stocks behind heroicClear picks
+    // up the gate automatically; one no shop stocks does not.
     const gated: ReliquaryPageDef = {
       ...page,
       id: 'gated_vendor_page',
+      clearSource: { kind: 'delve', delveId: 'drowned_litany' },
       relics: [
         {
           kind: 'item',
@@ -2427,6 +2428,44 @@ describe('grid cell source plans', () => {
     ]);
     // 'vex' stocks nothing under 'own_hint': unaffected, same as before.
     expect(cells[1].sourcePlans).toEqual([{ kind: 'vendor', npcId: 'vex' }]);
+  });
+
+  it("never names a gate from a delve OTHER than the page's own clearSource", () => {
+    // Same real shop item, real heroicClear gate, but the page claims a
+    // DIFFERENT delve (or no delve at all): the lookup is keyed on both ids,
+    // so a page must never borrow another delve's vendor's gate.
+    const wrongDelve: ReliquaryPageDef = {
+      ...page,
+      id: 'wrong_delve_page',
+      clearSource: { kind: 'delve', delveId: 'collapsed_reliquary' },
+      relics: [
+        {
+          kind: 'item',
+          itemId: 'sister_nhalia_choir_plate',
+          source: { sourceKind: 'vendor', sourceId: 'brother_halven_marsh' },
+        },
+      ],
+    };
+    expect(
+      buildReliquaryPageCells(wrongDelve, { itemsDiscovered: ownedSet() })[0].sourcePlans,
+    ).toEqual([{ kind: 'vendor', npcId: 'brother_halven_marsh' }]);
+
+    // The shared `page` fixture's own clearSource (a dungeon, not a delve):
+    // no gate note, even though the item id is real delve-shop stock.
+    const noDelveClearSource: ReliquaryPageDef = {
+      ...page,
+      id: 'no_delve_clear_source_page',
+      relics: [
+        {
+          kind: 'item',
+          itemId: 'sister_nhalia_choir_plate',
+          source: { sourceKind: 'vendor', sourceId: 'brother_halven_marsh' },
+        },
+      ],
+    };
+    expect(
+      buildReliquaryPageCells(noDelveClearSource, { itemsDiscovered: ownedSet() })[0].sourcePlans,
+    ).toEqual([{ kind: 'vendor', npcId: 'brother_halven_marsh' }]);
   });
 
   it('omits the plans entirely for an un-hinted relic on an un-hinted page', () => {

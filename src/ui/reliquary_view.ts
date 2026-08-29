@@ -607,6 +607,26 @@ function relicSlotId(relic: ReliquaryRelicDef): string {
   }
 }
 
+/**
+ * The DELVE_SHOPS gate (if any) to name on one relic's vendor source line, so
+ * production (buildReliquaryPageCells below) and its test oracle
+ * (tests/reliquary_window_behavior.test.ts sourceLinesFor) resolve it through
+ * the SAME implementation rather than two hand-derivations that can drift.
+ * Keyed by BOTH the item id and the page's own delve (never item id alone: a
+ * relic could in principle be stocked, at a different gate, by a delve this
+ * page is not about), so it only ever names the gate on the vendor the page
+ * itself already claims; a page with no single delve clearSource, or a
+ * non-item relic, answers undefined.
+ */
+export function relicVendorGate(
+  page: ReliquaryPageDef,
+  relic: ReliquaryRelicDef,
+): DelveShopGate | undefined {
+  if (relic.kind !== 'item') return undefined;
+  const pageDelveId = page.clearSource?.kind === 'delve' ? page.clearSource.delveId : undefined;
+  return pageDelveId !== undefined ? delveShopGateForItem(pageDelveId, relic.itemId) : undefined;
+}
+
 /** Build ordered grid cells for one page (owned vs missing). */
 export function buildReliquaryPageCells(
   page: ReliquaryPageDef,
@@ -635,14 +655,10 @@ export function buildReliquaryPageCells(
     // that precedence (reliquaryRelicSource). It takes the INJECTED page def,
     // never a catalog lookup by id, so a synthetic test page resolves its own
     // sourceDefault instead of a live RELIQUARY_PAGES row that shares its id.
-    // The vendor gate is a live DELVE_SHOPS lookup by item id (only an item
-    // relic can be delve-shop stock), so a missing/relabeled shop row silently
-    // drops the gate note rather than ever lying about one.
-    const vendorGate = relic.kind === 'item' ? delveShopGateForItem(relic.itemId) : undefined;
     const plans = reliquarySourceLinePlan(
       reliquaryRelicSource(page, relic),
       page.clearSource,
-      vendorGate,
+      relicVendorGate(page, relic),
     );
     if (plans.length > 0) cell.sourcePlans = plans;
     if (owned && relic.kind === 'item') {

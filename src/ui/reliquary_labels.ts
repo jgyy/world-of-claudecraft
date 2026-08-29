@@ -25,7 +25,7 @@
 // "unknownRelic" copy, which is honest in every language.
 
 import { DEEDS } from '../sim/content/deeds';
-import type { DelveShopGate } from '../sim/content/delves';
+import { type DelveShopGate, delveShopGateClears } from '../sim/content/delves';
 import {
   RELIQUARY_ACTIVITY_SOURCE_IDS,
   RELIQUARY_RIFT_RANK_SOURCE_IDS,
@@ -145,8 +145,8 @@ function vendorName(npcId: string): string | null {
 function vendorGateRequirementText(gate: DelveShopGate | undefined): string | null {
   if (gate === undefined || gate === 'available') return null;
   if (gate === 'heroicClear') return t('delveUi.shop.reqHeroic');
-  const count = Number(gate.slice('clears:'.length));
-  if (!Number.isFinite(count)) return null;
+  const count = delveShopGateClears(gate);
+  if (count === null) return null;
   return t('delveUi.shop.reqClears', { count: formatNumber(count, { maximumFractionDigits: 0 }) });
 }
 

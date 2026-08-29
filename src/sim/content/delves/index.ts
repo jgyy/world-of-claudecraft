@@ -8,6 +8,7 @@ export { DELVE_MOBS } from './mobs';
 export type { DelveShopEntry, DelveShopGate, DelveShopOffer } from './shop';
 export {
   DELVE_SHOPS,
+  delveShopGateClears,
   delveShopGateForItem,
   delveShopGateUnlocked,
   resolveDelveShopOffers,

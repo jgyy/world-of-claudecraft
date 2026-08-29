@@ -982,7 +982,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.frameNames.xpBar",
     "hudChrome.interfaceUnlock.previewMemberName",
     "hudChrome.interfaceUnlock.snapToGrid",
-    "hudChrome.reliquary.sourceVendorGated",
     "hudChrome.wocMarket.walletUsdBalance",
     "hudChrome.wocStore.charter.resultContext"
   ],
@@ -992,7 +991,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.frameNames.xpBar",
     "hudChrome.interfaceUnlock.previewMemberName",
     "hudChrome.interfaceUnlock.snapToGrid",
-    "hudChrome.reliquary.sourceVendorGated",
     "hudChrome.wocMarket.walletUsdBalance",
     "hudChrome.wocStore.charter.resultContext"
   ],
@@ -1002,7 +1000,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.frameNames.xpBar",
     "hudChrome.interfaceUnlock.previewMemberName",
     "hudChrome.interfaceUnlock.snapToGrid",
-    "hudChrome.reliquary.sourceVendorGated",
     "hudChrome.wocMarket.walletUsdBalance",
     "hudChrome.wocStore.charter.resultContext"
   ],
@@ -1012,7 +1009,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.frameNames.xpBar",
     "hudChrome.interfaceUnlock.previewMemberName",
     "hudChrome.interfaceUnlock.snapToGrid",
-    "hudChrome.reliquary.sourceVendorGated",
     "hudChrome.wocMarket.walletUsdBalance",
     "hudChrome.wocStore.charter.resultContext"
   ],
@@ -1183,7 +1179,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.interfaceUnlock.frameNames.xpBar",
     "hudChrome.interfaceUnlock.previewMemberName",
     "hudChrome.interfaceUnlock.snapToGrid",
-    "hudChrome.reliquary.sourceVendorGated",
     "hudChrome.wocMarket.walletUsdBalance",
     "hudChrome.wocStore.charter.resultContext"
   ],
