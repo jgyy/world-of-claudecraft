@@ -69,6 +69,29 @@ function spawnDummy(sim: Sim, p: Entity, level = 5, dz = 2): Entity {
   return mob;
 }
 
+// A second player, in a live duel with p (real PvP hostility, not a mob-owner
+// stand-in), positioned at distance dz along z the same way spawnDummy places
+// a mob. Ticks the 3s duel countdown out so isHostileTo(p, opponent) is true
+// by the time the caller drives updatePlayerAutoAttack directly.
+function spawnDuelOpponent(sim: Sim, p: Entity, dz = 2): Entity {
+  const oppId = sim.addPlayer('warrior', 'Opponent', { autoEquip: true });
+  const opp = sim.entities.get(oppId)!;
+  opp.pos = { x: p.pos.x, y: p.pos.y, z: p.pos.z + dz };
+  opp.prevPos = { ...opp.pos };
+  sim.duelRequest(opp.id, p.id);
+  sim.duelAccept(opp.id);
+  for (let i = 0; i < 20 * 4; i++) {
+    sim.tick();
+    // biome-ignore lint/suspicious/noExplicitAny: reaching the private `duels` map, same as tests/duel.test.ts
+    const d = (sim as any).duels.get(p.id);
+    if (d?.state === 'active') break;
+  }
+  opp.pos = { x: p.pos.x, y: p.pos.y, z: p.pos.z + dz }; // countdown ticks can drift idle regen/AI; re-pin
+  opp.prevPos = { ...opp.pos };
+  sim.targetEntity(opp.id, p.id);
+  return opp;
+}
+
 // Capture the event stream. ctx.emit is late-bound, so swapping sim.emit is observed.
 function capture(sim: Sim): SimEvent[] {
   const events: SimEvent[] = [];
@@ -531,6 +554,39 @@ describe('auto_attack facing: self-corrects onto a target that circled behind th
     updatePlayerAutoAttack(sim.ctx, p, meta);
     expect(events.some((e) => e.type === 'damage')).toBe(false);
     expect(p.facing).toBe(away);
+  });
+});
+
+describe('auto_attack facing: PvP keeps the pre-fix facing gate (does not auto-face)', () => {
+  // #3729 feedback: auto-facing every tick against a PLAYER target would snap the
+  // defender's facing onto the attacker the instant the defender swings back,
+  // making Backstab/Ambush's requiresBehind check (casting_lifecycle.ts, which reads
+  // the target's live `facing`) unsatisfiable for as long as the fight lasts. PvE
+  // (mob/NPC) targets keep the auto-face fix from the describe block above; PvP
+  // targets keep the original MELEE_ARC gate instead, exactly as it behaved before
+  // this module's auto-face fix landed.
+  it('a live duel opponent directly behind the player does not turn the player and the swing no-ops', () => {
+    const { sim, p, meta } = makeSim('warrior', 12);
+    const opp = spawnDuelOpponent(sim, p, 2);
+    const away = normAngle(angleTo(p.pos, opp.pos) + Math.PI);
+    p.facing = away; // face directly AWAY from the duel opponent
+    p.autoAttack = true;
+    p.swingTimer = 0;
+    const events = capture(sim);
+    updatePlayerAutoAttack(sim.ctx, p, meta);
+    expect(events.some((e) => e.type === 'damage' && e.sourceId === p.id)).toBe(false);
+    expect(p.facing).toBe(away);
+  });
+
+  it('a live duel opponent inside the facing arc still connects, same as before the auto-face fix', () => {
+    const { sim, p, meta } = makeSim('warrior', 12);
+    const opp = spawnDuelOpponent(sim, p, 2);
+    p.facing = angleTo(p.pos, opp.pos); // already facing the opponent, no auto-face needed
+    p.autoAttack = true;
+    p.swingTimer = 0;
+    const events = capture(sim);
+    updatePlayerAutoAttack(sim.ctx, p, meta);
+    expect(events.some((e) => e.type === 'damage' && e.sourceId === p.id)).toBe(true);
   });
 });
 

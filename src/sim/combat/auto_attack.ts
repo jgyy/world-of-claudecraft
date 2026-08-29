@@ -2,10 +2,11 @@
 // monolith (C5). This module owns:
 //   - startAutoAttack / stopAutoAttack: the public auto-attack toggle (validate
 //     target, aggro an idle mob, enter combat).
-//   - updatePlayerAutoAttack: the per-tick driver (swing-timer decay, auto-facing
-//     the target then a range gate, the ranged-vs-melee branch, and queuedOnSwing
-//     consumption that feeds on-next-swing abilities like Heroic Strike / Raptor
-//     Strike into the swing).
+//   - updatePlayerAutoAttack: the per-tick driver (swing-timer decay, then
+//     either an auto-face (PvE) or the original facing-arc gate (PvP, so
+//     positional combat like Backstab still works), a range gate, the
+//     ranged-vs-melee branch, and queuedOnSwing consumption that feeds
+//     on-next-swing abilities like Heroic Strike / Raptor Strike into the swing).
 //   - rangedSwing: Auto Shot (hunters, 8yd dead zone) and Wand (casters, no dead
 //     zone); miss roll, crit, and armor mitigation for physical shots only.
 //   - meleeSwing: the white-hit table (single rng.next() miss -> dodge -> hit, crit,
@@ -39,13 +40,16 @@ import { resolveTalentHitMult } from '../talent_hit_mult';
 import { addThreat, hasEscapeStealth } from '../threat';
 import { creditAbilityDrill } from '../tutorial/ability_drill';
 import {
+  angleTo,
   armorReduction,
   BATTLE_TRANCE_CHANCE,
   BATTLE_TRANCE_DURATION,
   DT,
   dist2d,
   type Entity,
+  MELEE_ARC,
   MELEE_RANGE,
+  normAngle,
   STANCE_MASTERY_BERSERKER_HASTE,
   steadyAngleTo,
   swingMissChance,
@@ -211,14 +215,32 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   if (isStunned(p)) return;
   if (isDisarmed(p)) return; // weapon knocked away: no auto-attack swings
   const d = dist2d(p.pos, t.pos);
-  // Auto-face the current auto-attack target every tick, the same self-correction
-  // the mob melee driver (mob/combat_profile.ts tryMobMeleeSwingInRange) and
-  // /follow (Sim.updateFollowMovement) already apply via steadyAngleTo: without
-  // it a player who never manually re-turns onto a target that circled or
-  // aggroed from behind had every swing silently no-op against the MELEE_ARC
-  // gate forever. isStunned/isDisarmed above already bailed out before this
-  // point, so a stunned or disarmed attacker still cannot turn onto a target.
-  p.facing = steadyAngleTo(p.pos, t.pos, p.facing);
+  if (t.kind === 'player') {
+    // PvP keeps the pre-fix facing GATE instead of auto-facing: positional
+    // combat (most concretely Backstab/Ambush's requiresBehind check in
+    // casting_lifecycle.ts, which reads the target's live `facing`) is real
+    // classic-era player skill, and auto-facing here would snap a defender's
+    // facing onto the attacker every tick the instant the defender swings
+    // back, making "behind" unreachable in practice for as long as the fight
+    // lasts (reported against this module's own auto-face fix: a rogue can
+    // no longer hold rear positioning on a player target that fights back).
+    // A stunned or disarmed attacker still can't turn onto a target, same as
+    // the auto-face arm below.
+    const facingDiff = Math.abs(normAngle(angleTo(p.pos, t.pos) - p.facing));
+    if (facingDiff > MELEE_ARC) return;
+  } else {
+    // Auto-face a mob/NPC auto-attack target every tick, the same
+    // self-correction the mob melee driver (mob/combat_profile.ts
+    // tryMobMeleeSwingInRange) and /follow (Sim.updateFollowMovement)
+    // already apply via steadyAngleTo: without it a player who never
+    // manually re-turns onto a target that circled or aggroed from behind
+    // had every swing silently no-op against the MELEE_ARC gate forever.
+    // isStunned/isDisarmed above already bailed out before this point, so a
+    // stunned or disarmed attacker still cannot turn onto a target. PvE
+    // targets have no facing-dependent defensive mechanic riding on this,
+    // so there's no positional skill to preserve here.
+    p.facing = steadyAngleTo(p.pos, t.pos, p.facing);
+  }
 
   // ranged auto-attack: hunters (auto shot, dead zone inside minRange) and
   // casters (wand-style, no dead zone so they don't run into melee, #94).
