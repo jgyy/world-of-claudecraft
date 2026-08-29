@@ -2515,6 +2515,27 @@ describe('The Drowned Litany reliquary page names the Marks vendor gate (live ca
   });
 });
 
+describe('The Collapsed Reliquary page names the same gate (live catalog)', () => {
+  // The entry-tier delve shares the exact same shape: two signature rares on
+  // a heroicClear Marks rung, named by the page's own clearSource.delveId.
+  // Unlike the Litany's two Marks-only rares, these two ALSO drop from the
+  // lockpick chest, so each carries a delve line ahead of its vendor line.
+  const page = RELIQUARY_PAGES_BY_ID.conquerors_collapsed_reliquary;
+
+  it('names the Heroic clear on the vendor line, alongside the chest line', () => {
+    const cells = buildReliquaryPageCells(page, { itemsDiscovered: ownedSet() });
+    for (const id of ['deacon_reliquary_helm', 'varric_shadow_cowl']) {
+      const cell = cells.find((c) => c.id === id)!;
+      expect(cell.sourcePlans, id).toEqual([
+        { kind: 'delve', delveId: 'collapsed_reliquary' },
+        { kind: 'vendor', npcId: 'brother_halven', gate: 'heroicClear' },
+      ]);
+      const lines = reliquarySourceLines(cell.sourcePlans);
+      expect(lines[1], id).toContain(t('delveUi.shop.reqHeroic'));
+    }
+  });
+});
+
 describe('search and ownership filter', () => {
   const page: ReliquaryPageDef = {
     id: 'filter_page',
