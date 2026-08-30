@@ -104,11 +104,7 @@ async function main() {
     });
     await sleep(200);
 
-    await page.evaluate(
-      (x, z) => window.__game.world.chat(`/dev tp ${x} ${z}`),
-      TP_X,
-      TP_Z,
-    );
+    await page.evaluate((x, z) => window.__game.world.chat(`/dev tp ${x} ${z}`), TP_X, TP_Z);
     await sleep(400);
     // Wait out any transient movement-suspend window (e.g. a lingering
     // teleport/UI flag) before driving real input: input.debugState()
