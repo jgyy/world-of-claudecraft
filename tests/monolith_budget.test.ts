@@ -421,7 +421,12 @@ const MONOLITHS: MonolithRow[] = [
     // moved down across the bank-storage and entry-fade merges while this
     // branch keeps its +4 above. Measured on the merged tree, never
     // reconciled by arithmetic. Exact count, zero slack.
-    ceiling: 12359,
+    // LOWERED 12359 -> 12293 for the knockback-wall-pin fix: applyKnockback's
+    // full body (the shove loop, the SKIN_WIDTH-padded resolve, the landing
+    // seat) moved verbatim to src/sim/knockback.ts behind SimContext; Sim
+    // keeps only the thin delegate the ctx binding and the `(sim as any)`
+    // test call sites need. Exact count, zero slack.
+    ceiling: 12293,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
