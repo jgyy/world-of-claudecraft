@@ -170,6 +170,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "es_ES": [
@@ -333,6 +334,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "fr_FR": [
@@ -496,6 +498,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "fr_CA": [
@@ -659,6 +662,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "en_CA": [],
@@ -823,6 +827,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "de_DE": [
@@ -986,6 +991,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "zh_CN": [
@@ -1185,6 +1191,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "ru_RU": [
@@ -1357,6 +1364,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "nl_NL": [
@@ -1520,6 +1528,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "pl_PL": [
@@ -1683,6 +1692,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "id_ID": [
@@ -1846,6 +1856,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "tr_TR": [
@@ -2009,6 +2020,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "sv_SE": [
@@ -2172,6 +2184,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "vi_VN": [
@@ -2335,6 +2348,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ],
   "da_DK": [
@@ -2498,6 +2512,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocStore.charter.scope",
     "hudChrome.wocStore.charter.someHiddenByFit",
     "hudChrome.wocStore.charter.title",
+    "loading.rendererContextLost",
     "wallet.browser.stepUpBody"
   ]
 };

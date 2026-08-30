@@ -584,11 +584,13 @@ describe('wiring pins (source scans, anchor style per docs/qa-gate.md)', () => {
     expect(enableAt).toBeGreaterThanOrEqual(0);
     expect(deferredAt).toBeGreaterThanOrEqual(0);
     expect(enableAt).toBeLessThan(deferredAt);
-    // (2) The re-transcode kick must sit INSIDE the canvas webglcontextlost
-    // listener (it serves both in-place loss and the rebuild recycle).
-    expect(
-      between(mainSrc, "addEventListener('webglcontextlost'", 'webglcontextrestored'),
-    ).toContain('ktx2MipsOnContextLost()');
+    // (2) The re-transcode kick must sit INSIDE the onLost callback wired
+    // through attachContextRecoveryHandlers (context_loss_recovery.ts), which
+    // dispatches on the same canvas webglcontextlost event for both in-place
+    // loss and the rebuild recycle.
+    expect(between(mainSrc, 'attachContextRecoveryHandlers(canvas, {', 'onRestored:')).toContain(
+      'ktx2MipsOnContextLost()',
+    );
     // (3) The curtain gate must sit INSIDE the rebuild prewarm step, after the
     // far-vista hold, so the reveal never shows stub-black world textures.
     expect(between(mainSrc, 'prewarmRenderer: async (next)', 'validateRenderer')).toContain(

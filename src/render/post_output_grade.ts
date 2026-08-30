@@ -59,12 +59,28 @@ export const OUTPUT_GRADE_FRAGMENT_SHADER = /* glsl */ `
   // Linux). Every NaN comparison is false, so the (x < 0.0 || x >= 0.0) test
   // keeps finite and infinite values and rewrites only NaN to zero. This must
   // stay on the beauty AND the bloom read, since the blur already spread the NaN.
+  //
+  // A literal +Infinity is a SEPARATE hazard the check above deliberately lets
+  // through (Infinity >= 0.0 is true): ACES and every other curve this pass can
+  // select compute their own internal ratio of two quantities that both diverge
+  // together on a uniformly-infinite input, which is the Infinity/Infinity
+  // indeterminate form, i.e. NaN again, downstream of this sanitizer where
+  // nothing scrubs it a second time. Capping the UPPER bound only (min, not
+  // clamp) at the beauty target's own max finite value (RGBA16F's ceiling,
+  // 65504) keeps every real HDR highlight this pipeline already renders
+  // untouched (none of them are within orders of magnitude of that ceiling)
+  // and keeps every legitimate negative/near-zero value passing the check
+  // above exactly as before, while turning a stray Infinity into the same
+  // deterministic, clean-white filmic saturation an ordinary very bright
+  // pixel gets, instead of the undefined per-driver outcome an internal NaN
+  // produces.
   vec3 sanitizeFinite(vec3 v) {
-    return vec3(
+    vec3 finite = vec3(
       (v.x < 0.0 || v.x >= 0.0) ? v.x : 0.0,
       (v.y < 0.0 || v.y >= 0.0) ? v.y : 0.0,
       (v.z < 0.0 || v.z >= 0.0) ? v.z : 0.0
     );
+    return min(finite, vec3(65504.0));
   }
 
   // The display-referred image this pass grades: one scene sample with bloom
@@ -77,8 +93,14 @@ export const OUTPUT_GRADE_FRAGMENT_SHADER = /* glsl */ `
     outputColor.rgb = sanitizeFinite(outputColor.rgb);
 
     #ifdef BLOOM_PREPARED
+      // Sanitize the SUM, not each addend: outputColor.rgb is already capped
+      // at 65504 above, and an equally-capped bloom term can still add past
+      // it (up to 131008), which packHalf2x16 below cannot represent and
+      // rounds to +Infinity, right back to the failure this pass exists to
+      // prevent. One sanitize on the combined value keeps it in range no
+      // matter how bright either addend was.
       vec4 bloom = texture(tBloom, inputUv);
-      outputColor.rgb = quantizeHalf(outputColor.rgb + sanitizeFinite(bloom.rgb * bloom.a));
+      outputColor.rgb = quantizeHalf(sanitizeFinite(outputColor.rgb + bloom.rgb * bloom.a));
     #endif
 
     #ifdef LINEAR_TONE_MAPPING

@@ -8,7 +8,7 @@ describe('fused output and grade shader', () => {
     const diffuseSampleAt = shader.indexOf('vec4 outputColor = texture(tDiffuse, inputUv);');
     const bloomSampleAt = shader.indexOf('vec4 bloom = texture(tBloom, inputUv);');
     const bloomBlendAt = shader.indexOf(
-      'outputColor.rgb = quantizeHalf(outputColor.rgb + sanitizeFinite(bloom.rgb * bloom.a));',
+      'outputColor.rgb = quantizeHalf(sanitizeFinite(outputColor.rgb + bloom.rgb * bloom.a));',
     );
     const toneMapAt = shader.indexOf('outputColor.rgb = ACESFilmicToneMapping(outputColor.rgb);');
     const srgbAt = shader.indexOf('outputColor = sRGBTransferOETF(outputColor);');
@@ -103,13 +103,35 @@ describe('fused output and grade shader', () => {
     const helperAt = shader.indexOf('vec3 sanitizeFinite(vec3 v) {');
     const beautyScrubAt = shader.indexOf('outputColor.rgb = sanitizeFinite(outputColor.rgb);');
     const diffuseSampleAt = shader.indexOf('vec4 outputColor = texture(tDiffuse, inputUv);');
-    const bloomScrubAt = shader.indexOf('sanitizeFinite(bloom.rgb * bloom.a)');
+    const bloomScrubAt = shader.indexOf(
+      'outputColor.rgb = quantizeHalf(sanitizeFinite(outputColor.rgb + bloom.rgb * bloom.a));',
+    );
     const toneMapAt = shader.indexOf('outputColor.rgb = ACESFilmicToneMapping(outputColor.rgb);');
     expect(helperAt).toBeGreaterThan(-1);
     expect(beautyScrubAt).toBeGreaterThan(diffuseSampleAt);
     expect(bloomScrubAt).toBeGreaterThan(-1);
     expect(toneMapAt).toBeGreaterThan(beautyScrubAt);
     expect(toneMapAt).toBeGreaterThan(bloomScrubAt);
+  });
+
+  it('caps a stray +Infinity at the beauty target own half-float max before the SUM reaches quantizeHalf', () => {
+    // sanitizeFinite's NaN check alone deliberately lets Infinity and any
+    // runaway-but-finite value through; ACES (and every other selectable
+    // curve) internally divides two quantities that both diverge together on
+    // a uniformly-infinite input, the Infinity/Infinity indeterminate form,
+    // which is NaN again downstream of this sanitizer where nothing scrubs it
+    // a second time. The upper-bound-only min(...) closes that without
+    // touching the pre-existing negative-value passthrough. It must sanitize
+    // the SUM of the beauty and bloom terms, not each addend separately: two
+    // terms independently capped at 65504 can still add to 131008, which
+    // packHalf2x16 cannot represent and rounds to +Infinity, reopening the
+    // exact hole this pin exists to keep shut.
+    const shader = OUTPUT_GRADE_FRAGMENT_SHADER;
+    expect(shader).toContain('return min(finite, vec3(65504.0));');
+    expect(shader).not.toContain('clamp(finite, vec3(0.0), vec3(65504.0))');
+    expect(shader).toContain(
+      'outputColor.rgb = quantizeHalf(sanitizeFinite(outputColor.rgb + bloom.rgb * bloom.a));',
+    );
   });
 
   it('only calls tonemapping functions the installed three chunk defines', () => {

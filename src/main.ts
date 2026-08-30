@@ -302,6 +302,7 @@ import {
   playerPortraitDataUrl,
   resetPortraitRendererForGraphicsRebuild,
 } from './render/characters/portrait';
+import { attachContextRecoveryHandlers } from './render/context_loss_recovery';
 import { type RecycledRendererContext, recycleWebGL2Context } from './render/context_recycle';
 import { installWebGLContextRelease } from './render/context_release';
 import { setDayNightPhaseOverride, setLunarPhaseOverride } from './render/day_night_clock';
@@ -1480,21 +1481,20 @@ async function startGame(
   uiEffectsApplier.applyNow();
   const autoLoot = new AutoLoot();
   const perf = createPerfMonitor(null, DESKTOP_APP);
-  canvas.addEventListener('webglcontextlost', () => {
-    // Start re-transcoding released KTX2 mip chains NOW: the restored (or
-    // recycled) context re-uploads from texture.mipmaps, and the sooner the
-    // worker starts the shorter any stub-black window. Fires for in-place GPU
-    // loss AND the graphics-rebuild recycle (both dispatch on this canvas).
-    ktx2MipsOnContextLost();
-    entryDiagnostics.checkpoint('webgl-context-lost', {
-      ...renderEntryDiagnostics(),
-      contextLost: rendererReady ? renderer.perfStats().contextLost + 1 : 1,
-    });
-    console.warn('[entry-diag] WebGL context lost during or after world entry');
-  });
-  canvas.addEventListener('webglcontextrestored', () => {
-    entryDiagnostics.checkpoint('webgl-context-restored');
-    console.info('[entry-diag] WebGL context restored during or after world entry');
+  attachContextRecoveryHandlers(canvas, {
+    onLost: () => {
+      ktx2MipsOnContextLost();
+      entryDiagnostics.checkpoint('webgl-context-lost', {
+        ...renderEntryDiagnostics(),
+        contextLost: rendererReady ? renderer.perfStats().contextLost + 1 : 1,
+      });
+      console.warn('[entry-diag] WebGL context lost during or after world entry');
+    },
+    onRestored: () => {
+      entryDiagnostics.checkpoint('webgl-context-restored');
+      console.info('[entry-diag] WebGL context restored during or after world entry');
+    },
+    onStuck: () => fatalOverlay(t('loading.rendererContextLost')),
   });
   // The probe was armed before the locale/asset awaits above; mark that the await
   // window ended and the synchronous scene build is what runs next.

@@ -304,10 +304,12 @@ function releaseAfterUpload(tex: ReleasableCompressedTexture, entry: ReleaseEntr
   entry.state = 'released';
 }
 
-/** Kick the re-transcode for every released texture. Wired to the game
- *  canvas's webglcontextlost listener in src/main.ts, which fires for both
- *  in-place GPU loss and the graphics-rebuild context recycle. Idempotent:
- *  textures already restoring are left to their in-flight transcode. */
+/** Kick the re-transcode for every released texture. Wired as the onLost
+ *  callback src/main.ts passes to attachContextRecoveryHandlers
+ *  (src/render/context_loss_recovery.ts), which fires it for every
+ *  webglcontextlost on the game canvas: both in-place GPU loss and the
+ *  graphics-rebuild context recycle. Idempotent: textures already restoring
+ *  are left to their in-flight transcode. */
 export function ktx2MipsOnContextLost(): void {
   if (!rederive) return;
   for (const [tex, entry] of entries.entries()) {
