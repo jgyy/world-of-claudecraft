@@ -29,6 +29,7 @@ import {
 } from '../src/render/assets/ktx2_mip_release';
 import { residencyBudget } from '../src/render/assets/residency_budget';
 import { type BackgroundGpuQueue, GPU_WORK_PRIORITY } from '../src/render/background_gpu_queue';
+import { FAR_VISTA_ENTRY_MAX_WAIT_MS } from '../src/render/far_terrain';
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -353,8 +354,10 @@ describe('context-loss restore story', () => {
     // awaits inside prewarmRenderer (src/main.ts), so what they jointly
     // permit is the SUM of all three, not the max of any one.
     expect(KTX2_RESTORE_MAX_WAIT_MS).toBe(3000);
+    // VIEW_PREWARM_MAX_MS is unexported (private to renderer.ts): pinned
+    // against its known literal, same as the doc comment above.
     expect(KTX2_RESTORE_MAX_WAIT_MS).toBeLessThanOrEqual(3000); // VIEW_PREWARM_MAX_MS
-    expect(KTX2_RESTORE_MAX_WAIT_MS).toBeLessThanOrEqual(4000); // FAR_VISTA_ENTRY_MAX_WAIT_MS
+    expect(KTX2_RESTORE_MAX_WAIT_MS).toBeLessThanOrEqual(FAR_VISTA_ENTRY_MAX_WAIT_MS);
   });
 
   it('an Infinity bound waits outright instead of firing almost immediately (the setTimeout(fn, Infinity) coercion trap)', async () => {
@@ -484,6 +487,60 @@ describe('context-loss restore story', () => {
     tex.dispose();
     drain();
     expect(initTexture).not.toHaveBeenCalled();
+  });
+
+  it('skips the real upload, but keeps the restored mips, when the host context is lost by the time the queued unit runs', async () => {
+    // The reviewed regression: three's initTexture has no lost-context guard
+    // of its own, unlike render(), and its onUpdate callback
+    // (releaseAfterUpload here) fires regardless of whether any GL work
+    // actually happened. Calling it while the host reports a lost context
+    // would re-release the freshly restored mips back to stubs having never
+    // reached the GPU, with nothing left to re-arm a restore afterward. This
+    // double's initTexture mirrors that real contract (it fires onUpdate
+    // exactly like `simulateUpload` does elsewhere in this file) and its
+    // queue admits the unit immediately, modeling "the unit ran while the
+    // context was still lost" rather than pacing it further out.
+    const tex = armedTexture(2);
+    simulateUpload(tex);
+    const freshMips = makeMips(2);
+    setKtx2MipRederive(async () => ({ mipmaps: freshMips, format: tex.format as number }));
+    const initTexture = vi.fn((t: unknown) => simulateUpload(t as THREE.CompressedTexture));
+    const queue = {
+      run: vi.fn((work: () => unknown) => Promise.resolve(work())),
+    } as unknown as BackgroundGpuQueue;
+    const target: Ktx2RestoreTarget = {
+      queue,
+      host: { initTexture, getContext: () => ({ isContextLost: () => true }) },
+    };
+
+    ktx2MipsOnContextLost(() => target);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    expect(initTexture).not.toHaveBeenCalled();
+    expect(tex.mipmaps as unknown).toBe(freshMips);
+    expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('armed');
+    expect((tex.source as unknown as { dataReady: boolean }).dataReady).toBe(true);
+  });
+
+  it('still runs the real upload when the host reports a live context', async () => {
+    // Companion to the lost-context case above: a host that implements
+    // getContext() but reports a live context must not accidentally suppress
+    // every upload.
+    const tex = armedTexture(2);
+    simulateUpload(tex);
+    const freshMips = makeMips(2);
+    setKtx2MipRederive(async () => ({ mipmaps: freshMips, format: tex.format as number }));
+    const { target, initTexture, drain } = makeStepQueue();
+    (target.host as { getContext?: () => { isContextLost(): boolean } }).getContext = () => ({
+      isContextLost: () => false,
+    });
+
+    ktx2MipsOnContextLost(() => target);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    drain();
+
+    expect(initTexture).toHaveBeenCalledTimes(1);
+    expect(initTexture).toHaveBeenCalledWith(tex);
   });
 
   it('paces a rebuild-path straggler through the NEW renderer queue, read live at apply time, not the (gone) queue live at contextlost', async () => {

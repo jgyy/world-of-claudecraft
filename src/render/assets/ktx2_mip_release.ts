@@ -61,6 +61,22 @@
 // candidate after the first admits on `fits` and the whole backlog still
 // drains in one frame, the exact burst pacing exists to spread.
 //
+// Because the unit's admission can land well after the transcode settled, the
+// canvas can have LOST its context again in the meantime (the in-place
+// GPU-loss path has no curtain, so this window is live during normal play).
+// Three's initTexture has no lost-context guard of its own (unlike render(),
+// which no-ops while the context is lost), and its onUpdate callback
+// (releaseAfterUpload here) fires regardless of whether any GL work actually
+// happened; calling it on a lost context would re-release the freshly
+// restored mips back to stubs having never reached the GPU, with nothing left
+// to re-arm a restore afterward. The unit therefore checks the host's live
+// getContext().isContextLost() (the same check src/main.ts already makes at
+// its own context-lost recovery path) immediately before calling initTexture,
+// and skips the call, not the whole restore, when the context is lost:
+// applyRestore already set needsUpdate, so three's own render loop performs
+// the real upload once render() resumes after the context returns, matching
+// the no-target immediate-apply path's behavior in that same window.
+//
 // The getter, not a snapshotted instance, is load-bearing on the
 // graphics-rebuild path: a transcode can still be in flight well after the
 // recycle that started it, and by the time it resolves the OLD renderer's
@@ -113,6 +129,14 @@ export interface Ktx2MipLevel {
  *  pacing" section. */
 export interface Ktx2RestoreUploadHost {
   initTexture(texture: unknown): void;
+  /** Structural match for THREE.WebGLRenderer.getContext(): consulted right
+   *  before the queued unit's real upload (see "Upload pacing" above). Three's
+   *  own initTexture has no lost-context guard, unlike render(), so calling it
+   *  during a lost context would still fire onUpdate/releaseAfterUpload and
+   *  re-release a freshly transcoded texture to stubs without ever reaching
+   *  the GPU. Optional so existing lightweight test doubles that never model a
+   *  context loss keep passing unchanged. */
+  getContext?(): { isContextLost(): boolean };
 }
 
 /** What a restore's re-upload paces through: the queue plus the host that
@@ -530,7 +554,16 @@ function startRestore(
       return target.queue
         .run(
           () => {
-            if (applyRestore()) target.host.initTexture(tex);
+            if (!applyRestore()) return;
+            // A context lost since this unit was admitted (three's initTexture
+            // has no lost-context guard of its own, see the module header):
+            // calling it anyway would still fire onUpdate/releaseAfterUpload
+            // and re-release these freshly transcoded mips to stubs without
+            // ever reaching the GPU. applyRestore already set needsUpdate;
+            // three's own render loop uploads for real once render() resumes
+            // after the context returns, matching the no-target path above.
+            if (target.host.getContext?.()?.isContextLost()) return;
+            target.host.initTexture(tex);
           },
           GPU_WORK_PRIORITY.BACKGROUND,
           'ktx2-restore:upload',
