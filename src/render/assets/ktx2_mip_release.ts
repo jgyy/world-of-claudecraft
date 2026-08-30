@@ -41,28 +41,34 @@
 // world props while the workers catch up: a designed, self-healing transient
 // on an exceptional recovery path.
 //
-// Upload pacing: when the caller passes a queue GETTER to
-// ktx2MipsOnContextLost, each restore's re-upload (the mipmap swap-in plus
-// needsUpdate) runs as one queued unit at GPU_WORK_PRIORITY.BACKGROUND
-// instead of firing the moment its transcode resolves. A shared 4-worker
-// transcode pool draining a large session-wide backlog (desktop hosts never
-// evict prepared zones, see zone_eviction_core.ts) lands many transcodes
-// close together; setting needsUpdate on all of them unpaced bunches their
-// re-uploads into whichever live frame happens to be current when they
-// settle, an unbudgeted GPU work burst on a canvas that JUST recovered from a
-// context loss. Queuing spreads that cost across frames under the same
-// admission budget every other GPU producer answers to (see
-// "GPU work: every new producer is a client of the scheduler" in
-// src/render/CLAUDE.md).
+// Upload pacing: when the caller passes a restore-target GETTER to
+// ktx2MipsOnContextLost, each restore's re-upload runs as one queued unit at
+// GPU_WORK_PRIORITY.BACKGROUND instead of firing the moment its transcode
+// resolves. A shared 4-worker transcode pool draining a large session-wide
+// backlog (desktop hosts never evict prepared zones, see
+// zone_eviction_core.ts) lands many transcodes close together; setting
+// needsUpdate on all of them unpaced bunches their re-uploads into whichever
+// live frame happens to be current when they settle, an unbudgeted GPU work
+// burst on a canvas that JUST recovered from a context loss. Queuing spreads
+// that cost across frames under the same admission budget every other GPU
+// producer answers to (see "GPU work: every new producer is a client of the
+// scheduler" in src/render/CLAUDE.md). The queued unit's work function calls
+// the host's initTexture (the eager per-texture upload texture_prep_lane.ts's
+// runTexturePrepLane also drives through host.initTexture) so the REAL GL
+// upload runs synchronously inside the unit, not a bare flag flip: without
+// this the queue's admission ledger (`admission?.spend(syncMs, label)` in
+// background_gpu_queue.ts) learns roughly 0 ms per restore, so every
+// candidate after the first admits on `fits` and the whole backlog still
+// drains in one frame, the exact burst pacing exists to spread.
 //
 // The getter, not a snapshotted instance, is load-bearing on the
 // graphics-rebuild path: a transcode can still be in flight well after the
 // recycle that started it, and by the time it resolves the OLD renderer's
 // queue may be gone while the NEW one (built later in the rebuild, see
-// src/main.ts) already exists. Resolving the queue at the point of
+// src/main.ts) already exists. Resolving the queue and host at the point of
 // application instead of at contextlost-fire time is what lets a past-bound
 // straggler still find a live queue rather than always taking the
-// immediate-apply fallback. No queue (the caller has none, the getter is
+// immediate-apply fallback. No target (the caller has none, the getter is
 // omitted, or it currently returns none) falls back to the pre-existing
 // immediate behavior, and a queue that refuses or has been shut down (a
 // renderer rebuild mid-restore) does too: this stage is a self-healing
@@ -98,6 +104,25 @@ export interface Ktx2MipLevel {
   width: number;
   height: number;
   data: Uint8Array;
+}
+
+/** The structural slice of WebGLRenderer a paced restore's queued unit uses to
+ *  perform the REAL GL upload (matching texture_prep_lane.ts's
+ *  `host.initTexture` pattern), so the queue prices the unit correctly
+ *  instead of a near-zero flag flip. See the module header's "Upload
+ *  pacing" section. */
+export interface Ktx2RestoreUploadHost {
+  initTexture(texture: unknown): void;
+}
+
+/** What a restore's re-upload paces through: the queue plus the host that
+ *  performs the eager upload the queued unit prices. Both come from the same
+ *  live renderer, so they are resolved together (never independently, which
+ *  could otherwise pair a queue from one renderer with a host from another
+ *  across a rebuild). */
+export interface Ktx2RestoreTarget {
+  queue: BackgroundGpuQueue;
+  host: Ktx2RestoreUploadHost;
 }
 
 /** The structural slice of THREE.CompressedTexture this module manages. */
@@ -351,15 +376,15 @@ function releaseAfterUpload(tex: ReleasableCompressedTexture, entry: ReleaseEntr
  *  its own restore), only which finish before an unrelated caller stops
  *  awaiting them.
  *
- *  `queueGetter` reads the CURRENT renderer's background_gpu_queue, called at
- *  the point each restore's re-upload is actually applied rather than latched
- *  once here (src/main.ts passes a closure over its own live `renderer`
- *  binding, which a graphics rebuild reassigns partway through this
- *  restore's lifetime): see the module header's "Upload pacing" section for
- *  why the getter, not a snapshotted instance, is what makes pacing actually
- *  reach a rebuild's past-bound stragglers. Omit it (or have it return
- *  undefined) to keep the pre-existing immediate-upload behavior. */
-export function ktx2MipsOnContextLost(queueGetter?: () => BackgroundGpuQueue | undefined): void {
+ *  `resolveTarget` reads the CURRENT renderer's queue and upload host, called
+ *  at the point each restore's re-upload is actually applied rather than
+ *  latched once here (src/main.ts passes a closure over its own live
+ *  `renderer` binding, which a graphics rebuild reassigns partway through
+ *  this restore's lifetime): see the module header's "Upload pacing" section
+ *  for why the getter, not a snapshotted instance, is what makes pacing
+ *  actually reach a rebuild's past-bound stragglers. Omit it (or have it
+ *  return undefined) to keep the pre-existing immediate-upload behavior. */
+export function ktx2MipsOnContextLost(resolveTarget?: () => Ktx2RestoreTarget | undefined): void {
   if (!rederive) return;
   const released: [ReleasableCompressedTexture, ReleaseEntry][] = [];
   for (const pair of entries.entries()) {
@@ -367,7 +392,7 @@ export function ktx2MipsOnContextLost(queueGetter?: () => BackgroundGpuQueue | u
   }
   for (let i = released.length - 1; i >= 0; i--) {
     const [tex, entry] = released[i] as [ReleasableCompressedTexture, ReleaseEntry];
-    startRestore(tex, entry, queueGetter);
+    startRestore(tex, entry, resolveTarget);
   }
 }
 
@@ -379,14 +404,17 @@ export function ktx2MipsOnContextLost(queueGetter?: () => BackgroundGpuQueue | u
  *  recycle kicks off a restore for ALL of them (ktx2MipsOnContextLost), not
  *  just the ones the rebuilt scene is about to show. Without a bound this made
  *  a routine settings change hold the curtain for however long that backlog
- *  took to drain through the shared transcode worker pool. Set to the
+ *  took to drain through the shared transcode worker pool. Set to TIED FOR THE
  *  TIGHTEST of this rebuild's sibling bounds (renderer.ts's
- *  VIEW_PREWARM_MAX_MS = 3000, far_terrain.ts's FAR_VISTA_ENTRY_MAX_WAIT_MS =
- *  4000), not the loosest: this stage protects a purely cosmetic,
- *  self-healing transient (a stub-black texture that repaints itself once its
- *  restore lands), while the other two protect a horizon pop and real
- *  first-draw links, so it is the stage that can most afford to give up early.
- *  A restore still in flight past the bound keeps running and swaps in on its
+ *  VIEW_PREWARM_MAX_MS = 3000, equal; far_terrain.ts's
+ *  FAR_VISTA_ENTRY_MAX_WAIT_MS = 4000, looser), never the loosest: this stage
+ *  protects a purely cosmetic, self-healing transient (a stub-black texture
+ *  that repaints itself once its restore lands), while the other two protect
+ *  a horizon pop and real first-draw links, so it is the stage that can most
+ *  afford to give up early. The three stages are sequential awaits inside
+ *  prewarmRenderer (src/main.ts), so what they jointly permit is their SUM,
+ *  not their max: up to about 10 seconds of curtain in the worst case. A
+ *  restore still in flight past this bound keeps running and swaps in on its
  *  own next render: the same accepted transient the in-place GPU-loss path
  *  already lives with (see the module header). */
 export const KTX2_RESTORE_MAX_WAIT_MS = 3000;
@@ -402,8 +430,19 @@ export const KTX2_RESTORE_MAX_WAIT_MS = 3000;
  *  otherwise coerce it to fire almost immediately, the exact opposite of what
  *  a caller spelling "no bound" means. */
 export function ktx2MipsRestored(maxWaitMs: number = KTX2_RESTORE_MAX_WAIT_MS): Promise<boolean> {
-  const settled = Promise.allSettled([...inflightRestores]).then(() => true as const);
-  if (inflightRestores.size === 0 || !Number.isFinite(maxWaitMs)) return settled;
+  // Snapshotted once: inflightRestores can grow after this call (a second
+  // context loss starting mid-wait), and the timeout below must report how
+  // many of what THIS call started waiting on are still outstanding, not the
+  // live registry size at fire time (that would count restores this wait
+  // never promised to cover, misleading a field report reading the number).
+  const target = [...inflightRestores];
+  const settled = Promise.allSettled(target).then(() => true as const);
+  if (target.length === 0 || !Number.isFinite(maxWaitMs)) return settled;
+  let settledCount = 0;
+  for (const restore of target)
+    void restore.finally(() => {
+      settledCount++;
+    });
   return new Promise((resolve) => {
     let done = false;
     const timer = setTimeout(() => {
@@ -412,7 +451,7 @@ export function ktx2MipsRestored(maxWaitMs: number = KTX2_RESTORE_MAX_WAIT_MS): 
       // Dev-channel English: a field recurrence of the reported hang must be
       // visible, not silently absorbed by the bound that replaced it.
       console.warn(
-        `[ktx2] restore bound hit with ${inflightRestores.size} texture(s) still restoring; continuing in the background`,
+        `[ktx2] restore bound hit with ${target.length - settledCount} texture(s) still restoring; continuing in the background`,
       );
       resolve(false);
     }, maxWaitMs);
@@ -440,7 +479,7 @@ export function ktx2RetainedSourceBytes(): number {
 function startRestore(
   tex: ReleasableCompressedTexture,
   entry: ReleaseEntry,
-  queueGetter?: () => BackgroundGpuQueue | undefined,
+  resolveTarget?: () => Ktx2RestoreTarget | undefined,
 ): void {
   if (!rederive) return;
   entry.state = 'restoring';
@@ -460,32 +499,46 @@ function startRestore(
       // Re-checked at the point of application, not just above: when queued,
       // time passes between the transcode settling and this unit actually
       // running, and the texture can be disposed or lose a race with a
-      // second context loss in between.
-      const applyRestore = (): void => {
-        if (entries.get(tex) !== entry || entry.state !== 'restoring') return;
+      // second context loss in between. Returns whether it actually applied,
+      // so a queued unit knows whether the upload below is still warranted.
+      const applyRestore = (): boolean => {
+        if (entries.get(tex) !== entry || entry.state !== 'restoring') return false;
         tex.mipmaps = fresh.mipmaps;
         if (tex.source) tex.source.dataReady = true;
         entry.state = 'armed';
-        // Re-upload on the next render; that upload's onUpdate re-releases.
         tex.needsUpdate = true;
+        return true;
       };
       // Resolved HERE, not at ktx2MipsOnContextLost's call time: see the
       // module header's "Upload pacing" section for why a rebuild's
-      // past-bound stragglers need the queue read live, at application time.
-      const queue = queueGetter?.();
-      if (!queue) {
+      // past-bound stragglers need the queue and host read live, at
+      // application time.
+      const target = resolveTarget?.();
+      if (!target) {
+        // No queue/host: needsUpdate alone is enough here, three's own render
+        // loop uploads from tex.mipmaps the next time it draws this texture.
         applyRestore();
         return;
       }
       // See the module header's "Upload pacing" section: a queued unit at
       // the cosmetic BACKGROUND tier so a large backlog's re-uploads spread
       // across frames instead of bursting into whichever one they settle in.
-      return queue
-        .run(applyRestore, GPU_WORK_PRIORITY.BACKGROUND, 'ktx2-restore:upload')
+      // The unit calls host.initTexture ITSELF (matching texture_prep_lane's
+      // pattern) so its synchronous work is the real GL upload, not a bare
+      // flag flip: that is what makes the queue's admission ledger learn the
+      // true cost instead of pricing every restore at roughly 0 ms.
+      return target.queue
+        .run(
+          () => {
+            if (applyRestore()) target.host.initTexture(tex);
+          },
+          GPU_WORK_PRIORITY.BACKGROUND,
+          'ktx2-restore:upload',
+        )
         .catch(() => {
           // The queue refused or was shut down (a renderer rebuild/teardown
           // raced this restore): apply directly rather than strand the
-          // texture on stubs forever, matching the no-queue path above.
+          // texture on stubs forever, matching the no-target path above.
           applyRestore();
         });
     },
