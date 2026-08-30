@@ -1453,6 +1453,7 @@ function dynamicFields(e: Entity, includeAuras = true): Record<string, unknown> 
   }
   if (e.weaponStowed) out.ws = 1; // Z-key sheathe: weapons render on the back
   if (e.helmHidden) out.hh = 1; // paperdoll eye toggle: kit helm left off the composed body
+  if (!e.autoFaceLocked) out.afu = 1; // Y-key auto-face lock: absent means locked/on
   if (e.aggroTargetId !== null) out.aggro = e.aggroTargetId;
   if (e.forcedTargetId !== null) out.ft = e.forcedTargetId;
   if (e.forcedTargetTimer > 0) out.ftm = round2(e.forcedTargetTimer);
@@ -7144,6 +7145,9 @@ export class GameServer {
       // and the combat auto-unsheathe rule.
       case 'stow_weapon':
         sim.toggleWeaponStow(pid);
+        break;
+      case 'toggle_auto_face_lock': // Y-key auto-face lock: no payload
+        sim.toggleAutoFaceLock(pid);
         break;
       // Paperdoll eye toggle: cosmetic helmet-visibility preference. Explicit
       // boolean (not a toggle) so it is idempotent: the client sends the state

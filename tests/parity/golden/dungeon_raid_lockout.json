@@ -28,7 +28,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1002,
-      "state": "8d84cad4",
+      "state": "4f17f722",
       "events": "d42fc726",
       "rng": {
         "draws": 0,
@@ -363,6 +363,7 @@
               "sourceId": 997
             }
           ],
+          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99,
@@ -415,6 +416,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -465,6 +467,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -515,6 +518,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -565,6 +569,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -618,7 +623,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1002,
-      "state": "8d84cad4",
+      "state": "4f17f722",
       "events": "a9da7315",
       "rng": {
         "draws": 0,
@@ -953,6 +958,7 @@
               "sourceId": 997
             }
           ],
+          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99,
@@ -1005,6 +1011,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -1055,6 +1062,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -1105,6 +1113,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -1155,6 +1164,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -1208,7 +1218,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 1002,
-      "state": "1ef1bb4e",
+      "state": "95a04a9c",
       "events": "a01771e0",
       "rng": {
         "draws": 0,
@@ -1578,6 +1588,7 @@
               "sourceId": 997
             }
           ],
+          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99.05,
@@ -1630,6 +1641,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -1680,6 +1692,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -1730,6 +1743,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.0555,
@@ -1780,6 +1794,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.0555,

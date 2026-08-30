@@ -30,7 +30,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 1001,
-      "state": "c7ec0e46",
+      "state": "1b818fca",
       "events": "3f99ff09",
       "rng": {
         "draws": 0,
@@ -41,7 +41,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 1001,
-      "state": "7fb85c55",
+      "state": "0dda6519",
       "events": "27775c8e",
       "rng": {
         "draws": 66,
@@ -52,7 +52,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 1001,
-      "state": "ada9ed47",
+      "state": "845cfdeb",
       "events": "a669b228",
       "rng": {
         "draws": 247,
@@ -63,7 +63,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 1001,
-      "state": "318a6d22",
+      "state": "3a15c8be",
       "events": "9255b03e",
       "rng": {
         "draws": 485,
@@ -74,7 +74,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 1001,
-      "state": "de5f33cd",
+      "state": "b371ab11",
       "events": "8cf88507",
       "rng": {
         "draws": 755,
@@ -85,7 +85,7 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 1001,
-      "state": "45e03ccc",
+      "state": "6e172868",
       "events": "741638a5",
       "rng": {
         "draws": 1040,
@@ -96,7 +96,7 @@
       "tick": 163,
       "time": 8.15,
       "nextId": 1001,
-      "state": "225d8ca1",
+      "state": "072b333d",
       "events": "205891fc",
       "rng": {
         "draws": 1175,
@@ -411,6 +411,7 @@
               "sourceId": 997
             }
           ],
+          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 102.1,
@@ -461,6 +462,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "autoFaceLocked": true,
           "combatTimer": 102.1,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -509,6 +511,7 @@
         {
           "aiState": "idle",
           "attackPower": 160,
+          "autoFaceLocked": true,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.211,
@@ -567,6 +570,7 @@
         {
           "aiState": "idle",
           "attackPower": 139,
+          "autoFaceLocked": true,
           "combatTimer": 102.1,
           "comboUntil": -1,
           "critChance": 0.091,

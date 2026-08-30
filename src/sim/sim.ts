@@ -19,6 +19,7 @@ import type {
   PlayerProfessionsView,
   ToolEffectSlotView,
 } from '../world_api';
+import { toggleAutoFaceLock as toggleAutoFaceLockImpl } from './auto_face_lock';
 import * as bagsMod from './bags';
 import {
   addStacked,
@@ -7651,6 +7652,10 @@ export class Sim {
 
   stopAutoAttack(pid?: number): void {
     stopAutoAttackImpl(this.ctx, pid);
+  }
+
+  toggleAutoFaceLock(pid?: number): void {
+    toggleAutoFaceLockImpl(this.ctx, pid);
   }
 
   private updatePlayerAutoAttack(p: Entity, meta: PlayerMeta): void {

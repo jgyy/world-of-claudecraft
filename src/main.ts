@@ -2018,6 +2018,9 @@ async function startGame(
             }
             break;
           }
+          case 'autoFaceLock':
+            world.toggleAutoFaceLock();
+            break;
           case 'chat':
             openChat();
             break;
@@ -2386,6 +2389,9 @@ async function startGame(
         }
         break;
       }
+      case 'autoFaceLock':
+        world.toggleAutoFaceLock();
+        break;
       case 'chat':
         openChat();
         break;

@@ -247,7 +247,11 @@ const MONOLITHS: MonolithRow[] = [
     // Plus 7 at the v0.39.3 main back-merge: the Double Honor port grew the
     // sim arm on main while the release pin sat at zero slack (the known
     // both-arms compound). Exact merged count, zero slack.
-    ceiling: 12538,
+    // Raised +5 for the auto-attack auto-face lock toggle (#3729 follow-up):
+    // the toggleAutoFaceLock thin delegate onto src/sim/auto_face_lock.ts (a
+    // SimContext-seam module, the startAutoAttack/stopAutoAttack pattern) plus
+    // its import line. Exact count, zero slack.
+    ceiling: 12543,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -276,7 +280,10 @@ const MONOLITHS: MonolithRow[] = [
     // the player-frame bar lock) predate this ratchet; folding them behind a
     // src/game/ settings-application seam is flagged follow-up work. Exact
     // merged count.
-    ceiling: 11629,
+    // Raised +6 for the auto-attack auto-face lock toggle (#3729 follow-up):
+    // two thin onUiKey/gamepad dispatch cases (the sheathe-toggle shape) that
+    // just call world.toggleAutoFaceLock(). Exact count, zero slack.
+    ceiling: 11635,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {
@@ -319,7 +326,10 @@ const MONOLITHS: MonolithRow[] = [
     // routeEvents into the guild board window's live REST read (the
     // noticeboard_guilds event transform is deleted). Exact count, zero
     // slack.
-    ceiling: 10645,
+    // Raised +2 for the auto-attack auto-face lock toggle (#3729 follow-up):
+    // the `afu` wire-encode line and the toggle_auto_face_lock dispatch case
+    // (thin delegate onto sim.toggleAutoFaceLock). Exact count, zero slack.
+    ceiling: 10647,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -341,7 +351,11 @@ const MONOLITHS: MonolithRow[] = [
     // Down 5855 -> 5817 at the desktop-signing round: the handoff result
     // validation moved to src/net/desktop_wallet_handoff.ts
     // (parseDesktopWalletHandoffStatus), paying for the stepup action kind.
-    ceiling: 5817,
+    // Raised +9 for the auto-attack auto-face lock toggle (#3729 follow-up):
+    // the blankEntity default, the `afu` decode line, and the
+    // toggleAutoFaceLock optimistic-nudge command sender (the toggleWeaponStow
+    // idiom). Exact count, zero slack.
+    ceiling: 5826,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

@@ -590,6 +590,61 @@ describe('auto_attack facing: PvP keeps the pre-fix facing gate (does not auto-f
   });
 });
 
+describe('auto_attack facing: PvE auto-face lock toggle (the Y key)', () => {
+  // #3729 round-3 feedback: an unconditional PvE auto-face conflicts with boss
+  // "don't look at me" mechanics and pillar-activation puzzles that need the
+  // player to deliberately hold a facing away from their target. Entity.autoFaceLocked
+  // (Sim.toggleAutoFaceLock / IWorld.toggleAutoFaceLock, the Y key) defaults on and,
+  // flipped off, falls the PvE branch back to the same MELEE_ARC gate the PvP branch
+  // above already uses.
+  it('defaults to locked (auto-face stays on) for a fresh player', () => {
+    const { p } = makeSim('warrior', 12);
+    expect(p.autoFaceLocked).toBe(true);
+  });
+
+  it('toggling flips the flag and emits a matching notice toast each way', () => {
+    const { sim, p } = makeSim('warrior', 12);
+    const events = capture(sim);
+    sim.toggleAutoFaceLock();
+    expect(p.autoFaceLocked).toBe(false);
+    expect(events.some((e) => e.type === 'log' && e.pid === p.id && /lock off/i.test(e.text))).toBe(
+      true,
+    );
+    events.length = 0;
+    sim.toggleAutoFaceLock();
+    expect(p.autoFaceLocked).toBe(true);
+    expect(events.some((e) => e.type === 'log' && e.pid === p.id && /lock on/i.test(e.text))).toBe(
+      true,
+    );
+  });
+
+  it('flipped off, a PvE target directly behind the player does not turn the player and the swing no-ops', () => {
+    const { sim, p, meta } = makeSim('warrior', 12);
+    const mob = spawnDummy(sim, p, 1, 2);
+    sim.toggleAutoFaceLock();
+    const away = normAngle(angleTo(p.pos, mob.pos) + Math.PI);
+    p.facing = away; // face directly AWAY from the target
+    p.autoAttack = true;
+    p.swingTimer = 0;
+    const events = capture(sim);
+    updatePlayerAutoAttack(sim.ctx, p, meta);
+    expect(events.some((e) => e.type === 'damage' && e.sourceId === p.id)).toBe(false);
+    expect(p.facing).toBe(away);
+  });
+
+  it('flipped off, a PvE target already inside the facing arc still connects, same as the lock-on case', () => {
+    const { sim, p, meta } = makeSim('warrior', 12);
+    const mob = spawnDummy(sim, p, 1, 2);
+    sim.toggleAutoFaceLock();
+    p.facing = angleTo(p.pos, mob.pos); // already facing the target, no auto-face needed
+    p.autoAttack = true;
+    p.swingTimer = 0;
+    const events = capture(sim);
+    updatePlayerAutoAttack(sim.ctx, p, meta);
+    expect(events.some((e) => e.type === 'damage' && e.sourceId === p.id)).toBe(true);
+  });
+});
+
 describe('auto_attack Vanish (issue #2426): a target that escapes stealth mid-fight', () => {
   // Vanish grants the target a stealth aura with escape semantics (hasEscapeStealth,
   // threat.ts): fully undetectable regardless of range, the same gate the mob AI

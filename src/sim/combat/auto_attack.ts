@@ -3,8 +3,10 @@
 //   - startAutoAttack / stopAutoAttack: the public auto-attack toggle (validate
 //     target, aggro an idle mob, enter combat).
 //   - updatePlayerAutoAttack: the per-tick driver (swing-timer decay, then
-//     either an auto-face (PvE) or the original facing-arc gate (PvP, so
-//     positional combat like Backstab still works), a range gate, the
+//     either an auto-face (PvE, while Entity.autoFaceLocked stays on) or the
+//     original facing-arc gate (PvP, or PvE with the lock flipped off via the
+//     Y key, so positional combat like Backstab still works and a player can
+//     hold a deliberate facing during a boss mechanic), a range gate, the
 //     ranged-vs-melee branch, and queuedOnSwing consumption that feeds
 //     on-next-swing abilities like Heroic Strike / Raptor Strike into the swing).
 //   - rangedSwing: Auto Shot (hunters, 8yd dead zone) and Wand (casters, no dead
@@ -215,7 +217,7 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   if (isStunned(p)) return;
   if (isDisarmed(p)) return; // weapon knocked away: no auto-attack swings
   const d = dist2d(p.pos, t.pos);
-  if (t.kind === 'player') {
+  if (t.kind === 'player' || !p.autoFaceLocked) {
     // PvP keeps the pre-fix facing GATE instead of auto-facing: positional
     // combat (most concretely Backstab/Ambush's requiresBehind check in
     // casting_lifecycle.ts, which reads the target's live `facing`) is real
@@ -224,21 +226,25 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
     // back, making "behind" unreachable in practice for as long as the fight
     // lasts (reported against this module's own auto-face fix: a rogue can
     // no longer hold rear positioning on a player target that fights back).
-    // A stunned or disarmed attacker still can't turn onto a target, same as
-    // the auto-face arm below.
+    // A PvE target falls into this same gate when the player has flipped
+    // their auto-face lock off (the Y key / Sim.toggleAutoFaceLock): a "don't
+    // look at me" boss mechanic or a pillar-activation puzzle needs to hold a
+    // deliberate facing away from the target, which the always-on auto-face
+    // below cannot do. A stunned or disarmed attacker still can't turn onto a
+    // target, same as the auto-face arm below.
     const facingDiff = Math.abs(normAngle(angleTo(p.pos, t.pos) - p.facing));
     if (facingDiff > MELEE_ARC) return;
   } else {
-    // Auto-face a mob/NPC auto-attack target every tick, the same
-    // self-correction the mob melee driver (mob/combat_profile.ts
-    // tryMobMeleeSwingInRange) and /follow (Sim.updateFollowMovement)
-    // already apply via steadyAngleTo: without it a player who never
-    // manually re-turns onto a target that circled or aggroed from behind
-    // had every swing silently no-op against the MELEE_ARC gate forever.
-    // isStunned/isDisarmed above already bailed out before this point, so a
-    // stunned or disarmed attacker still cannot turn onto a target. PvE
-    // targets have no facing-dependent defensive mechanic riding on this,
-    // so there's no positional skill to preserve here.
+    // Auto-face a mob/NPC auto-attack target every tick (while the lock stays
+    // on, the default), the same self-correction the mob melee driver
+    // (mob/combat_profile.ts tryMobMeleeSwingInRange) and /follow
+    // (Sim.updateFollowMovement) already apply via steadyAngleTo: without it
+    // a player who never manually re-turns onto a target that circled or
+    // aggroed from behind had every swing silently no-op against the
+    // MELEE_ARC gate forever. isStunned/isDisarmed above already bailed out
+    // before this point, so a stunned or disarmed attacker still cannot turn
+    // onto a target. PvE targets have no facing-dependent defensive mechanic
+    // riding on this, so there's no positional skill to preserve here.
     p.facing = steadyAngleTo(p.pos, t.pos, p.facing);
   }
 

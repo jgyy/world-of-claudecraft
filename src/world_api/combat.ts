@@ -56,6 +56,12 @@ export interface IWorldCombat {
   cancelAura(auraId: string): void;
   startAutoAttack(): void;
   stopAutoAttack(): void;
+  // Y-key auto-face lock toggle (default on): whether PvE auto-attack keeps
+  // forcibly turning the player onto their target every tick. Flipped off,
+  // PvE auto-attack falls back to the same facing-arc gate PvP targets
+  // already use, so a player can hold a deliberate facing during a "don't
+  // look at me" boss mechanic or a pillar-activation puzzle.
+  toggleAutoFaceLock(): void;
   // Begin the local, server-authoritative geometry recovery countdown. It may
   // only relocate within the current reachable area and can be cancelled by
   // movement or combat.
