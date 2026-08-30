@@ -462,7 +462,12 @@ const MONOLITHS: MonolithRow[] = [
     // extraction pays 2 more under the entry-fade row above. Measured on the
     // merged tree, never reconciled by arithmetic. Exact merged count, zero
     // headroom.
-    ceiling: 11623,
+    // Down 11623 -> 11620 on PR #3763's follow-up round: the WebGL
+    // context-recovery callbacks (checkpoint plus console breadcrumbs plus the
+    // fatalOverlay call) moved out into src/game/context_loss_diagnostics.ts,
+    // which also pays for the new webgl-context-stuck checkpoint the round
+    // added. Exact count, zero headroom.
+    ceiling: 11620,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {

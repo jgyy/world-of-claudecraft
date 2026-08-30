@@ -96,6 +96,16 @@ export interface WebglContextWatchdogOptions {
 export class WebglContextWatchdog {
   private timer: number | null = null;
   private unsubscribeVisible: (() => void) | null = null;
+  // Latched permanently once onStuck has fired: a later, SEPARATE loss must
+  // never escalate a second time. fatalOverlay runs clearPlayMarker()
+  // unconditionally before its own first-reason-wins overlay guard, so a
+  // second escalation landing on an overlay a caller raised with
+  // `keepResumeMarker: true` (the duplicate-session case) would erase the
+  // marker that caller deliberately kept, even though the DOM overlay itself
+  // never changes. lost() is the only re-entry point after a loss ends
+  // (restored() clears the pre-escalation timer/wait, not this), so gating
+  // it here covers every path.
+  private escalated = false;
   private readonly escalateMs: number;
   private readonly scheduler: ContextLossScheduler;
   private readonly visibility: ContextLossVisibility;
@@ -112,7 +122,7 @@ export class WebglContextWatchdog {
   }
 
   lost(): void {
-    if (this.timer !== null || this.unsubscribeVisible !== null) return;
+    if (this.escalated || this.timer !== null || this.unsubscribeVisible !== null) return;
     this.arm();
   }
 
@@ -130,7 +140,10 @@ export class WebglContextWatchdog {
       });
       return;
     }
-    if (this.isStillLost()) this.onStuck();
+    if (this.isStillLost()) {
+      this.escalated = true;
+      this.onStuck();
+    }
   }
 
   restored(): void {
@@ -143,8 +156,9 @@ export class WebglContextWatchdog {
   }
 
   /** For a teardown that outlives a pending loss (attachContextRecoveryHandlers
-   *  wires this to `pagehide`, so a full page navigation is already underway);
-   *  stops the watchdog with no callback. */
+   *  wires this to a REAL `pagehide`, `persisted === false`, so a full page
+   *  navigation is already underway; a bfcache freeze does not reach this,
+   *  see that function's own doc); stops the watchdog with no callback. */
   dispose(): void {
     this.restored();
   }
@@ -164,9 +178,13 @@ export interface ContextRecoveryCallbacks {
  *  context recycle, so this never re-attaches). `isStillLost` defaults to
  *  the canvas's own live WebGL2 context, which `getContext('webgl2')`
  *  returns without side effects once a context already exists. The watchdog
- *  self-disposes on `pagehide` so a pending timer cannot outlive the page
- *  (real navigation clears it anyway; this only matters for a bfcache-frozen
- *  page, which must not fire a stale onStuck on restore). */
+ *  disposes only on a REAL teardown (`pagehide` with `persisted === false`),
+ *  mirroring context_release.ts's own bfcache check: that module deliberately
+ *  keeps a frozen page's WebGL context alive across the freeze, so a loss the
+ *  watchdog is already timing can still be genuinely, still-lost when the
+ *  page comes back, and disposing on a mere freeze would strand it with no
+ *  watchdog left to ever report it. `pageshow` with `persisted === true`
+ *  re-arms instead, in case the freeze left the loss unresolved. */
 export function attachContextRecoveryHandlers(
   canvas: HTMLCanvasElement,
   callbacks: ContextRecoveryCallbacks,
@@ -178,16 +196,18 @@ export function attachContextRecoveryHandlers(
     pageTeardown?: Pick<EventTarget, 'addEventListener'>;
   } = {},
 ): void {
+  // Defaults to escalating (true) whenever a live answer isn't available (no
+  // WebGL2 context at all): only a POSITIVE confirmation of "restored" stands
+  // the watchdog down, so an unusual host can never silently suppress
+  // escalation. Shared with the pageshow re-arm below, so both read the exact
+  // same live-context answer.
+  const isStillLost =
+    options.isStillLost ?? (() => canvas.getContext('webgl2')?.isContextLost() !== false);
   const watchdog = new WebglContextWatchdog(callbacks.onStuck, {
     escalateMs: options.escalateMs,
     scheduler: options.scheduler,
     visibility: options.visibility,
-    // Defaults to escalating (true) whenever a live answer isn't available
-    // (no WebGL2 context at all): only a POSITIVE confirmation of "restored"
-    // stands the watchdog down, so an unusual host can never silently
-    // suppress escalation.
-    isStillLost:
-      options.isStillLost ?? (() => canvas.getContext('webgl2')?.isContextLost() !== false),
+    isStillLost,
   });
   canvas.addEventListener('webglcontextlost', (event) => {
     event.preventDefault();
@@ -198,8 +218,11 @@ export function attachContextRecoveryHandlers(
     watchdog.restored();
     callbacks.onRestored();
   });
-  (options.pageTeardown ?? (typeof window === 'undefined' ? undefined : window))?.addEventListener(
-    'pagehide',
-    () => watchdog.dispose(),
-  );
+  const pageTeardown = options.pageTeardown ?? (typeof window === 'undefined' ? undefined : window);
+  pageTeardown?.addEventListener('pagehide', (event) => {
+    if (!(event as PageTransitionEvent).persisted) watchdog.dispose();
+  });
+  pageTeardown?.addEventListener('pageshow', (event) => {
+    if ((event as PageTransitionEvent).persisted && isStillLost()) watchdog.lost();
+  });
 }

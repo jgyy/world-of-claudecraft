@@ -114,22 +114,25 @@ describe('fused output and grade shader', () => {
     expect(toneMapAt).toBeGreaterThan(bloomScrubAt);
   });
 
-  it('caps a stray +Infinity at the beauty target own half-float max before the SUM reaches quantizeHalf', () => {
+  it('caps a stray +/-Infinity at the beauty target own half-float max before the SUM reaches quantizeHalf', () => {
     // sanitizeFinite's NaN check alone deliberately lets Infinity and any
     // runaway-but-finite value through; ACES (and every other selectable
     // curve) internally divides two quantities that both diverge together on
     // a uniformly-infinite input, the Infinity/Infinity indeterminate form,
-    // which is NaN again downstream of this sanitizer where nothing scrubs it
-    // a second time. The upper-bound-only min(...) closes that without
-    // touching the pre-existing negative-value passthrough. The SUM of the
-    // beauty and bloom terms must be sanitized IN ADDITION TO the addend
-    // (see the NaN test above, a separate invariant): two terms independently
-    // capped at 65504 can still add to 131008, which packHalf2x16 cannot
-    // represent and rounds to +Infinity, reopening the exact hole this pin
-    // exists to keep shut. Never one scrub instead of the other.
+    // for v = +Inf AND v = -Inf alike, which is NaN again downstream of this
+    // sanitizer where nothing scrubs it a second time. clamp(...) on BOTH
+    // bounds closes that on both signs, while keeping the clamp floor well
+    // clear of the pre-existing legitimate negative-value passthrough (nothing
+    // real sits anywhere near -65504). The SUM of the beauty and bloom terms
+    // must be sanitized IN ADDITION TO the addend (see the NaN test above, a
+    // separate invariant): two terms independently capped at 65504 can still
+    // add to 131008, which packHalf2x16 cannot represent and rounds to
+    // +Infinity, reopening the exact hole this pin exists to keep shut. Never
+    // one scrub instead of the other.
     const shader = OUTPUT_GRADE_FRAGMENT_SHADER;
-    expect(shader).toContain('return min(finite, vec3(65504.0));');
+    expect(shader).toContain('return clamp(finite, vec3(-65504.0), vec3(65504.0));');
     expect(shader).not.toContain('clamp(finite, vec3(0.0), vec3(65504.0))');
+    expect(shader).not.toContain('return min(finite, vec3(65504.0));');
     expect(shader).toContain(
       'sanitizeFinite(outputColor.rgb + sanitizeFinite(bloom.rgb * bloom.a))',
     );

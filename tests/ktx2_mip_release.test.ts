@@ -587,9 +587,15 @@ describe('wiring pins (source scans, anchor style per docs/qa-gate.md)', () => {
     // (2) The re-transcode kick must sit INSIDE the onLost callback wired
     // through attachContextRecoveryHandlers (context_loss_recovery.ts), which
     // dispatches on the same canvas webglcontextlost event for both in-place
-    // loss and the rebuild recycle.
-    expect(between(mainSrc, 'attachContextRecoveryHandlers(canvas, {', 'onRestored:')).toContain(
-      'ktx2MipsOnContextLost()',
+    // loss and the rebuild recycle. The callbacks themselves are built by
+    // src/game/context_loss_diagnostics.ts (kept out of main.ts's own
+    // zero-headroom line ceiling), so main.ts only needs to pass the real
+    // ktx2MipsOnContextLost through to that builder, and the builder itself
+    // must still call it inside onLost, before onRestored.
+    expect(mainSrc).toContain('ktx2MipsOnContextLost,');
+    const buildSrc = read('src/game/context_loss_diagnostics.ts');
+    expect(between(buildSrc, 'onLost: () => {', 'onRestored:')).toContain(
+      'deps.ktx2MipsOnContextLost()',
     );
     // (3) The curtain gate must sit INSIDE the rebuild prewarm step, after the
     // far-vista hold, so the reveal never shows stub-black world textures.

@@ -45,6 +45,7 @@ import {
 } from './game/click_move';
 import { clientEnvBits, installPageStateTracking, pageStateBits } from './game/client_env';
 import { getClientSeed } from './game/client_seed';
+import { buildContextRecoveryCallbacks } from './game/context_loss_diagnostics';
 import { localPartyMemberIds } from './game/corpse_loot_availability';
 import { createCrossHotbar, measureCrossHotbarLift } from './game/cross_hotbar_wiring';
 import { shouldClearAutorunOnDeath } from './game/death_input_reset';
@@ -1481,21 +1482,17 @@ async function startGame(
   uiEffectsApplier.applyNow();
   const autoLoot = new AutoLoot();
   const perf = createPerfMonitor(null, DESKTOP_APP);
-  attachContextRecoveryHandlers(canvas, {
-    onLost: () => {
-      ktx2MipsOnContextLost();
-      entryDiagnostics.checkpoint('webgl-context-lost', {
-        ...renderEntryDiagnostics(),
-        contextLost: rendererReady ? renderer.perfStats().contextLost + 1 : 1,
-      });
-      console.warn('[entry-diag] WebGL context lost during or after world entry');
-    },
-    onRestored: () => {
-      entryDiagnostics.checkpoint('webgl-context-restored');
-      console.info('[entry-diag] WebGL context restored during or after world entry');
-    },
-    onStuck: () => fatalOverlay(t('loading.rendererContextLost')),
-  });
+  attachContextRecoveryHandlers(
+    canvas,
+    buildContextRecoveryCallbacks({
+      entryDiagnostics,
+      renderEntryDiagnostics,
+      ktx2MipsOnContextLost,
+      contextLostCount: () => (rendererReady ? renderer.perfStats().contextLost : 0),
+      showFatalOverlay: fatalOverlay,
+      stuckMessage: t('loading.rendererContextLost'),
+    }),
+  );
   // The probe was armed before the locale/asset awaits above; mark that the await
   // window ended and the synchronous scene build is what runs next.
   entryDiagnostics.checkpoint('scene-build-start', baseEntryDiagnostics());
