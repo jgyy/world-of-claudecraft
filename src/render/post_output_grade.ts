@@ -93,14 +93,21 @@ export const OUTPUT_GRADE_FRAGMENT_SHADER = /* glsl */ `
     outputColor.rgb = sanitizeFinite(outputColor.rgb);
 
     #ifdef BLOOM_PREPARED
-      // Sanitize the SUM, not each addend: outputColor.rgb is already capped
-      // at 65504 above, and an equally-capped bloom term can still add past
-      // it (up to 131008), which packHalf2x16 below cannot represent and
-      // rounds to +Infinity, right back to the failure this pass exists to
-      // prevent. One sanitize on the combined value keeps it in range no
-      // matter how bright either addend was.
+      // Sanitize the bloom addend AND the sum: the blur already smeared any
+      // NaN in the beauty target across every bloom mip, so a NaN bloom tap
+      // must be scrubbed here too, before it reaches the sum. Skipping this
+      // scrub turns a NaN bloom tap into beauty + NaN, which is NaN again,
+      // and the sum-sanitize below rewrites the WHOLE pixel to 0 instead of
+      // just dropping the bloom contribution. Sanitizing the sum on top of
+      // that (rather than instead of it) is still required: outputColor.rgb
+      // is already capped at 65504 above, and an equally-capped bloom term
+      // can still add past it (up to 131008), which packHalf2x16 below
+      // cannot represent and rounds to +Infinity, right back to the failure
+      // this pass exists to prevent. Neither scrub substitutes for the other.
       vec4 bloom = texture(tBloom, inputUv);
-      outputColor.rgb = quantizeHalf(sanitizeFinite(outputColor.rgb + bloom.rgb * bloom.a));
+      outputColor.rgb = quantizeHalf(
+        sanitizeFinite(outputColor.rgb + sanitizeFinite(bloom.rgb * bloom.a))
+      );
     #endif
 
     #ifdef LINEAR_TONE_MAPPING

@@ -142,9 +142,9 @@ export class WebglContextWatchdog {
     this.unsubscribeVisible = null;
   }
 
-  /** For teardown paths that outlive a pending loss (e.g. the renderer is
-   *  disposed, or a full page navigation is already underway); stops the
-   *  watchdog with no callback. */
+  /** For a teardown that outlives a pending loss (attachContextRecoveryHandlers
+   *  wires this to `pagehide`, so a full page navigation is already underway);
+   *  stops the watchdog with no callback. */
   dispose(): void {
     this.restored();
   }
