@@ -646,6 +646,55 @@ describe('per-character scope', () => {
     const secondRelogin = new Keybinds('char:alice');
     expect(secondRelogin.codeAt('slot10', 0)).toBe('KeyQ');
     expect(secondRelogin.codeAt('slot11', 0)).toBe('KeyE');
+
+    // The persisted blob carries the repair marker and nothing else beyond the
+    // action ids, so it can never be mistaken for one of BIND_ACTIONS.
+    const stored = JSON.parse(localStorage.getItem('woc_keybinds:char:alice')!);
+    expect(stored.__repaired).toBe(true);
+    const actionIds = new Set(BIND_ACTIONS.map((a) => a.id));
+    expect(Object.keys(stored).filter((k) => !actionIds.has(k))).toEqual(['__repaired']);
+  });
+
+  it('leaves a Signature-A-shaped blob alone once it is already marked repaired', () => {
+    // A profile that is marked repaired but still holds the exact corrupted
+    // shape (e.g. because the player deliberately recreated it after the fix
+    // shipped) must not be reverted again: the marker, not the shape, decides.
+    localStorage.setItem(
+      'woc_keybinds:char:alice',
+      JSON.stringify({
+        strafeLeft: [null, null],
+        strafeRight: [null, null],
+        slot10: ['KeyQ', 'Minus'],
+        slot11: ['KeyE', 'Equal'],
+        __repaired: true,
+      }),
+    );
+    const fresh = new Keybinds('char:alice');
+    expect(fresh.codeAt('slot10', 0)).toBe('KeyQ');
+    expect(fresh.codeAt('slot11', 0)).toBe('KeyE');
+    expect(fresh.codeAt('strafeLeft', 0)).toBe(null);
+    expect(fresh.codeAt('strafeRight', 0)).toBe(null);
+  });
+
+  it('still repairs when the marker is present but not exactly true', () => {
+    // Only a strict `true` counts as already-repaired; any other stored value
+    // (a hand-edited blob, a future format change) must not suppress a real
+    // repair the shape still calls for.
+    localStorage.setItem(
+      'woc_keybinds:char:alice',
+      JSON.stringify({
+        strafeLeft: [null, null],
+        strafeRight: [null, null],
+        slot10: ['KeyQ', 'Minus'],
+        slot11: ['KeyE', 'Equal'],
+        __repaired: 1,
+      }),
+    );
+    const fresh = new Keybinds('char:alice');
+    expect(fresh.codeAt('strafeLeft', 0)).toBe('KeyQ');
+    expect(fresh.codeAt('strafeRight', 0)).toBe('KeyE');
+    expect(fresh.codeAt('slot10', 0)).toBe('Minus');
+    expect(fresh.codeAt('slot11', 0)).toBe('Equal');
   });
 
   it('still imports a genuine legacy customization that does not collide with a current default', () => {

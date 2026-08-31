@@ -418,6 +418,11 @@ const SLOTS_PER_ACTION = 2; // primary + secondary
 // in bind(), byte-identical to the reverted Q/E strafe overhaul's leftover
 // shape) gets silently reverted on every relogin instead of just once. Not a
 // valid BIND_ACTIONS id, so it is never touched by the id-keyed load/save loops.
+// IMPORTANT for a future repair signature (a "Signature C"): once this marker is
+// set, repairStoredBindings() never runs again for that profile, so a signature
+// added later will never fire for anyone who saved since this shipped. Adding one
+// means deciding (and documenting here) whether existing marked profiles need to
+// see it too, e.g. by moving this to a version number bumped for that signature.
 const REPAIR_MARKER = '__repaired';
 
 export function actionKind(id: string): BindKind | null {
@@ -663,7 +668,7 @@ export class Keybinds {
   }
 
   private save(): void {
-    const obj: Record<string, unknown> = {};
+    const obj: Record<string, (string | null)[] | boolean> = {};
     for (const [id, codes] of this.map) obj[id] = codes;
     obj[REPAIR_MARKER] = true;
     try {
