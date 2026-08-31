@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "assetId": "hesk_tannery",
-  "sourceFingerprint": "7be1232b6307d51020bf30b1a54c946ca93573c6aaebe4ec8853c51122283dcc",
+  "sourceFingerprint": "f78adcae8278a5697e72cca89b431c86bb2982dcfb04f79c4a5d65984ca7716b",
   "reference": "docs/design/fenbridge-rebuild/references/hesk-tannery-turnaround.png",
   "minimumOverallScore": 0.7,
   "requiredViews": [
