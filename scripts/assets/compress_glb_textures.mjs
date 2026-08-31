@@ -76,6 +76,17 @@ const UASTC_SLOTS = /^(normalTexture|occlusionTexture)$/;
 // crispness under ETC1S's low-bitrate block palette (a measured ~19 dB PSNR
 // gap on shipped Tripo art), unlike the CC0 kits' flat-shaded stylized
 // textures, which compress cleanly under ETC1S and stay on the smaller codec.
+// That quality win has a real, measured cost, not just a size line item: on
+// shipped Tripo baseColors, UASTC (the pipeline's exact uastc-quality 2, zstd
+// 18 flags) runs 3.0x to 3.7x the ETC1S byte count, and doubles GPU-resident
+// size (ETC1S's 4 bpp BC1 transcode versus UASTC's 8 bpp BC7). 198 of the
+// 1330 shipped GLBs carry a tripo_ material; their baseColors are 13.8 MB of
+// the 162 MB model corpus today, so this adds roughly 30 MB as that set turns
+// over. That is the exact decode-amplification budget this file exists to
+// protect (see the header: the iOS jetsam kill at 1.54 GB resident) and the
+// Play 500 MB compressed-download cap (tests/native_assets_pack.test.ts), so
+// this carve-out is a maintainer-approved trade, not a default to widen
+// casually to more slots or more materials.
 const UASTC_SLOTS_WITH_BASE_COLOR = /^(normalTexture|occlusionTexture|baseColorTexture)$/;
 
 function excludedGlbPaths() {
