@@ -18,11 +18,20 @@
 //
 // Per file: webp textures are first transcoded to png (toktx cannot read webp),
 // then normal/occlusion slots go to UASTC (quality) and everything else to
-// ETC1S (size), then meshopt is re-applied when the source file used
-// EXT_meshopt_compression (reading decodes it; without re-encoding the file
-// would grow). Files whose embedded textures are already all KTX2, and files
-// with no embedded textures at all (e.g. the Eastbrook kit, which uses a shared
-// external atlas and carries provenance extras), are skipped without a write.
+// ETC1S (size) EXCEPT baseColorTexture on a Tripo AI-generated material
+// (hasTripoGeneratedMaterial), which also goes to UASTC: Tripo's painterly PBR
+// output is detailed, high-frequency content that measurably loses fidelity
+// under ETC1S's low-bitrate block palette, unlike the CC0 kits' flat-shaded
+// stylized textures, which compress cleanly under ETC1S and stay on the
+// smaller codec. This only affects a file's FIRST conversion (see below), so
+// it improves newly generated Tripo assets going forward; an already-shipped
+// Tripo GLB's baseColor was already lossily encoded to ETC1S at that time and
+// has no pristine source left to re-derive a UASTC version from. Then meshopt
+// is re-applied when the source file used EXT_meshopt_compression (reading
+// decodes it; without re-encoding the file would grow). Files whose embedded
+// textures are already all KTX2, and files with no embedded textures at all
+// (e.g. the Eastbrook kit, which uses a shared external atlas and carries
+// provenance extras), are skipped without a write.
 // After transforming, the script asserts the structural invariants (skins,
 // animations, meshes, nodes, extras-bearing nodes) match the source and aborts
 // the file on any mismatch.
@@ -38,6 +47,7 @@ import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer';
 import {
   classifyGlb,
   glbJsonChunk,
+  hasTripoGeneratedMaterial,
   snapshotMismatch,
   structuralSnapshot,
   weaponVfxModelKeys,
@@ -61,6 +71,12 @@ const DEFAULT_DIR = path.join(ROOT, 'public', 'models');
 
 // Slots that favor UASTC's higher quality over ETC1S's smaller size.
 const UASTC_SLOTS = /^(normalTexture|occlusionTexture)$/;
+// Tripo AI-generated content (hasTripoGeneratedMaterial) additionally routes
+// baseColorTexture through UASTC: its painterly PBR output visibly loses
+// crispness under ETC1S's low-bitrate block palette (a measured ~19 dB PSNR
+// gap on shipped Tripo art), unlike the CC0 kits' flat-shaded stylized
+// textures, which compress cleanly under ETC1S and stay on the smaller codec.
+const UASTC_SLOTS_WITH_BASE_COLOR = /^(normalTexture|occlusionTexture|baseColorTexture)$/;
 
 function excludedGlbPaths() {
   const source = fs.readFileSync(path.join(ROOT, 'src', 'render', 'weapon_vfx.ts'), 'utf8');
@@ -101,11 +117,12 @@ async function convertFile(io, file, { dryRun }) {
   if (dryRun) return { file, status: 'would-convert', before: srcBuf.length, after: srcBuf.length };
 
   const doc = await io.readBinary(srcBuf);
+  const uastcSlots = hasTripoGeneratedMaterial(srcJson) ? UASTC_SLOTS_WITH_BASE_COLOR : UASTC_SLOTS;
   const transforms = [
     textureCompress({ encoder: sharp, targetFormat: 'png', formats: /^image\/webp$/ }),
     // encoder feeds the transform's own resize path: ktx requires dimensions
     // that are multiples of four, and NPOT sources get resized via sharp first.
-    toktx({ mode: Mode.UASTC, slots: UASTC_SLOTS, jobs: 2, encoder: sharp }),
+    toktx({ mode: Mode.UASTC, slots: uastcSlots, jobs: 2, encoder: sharp }),
     toktx({ mode: Mode.ETC1S, jobs: 2, encoder: sharp }),
   ];
   if (cls.hadMeshopt && !losslessMeshopt) {
