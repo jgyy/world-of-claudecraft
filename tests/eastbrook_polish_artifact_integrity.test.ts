@@ -1025,19 +1025,19 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // Re-minted for the v0.40.0 sync merge into the guild pledge branch (the
 // OSSBrain v0.40 batch landed on the release arm; renderer inputs moved on
 // both sides). No capture was retaken.
-// Re-minted for the entry-horizon scenery cull (renderer.ts hands the four
-// reveal-gated painters the horizon-capped cull far at both frame sites): the
-// renderer integration leaf moved. No capture was retaken.
-// Re-minted for the battleground field-stream compile gate (renderer.ts
-// injects the gate at the buildBattleground site; renderer.ts is a
-// provenance input). No capture was retaken.
-// Re-minted for the v0.41.0 sync merge into the entry-fade-gate branch (the
-// compile-gate batch landed on the release arm; renderer inputs moved on
-// both sides). No capture was retaken.
+// Re-minted for the Ignivar raid consolidation (the v0.41.0 base merge plus
+// the renderer extraction round moved the renderer integration leaf). No
+// capture was retaken.
+// Re-minted for PR #3740's forge-lift room (the lift room render hookup and
+// door-portal arm moved the renderer integration leaf). No capture was
+// retaken.
+// Re-minted for the Drakelands entrance merge into the raid branch (PRs 3689
+// plus 3734: both arms had re-minted, the merged renderer and evidence inputs
+// land together). No capture was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  'f5ab9c7e4ad1bf33180be2d6b5df38654a57ba94ddbc09af48ade9fa230370c6';
+  'a5c2116d1b9087ee0a1471a4e3bcaf8e81edb88c09b4ef6de792305b778ba94c';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  '731a596facf6af99bde5a2f1bf1298c633b5e955820baea45dc87d12b7c4c995';
+  '89c8a62f400d63c10f85c61eac2c93f2f0a43d1e822679027d03bbed6ee82d0d';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -2184,17 +2184,16 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // OSSBrain v0.40 batch landed on the release arm; renderer inputs moved on
     // both sides): same order, the composite first, then this seal. No capture
     // was retaken.
-    // Re-minted for the entry-horizon scenery cull (renderer.ts edit only):
-    // same order, the composite first, then this seal. No capture was retaken.
-    // Re-minted for the battleground field-stream compile gate (renderer.ts
-    // provenance input moved): same order, the composite first, then this
-    // seal. No capture was retaken.
-    // Re-minted for the v0.41.0 sync merge into the entry-fade-gate branch:
-    // same order, the composite first, then this seal. No capture was retaken.
+    // Re-minted for PR #3740's forge-lift room: the first-order composite
+    // follows the lift room's renderer.ts hookup, then this second-order
+    // performance seal follows the swept evidence bytes. No capture was
+    // retaken.
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
-    ).toBe('42fe2b3731fb03a5a7514b6080f4677ae2d67e9187de6b3eea25d943ed849006');
+      // Re-minted for the Drakelands entrance merge into the raid branch: the
+      // composite first, then this seal. No capture was retaken.
+    ).toBe('eca473321cb438c8ecdd9bfadf949fcf23f0b38fd1830590822d878950ce6a55');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {

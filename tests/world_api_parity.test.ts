@@ -111,12 +111,19 @@ export const IWORLD_MEMBERS = [
   { name: 'known', kind: 'data' },
   { name: 'activeConsecrations', kind: 'data' },
   { name: 'activeFrostRings', kind: 'data' },
+  { name: 'activeIgnivarMeteors', kind: 'data' },
+  { name: 'activeVarkhulCinderFires', kind: 'data' },
+  { name: 'activeVarkhulCinderOrbProjectiles', kind: 'data' },
+  { name: 'activeVarkhulForgestormWarnings', kind: 'data' },
+  { name: 'activeVarkhulAnvilMeteors', kind: 'data' },
+  { name: 'activeVarkhulAssemblies', kind: 'data' },
   { name: 'activeTemporalHourglasses', kind: 'data' },
   { name: 'questLog', kind: 'data' },
   { name: 'questsDone', kind: 'data' },
   // --- commands + read-returning methods ---
   { name: 'questState', kind: 'method' }, // read-returning (1/6)
   { name: 'reactiveAbilityWindowRemaining', kind: 'method' },
+  { name: 'groundAimPlacementPreview', kind: 'method' },
   { name: 'castAbility', kind: 'method' },
   { name: 'castAbilityAt', kind: 'method' },
   { name: 'castAbilityBySlot', kind: 'method' },
@@ -164,6 +171,7 @@ export const IWORLD_MEMBERS = [
   { name: 'upgradeRiftItem', kind: 'method' },
   { name: 'enchantRiftItem', kind: 'method' },
   { name: 'socketRiftGem', kind: 'method' },
+  { name: 'partyTradeMsRemaining', kind: 'method' },
   { name: 'equipBag', kind: 'method' },
   { name: 'unequipBag', kind: 'method' },
   { name: 'changeSkin', kind: 'method' },
@@ -392,6 +400,7 @@ export const IWORLD_MEMBERS = [
   { name: 'dungeonDifficulty', kind: 'method' }, // read-returning
   { name: 'setDungeonDifficulty', kind: 'method' },
   { name: 'buyHeroicVendorItem', kind: 'method' },
+  { name: 'buyCrucibleVendorItem', kind: 'method' },
   { name: 'leaderboard', kind: 'method' }, // async
   { name: 'guildLeaderboard', kind: 'method' }, // async
   { name: 'guildRoster', kind: 'method' }, // async
@@ -640,6 +649,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // startTutorial (IWorldQuests, a method) for the tutorial greeting. Both
     // arms land in the merged tree and the totals below are read off a run on
     // it, never reconciled by arithmetic across a merge.
+    // The PR 3676 arm's ground-aim landing preview adds groundAimPlacementPreview
+    // (IWorldCombat, a method) on top of the bank-storage members at the sixth
+    // v0.41.0 sync; the totals below are read off a run on the merged tree.
     //
     // NOTE for the next merge, four syncs run now: BOTH sides of this pin move
     // it independently every cycle. Twice git merged identical numbers with no
@@ -649,9 +661,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // even when the total agrees. Only running the suite says what these
     // numbers really are; never reconcile them by arithmetic in the diff (the
     // numbers below were set from a suite run, not from this narrative).
-    expect(IWORLD_MEMBERS.length).toBe(334);
-    expect(DATA_MEMBERS.length).toBe(89);
-    expect(METHOD_MEMBERS.length).toBe(245);
+    expect(IWORLD_MEMBERS.length).toBe(343);
+    expect(DATA_MEMBERS.length).toBe(95);
+    expect(METHOD_MEMBERS.length).toBe(248);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -673,12 +685,18 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'activeBorder',
       'activeConsecrations',
       'activeFrostRings',
+      'activeIgnivarMeteors',
       'activeLoadout',
       'activeLootRolls',
       'activeMasterLootRolls',
       'activeMobileStationCraft',
       'activeTemporalHourglasses',
       'activeTitle',
+      'activeVarkhulAnvilMeteors',
+      'activeVarkhulAssemblies',
+      'activeVarkhulCinderFires',
+      'activeVarkhulCinderOrbProjectiles',
+      'activeVarkhulForgestormWarnings',
       'applyEnchant',
       'applyTalents',
       'archetypeTitle',
@@ -706,6 +724,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'blockAdd',
       'blockRemove',
       'buyBackItem',
+      'buyCrucibleVendorItem',
       'buyHeroicVendorItem',
       'buyItem',
       'cancelAura',
@@ -786,6 +805,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'friendRemove',
       'friendlyTabTarget',
       'gatheringProficiency',
+      'groundAimPlacementPreview',
       'guildAccept',
       'guildBankBuySlots',
       'guildBankDeposit',
@@ -876,6 +896,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'partyKick',
       'partyLeave',
       'partyPromote',
+      'partyTradeMsRemaining',
       'petAttack',
       'petSpecial',
       'petSpecialCommandsSupported',
@@ -1006,10 +1027,16 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'activeBorder',
       'activeConsecrations',
       'activeFrostRings',
+      'activeIgnivarMeteors',
       'activeLoadout',
       'activeMobileStationCraft',
       'activeTemporalHourglasses',
       'activeTitle',
+      'activeVarkhulAnvilMeteors',
+      'activeVarkhulAssemblies',
+      'activeVarkhulCinderFires',
+      'activeVarkhulCinderOrbProjectiles',
+      'activeVarkhulForgestormWarnings',
       'archetypeTitle',
       'arenaInfo',
       'bagCapacity',
@@ -1123,6 +1150,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'blockAdd',
       'blockRemove',
       'buyBackItem',
+      'buyCrucibleVendorItem',
       'buyHeroicVendorItem',
       'buyItem',
       'cancelAura',
@@ -1181,6 +1209,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'friendAdd',
       'friendRemove',
       'friendlyTabTarget',
+      'groundAimPlacementPreview',
       'guildAccept',
       'guildBankBuySlots',
       'guildBankDeposit',
@@ -1251,6 +1280,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'partyKick',
       'partyLeave',
       'partyPromote',
+      'partyTradeMsRemaining',
       'petAttack',
       'petSpecial',
       'petTaunt',
@@ -1439,8 +1469,15 @@ const FACET_COMBAT = [
   'known',
   'activeConsecrations',
   'activeFrostRings',
+  'activeIgnivarMeteors',
   'activeTemporalHourglasses',
+  'activeVarkhulForgestormWarnings',
+  'activeVarkhulCinderFires',
+  'activeVarkhulCinderOrbProjectiles',
+  'activeVarkhulAnvilMeteors',
+  'activeVarkhulAssemblies',
   'reactiveAbilityWindowRemaining',
+  'groundAimPlacementPreview',
   'castAbility',
   'castAbilityAt',
   'castAbilityBySlot',
@@ -1514,6 +1551,7 @@ const FACET_INVENTORY = [
   'upgradeRiftItem',
   'enchantRiftItem',
   'socketRiftGem',
+  'partyTradeMsRemaining',
   'equipBag',
   'unequipBag',
 ] as const satisfies readonly (keyof IWorldInventory)[];
@@ -1770,6 +1808,7 @@ const FACET_DUNGEONS = [
   'dungeonDifficulty',
   'setDungeonDifficulty',
   'buyHeroicVendorItem',
+  'buyCrucibleVendorItem',
 ] as const satisfies readonly (keyof IWorldDungeons)[];
 type _ExhaustDungeons = AssertNever<Exclude<keyof IWorldDungeons, (typeof FACET_DUNGEONS)[number]>>;
 
@@ -1980,8 +2019,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
 
   it('the facet union equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(334);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(334);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(343);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(343);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);
