@@ -19,8 +19,8 @@ import type {
   PlayerProfessionsView,
   ToolEffectSlotView,
 } from '../world_api';
-import { toggleAutoFaceLock as toggleAutoFaceLockImpl } from './auto_face_lock';
 import type { GroundAimPointXZ } from '../world_api/combat';
+import { toggleAutoFaceLock as toggleAutoFaceLockImpl } from './auto_face_lock';
 import * as bagsMod from './bags';
 import {
   addStacked,
@@ -174,7 +174,6 @@ import {
 } from './content/skins';
 import {
   cloneAllocation,
-  computeTalentModifiers,
   emptyAllocation,
   emptyModifiers,
   FIRST_TALENT_LEVEL,
