@@ -404,6 +404,18 @@ describe('predictVaultDepositAll (the click-time replay of the sim sweep)', () =
       );
       expect(p.notableItemId).toBeNull();
     });
+
+    it('a partially-clamped epic stack is still named: SOME of it moved', () => {
+      // Headroom 5 against an 8-count epic stack: 5 move, 3 stay carried (the
+      // moved < slot.count arm, same clamp as the ordinary partial-fill case
+      // above), so `full` is set for the leftover AND notableItemId still
+      // names the item, because it is not "nothing of it actually moved" (the
+      // ceiling-blocked case above): the vault pane's own headroom readout
+      // explains the rest, so naming what DID move stays consistent here too.
+      const inv = [slot('ember_core', 8)];
+      const p = predictVaultDepositAll(inv, vinfo({ ember_core: 35 }, 1, 40), MATERIALS, lookup);
+      expect(p).toEqual({ stacks: 0, items: 5, full: true, notableItemId: 'ember_core' });
+    });
   });
 });
 
@@ -426,7 +438,7 @@ describe('hasVaultDepositable (the button enable)', () => {
 });
 
 describe('vaultDepositAllSummaryKey', () => {
-  it('exactly one of four arms: none / notable / full / done', () => {
+  it('exactly one of five arms: none / notable / notableFull / full / done', () => {
     expect(vaultDepositAllSummaryKey({ items: 0, full: true, notableItemId: null })).toBe(
       'hudChrome.bank.vaultDepositAllNone',
     );
@@ -445,8 +457,14 @@ describe('vaultDepositAllSummaryKey', () => {
     expect(vaultDepositAllSummaryKey({ items: 3, full: false, notableItemId: 'ember_core' })).toBe(
       'hudChrome.bank.vaultDepositAllNotable',
     );
+  });
+
+  // #3xxx follow-up: the Notable arm used to swallow the Full arm outright, so a
+  // sweep that both named the epic reagent AND left an ordinary material behind
+  // its ceiling read as if nothing else was capped. NotableFull keeps both facts.
+  it('a notable item alongside a ceiling that also held something back gets its OWN arm', () => {
     expect(vaultDepositAllSummaryKey({ items: 3, full: true, notableItemId: 'ember_core' })).toBe(
-      'hudChrome.bank.vaultDepositAllNotable',
+      'hudChrome.bank.vaultDepositAllNotableFull',
     );
   });
 

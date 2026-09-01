@@ -826,6 +826,26 @@ describe('deposit-all (ONE batched command)', () => {
     );
   });
 
+  it('a notable item alongside a ceiling that ALSO held something back gets its own line', () => {
+    // Both facts land in one sweep: the epic reagent moves (named, headroom
+    // wide open) and copper_ore is already at its ceiling (nothing of it
+    // moves, `full` is set). Before the NotableFull arm this collapsed to
+    // "including Core of the Last Flame" alone, with no sign copper_ore
+    // stayed behind: the same silent-omission shape this PR exists to fix.
+    const h = harness(vaultInfo({ stock: { copper_ore: 40 } }));
+    h.world.inventory = [
+      { itemId: 'copper_ore', count: 5 },
+      { itemId: 'lastflame_core', count: 1 },
+    ];
+    h.window.open();
+    clickVaultTab(h);
+    (h.root.querySelector('.vault-deposit-all') as HTMLElement).click();
+    expect(h.calls).toEqual(['vaultDepositAll']);
+    expect(h.root.querySelector('.vault-status')?.textContent).toBe(
+      'Materials deposited: 1, including Core of the Last Flame. Some ceilings are full.',
+    );
+  });
+
   it('OFFLINE SHAPE: a synchronously-mutating world still gets the click-time summary', () => {
     // Offline, IWorld.inventory is the LIVE sim array and vaultDepositAll
     // mutates it synchronously before the handler's next line. The summary

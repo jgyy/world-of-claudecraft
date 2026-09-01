@@ -360,26 +360,35 @@ export function hasVaultDepositable(
   return inventory.some((s) => isVaultDepositableSlot(s, materialIds));
 }
 
-/** The four deposit-all summary lines, as t() keys so the painter stays a
+/** The five deposit-all summary lines, as t() keys so the painter stays a
  *  thin consumer and the arm CHOICE is unit-pinned here. */
 export type VaultDepositAllSummaryKey =
   | 'hudChrome.bank.vaultDepositAllNone'
   | 'hudChrome.bank.vaultDepositAllFull'
   | 'hudChrome.bank.vaultDepositAllDone'
-  | 'hudChrome.bank.vaultDepositAllNotable';
+  | 'hudChrome.bank.vaultDepositAllNotable'
+  | 'hudChrome.bank.vaultDepositAllNotableFull';
 
 /** Which transient summary a finished deposit-all earns. Nothing moved (every
  *  candidate ceiling-blocked) -> None. Otherwise, an epic-or-better material
- *  moved -> Notable, which NAMES it and takes priority over Full: knowing
- *  WHAT moved matters more in the moment than whether a ceiling also capped
- *  something else, and the vault pane itself still shows the exact per-material
- *  headroom on demand. Absent a notable item: a ceiling held something back
- *  -> Full; everything moved -> Done. */
+ *  moved -> Notable (or NotableFull when a ceiling ALSO held something else
+ *  back), which NAMES the epic-or-better item and takes priority over the
+ *  plain Full arm: knowing WHAT moved matters more in the moment than whether
+ *  a ceiling also capped something else, and the vault pane itself still
+ *  shows the exact per-material headroom on demand, but the ceiling fact is
+ *  not dropped either: a player who reads "6, including Core of the Last
+ *  Flame" as the whole story would wrongly conclude nothing else was left
+ *  behind. Absent a notable item: a ceiling held something back -> Full;
+ *  everything moved -> Done. */
 export function vaultDepositAllSummaryKey(
   p: Pick<VaultDepositAllPrediction, 'items' | 'full' | 'notableItemId'>,
 ): VaultDepositAllSummaryKey {
   if (p.items === 0) return 'hudChrome.bank.vaultDepositAllNone';
-  if (p.notableItemId !== null) return 'hudChrome.bank.vaultDepositAllNotable';
+  if (p.notableItemId !== null) {
+    return p.full
+      ? 'hudChrome.bank.vaultDepositAllNotableFull'
+      : 'hudChrome.bank.vaultDepositAllNotable';
+  }
   if (p.full) return 'hudChrome.bank.vaultDepositAllFull';
   return 'hudChrome.bank.vaultDepositAllDone';
 }

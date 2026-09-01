@@ -32,6 +32,7 @@ import { showBuyConfirmPrompt } from './bank_buy_prompt';
 import { showQuantityPrompt } from './bank_quantity_prompt';
 import { appendBankStatusLine, type BankStatusAnnouncementState } from './bank_status_line';
 import { formatCount } from './count_format';
+import { depositAllNotableParams } from './deposit_all_status_text';
 import { itemDisplayName } from './entity_i18n';
 import { esc } from './esc';
 import { FOCUS_KEY_ATTR, findFocusKey, restoreFirstEnabled } from './focus_restore';
@@ -672,15 +673,14 @@ export class VaultTab {
       this.deps.onInventoryChanged();
     }
     const key = vaultDepositAllSummaryKey(prediction);
-    const notableDef = prediction.notableItemId ? ITEMS[prediction.notableItemId] : undefined;
+    const notableDef = prediction.notableItemId
+      ? knownItemDef(ITEMS, prediction.notableItemId)
+      : undefined;
     this.setStatus(
       key,
       prediction.items === 0
         ? undefined
-        : {
-            count: formatCount(prediction.items),
-            ...(notableDef ? { item: itemDisplayName(notableDef) } : {}),
-          },
+        : depositAllNotableParams(formatCount(prediction.items), notableDef),
     );
     this.deps.requestRender();
   }

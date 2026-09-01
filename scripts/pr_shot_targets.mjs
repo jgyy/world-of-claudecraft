@@ -2689,6 +2689,21 @@ export const TARGETS = [
       }
       await awaitWorldPainted(page);
       await dismissEntryOverlays(page);
+      // The first-spawn greeting is a window, not the tutorial overlay the
+      // shared entry helper owns (the bank-vault target's idiom above). It can
+      // arrive after the banker teleport and cover the pane while every
+      // underlying DOM geometry check still looks healthy, so dismiss it at
+      // the last responsible moment, before the deposit-all click.
+      const dismissedGreeting = await page.evaluate(() => {
+        const greeting = document.getElementById('tutorial-greeting');
+        if (!(greeting instanceof HTMLElement) || getComputedStyle(greeting).display === 'none') {
+          return false;
+        }
+        const close = [...greeting.querySelectorAll('button')].at(-1);
+        close?.click();
+        return true;
+      });
+      if (dismissedGreeting) await wait(400);
       const depositReady = await pollForSize(page, '#bank-window .vault-deposit-all');
       if (!depositReady) throw new Error('deposit-all button did not render');
       await page.evaluate(() => {
