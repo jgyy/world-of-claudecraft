@@ -1332,6 +1332,7 @@ export const en: EnTranslations = {
       "targetPrev": "Cycle Target Backward",
       "discord": "Discord",
       "bgFlag": "Battleground Flag Action",
+      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Sheathe/Unsheathe Weapon",
       "dive": "Swim Down",
       "categoryPet": "Pet",

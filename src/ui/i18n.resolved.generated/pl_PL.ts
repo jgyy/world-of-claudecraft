@@ -1332,6 +1332,7 @@ export const pl_PL: EnTranslations = {
       "targetPrev": "Przełączaj cel wstecz",
       "discord": "Discord",
       "bgFlag": "Akcja flagi pola bitwy",
+      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Schowaj/Wyciągnij Broń",
       "dive": "Nurkowanie w dół",
       "categoryPet": "Zwierzę",

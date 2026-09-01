@@ -1332,6 +1332,7 @@ export const cs_CZ: EnTranslations = {
       "targetPrev": "Přepínat cíl zpět",
       "discord": "Discord",
       "bgFlag": "Akce s vlajkou na bojišti",
+      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Zasunout/Vytasit zbraň",
       "dive": "Potopit se",
       "categoryPet": "Mazlíček",

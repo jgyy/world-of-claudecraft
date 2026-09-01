@@ -45,7 +45,6 @@ import {
   stageGraphicsDraftChange,
 } from '../game/graphics_rebuild_core';
 import {
-  ACTION_BAR_SLOTS,
   BIND_ACTIONS,
   BIND_CATEGORIES,
   isReservedCode,
@@ -229,6 +228,7 @@ const BIND_ACTION_LABEL_KEYS: Partial<Record<string, TranslationKey>> = {
   targetPrev: 'hudChrome.keybinds.targetPrev',
   discord: 'hudChrome.keybinds.discord',
   bgFlag: 'hudChrome.keybinds.bgFlag',
+  autoFaceLock: 'hudChrome.keybinds.autoFaceLock',
   sheathe: 'hudChrome.keybinds.sheathe',
   petAttack: 'hudChrome.keybinds.petAttack',
   petStop: 'hudChrome.keybinds.petStop',

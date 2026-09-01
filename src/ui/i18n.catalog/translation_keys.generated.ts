@@ -9550,6 +9550,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.itemTooltip.riftUpgrade'
   | 'hudChrome.itemTooltip.statEnchanted'
   | 'hudChrome.itemUniqueEquipped'
+  | 'hudChrome.keybinds.autoFaceLock'
   | 'hudChrome.keybinds.bgFlag'
   | 'hudChrome.keybinds.categoryPet'
   | 'hudChrome.keybinds.discord'

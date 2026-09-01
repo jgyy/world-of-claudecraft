@@ -1332,6 +1332,7 @@ export const ru_RU: EnTranslations = {
       "targetPrev": "Цикл целей назад",
       "discord": "Discord",
       "bgFlag": "Действие с флагом",
+      "autoFaceLock": "Переключить блокировку автоповорота",
       "sheathe": "Убрать/обнажить оружие",
       "dive": "Нырнуть",
       "categoryPet": "Питомец",

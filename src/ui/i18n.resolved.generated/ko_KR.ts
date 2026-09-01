@@ -1332,6 +1332,7 @@ export const ko_KR: EnTranslations = {
       "targetPrev": "대상 역방향 순환",
       "discord": "Discord",
       "bgFlag": "전장 깃발 행동",
+      "autoFaceLock": "자동 방향 고정 전환",
       "sheathe": "무기 넣기/빼기",
       "dive": "아래로 수영",
       "categoryPet": "펫",

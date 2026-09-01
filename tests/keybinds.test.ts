@@ -168,7 +168,8 @@ describe('Keybinds defaults', () => {
     expect(kb.actionForCode('KeyJ')).toBe('targetFriendlyNext');
     expect(kb.actionForCode('KeyU')).toBe('discord');
     expect(kb.actionForCode('KeyT')).toBe('crafting');
-    expect(kb.actionForCode('KeyY')).toBe(null);
+    // KeyY defaults to the auto-attack auto-face lock toggle (#3729 follow-up).
+    expect(kb.actionForCode('KeyY')).toBe('autoFaceLock');
     // Bare Z sheathes; the Book of Deeds ships on the shifted layer of the same key.
     expect(kb.actionForCode('KeyZ')).toBe('sheathe');
     expect(kb.actionForCode('Shift+KeyZ')).toBe('deeds');

@@ -1178,6 +1178,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.warfareShop.buyOwnedAria': '以 {honor} 購買 {item}，已擁有',
   'hudChrome.warfareShop.buyConfirmBody': '用 {honor} 購買 {item}？榮譽購買後無法退款。',
   'hudChrome.keybinds.bgFlag': '戰場奪旗動作',
+  'hudChrome.keybinds.autoFaceLock': '切換自動朝向鎖定',
   'hudChrome.pvp.mobileLabel': 'PvP',
   'hudChrome.bg.title': '荊谷原野',
   'hudChrome.bg.blurb':

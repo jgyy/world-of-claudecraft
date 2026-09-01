@@ -1499,6 +1499,9 @@ export const hudChromeStrings = {
     // Discord is a brand name; it stays identical across locales.
     discord: 'Discord',
     bgFlag: 'Battleground Flag Action',
+    // Auto-attack auto-face lock toggle (default on). Flip it off to hold a
+    // deliberate facing away from a PvE target instead of auto-turning onto it.
+    autoFaceLock: 'Toggle Auto-Face Lock',
     sheathe: 'Sheathe/Unsheathe Weapon',
     // Swimming: Jump swims up, this swims down.
     dive: 'Swim Down',
