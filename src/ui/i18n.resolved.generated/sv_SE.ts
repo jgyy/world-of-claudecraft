@@ -3386,6 +3386,7 @@ export const sv_SE: EnTranslations = {
       "vaultDepositAllDone": "Material insatta: {count}.",
       "vaultDepositAllFull": "Material insatta: {count}. Vissa tak är fulla.",
       "vaultDepositAllNone": "Valvets tak är fulla: inget sattes in.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Bara {fit} av {count} får plats i dina väskor.",
       "vaultDepositHint": "Klicka för att sätta in i ditt valv",
       "vaultCannotDeposit": "Kan inte förvaras i valvet",

@@ -9671,6 +9671,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.vaultDepositAllDone': '已存入材料：{count}。',
   'hudChrome.bank.vaultDepositAllFull': '已存入材料：{count}。部分材料已達上限。',
   'hudChrome.bank.vaultDepositAllNone': '倉庫已滿：未存入任何材料。',
+  'hudChrome.bank.vaultDepositAllNotable': '已存入材料：{count}，其中包括{item}。',
   'hudChrome.bank.vaultWithdrawShort': '背包只裝得下{count}個中的{fit}個。',
   'hudChrome.bank.vaultDepositHint': '點擊存入材料倉庫',
   'hudChrome.bank.vaultCannotDeposit': '無法存入材料倉庫',

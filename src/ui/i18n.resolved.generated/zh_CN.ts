@@ -3386,6 +3386,7 @@ export const zh_CN: EnTranslations = {
       "vaultDepositAllDone": "已存入材料：{count}。",
       "vaultDepositAllFull": "已存入材料：{count}。部分材料已达上限。",
       "vaultDepositAllNone": "仓库已满：未存入任何材料。",
+      "vaultDepositAllNotable": "已存入材料：{count}，其中包括{item}。",
       "vaultWithdrawShort": "背包只装得下{count}个中的{fit}个。",
       "vaultDepositHint": "点击存入材料仓库",
       "vaultCannotDeposit": "无法存入材料仓库",

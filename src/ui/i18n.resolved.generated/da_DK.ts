@@ -3386,6 +3386,7 @@ export const da_DK: EnTranslations = {
       "vaultDepositAllDone": "Materialer indsat: {count}.",
       "vaultDepositAllFull": "Materialer indsat: {count}. Nogle lofter er fulde.",
       "vaultDepositAllNone": "Hvælvets lofter er fulde: intet blev indsat.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Kun {fit} af {count} er der plads til i dine tasker.",
       "vaultDepositHint": "Klik for at indsætte i dit hvælv",
       "vaultCannotDeposit": "Kan ikke lægges i hvælvet",

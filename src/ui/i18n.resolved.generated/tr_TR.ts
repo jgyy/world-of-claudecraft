@@ -3386,6 +3386,7 @@ export const tr_TR: EnTranslations = {
       "vaultDepositAllDone": "Yatırılan malzeme: {count}.",
       "vaultDepositAllFull": "Yatırılan malzeme: {count}. Bazı sınırlar dolu.",
       "vaultDepositAllNone": "Kasa sınırları dolu: hiçbir şey yatırılmadı.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Çantalarına {count} üzerinden yalnızca {fit} tanesi sığar.",
       "vaultDepositHint": "Kasana yatırmak için tıkla",
       "vaultCannotDeposit": "Kasaya konulamaz",

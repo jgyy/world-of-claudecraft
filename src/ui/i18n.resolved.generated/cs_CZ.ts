@@ -3386,6 +3386,7 @@ export const cs_CZ: EnTranslations = {
       "vaultDepositAllDone": "Uloženo materiálů: {count}.",
       "vaultDepositAllFull": "Uloženo materiálů: {count}. Některé stropy jsou plné.",
       "vaultDepositAllNone": "Stropy trezoru jsou plné: nic nebylo uloženo.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Do tvých batohů se vejde jen {fit} z {count}.",
       "vaultDepositHint": "Klikni a ulož do svého trezoru",
       "vaultCannotDeposit": "Nelze uložit do trezoru",

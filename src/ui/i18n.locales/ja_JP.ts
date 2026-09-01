@@ -10134,6 +10134,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.vaultDepositAllDone': '預けた素材：{count}個。',
   'hudChrome.bank.vaultDepositAllFull': '預けた素材：{count}個。上限に達した素材があります。',
   'hudChrome.bank.vaultDepositAllNone': '保管庫の上限に達しているため、何も預けられませんでした。',
+  'hudChrome.bank.vaultDepositAllNotable': '預けた素材：{count}個（{item}を含む）。',
   'hudChrome.bank.vaultWithdrawShort': 'バッグには{count}個のうち{fit}個しか入りません。',
   'hudChrome.bank.vaultDepositHint': 'クリックで保管庫に預ける',
   'hudChrome.bank.vaultCannotDeposit': '保管庫には預けられません',

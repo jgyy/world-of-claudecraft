@@ -4547,6 +4547,7 @@ export const hudChromeStrings = {
     vaultDepositAllDone: 'Materials deposited: {count}.',
     vaultDepositAllFull: 'Materials deposited: {count}. Some ceilings are full.',
     vaultDepositAllNone: 'Vault ceilings full: nothing deposited.',
+    vaultDepositAllNotable: 'Materials deposited: {count}, including {item}.',
     vaultWithdrawShort: 'Only {fit} of {count} fit in your bags.',
     // Bags-side hints while the VAULT tab is active (the guild pair's rule:
     // distinct keys because the target differs).

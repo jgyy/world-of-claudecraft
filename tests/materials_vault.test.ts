@@ -1949,7 +1949,7 @@ describe('vaultDepositAll (the batched server-side sweep, Bank Storage Phase 03)
     const invSnap = m.inventory.map((s) => ({ ...s }));
     const info = sim.vaultInfo;
     if (!info) throw new Error('vaultInfo must be non-null at the banker');
-    const prediction = predictVaultDepositAll(invSnap, info, vaultMaterialIds());
+    const prediction = predictVaultDepositAll(invSnap, info, vaultMaterialIds(), (id) => ITEMS[id]);
     const before = new Map(
       [...vaultMaterialIds()].map((itemId) => [itemId, vaultStoredCount(m.vault, itemId)]),
     );

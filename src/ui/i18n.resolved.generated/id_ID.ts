@@ -3386,6 +3386,7 @@ export const id_ID: EnTranslations = {
       "vaultDepositAllDone": "Material disetorkan: {count}.",
       "vaultDepositAllFull": "Material disetorkan: {count}. Beberapa batas maksimum sudah penuh.",
       "vaultDepositAllNone": "Batas maksimum brankas penuh: tidak ada yang disetorkan.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Hanya {fit} dari {count} yang muat di tasmu.",
       "vaultDepositHint": "Klik untuk menyetor ke brankasmu",
       "vaultCannotDeposit": "Tidak dapat masuk ke brankas",

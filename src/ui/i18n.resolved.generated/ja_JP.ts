@@ -3386,6 +3386,7 @@ export const ja_JP: EnTranslations = {
       "vaultDepositAllDone": "預けた素材：{count}個。",
       "vaultDepositAllFull": "預けた素材：{count}個。上限に達した素材があります。",
       "vaultDepositAllNone": "保管庫の上限に達しているため、何も預けられませんでした。",
+      "vaultDepositAllNotable": "預けた素材：{count}個（{item}を含む）。",
       "vaultWithdrawShort": "バッグには{count}個のうち{fit}個しか入りません。",
       "vaultDepositHint": "クリックで保管庫に預ける",
       "vaultCannotDeposit": "保管庫には預けられません",

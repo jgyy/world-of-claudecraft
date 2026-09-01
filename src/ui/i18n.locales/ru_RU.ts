@@ -10311,6 +10311,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.vaultDepositAllDone': 'Сложено материалов: {count}.',
   'hudChrome.bank.vaultDepositAllFull': 'Сложено материалов: {count}. Часть пределов заполнена.',
   'hudChrome.bank.vaultDepositAllNone': 'Пределы хранилища заполнены: ничего не сложено.',
+  'hudChrome.bank.vaultDepositAllNotable': 'Сложено материалов: {count}, включая {item}.',
   'hudChrome.bank.vaultWithdrawShort': 'В сумки помещается только {fit} из {count}.',
   'hudChrome.bank.vaultDepositHint': 'Щелкните, чтобы поместить в хранилище',
   'hudChrome.bank.vaultCannotDeposit': 'Нельзя поместить в хранилище',

@@ -3386,6 +3386,7 @@ export const es: EnTranslations = {
       "vaultDepositAllDone": "Materiales depositados: {count}.",
       "vaultDepositAllFull": "Materiales depositados: {count}. Algunos límites están llenos.",
       "vaultDepositAllNone": "Límites de la bóveda llenos: no se depositó nada.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Solo caben {fit} de {count} en tus bolsas.",
       "vaultDepositHint": "Haz clic para depositar en tu bóveda",
       "vaultCannotDeposit": "No puede ir en la bóveda",

@@ -3386,6 +3386,7 @@ export const ru_RU: EnTranslations = {
       "vaultDepositAllDone": "Сложено материалов: {count}.",
       "vaultDepositAllFull": "Сложено материалов: {count}. Часть пределов заполнена.",
       "vaultDepositAllNone": "Пределы хранилища заполнены: ничего не сложено.",
+      "vaultDepositAllNotable": "Сложено материалов: {count}, включая {item}.",
       "vaultWithdrawShort": "В сумки помещается только {fit} из {count}.",
       "vaultDepositHint": "Щелкните, чтобы поместить в хранилище",
       "vaultCannotDeposit": "Нельзя поместить в хранилище",

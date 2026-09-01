@@ -3386,6 +3386,7 @@ export const de_DE: EnTranslations = {
       "vaultDepositAllDone": "Eingelagerte Materialien: {count}.",
       "vaultDepositAllFull": "Eingelagerte Materialien: {count}. Manche Obergrenzen sind erreicht.",
       "vaultDepositAllNone": "Tresor-Obergrenzen erreicht: nichts eingelagert.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Nur {fit} von {count} passen in deine Taschen.",
       "vaultDepositHint": "Klicken, um in deinen Tresor einzulagern",
       "vaultCannotDeposit": "Kann nicht in den Tresor gelegt werden",

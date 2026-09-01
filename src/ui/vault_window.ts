@@ -649,7 +649,9 @@ export class VaultTab {
     // pending guard, and the bags repaint with it). Online the mirror lags a
     // tick either way. The dead flag is captured on the same snapshot.
     const dead = world.player.dead;
-    const prediction = predictVaultDepositAll(world.inventory, info, vaultMaterialIds());
+    const prediction = predictVaultDepositAll(world.inventory, info, vaultMaterialIds(), (id) =>
+      knownItemDef(ITEMS, id),
+    );
     world.vaultDepositAll();
     // While dead the sim silently no-ops the sweep (the town-service idiom):
     // the command still goes (server decides), but the predicted "Materials
@@ -670,9 +672,15 @@ export class VaultTab {
       this.deps.onInventoryChanged();
     }
     const key = vaultDepositAllSummaryKey(prediction);
+    const notableDef = prediction.notableItemId ? ITEMS[prediction.notableItemId] : undefined;
     this.setStatus(
       key,
-      prediction.items === 0 ? undefined : { count: formatCount(prediction.items) },
+      prediction.items === 0
+        ? undefined
+        : {
+            count: formatCount(prediction.items),
+            ...(notableDef ? { item: itemDisplayName(notableDef) } : {}),
+          },
     );
     this.deps.requestRender();
   }

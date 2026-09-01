@@ -3386,6 +3386,7 @@ export const vi_VN: EnTranslations = {
       "vaultDepositAllDone": "Nguyên liệu đã gửi: {count}.",
       "vaultDepositAllFull": "Nguyên liệu đã gửi: {count}. Một số mức trần đã đầy.",
       "vaultDepositAllNone": "Trần kho đã đầy: không gửi được gì.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Chỉ {fit} trên {count} vừa trong túi đồ của bạn.",
       "vaultDepositHint": "Nhấp để gửi vào kho của bạn",
       "vaultCannotDeposit": "Không thể cất vào kho",

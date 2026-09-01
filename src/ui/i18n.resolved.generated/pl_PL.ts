@@ -3386,6 +3386,7 @@ export const pl_PL: EnTranslations = {
       "vaultDepositAllDone": "Zdeponowane materiały: {count}.",
       "vaultDepositAllFull": "Zdeponowane materiały: {count}. Niektóre limity są pełne.",
       "vaultDepositAllNone": "Limity skarbca pełne: niczego nie zdeponowano.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Tylko {fit} z {count} zmieści się w twoich torbach.",
       "vaultDepositHint": "Kliknij, aby zdeponować w skarbcu",
       "vaultCannotDeposit": "Nie można umieścić w skarbcu",

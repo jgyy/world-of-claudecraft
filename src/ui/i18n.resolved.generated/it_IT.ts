@@ -3386,6 +3386,7 @@ export const it_IT: EnTranslations = {
       "vaultDepositAllDone": "Materiali depositati: {count}.",
       "vaultDepositAllFull": "Materiali depositati: {count}. Alcuni limiti sono pieni.",
       "vaultDepositAllNone": "Limiti del caveau pieni: nulla è stato depositato.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Solo {fit} di {count} entrano nelle tue borse.",
       "vaultDepositHint": "Clicca per depositare nel tuo caveau",
       "vaultCannotDeposit": "Non può andare nel caveau",

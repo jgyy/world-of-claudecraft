@@ -8300,6 +8300,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.bank.vaultDepositAllDone'
   | 'hudChrome.bank.vaultDepositAllFull'
   | 'hudChrome.bank.vaultDepositAllNone'
+  | 'hudChrome.bank.vaultDepositAllNotable'
   | 'hudChrome.bank.vaultDepositAllTooltip'
   | 'hudChrome.bank.vaultDepositHint'
   | 'hudChrome.bank.vaultEmpty'

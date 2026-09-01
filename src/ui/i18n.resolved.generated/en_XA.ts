@@ -3386,6 +3386,7 @@ export const en_XA: EnTranslations = {
       "vaultDepositAllDone": "[Ɱáţéŕíáļš ðéþóšíţéð: {count}.]",
       "vaultDepositAllFull": "[Ɱáţéŕíáļš ðéþóšíţéð: {count}. Šóɱé çéíļíñĝš áŕé ƒúļļ.]",
       "vaultDepositAllNone": "[Ʋáúļţ çéíļíñĝš ƒúļļ: ñóţĥíñĝ ðéþóšíţéð.]",
+      "vaultDepositAllNotable": "[Ɱáţéŕíáļš ðéþóšíţéð: {count}, íñçļúðíñĝ {item}.]",
       "vaultWithdrawShort": "[Óñļý {fit} óƒ {count} ƒíţ íñ ýóúŕ ƀáĝš.]",
       "vaultDepositHint": "[Çļíçķ ţó ðéþóšíţ íñţó ýóúŕ ʋáúļţ]",
       "vaultCannotDeposit": "[Çáññóţ ĝó íñ ţĥé ʋáúļţ]",

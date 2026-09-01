@@ -3386,6 +3386,7 @@ export const en: EnTranslations = {
       "vaultDepositAllDone": "Materials deposited: {count}.",
       "vaultDepositAllFull": "Materials deposited: {count}. Some ceilings are full.",
       "vaultDepositAllNone": "Vault ceilings full: nothing deposited.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Only {fit} of {count} fit in your bags.",
       "vaultDepositHint": "Click to deposit into your vault",
       "vaultCannotDeposit": "Cannot go in the vault",

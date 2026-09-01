@@ -3386,6 +3386,7 @@ export const nl_NL: EnTranslations = {
       "vaultDepositAllDone": "Materialen gestort: {count}.",
       "vaultDepositAllFull": "Materialen gestort: {count}. Sommige plafonds zijn vol.",
       "vaultDepositAllNone": "Plafonds van de Materialenkluis vol: niets gestort.",
+      "vaultDepositAllNotable": "Materials deposited: {count}, including {item}.",
       "vaultWithdrawShort": "Slechts {fit} van {count} past in je tassen.",
       "vaultDepositHint": "Klik om in je Materialenkluis te storten",
       "vaultCannotDeposit": "Kan niet in de Materialenkluis",

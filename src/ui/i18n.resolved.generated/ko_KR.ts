@@ -3386,6 +3386,7 @@ export const ko_KR: EnTranslations = {
       "vaultDepositAllDone": "보관한 재료: {count}개.",
       "vaultDepositAllFull": "보관한 재료: {count}개. 일부 재료가 한도에 도달했습니다.",
       "vaultDepositAllNone": "보관 한도가 가득 차서 아무것도 보관하지 못했습니다.",
+      "vaultDepositAllNotable": "보관한 재료: {count}개({item} 포함).",
       "vaultWithdrawShort": "가방에는 {count}개 중 {fit}개만 들어갑니다.",
       "vaultDepositHint": "클릭하여 보관소에 보관",
       "vaultCannotDeposit": "보관소에 넣을 수 없습니다",
