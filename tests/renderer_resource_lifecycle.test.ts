@@ -74,12 +74,17 @@ describe('renderer resource lifecycle', () => {
   // Regression for the graphics-rebuild heap leak (GitHub issue #3750):
   // disposeRendererResources() never called these views' own dispose()
   // methods, so a renderer swap permanently retained the previous
-  // terrain/water/underwater GPU resources on the JS heap.
+  // terrain/far-terrain/water/underwater GPU resources on the JS heap.
   describe('disposeRendererWorldViews', () => {
-    it('disposes terrain, water, and underwater independently, each other failing', () => {
+    it('disposes terrain, far terrain, water, and underwater independently, each other failing', () => {
       const terrainView = {
         dispose: vi.fn(() => {
           throw new Error('terrain');
+        }),
+      };
+      const farTerrainView = {
+        dispose: vi.fn(() => {
+          throw new Error('far terrain');
         }),
       };
       const waterView = { dispose: vi.fn() };
@@ -97,12 +102,13 @@ describe('renderer resource lifecycle', () => {
         }
       };
 
-      disposeRendererWorldViews({ terrainView, waterView, underwaterView }, bestEffort);
+      disposeRendererWorldViews(terrainView, farTerrainView, waterView, underwaterView, bestEffort);
 
       expect(terrainView.dispose).toHaveBeenCalledOnce();
+      expect(farTerrainView.dispose).toHaveBeenCalledOnce();
       expect(waterView.dispose).toHaveBeenCalledOnce();
       expect(underwaterView.dispose).toHaveBeenCalledOnce();
-      expect(errors).toHaveLength(2);
+      expect(errors).toHaveLength(3);
     });
 
     it('tolerates a view that has not been constructed yet', () => {
@@ -117,10 +123,7 @@ describe('renderer resource lifecycle', () => {
       };
 
       expect(() =>
-        disposeRendererWorldViews(
-          { terrainView: undefined, waterView, underwaterView: undefined },
-          bestEffort,
-        ),
+        disposeRendererWorldViews(undefined, undefined, waterView, undefined, bestEffort),
       ).not.toThrow();
 
       expect(waterView.dispose).toHaveBeenCalledOnce();

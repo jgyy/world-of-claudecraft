@@ -3223,7 +3223,13 @@ export class Renderer {
     for (const target of this.envRTs.values()) bestEffort(() => target.dispose());
     this.envRTs.clear();
     disposeRendererPrewarmAndGroundFx(this, bestEffort);
-    disposeRendererWorldViews(this, bestEffort);
+    disposeRendererWorldViews(
+      this.terrainView,
+      this.farTerrainView,
+      this.waterView,
+      this.underwaterView,
+      bestEffort,
+    );
     for (const bubble of this.chatBubbles.values()) bestEffort(() => bubble.el.remove());
     this.chatBubbles.clear();
     for (const id of [...this.views.keys()]) bestEffort(() => this.removeView(id, true));
@@ -12620,24 +12626,8 @@ export class Renderer {
       this.terrainView.rebuildRegion(region.minX, region.minZ, region.maxX, region.maxZ);
       return;
     }
-    this.terrainView.cancelStreaming();
-    const old = this.terrainView.group;
-    this.scene.remove(old);
-    const firstMesh = old.children.find((c) => (c as THREE.Mesh).isMesh) as THREE.Mesh | undefined;
-    const sharedMat = firstMesh?.material as THREE.Material | THREE.Material[] | undefined;
-    old.traverse((o) => {
-      const m = o as THREE.Mesh;
-      if (m.isMesh) m.geometry.dispose();
-    });
-    const disposeMat = (mat: THREE.Material): void => {
-      const withMap = mat as THREE.Material & {
-        normalMap?: THREE.Texture | null;
-      };
-      withMap.normalMap?.dispose();
-      mat.dispose();
-    };
-    if (Array.isArray(sharedMat)) sharedMat.forEach(disposeMat);
-    else if (sharedMat) disposeMat(sharedMat);
+    this.scene.remove(this.terrainView.group);
+    this.terrainView.dispose();
     this.terrainView = buildTerrain(this.sim.cfg.seed);
     setRenderCategory(this.terrainView.group, 'terrain');
     this.scene.add(this.terrainView.group);
