@@ -1332,7 +1332,6 @@ export const zh_CN: EnTranslations = {
       "targetPrev": "反向切换目标",
       "discord": "Discord",
       "bgFlag": "战场夺旗动作",
-      "autoFaceLock": "切换自动朝向锁定",
       "sheathe": "收起/拔出武器",
       "dive": "下潜",
       "categoryPet": "宠物",

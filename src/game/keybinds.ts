@@ -204,18 +204,6 @@ export const BIND_ACTIONS: BindAction[] = [
     kind: 'edge',
     defaults: ['Shift+KeyF'],
   },
-  // Auto-attack auto-face lock toggle (default on). Flip it off to hold a
-  // deliberate facing away from a PvE target during a "don't look at me" boss
-  // mechanic or a pillar-activation puzzle, without losing the always-on
-  // #3729 auto-face fix the rest of the time. KeyY is free (every bare letter
-  // default nearby is already claimed: see the KeyZ note further down).
-  {
-    id: 'autoFaceLock',
-    label: 'Toggle Auto-Face Lock',
-    category: 'Targeting',
-    kind: 'edge',
-    defaults: ['KeyY'],
-  },
   // Only acts while the Attack Move setting is on; shares its default key with
   // Turn Left intentionally, and only that key is reserved while active.
   {

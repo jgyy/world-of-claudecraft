@@ -1332,7 +1332,6 @@ export const it_IT: EnTranslations = {
       "targetPrev": "Scorri i bersagli indietro",
       "discord": "Discord",
       "bgFlag": "Azione Bandiera del Campo di Battaglia",
-      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Fodera/Sfodera Arma",
       "dive": "Nuota Verso il Basso",
       "categoryPet": "Famiglio",

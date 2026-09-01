@@ -1332,7 +1332,6 @@ export const sv_SE: EnTranslations = {
       "targetPrev": "Växla mål bakåt",
       "discord": "Discord",
       "bgFlag": "Slagfältets flaggåtgärd",
-      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Slida/Ta fram vapen",
       "dive": "Simma nedåt",
       "categoryPet": "Djur",

@@ -28,7 +28,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 1001,
-      "state": "877eee1a",
+      "state": "df349e78",
       "events": "2c90ce12",
       "rng": {
         "draws": 2,
@@ -217,7 +217,6 @@
               "sourceId": 998
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99.15,
@@ -272,7 +271,6 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "autoFaceLocked": true,
           "combatTimer": 99.15,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -323,7 +321,6 @@
         },
         {
           "aiState": "idle",
-          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "corpseTimer": 61.85,

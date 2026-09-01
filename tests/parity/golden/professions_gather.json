@@ -21,7 +21,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "5102a695",
+      "state": "06cbf5e3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -112,7 +112,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99,
@@ -169,7 +168,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 999,
-      "state": "0b4b0651",
+      "state": "4758e07b",
       "events": "5f103aaf",
       "rng": {
         "draws": 2,
@@ -303,7 +302,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "castTotal": 2.5,
@@ -361,7 +359,7 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 999,
-      "state": "7e16c828",
+      "state": "200e5846",
       "events": "49aac4cd",
       "rng": {
         "draws": 4,
@@ -515,7 +513,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "castTotal": 2.35,
@@ -573,7 +570,7 @@
       "tick": 500,
       "time": 25,
       "nextId": 999,
-      "state": "0cf1e407",
+      "state": "79f46e9d",
       "events": "063d4d9b",
       "rng": {
         "draws": 18,
@@ -584,7 +581,7 @@
       "tick": 1000,
       "time": 50,
       "nextId": 999,
-      "state": "cdd44895",
+      "state": "194fb687",
       "events": "83b064a9",
       "rng": {
         "draws": 38,
@@ -595,7 +592,7 @@
       "tick": 1500,
       "time": 75,
       "nextId": 999,
-      "state": "c6d5b297",
+      "state": "039447e5",
       "events": "2e33d1f6",
       "rng": {
         "draws": 58,
@@ -606,7 +603,7 @@
       "tick": 2000,
       "time": 100,
       "nextId": 999,
-      "state": "f80d81d8",
+      "state": "edddff36",
       "events": "82386e4d",
       "rng": {
         "draws": 78,
@@ -617,7 +614,7 @@
       "tick": 2500,
       "time": 125,
       "nextId": 999,
-      "state": "3ab0aee5",
+      "state": "ead1bf9f",
       "events": "c32f03f9",
       "rng": {
         "draws": 96,
@@ -628,7 +625,7 @@
       "tick": 3000,
       "time": 150,
       "nextId": 999,
-      "state": "84495f43",
+      "state": "fea53e31",
       "events": "82386e4d",
       "rng": {
         "draws": 116,
@@ -639,7 +636,7 @@
       "tick": 3500,
       "time": 175,
       "nextId": 999,
-      "state": "69cab0e6",
+      "state": "5082e148",
       "events": "99cbaa30",
       "rng": {
         "draws": 136,
@@ -650,7 +647,7 @@
       "tick": 4000,
       "time": 200,
       "nextId": 999,
-      "state": "341ce96f",
+      "state": "d75d5571",
       "events": "089db9bd",
       "rng": {
         "draws": 156,
@@ -661,7 +658,7 @@
       "tick": 4500,
       "time": 225,
       "nextId": 999,
-      "state": "a209d165",
+      "state": "ecb744df",
       "events": "01f10e1e",
       "rng": {
         "draws": 176,
@@ -672,7 +669,7 @@
       "tick": 5000,
       "time": 250,
       "nextId": 999,
-      "state": "86e087f0",
+      "state": "8e4f835e",
       "events": "b9040aa9",
       "rng": {
         "draws": 194,
@@ -683,7 +680,7 @@
       "tick": 5206,
       "time": 260.3,
       "nextId": 999,
-      "state": "888fb95a",
+      "state": "4d6e4a08",
       "events": "6b261455",
       "rng": {
         "draws": 204,
@@ -868,7 +865,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "castTotal": 2.5,
@@ -926,7 +922,7 @@
       "tick": 5208,
       "time": 260.4,
       "nextId": 999,
-      "state": "41bd24b5",
+      "state": "4cfbeb07",
       "events": "741638a5",
       "rng": {
         "draws": 204,
@@ -1111,7 +1107,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "castTotal": 2.5,

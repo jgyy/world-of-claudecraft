@@ -1332,7 +1332,6 @@ export const en_XA: EnTranslations = {
       "targetPrev": "[Çýçļé Ţáŕĝéţ Ɓáçķŵáŕð]",
       "discord": "[Ðíšçóŕð]",
       "bgFlag": "[Ɓáţţļéĝŕóúñð Ƒļáĝ Áçţíóñ]",
-      "autoFaceLock": "[Ţóĝĝļé Áúţó-Ƒáçé Ļóçķ]",
       "sheathe": "[Šĥéáţĥé/Úñšĥéáţĥé Ŵéáþóñ]",
       "dive": "[Šŵíɱ Ðóŵñ]",
       "categoryPet": "[Þéţ]",

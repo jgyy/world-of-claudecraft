@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "5102a695",
+      "state": "06cbf5e3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -107,7 +107,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99,
@@ -164,7 +163,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 1001,
-      "state": "b11b4e4c",
+      "state": "c46467be",
       "events": "abfde640",
       "rng": {
         "draws": 15,
@@ -175,7 +174,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1001,
-      "state": "1b650251",
+      "state": "e1917e83",
       "events": "a3c4f9f0",
       "rng": {
         "draws": 29,
@@ -186,7 +185,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 1001,
-      "state": "1b43bd71",
+      "state": "066994f3",
       "events": "ef17d137",
       "rng": {
         "draws": 104,
@@ -313,7 +312,6 @@
               "value": 5
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
@@ -388,7 +386,6 @@
             }
           ],
           "autoAttack": true,
-          "autoFaceLocked": true,
           "bossDamagers": [
             994
           ],
@@ -452,7 +449,6 @@
           "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
-          "autoFaceLocked": true,
           "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -502,7 +498,7 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 1001,
-      "state": "d63cbe84",
+      "state": "90d7c922",
       "events": "741638a5",
       "rng": {
         "draws": 134,
@@ -629,7 +625,6 @@
               "value": 5
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 0.2,
@@ -705,7 +700,6 @@
             }
           ],
           "autoAttack": true,
-          "autoFaceLocked": true,
           "bossDamagers": [
             994
           ],
@@ -770,7 +764,6 @@
           "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
-          "autoFaceLocked": true,
           "combatTimer": 0.7,
           "comboUntil": -1,
           "critChance": 0.05,

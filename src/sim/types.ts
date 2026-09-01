@@ -4632,15 +4632,6 @@ export interface Entity extends ClientMirroredEntityFields {
   // piece. A standing wardrobe preference (never auto-cleared), it rides the
   // entity wire (`hh` bit) so peers and portraits present the chosen look.
   helmHidden: boolean;
-  // Y-key combat preference (default on): whether PvE auto-attack keeps
-  // forcibly turning this player onto their target every tick
-  // (src/sim/combat/auto_attack.ts). Flipped off, PvE auto-attack falls back
-  // to the same MELEE_ARC facing gate PvP targets already use, so a player
-  // can hold a deliberate facing during a "don't look at me" boss mechanic or
-  // a pillar-activation puzzle without giving up the #3729 auto-face fix the
-  // rest of the time. Rides the entity wire so the owning client's optimistic
-  // toggle reconciles against the server snapshot (see `weaponStowed`).
-  autoFaceLocked: boolean;
   // The authored modular-creator look (characters.appearance column), riding
   // the identity wire (`app`) so every client in view composes this player's
   // real body. Deliberately opaque here: the sim never reads it, and typing it

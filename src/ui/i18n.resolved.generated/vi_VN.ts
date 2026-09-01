@@ -1332,7 +1332,6 @@ export const vi_VN: EnTranslations = {
       "targetPrev": "Luân Phiên Mục Tiêu Ngược",
       "discord": "Discord",
       "bgFlag": "Hành Động Cờ Chiến Trường",
-      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Tra/Rút Vũ Khí",
       "dive": "Lặn Xuống",
       "categoryPet": "Thú Cưng",

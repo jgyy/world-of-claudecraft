@@ -707,10 +707,6 @@ export const COMMAND_NAMES = [
   // life, and band server-side). Appended because wire tokens are never
   // reordered.
   'tutorial_start',
-  // Auto-attack auto-face lock toggle (IWorldCombat.toggleAutoFaceLock, the Y
-  // key): no payload, the sim flips Entity.autoFaceLocked and emits the
-  // matching notice toast. Appended because wire tokens are never reordered.
-  'toggle_auto_face_lock',
 ] as const;
 
 // The union both the send path (`online.ts`) and the dispatch switch
@@ -810,7 +806,6 @@ export const COMMAND_FACETS = {
   resurrect_corpse: 'IWorldCombat',
   resurrect_healer: 'IWorldCombat',
   resurrect_respond: 'IWorldCombat',
-  toggle_auto_face_lock: 'IWorldCombat',
   // IWorldTargeting: target selection + tab cycling.
   target: 'IWorldTargeting',
   tab: 'IWorldTargeting',

@@ -40,12 +40,6 @@ const baseEnTable = {
   'error.bagEquipHasProperty': 'That bag cannot be equipped while it carries a special property.',
   'error.tradeBagSpace': 'Trade failed: not enough bag space.',
   'log.bagsMigrated': 'Your belongings have been packed into new bags.',
-  // Auto-attack auto-face lock toggle (the Y key; src/sim/sim.ts toggleAutoFaceLock).
-  // Default on: PvE auto-attack keeps turning the player onto their target. No
-  // visible pose change (unlike the Z-key sheathe toggle), so this is the only
-  // player feedback for the state flipping.
-  'log.autoFaceLockOn': 'Auto-face lock on: auto-attack will turn you to face your target.',
-  'log.autoFaceLockOff': 'Auto-face lock off: auto-attack stops turning you to face your target.',
   // Bank (guild-bank-ready pooled bank; src/sim/bank.ts). The error.* lines are the
   // refusal toasts; log.bankSlotsPurchased is the purchase notice.
   'error.bankQuestItem': 'You cannot store quest items in the bank.',

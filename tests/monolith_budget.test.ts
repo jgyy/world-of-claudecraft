@@ -457,15 +457,16 @@ const MONOLITHS: MonolithRow[] = [
     // Plus 2 for the Phase B set-bonus seam: the set_bonus_mods import and
     // the setPlayerLevel writer routing through computeCharacterModifiers
     // (the resolver itself is the extracted module). Exact count, zero slack.
-    // Plus 5 for the auto-attack auto-face lock toggle (#3729 follow-up): the
-    // toggleAutoFaceLock thin delegate onto src/sim/auto_face_lock.ts (a
-    // SimContext-seam module, the startAutoAttack/stopAutoAttack pattern) plus
-    // its import line. Re-pinned to the exact merged count of the
-    // release/v0.42.0 sync: the release arm's own row moved down further
-    // (extractions outpacing growth) while this branch's +5 rides on top.
-    // Measured on the merged tree, never reconciled by arithmetic. Exact
-    // count, zero slack.
-    ceiling: 12278,
+    // #3729 round 4 REVERTS the auto-attack auto-face lock toggle: the
+    // toggleAutoFaceLock thin delegate onto src/sim/auto_face_lock.ts (plus
+    // its import line) is removed. In its place, the round-4 facing rework
+    // adds ONE new PlayerMeta field (nextFacingErrorAt, the auto-attack
+    // facing-refusal throttle clock) with its justification comment: a
+    // session-only field with no clean extraction, same shape as the
+    // stopAutoAttackOnTargetSwitch precedent beside it. Net +1 line over the
+    // de-toggled baseline. Re-measured on this branch, never reconciled by
+    // arithmetic. Exact count, zero slack.
+    ceiling: 12279,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -511,11 +512,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the v0.41.0 base sync into the
     // raid branch: both arms extracted and added independently, so neither
     // parent pin fits the combined file; the merged count is the honest bound.
-    // Raised +6 for the auto-attack auto-face lock toggle (#3729 follow-up):
-    // two thin onUiKey/gamepad dispatch cases (the sheathe-toggle shape) that
-    // just call world.toggleAutoFaceLock(). Re-pinned to the exact merged
-    // count of the release/v0.42.0 sync: measured on the merged tree, never
-    // reconciled by arithmetic. Exact count, zero slack.
+    // #3729 round 4 REVERTS the auto-attack auto-face lock toggle: the two
+    // thin onUiKey/gamepad dispatch cases calling world.toggleAutoFaceLock()
+    // are removed, so the prior +6 no longer applies. Re-measured on this
+    // branch, never reconciled by arithmetic. Exact count, zero slack.
     ceiling: 11517,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
@@ -589,11 +589,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Raised +4 for the auto-attack auto-face lock toggle (#3729 follow-up):
-    // the `afu` wire-encode line and the toggle_auto_face_lock dispatch case
-    // (thin delegate onto sim.toggleAutoFaceLock). Re-pinned to the exact
-    // merged count of the release/v0.42.0 sync: measured on the merged tree,
-    // never reconciled by arithmetic. Exact count, zero slack.
+    // #3729 round 4 REVERTS the auto-attack auto-face lock toggle: the `afu`
+    // wire-encode line and the toggle_auto_face_lock dispatch case are
+    // removed, so the prior +4 no longer applies. Re-measured on this
+    // branch, never reconciled by arithmetic. Exact count, zero slack.
     ceiling: 10645,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
@@ -656,12 +655,11 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Raised +9 for the auto-attack auto-face lock toggle (#3729 follow-up):
-    // the blankEntity default, the `afu` decode line, and the
-    // toggleAutoFaceLock optimistic-nudge command sender (the toggleWeaponStow
-    // idiom). Re-pinned to the exact merged count of the release/v0.42.0
-    // sync: measured on the merged tree, never reconciled by arithmetic.
-    // Exact count, zero slack.
+    // #3729 round 4 REVERTS the auto-attack auto-face lock toggle: the
+    // blankEntity default, the `afu` decode line, and the toggleAutoFaceLock
+    // optimistic-nudge command sender are all removed, so the prior +9 no
+    // longer applies. Re-measured on this branch, never reconciled by
+    // arithmetic. Exact count, zero slack.
     ceiling: 5917,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },

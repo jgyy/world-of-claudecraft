@@ -1403,7 +1403,6 @@ function blankEntity(id: number): Entity {
     afk: false,
     weaponStowed: false,
     helmHidden: false,
-    autoFaceLocked: true,
     modularAppearance: null,
     eating: null,
     drinking: null,
@@ -3200,7 +3199,6 @@ export class ClientWorld extends ReconWireState implements IWorld {
       e.afk = !!w.ak; // /afk display bit: drives the nameplate tag + social presence dot
       e.weaponStowed = !!w.ws;
       e.helmHidden = !!w.hh;
-      e.autoFaceLocked = !w.afu; // default true; the wire only carries the unlocked deviation
       e.aggroTargetId = w.aggro ?? null;
       e.forcedTargetId = w.ft ?? null;
       e.forcedTargetTimer = w.ftm ?? 0;
@@ -4563,13 +4561,6 @@ export class ClientWorld extends ReconWireState implements IWorld {
     const p = this.entities.get(this.playerId);
     if (p && !p.dead) p.weaponStowed = !p.weaponStowed;
     this.cmd({ cmd: 'stow_weapon' });
-  }
-  toggleAutoFaceLock(): void {
-    // Optimistic local nudge (the toggleWeaponStow idiom); the notice toast
-    // itself is a server-driven SimEvent, reconciled by the next `afu` bit.
-    const p = this.entities.get(this.playerId);
-    if (p) p.autoFaceLocked = !p.autoFaceLocked;
-    this.cmd({ cmd: 'toggle_auto_face_lock' });
   }
   setHelmHidden(hidden: boolean): void {
     // Optimistic local nudge (the toggleWeaponStow idiom) so the recompose and

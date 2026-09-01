@@ -2,13 +2,15 @@
 // monolith (C5). This module owns:
 //   - startAutoAttack / stopAutoAttack: the public auto-attack toggle (validate
 //     target, aggro an idle mob, enter combat).
-//   - updatePlayerAutoAttack: the per-tick driver (swing-timer decay, then
-//     either an auto-face (PvE, while Entity.autoFaceLocked stays on) or the
-//     original facing-arc gate (PvP, or PvE with the lock flipped off via the
-//     Y key, so positional combat like Backstab still works and a player can
-//     hold a deliberate facing during a boss mechanic), a range gate, the
-//     ranged-vs-melee branch, and queuedOnSwing consumption that feeds
-//     on-next-swing abilities like Heroic Strike / Raptor Strike into the swing).
+//   - updatePlayerAutoAttack: the per-tick driver (swing-timer decay, a range
+//     gate, the ranged-vs-melee branch, and queuedOnSwing consumption that
+//     feeds on-next-swing abilities like Heroic Strike / Raptor Strike into
+//     the swing). Auto-attack NEVER turns the player onto their target
+//     (classic-era facing rule, PvE and PvP alike): a swing that is otherwise
+//     ready but outside MELEE_ARC refuses with a throttled "You must be
+//     facing your target." toast instead (see blockedByFacing below). A
+//     player who wants to hold facing WHILE still landing a hit turns
+//     manually, exactly like every other classic auto-attack.
 //   - rangedSwing: Auto Shot (hunters, 8yd dead zone) and Wand (casters, no dead
 //     zone); miss roll, crit, and armor mitigation for physical shots only.
 //   - meleeSwing: the white-hit table (single rng.next() miss -> dodge -> hit, crit,
@@ -54,7 +56,6 @@ import {
   MELEE_RANGE,
   normAngle,
   STANCE_MASTERY_BERSERKER_HASTE,
-  steadyAngleTo,
   swingMissChance,
   type WeaponInfo,
 } from '../types';
@@ -97,6 +98,14 @@ const DUAL_WIELD_WHITE_MISS_PENALTY = 0.1;
 const SUDDEN_DEATH_CHANCE = 0.1;
 const SUDDEN_DEATH_DURATION = 10;
 const OFFHAND_AUTO_ATTACK_DMG_MULT = 0.5;
+// Auto-attack never turns the player onto their target (classic-era facing rule,
+// PvE and PvP alike; see the module header). A swing blocked by facing refuses
+// with this toast instead, throttled to once per this many seconds of sim time
+// (PlayerMeta.nextFacingErrorAt): held facing at 20 Hz would otherwise spam the
+// toast every tick for as long as the bad facing persists, unlike the ability-cast
+// facing refusal it mirrors (casting_lifecycle.ts), which is naturally throttled
+// by one press per cast attempt.
+const FACING_ERROR_THROTTLE_SEC = 1;
 
 // WEAPON DAMAGE CONTRACT: `weapon.min/max` is RAW per-swing damage at the weapon's
 // real speed, with the two-hand premium already folded in by itemization. A weapon's
@@ -198,6 +207,20 @@ export function stopAutoAttack(ctx: SimContext, pid?: number): void {
   if (r) r.e.autoAttack = false;
 }
 
+// Whether the swing this tick is blocked by facing; emits the throttled refusal
+// as a side effect when it is. Called last, right before a swing that already
+// cleared range/LoS would otherwise land, so a target merely out of range never
+// trips the refusal (see FACING_ERROR_THROTTLE_SEC).
+function blockedByFacing(ctx: SimContext, p: Entity, meta: PlayerMeta, t: Entity): boolean {
+  const facingDiff = Math.abs(normAngle(angleTo(p.pos, t.pos) - p.facing));
+  if (facingDiff <= MELEE_ARC) return false;
+  if ((meta.nextFacingErrorAt ?? 0) <= ctx.time) {
+    ctx.error(p.id, 'You must be facing your target.');
+    meta.nextFacingErrorAt = ctx.time + FACING_ERROR_THROTTLE_SEC;
+  }
+  return true;
+}
+
 export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerMeta): void {
   p.swingTimer = Math.max(0, p.swingTimer - DT);
   p.offhandSwingTimer = Math.max(0, p.offhandSwingTimer - DT);
@@ -220,36 +243,6 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   if (isStunned(p)) return;
   if (isDisarmed(p)) return; // weapon knocked away: no auto-attack swings
   const d = dist2d(p.pos, t.pos);
-  if (t.kind === 'player' || !p.autoFaceLocked) {
-    // PvP keeps the pre-fix facing GATE instead of auto-facing: positional
-    // combat (most concretely Backstab/Ambush's requiresBehind check in
-    // casting_lifecycle.ts, which reads the target's live `facing`) is real
-    // classic-era player skill, and auto-facing here would snap a defender's
-    // facing onto the attacker every tick the instant the defender swings
-    // back, making "behind" unreachable in practice for as long as the fight
-    // lasts (reported against this module's own auto-face fix: a rogue can
-    // no longer hold rear positioning on a player target that fights back).
-    // A PvE target falls into this same gate when the player has flipped
-    // their auto-face lock off (the Y key / Sim.toggleAutoFaceLock): a "don't
-    // look at me" boss mechanic or a pillar-activation puzzle needs to hold a
-    // deliberate facing away from the target, which the always-on auto-face
-    // below cannot do. A stunned or disarmed attacker still can't turn onto a
-    // target, same as the auto-face arm below.
-    const facingDiff = Math.abs(normAngle(angleTo(p.pos, t.pos) - p.facing));
-    if (facingDiff > MELEE_ARC) return;
-  } else {
-    // Auto-face a mob/NPC auto-attack target every tick (while the lock stays
-    // on, the default), the same self-correction the mob melee driver
-    // (mob/combat_profile.ts tryMobMeleeSwingInRange) and /follow
-    // (Sim.updateFollowMovement) already apply via steadyAngleTo: without it
-    // a player who never manually re-turns onto a target that circled or
-    // aggroed from behind had every swing silently no-op against the
-    // MELEE_ARC gate forever. isStunned/isDisarmed above already bailed out
-    // before this point, so a stunned or disarmed attacker still cannot turn
-    // onto a target. PvE targets have no facing-dependent defensive mechanic
-    // riding on this, so there's no positional skill to preserve here.
-    p.facing = steadyAngleTo(p.pos, t.pos, p.facing);
-  }
 
   // ranged auto-attack: hunters (auto shot, dead zone inside minRange) and
   // casters (wand-style, no dead zone so they don't run into melee, #94).
@@ -262,6 +255,10 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   const ranged = rangedAutoProfile(p, meta.cls);
   if (ranged && d <= ranged.maxRange && d >= (ranged.wand ? 0 : ranged.minRange)) {
     if (!ctx.hasLineOfSight(p, t)) return;
+    // Range and line of sight are established; facing is checked LAST, right
+    // before the shot actually fires, so a target merely out of range never
+    // spams the facing refusal (see blockedByFacing).
+    if (blockedByFacing(ctx, p, meta, t)) return;
     ctx.breakGhostWolf(p);
     // Hunters shoot with their equipped weapon (damage range + speed), casters
     // with their fixed class wand; the shot then fires at that resolved profile.
@@ -278,6 +275,8 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   // combatant pressed against a wall could swing through it. See sibling
   // logic in Sim.abilityNeedsLineOfSight.
   if (isArenaPos(p.pos.x) && !ctx.hasLineOfSight(p, t)) return;
+  // Same ordering as the ranged arm: facing is the LAST gate before the swing.
+  if (blockedByFacing(ctx, p, meta, t)) return;
   ctx.breakGhostWolf(p);
   const dualWieldWhiteMissPenalty = hasDualWieldWhiteMissPenalty(ctx, p, meta);
 

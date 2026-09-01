@@ -1332,7 +1332,6 @@ export const fr_FR: EnTranslations = {
       "targetPrev": "Revenir à la cible précédente",
       "discord": "Discord",
       "bgFlag": "Champ de bataille : drapeau",
-      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Ranger/Dégainer l'arme",
       "dive": "Nager vers le bas",
       "categoryPet": "Familier",

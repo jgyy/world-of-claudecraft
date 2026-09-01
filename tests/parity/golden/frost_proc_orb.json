@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "6652c1f4",
+      "state": "a98ac9a6",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -99,7 +99,6 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -154,7 +153,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 1000,
-      "state": "506fb260",
+      "state": "6c514070",
       "events": "85f8927d",
       "rng": {
         "draws": 1,
@@ -165,7 +164,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1000,
-      "state": "ac40bc22",
+      "state": "21f0d2ba",
       "events": "5dc5958c",
       "rng": {
         "draws": 2,
@@ -176,7 +175,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 1000,
-      "state": "81504f3d",
+      "state": "c93382b9",
       "events": "a5322ab5",
       "rng": {
         "draws": 150,
@@ -187,7 +186,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 1000,
-      "state": "b315192a",
+      "state": "79e79602",
       "events": "b2ce815a",
       "rng": {
         "draws": 316,
@@ -198,7 +197,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 1000,
-      "state": "d235780e",
+      "state": "9159ae16",
       "events": "9ec3fe76",
       "rng": {
         "draws": 356,
@@ -333,7 +332,6 @@
               "stacks": 5
             }
           ],
-          "autoFaceLocked": true,
           "castTotal": 2.5,
           "combatTimer": 0.05,
           "comboUntil": -1,
@@ -415,7 +413,6 @@
               "value": 0.6
             }
           ],
-          "autoFaceLocked": true,
           "combatTimer": 0.05,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -469,7 +466,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 1000,
-      "state": "d235780e",
+      "state": "9159ae16",
       "events": "741638a5",
       "rng": {
         "draws": 356,
@@ -604,7 +601,6 @@
               "stacks": 5
             }
           ],
-          "autoFaceLocked": true,
           "castTotal": 2.5,
           "combatTimer": 0.05,
           "comboUntil": -1,
@@ -686,7 +682,6 @@
               "value": 0.6
             }
           ],
-          "autoFaceLocked": true,
           "combatTimer": 0.05,
           "comboUntil": -1,
           "critChance": 0.05,

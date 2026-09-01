@@ -101,7 +101,6 @@ export interface InputCallbacks {
       | 'reliquary'
       | 'crafting'
       | 'sheathe'
-      | 'autoFaceLock'
       | 'mount',
   ): void;
   onEmoteWheel(open: boolean): void;
@@ -1218,9 +1217,6 @@ export class Input {
         return;
       case 'sheathe':
         this.cb.onUiKey('sheathe');
-        return;
-      case 'autoFaceLock':
-        this.cb.onUiKey('autoFaceLock');
         return;
     }
   }

@@ -75,13 +75,12 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // six vcup_* send + dispatch pairs (docs/design/eastbrook-revamp/master-plan.md);
 // the Proving Shore tutorial adds its one start_tutorial pair back on top, and
 // the v0.40.0 sync merge brings the release side's one new pair with it.
-// The release/v0.42.0 sync merge into the auto-face-lock branch (#3729) adds
-// toggle_auto_face_lock as a send + dispatch pair on top of the release's own
-// count (the branch's only command surface; every other addition here is
-// release-side). Re-derived from the merged tree, never reconciled by
-// arithmetic across the merge.
-const EXPECTED_SEND_COUNT = 208;
-const EXPECTED_DISPATCH_COUNT = 221;
+// #3729 round 4 REMOVES toggle_auto_face_lock (send + dispatch pair): the
+// auto-face-lock toggle it backed is reverted, so both counts drop by one
+// from the release/v0.42.0-synced total. Re-derived from source, never
+// reconciled by arithmetic.
+const EXPECTED_SEND_COUNT = 207;
+const EXPECTED_DISPATCH_COUNT = 220;
 const EXPECTED_DISPATCH_ONLY_COUNT = 13;
 
 // The chat sub-channel routing switch (server/game.ts `switch

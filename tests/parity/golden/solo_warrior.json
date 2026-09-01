@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "5102a695",
+      "state": "06cbf5e3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -108,7 +108,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99,
@@ -165,7 +164,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 1000,
-      "state": "e241ca90",
+      "state": "54196638",
       "events": "7d951bad",
       "rng": {
         "draws": 7,
@@ -176,7 +175,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1000,
-      "state": "0889cdce",
+      "state": "209848d2",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -187,7 +186,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 1000,
-      "state": "f2dc8be2",
+      "state": "fa18e912",
       "events": "80105553",
       "rng": {
         "draws": 174,
@@ -198,7 +197,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 1000,
-      "state": "3992ea01",
+      "state": "d52ddcb9",
       "events": "7e876716",
       "rng": {
         "draws": 263,
@@ -315,7 +314,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
@@ -373,7 +371,6 @@
         {
           "aiState": "dead",
           "autoAttack": true,
-          "autoFaceLocked": true,
           "comboUntil": -1,
           "corpseTimer": 60,
           "critChance": 0.05,
@@ -443,7 +440,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 1000,
-      "state": "c5aa1b89",
+      "state": "004a0da1",
       "events": "ffd1bba2",
       "rng": {
         "draws": 309,
@@ -564,7 +561,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 0.2,
@@ -623,7 +619,6 @@
         {
           "aiState": "dead",
           "autoAttack": true,
-          "autoFaceLocked": true,
           "comboUntil": -1,
           "corpseTimer": 59.8,
           "critChance": 0.05,

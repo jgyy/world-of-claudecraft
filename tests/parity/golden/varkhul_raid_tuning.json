@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "0f83e174",
+      "state": "c6eb4032",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -106,7 +106,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99,
@@ -163,7 +162,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 1002,
-      "state": "67e2e9f8",
+      "state": "fbad7e50",
       "events": "2d012d81",
       "rng": {
         "draws": 1,
@@ -174,7 +173,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 1002,
-      "state": "67e2e9f8",
+      "state": "fbad7e50",
       "events": "741638a5",
       "rng": {
         "draws": 1,
@@ -293,7 +292,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99.05,
@@ -350,7 +348,6 @@
         },
         {
           "aiState": "idle",
-          "autoFaceLocked": true,
           "ccImmune": true,
           "combatTimer": 99.05,
           "comboUntil": -1,
@@ -441,7 +438,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 1003,
-      "state": "9ed573ed",
+      "state": "8dd3270b",
       "events": "4db61433",
       "rng": {
         "draws": 1,
@@ -452,7 +449,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 1003,
-      "state": "7bd4f073",
+      "state": "641ebbad",
       "events": "6e11a49a",
       "rng": {
         "draws": 1,
@@ -463,7 +460,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 1003,
-      "state": "bdc8c000",
+      "state": "2ff6e7ae",
       "events": "744c2efc",
       "rng": {
         "draws": 1,
@@ -474,7 +471,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 1003,
-      "state": "bdc8c000",
+      "state": "2ff6e7ae",
       "events": "741638a5",
       "rng": {
         "draws": 1,
@@ -689,7 +686,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99.2,
@@ -747,7 +743,6 @@
         {
           "aggroTargetId": 1002,
           "aiState": "attack",
-          "autoFaceLocked": true,
           "ccImmune": true,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -877,7 +872,6 @@
               "sourceId": 1002
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
@@ -939,7 +933,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 1003,
-      "state": "e9661e5c",
+      "state": "e8c371de",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -950,7 +944,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 1003,
-      "state": "e9661e5c",
+      "state": "e8c371de",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -1165,7 +1159,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99.25,
@@ -1223,7 +1216,6 @@
         {
           "aggroTargetId": 1002,
           "aiState": "idle",
-          "autoFaceLocked": true,
           "ccImmune": true,
           "combatTimer": 0.05,
           "comboUntil": -1,
@@ -1282,7 +1274,6 @@
               "sourceId": 1002
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 0.05,
@@ -1339,7 +1330,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 1003,
-      "state": "e9661e5c",
+      "state": "e8c371de",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -1554,7 +1545,6 @@
               "sourceId": 994
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 99.25,
@@ -1612,7 +1602,6 @@
         {
           "aggroTargetId": 1002,
           "aiState": "idle",
-          "autoFaceLocked": true,
           "ccImmune": true,
           "combatTimer": 0.05,
           "comboUntil": -1,
@@ -1671,7 +1660,6 @@
               "sourceId": 1002
             }
           ],
-          "autoFaceLocked": true,
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 0.05,

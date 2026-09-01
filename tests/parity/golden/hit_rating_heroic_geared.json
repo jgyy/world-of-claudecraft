@@ -14,7 +14,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "09d4becb",
+      "state": "4c70471d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -96,7 +96,6 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "autoFaceLocked": true,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -151,7 +150,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 1000,
-      "state": "aa7b4c56",
+      "state": "70ddadce",
       "events": "4240a3f5",
       "rng": {
         "draws": 3,
@@ -162,7 +161,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 1000,
-      "state": "8f4bb1f1",
+      "state": "dd3283ad",
       "events": "632a979f",
       "rng": {
         "draws": 3,
@@ -173,7 +172,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 1000,
-      "state": "d44d946a",
+      "state": "58ede3be",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -184,7 +183,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1000,
-      "state": "e88f2843",
+      "state": "dfb8d29f",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -195,7 +194,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 1000,
-      "state": "51c0458a",
+      "state": "9c4ffc7a",
       "events": "89b7f752",
       "rng": {
         "draws": 72,
@@ -206,7 +205,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 1000,
-      "state": "a85c2b02",
+      "state": "322f8b0e",
       "events": "741638a5",
       "rng": {
         "draws": 153,
@@ -217,7 +216,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 1000,
-      "state": "7d009a23",
+      "state": "76a771ab",
       "events": "741638a5",
       "rng": {
         "draws": 241,
@@ -228,7 +227,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 1000,
-      "state": "26ee23c8",
+      "state": "cbfb8f94",
       "events": "93b43192",
       "rng": {
         "draws": 329,
@@ -239,7 +238,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 1000,
-      "state": "e5fcd835",
+      "state": "4e23cbad",
       "events": "c3725567",
       "rng": {
         "draws": 414,
@@ -250,7 +249,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 1000,
-      "state": "aa02ba08",
+      "state": "f8d4983c",
       "events": "741638a5",
       "rng": {
         "draws": 509,
@@ -261,7 +260,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 1000,
-      "state": "9397f007",
+      "state": "32e7f0df",
       "events": "741638a5",
       "rng": {
         "draws": 609,
@@ -272,7 +271,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 1000,
-      "state": "fc022ea4",
+      "state": "83d2d340",
       "events": "741638a5",
       "rng": {
         "draws": 687,
@@ -283,7 +282,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 1000,
-      "state": "fc022ea4",
+      "state": "83d2d340",
       "events": "741638a5",
       "rng": {
         "draws": 687,
@@ -434,7 +433,6 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "autoFaceLocked": true,
           "castTotal": 4,
           "combatTimer": 1.9,
           "comboUntil": -1,
@@ -506,7 +504,6 @@
             }
           ],
           "autoAttack": true,
-          "autoFaceLocked": true,
           "combatTimer": 1.9,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -567,7 +564,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 1000,
-      "state": "fc022ea4",
+      "state": "83d2d340",
       "events": "741638a5",
       "rng": {
         "draws": 687,
@@ -718,7 +715,6 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "autoFaceLocked": true,
           "castTotal": 4,
           "combatTimer": 1.9,
           "comboUntil": -1,
@@ -790,7 +786,6 @@
             }
           ],
           "autoAttack": true,
-          "autoFaceLocked": true,
           "combatTimer": 1.9,
           "comboUntil": -1,
           "critChance": 0.05,

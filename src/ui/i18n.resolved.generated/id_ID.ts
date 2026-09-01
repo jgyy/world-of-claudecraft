@@ -1332,7 +1332,6 @@ export const id_ID: EnTranslations = {
       "targetPrev": "Putar Bidikan Mundur",
       "discord": "Discord",
       "bgFlag": "Aksi Bendera Medan Pertempuran",
-      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Sarungkan/Cabut Senjata",
       "dive": "Berenang ke Bawah",
       "categoryPet": "Peliharaan",

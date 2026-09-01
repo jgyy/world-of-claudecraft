@@ -1332,7 +1332,6 @@ export const tr_TR: EnTranslations = {
       "targetPrev": "Hedefler Arasında Geri Geç",
       "discord": "Discord",
       "bgFlag": "Savaş Alanı Sancak Eylemi",
-      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Silahı Kın'a Tak / Çıkar",
       "dive": "Aşağı Yüz",
       "categoryPet": "Yoldaş",

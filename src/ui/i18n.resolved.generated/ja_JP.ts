@@ -1332,7 +1332,6 @@ export const ja_JP: EnTranslations = {
       "targetPrev": "ターゲットを逆順に切り替え",
       "discord": "Discord",
       "bgFlag": "戦場フラッグアクション",
-      "autoFaceLock": "オートフェイスロック切り替え",
       "sheathe": "武器を納刀/抜刀",
       "dive": "潜水",
       "categoryPet": "ペット",

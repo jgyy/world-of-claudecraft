@@ -9,55 +9,25 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "es_ES": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "fr_FR": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "fr_CA": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
+  "es": [],
+  "es_ES": [],
+  "fr_FR": [],
+  "fr_CA": [],
   "en_CA": [],
-  "it_IT": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "de_DE": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
+  "it_IT": [],
+  "de_DE": [],
   "zh_CN": [],
   "zh_TW": [],
   "ko_KR": [],
   "ja_JP": [],
-  "pt_BR": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
+  "pt_BR": [],
   "ru_RU": [],
-  "cs_CZ": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "nl_NL": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "pl_PL": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "id_ID": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "tr_TR": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "sv_SE": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "vi_VN": [
-    "hudChrome.keybinds.autoFaceLock"
-  ],
-  "da_DK": [
-    "hudChrome.keybinds.autoFaceLock"
-  ]
+  "cs_CZ": [],
+  "nl_NL": [],
+  "pl_PL": [],
+  "id_ID": [],
+  "tr_TR": [],
+  "sv_SE": [],
+  "vi_VN": [],
+  "da_DK": []
 };

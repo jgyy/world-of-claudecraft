@@ -1332,7 +1332,6 @@ export const es: EnTranslations = {
       "targetPrev": "Objetivo anterior",
       "discord": "Discord",
       "bgFlag": "Acción de bandera de campo de batalla",
-      "autoFaceLock": "Toggle Auto-Face Lock",
       "sheathe": "Envainar/Desenvainar arma",
       "dive": "Nadar hacia abajo",
       "categoryPet": "Mascota",
