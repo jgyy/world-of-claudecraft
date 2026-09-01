@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
-import { disposeRendererPrewarmAndGroundFx } from '../src/render/renderer_resource_lifecycle';
+import {
+  disposeRendererPrewarmAndGroundFx,
+  disposeRendererWorldViews,
+} from '../src/render/renderer_resource_lifecycle';
 
 describe('renderer resource lifecycle', () => {
   it('keeps every renderer-owned VFX owner independent at the lifecycle seam', () => {
@@ -66,5 +69,62 @@ describe('renderer resource lifecycle', () => {
     expect(vfx.dispose).toHaveBeenCalledOnce();
     expect(abilityVfxFx.dispose).toHaveBeenCalledOnce();
     expect(errors).toHaveLength(1);
+  });
+
+  // Regression for the graphics-rebuild heap leak (GitHub issue #3750):
+  // disposeRendererResources() never called these views' own dispose()
+  // methods, so a renderer swap permanently retained the previous
+  // terrain/water/underwater GPU resources on the JS heap.
+  describe('disposeRendererWorldViews', () => {
+    it('disposes terrain, water, and underwater independently, each other failing', () => {
+      const terrainView = {
+        dispose: vi.fn(() => {
+          throw new Error('terrain');
+        }),
+      };
+      const waterView = { dispose: vi.fn() };
+      const underwaterView = {
+        dispose: vi.fn(() => {
+          throw new Error('underwater');
+        }),
+      };
+      const errors: unknown[] = [];
+      const bestEffort = (cleanup: () => void): void => {
+        try {
+          cleanup();
+        } catch (error) {
+          errors.push(error);
+        }
+      };
+
+      disposeRendererWorldViews({ terrainView, waterView, underwaterView }, bestEffort);
+
+      expect(terrainView.dispose).toHaveBeenCalledOnce();
+      expect(waterView.dispose).toHaveBeenCalledOnce();
+      expect(underwaterView.dispose).toHaveBeenCalledOnce();
+      expect(errors).toHaveLength(2);
+    });
+
+    it('tolerates a view that has not been constructed yet', () => {
+      const waterView = { dispose: vi.fn() };
+      const errors: unknown[] = [];
+      const bestEffort = (cleanup: () => void): void => {
+        try {
+          cleanup();
+        } catch (error) {
+          errors.push(error);
+        }
+      };
+
+      expect(() =>
+        disposeRendererWorldViews(
+          { terrainView: undefined, waterView, underwaterView: undefined },
+          bestEffort,
+        ),
+      ).not.toThrow();
+
+      expect(waterView.dispose).toHaveBeenCalledOnce();
+      expect(errors).toHaveLength(0);
+    });
   });
 });

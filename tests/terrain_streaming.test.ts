@@ -187,6 +187,54 @@ describe('progressive terrain build', () => {
     expect(terrain.isZoneLoaded(zone.id)).toBe(false);
   });
 
+  // Regression for the graphics-rebuild heap leak (GitHub issue #3750): a
+  // renderer swap tore the old TerrainView down without ever releasing its
+  // resident chunk geometries or shared material, so every rebuild
+  // permanently retained the whole previous zone's terrain on the JS heap.
+  // dispose() is the terminal teardown disposeRendererResources() now calls.
+  it('dispose releases every resident chunk regardless of zone, plus the shared material', async () => {
+    vi.resetModules();
+    mockEmptyAssetLoads();
+    const { buildTerrain } = await import('../src/render/terrain');
+    const { zoneAt } = await import('../src/sim/data');
+
+    const terrain = buildTerrain(20061);
+    const zone = zoneAt(0, 0);
+    const neighbor = zoneAt(0, 300);
+    const firstTask = terrain.ensureZone(zone);
+    await vi.runAllTimersAsync();
+    await firstTask;
+    const neighborTask = terrain.ensureZone(neighbor);
+    await vi.runAllTimersAsync();
+    await neighborTask;
+
+    expect(terrain.group.children.length).toBeGreaterThan(0);
+    const meshes = terrain.group.children as THREE.Mesh[];
+    const geometrySpies = meshes.map((mesh) => vi.spyOn(mesh.geometry, 'dispose'));
+    // Every chunk mesh shares the ONE material buildTerrain built (see
+    // terrain.ts's `new THREE.Mesh(geo, mat)`), so dispose() must release it
+    // exactly once, not per chunk.
+    const sharedMaterial = meshes[0].material as THREE.Material;
+    expect(meshes.every((mesh) => mesh.material === sharedMaterial)).toBe(true);
+    const materialSpy = vi.spyOn(sharedMaterial, 'dispose');
+
+    terrain.dispose();
+
+    for (const spy of geometrySpies) expect(spy).toHaveBeenCalledOnce();
+    expect(materialSpy).toHaveBeenCalledOnce();
+    expect(terrain.group.children).toHaveLength(0);
+  });
+
+  it('dispose on a view with nothing built does not throw', async () => {
+    vi.resetModules();
+    mockEmptyAssetLoads();
+    const { buildTerrain } = await import('../src/render/terrain');
+
+    const terrain = buildTerrain(20061);
+    expect(() => terrain.dispose()).not.toThrow();
+    expect(terrain.group.children).toHaveLength(0);
+  });
+
   it('cancelStreaming stops an in-flight zone build from ever completing', async () => {
     vi.resetModules();
     mockEmptyAssetLoads();
