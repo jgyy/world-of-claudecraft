@@ -585,6 +585,39 @@ describe('context-loss restore story', () => {
     expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('armed');
   });
 
+  it('waits for a target supplier so graphics rebuild restores pace through the candidate renderer queue', async () => {
+    // Companion to the straggler test above, from the other direction: here
+    // the resolver's OWN return value is a promise (matching the game
+    // entry's ktx2_restore_upload_queue coordinator, whose current() stays
+    // pending while a graphics rebuild has the client paused), instead of a
+    // plain getter that happens to be re-invoked. Both paths must defer to
+    // the eventual live target rather than treating "not yet answered" as
+    // "no target".
+    const tex = armedTexture(2);
+    simulateUpload(tex);
+    const freshMips = makeMips(2);
+    setKtx2MipRederive(async () => ({ mipmaps: freshMips, format: tex.format as number }));
+    const candidate = makeStepQueue();
+    let publishCandidateTarget: (target: Ktx2RestoreTarget | undefined) => void = () => {};
+    const targetWhenCandidateExists = new Promise<Ktx2RestoreTarget | undefined>((resolve) => {
+      publishCandidateTarget = resolve;
+    });
+
+    ktx2MipsOnContextLost(() => targetWhenCandidateExists);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(candidate.run).not.toHaveBeenCalled();
+    expect(mipsOf(tex)[0]?.data.byteLength).toBe(0);
+    expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('restoring');
+
+    publishCandidateTarget(candidate.target);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(candidate.run).toHaveBeenCalledTimes(1);
+    expect(mipsOf(tex)[0]?.data.byteLength).toBe(0);
+    candidate.drain();
+    expect(tex.mipmaps as unknown).toBe(freshMips);
+    expect(ktx2MipReleaseInternalsForTest.stateOf(tex)).toBe('armed');
+  });
+
   it('ktx2MipsRestored still gates on the QUEUED re-upload, not just the transcode, so the curtain cannot reveal stubs', async () => {
     const tex = armedTexture(2);
     simulateUpload(tex);
@@ -980,19 +1013,37 @@ describe('wiring pins (source scans, anchor style per docs/qa-gate.md)', () => {
     expect(enableAt).toBeLessThan(deferredAt);
     // (2) The re-transcode kick must sit INSIDE the canvas webglcontextlost
     // listener (it serves both in-place loss and the rebuild recycle), and
-    // must pass a LIVE GETTER over the current renderer's queue AND host, not
-    // a snapshotted value, so a restore still pending after a graphics
-    // rebuild reassigns `renderer` paces through the NEW renderer's queue
-    // instead of always taking the immediate/unpaced fallback, and so its
-    // queued unit's real upload runs on the renderer that still owns the
-    // canvas (see the module header's "Upload pacing" section).
+    // must pass the restore-upload coordinator's live getter over the current
+    // renderer's queue AND host, rather than checking rendererReady in the
+    // listener itself: graphics-rebuild context loss fires after shutdown has
+    // marked the old renderer unready but before the candidate renderer
+    // exists, so the coordinator holds its answer pending (rather than
+    // resolving to "no target") until the next renderer publishes (see the
+    // module header's "Upload pacing" section).
     expect(
       between(mainSrc, "addEventListener('webglcontextlost'", 'webglcontextrestored'),
-    ).toContain(
-      'ktx2MipsOnContextLost(() =>\n' +
-        '      rendererReady ? { queue: renderer.backgroundGpuWork, host: renderer.webgl } : undefined,\n' +
-        '    );',
+    ).toContain('ktx2MipsOnContextLost(ktx2RestoreUploadQueue.current)');
+    expect(mainSrc).toContain(
+      "import { createKtx2RestoreUploadQueueCoordinator } from './game/ktx2_restore_upload_queue'",
     );
+    expect(mainSrc).toContain('createKtx2RestoreUploadQueueCoordinator<Ktx2RestoreTarget>()');
+    expect(mainSrc).toContain('ktx2RestoreUploadQueue.setPaused(paused)');
+    expect(between(mainSrc, 'shutdownRenderer: async (current)', 'recycleContext')).toContain(
+      'ktx2RestoreUploadQueue.publish(undefined)',
+    );
+    const buildRendererBlock = between(
+      mainSrc,
+      'buildRenderer: (_target, recycled) => {',
+      'prepareCurrentZone',
+    );
+    expect(buildRendererBlock).toContain(
+      'ktx2RestoreUploadQueue.publish({ queue: next.backgroundGpuWork, host: next.webgl })',
+    );
+    expect(
+      buildRendererBlock.indexOf(
+        'ktx2RestoreUploadQueue.publish({ queue: next.backgroundGpuWork, host: next.webgl })',
+      ),
+    ).toBeLessThan(buildRendererBlock.indexOf('return next'));
     // (3) The curtain gate must sit INSIDE the rebuild prewarm step, after the
     // far-vista hold, so the reveal normally shows no stub-black world
     // textures (bounded by KTX2_RESTORE_MAX_WAIT_MS: a large session-wide

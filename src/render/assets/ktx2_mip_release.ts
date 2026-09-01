@@ -90,6 +90,14 @@
 // renderer rebuild mid-restore) does too: this stage is a self-healing
 // cosmetic transient, never worth stranding a texture on stubs over.
 //
+// The getter may itself return a promise rather than an immediate value: the
+// game entry's restore-upload coordinator (src/game/ktx2_restore_upload_queue.ts)
+// holds its answer pending for the exact span a graphics rebuild has the
+// client paused, so a straggler waits for the commit that publishes the NEXT
+// renderer's queue and host instead of taking the immediate-apply fallback
+// mid-rebuild. The getter's result is awaited the same way whether it settles
+// synchronously or not.
+//
 // Retention bounds: both registries hold their textures WEAKLY. A texture the
 // world never references again (for example the normal/roughness maps a
 // Lambert-tier material build discards) is garbage-collected together with
@@ -402,13 +410,18 @@ function releaseAfterUpload(tex: ReleasableCompressedTexture, entry: ReleaseEntr
  *
  *  `resolveTarget` reads the CURRENT renderer's queue and upload host, called
  *  at the point each restore's re-upload is actually applied rather than
- *  latched once here (src/main.ts passes a closure over its own live
+ *  latched once here (src/main.ts passes a coordinator over its own live
  *  `renderer` binding, which a graphics rebuild reassigns partway through
  *  this restore's lifetime): see the module header's "Upload pacing" section
  *  for why the getter, not a snapshotted instance, is what makes pacing
- *  actually reach a rebuild's past-bound stragglers. Omit it (or have it
- *  return undefined) to keep the pre-existing immediate-upload behavior. */
-export function ktx2MipsOnContextLost(resolveTarget?: () => Ktx2RestoreTarget | undefined): void {
+ *  actually reach a rebuild's past-bound stragglers. It may return a promise
+ *  instead of an immediate value, so a coordinator can hold its answer
+ *  pending while a graphics rebuild has the client paused rather than
+ *  resolving to "no target" mid-rebuild. Omit it (or have it resolve to
+ *  undefined) to keep the pre-existing immediate-upload behavior. */
+export function ktx2MipsOnContextLost(
+  resolveTarget?: () => Ktx2RestoreTarget | undefined | Promise<Ktx2RestoreTarget | undefined>,
+): void {
   if (!rederive) return;
   const released: [ReleasableCompressedTexture, ReleaseEntry][] = [];
   for (const pair of entries.entries()) {
@@ -503,7 +516,7 @@ export function ktx2RetainedSourceBytes(): number {
 function startRestore(
   tex: ReleasableCompressedTexture,
   entry: ReleaseEntry,
-  resolveTarget?: () => Ktx2RestoreTarget | undefined,
+  resolveTarget?: () => Ktx2RestoreTarget | undefined | Promise<Ktx2RestoreTarget | undefined>,
 ): void {
   if (!rederive) return;
   entry.state = 'restoring';
@@ -536,44 +549,57 @@ function startRestore(
       // Resolved HERE, not at ktx2MipsOnContextLost's call time: see the
       // module header's "Upload pacing" section for why a rebuild's
       // past-bound stragglers need the queue and host read live, at
-      // application time.
-      const target = resolveTarget?.();
-      if (!target) {
-        // No queue/host: needsUpdate alone is enough here, three's own render
-        // loop uploads from tex.mipmaps the next time it draws this texture.
-        applyRestore();
-        return;
-      }
-      // See the module header's "Upload pacing" section: a queued unit at
-      // the cosmetic BACKGROUND tier so a large backlog's re-uploads spread
-      // across frames instead of bursting into whichever one they settle in.
-      // The unit calls host.initTexture ITSELF (matching texture_prep_lane's
-      // pattern) so its synchronous work is the real GL upload, not a bare
-      // flag flip: that is what makes the queue's admission ledger learn the
-      // true cost instead of pricing every restore at roughly 0 ms.
-      return target.queue
-        .run(
-          () => {
-            if (!applyRestore()) return;
-            // A context lost since this unit was admitted (three's initTexture
-            // has no lost-context guard of its own, see the module header):
-            // calling it anyway would still fire onUpdate/releaseAfterUpload
-            // and re-release these freshly transcoded mips to stubs without
-            // ever reaching the GPU. applyRestore already set needsUpdate;
-            // three's own render loop uploads for real once render() resumes
-            // after the context returns, matching the no-target path above.
-            if (target.host.getContext?.()?.isContextLost()) return;
-            target.host.initTexture(tex);
-          },
-          GPU_WORK_PRIORITY.BACKGROUND,
-          'ktx2-restore:upload',
-        )
-        .catch(() => {
-          // The queue refused or was shut down (a renderer rebuild/teardown
-          // raced this restore): apply directly rather than strand the
-          // texture on stubs forever, matching the no-target path above.
+      // application time. The resolver may itself return a promise (the
+      // game entry's coordinator holds its answer pending across a graphics
+      // rebuild's pause window), so it is awaited the same way whether it
+      // settles synchronously or not.
+      const targetAtApply = Promise.resolve().then(() => resolveTarget?.());
+      return targetAtApply.then(
+        (target) => {
+          if (!target) {
+            // No queue/host: needsUpdate alone is enough here, three's own
+            // render loop uploads from tex.mipmaps the next time it draws
+            // this texture.
+            applyRestore();
+            return;
+          }
+          // See the module header's "Upload pacing" section: a queued unit at
+          // the cosmetic BACKGROUND tier so a large backlog's re-uploads
+          // spread across frames instead of bursting into whichever one they
+          // settle in. The unit calls host.initTexture ITSELF (matching
+          // texture_prep_lane's pattern) so its synchronous work is the real
+          // GL upload, not a bare flag flip: that is what makes the queue's
+          // admission ledger learn the true cost instead of pricing every
+          // restore at roughly 0 ms.
+          return target.queue
+            .run(
+              () => {
+                if (!applyRestore()) return;
+                // A context lost since this unit was admitted (three's
+                // initTexture has no lost-context guard of its own, see the
+                // module header): calling it anyway would still fire
+                // onUpdate/releaseAfterUpload and re-release these freshly
+                // transcoded mips to stubs without ever reaching the GPU.
+                // applyRestore already set needsUpdate; three's own render
+                // loop uploads for real once render() resumes after the
+                // context returns, matching the no-target path above.
+                if (target.host.getContext?.()?.isContextLost()) return;
+                target.host.initTexture(tex);
+              },
+              GPU_WORK_PRIORITY.BACKGROUND,
+              'ktx2-restore:upload',
+            )
+            .catch(() => {
+              // The queue refused or was shut down (a renderer rebuild/teardown
+              // raced this restore): apply directly rather than strand the
+              // texture on stubs forever, matching the no-target path above.
+              applyRestore();
+            });
+        },
+        () => {
           applyRestore();
-        });
+        },
+      );
     },
     (err: unknown) => {
       if (entries.get(tex) !== entry) return;
