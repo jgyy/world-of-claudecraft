@@ -9,13 +9,13 @@
     "Old Blood landed-strike bank across Wolf and Bruin with both payoffs",
     "Verdance completed-HoT bank and Overbloom harvest"
   ],
-  "draws": 10635,
-  "drawDigest": "f8153de4",
+  "draws": 10631,
+  "drawDigest": "546b9e4b",
   "frames": [
     {
       "tick": 0,
       "time": 0,
-      "nextId": 997,
+      "nextId": 998,
       "state": "5bc471b0",
       "events": "741638a5",
       "rng": {
@@ -29,9 +29,9 @@
     {
       "tick": 20,
       "time": 1,
-      "nextId": 1001,
-      "state": "d65b8220",
-      "events": "1da6077e",
+      "nextId": 1002,
+      "state": "be268dbd",
+      "events": "3753994e",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -40,9 +40,9 @@
     {
       "tick": 40,
       "time": 2,
-      "nextId": 1001,
-      "state": "598a0e95",
-      "events": "f23ba692",
+      "nextId": 1002,
+      "state": "2f75fc53",
+      "events": "a0431fe1",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -51,8 +51,8 @@
     {
       "tick": 60,
       "time": 3,
-      "nextId": 1001,
-      "state": "85230dcf",
+      "nextId": 1002,
+      "state": "1b666471",
       "events": "741638a5",
       "rng": {
         "draws": 147,
@@ -62,9 +62,9 @@
     {
       "tick": 80,
       "time": 4,
-      "nextId": 1001,
-      "state": "35fc5a50",
-      "events": "ab5293b5",
+      "nextId": 1002,
+      "state": "ec580360",
+      "events": "4d32ab0a",
       "rng": {
         "draws": 331,
         "digest": "2cdd691b"
@@ -73,9 +73,9 @@
     {
       "tick": 100,
       "time": 5,
-      "nextId": 1001,
-      "state": "96a9eddd",
-      "events": "f23ba692",
+      "nextId": 1002,
+      "state": "6ab9cf74",
+      "events": "a0431fe1",
       "rng": {
         "draws": 496,
         "digest": "508edcc0"
@@ -84,9 +84,9 @@
     {
       "tick": 120,
       "time": 6,
-      "nextId": 1001,
-      "state": "2631c974",
-      "events": "1ab6500c",
+      "nextId": 1002,
+      "state": "c87196d0",
+      "events": "af12733b",
       "rng": {
         "draws": 703,
         "digest": "f4132b19"
@@ -95,9 +95,9 @@
     {
       "tick": 140,
       "time": 7,
-      "nextId": 1001,
-      "state": "fe65763f",
-      "events": "f23ba692",
+      "nextId": 1002,
+      "state": "7509bbf6",
+      "events": "a0431fe1",
       "rng": {
         "draws": 930,
         "digest": "c5bf1fe7"
@@ -106,8 +106,8 @@
     {
       "tick": 160,
       "time": 8,
-      "nextId": 1001,
-      "state": "afd7fc89",
+      "nextId": 1002,
+      "state": "180d0954",
       "events": "741638a5",
       "rng": {
         "draws": 1174,
@@ -117,9 +117,9 @@
     {
       "tick": 180,
       "time": 9,
-      "nextId": 1001,
-      "state": "8534c61e",
-      "events": "08847d41",
+      "nextId": 1002,
+      "state": "1fe51038",
+      "events": "539b7b92",
       "rng": {
         "draws": 1464,
         "digest": "cbb74be1"
@@ -128,9 +128,9 @@
     {
       "tick": 200,
       "time": 10,
-      "nextId": 1001,
-      "state": "325734a6",
-      "events": "52e48fab",
+      "nextId": 1002,
+      "state": "a8139804",
+      "events": "7c152c48",
       "rng": {
         "draws": 1717,
         "digest": "65ada805"
@@ -139,9 +139,9 @@
     {
       "tick": 220,
       "time": 11,
-      "nextId": 1001,
-      "state": "b8f96180",
-      "events": "f23ba692",
+      "nextId": 1002,
+      "state": "3e7a36bb",
+      "events": "a0431fe1",
       "rng": {
         "draws": 1862,
         "digest": "84bc2de0"
@@ -150,9 +150,9 @@
     {
       "tick": 240,
       "time": 12,
-      "nextId": 1001,
-      "state": "9280d205",
-      "events": "0a4c8df2",
+      "nextId": 1002,
+      "state": "9c2abfc1",
+      "events": "d21de1f5",
       "rng": {
         "draws": 2012,
         "digest": "3d317628"
@@ -161,9 +161,9 @@
     {
       "tick": 260,
       "time": 13,
-      "nextId": 1001,
-      "state": "c909e042",
-      "events": "f23ba692",
+      "nextId": 1002,
+      "state": "3ee365c3",
+      "events": "a0431fe1",
       "rng": {
         "draws": 2165,
         "digest": "936b3f39"
@@ -172,8 +172,8 @@
     {
       "tick": 280,
       "time": 14,
-      "nextId": 1001,
-      "state": "a222f320",
+      "nextId": 1002,
+      "state": "0e82f1dd",
       "events": "741638a5",
       "rng": {
         "draws": 2318,
@@ -183,9 +183,9 @@
     {
       "tick": 300,
       "time": 15,
-      "nextId": 1001,
-      "state": "480f8cb2",
-      "events": "98d59cf5",
+      "nextId": 1002,
+      "state": "770ff4e0",
+      "events": "d5915e1e",
       "rng": {
         "draws": 2498,
         "digest": "5c9947ae"
@@ -194,9 +194,9 @@
     {
       "tick": 320,
       "time": 16,
-      "nextId": 1001,
-      "state": "b25a5028",
-      "events": "f23ba692",
+      "nextId": 1002,
+      "state": "469062c9",
+      "events": "a0431fe1",
       "rng": {
         "draws": 2712,
         "digest": "52c75808"
@@ -205,9 +205,9 @@
     {
       "tick": 340,
       "time": 17,
-      "nextId": 1001,
-      "state": "71180d64",
-      "events": "ccdbf86d",
+      "nextId": 1002,
+      "state": "c62e51fa",
+      "events": "b8a9964a",
       "rng": {
         "draws": 2919,
         "digest": "4a971de2"
@@ -216,9 +216,9 @@
     {
       "tick": 360,
       "time": 18,
-      "nextId": 1001,
-      "state": "3c67e75a",
-      "events": "ae261fa1",
+      "nextId": 1002,
+      "state": "e66fbce1",
+      "events": "88a4e8da",
       "rng": {
         "draws": 3099,
         "digest": "d225e699"
@@ -227,8 +227,8 @@
     {
       "tick": 375,
       "time": 18.75,
-      "nextId": 1001,
-      "state": "24bf4a48",
+      "nextId": 1002,
+      "state": "5f2342cd",
       "events": "741638a5",
       "rng": {
         "draws": 3250,
@@ -247,7 +247,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
@@ -302,7 +309,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "gnarled_staff"
@@ -333,7 +340,10 @@
             "rows": {},
             "spec": "balance"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         },
         {
           "activeLoadout": -1,
@@ -346,102 +356,14 @@
             null,
             null
           ],
-          "bank": {},
-          "bgRating": 1500,
-          "cls": "druid",
-          "companionUpgrades": {},
-          "counters": {},
-          "craftSkills": {},
-          "deedStats": {
-            "counters": {},
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "baked_bread",
-              "footpad_jerkin",
-              "gnarled_staff",
-              "spring_water"
-            ],
-            "visited": [
-              "poi:eastbrook_vale:eastbrook_docks"
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
             ]
           },
-          "deedsEarned": [
-            [
-              "feat_era_cap",
-              ""
-            ],
-            [
-              "prog_double_digits",
-              ""
-            ],
-            [
-              "prog_finding_your_feet",
-              ""
-            ],
-            [
-              "prog_first_steps",
-              ""
-            ],
-            [
-              "prog_level_cap",
-              ""
-            ],
-            [
-              "prog_specialized",
-              ""
-            ],
-            [
-              "prog_the_long_middle",
-              ""
-            ]
-          ],
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 998,
-          "equipment": {
-            "chest": "footpad_jerkin",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "lifetimeXp": 167200,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "reliquary": {
-            "counts": {},
-            "firstFind": {}
-          },
-          "renown": 65,
-          "talents": {
-            "rows": {},
-            "spec": "feral"
-          },
-          "townFocus": {}
-        },
-        {
-          "activeLoadout": -1,
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
@@ -521,9 +443,117 @@
           "renown": 65,
           "talents": {
             "rows": {},
+            "spec": "feral"
+          },
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
+        },
+        {
+          "activeLoadout": -1,
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "bgRating": 1500,
+          "cls": "druid",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "deedStats": {
+            "counters": {},
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "baked_bread",
+              "footpad_jerkin",
+              "gnarled_staff",
+              "spring_water"
+            ],
+            "visited": [
+              "poi:eastbrook_vale:eastbrook_docks"
+            ]
+          },
+          "deedsEarned": [
+            [
+              "feat_era_cap",
+              ""
+            ],
+            [
+              "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_finding_your_feet",
+              ""
+            ],
+            [
+              "prog_first_steps",
+              ""
+            ],
+            [
+              "prog_level_cap",
+              ""
+            ],
+            [
+              "prog_specialized",
+              ""
+            ],
+            [
+              "prog_the_long_middle",
+              ""
+            ]
+          ],
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 1000,
+          "equipment": {
+            "chest": "footpad_jerkin",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "lifetimeXp": 167200,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "reliquary": {
+            "counts": {},
+            "firstFind": {}
+          },
+          "renown": 65,
+          "talents": {
+            "rows": {},
             "spec": "restoration"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -538,7 +568,7 @@
               "name": "Moonwing Form",
               "remaining": 3581.25,
               "school": "arcane",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 3600,
@@ -547,7 +577,7 @@
               "name": "Moontide",
               "remaining": 3600,
               "school": "nature",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -560,8 +590,9 @@
           "fallStartY": -2,
           "fiveSecondRule": 1,
           "gcdRemaining": 0.363636,
+          "healPower": 31,
           "hp": 662,
-          "id": 997,
+          "id": 998,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -595,7 +626,7 @@
             "sta": 55,
             "str": 34
           },
-          "targetId": 1000,
+          "targetId": 1001,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -614,8 +645,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 117.75,
+          "healPower": 29,
           "hp": 802,
-          "id": 998,
+          "id": 999,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -665,8 +697,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 117.75,
+          "healPower": 31,
           "hp": 662,
-          "id": 999,
+          "id": 1000,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -715,7 +748,7 @@
               "name": "Sunwake",
               "remaining": 8.1,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "tickInterval": 3,
               "tickTimer": 2.1,
               "value": 18
@@ -731,7 +764,7 @@
           "fiveSecondRule": 99,
           "hostile": true,
           "hp": 999002,
-          "id": 1000,
+          "id": 1001,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {
@@ -757,11 +790,11 @@
             "z": -55
           },
           "stats": {},
-          "tappedById": 997,
+          "tappedById": 998,
           "templateId": "training_dummy",
           "threat": [
             [
-              997,
+              998,
               998
             ]
           ],
@@ -774,9 +807,9 @@
     {
       "tick": 380,
       "time": 19,
-      "nextId": 1001,
-      "state": "378f909a",
-      "events": "e9681ffc",
+      "nextId": 1002,
+      "state": "2a38a5b7",
+      "events": "7bab734c",
       "rng": {
         "draws": 3310,
         "digest": "b623536a"
@@ -785,8 +818,8 @@
     {
       "tick": 400,
       "time": 20,
-      "nextId": 1001,
-      "state": "65aca3f0",
+      "nextId": 1002,
+      "state": "ac444891",
       "events": "741638a5",
       "rng": {
         "draws": 3486,
@@ -796,9 +829,9 @@
     {
       "tick": 420,
       "time": 21,
-      "nextId": 1001,
-      "state": "ec3d099e",
-      "events": "71b17585",
+      "nextId": 1002,
+      "state": "9e74d643",
+      "events": "d60f9aa9",
       "rng": {
         "draws": 3644,
         "digest": "99c1d580"
@@ -807,8 +840,8 @@
     {
       "tick": 440,
       "time": 22,
-      "nextId": 1001,
-      "state": "f6b4b7f0",
+      "nextId": 1002,
+      "state": "e0150343",
       "events": "741638a5",
       "rng": {
         "draws": 3823,
@@ -818,9 +851,9 @@
     {
       "tick": 460,
       "time": 23,
-      "nextId": 1001,
-      "state": "3746e2ba",
-      "events": "f5c05a78",
+      "nextId": 1002,
+      "state": "825ca4e7",
+      "events": "085de639",
       "rng": {
         "draws": 3962,
         "digest": "ae150b7f"
@@ -829,9 +862,9 @@
     {
       "tick": 480,
       "time": 24,
-      "nextId": 1001,
-      "state": "2d3b6db6",
-      "events": "788d80a1",
+      "nextId": 1002,
+      "state": "de623081",
+      "events": "e31c7f29",
       "rng": {
         "draws": 4143,
         "digest": "3f8d200c"
@@ -840,9 +873,9 @@
     {
       "tick": 500,
       "time": 25,
-      "nextId": 1001,
-      "state": "4fc372da",
-      "events": "a6ced2e9",
+      "nextId": 1002,
+      "state": "cca79317",
+      "events": "02458e84",
       "rng": {
         "draws": 4320,
         "digest": "d447fd6d"
@@ -851,9 +884,9 @@
     {
       "tick": 520,
       "time": 26,
-      "nextId": 1001,
-      "state": "92f82a34",
-      "events": "bade195f",
+      "nextId": 1002,
+      "state": "7a9865d7",
+      "events": "93b1efea",
       "rng": {
         "draws": 4483,
         "digest": "87b2fb52"
@@ -862,9 +895,9 @@
     {
       "tick": 540,
       "time": 27,
-      "nextId": 1001,
-      "state": "50b7b2ed",
-      "events": "e4f558a7",
+      "nextId": 1002,
+      "state": "75988af7",
+      "events": "b7e3e0d0",
       "rng": {
         "draws": 4652,
         "digest": "e26debf0"
@@ -873,9 +906,9 @@
     {
       "tick": 560,
       "time": 28,
-      "nextId": 1001,
-      "state": "9900c189",
-      "events": "17ca6809",
+      "nextId": 1002,
+      "state": "59223963",
+      "events": "1546a038",
       "rng": {
         "draws": 4852,
         "digest": "e8ab8513"
@@ -884,8 +917,8 @@
     {
       "tick": 580,
       "time": 29,
-      "nextId": 1001,
-      "state": "555212d9",
+      "nextId": 1002,
+      "state": "8e82464f",
       "events": "741638a5",
       "rng": {
         "draws": 5031,
@@ -895,9 +928,9 @@
     {
       "tick": 600,
       "time": 30,
-      "nextId": 1001,
-      "state": "32b6a31e",
-      "events": "07ebdb5d",
+      "nextId": 1002,
+      "state": "ee6dea00",
+      "events": "ccd5750c",
       "rng": {
         "draws": 5211,
         "digest": "bc59e696"
@@ -906,8 +939,8 @@
     {
       "tick": 620,
       "time": 31,
-      "nextId": 1001,
-      "state": "b51280ae",
+      "nextId": 1002,
+      "state": "3a8b18b6",
       "events": "741638a5",
       "rng": {
         "draws": 5369,
@@ -917,9 +950,9 @@
     {
       "tick": 640,
       "time": 32,
-      "nextId": 1001,
-      "state": "ec52d33a",
-      "events": "3e0e8ef2",
+      "nextId": 1002,
+      "state": "d10face4",
+      "events": "e78b9c73",
       "rng": {
         "draws": 5539,
         "digest": "ffb4f255"
@@ -928,9 +961,9 @@
     {
       "tick": 660,
       "time": 33,
-      "nextId": 1001,
-      "state": "781c9af8",
-      "events": "cff1fecc",
+      "nextId": 1002,
+      "state": "2ffe6d6a",
+      "events": "ab03357a",
       "rng": {
         "draws": 5720,
         "digest": "53f71281"
@@ -939,8 +972,8 @@
     {
       "tick": 680,
       "time": 34,
-      "nextId": 1001,
-      "state": "5cff1128",
+      "nextId": 1002,
+      "state": "28820e1e",
       "events": "741638a5",
       "rng": {
         "draws": 5891,
@@ -950,9 +983,9 @@
     {
       "tick": 700,
       "time": 35,
-      "nextId": 1001,
-      "state": "2191bcfe",
-      "events": "1c3475c5",
+      "nextId": 1002,
+      "state": "7b9a0f9c",
+      "events": "e2745498",
       "rng": {
         "draws": 6078,
         "digest": "5c9231cc"
@@ -961,8 +994,8 @@
     {
       "tick": 720,
       "time": 36,
-      "nextId": 1001,
-      "state": "0545a2f6",
+      "nextId": 1002,
+      "state": "439c9aa0",
       "events": "741638a5",
       "rng": {
         "draws": 6227,
@@ -972,9 +1005,9 @@
     {
       "tick": 740,
       "time": 37,
-      "nextId": 1001,
-      "state": "dbcf6de4",
-      "events": "956a4a8d",
+      "nextId": 1002,
+      "state": "46e772a0",
+      "events": "8588b41c",
       "rng": {
         "draws": 6415,
         "digest": "bc681b4e"
@@ -983,8 +1016,8 @@
     {
       "tick": 760,
       "time": 38,
-      "nextId": 1001,
-      "state": "ecd446a5",
+      "nextId": 1002,
+      "state": "a583473f",
       "events": "741638a5",
       "rng": {
         "draws": 6593,
@@ -994,9 +1027,9 @@
     {
       "tick": 780,
       "time": 39,
-      "nextId": 1001,
-      "state": "0f191c0f",
-      "events": "174c0d04",
+      "nextId": 1002,
+      "state": "3b30418d",
+      "events": "96c0b8b9",
       "rng": {
         "draws": 6761,
         "digest": "17f6aef6"
@@ -1005,8 +1038,8 @@
     {
       "tick": 800,
       "time": 40,
-      "nextId": 1001,
-      "state": "0d4a8424",
+      "nextId": 1002,
+      "state": "050f22dc",
       "events": "741638a5",
       "rng": {
         "draws": 6963,
@@ -1016,9 +1049,9 @@
     {
       "tick": 820,
       "time": 41,
-      "nextId": 1001,
-      "state": "f4ff13d6",
-      "events": "bade195f",
+      "nextId": 1002,
+      "state": "4fbb257c",
+      "events": "93b1efea",
       "rng": {
         "draws": 7129,
         "digest": "4e7199b1"
@@ -1027,9 +1060,9 @@
     {
       "tick": 840,
       "time": 42,
-      "nextId": 1001,
-      "state": "43a8dfa7",
-      "events": "17ca6809",
+      "nextId": 1002,
+      "state": "2eaee439",
+      "events": "1546a038",
       "rng": {
         "draws": 7308,
         "digest": "61d85084"
@@ -1038,8 +1071,8 @@
     {
       "tick": 860,
       "time": 43,
-      "nextId": 1001,
-      "state": "ba85c9f9",
+      "nextId": 1002,
+      "state": "409d11a7",
       "events": "741638a5",
       "rng": {
         "draws": 7475,
@@ -1049,9 +1082,9 @@
     {
       "tick": 880,
       "time": 44,
-      "nextId": 1001,
-      "state": "d12b8df9",
-      "events": "07ebdb5d",
+      "nextId": 1002,
+      "state": "163588cd",
+      "events": "ccd5750c",
       "rng": {
         "draws": 7669,
         "digest": "572514d5"
@@ -1060,8 +1093,8 @@
     {
       "tick": 900,
       "time": 45,
-      "nextId": 1001,
-      "state": "4fa4ffd7",
+      "nextId": 1002,
+      "state": "c62ad701",
       "events": "741638a5",
       "rng": {
         "draws": 7846,
@@ -1071,9 +1104,9 @@
     {
       "tick": 920,
       "time": 46,
-      "nextId": 1001,
-      "state": "9636f8f2",
-      "events": "4bfae3a8",
+      "nextId": 1002,
+      "state": "d7e498e0",
+      "events": "4aaae6c9",
       "rng": {
         "draws": 8037,
         "digest": "384dea8a"
@@ -1082,8 +1115,8 @@
     {
       "tick": 940,
       "time": 47,
-      "nextId": 1001,
-      "state": "16d4c0d0",
+      "nextId": 1002,
+      "state": "35677fc8",
       "events": "741638a5",
       "rng": {
         "draws": 8197,
@@ -1093,9 +1126,9 @@
     {
       "tick": 960,
       "time": 48,
-      "nextId": 1001,
-      "state": "4dc447b2",
-      "events": "17ca6809",
+      "nextId": 1002,
+      "state": "566969a4",
+      "events": "1546a038",
       "rng": {
         "draws": 8340,
         "digest": "fee9a6ab"
@@ -1104,9 +1137,9 @@
     {
       "tick": 980,
       "time": 49,
-      "nextId": 1001,
-      "state": "30292908",
-      "events": "c9510b17",
+      "nextId": 1002,
+      "state": "482eb4e8",
+      "events": "c31e0fcc",
       "rng": {
         "draws": 8506,
         "digest": "cca1ae11"
@@ -1115,8 +1148,8 @@
     {
       "tick": 1000,
       "time": 50,
-      "nextId": 1001,
-      "state": "307fdfb2",
+      "nextId": 1002,
+      "state": "0f9d8976",
       "events": "741638a5",
       "rng": {
         "draws": 8694,
@@ -1126,12 +1159,12 @@
     {
       "tick": 1015,
       "time": 50.75,
-      "nextId": 1001,
-      "state": "517881e8",
-      "events": "d1a52012",
+      "nextId": 1002,
+      "state": "c68c551f",
+      "events": "db928672",
       "rng": {
-        "draws": 8824,
-        "digest": "db6efc89"
+        "draws": 8825,
+        "digest": "46e51d21"
       },
       "label": "wildfang-spend",
       "players": [
@@ -1146,7 +1179,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
@@ -1157,109 +1197,6 @@
           "deedStats": {
             "counters": {
               "dummyDamage": 1052
-            },
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "baked_bread",
-              "footpad_jerkin",
-              "gnarled_staff",
-              "spring_water"
-            ],
-            "visited": [
-              "poi:eastbrook_vale:eastbrook_docks"
-            ]
-          },
-          "deedsEarned": [
-            [
-              "chr_peaks_sparring",
-              ""
-            ],
-            [
-              "feat_era_cap",
-              ""
-            ],
-            [
-              "prog_double_digits",
-              ""
-            ],
-            [
-              "prog_finding_your_feet",
-              ""
-            ],
-            [
-              "prog_first_steps",
-              ""
-            ],
-            [
-              "prog_level_cap",
-              ""
-            ],
-            [
-              "prog_specialized",
-              ""
-            ],
-            [
-              "prog_the_long_middle",
-              ""
-            ]
-          ],
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 997,
-          "equipment": {
-            "chest": "footpad_jerkin",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "lifetimeXp": 167200,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "reliquary": {
-            "counts": {},
-            "firstFind": {}
-          },
-          "renown": 70,
-          "talents": {
-            "rows": {},
-            "spec": "balance"
-          },
-          "townFocus": {}
-        },
-        {
-          "activeLoadout": -1,
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "bgRating": 1500,
-          "cls": "druid",
-          "companionUpgrades": {},
-          "counters": {
-            "damageDealt": 2564
-          },
-          "craftSkills": {},
-          "deedStats": {
-            "counters": {
-              "dummyDamage": 2564
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1337,9 +1274,12 @@
           "renown": 70,
           "talents": {
             "rows": {},
-            "spec": "feral"
+            "spec": "balance"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         },
         {
           "activeLoadout": -1,
@@ -1352,14 +1292,25 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
-          "counters": {},
+          "counters": {
+            "damageDealt": 2572
+          },
           "craftSkills": {},
           "deedStats": {
-            "counters": {},
+            "counters": {
+              "dummyDamage": 2572
+            },
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
@@ -1372,6 +1323,10 @@
             ]
           },
           "deedsEarned": [
+            [
+              "chr_peaks_sparring",
+              ""
+            ],
             [
               "feat_era_cap",
               ""
@@ -1429,12 +1384,120 @@
             "counts": {},
             "firstFind": {}
           },
+          "renown": 70,
+          "talents": {
+            "rows": {},
+            "spec": "feral"
+          },
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
+        },
+        {
+          "activeLoadout": -1,
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "bgRating": 1500,
+          "cls": "druid",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "deedStats": {
+            "counters": {},
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "baked_bread",
+              "footpad_jerkin",
+              "gnarled_staff",
+              "spring_water"
+            ],
+            "visited": [
+              "poi:eastbrook_vale:eastbrook_docks"
+            ]
+          },
+          "deedsEarned": [
+            [
+              "feat_era_cap",
+              ""
+            ],
+            [
+              "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_finding_your_feet",
+              ""
+            ],
+            [
+              "prog_first_steps",
+              ""
+            ],
+            [
+              "prog_level_cap",
+              ""
+            ],
+            [
+              "prog_specialized",
+              ""
+            ],
+            [
+              "prog_the_long_middle",
+              ""
+            ]
+          ],
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 1000,
+          "equipment": {
+            "chest": "footpad_jerkin",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "lifetimeXp": 167200,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "reliquary": {
+            "counts": {},
+            "firstFind": {}
+          },
           "renown": 65,
           "talents": {
             "rows": {},
             "spec": "restoration"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -1449,7 +1512,7 @@
               "name": "Moonwing Form",
               "remaining": 3549.25,
               "school": "arcane",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 3600,
@@ -1458,7 +1521,7 @@
               "name": "Moontide",
               "remaining": 3600,
               "school": "nature",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -1470,8 +1533,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 33,
+          "healPower": 31,
           "hp": 662,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -1504,7 +1568,7 @@
             "sta": 55,
             "str": 34
           },
-          "targetId": 1000,
+          "targetId": 1001,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -1523,7 +1587,7 @@
               "name": "Bruin Form",
               "remaining": 3598,
               "school": "physical",
-              "sourceId": 998,
+              "sourceId": 999,
               "value": 0.65
             }
           ],
@@ -1537,8 +1601,9 @@
           "fallStartY": -2,
           "fiveSecondRule": 32,
           "gcdRemaining": 1.25,
+          "healPower": 29,
           "hp": 782,
-          "id": 998,
+          "id": 999,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -1572,7 +1637,7 @@
             "sta": 69,
             "str": 34
           },
-          "targetId": 1000,
+          "targetId": 1001,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -1591,8 +1656,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 149.75,
+          "healPower": 31,
           "hp": 662,
-          "id": 999,
+          "id": 1000,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -1642,8 +1708,8 @@
           "fallStartY": -2,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 996384,
-          "id": 1000,
+          "hp": 996376,
+          "id": 1001,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {
@@ -1669,16 +1735,16 @@
             "z": -55
           },
           "stats": {},
-          "tappedById": 997,
+          "tappedById": 998,
           "templateId": "training_dummy",
           "threat": [
             [
-              997,
+              998,
               1052
             ],
             [
-              998,
-              3673.1475
+              999,
+              3707.4675
             ]
           ],
           "weapon": {
@@ -1690,31 +1756,31 @@
     {
       "tick": 1020,
       "time": 51,
-      "nextId": 1001,
-      "state": "e6c9d5a0",
-      "events": "50e498ec",
+      "nextId": 1002,
+      "state": "52858d75",
+      "events": "662f1408",
       "rng": {
-        "draws": 8874,
-        "digest": "20611974"
+        "draws": 8876,
+        "digest": "6ccfe83a"
       }
     },
     {
       "tick": 1040,
       "time": 52,
-      "nextId": 1001,
-      "state": "4ef4c58f",
+      "nextId": 1002,
+      "state": "8992c314",
       "events": "741638a5",
       "rng": {
-        "draws": 9050,
-        "digest": "889513c6"
+        "draws": 9047,
+        "digest": "724229bb"
       }
     },
     {
       "tick": 1060,
       "time": 53,
-      "nextId": 1001,
-      "state": "7173f0e1",
-      "events": "cb4f35a4",
+      "nextId": 1002,
+      "state": "52cbe78e",
+      "events": "79e5e67a",
       "rng": {
         "draws": 9233,
         "digest": "dcb86793"
@@ -1723,100 +1789,100 @@
     {
       "tick": 1080,
       "time": 54,
-      "nextId": 1001,
-      "state": "e9c1f345",
-      "events": "1f148f2e",
+      "nextId": 1002,
+      "state": "0dec7246",
+      "events": "a60c797c",
       "rng": {
-        "draws": 9385,
-        "digest": "cf942b36"
+        "draws": 9390,
+        "digest": "dd4a2d5b"
       }
     },
     {
       "tick": 1100,
       "time": 55,
-      "nextId": 1001,
-      "state": "4f01e977",
-      "events": "16c00167",
+      "nextId": 1002,
+      "state": "c8c7ae88",
+      "events": "112c4dfd",
       "rng": {
-        "draws": 9541,
-        "digest": "4efbebb5"
+        "draws": 9544,
+        "digest": "3686f3c4"
       }
     },
     {
       "tick": 1120,
       "time": 56,
-      "nextId": 1001,
-      "state": "bda49954",
-      "events": "5bc2e031",
+      "nextId": 1002,
+      "state": "86122ba0",
+      "events": "f5293d72",
       "rng": {
-        "draws": 9710,
-        "digest": "22229265"
+        "draws": 9706,
+        "digest": "33ef5ea4"
       }
     },
     {
       "tick": 1140,
       "time": 57,
-      "nextId": 1001,
-      "state": "7928ce31",
-      "events": "df34946b",
+      "nextId": 1002,
+      "state": "22d4ba56",
+      "events": "54c69ccd",
       "rng": {
-        "draws": 9895,
-        "digest": "f046712b"
+        "draws": 9885,
+        "digest": "71dc3438"
       }
     },
     {
       "tick": 1160,
       "time": 58,
-      "nextId": 1001,
-      "state": "94d3806c",
-      "events": "3d8299b7",
+      "nextId": 1002,
+      "state": "fdc4fbca",
+      "events": "e308f370",
       "rng": {
-        "draws": 10087,
-        "digest": "b7002d69"
+        "draws": 10071,
+        "digest": "22f3c51d"
       }
     },
     {
       "tick": 1180,
       "time": 59,
-      "nextId": 1001,
-      "state": "c6e061af",
-      "events": "e009c712",
+      "nextId": 1002,
+      "state": "05a7dc1f",
+      "events": "6f2cf4c2",
       "rng": {
-        "draws": 10251,
-        "digest": "edd1f189"
+        "draws": 10250,
+        "digest": "d57e7bbc"
       }
     },
     {
       "tick": 1200,
       "time": 60,
-      "nextId": 1001,
-      "state": "8a825646",
-      "events": "31fe1643",
+      "nextId": 1002,
+      "state": "81b91fdd",
+      "events": "b5ac257a",
       "rng": {
-        "draws": 10421,
-        "digest": "b712fd8d"
+        "draws": 10406,
+        "digest": "362ee4ac"
       }
     },
     {
       "tick": 1220,
       "time": 61,
-      "nextId": 1001,
-      "state": "76bdc9b2",
-      "events": "1fbea9a4",
+      "nextId": 1002,
+      "state": "badba2aa",
+      "events": "a41a99a7",
       "rng": {
-        "draws": 10601,
-        "digest": "f7ee4164"
+        "draws": 10591,
+        "digest": "61c54b5c"
       }
     },
     {
       "tick": 1225,
       "time": 61.25,
-      "nextId": 1001,
-      "state": "f0aef025",
-      "events": "73d7612d",
+      "nextId": 1002,
+      "state": "743bb6dc",
+      "events": "dc127026",
       "rng": {
-        "draws": 10635,
-        "digest": "f8153de4"
+        "draws": 10631,
+        "digest": "546b9e4b"
       },
       "label": "groveheart-harvest",
       "players": [
@@ -1831,7 +1897,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
@@ -1842,109 +1915,6 @@
           "deedStats": {
             "counters": {
               "dummyDamage": 1052
-            },
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "baked_bread",
-              "footpad_jerkin",
-              "gnarled_staff",
-              "spring_water"
-            ],
-            "visited": [
-              "poi:eastbrook_vale:eastbrook_docks"
-            ]
-          },
-          "deedsEarned": [
-            [
-              "chr_peaks_sparring",
-              ""
-            ],
-            [
-              "feat_era_cap",
-              ""
-            ],
-            [
-              "prog_double_digits",
-              ""
-            ],
-            [
-              "prog_finding_your_feet",
-              ""
-            ],
-            [
-              "prog_first_steps",
-              ""
-            ],
-            [
-              "prog_level_cap",
-              ""
-            ],
-            [
-              "prog_specialized",
-              ""
-            ],
-            [
-              "prog_the_long_middle",
-              ""
-            ]
-          ],
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 997,
-          "equipment": {
-            "chest": "footpad_jerkin",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "lifetimeXp": 167200,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "reliquary": {
-            "counts": {},
-            "firstFind": {}
-          },
-          "renown": 70,
-          "talents": {
-            "rows": {},
-            "spec": "balance"
-          },
-          "townFocus": {}
-        },
-        {
-          "activeLoadout": -1,
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "bgRating": 1500,
-          "cls": "druid",
-          "companionUpgrades": {},
-          "counters": {
-            "damageDealt": 2564
-          },
-          "craftSkills": {},
-          "deedStats": {
-            "counters": {
-              "dummyDamage": 2564
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2022,9 +1992,12 @@
           "renown": 70,
           "talents": {
             "rows": {},
-            "spec": "feral"
+            "spec": "balance"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         },
         {
           "activeLoadout": -1,
@@ -2037,14 +2010,25 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
-          "counters": {},
+          "counters": {
+            "damageDealt": 2572
+          },
           "craftSkills": {},
           "deedStats": {
-            "counters": {},
+            "counters": {
+              "dummyDamage": 2572
+            },
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
@@ -2057,6 +2041,10 @@
             ]
           },
           "deedsEarned": [
+            [
+              "chr_peaks_sparring",
+              ""
+            ],
             [
               "feat_era_cap",
               ""
@@ -2114,12 +2102,120 @@
             "counts": {},
             "firstFind": {}
           },
+          "renown": 70,
+          "talents": {
+            "rows": {},
+            "spec": "feral"
+          },
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
+        },
+        {
+          "activeLoadout": -1,
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "bgRating": 1500,
+          "cls": "druid",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "deedStats": {
+            "counters": {},
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "baked_bread",
+              "footpad_jerkin",
+              "gnarled_staff",
+              "spring_water"
+            ],
+            "visited": [
+              "poi:eastbrook_vale:eastbrook_docks"
+            ]
+          },
+          "deedsEarned": [
+            [
+              "feat_era_cap",
+              ""
+            ],
+            [
+              "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_finding_your_feet",
+              ""
+            ],
+            [
+              "prog_first_steps",
+              ""
+            ],
+            [
+              "prog_level_cap",
+              ""
+            ],
+            [
+              "prog_specialized",
+              ""
+            ],
+            [
+              "prog_the_long_middle",
+              ""
+            ]
+          ],
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 1000,
+          "equipment": {
+            "chest": "footpad_jerkin",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "lifetimeXp": 167200,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "reliquary": {
+            "counts": {},
+            "firstFind": {}
+          },
           "renown": 65,
           "talents": {
             "rows": {},
             "spec": "restoration"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -2134,7 +2230,7 @@
               "name": "Moonwing Form",
               "remaining": 3538.75,
               "school": "arcane",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 3600,
@@ -2143,7 +2239,7 @@
               "name": "Moontide",
               "remaining": 3600,
               "school": "nature",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -2155,8 +2251,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 43.5,
+          "healPower": 31,
           "hp": 662,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -2189,7 +2286,7 @@
             "sta": 55,
             "str": 34
           },
-          "targetId": 1000,
+          "targetId": 1001,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -2208,7 +2305,7 @@
               "name": "Bruin Form",
               "remaining": 3587.5,
               "school": "physical",
-              "sourceId": 998,
+              "sourceId": 999,
               "value": 0.65
             }
           ],
@@ -2221,8 +2318,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 42.5,
+          "healPower": 29,
           "hp": 751,
-          "id": 998,
+          "id": 999,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -2255,7 +2353,7 @@
             "sta": 69,
             "str": 34
           },
-          "targetId": 1000,
+          "targetId": 1001,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -2274,7 +2372,7 @@
               "name": "Wildbloom",
               "remaining": 11.75,
               "school": "nature",
-              "sourceId": 999,
+              "sourceId": 1000,
               "tickInterval": 3,
               "tickTimer": 2.75,
               "value": 81
@@ -2296,8 +2394,9 @@
           "fallStartY": -2,
           "fiveSecondRule": 0.25,
           "gcdRemaining": 1.25,
+          "healPower": 31,
           "hp": 662,
-          "id": 999,
+          "id": 1000,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -2329,7 +2428,7 @@
             "sta": 55,
             "str": 34
           },
-          "targetId": 999,
+          "targetId": 1000,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -2349,7 +2448,7 @@
           "fiveSecondRule": 99,
           "hostile": true,
           "hp": 1000000,
-          "id": 1000,
+          "id": 1001,
           "kind": "mob",
           "leashAnchor": {
             "x": -94,
@@ -2374,7 +2473,7 @@
             "z": -55
           },
           "stats": {},
-          "tappedById": 997,
+          "tappedById": 998,
           "templateId": "training_dummy",
           "weapon": {
             "speed": 2
@@ -2385,12 +2484,12 @@
     {
       "tick": 1225,
       "time": 61.25,
-      "nextId": 1001,
-      "state": "f0aef025",
+      "nextId": 1002,
+      "state": "743bb6dc",
       "events": "741638a5",
       "rng": {
-        "draws": 10635,
-        "digest": "f8153de4"
+        "draws": 10631,
+        "digest": "546b9e4b"
       },
       "label": "final",
       "players": [
@@ -2405,7 +2504,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
@@ -2416,109 +2522,6 @@
           "deedStats": {
             "counters": {
               "dummyDamage": 1052
-            },
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "baked_bread",
-              "footpad_jerkin",
-              "gnarled_staff",
-              "spring_water"
-            ],
-            "visited": [
-              "poi:eastbrook_vale:eastbrook_docks"
-            ]
-          },
-          "deedsEarned": [
-            [
-              "chr_peaks_sparring",
-              ""
-            ],
-            [
-              "feat_era_cap",
-              ""
-            ],
-            [
-              "prog_double_digits",
-              ""
-            ],
-            [
-              "prog_finding_your_feet",
-              ""
-            ],
-            [
-              "prog_first_steps",
-              ""
-            ],
-            [
-              "prog_level_cap",
-              ""
-            ],
-            [
-              "prog_specialized",
-              ""
-            ],
-            [
-              "prog_the_long_middle",
-              ""
-            ]
-          ],
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 997,
-          "equipment": {
-            "chest": "footpad_jerkin",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "lifetimeXp": 167200,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "reliquary": {
-            "counts": {},
-            "firstFind": {}
-          },
-          "renown": 70,
-          "talents": {
-            "rows": {},
-            "spec": "balance"
-          },
-          "townFocus": {}
-        },
-        {
-          "activeLoadout": -1,
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "bgRating": 1500,
-          "cls": "druid",
-          "companionUpgrades": {},
-          "counters": {
-            "damageDealt": 2564
-          },
-          "craftSkills": {},
-          "deedStats": {
-            "counters": {
-              "dummyDamage": 2564
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2596,9 +2599,12 @@
           "renown": 70,
           "talents": {
             "rows": {},
-            "spec": "feral"
+            "spec": "balance"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         },
         {
           "activeLoadout": -1,
@@ -2611,14 +2617,25 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "druid",
           "companionUpgrades": {},
-          "counters": {},
+          "counters": {
+            "damageDealt": 2572
+          },
           "craftSkills": {},
           "deedStats": {
-            "counters": {},
+            "counters": {
+              "dummyDamage": 2572
+            },
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
@@ -2631,6 +2648,10 @@
             ]
           },
           "deedsEarned": [
+            [
+              "chr_peaks_sparring",
+              ""
+            ],
             [
               "feat_era_cap",
               ""
@@ -2688,12 +2709,120 @@
             "counts": {},
             "firstFind": {}
           },
+          "renown": 70,
+          "talents": {
+            "rows": {},
+            "spec": "feral"
+          },
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
+        },
+        {
+          "activeLoadout": -1,
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
+          "bgRating": 1500,
+          "cls": "druid",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "deedStats": {
+            "counters": {},
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "baked_bread",
+              "footpad_jerkin",
+              "gnarled_staff",
+              "spring_water"
+            ],
+            "visited": [
+              "poi:eastbrook_vale:eastbrook_docks"
+            ]
+          },
+          "deedsEarned": [
+            [
+              "feat_era_cap",
+              ""
+            ],
+            [
+              "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_finding_your_feet",
+              ""
+            ],
+            [
+              "prog_first_steps",
+              ""
+            ],
+            [
+              "prog_level_cap",
+              ""
+            ],
+            [
+              "prog_specialized",
+              ""
+            ],
+            [
+              "prog_the_long_middle",
+              ""
+            ]
+          ],
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 1000,
+          "equipment": {
+            "chest": "footpad_jerkin",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "lifetimeXp": 167200,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "reliquary": {
+            "counts": {},
+            "firstFind": {}
+          },
           "renown": 65,
           "talents": {
             "rows": {},
             "spec": "restoration"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -2708,7 +2837,7 @@
               "name": "Moonwing Form",
               "remaining": 3538.75,
               "school": "arcane",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 3600,
@@ -2717,7 +2846,7 @@
               "name": "Moontide",
               "remaining": 3600,
               "school": "nature",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -2729,8 +2858,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 43.5,
+          "healPower": 31,
           "hp": 662,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -2763,7 +2893,7 @@
             "sta": 55,
             "str": 34
           },
-          "targetId": 1000,
+          "targetId": 1001,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -2782,7 +2912,7 @@
               "name": "Bruin Form",
               "remaining": 3587.5,
               "school": "physical",
-              "sourceId": 998,
+              "sourceId": 999,
               "value": 0.65
             }
           ],
@@ -2795,8 +2925,9 @@
           "dodgeChance": 0.067,
           "fallStartY": -2,
           "fiveSecondRule": 42.5,
+          "healPower": 29,
           "hp": 751,
-          "id": 998,
+          "id": 999,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -2829,7 +2960,7 @@
             "sta": 69,
             "str": 34
           },
-          "targetId": 1000,
+          "targetId": 1001,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -2848,7 +2979,7 @@
               "name": "Wildbloom",
               "remaining": 11.75,
               "school": "nature",
-              "sourceId": 999,
+              "sourceId": 1000,
               "tickInterval": 3,
               "tickTimer": 2.75,
               "value": 81
@@ -2870,8 +3001,9 @@
           "fallStartY": -2,
           "fiveSecondRule": 0.25,
           "gcdRemaining": 1.25,
+          "healPower": 31,
           "hp": 662,
-          "id": 999,
+          "id": 1000,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
@@ -2903,7 +3035,7 @@
             "sta": 55,
             "str": 34
           },
-          "targetId": 999,
+          "targetId": 1000,
           "templateId": "druid",
           "weapon": {
             "max": 6,
@@ -2923,7 +3055,7 @@
           "fiveSecondRule": 99,
           "hostile": true,
           "hp": 1000000,
-          "id": 1000,
+          "id": 1001,
           "kind": "mob",
           "leashAnchor": {
             "x": -94,
@@ -2948,7 +3080,7 @@
             "z": -55
           },
           "stats": {},
-          "tappedById": 997,
+          "tappedById": 998,
           "templateId": "training_dummy",
           "weapon": {
             "speed": 2

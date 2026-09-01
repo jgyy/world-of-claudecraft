@@ -20,7 +20,7 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 997,
+      "nextId": 998,
       "state": "5bc471b0",
       "events": "741638a5",
       "rng": {
@@ -34,8 +34,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "8db054c8",
+      "nextId": 999,
+      "state": "0e3478f5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -54,7 +54,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -73,7 +80,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -98,7 +105,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -113,7 +123,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -126,8 +136,9 @@
           "dodgeChance": 0.06,
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 100,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -171,9 +182,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "ece3465d",
-      "events": "5f89933f",
+      "nextId": 999,
+      "state": "15c060f8",
+      "events": "95927429",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -191,7 +202,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -212,7 +230,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -245,7 +263,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -260,7 +281,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -273,8 +294,9 @@
           "dodgeChance": 0.06,
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 100,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -318,9 +340,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "caf58095",
-      "events": "2e4a7787",
+      "nextId": 999,
+      "state": "ef5412c2",
+      "events": "b2b642a5",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -338,7 +360,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -361,7 +390,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "helmet": "cryptbone_helm",
@@ -406,7 +435,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -421,7 +453,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -434,8 +466,9 @@
           "dodgeChance": 0.06,
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 130,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -479,9 +512,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "c5d87ef0",
-      "events": "20062b4c",
+      "nextId": 999,
+      "state": "a760cc59",
+      "events": "3bed5181",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -499,7 +532,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -522,7 +562,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "helmet": "roadwardens_helm",
@@ -567,7 +607,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -582,7 +625,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -595,8 +638,9 @@
           "dodgeChance": 0.06,
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 120,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -640,9 +684,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "3e7dc924",
-      "events": "548d9ec5",
+      "nextId": 999,
+      "state": "be272c95",
+      "events": "b8569d6c",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -660,7 +704,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -683,7 +734,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -731,7 +782,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -746,7 +800,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -759,8 +813,9 @@
           "dodgeChance": 0.06,
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 100,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -804,9 +859,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "47c65f66",
-      "events": "b20dbed7",
+      "nextId": 999,
+      "state": "0aae07bd",
+      "events": "47b456bf",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -824,7 +879,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -847,7 +909,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -895,7 +957,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -910,7 +975,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -935,8 +1000,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 100,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -981,9 +1047,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "641af64b",
-      "events": "ca5a5724",
+      "nextId": 999,
+      "state": "1fcfdefa",
+      "events": "c6cc92f6",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1001,7 +1067,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -1024,7 +1097,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -1068,7 +1141,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -1083,7 +1159,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             }
           ],
           "autoFaceLocked": true,
@@ -1108,8 +1184,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 100,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1154,9 +1231,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "5ca309e3",
-      "events": "a65d27d7",
+      "nextId": 999,
+      "state": "47fd81ef",
+      "events": "a0a3df55",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1174,7 +1251,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -1198,7 +1282,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -1242,7 +1326,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -1257,7 +1344,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 900,
@@ -1266,7 +1353,7 @@
               "name": "Might of the Bear",
               "remaining": 900,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "value": 12
             }
           ],
@@ -1292,8 +1379,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 220,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1338,9 +1426,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "3b209cd6",
-      "events": "6b34a655",
+      "nextId": 999,
+      "state": "216a0884",
+      "events": "0bc06cb5",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1358,7 +1446,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -1386,7 +1481,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -1430,7 +1525,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -1445,7 +1543,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 900,
@@ -1454,7 +1552,7 @@
               "name": "Might of the Serpent",
               "remaining": 900,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "value": 12
             }
           ],
@@ -1480,8 +1578,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 220,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1526,9 +1625,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "43b67771",
-      "events": "ebb4b302",
+      "nextId": 999,
+      "state": "384f6721",
+      "events": "a7c4dd14",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1546,7 +1645,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -1575,7 +1681,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -1623,7 +1729,10 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "vault": {
+            "stock": {}
+          }
         }
       ],
       "entities": [
@@ -1638,7 +1747,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 900,
@@ -1647,7 +1756,7 @@
               "name": "Might of the Serpent",
               "remaining": 900,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "value": 12
             }
           ],
@@ -1673,8 +1782,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 220,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1719,9 +1829,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "67daa08e",
-      "events": "c517cfe8",
+      "nextId": 999,
+      "state": "0fc5f694",
+      "events": "d52c6f9c",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1739,7 +1849,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -1768,7 +1885,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -1817,6 +1934,9 @@
             "rows": {}
           },
           "townFocus": {},
+          "vault": {
+            "stock": {}
+          },
           "vendorBuyback": [
             {
               "count": 1,
@@ -1837,7 +1957,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 900,
@@ -1846,7 +1966,7 @@
               "name": "Might of the Serpent",
               "remaining": 900,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "value": 12
             }
           ],
@@ -1872,8 +1992,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 220,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1918,9 +2039,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "588f0397",
-      "events": "f4d68dcb",
+      "nextId": 999,
+      "state": "dea36ac9",
+      "events": "03450c48",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -1938,7 +2059,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -1968,7 +2096,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -2017,6 +2145,9 @@
             "rows": {}
           },
           "townFocus": {},
+          "vault": {
+            "stock": {}
+          },
           "vendorBuyback": [
             {
               "count": 1,
@@ -2041,7 +2172,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 900,
@@ -2050,7 +2181,7 @@
               "name": "Might of the Serpent",
               "remaining": 900,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "value": 12
             }
           ],
@@ -2076,8 +2207,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 220,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2122,9 +2254,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "f688c3e2",
-      "events": "4144f20d",
+      "nextId": 999,
+      "state": "4b7d07f8",
+      "events": "80d9aa71",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -2142,7 +2274,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -2172,7 +2311,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -2221,6 +2360,9 @@
             "rows": {}
           },
           "townFocus": {},
+          "vault": {
+            "stock": {}
+          },
           "vendorBuyback": [
             {
               "count": 1,
@@ -2241,7 +2383,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 900,
@@ -2250,7 +2392,7 @@
               "name": "Might of the Serpent",
               "remaining": 900,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "value": 12
             }
           ],
@@ -2276,8 +2418,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 220,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2322,8 +2465,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 998,
-      "state": "f688c3e2",
+      "nextId": 999,
+      "state": "4b7d07f8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2342,7 +2485,14 @@
             null,
             null
           ],
-          "bank": {},
+          "bank": {
+            "socketBags": [
+              null,
+              null,
+              null,
+              null
+            ]
+          },
           "bgRating": 1500,
           "cls": "warrior",
           "companionUpgrades": {},
@@ -2372,7 +2522,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 997,
+          "entityId": 998,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -2421,6 +2571,9 @@
             "rows": {}
           },
           "townFocus": {},
+          "vault": {
+            "stock": {}
+          },
           "vendorBuyback": [
             {
               "count": 1,
@@ -2441,7 +2594,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 997
+              "sourceId": 998
             },
             {
               "duration": 900,
@@ -2450,7 +2603,7 @@
               "name": "Might of the Serpent",
               "remaining": 900,
               "school": "nature",
-              "sourceId": 997,
+              "sourceId": 998,
               "value": 12
             }
           ],
@@ -2476,8 +2629,9 @@
           },
           "fallStartY": -0.948287,
           "fiveSecondRule": 99,
+          "healPower": 5,
           "hp": 220,
-          "id": 997,
+          "id": 998,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
