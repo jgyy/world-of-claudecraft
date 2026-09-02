@@ -171,9 +171,13 @@ export function bopWindowOpen(
   instance: ItemInstancePayload | undefined,
   partyTradeMsRemaining: ((untilMs: number) => number) | undefined,
 ): boolean {
-  const untilMs = instance?.partyTrade?.untilMs;
-  if (untilMs === undefined || !Number.isFinite(untilMs) || !partyTradeMsRemaining) return false;
-  return partyTradeMsRemaining(untilMs) > 0;
+  // Same shape rule as the sim twin (bop_trade_window.ts partyTradeActive):
+  // the payload crosses a JSONB boundary, so a malformed marker reads as no
+  // window here too, or the hint would advertise a click the sim refuses.
+  const trade = instance?.partyTrade;
+  if (!trade || !Number.isFinite(trade.untilMs) || !Array.isArray(trade.eligible)) return false;
+  if (!partyTradeMsRemaining) return false;
+  return partyTradeMsRemaining(trade.untilMs) > 0;
 }
 
 /** Decide what a click on a bag item does. Mirrors the original click handler's

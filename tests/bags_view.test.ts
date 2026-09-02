@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { RAW_COOKING_CATCH_IDS } from '../src/sim/content/items';
 import { ITEMS as CATALOG_ITEMS } from '../src/sim/data';
-import type { InvSlot, ItemDef } from '../src/sim/types';
+import type { InvSlot, ItemDef, ItemInstancePayload } from '../src/sim/types';
 import { DEFAULT_BAG_FILTER, type ItemLookup } from '../src/ui/bag_filter';
 import {
   type BagMode,
@@ -340,6 +340,13 @@ describe('bind-on-pickup party trade window (bags side)', () => {
     expect(
       bagTooltipHintKey(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, WINDOWED, undefined, closed),
     ).toBe('hudChrome.itemSoulbound');
+  });
+
+  it('reads a malformed persisted marker as no window, like the sim twin', () => {
+    const noEligible = { partyTrade: { untilMs: 1000 } } as unknown as ItemInstancePayload;
+    expect(
+      bagItemAction(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, noEligible, undefined, open),
+    ).toBe('transferBlockedSoulbound');
   });
 
   it('blocks a windowless soulbound copy and a caller that injects no clock', () => {

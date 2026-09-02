@@ -101,7 +101,10 @@ describe('ignivar loot: every gear piece is item level 35 and budget-exact', () 
   // trade freely, so a raid that hands the wrong drop to the wrong looter can
   // pass it on after the party trade window would have closed.
   it('binds only tier gear: set pieces stay soulbound, off-set loot trades freely', () => {
-    for (const item of Object.values(IGNIVAR_SET_ITEMS)) {
+    for (const item of [
+      ...Object.values(IGNIVAR_SET_ITEMS),
+      ...Object.values(IGNIVAR_SIGIL_ITEMS),
+    ]) {
       expect(item.soulbound, item.id).toBe(true);
     }
     const offSet = [
