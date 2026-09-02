@@ -1251,6 +1251,17 @@ export const es_ES: EnTranslations = {
       "heroicName": "{name} Heroico",
       "heroicLocked": "Estás bloqueado en {name} Heroico."
     },
+    "practiceDps": {
+      "title": "Practice Dummy",
+      "liveDps": "{value} DPS",
+      "liveLabel": "This run",
+      "prompt": "Attack the dummy to start a run",
+      "previous": "Previous runs",
+      "runLabel": "Run {index}",
+      "runSummary": "{total} in {time}",
+      "thousands": "{value}k",
+      "millions": "{value}m"
+    },
     "riftTracker": {
       "title": "Brecha",
       "floor": "Piso {current} de {total}",

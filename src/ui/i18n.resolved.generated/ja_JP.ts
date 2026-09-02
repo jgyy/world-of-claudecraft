@@ -1251,6 +1251,17 @@ export const ja_JP: EnTranslations = {
       "heroicName": "ヒロイック:{name}",
       "heroicLocked": "ヒロイックの{name}にロックされています。"
     },
+    "practiceDps": {
+      "title": "練習用ダミー",
+      "liveDps": "{value} DPS",
+      "liveLabel": "This run",
+      "prompt": "ダミーを攻撃して計測を開始",
+      "previous": "これまでの計測",
+      "runLabel": "Run {index}",
+      "runSummary": "{total} in {time}",
+      "thousands": "{value}k",
+      "millions": "{value}m"
+    },
     "riftTracker": {
       "title": "リフト",
       "floor": "フロア {current}/{total}",

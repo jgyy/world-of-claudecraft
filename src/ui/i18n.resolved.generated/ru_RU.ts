@@ -1251,6 +1251,17 @@ export const ru_RU: EnTranslations = {
       "heroicName": "Героический режим: {name}",
       "heroicLocked": "Вы закреплены за героическим подземельем: {name}."
     },
+    "practiceDps": {
+      "title": "Тренировочный манекен",
+      "liveDps": "{value} DPS",
+      "liveLabel": "This run",
+      "prompt": "Атакуйте манекен, чтобы начать замер",
+      "previous": "Предыдущие замеры",
+      "runLabel": "Run {index}",
+      "runSummary": "{total} in {time}",
+      "thousands": "{value}k",
+      "millions": "{value}m"
+    },
     "riftTracker": {
       "title": "Разлом",
       "floor": "Этаж {current} из {total}",

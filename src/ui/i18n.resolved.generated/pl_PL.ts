@@ -1251,6 +1251,17 @@ export const pl_PL: EnTranslations = {
       "heroicName": "Heroiczny {name}",
       "heroicLocked": "Jesteś przypisany do heroicznego {name}."
     },
+    "practiceDps": {
+      "title": "Practice Dummy",
+      "liveDps": "{value} DPS",
+      "liveLabel": "This run",
+      "prompt": "Attack the dummy to start a run",
+      "previous": "Previous runs",
+      "runLabel": "Run {index}",
+      "runSummary": "{total} in {time}",
+      "thousands": "{value}k",
+      "millions": "{value}m"
+    },
     "riftTracker": {
       "title": "Szczelina",
       "floor": "Piętro {current} z {total}",

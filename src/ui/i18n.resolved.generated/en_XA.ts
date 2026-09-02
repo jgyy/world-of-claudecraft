@@ -1251,6 +1251,17 @@ export const en_XA: EnTranslations = {
       "heroicName": "[Ĥéŕóíç {name}]",
       "heroicLocked": "[Ýóú áŕé ļóçķéð ţó Ĥéŕóíç {name}.]"
     },
+    "practiceDps": {
+      "title": "[Þŕáçţíçé Ðúɱɱý]",
+      "liveDps": "[{value} ÐÞŠ]",
+      "liveLabel": "[Ţĥíš ŕúñ]",
+      "prompt": "[Áţţáçķ ţĥé ðúɱɱý ţó šţáŕţ á ŕúñ]",
+      "previous": "[Þŕéʋíóúš ŕúñš]",
+      "runLabel": "[Ŕúñ {index}]",
+      "runSummary": "[{total} íñ {time}]",
+      "thousands": "[{value}ķ]",
+      "millions": "[{value}ɱ]"
+    },
     "riftTracker": {
       "title": "[Ŕíƒţ]",
       "floor": "[Ƒļóóŕ {current} óƒ {total}]",

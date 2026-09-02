@@ -2591,6 +2591,16 @@
     overflow-y: auto;
     pointer-events: auto;
   }
+  /* The practice DPS tracker (src/ui/hud/practice/) is a live child of this
+     stack too: a dummy run's live number is what a player changes a build
+     against, so it stays up in this seat under the same bound and affordance
+     as the two above (its own rule so the pinned two-selector rule above stays
+     byte-stable for tests/mobile_touch_xhb_exclusivity.test.ts). */
+  body.mobile-touch.xhb-mode #practice-tracker {
+    max-height: calc((var(--app-vh, 100vh) - 128px) / var(--ui-scale, 1) - 172px);
+    overflow-y: auto;
+    pointer-events: auto;
+  }
   /* Trimmed to the launchers with no other pad-reachable path: Quick Actions'
      own strip (#mobile-menu-strip, kept up alongside this rail per the review
      above) already covers Character, Spellbook, World Map, Bags, Quest Log,

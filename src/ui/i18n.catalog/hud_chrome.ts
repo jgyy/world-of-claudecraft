@@ -1365,6 +1365,29 @@ export const hudChromeStrings = {
     // mirrored yet ({name} = dungeon name).
     heroicLocked: 'You are locked to Heroic {name}.',
   },
+  // The practice DPS tracker (src/ui/hud/practice/): the compact readout that
+  // appears while the player targets or hits a training dummy. It reads the
+  // Damage Meters' own encounter ledger, so its numbers are the meters' numbers
+  // for the local player; the per-second unit reuses hudChrome.meters.perSecond.
+  practiceDps: {
+    // Fallback header when no dummy name is known; normally the header is the
+    // localized dummy name (entities.mobs.<id>.name).
+    title: 'Practice Dummy',
+    // The big live number. {value} is a compacted damage-per-second figure.
+    liveDps: '{value} DPS',
+    liveLabel: 'This run',
+    // Shown while the player targets a dummy with no run in progress.
+    prompt: 'Attack the dummy to start a run',
+    // Sub-header above the finished-run list (newest first).
+    previous: 'Previous runs',
+    // {index} is 1-based, newest first ("Run 1" is the most recent).
+    runLabel: 'Run {index}',
+    // {total} is compacted total damage, {time} a pre-built "Xm Ys" duration.
+    runSummary: '{total} in {time}',
+    // Compact number units: 12.3k, 1.2m.
+    thousands: '{value}k',
+    millions: '{value}m',
+  },
   // In-rift HUD tracker (issue #2655): floor position + a live "closes in"
   // countdown on the rift's backing world event. Digits run through
   // formatNumber; the clock templates are pre-built mm:ss / h:mm:ss so the

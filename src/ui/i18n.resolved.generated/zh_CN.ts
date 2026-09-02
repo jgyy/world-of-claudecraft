@@ -1251,6 +1251,17 @@ export const zh_CN: EnTranslations = {
       "heroicName": "英雄难度：{name}",
       "heroicLocked": "你已被锁定至英雄难度的{name}。"
     },
+    "practiceDps": {
+      "title": "训练假人",
+      "liveDps": "{value} DPS",
+      "liveLabel": "This run",
+      "prompt": "攻击假人以开始一轮测试",
+      "previous": "之前的测试",
+      "runLabel": "Run {index}",
+      "runSummary": "{total} in {time}",
+      "thousands": "{value}k",
+      "millions": "{value}m"
+    },
     "riftTracker": {
       "title": "裂隙",
       "floor": "第 {current} 层，共 {total} 层",

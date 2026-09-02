@@ -1251,6 +1251,17 @@ export const ko_KR: EnTranslations = {
       "heroicName": "영웅: {name}",
       "heroicLocked": "영웅 난이도 {name}에 귀속되었습니다."
     },
+    "practiceDps": {
+      "title": "훈련용 허수아비",
+      "liveDps": "{value} DPS",
+      "liveLabel": "This run",
+      "prompt": "허수아비를 공격하여 측정을 시작하세요",
+      "previous": "이전 측정",
+      "runLabel": "Run {index}",
+      "runSummary": "{total} in {time}",
+      "thousands": "{value}k",
+      "millions": "{value}m"
+    },
     "riftTracker": {
       "title": "균열",
       "floor": "{total}층 중 {current}층",

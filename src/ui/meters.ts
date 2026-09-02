@@ -42,6 +42,7 @@ import {
   buildGroupedMeterBreakdown,
   buildMeterBreakdown,
 } from './meters_breakdown_view';
+import { PracticeDpsController, practiceDpsModel } from './hud/practice';
 import { MeterFrame } from './meters_frame';
 import { METER_FRAME_LIMITS, TABBED_METER_FRAME_LIMITS } from './meters_frame_core';
 import { buildMeterTabMenu, type MeterMenuRow } from './meters_menu_view';
@@ -862,12 +863,33 @@ export class Meters {
   private readonly detached = new Map<DetachableTab, MetersPanel>();
   /** Detached windows hidden along with the tabbed one, to restore on reopen. */
   private reopenDetached: DetachableTab[] = [];
+  /**
+   * The practice DPS strip (src/ui/hud/practice/): a readout over this SAME
+   * encounter ledger for the local player's runs on a training dummy. It lives
+   * here rather than on the Hud so the two surfaces share one feed and one
+   * per-frame drive; null on a document without the strip (the /play shell).
+   */
+  private readonly practice: PracticeDpsController | null;
 
   constructor(
     private world: IWorld,
     private deps?: MetersDeps,
   ) {
     this.data = new MeterData(performance.now());
+    const practiceEl = document.getElementById('practice-tracker');
+    this.practice = practiceEl
+      ? new PracticeDpsController({
+          element: practiceEl,
+          model: () =>
+            practiceDpsModel({
+              current: this.data.current,
+              history: this.data.history,
+              playerId: world.player.id,
+              targetTemplateId: this.targetTemplateId(),
+            }),
+          dummyName: (templateId) => tEntity({ kind: 'mob', id: templateId, field: 'name' }),
+        })
+      : null;
     const host: PanelHost = {
       world,
       data: this.data,
@@ -1024,10 +1046,18 @@ export class Meters {
     this.data.onEvent(ev, this.world, this.partyPids(), performance.now());
   }
 
+  /** Template id of the local player's current target, for the practice strip. */
+  private targetTemplateId(): string | null {
+    const targetId = this.world.player.targetId;
+    if (targetId === null) return null;
+    return this.world.entities.get(targetId)?.templateId ?? null;
+  }
+
   /** called every hud frame; each open panel renders at ~4Hz */
   update(): void {
     const now = performance.now();
     this.data.update(this.world, this.partyPids(), now);
+    this.practice?.update(now);
     this.main.update(now);
     for (const panel of this.detached.values()) panel.update(now);
   }

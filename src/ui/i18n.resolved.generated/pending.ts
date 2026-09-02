@@ -9,25 +9,210 @@
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
 export const pending: Record<string, readonly string[]> = {
-  "es": [],
-  "es_ES": [],
-  "fr_FR": [],
-  "fr_CA": [],
+  "es": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "es_ES": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "fr_FR": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "fr_CA": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
   "en_CA": [],
-  "it_IT": [],
-  "de_DE": [],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
-  "pt_BR": [],
-  "ru_RU": [],
-  "cs_CZ": [],
-  "nl_NL": [],
-  "pl_PL": [],
-  "id_ID": [],
-  "tr_TR": [],
-  "sv_SE": [],
-  "vi_VN": [],
-  "da_DK": []
+  "it_IT": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "de_DE": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "zh_CN": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands"
+  ],
+  "zh_TW": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands"
+  ],
+  "ko_KR": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands"
+  ],
+  "ja_JP": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands"
+  ],
+  "pt_BR": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "ru_RU": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands"
+  ],
+  "cs_CZ": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "nl_NL": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "pl_PL": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "id_ID": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "tr_TR": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "sv_SE": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "vi_VN": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ],
+  "da_DK": [
+    "hudChrome.practiceDps.liveDps",
+    "hudChrome.practiceDps.liveLabel",
+    "hudChrome.practiceDps.millions",
+    "hudChrome.practiceDps.previous",
+    "hudChrome.practiceDps.prompt",
+    "hudChrome.practiceDps.runLabel",
+    "hudChrome.practiceDps.runSummary",
+    "hudChrome.practiceDps.thousands",
+    "hudChrome.practiceDps.title"
+  ]
 };
