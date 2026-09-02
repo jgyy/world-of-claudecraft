@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { HEROIC_DUNGEON_TUNING } from '../src/sim/content/dungeon_difficulty';
 import { DUNGEON_DEFS } from '../src/sim/content/dungeons';
 import { HEROIC_BOSS_LOOT } from '../src/sim/content/heroic_loot';
+import { heroicVariantId } from '../src/sim/content/heroic_variants';
 import {
   CRUCIBLE_VENDOR_STOCK,
   IGNIVAR_HELD_ITEMS,
@@ -112,6 +113,9 @@ describe('ignivar loot: every gear piece is item level 35 and budget-exact', () 
     expect(offSet.length).toBeGreaterThan(0);
     for (const item of offSet) {
       expect(item.soulbound, item.id).toBeFalsy();
+      // A heroic variant is built by spreading the base def, so it must not
+      // re-bind either (none exists today: the raid has no heroic item layer).
+      expect(ITEMS[heroicVariantId(item.id)]?.soulbound, item.id).toBeFalsy();
     }
     // The reported item, pinned by name so the ruling cannot silently regress.
     expect(ITEMS.heartspring_amulet.soulbound).toBeFalsy();

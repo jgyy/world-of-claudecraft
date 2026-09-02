@@ -16,6 +16,9 @@
 // can pass it on to another drop-moment member within the same deadline.
 // Mail, market, vendor, and guild-bank stay hard-blocked by def.soulbound at
 // their existing gates; the trade offer path is the ONE channel this opens.
+// Only tier gear (set pieces, sigils) is soulbound in the Crucible table; the
+// off-set drops carry no bind flag and never get a window (loot_roll.ts
+// grantAwardedLootItem hands them over as plain grants).
 
 import type { ItemInstancePayload } from '../types';
 

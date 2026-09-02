@@ -1047,7 +1047,10 @@ Implemented alongside the soulbound rulings above:
   (`items.ts equipmentPayloadFor` strips the payload on the bag-to-worn
   bridge). Mail, market, vendor, and guild bank stay hard-blocked by
   `def.soulbound`; the trade offer path is the one channel the window
-  opens.
+  opens. Since 2026-09-01 only TIER gear (set pieces and sigils) is
+  soulbound here: the off-set armor, jewelry, held items, and weapons
+  carry no bind flag, get no window, and trade like every other epic in
+  the game (ignivar-raid-loot-items.md, "Shared by every gear item").
 - The clock is `ctx.lockoutNowMs()` (the raid-lockout clock), so the
   deadline survives server restarts; the client counts down via the
   `partyTradeMsRemaining` IWorld facet member.
