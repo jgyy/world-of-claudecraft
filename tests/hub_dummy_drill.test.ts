@@ -113,7 +113,7 @@ describe('Drillmaster Hale stands beside the hub dummy', () => {
     }
   });
 
-  it('is appended last in NPCS so no earlier entity id moves', () => {
+  it('is appended last in NPCS so no earlier NPC id moves', () => {
     const ids = Object.keys(NPCS);
     expect(ids[ids.length - 1]).toBe(HUB_SPARRING_MASTER_ID);
   });
@@ -142,6 +142,19 @@ describe('creditDummyDrill', () => {
     creditDummyDrill(sim.ctx, p, dummy());
     expect(qp.counts[0]).toBe(need);
     expect(qp.state).toBe('ready');
+  });
+
+  it('draws no rng when it credits', () => {
+    const sim = makeSim();
+    seedActiveDrill(sim);
+    const p = sim.entities.get(sim.playerId)!;
+    let draws = 0;
+    sim.rng.setObserver(() => {
+      draws++;
+    });
+    creditDummyDrill(sim.ctx, p, dummy());
+    sim.rng.setObserver(null);
+    expect(draws).toBe(0);
   });
 
   it('never overshoots the count', () => {

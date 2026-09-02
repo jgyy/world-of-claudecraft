@@ -461,7 +461,11 @@ export const NPCS: Record<string, NpcDef> = {
   // resolve its name; spirit.ts spawns a copy at every graveyard.
   [SPIRIT_HEALER_NPC_ID]: SPIRIT_HEALER,
   // The Eastbrook quay's sparring master (content/practice_dummies.ts),
-  // appended last of all for the same insertion-order stability reason.
+  // appended last so no EARLIER NPC's id moves. NPCs spawn before camps and
+  // ground objects, so every entity minted after the NPC loop still shifts
+  // by one (id-seeded private streams such as mob/idle_rng.ts move with
+  // them, deterministically); no shared-stream draw changes, which is why
+  // the parity goldens re-mint without any draw digest moving.
   ...HUB_PRACTICE_NPCS,
 };
 

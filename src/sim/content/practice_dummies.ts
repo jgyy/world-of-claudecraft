@@ -222,7 +222,7 @@ export const HUB_PRACTICE_DUMMY_CAMPS: CampDef[] = [
 // crate edge), east of the quay-walk road (centreline x -92, halfWidth 1.5)
 // and clear of Fisherman Brandt (-95, -50), facing north-east across the
 // dummy so a player walking up from the start sees him address it.
-// tests/hub_training_dummy.test.ts pins that findSafePos leaves him on his
+// tests/hub_dummy_drill.test.ts pins that findSafePos leaves him on his
 // mark and that nothing else stands within arm's reach.
 export const HUB_SPARRING_MASTER_ID = 'drillmaster_hale';
 export const HUB_SPARRING_MASTER_POS = { x: -88, z: -45 } as const;
@@ -265,8 +265,10 @@ export const HUB_PRACTICE_QUESTS: Record<string, QuestDef> = {
         label: 'Blow landed on the Training Dummy',
       },
     ],
-    xpReward: 30,
-    copperReward: 25,
+    // Sized with the Proving Shore drills (Strike True, Hone the Edge): one
+    // lesson's worth, never a level's.
+    xpReward: 60,
+    copperReward: 40,
     itemRewards: {},
   },
 };
