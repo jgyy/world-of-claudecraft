@@ -19,7 +19,7 @@ export function fmtNum(v: number): string {
   return formatNumber(Math.round(v), { maximumFractionDigits: 0, useGrouping: false });
 }
 
-// "{rate}/s" cell, e.g. "1.2k/s" — the /s unit comes from the localizable key.
+// "{rate}/s" cell, e.g. "1.2k/s": the /s unit comes from the localizable key.
 export function fmtPerSecond(v: number): string {
   return t('hudChrome.meters.perSecond', { value: fmtNum(v) });
 }

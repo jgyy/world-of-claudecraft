@@ -82,10 +82,9 @@ export class PracticeDpsController {
     const title = dummyId ? this.deps.dummyName(dummyId) : t('hudChrome.practiceDps.title');
     let body: string;
     if (model.live) {
-      body =
-        `<div class="pt-live">${esc(
-          t('hudChrome.practiceDps.liveDps', { value: fmtNum(model.live.dps) }),
-        )}</div>` + runLine(model.live, false, t('hudChrome.practiceDps.liveLabel'));
+      const live = esc(t('hudChrome.practiceDps.liveDps', { value: fmtNum(model.live.dps) }));
+      const thisRun = runLine(model.live, false, t('hudChrome.practiceDps.liveLabel'));
+      body = `<div class="pt-live">${live}</div>${thisRun}`;
     } else {
       body = `<div class="pt-obj">${esc(t('hudChrome.practiceDps.prompt'))}</div>`;
     }
