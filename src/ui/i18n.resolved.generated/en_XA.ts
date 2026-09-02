@@ -1258,9 +1258,7 @@ export const en_XA: EnTranslations = {
       "prompt": "[Áţţáçķ ţĥé ðúɱɱý ţó šţáŕţ á ŕúñ]",
       "previous": "[Þŕéʋíóúš ŕúñš]",
       "runLabel": "[Ŕúñ {index}]",
-      "runSummary": "[{total} íñ {time}]",
-      "thousands": "[{value}ķ]",
-      "millions": "[{value}ɱ]"
+      "runSummary": "[{total} íñ {time}]"
     },
     "riftTracker": {
       "title": "[Ŕíƒţ]",
@@ -1297,6 +1295,8 @@ export const en_XA: EnTranslations = {
     },
     "meters": {
       "perSecond": "[{value}/š]",
+      "thousands": "[{value}ķ]",
+      "millions": "[{value}ɱ]",
       "perSecondRow": "[{total} ({rate})]",
       "minutesSeconds": "[{m}ɱ {s}š]",
       "seconds": "[{s}š]",

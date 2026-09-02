@@ -2,12 +2,12 @@
 // practice_dps_controller.ts): it paints from the model it is handed, throttles
 // to its own cadence, elides an unchanged frame, and re-localizes by itself.
 import { describe, expect, it } from 'vitest';
-import { ensureLocaleLoaded, setLanguage } from '../src/ui/i18n';
 import {
   PRACTICE_PAINT_INTERVAL_MS,
   PracticeDpsController,
 } from '../src/ui/hud/practice/practice_dps_controller';
 import type { PracticeDpsModel, PracticeRun } from '../src/ui/hud/practice/practice_dps_view';
+import { ensureLocaleLoaded, setLanguage } from '../src/ui/i18n';
 
 function trackerElement() {
   let html = '';
@@ -43,9 +43,10 @@ describe('PracticeDpsController', () => {
   it('stays hidden and empty with no model', () => {
     const { controller, element, writes } = make(() => null);
     controller.update(0);
-    expect(element.style.display).toBe('none');
+    // Never painted: the stylesheet's own display:none holds, so there is
+    // nothing to clear and no write at all.
     expect(element.innerHTML).toBe('');
-    expect(writes()).toBe(0); // nothing to clear: no write at all
+    expect(writes()).toBe(0);
   });
 
   it('shows the prompt while a dummy is targeted with no run', () => {
@@ -81,7 +82,7 @@ describe('PracticeDpsController', () => {
     expect(html).toContain('Run 2');
     // Exactly one best mark, on the 3000/s run.
     expect(html.match(/pt-best/g)).toHaveLength(1);
-    expect(html).toMatch(/pt-best[^]*3000\/s/);
+    expect(html).toMatch(/pt-best[\s\S]*3000\/s/);
   });
 
   it('elides an unchanged frame and throttles to its cadence', () => {
@@ -123,6 +124,52 @@ describe('PracticeDpsController', () => {
     } finally {
       setLanguage('en');
     }
+  });
+
+  it('clears and hides the strip once the model goes away, exactly once', () => {
+    let model: PracticeDpsModel | null = {
+      targetDummyId: 'training_dummy',
+      live: run(1000, 2),
+      previous: [],
+      bestDps: 500,
+    };
+    const { controller, element, writes } = make(() => model);
+    controller.update(0);
+    expect(element.style.display).toBe('block');
+    model = null;
+    controller.update(PRACTICE_PAINT_INTERVAL_MS);
+    expect(element.innerHTML).toBe('');
+    expect(element.style.display).toBe('none');
+    expect(writes()).toBe(2);
+    controller.update(PRACTICE_PAINT_INTERVAL_MS * 2);
+    expect(writes()).toBe(2); // already cleared: no second clearing write
+  });
+
+  it('elides against the markup it BUILT, so an escaped quote in a name cannot defeat it', () => {
+    // A real DOM reserializes esc()'s &#39; back to a bare apostrophe, so a
+    // compare against live innerHTML would rewrite every tick; the fake
+    // element here mimics that by normalizing on read.
+    let html = '';
+    let writes = 0;
+    const element = {
+      style: { display: '' },
+      get innerHTML() {
+        return html.replace(/&#39;/g, "'");
+      },
+      set innerHTML(value: string) {
+        html = value;
+        writes++;
+      },
+    } as unknown as HTMLElement;
+    const controller = new PracticeDpsController({
+      element,
+      model: () => ({ targetDummyId: 'training_dummy', live: null, previous: [], bestDps: 0 }),
+      dummyName: () => "Mannequin d'entrainement",
+    });
+    controller.update(0);
+    controller.update(PRACTICE_PAINT_INTERVAL_MS);
+    controller.update(PRACTICE_PAINT_INTERVAL_MS * 2);
+    expect(writes).toBe(1);
   });
 
   it('escapes the dummy name it is handed', () => {

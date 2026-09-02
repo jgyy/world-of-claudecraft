@@ -6,11 +6,14 @@
 // Driven by Meters.update() (src/ui/meters.ts), the same per-frame call that
 // advances the encounter ledger this reads, so the readout can never run ahead
 // of or behind the Damage Meters window. It rebuilds at most every
-// PAINT_INTERVAL_MS and elides the write by comparing the RESOLVED markup
-// against what is on screen: no data-signature memo, so a runtime language
-// switch moves the comparison by itself and the strip needs no arm in the
-// Hud's language fan-out (tests/language_fanout_registry.test.ts explains the
-// two idioms). No forced-reflow layout read, no driver of its own.
+// PRACTICE_PAINT_INTERVAL_MS and elides the write by comparing the freshly
+// built markup against the last markup it BUILT (never the live innerHTML,
+// whose reserialization drops esc()'s entity forms and would defeat the
+// compare on any name with a quote in it): the memo holds resolved strings,
+// so a runtime language switch moves the fresh side of the comparison by
+// itself and the strip needs no arm in the Hud's language fan-out (the
+// quest tracker's lastHtml exemption in tests/language_fanout_registry.test.ts
+// is the same idiom). No forced-reflow layout read, no driver of its own.
 //
 // Actionable, so it stays on every graphics tier and in the mobile cross-hotbar
 // mode (docs/design/graphics-settings-fairness.md): a player reads the live
@@ -18,6 +21,7 @@
 
 import { esc } from '../../esc';
 import { formatNumber, t } from '../../i18n';
+import { fmtDuration, fmtNum, fmtPerSecond } from '../../meters_format';
 import type { PracticeDpsModel, PracticeRun } from './practice_dps_view';
 
 export interface PracticeDpsControllerDeps {
@@ -32,28 +36,6 @@ export interface PracticeDpsControllerDeps {
  *  summarizes only closes a run on a whole-second idle window. */
 export const PRACTICE_PAINT_INTERVAL_MS = 250;
 
-// Same compaction thresholds as the meters window (src/ui/meters.ts fmtNum):
-// whole numbers below 10k, one decimal with a unit above. The unit suffix comes
-// from a localizable key rather than a literal.
-function fmtNum(v: number): string {
-  const one = { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false };
-  if (v >= 1_000_000)
-    return t('hudChrome.practiceDps.millions', { value: formatNumber(v / 1_000_000, one) });
-  if (v >= 10_000)
-    return t('hudChrome.practiceDps.thousands', { value: formatNumber(v / 1000, one) });
-  return formatNumber(Math.round(v), { maximumFractionDigits: 0, useGrouping: false });
-}
-
-/** "Xm Ys" past a minute, else "Ys"; the same shape the meters window uses. */
-function fmtDuration(seconds: number): string {
-  const s = Math.max(0, Math.round(seconds));
-  if (s < 60) return t('hudChrome.meters.seconds', { s: formatNumber(s) });
-  return t('hudChrome.meters.minutesSeconds', {
-    m: formatNumber(Math.floor(s / 60)),
-    s: formatNumber(s % 60),
-  });
-}
-
 function runLine(run: PracticeRun, isBest: boolean, label: string): string {
   const cls = isBest ? 'pt-run pt-best' : 'pt-run';
   const summary = t('hudChrome.practiceDps.runSummary', {
@@ -62,7 +44,7 @@ function runLine(run: PracticeRun, isBest: boolean, label: string): string {
   });
   return (
     `<div class="${cls}"><span class="pt-run-label">${esc(label)}</span>` +
-    `<span class="pt-run-dps">${esc(t('hudChrome.meters.perSecond', { value: fmtNum(run.dps) }))}</span>` +
+    `<span class="pt-run-dps">${esc(fmtPerSecond(run.dps))}</span>` +
     `<span class="pt-run-sum">${esc(summary)}</span></div>`
   );
 }
@@ -70,6 +52,8 @@ function runLine(run: PracticeRun, isBest: boolean, label: string): string {
 /** Paints the practice DPS strip only when its resolved markup changes. */
 export class PracticeDpsController {
   private nextPaintAt = 0;
+  /** The last markup written, or null while the strip is hidden and empty. */
+  private lastHtml: string | null = null;
 
   constructor(private readonly deps: PracticeDpsControllerDeps) {}
 
@@ -80,13 +64,17 @@ export class PracticeDpsController {
     const { element } = this.deps;
     const model = this.deps.model();
     if (!model) {
-      if (element.innerHTML !== '') element.innerHTML = '';
-      if (element.style.display !== 'none') element.style.display = 'none';
+      if (this.lastHtml === null) return;
+      this.lastHtml = null;
+      element.innerHTML = '';
+      element.style.display = 'none';
       return;
     }
     const html = this.markup(model);
-    if (element.style.display !== 'block') element.style.display = 'block';
-    if (element.innerHTML !== html) element.innerHTML = html;
+    if (html === this.lastHtml) return;
+    if (this.lastHtml === null) element.style.display = 'block';
+    this.lastHtml = html;
+    element.innerHTML = html;
   }
 
   private markup(model: PracticeDpsModel): string {

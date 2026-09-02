@@ -32,7 +32,10 @@ function makeWorld(): Sim {
 }
 
 function dummyOf(sim: Sim): Entity {
-  const d = [...sim.entities.values()].find((e) => e.templateId === 'training_dummy' && !e.dead);
+  const { x, z } = HUB_TRAINING_DUMMY_POS;
+  const d = [...sim.entities.values()].find(
+    (e) => e.templateId === 'training_dummy' && !e.dead && Math.hypot(e.pos.x - x, e.pos.z - z) < 5,
+  );
   if (!d) throw new Error('hub training dummy not spawned');
   return d;
 }
@@ -51,8 +54,15 @@ describe('Eastbrook hub training dummy', () => {
     // Ground the sim can spawn on: not inside a prop or building, above water.
     expect(isBlocked(SEED, x, z, 0.5)).toBe(false);
     expect(groundHeight(x, z, SEED)).toBeGreaterThan(waterLevelAt(x, z, SEED));
-    const sim = makeWorld();
+    // The FULL built-in world here (npcs, ground objects, every camp): the
+    // source comment claims clearance from the quay's NPCs and props, and a
+    // trimmed world would stay green if a layout change parked one on the mark.
+    const sim = new Sim({ seed: SEED, playerClass: 'warrior', world: BUILTIN_WORLD });
     const d = dummyOf(sim);
+    for (const e of sim.entities.values()) {
+      if (e.id === d.id || e.id === sim.player.id) continue;
+      expect(Math.hypot(e.pos.x - d.pos.x, e.pos.z - d.pos.z)).toBeGreaterThan(3);
+    }
     // findSafePos left it exactly where it was authored (nothing shoved it).
     expect(Math.round(d.pos.x)).toBe(x);
     expect(Math.round(d.pos.z)).toBe(z);

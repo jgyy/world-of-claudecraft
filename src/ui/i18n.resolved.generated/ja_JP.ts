@@ -1258,9 +1258,7 @@ export const ja_JP: EnTranslations = {
       "prompt": "ダミーを攻撃して計測を開始",
       "previous": "これまでの計測",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "リフト",
@@ -1297,6 +1295,8 @@ export const ja_JP: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/秒",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total}（{rate}）",
       "minutesSeconds": "{m}分{s}秒",
       "seconds": "{s}秒",

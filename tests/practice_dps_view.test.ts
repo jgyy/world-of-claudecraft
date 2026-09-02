@@ -2,14 +2,11 @@
 // which meters encounters count as practice runs, what the local player's
 // numbers on them are, and when the strip has anything to say at all.
 import { describe, expect, it } from 'vitest';
+import { HEROIC_BOSS_DUMMY_ID, NORMAL_BOSS_DUMMY_ID } from '../src/sim/content/practice_dummies';
 import {
-  HEROIC_BOSS_DUMMY_ID,
-  NORMAL_BOSS_DUMMY_ID,
-} from '../src/sim/content/practice_dummies';
-import {
+  isPracticeDummy,
   PRACTICE_RUN_HISTORY,
   type PracticeEncounter,
-  isPracticeDummy,
   practiceDpsModel,
   practiceRunOf,
 } from '../src/ui/hud/practice/practice_dps_view';
@@ -130,15 +127,5 @@ describe('practiceDpsModel', () => {
     expect(model?.previous).toHaveLength(PRACTICE_RUN_HISTORY);
     expect(model?.previous[0]?.total).toBe(100);
     expect(model?.previous[PRACTICE_RUN_HISTORY - 1]?.total).toBe(100 * PRACTICE_RUN_HISTORY);
-  });
-
-  it('is the same model for a Sim- and a ClientWorld-shaped ledger (plain data in, plain data out)', () => {
-    const input = {
-      current: enc('training_dummy', 5, { [ME]: 500 }),
-      history: [enc('training_dummy', 5, { [ME]: 250 })],
-      playerId: ME,
-      targetTemplateId: 'training_dummy',
-    };
-    expect(practiceDpsModel(input)).toEqual(practiceDpsModel({ ...input }));
   });
 });

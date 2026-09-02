@@ -33,6 +33,7 @@ import type { IWorld } from '../world_api';
 import { abilityDisplayNameFromSource } from './ability_display_name';
 import { tEntity } from './entity_i18n';
 import { esc } from './esc';
+import { PracticeDpsController, practiceDpsModel } from './hud/practice';
 import { formatNumber, type TranslationKey, t } from './i18n';
 import {
   type BreakdownEntry,
@@ -42,7 +43,7 @@ import {
   buildGroupedMeterBreakdown,
   buildMeterBreakdown,
 } from './meters_breakdown_view';
-import { PracticeDpsController, practiceDpsModel } from './hud/practice';
+import { fmtDuration, fmtNum, fmtPerSecondRow } from './meters_format';
 import { MeterFrame } from './meters_frame';
 import { METER_FRAME_LIMITS, TABBED_METER_FRAME_LIMITS } from './meters_frame_core';
 import { buildMeterTabMenu, type MeterMenuRow } from './meters_menu_view';
@@ -1085,37 +1086,4 @@ function breakdownRowLabel(row: BreakdownRow, nested: boolean): string {
     : t('hudChrome.meters.melee');
   if (nested) return ability;
   return row.petName ? t('hudChrome.meters.petAbility', { pet: row.petName, ability }) : ability;
-}
-
-// Compact damage/heal/threat number. Digits route through formatNumber so the
-// numerals/decimal mark follow the active locale, while the classic English
-// k/m suffixes + thresholds are preserved (useGrouping:false keeps the readout
-// byte-identical to the historical `toFixed(1)`/`Math.round` form in en).
-function fmtNum(v: number): string {
-  if (v >= 1_000_000)
-    return `${formatNumber(v / 1_000_000, { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false })}m`;
-  if (v >= 10_000)
-    return `${formatNumber(v / 1000, { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false })}k`;
-  return formatNumber(Math.round(v), { maximumFractionDigits: 0, useGrouping: false });
-}
-
-// "{rate}/s" cell, e.g. "1.2k/s" — the /s unit comes from the localizable key.
-function fmtPerSecond(v: number): string {
-  return t('hudChrome.meters.perSecond', { value: fmtNum(v) });
-}
-
-// "{total} ({rate}/s)" cell, e.g. "12.3k (1.2k/s)". Defined at module scope so
-// the imported t() is in view (the render loop shadows `t` with a tally row).
-function fmtPerSecondRow(total: number, rate: number): string {
-  return t('hudChrome.meters.perSecondRow', { total: fmtNum(total), rate: fmtPerSecond(rate) });
-}
-
-// "Xm Ys" / "Ys" duration; the m/s units come from localizable keys, digits via
-// formatNumber.
-function fmtDuration(s: number): string {
-  const m = Math.floor(s / 60);
-  const num = (n: number) => formatNumber(n, { maximumFractionDigits: 0, useGrouping: false });
-  return m > 0
-    ? t('hudChrome.meters.minutesSeconds', { m: num(m), s: num(Math.round(s % 60)) })
-    : t('hudChrome.meters.seconds', { s: num(Math.round(s)) });
 }

@@ -1258,9 +1258,7 @@ export const ru_RU: EnTranslations = {
       "prompt": "Атакуйте манекен, чтобы начать замер",
       "previous": "Предыдущие замеры",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "Разлом",
@@ -1297,6 +1295,8 @@ export const ru_RU: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/с",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m} мин {s} сек.",
       "seconds": "{s} сек.",

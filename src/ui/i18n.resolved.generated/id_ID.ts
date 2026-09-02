@@ -1258,9 +1258,7 @@ export const id_ID: EnTranslations = {
       "prompt": "Attack the dummy to start a run",
       "previous": "Previous runs",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "Rift",
@@ -1297,6 +1295,8 @@ export const id_ID: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/d",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m}m {s}d",
       "seconds": "{s}d",

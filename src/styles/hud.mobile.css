@@ -3701,6 +3701,26 @@
     top: max(150px, env(safe-area-inset-top));
     width: calc(190px * var(--mobile-chrome-scale, 1));
   }
+  /* The practice DPS tracker leaves the stack on touch: the stack's seat runs
+     down into the action ring, and this strip is tall (a live number plus a
+     run list). It re-seats under the target frame in the left column, the
+     one span the touch HUD leaves clear between the frame and the move zone,
+     compacted (smaller live number, the per-run total/time detail line
+     dropped; the per-second figures a build is compared on stay). */
+  body.mobile-touch #practice-tracker {
+    position: fixed;
+    left: max(18px, env(safe-area-inset-left));
+    right: auto;
+    top: max(96px, env(safe-area-inset-top));
+    width: calc(170px * var(--mobile-chrome-scale, 1));
+    font-size: 11px;
+  }
+  body.mobile-touch #practice-tracker .pt-live {
+    font-size: 16px;
+  }
+  body.mobile-touch #practice-tracker .pt-run-sum {
+    display: none;
+  }
   /* The right-anchored tracker is REPLACED on touch by #quest-strip above, not
      restyled: it is fixed-width per tier and unbounded in height, so every extra
      quest grew it down into the action ring. Desktop keeps it untouched, and the

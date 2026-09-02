@@ -1258,9 +1258,7 @@ export const ko_KR: EnTranslations = {
       "prompt": "허수아비를 공격하여 측정을 시작하세요",
       "previous": "이전 측정",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "균열",
@@ -1297,6 +1295,8 @@ export const ko_KR: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/초",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m}분 {s}초",
       "seconds": "{s}초",

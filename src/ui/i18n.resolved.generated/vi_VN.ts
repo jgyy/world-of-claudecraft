@@ -1258,9 +1258,7 @@ export const vi_VN: EnTranslations = {
       "prompt": "Attack the dummy to start a run",
       "previous": "Previous runs",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "Rạn Nứt",
@@ -1297,6 +1295,8 @@ export const vi_VN: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/g",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m}p {s}g",
       "seconds": "{s}g",

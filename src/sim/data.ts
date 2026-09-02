@@ -565,8 +565,10 @@ export const CAMPS: CampDef[] = [
   ...PROVING_SHORE_CAMPS,
   // The Eastbrook hub dummy (content/practice_dummies.ts) is last of all: the
   // dummy branch of the spawn loop draws no rng, so this entry can move no
-  // earlier camp's draws, and appending it keeps every earlier entity id
-  // (and so every id-seeded private stream) exactly where it was.
+  // camp's draws, and appending it keeps every CAMP entity's id where it
+  // was. Everything minted after the camp loop (the player first) still
+  // shifts by one, which is why the parity goldens re-mint with it (no draw
+  // digest moves); same as the Proving Shore append above.
   ...HUB_PRACTICE_DUMMY_CAMPS,
 ];
 

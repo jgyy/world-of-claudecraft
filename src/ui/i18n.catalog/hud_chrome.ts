@@ -1384,9 +1384,6 @@ export const hudChromeStrings = {
     runLabel: 'Run {index}',
     // {total} is compacted total damage, {time} a pre-built "Xm Ys" duration.
     runSummary: '{total} in {time}',
-    // Compact number units: 12.3k, 1.2m.
-    thousands: '{value}k',
-    millions: '{value}m',
   },
   // In-rift HUD tracker (issue #2655): floor position + a live "closes in"
   // countdown on the rift's backing world event. Digits run through
@@ -1443,6 +1440,9 @@ export const hudChromeStrings = {
   // through formatNumber; these carry the localizable unit/parenthesization).
   meters: {
     perSecond: '{value}/s',
+    // Compact number units for the meters and the practice tracker: 12.3k, 1.2m.
+    thousands: '{value}k',
+    millions: '{value}m',
     perSecondRow: '{total} ({rate})',
     minutesSeconds: '{m}m {s}s',
     seconds: '{s}s',

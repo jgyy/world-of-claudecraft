@@ -1258,9 +1258,7 @@ export const zh_CN: EnTranslations = {
       "prompt": "攻击假人以开始一轮测试",
       "previous": "之前的测试",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "裂隙",
@@ -1297,6 +1295,8 @@ export const zh_CN: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/秒",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total}（{rate}）",
       "minutesSeconds": "{m}分{s}秒",
       "seconds": "{s}秒",

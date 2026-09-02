@@ -11772,6 +11772,79 @@ export const TARGETS = [
       return { clip: '#ui' };
     },
   },
+  {
+    key: 'practice-dps-tracker',
+    label: 'Eastbrook hub training dummy with the practice DPS tracker (live run + a previous run)',
+    when: ['ui/hud/practice', 'content/practice_dummies'],
+    // Desktop and the landscape mobile HUD: the strip rides #right-tracker-stack,
+    // which re-seats on the touch layout, so both arms are evidence.
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      const staged = await page.evaluate(() => {
+        document.querySelector('#gpu-notice')?.remove();
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        const game = window.__game;
+        const sim = game?.sim;
+        const player = sim?.player;
+        if (!game || !sim || !player) return { ok: false, reason: 'offline world is unavailable' };
+        // The hub dummy is the nearest training_dummy to a fresh character
+        // (the Highwatch one is 700 yards north).
+        let dummy = null;
+        let best = Infinity;
+        for (const e of sim.entities.values()) {
+          if (e.kind !== 'mob' || e.templateId !== 'training_dummy' || e.dead) continue;
+          const d = (e.pos.x - player.pos.x) ** 2 + (e.pos.z - player.pos.z) ** 2;
+          if (d < best) {
+            best = d;
+            dummy = e;
+          }
+        }
+        if (!dummy) return { ok: false, reason: 'no training dummy in the offline world' };
+        // Stand two yards south of it, facing north onto the dummy, so both the
+        // post and the tracker are in frame.
+        player.pos.x = dummy.pos.x;
+        player.pos.z = dummy.pos.z - 2.5;
+        player.pos.y = dummy.pos.y;
+        if (player.prevPos) {
+          player.prevPos.x = player.pos.x;
+          player.prevPos.y = player.pos.y;
+          player.prevPos.z = player.pos.z;
+        }
+        player.facing = 0;
+        game.input.camYaw = 0;
+        sim.rebucket?.(player);
+        sim.setPlayerLevel?.(20, player.id);
+        player.targetId = dummy.id;
+        player.autoAttack = true;
+        return { ok: true };
+      }, {});
+      if (!staged.ok) throw new Error(staged.reason);
+      // First run: swing for a few seconds, stop, and let the meters close the
+      // segment (their idle window is 5s), so the strip has a "previous run".
+      await wait(6000);
+      await page.evaluate(() => {
+        window.__game.sim.player.autoAttack = false;
+      });
+      await wait(6500);
+      // Second run, live at shutter time.
+      await page.evaluate(() => {
+        const sim = window.__game.sim;
+        sim.player.autoAttack = true;
+      });
+      await wait(4500);
+      await pollForSize(page, '#practice-tracker');
+      // The Proving Shore greeting (Ferryman Odo) lands over the scene during
+      // the wait above; dismiss it so the shot shows the HUD, not the dialog.
+      await page.evaluate(() => {
+        for (const button of document.querySelectorAll('button')) {
+          if (/understood/i.test(button.textContent ?? '')) button.click();
+        }
+      });
+      await wait(400);
+      return { clip: '#ui' };
+    },
+  },
 ];
 
 // Grant one staged stack (a plain count, or a specific ItemInstancePayload) and

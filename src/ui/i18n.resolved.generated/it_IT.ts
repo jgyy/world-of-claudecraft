@@ -1258,9 +1258,7 @@ export const it_IT: EnTranslations = {
       "prompt": "Attack the dummy to start a run",
       "previous": "Previous runs",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "Squarcio",
@@ -1297,6 +1295,8 @@ export const it_IT: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/s",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m}m {s}s",
       "seconds": "{s}s",

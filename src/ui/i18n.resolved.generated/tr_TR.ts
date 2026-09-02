@@ -1258,9 +1258,7 @@ export const tr_TR: EnTranslations = {
       "prompt": "Attack the dummy to start a run",
       "previous": "Previous runs",
       "runLabel": "Run {index}",
-      "runSummary": "{total} in {time}",
-      "thousands": "{value}k",
-      "millions": "{value}m"
+      "runSummary": "{total} in {time}"
     },
     "riftTracker": {
       "title": "Yarık",
@@ -1297,6 +1295,8 @@ export const tr_TR: EnTranslations = {
     },
     "meters": {
       "perSecond": "{value}/sn",
+      "thousands": "{value}k",
+      "millions": "{value}m",
       "perSecondRow": "{total} ({rate})",
       "minutesSeconds": "{m}dk {s}sn",
       "seconds": "{s}sn",
