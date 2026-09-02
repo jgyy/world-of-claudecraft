@@ -192,3 +192,22 @@ export const PRACTICE_ROW_CAMPFIRE: [number, number] = [
   PRACTICE_ROW_X + PRACTICE_ROW_CAMPFIRE_OFFSET,
   practiceRowZ(PRACTICE_ROW_ORDER.indexOf(NORMAL_BOSS_DUMMY_ID)),
 ];
+
+// The Eastbrook hub dummy: a second `training_dummy` (zone3.ts owns the
+// template) on the quay pad where every new character first stands, eleven
+// yards inland of the player start (eastbrook_layout.ts services.playerStart,
+// (-94, -58)). The Highwatch row is a level-20 measuring station; this one is
+// the hub's, so a player can test a build, a new piece of gear or a rotation
+// the moment they respec in town instead of riding to the hill above Highwatch.
+//
+// The mark sits on the dock's levelled shelf (zone1.ts levels it flat), six
+// yards east of the quay-walk road centreline (x -92, halfWidth 1.5), clear of
+// Fisherman Brandt (-95, -50), Foreman Odell (-84, -63) and the watchtower and
+// crate colliders on the pad's north edge, so findSafePos never has to move it
+// (tests/training_dummy.test.ts pins that it lands on its authored mark).
+export const HUB_TRAINING_DUMMY_POS = { x: -86, z: -50 } as const;
+
+// radius 0 / count 1, like every dummy camp: rng-free in the spawn loop.
+export const HUB_PRACTICE_DUMMY_CAMPS: CampDef[] = [
+  { mobId: 'training_dummy', center: { ...HUB_TRAINING_DUMMY_POS }, radius: 0, count: 1 },
+];

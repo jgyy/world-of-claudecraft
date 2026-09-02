@@ -169,7 +169,11 @@ import {
   PALMREACH_ROADS,
   PALMREACH_ZONE,
 } from './content/palmreach';
-import { PRACTICE_DUMMY_CAMPS, PRACTICE_DUMMY_MOBS } from './content/practice_dummies';
+import {
+  HUB_PRACTICE_DUMMY_CAMPS,
+  PRACTICE_DUMMY_CAMPS,
+  PRACTICE_DUMMY_MOBS,
+} from './content/practice_dummies';
 import { STATIONS } from './content/professions';
 import {
   PROVING_SHORE_CAMPS,
@@ -559,6 +563,11 @@ export const CAMPS: CampDef[] = [
   // private streams (mob/idle_rng.ts) move: a content append like this one
   // legitimately re-mints the parity goldens without touching a draw digest.
   ...PROVING_SHORE_CAMPS,
+  // The Eastbrook hub dummy (content/practice_dummies.ts) is last of all: the
+  // dummy branch of the spawn loop draws no rng, so this entry can move no
+  // earlier camp's draws, and appending it keeps every earlier entity id
+  // (and so every id-seeded private stream) exactly where it was.
+  ...HUB_PRACTICE_DUMMY_CAMPS,
 ];
 
 // Escort quest runs (src/sim/escort.ts): defs authored per realm, merged here
