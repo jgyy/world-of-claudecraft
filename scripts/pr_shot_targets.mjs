@@ -11773,6 +11773,100 @@ export const TARGETS = [
     },
   },
   {
+    key: 'hub-sparring-master',
+    label: 'Drillmaster Hale beside the Eastbrook hub dummy, his greeting and quest open',
+    when: ['tutorial/dummy_drill'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.camera-prompt-backdrop')?.remove();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('#gpu-notice')?.remove();
+      });
+      // The loading curtain: observe it rise, then wait for it to lift with
+      // the HUD painted (the entry-flow idiom used by the loading-screen
+      // targets), or the shutter photographs "Entering the world".
+      try {
+        await page.waitForFunction(
+          () => document.querySelector('#loading-screen')?.classList.contains('visible'),
+          { timeout: 10000 },
+        );
+      } catch {
+        // A warm load can finish before this recipe starts.
+      }
+      // The curtain rises more than once (the world load, the "Entering the
+      // world" arrival warmup a beat later, and again for a few seconds after
+      // the teleport below re-prepares the zone), so a single hidden check
+      // can pass in a gap: require it to stay hidden for 3 continuous seconds.
+      const curtainSettled = async () => {
+        let hiddenStreak = 0;
+        for (let i = 0; i < 450 && hiddenStreak < 15; i++) {
+          const settled = await page.evaluate(() => {
+            const loading = document.querySelector('#loading-screen');
+            const ui = document.querySelector('#ui');
+            return (
+              document.body.classList.contains('game-active') &&
+              !!ui &&
+              getComputedStyle(ui).display !== 'none' &&
+              !!loading &&
+              !loading.classList.contains('visible') &&
+              !!window.__game?.sim
+            );
+          });
+          hiddenStreak = settled ? hiddenStreak + 1 : 0;
+          await wait(200);
+        }
+        if (hiddenStreak < 15) throw new Error('loading curtain never settled');
+      };
+      await curtainSettled();
+      // Stand a few yards south of Hale, facing north across him and the
+      // dummy, then open his dialog (the gossip-crafting-shortcut idiom:
+      // window.__game attaches a beat after the entry flow, so retry).
+      let setup = { ok: false, reason: 'staging never ran' };
+      for (let attempt = 0; attempt < 20 && !setup.ok; attempt++) {
+        setup = await page.evaluate(() => {
+          const game = window.__game;
+          const sim = game?.sim;
+          const player = sim?.player;
+          if (!game || !sim || !player) return { ok: false, reason: 'no sim' };
+          const hale = [...sim.entities.values()].find((e) => e.templateId === 'drillmaster_hale');
+          if (!hale) return { ok: false, reason: 'no drillmaster_hale entity' };
+          player.pos.x = hale.pos.x;
+          player.pos.z = hale.pos.z + 3;
+          player.pos.y = hale.pos.y;
+          if (player.prevPos) {
+            player.prevPos.x = player.pos.x;
+            player.prevPos.y = player.pos.y;
+            player.prevPos.z = player.pos.z;
+          }
+          player.facing = 0;
+          game.input.camYaw = 0;
+          sim.rebucket?.(player);
+          player.targetId = hale.id;
+          game.hud.openQuestDialog(hale.id);
+          return { ok: true };
+        });
+        if (!setup.ok) await wait(500);
+      }
+      if (!setup.ok) throw new Error(`sparring master setup failed: ${setup.reason}`);
+      await curtainSettled();
+      const open = await pollForSize(page, '#quest-dialog');
+      if (!open) throw new Error('quest dialog did not open');
+      // The Proving Shore greeting (Ferryman Odo) can land over the scene;
+      // dismiss it so the shot shows Hale's dialog, not the island's.
+      await page.evaluate(() => {
+        for (const button of document.querySelectorAll('button')) {
+          if (/understood/i.test(button.textContent ?? '')) button.click();
+        }
+        document.querySelector('.camera-prompt-backdrop')?.remove();
+        document.querySelector('#gpu-notice')?.remove();
+      });
+      await wait(800);
+      return { clip: '#ui' };
+    },
+  },
+  {
     key: 'practice-dps-tracker',
     label: 'Eastbrook hub training dummy with the practice DPS tracker (live run + a previous run)',
     when: ['ui/hud/practice', 'content/practice_dummies'],
