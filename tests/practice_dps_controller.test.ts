@@ -114,8 +114,8 @@ describe('PracticeDpsController', () => {
     }));
     controller.update(0);
     expect(element.innerHTML).toContain('12.3k');
-    await ensureLocaleLoaded('de');
-    setLanguage('de');
+    await ensureLocaleLoaded('de_DE');
+    setLanguage('de_DE');
     try {
       controller.update(PRACTICE_PAINT_INTERVAL_MS);
       expect(element.innerHTML).toContain('12,3k');
