@@ -459,7 +459,7 @@ const WHO_RESULT_LIMIT = 50;
 // character (self-trade by dual-boxing) is no longer needed. GMs are exempt.
 const MAX_ACTIVE_SESSIONS_PER_ACCOUNT = 1;
 // WS protocol-level ping cadence; see the keepalive interval in start().
-const WS_KEEPALIVE_PING_MS = 30_000;
+export const WS_KEEPALIVE_PING_MS = 30_000;
 const RESTART_COUNTDOWN_TOTAL_SECONDS = 600;
 const RESTART_COUNTDOWN_STEPS = [
   { atSeconds: 0, text: 'Server restart in 10 minutes.' },

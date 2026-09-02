@@ -49,11 +49,15 @@ export function noteClientFrame(ws: object, nowMs = Date.now()): void {
 
 // True when the socket's silence, measured only up to the PREVIOUS sweep,
 // exceeds the deadline. Stopping the measurement at the previous sweep is what
-// makes the verdict stall-proof: Node runs at least one poll phase between two
-// timer firings, so every frame that arrived before the previous sweep has
-// been processed (and stamped) by the time this sweep runs. Frames that arrived
-// since may still be queued behind a stall, so that interval is never counted.
-// A socket with no stamp yet (handshake just finished) is never judged.
+// makes the verdict stall-tolerant: a frame that arrived before the previous
+// sweep is normally processed (and stamped) in the poll phase that follows it,
+// well before this sweep, while frames that arrived since may still be queued
+// behind a stall, so that interval is never counted. The ordering is not an
+// absolute guarantee (a very large fd backlog, or an async inflate if
+// permessage-deflate were ever enabled on the WebSocketServer, can carry a
+// frame to a later turn), which is why the deadline is many ping intervals
+// long: a live client has answered several pings inside it. A socket with no
+// stamp yet (handshake just finished) is never judged.
 export function socketSilentPastDeadline(ws: object, lastSweepAtMs: number): boolean {
   const lastFrameAt = lastFrameAtBySocket.get(ws);
   if (lastFrameAt === undefined) return false;
