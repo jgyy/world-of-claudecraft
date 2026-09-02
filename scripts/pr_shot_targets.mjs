@@ -317,14 +317,17 @@ async function openMarketBrowse(page) {
   return pollForSize(page, '#market-window');
 }
 
-// Open Esc options -> Interface -> Combat by CLICKING the rendered controls rather
-// than reaching past them, so the shot proves the row is reachable the way a player
-// reaches it. Interface is the 4th main-menu row (buildOptionsMenu; the optional Bug
-// Report row is appended AFTER it, so the index is stable) and Combat the 4th tab of
-// the Interface panel (INTERFACE_TAB_ORDER). The window is force-hidden first so the
-// toggle is deterministic regardless of prior state, the same trick the bags target uses.
-async function openInterfaceCombatTab(page) {
+// Open Esc options -> Interface -> the given tab by CLICKING the rendered controls
+// rather than reaching past them, so the shot proves the row is reachable the way a
+// player reaches it. Interface is the 4th main-menu row (buildOptionsMenu; the optional
+// Bug Report row is appended AFTER it, so the index is stable) and tabIndex indexes
+// INTERFACE_TAB_ORDER (general, frames, chat, combat). The window is force-hidden first
+// so the toggle is deterministic regardless of prior state, the same trick the bags
+// target uses, and the one-shot tutorial greeting (Ferryman Odo) is dismissed by its
+// own button, the way a player does, so it never sits over the clip.
+async function openInterfaceTab(page, tabIndex) {
   await page.evaluate(() => {
+    document.querySelector('#tutorial-greeting button')?.click();
     const el = document.querySelector('#options-menu');
     if (el) el.style.display = 'none';
     window.__game?.hud?.toggleOptionsMenu?.();
@@ -334,31 +337,14 @@ async function openInterfaceCombatTab(page) {
     document.querySelectorAll('#options-menu .opt-btn')[3]?.click();
   });
   await wait(400);
-  await page.evaluate(() => {
-    document.querySelectorAll('#options-menu .opt-tab')[3]?.click();
-  });
+  await page.evaluate((i) => {
+    document.querySelectorAll('#options-menu .opt-tab')[i]?.click();
+  }, tabIndex);
   return pollForSize(page, '#options-menu');
 }
 
-// Same click path as openInterfaceCombatTab, landing on the Chat tab (3rd of
-// INTERFACE_TAB_ORDER) instead: the chat-facing rows, including the profanity
-// filter switch that moved here from Key Bindings.
-async function openInterfaceChatTab(page) {
-  await page.evaluate(() => {
-    const el = document.querySelector('#options-menu');
-    if (el) el.style.display = 'none';
-    window.__game?.hud?.toggleOptionsMenu?.();
-  });
-  await wait(400);
-  await page.evaluate(() => {
-    document.querySelectorAll('#options-menu .opt-btn')[3]?.click();
-  });
-  await wait(400);
-  await page.evaluate(() => {
-    document.querySelectorAll('#options-menu .opt-tab')[2]?.click();
-  });
-  return pollForSize(page, '#options-menu');
-}
+const openInterfaceCombatTab = (page) => openInterfaceTab(page, 3);
+const openInterfaceChatTab = (page) => openInterfaceTab(page, 2);
 
 // Press the real "Unlock interface" button (the first row of the Combat tabpanel,
 // which interfaceUnlockRow appends ahead of the declarative list), then close the
@@ -2060,6 +2046,27 @@ export const TARGETS = [
     async capture(page) {
       await openInterfaceChatTab(page);
       return { clip: '#options-menu' };
+    },
+  },
+  {
+    key: 'keybinds-input-toggles',
+    label: 'Key Bindings panel: the input toggles above the key list',
+    when: ['ui/options_window'],
+    variants: [{ key: 'desktop' }],
+    async capture(page) {
+      await page.evaluate(() => {
+        document.querySelector('#tutorial-greeting button')?.click();
+        const el = document.querySelector('#options-menu');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleOptionsMenu?.();
+      });
+      await wait(400);
+      await page.evaluate(() => {
+        // Key Bindings is the first row on the main options menu.
+        document.querySelectorAll('#options-menu .opt-btn')[0]?.click();
+      });
+      const open = await pollForSize(page, '#options-menu .kb-cols');
+      return open ? { clip: '#options-menu' } : {};
     },
   },
   {
