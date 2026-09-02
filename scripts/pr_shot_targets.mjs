@@ -2141,6 +2141,80 @@ export const TARGETS = [
     },
   },
   {
+    key: 'crucible-bop-trade',
+    label: 'Crucible raid loot in bags: off-set piece unbound, windowed tier piece tradeable',
+    // The Heartspring Amulet report: the bag hover must NOT read Soulbound on an
+    // off-set Crucible drop any more, and a tier piece still inside its
+    // bind-on-pickup party trade window must advertise the trade click instead
+    // of the Soulbound deny. Two hovers, one variant each, shot with the trade
+    // mode forced on the bags core's own gate (the pure decision the click and
+    // the hint share), since a real trade needs a second online client.
+    when: ['sim/content/ignivar_loot', 'ui/bags_view'],
+    variants: [
+      { key: 'offset-amulet', name: 'Heartspring Amulet' },
+      { key: 'tier-window', name: 'Slagbreaker Helm', tradeOpen: true },
+    ],
+    async capture(page, variant) {
+      await page.evaluate((tradeOpen) => {
+        const sim = window.__game?.sim;
+        // The trade-mode hint needs the HUD to believe a trade window is open
+        // (hud.tradeOpen reads sim.tradeInfo !== null); a real one needs a
+        // second online client, so shadow the prototype getter on this one
+        // instance with a non-null stub. Screenshot rig only.
+        if (tradeOpen && sim) {
+          Object.defineProperty(sim, 'tradeInfo', {
+            configurable: true,
+            get: () => ({ partner: 'Toralin', mine: [], theirs: [] }),
+          });
+        }
+        try {
+          sim?.addItem('heartspring_amulet', 1);
+          // A windowed copy exactly as the loot roll grants it: the same clock
+          // the tooltip countdown reads, two hours out, two drop-mates.
+          const now = sim?.lockoutNowMs?.() ?? 0;
+          sim?.addItemInstance?.('slagbreaker_helmet', {
+            partyTrade: { untilMs: now + 2 * 60 * 60 * 1000, eligible: ['Toralin', 'Mira'] },
+          });
+        } catch {}
+        const el = document.querySelector('#bags');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleBags?.();
+      }, variant.tradeOpen === true);
+      await wait(500);
+      const box = await page.evaluate((name) => {
+        const cell = Array.from(document.querySelectorAll('#bags button')).find((b) =>
+          b.getAttribute('aria-label')?.includes(name),
+        );
+        if (!cell) return null;
+        const r = cell.getBoundingClientRect();
+        return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+      }, variant.name);
+      if (!box) throw new Error(`${variant.name} cell not found in bags`);
+      await page.mouse.move(box.x, box.y);
+      await wait(500);
+      const clip = await page.evaluate(() => {
+        const bags = document.querySelector('#bags')?.getBoundingClientRect();
+        const tip = document.querySelector('#tooltip')?.getBoundingClientRect();
+        if (!bags) return null;
+        const boxes = [bags, tip].filter((b) => b && b.width > 0);
+        const x = Math.max(0, Math.min(...boxes.map((b) => b.left)) - 8);
+        const y = Math.max(0, Math.min(...boxes.map((b) => b.top)) - 8);
+        const right = Math.min(window.innerWidth, Math.max(...boxes.map((b) => b.right)) + 8);
+        const bottom = Math.min(window.innerHeight, Math.max(...boxes.map((b) => b.bottom)) + 8);
+        return { x, y, width: right - x, height: bottom - y };
+      });
+      if (!clip) return { clip: '#bags' };
+      // A rect clip (bags plus the hover tooltip beside it) is shot here; the
+      // runner's own shoot() takes selector clips only.
+      await page.screenshot({
+        // biome-ignore lint/suspicious/noUndeclaredEnvVars: Screenshot-only CLI input is not a Turbo task dependency.
+        path: `${process.env.SHOTS_DIR ?? 'pr-shots'}/crucible-bop-trade-${variant.key}.png`,
+        clip,
+      });
+      return {};
+    },
+  },
+  {
     key: 'inventory-sort',
     label: 'Bags after the one-shot Sort (stacks consolidated, ladder order)',
     when: ['sim/inventory_sort', 'ui/bags_window'],
