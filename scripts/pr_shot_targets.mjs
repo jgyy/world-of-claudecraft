@@ -340,6 +340,26 @@ async function openInterfaceCombatTab(page) {
   return pollForSize(page, '#options-menu');
 }
 
+// Same click path as openInterfaceCombatTab, landing on the Chat tab (3rd of
+// INTERFACE_TAB_ORDER) instead: the chat-facing rows, including the profanity
+// filter switch that moved here from Key Bindings.
+async function openInterfaceChatTab(page) {
+  await page.evaluate(() => {
+    const el = document.querySelector('#options-menu');
+    if (el) el.style.display = 'none';
+    window.__game?.hud?.toggleOptionsMenu?.();
+  });
+  await wait(400);
+  await page.evaluate(() => {
+    document.querySelectorAll('#options-menu .opt-btn')[3]?.click();
+  });
+  await wait(400);
+  await page.evaluate(() => {
+    document.querySelectorAll('#options-menu .opt-tab')[2]?.click();
+  });
+  return pollForSize(page, '#options-menu');
+}
+
 // Press the real "Unlock interface" button (the first row of the Combat tabpanel,
 // which interfaceUnlockRow appends ahead of the declarative list), then close the
 // menu so the loosened HUD is what the camera sees.
@@ -2029,6 +2049,16 @@ export const TARGETS = [
     variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
     async capture(page) {
       await openInterfaceCombatTab(page);
+      return { clip: '#options-menu' };
+    },
+  },
+  {
+    key: 'interface-chat-tab',
+    label: 'Interface options, Chat tab: the chat rows (profanity filter lives here)',
+    when: ['ui/options_window', 'ui/options_view'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      await openInterfaceChatTab(page);
       return { clip: '#options-menu' };
     },
   },
