@@ -2972,7 +2972,7 @@ export class GameServer {
   // gives up on the dead socket, which can take minutes; with it, the
   // client's reconnect backoff resumes within a ping interval or two (the
   // client tolerates that rejection mid-reconnect, src/net/reconnect_policy.ts).
-  // shouldReapSession also applies the hard two-minute silence deadline that
+  // shouldReapSession also applies the hard ten-minute silence deadline that
   // holds even when the stall guard below pauses the pong verdict.
   pingLiveSessions(): void {
     const now = Date.now();

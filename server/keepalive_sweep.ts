@@ -33,9 +33,9 @@ export function keepaliveSweepDelayed(
 // at all, long after the client's bounded reconnect had given up. This
 // deadline caps that: a socket the server has processed NO frame from (no
 // input, no pong; browsers answer pings on their own, so an AFK or
-// backgrounded tab still counts as alive) for two whole minutes is terminated
+// backgrounded tab still counts as alive) for ten whole minutes is terminated
 // into the linkdead grace, and the character resumes on the next reconnect.
-export const WS_SILENCE_DEADLINE_MS = 2 * 60 * 1000;
+export const WS_SILENCE_DEADLINE_MS = 10 * 60 * 1000;
 
 // Last frame PROCESSED from each socket, keyed on socket identity (a resume
 // swaps the session's socket, so the replacement starts its own clock and a

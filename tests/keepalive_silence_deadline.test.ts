@@ -8,8 +8,8 @@ import {
 } from '../server/keepalive_sweep';
 
 describe('keepalive silence deadline', () => {
-  it('is two minutes, and longer than any span the pong check could be paused for by one late sweep', () => {
-    expect(WS_SILENCE_DEADLINE_MS).toBe(2 * 60 * 1000);
+  it('is ten minutes, and longer than any span the pong check could be paused for by one late sweep', () => {
+    expect(WS_SILENCE_DEADLINE_MS).toBe(10 * 60 * 1000);
     expect(WS_SILENCE_DEADLINE_MS).toBeGreaterThan(KEEPALIVE_STALL_FACTOR * 30_000);
   });
 
