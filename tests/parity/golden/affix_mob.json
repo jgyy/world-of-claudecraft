@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1001,
-      "state": "2f97ea1d",
+      "state": "06cbf5e3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -61,7 +61,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -104,7 +104,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             }
           ],
           "blockChance": 0.05,
@@ -118,7 +118,7 @@
           "fiveSecondRule": 99,
           "healPower": 5,
           "hp": 100,
-          "id": 996,
+          "id": 994,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -163,8 +163,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 1003,
-      "state": "d0cbdb18",
-      "events": "e73b4d11",
+      "state": "a4c1e5c0",
+      "events": "08a4934f",
       "rng": {
         "draws": 15,
         "digest": "d60aed87"
@@ -174,8 +174,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 1003,
-      "state": "6ef33ec3",
-      "events": "7d90f59d",
+      "state": "093a8a3b",
+      "events": "cf6031b5",
       "rng": {
         "draws": 29,
         "digest": "492e0874"
@@ -185,8 +185,8 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 1003,
-      "state": "ea27b590",
-      "events": "69812301",
+      "state": "344a49d2",
+      "events": "64dd7649",
       "rng": {
         "draws": 104,
         "digest": "795cead3"
@@ -252,7 +252,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -297,7 +297,7 @@
               "name": "Battle Stance",
               "remaining": 3597.5,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             },
             {
               "duration": 9,
@@ -328,7 +328,7 @@
           "fiveSecondRule": 101.5,
           "healPower": 5,
           "hp": 375,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 13,
@@ -371,7 +371,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "auras": [
             {
@@ -387,7 +387,7 @@
           ],
           "autoAttack": true,
           "bossDamagers": [
-            996
+            994
           ],
           "comboUntil": -1,
           "critChance": 0.05,
@@ -396,7 +396,7 @@
           "facing": -1.570796,
           "fallStartY": -2,
           "fiveSecondRule": 99,
-          "forcedTargetId": 996,
+          "forcedTargetId": 994,
           "forcedTargetTimer": 3,
           "hostile": true,
           "hp": 59800,
@@ -430,12 +430,12 @@
             "armor": 48
           },
           "swingTimer": 0.334615,
-          "tappedById": 996,
-          "targetId": 996,
+          "tappedById": 994,
+          "targetId": 994,
           "templateId": "old_greyjaw",
           "threat": [
             [
-              996,
+              994,
               200
             ]
           ],
@@ -446,7 +446,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "combatTimer": 0.5,
@@ -484,7 +484,7 @@
             "armor": 168
           },
           "swingTimer": 1.35,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "ridge_stalker",
           "weapon": {
             "max": 50,
@@ -498,7 +498,7 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 1003,
-      "state": "d06c457f",
+      "state": "4daffb25",
       "events": "741638a5",
       "rng": {
         "draws": 134,
@@ -565,7 +565,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -610,7 +610,7 @@
               "name": "Battle Stance",
               "remaining": 3597.3,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             },
             {
               "duration": 9,
@@ -642,7 +642,7 @@
           "fiveSecondRule": 101.7,
           "healPower": 5,
           "hp": 375,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 13,
@@ -685,7 +685,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "auras": [
             {
@@ -701,7 +701,7 @@
           ],
           "autoAttack": true,
           "bossDamagers": [
-            996
+            994
           ],
           "combatTimer": 0.2,
           "comboUntil": -1,
@@ -711,7 +711,7 @@
           "facing": -1.570796,
           "fallStartY": -2,
           "fiveSecondRule": 99,
-          "forcedTargetId": 996,
+          "forcedTargetId": 994,
           "forcedTargetTimer": 2.8,
           "hostile": true,
           "hp": 59800,
@@ -745,12 +745,12 @@
             "armor": 48
           },
           "swingTimer": 0.134615,
-          "tappedById": 996,
-          "targetId": 996,
+          "tappedById": 994,
+          "targetId": 994,
           "templateId": "old_greyjaw",
           "threat": [
             [
-              996,
+              994,
               200
             ]
           ],
@@ -761,7 +761,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "combatTimer": 0.7,
@@ -799,7 +799,7 @@
             "armor": 168
           },
           "swingTimer": 1.15,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "ridge_stalker",
           "weapon": {
             "max": 50,

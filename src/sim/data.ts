@@ -170,7 +170,6 @@ import {
   PALMREACH_ZONE,
 } from './content/palmreach';
 import {
-  HUB_PRACTICE_DUMMY_CAMPS,
   HUB_PRACTICE_NPCS,
   HUB_PRACTICE_QUEST_ORDER,
   HUB_PRACTICE_QUESTS,
@@ -460,12 +459,9 @@ export const NPCS: Record<string, NpcDef> = {
   // loop skips it). Kept in NPCS so the online client and world_entity_i18n can
   // resolve its name; spirit.ts spawns a copy at every graveyard.
   [SPIRIT_HEALER_NPC_ID]: SPIRIT_HEALER,
-  // The Eastbrook quay's sparring master (content/practice_dummies.ts),
-  // appended last so no EARLIER NPC's id moves. NPCs spawn before camps and
-  // ground objects, so every entity minted after the NPC loop still shifts
-  // by one (id-seeded private streams such as mob/idle_rng.ts move with
-  // them, deterministically); no shared-stream draw changes, which is why
-  // the parity goldens re-mint without any draw digest moving.
+  // The Eastbrook quay's sparring master (content/practice_dummies.ts):
+  // dynamic, spawned after the player by sim/hub_practice.ts, so his
+  // presence in this record moves no id.
   ...HUB_PRACTICE_NPCS,
 };
 
@@ -575,13 +571,8 @@ export const CAMPS: CampDef[] = [
   // private streams (mob/idle_rng.ts) move: a content append like this one
   // legitimately re-mints the parity goldens without touching a draw digest.
   ...PROVING_SHORE_CAMPS,
-  // The Eastbrook hub dummy (content/practice_dummies.ts) is last of all: the
-  // dummy branch of the spawn loop draws no rng, so this entry can move no
-  // camp's draws, and appending it keeps every CAMP entity's id where it
-  // was. Everything minted after the camp loop (the player first) still
-  // shifts by one, which is why the parity goldens re-mint with it (no draw
-  // digest moves); same as the Proving Shore append above.
-  ...HUB_PRACTICE_DUMMY_CAMPS,
+  // The Eastbrook hub dummy is NOT a camp: it spawns with its sparring master
+  // after the player (sim/hub_practice.ts), so it consumes only trailing ids.
 ];
 
 // Escort quest runs (src/sim/escort.ts): defs authored per realm, merged here

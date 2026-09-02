@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1001,
-      "state": "1314ae40",
+      "state": "3013e788",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -61,7 +61,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -108,7 +108,7 @@
           "fiveSecondRule": 99,
           "healPower": 11,
           "hp": 57,
-          "id": 996,
+          "id": 994,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -153,8 +153,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 1001,
-      "state": "83edecd2",
-      "events": "837f7480",
+      "state": "7f83ce42",
+      "events": "b4175b02",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -164,7 +164,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1001,
-      "state": "411c5522",
+      "state": "efceed52",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -175,7 +175,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 1001,
-      "state": "f420c1a3",
+      "state": "830b6db3",
       "events": "741638a5",
       "rng": {
         "draws": 146,
@@ -186,7 +186,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 1001,
-      "state": "a0c8f19c",
+      "state": "1c89b4ec",
       "events": "741638a5",
       "rng": {
         "draws": 335,
@@ -197,8 +197,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 1002,
-      "state": "ac389d87",
-      "events": "f3d31f76",
+      "state": "89c6205b",
+      "events": "b7e069ca",
       "rng": {
         "draws": 487,
         "digest": "60c31138"
@@ -208,8 +208,8 @@
       "tick": 120,
       "time": 6,
       "nextId": 1003,
-      "state": "2fe859f4",
-      "events": "396bfad5",
+      "state": "d584b210",
+      "events": "361c7aaf",
       "rng": {
         "draws": 677,
         "digest": "55e5f1d8"
@@ -219,8 +219,8 @@
       "tick": 140,
       "time": 7,
       "nextId": 1003,
-      "state": "2ff20bd1",
-      "events": "2ccef85b",
+      "state": "806eb029",
+      "events": "01525c69",
       "rng": {
         "draws": 902,
         "digest": "764eb9c7"
@@ -230,8 +230,8 @@
       "tick": 160,
       "time": 8,
       "nextId": 1003,
-      "state": "af1bfe88",
-      "events": "0052e7cb",
+      "state": "7ea0c490",
+      "events": "a5f3a6d7",
       "rng": {
         "draws": 1147,
         "digest": "3f5358b9"
@@ -241,8 +241,8 @@
       "tick": 180,
       "time": 9,
       "nextId": 1003,
-      "state": "3e607702",
-      "events": "2dded14a",
+      "state": "fffa3f98",
+      "events": "0d8e9282",
       "rng": {
         "draws": 1423,
         "digest": "5ff960aa"
@@ -252,8 +252,8 @@
       "tick": 200,
       "time": 10,
       "nextId": 1003,
-      "state": "ab5c9eaa",
-      "events": "3678d8ef",
+      "state": "e189effa",
+      "events": "d3d61a85",
       "rng": {
         "draws": 1692,
         "digest": "83d0b4ee"
@@ -263,8 +263,8 @@
       "tick": 220,
       "time": 11,
       "nextId": 1003,
-      "state": "0c86b8b7",
-      "events": "e7bf7fd7",
+      "state": "13cc56d3",
+      "events": "7aba250b",
       "rng": {
         "draws": 1853,
         "digest": "4dfcf0d9"
@@ -274,7 +274,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 1003,
-      "state": "1f7bdfd3",
+      "state": "0a93ed4f",
       "events": "741638a5",
       "rng": {
         "draws": 1853,
@@ -340,7 +340,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -391,7 +391,7 @@
           "fiveSecondRule": 6.05,
           "healPower": 28,
           "hp": 50000,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 12,
@@ -454,7 +454,7 @@
           "moveSpeed": 5,
           "onGround": true,
           "overpowerUntil": -1,
-          "ownerId": 996,
+          "ownerId": 994,
           "petAutoSkill": true,
           "petAutoTaunt": true,
           "petMode": "aggressive",
@@ -526,12 +526,12 @@
             "armor": 70
           },
           "swingTimer": 0.05,
-          "tappedById": 996,
-          "targetId": 996,
+          "tappedById": 994,
+          "targetId": 994,
           "templateId": "forest_wolf",
           "threat": [
             [
-              996,
+              994,
               21
             ],
             [
@@ -551,8 +551,8 @@
       "tick": 224,
       "time": 11.2,
       "nextId": 1003,
-      "state": "5deda58f",
-      "events": "476350d8",
+      "state": "dc97434f",
+      "events": "816ff2ca",
       "rng": {
         "draws": 1890,
         "digest": "f679fd73"
@@ -617,7 +617,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -668,7 +668,7 @@
           "fiveSecondRule": 6.25,
           "healPower": 28,
           "hp": 50000,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 12,
@@ -732,7 +732,7 @@
           "moveSpeed": 5,
           "onGround": true,
           "overpowerUntil": -1,
-          "ownerId": 996,
+          "ownerId": 994,
           "petAutoSkill": true,
           "petAutoTaunt": true,
           "petMode": "aggressive",
@@ -805,12 +805,12 @@
             "armor": 70
           },
           "swingTimer": 1.85,
-          "tappedById": 996,
-          "targetId": 996,
+          "tappedById": 994,
+          "targetId": 994,
           "templateId": "forest_wolf",
           "threat": [
             [
-              996,
+              994,
               21
             ],
             [

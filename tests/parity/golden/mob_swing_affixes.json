@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1001,
-      "state": "2f97ea1d",
+      "state": "06cbf5e3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -62,7 +62,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -105,7 +105,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             }
           ],
           "blockChance": 0.05,
@@ -119,7 +119,7 @@
           "fiveSecondRule": 99,
           "healPower": 5,
           "hp": 100,
-          "id": 996,
+          "id": 994,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -164,8 +164,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 1007,
-      "state": "6ed900ee",
-      "events": "70d4657c",
+      "state": "64769424",
+      "events": "c63c5110",
       "rng": {
         "draws": 55,
         "digest": "56ee185d"
@@ -175,8 +175,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 1007,
-      "state": "b1511042",
-      "events": "7514f623",
+      "state": "1b2148dc",
+      "events": "efbf1cbd",
       "rng": {
         "draws": 100,
         "digest": "81fe35c6"
@@ -186,8 +186,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 1007,
-      "state": "23753959",
-      "events": "6ca0f532",
+      "state": "ebefe173",
+      "events": "01af85c8",
       "rng": {
         "draws": 326,
         "digest": "5baa2bec"
@@ -197,7 +197,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 1007,
-      "state": "7ec1568c",
+      "state": "cdc0399a",
       "events": "741638a5",
       "rng": {
         "draws": 326,
@@ -265,7 +265,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -310,7 +310,7 @@
               "name": "Battle Stance",
               "remaining": 3597,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             },
             {
               "duration": 3,
@@ -364,7 +364,7 @@
           "fiveSecondRule": 102,
           "healPower": 5,
           "hp": 1000000,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 16,
@@ -449,8 +449,8 @@
             "armor": 306
           },
           "swingTimer": 1.05,
-          "tappedById": 996,
-          "targetId": 996,
+          "tappedById": 994,
+          "targetId": 994,
           "templateId": "mogger_lackey",
           "threat": [
             [
@@ -465,7 +465,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "combatTimer": 0.5,
@@ -501,7 +501,7 @@
             "armor": 136
           },
           "swingTimer": 0.65,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "webwood_spider",
           "weapon": {
             "max": 41,
@@ -510,7 +510,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "combatTimer": 0.5,
@@ -548,7 +548,7 @@
             "armor": 272
           },
           "swingTimer": 1.05,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "gravecaller_summoner",
           "weapon": {
             "max": 66,
@@ -557,7 +557,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "auras": [
             {
@@ -609,7 +609,7 @@
             "armor": 476
           },
           "swingTimer": 2.3,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "warlord_drogmar",
           "weapon": {
             "max": 109,
@@ -639,7 +639,7 @@
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
-          "ownerId": 996,
+          "ownerId": 994,
           "petMode": "defensive",
           "pos": {
             "x": 3,
@@ -707,7 +707,7 @@
             "armor": 70
           },
           "swingTimer": 1.25,
-          "tappedById": 996,
+          "tappedById": 994,
           "templateId": "forest_wolf",
           "threat": [
             [
@@ -727,7 +727,7 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 1007,
-      "state": "631ba332",
+      "state": "f5bef3a4",
       "events": "741638a5",
       "rng": {
         "draws": 363,
@@ -795,7 +795,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -840,7 +840,7 @@
               "name": "Battle Stance",
               "remaining": 3596.8,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             },
             {
               "duration": 3,
@@ -894,7 +894,7 @@
           "fiveSecondRule": 102.2,
           "healPower": 5,
           "hp": 1000000,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 16,
@@ -979,8 +979,8 @@
             "armor": 306
           },
           "swingTimer": 0.85,
-          "tappedById": 996,
-          "targetId": 996,
+          "tappedById": 994,
+          "targetId": 994,
           "templateId": "mogger_lackey",
           "threat": [
             [
@@ -995,7 +995,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "combatTimer": 0.7,
@@ -1031,7 +1031,7 @@
             "armor": 136
           },
           "swingTimer": 0.45,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "webwood_spider",
           "weapon": {
             "max": 41,
@@ -1040,7 +1040,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "combatTimer": 0.7,
@@ -1078,7 +1078,7 @@
             "armor": 272
           },
           "swingTimer": 0.85,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "gravecaller_summoner",
           "weapon": {
             "max": 66,
@@ -1087,7 +1087,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "auras": [
             {
@@ -1139,7 +1139,7 @@
             "armor": 476
           },
           "swingTimer": 2.1,
-          "targetId": 996,
+          "targetId": 994,
           "templateId": "warlord_drogmar",
           "weapon": {
             "max": 109,
@@ -1169,7 +1169,7 @@
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
-          "ownerId": 996,
+          "ownerId": 994,
           "petMode": "defensive",
           "pos": {
             "x": 3,
@@ -1237,7 +1237,7 @@
             "armor": 70
           },
           "swingTimer": 1.05,
-          "tappedById": 996,
+          "tappedById": 994,
           "templateId": "forest_wolf",
           "threat": [
             [

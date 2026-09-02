@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1001,
-      "state": "cfd5680e",
+      "state": "a98ac9a6",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -61,7 +61,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -108,7 +108,7 @@
           "fiveSecondRule": 99,
           "healPower": 13,
           "hp": 54,
-          "id": 996,
+          "id": 994,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -153,8 +153,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 1002,
-      "state": "64cfd986",
-      "events": "e3e8152f",
+      "state": "e69df38a",
+      "events": "21cbf91d",
       "rng": {
         "draws": 1,
         "digest": "cf5e57a1"
@@ -164,8 +164,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 1002,
-      "state": "0705125b",
-      "events": "14f8f5a2",
+      "state": "7522656b",
+      "events": "ebe30304",
       "rng": {
         "draws": 2,
         "digest": "6d172bb5"
@@ -175,8 +175,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 1002,
-      "state": "77c2f1d6",
-      "events": "b5c4ff4d",
+      "state": "5667085e",
+      "events": "1987285d",
       "rng": {
         "draws": 150,
         "digest": "478ace8d"
@@ -186,8 +186,8 @@
       "tick": 80,
       "time": 4,
       "nextId": 1002,
-      "state": "0de42d58",
-      "events": "b8a3a511",
+      "state": "7162c4b4",
+      "events": "0b9b9ed9",
       "rng": {
         "draws": 316,
         "digest": "650546d2"
@@ -197,8 +197,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 1002,
-      "state": "ab59a0e4",
-      "events": "710a8892",
+      "state": "0ebe19ba",
+      "events": "8dee3a3e",
       "rng": {
         "draws": 356,
         "digest": "6ca1a356"
@@ -279,7 +279,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -328,7 +328,7 @@
               "name": "Icicles",
               "remaining": 29.95,
               "school": "frost",
-              "sourceId": 996,
+              "sourceId": 994,
               "stacks": 5
             }
           ],
@@ -348,7 +348,7 @@
           "fiveSecondRule": 0.25,
           "healPower": 41,
           "hp": 418,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -399,7 +399,7 @@
               "name": "Frozen Orb",
               "remaining": 2.25,
               "school": "frost",
-              "sourceId": 996,
+              "sourceId": 994,
               "value": 0.7
             },
             {
@@ -409,7 +409,7 @@
               "name": "Rimelance",
               "remaining": 8.95,
               "school": "frost",
-              "sourceId": 996,
+              "sourceId": 994,
               "value": 0.6
             }
           ],
@@ -448,11 +448,11 @@
             "z": -54
           },
           "stats": {},
-          "tappedById": 996,
+          "tappedById": 994,
           "templateId": "training_dummy",
           "threat": [
             [
-              996,
+              994,
               219
             ]
           ],
@@ -466,7 +466,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 1002,
-      "state": "ab59a0e4",
+      "state": "0ebe19ba",
       "events": "741638a5",
       "rng": {
         "draws": 356,
@@ -548,7 +548,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -597,7 +597,7 @@
               "name": "Icicles",
               "remaining": 29.95,
               "school": "frost",
-              "sourceId": 996,
+              "sourceId": 994,
               "stacks": 5
             }
           ],
@@ -617,7 +617,7 @@
           "fiveSecondRule": 0.25,
           "healPower": 41,
           "hp": 418,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -668,7 +668,7 @@
               "name": "Frozen Orb",
               "remaining": 2.25,
               "school": "frost",
-              "sourceId": 996,
+              "sourceId": 994,
               "value": 0.7
             },
             {
@@ -678,7 +678,7 @@
               "name": "Rimelance",
               "remaining": 8.95,
               "school": "frost",
-              "sourceId": 996,
+              "sourceId": 994,
               "value": 0.6
             }
           ],
@@ -717,11 +717,11 @@
             "z": -54
           },
           "stats": {},
-          "tappedById": 996,
+          "tappedById": 994,
           "templateId": "training_dummy",
           "threat": [
             [
-              996,
+              994,
               219
             ]
           ],

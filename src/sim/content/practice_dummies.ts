@@ -207,7 +207,10 @@ export const PRACTICE_ROW_CAMPFIRE: [number, number] = [
 // (tests/training_dummy.test.ts pins that it lands on its authored mark).
 export const HUB_TRAINING_DUMMY_POS = { x: -86, z: -50 } as const;
 
-// radius 0 / count 1, like every dummy camp: rng-free in the spawn loop.
+// NOT a CAMPS entry: the hub yard (dummy + sparring master) spawns after the
+// player in sim/hub_practice.ts so it consumes only trailing entity ids;
+// a camp appended here shifted the player's id and re-minted every parity
+// golden. The def stays as data for the spawn hook and its tests.
 export const HUB_PRACTICE_DUMMY_CAMPS: CampDef[] = [
   { mobId: 'training_dummy', center: { ...HUB_TRAINING_DUMMY_POS }, radius: 0, count: 1 },
 ];
@@ -236,6 +239,10 @@ export const HUB_PRACTICE_NPCS: Record<string, NpcDef> = {
     facing: -0.38,
     color: 0x7a4a4a,
     questIds: ['q_hub_know_your_numbers'],
+    // Spawned by sim/hub_practice.ts after the player (trailing ids), not by
+    // the surface-placement loop; the def stays in NPCS so the online client
+    // resolves his questIds and world_entity_i18n his strings.
+    dynamic: true,
     greeting:
       'That post behind me is a training dummy, $C: hit it as hard and as often as you like, it never swings back and it never goes down. What it is FOR is the tally. Hold Shift and press H to open your Damage Meters: every blow you land on it is counted there, per second and in total, and the practice strip beside it keeps your best run so you can tell whether a new weapon, a new talent or a new rotation actually made you stronger.',
   },

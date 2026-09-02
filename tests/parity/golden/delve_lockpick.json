@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1001,
-      "state": "4d14b05f",
+      "state": "69311947",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -60,7 +60,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger",
@@ -105,7 +105,7 @@
           "fiveSecondRule": 99,
           "healPower": 6,
           "hp": 62,
-          "id": 996,
+          "id": 994,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -158,8 +158,8 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 1011,
-      "state": "8b1eb10f",
-      "events": "ef5a3664",
+      "state": "13f0bb4f",
+      "events": "54713470",
       "rng": {
         "draws": 5,
         "digest": "110f9090"
@@ -169,8 +169,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 1011,
-      "state": "802b722a",
-      "events": "127f76dd",
+      "state": "b3ee081a",
+      "events": "632a979f",
       "rng": {
         "draws": 5,
         "digest": "110f9090"
@@ -180,8 +180,8 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 1011,
-      "state": "7232af5f",
-      "events": "9b5bfa08",
+      "state": "1baa55f7",
+      "events": "ad3931da",
       "rng": {
         "draws": 8,
         "digest": "b2debc02"
@@ -191,8 +191,8 @@
       "tick": 38,
       "time": 1.9,
       "nextId": 1013,
-      "state": "936076d1",
-      "events": "391d088b",
+      "state": "733334c7",
+      "events": "85fc71f1",
       "rng": {
         "draws": 11,
         "digest": "6ae3afff"
@@ -280,7 +280,7 @@
             "eastbrook_ledger"
           ],
           "delveMarks": 3,
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger",
@@ -327,7 +327,7 @@
           "fiveSecondRule": 100.9,
           "healPower": 6,
           "hp": 50000,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 7,
@@ -393,7 +393,7 @@
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
-          "ownerId": 996,
+          "ownerId": 994,
           "petMode": "defensive",
           "pos": {
             "x": 104200,
@@ -441,7 +441,7 @@
           },
           "lootFfaTimer": 59.6,
           "lootRecipientIds": [
-            996
+            994
           ],
           "lootable": true,
           "maxHp": 635,
@@ -464,7 +464,7 @@
           },
           "stompTimer": 10.5,
           "swingTimer": 0.75,
-          "tappedById": 996,
+          "tappedById": 994,
           "templateId": "deacon_varric",
           "weapon": {
             "max": 51,
@@ -516,7 +516,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1013,
-      "state": "f1d28c0d",
+      "state": "9f35eeab",
       "events": "741638a5",
       "rng": {
         "draws": 11,
@@ -527,7 +527,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 1013,
-      "state": "f1d28c0d",
+      "state": "9f35eeab",
       "events": "741638a5",
       "rng": {
         "draws": 11,
@@ -616,7 +616,7 @@
             "eastbrook_ledger"
           ],
           "delveMarks": 3,
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger",
@@ -663,7 +663,7 @@
           "fiveSecondRule": 101,
           "healPower": 6,
           "hp": 50000,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 7,
@@ -729,7 +729,7 @@
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
-          "ownerId": 996,
+          "ownerId": 994,
           "petMode": "defensive",
           "pos": {
             "x": 104200,
@@ -777,7 +777,7 @@
           },
           "lootFfaTimer": 59.5,
           "lootRecipientIds": [
-            996
+            994
           ],
           "lootable": true,
           "maxHp": 635,
@@ -800,7 +800,7 @@
           },
           "stompTimer": 10.5,
           "swingTimer": 0.75,
-          "tappedById": 996,
+          "tappedById": 994,
           "templateId": "deacon_varric",
           "weapon": {
             "max": 51,

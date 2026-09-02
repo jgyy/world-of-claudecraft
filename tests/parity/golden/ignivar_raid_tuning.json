@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1001,
-      "state": "aab7573c",
+      "state": "c6eb4032",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -60,7 +60,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -103,7 +103,7 @@
               "name": "Battle Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             }
           ],
           "blockChance": 0.05,
@@ -117,7 +117,7 @@
           "fiveSecondRule": 99,
           "healPower": 5,
           "hp": 100,
-          "id": 996,
+          "id": 994,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -162,8 +162,8 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 1012,
-      "state": "235e6a0d",
-      "events": "e9967fbc",
+      "state": "21fb629f",
+      "events": "caee1426",
       "rng": {
         "draws": 1,
         "digest": "3650680b"
@@ -173,8 +173,8 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 1012,
-      "state": "54913577",
-      "events": "d4d604c6",
+      "state": "f1ea8b09",
+      "events": "4dd44acc",
       "rng": {
         "draws": 1,
         "digest": "3650680b"
@@ -184,8 +184,8 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 1012,
-      "state": "769eff11",
-      "events": "8201952b",
+      "state": "203f1bd1",
+      "events": "dabf52c1",
       "rng": {
         "draws": 1,
         "digest": "3650680b"
@@ -195,7 +195,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 1012,
-      "state": "85d20394",
+      "state": "773076b0",
       "events": "741638a5",
       "rng": {
         "draws": 1,
@@ -206,7 +206,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 1012,
-      "state": "85d20394",
+      "state": "773076b0",
       "events": "741638a5",
       "rng": {
         "draws": 1,
@@ -279,7 +279,7 @@
           "delveClears": {},
           "delveDaily": {},
           "dungeonDifficulty": "heroic",
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -615,7 +615,7 @@
               "name": "Battle Stance",
               "remaining": 3599.8,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             }
           ],
           "blockChance": 0.05,
@@ -628,7 +628,7 @@
           "fiveSecondRule": 99.2,
           "healPower": 5,
           "hp": 500,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -669,7 +669,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "castRemaining": 7.9,
@@ -689,7 +689,7 @@
           "id": 1001,
           "ignivar": {
             "attemptParticipantIds": [
-              996,
+              994,
               1009,
               1010,
               1011
@@ -711,7 +711,7 @@
             "rotatingRaysDirection": 1,
             "rotatingRaysFacing": 0.031416,
             "rotatingRaysHitCooldownByPlayerId": {
-              "996": 0.45
+              "994": 0.45
             },
             "rotatingRaysNextDirection": -1,
             "rotatingRaysPulseTimer": 0.45,
@@ -905,7 +905,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 1012,
-      "state": "659e7a31",
+      "state": "52ad0c7b",
       "events": "aa102bca",
       "rng": {
         "draws": 4,
@@ -916,7 +916,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 1012,
-      "state": "659e7a31",
+      "state": "52ad0c7b",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -989,7 +989,7 @@
           "delveClears": {},
           "delveDaily": {},
           "dungeonDifficulty": "heroic",
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -1325,7 +1325,7 @@
               "name": "Battle Stance",
               "remaining": 3599.75,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             }
           ],
           "blockChance": 0.05,
@@ -1338,7 +1338,7 @@
           "fiveSecondRule": 99.25,
           "healPower": 5,
           "hp": 500,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -1379,7 +1379,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "castAim": {
@@ -1387,7 +1387,7 @@
             "z": -1230.607402
           },
           "castRemaining": 3,
-          "castTargetId": 996,
+          "castTargetId": 994,
           "castTotal": 3,
           "castingAbility": "Searing Torrent",
           "ccImmune": true,
@@ -1403,7 +1403,7 @@
           "id": 1001,
           "ignivar": {
             "attemptParticipantIds": [
-              996,
+              994,
               1009,
               1010,
               1011
@@ -1428,7 +1428,7 @@
             "rotatingRaysDirection": 1,
             "rotatingRaysFacing": 0.031416,
             "rotatingRaysHitCooldownByPlayerId": {
-              "996": 0.45
+              "994": 0.45
             },
             "rotatingRaysNextDirection": -1,
             "rotatingRaysPulseTimer": 0.45,
@@ -1676,7 +1676,7 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 1012,
-      "state": "40ef2383",
+      "state": "4d5f5a37",
       "events": "741638a5",
       "rng": {
         "draws": 5,
@@ -1687,7 +1687,7 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 1012,
-      "state": "40ef2383",
+      "state": "4d5f5a37",
       "events": "741638a5",
       "rng": {
         "draws": 5,
@@ -1760,7 +1760,7 @@
           "delveClears": {},
           "delveDaily": {},
           "dungeonDifficulty": "heroic",
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -2096,7 +2096,7 @@
               "name": "Battle Stance",
               "remaining": 3599.75,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             }
           ],
           "blockChance": 0.05,
@@ -2109,7 +2109,7 @@
           "dodgeChance": 0.0695,
           "fiveSecondRule": 99.3,
           "healPower": 5,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -2150,7 +2150,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "idle",
           "autoAttack": true,
           "ccImmune": true,
@@ -2350,7 +2350,7 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 1012,
-      "state": "40ef2383",
+      "state": "4d5f5a37",
       "events": "741638a5",
       "rng": {
         "draws": 5,
@@ -2423,7 +2423,7 @@
           "delveClears": {},
           "delveDaily": {},
           "dungeonDifficulty": "heroic",
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -2759,7 +2759,7 @@
               "name": "Battle Stance",
               "remaining": 3599.75,
               "school": "physical",
-              "sourceId": 996
+              "sourceId": 994
             }
           ],
           "blockChance": 0.05,
@@ -2772,7 +2772,7 @@
           "dodgeChance": 0.0695,
           "fiveSecondRule": 99.3,
           "healPower": 5,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 20,
@@ -2813,7 +2813,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "idle",
           "autoAttack": true,
           "ccImmune": true,

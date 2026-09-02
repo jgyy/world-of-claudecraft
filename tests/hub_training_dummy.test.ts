@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { isBlocked } from '../src/sim/colliders';
 import {
   HUB_PRACTICE_DUMMY_CAMPS,
+  HUB_PRACTICE_NPCS,
   HUB_TRAINING_DUMMY_POS,
 } from '../src/sim/content/practice_dummies';
 import { BUILTIN_WORLD, CAMPS, PLAYER_START } from '../src/sim/data';
@@ -20,10 +21,12 @@ const SEED = 42;
 
 // Only the hub dummy is targeted here; the rest of the world is Sim-construction
 // overhead (the trimming tests/training_dummy.test.ts uses for the Highwatch one).
+// The yard spawns off the sparring master's def (sim/hub_practice.ts), so the
+// trimmed world keeps exactly that one NPC and no camps.
 const HUB_DUMMY_WORLD: WorldContent = {
   ...BUILTIN_WORLD,
-  camps: HUB_PRACTICE_DUMMY_CAMPS,
-  npcs: {},
+  camps: [],
+  npcs: HUB_PRACTICE_NPCS,
   groundObjects: [],
 };
 
@@ -41,12 +44,24 @@ function dummyOf(sim: Sim): Entity {
 }
 
 describe('Eastbrook hub training dummy', () => {
-  it('is appended LAST in CAMPS so no earlier entity id or rng draw moves', () => {
-    const last = CAMPS[CAMPS.length - 1];
-    expect(last).toEqual(HUB_PRACTICE_DUMMY_CAMPS[0]);
-    expect(last.mobId).toBe('training_dummy');
-    expect(last.radius).toBe(0);
-    expect(last.count).toBe(1);
+  it('is NOT a camp: it spawns after the player so no construction-time id or rng draw moves', () => {
+    expect(CAMPS.some((camp) => camp.center.z === HUB_TRAINING_DUMMY_POS.z)).toBe(false);
+    expect(HUB_PRACTICE_DUMMY_CAMPS[0].mobId).toBe('training_dummy');
+    // With the yard and without it, the player and every earlier entity keep
+    // their ids; the yard's own two entities trail the player.
+    const withYard = new Sim({ seed: SEED, playerClass: 'warrior', world: BUILTIN_WORLD });
+    const { drillmaster_hale: _hale, ...npcsWithoutHale } = BUILTIN_WORLD.npcs;
+    const withoutYard = new Sim({
+      seed: SEED,
+      playerClass: 'warrior',
+      world: { ...BUILTIN_WORLD, npcs: npcsWithoutHale },
+    });
+    expect(withYard.playerId).toBe(withoutYard.playerId);
+    expect(withYard.entities.size).toBe(withoutYard.entities.size + 2);
+    expect(dummyOf(withYard).id).toBeGreaterThan(withYard.playerId);
+    expect(
+      [...withoutYard.entities.values()].some((e) => e.templateId === 'drillmaster_hale'),
+    ).toBe(false);
   });
 
   it('stands on its authored mark, on dry standable ground, a few yards from the player start', () => {

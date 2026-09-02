@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 1001,
-      "state": "4d14b05f",
+      "state": "69311947",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -59,7 +59,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger",
@@ -104,7 +104,7 @@
           "fiveSecondRule": 99,
           "healPower": 6,
           "hp": 62,
-          "id": 996,
+          "id": 994,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -157,8 +157,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 1002,
-      "state": "be42dcdd",
-      "events": "42b073a9",
+      "state": "8a8875ad",
+      "events": "802875d7",
       "rng": {
         "draws": 12,
         "digest": "f30c489f"
@@ -168,8 +168,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 1002,
-      "state": "6dbb4c8e",
-      "events": "a5b08015",
+      "state": "f0e934ba",
+      "events": "307a53f1",
       "rng": {
         "draws": 19,
         "digest": "d68c35cb"
@@ -179,8 +179,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 1002,
-      "state": "e24ba111",
-      "events": "67b3b1e2",
+      "state": "f0f74d71",
+      "events": "07d168b8",
       "rng": {
         "draws": 162,
         "digest": "fe151d49"
@@ -190,7 +190,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 1002,
-      "state": "43a50225",
+      "state": "7875ed01",
       "events": "741638a5",
       "rng": {
         "draws": 249,
@@ -257,7 +257,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 996,
+          "entityId": 994,
           "equipment": {
             "chest": "footpad_jerkin",
             "mainhand": "rusty_dagger",
@@ -307,7 +307,7 @@
           "fiveSecondRule": 102.6,
           "healPower": 6,
           "hp": 49992,
-          "id": 996,
+          "id": 994,
           "inCombat": true,
           "kind": "player",
           "level": 10,
@@ -359,7 +359,7 @@
           }
         },
         {
-          "aggroTargetId": 996,
+          "aggroTargetId": 994,
           "aiState": "attack",
           "autoAttack": true,
           "combatTimer": 1.2,
@@ -402,12 +402,12 @@
             "armor": 40
           },
           "swingTimer": 0.45,
-          "tappedById": 996,
-          "targetId": 996,
+          "tappedById": 994,
+          "targetId": 994,
           "templateId": "forest_wolf",
           "threat": [
             [
-              996,
+              994,
               105
             ]
           ],

@@ -113,9 +113,12 @@ describe('Drillmaster Hale stands beside the hub dummy', () => {
     }
   });
 
-  it('is appended last in NPCS so no earlier NPC id moves', () => {
-    const ids = Object.keys(NPCS);
-    expect(ids[ids.length - 1]).toBe(HUB_SPARRING_MASTER_ID);
+  it('is dynamic (spawned after the player by hub_practice.ts, never by the surface loop)', () => {
+    expect(NPCS[HUB_SPARRING_MASTER_ID].dynamic).toBe(true);
+    const sim = new Sim({ seed: SEED, playerClass: 'warrior', world: BUILTIN_WORLD });
+    const hale = [...sim.entities.values()].filter((e) => e.templateId === HUB_SPARRING_MASTER_ID);
+    expect(hale).toHaveLength(1);
+    expect(hale[0].id).toBeGreaterThan(sim.playerId);
   });
 });
 
