@@ -318,6 +318,52 @@ describe('transfer-locked instanced copies (issue 1165)', () => {
   });
 });
 
+describe('bind-on-pickup party trade window (bags side)', () => {
+  // The clock is injected the way the HUD injects IWorld.partyTradeMsRemaining.
+  const WINDOWED = { partyTrade: { untilMs: 1000, eligible: ['Alice', 'Bob'] } };
+  const open = (untilMs: number): number => untilMs;
+  const closed = (): number => 0;
+
+  it('lets a soulbound copy with an unexpired window stage into an open trade', () => {
+    expect(
+      bagItemAction(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, WINDOWED, undefined, open),
+    ).toBe('trade');
+    expect(
+      bagTooltipHintKey(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, WINDOWED, undefined, open),
+    ).toBe('itemUi.tooltip.clickTradeOffer');
+  });
+
+  it('still blocks the trade click once the window has expired', () => {
+    expect(
+      bagItemAction(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, WINDOWED, undefined, closed),
+    ).toBe('transferBlockedSoulbound');
+    expect(
+      bagTooltipHintKey(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, WINDOWED, undefined, closed),
+    ).toBe('hudChrome.itemSoulbound');
+  });
+
+  it('blocks a windowless soulbound copy and a caller that injects no clock', () => {
+    expect(
+      bagItemAction(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, undefined, undefined, open),
+    ).toBe('transferBlockedSoulbound');
+    expect(bagItemAction(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, WINDOWED)).toBe(
+      'transferBlockedSoulbound',
+    );
+  });
+
+  it('opens the trade channel only: mail, market, and vendor stay soulbound-blocked', () => {
+    expect([
+      bagItemAction(ITEMS.mark, { ...NO_MODE, mailAttach: true }, WINDOWED, undefined, open),
+      bagItemAction(ITEMS.mark, { ...NO_MODE, marketSell: true }, WINDOWED, undefined, open),
+      bagItemAction(ITEMS.mark, { ...NO_MODE, vendorOpen: true }, WINDOWED, undefined, open),
+    ]).toEqual([
+      'transferBlockedSoulbound',
+      'transferBlockedSoulbound',
+      'transferBlockedSoulbound',
+    ]);
+  });
+});
+
 describe('soulbound transfer affordances', () => {
   it('blocks trade, mail, market, and vendor clicks instead of staging a Heroic Mark transfer', () => {
     expect([

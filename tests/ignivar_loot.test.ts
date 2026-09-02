@@ -91,8 +91,30 @@ describe('ignivar loot: every gear piece is item level 35 and budget-exact', () 
       expect(item.quality, item.id).toBe('epic');
       expect(itemLevel(item), `${item.id} ilvl`).toBe(35);
       expect(item.requiredLevel, item.id).toBe(20);
+    }
+  });
+
+  // Maintainer ruling (Discord, 2026-09-01, the Heartspring Amulet report):
+  // only TIER gear binds on pickup. Every set piece (and every sigil that buys
+  // one) stays soulbound; the off-set armor, jewelry, held items, and weapons
+  // trade freely, so a raid that hands the wrong drop to the wrong looter can
+  // pass it on after the party trade window would have closed.
+  it('binds only tier gear: set pieces stay soulbound, off-set loot trades freely', () => {
+    for (const item of Object.values(IGNIVAR_SET_ITEMS)) {
       expect(item.soulbound, item.id).toBe(true);
     }
+    const offSet = [
+      ...Object.values(IGNIVAR_OFFSET_ITEMS),
+      ...Object.values(IGNIVAR_JEWELRY_ITEMS),
+      ...Object.values(IGNIVAR_HELD_ITEMS),
+      ...Object.values(IGNIVAR_WEAPON_ITEMS),
+    ];
+    expect(offSet.length).toBeGreaterThan(0);
+    for (const item of offSet) {
+      expect(item.soulbound, item.id).toBeFalsy();
+    }
+    // The reported item, pinned by name so the ruling cannot silently regress.
+    expect(ITEMS.heartspring_amulet.soulbound).toBeFalsy();
   });
 
   it('every gear piece carries exactly its item-level stat budget', () => {

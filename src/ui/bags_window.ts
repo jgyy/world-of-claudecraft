@@ -1546,6 +1546,7 @@ export class BagsWindow {
       this.bagMode(),
       s.instance,
       s.craftedRecipeId,
+      (untilMs) => this.deps.world().partyTradeMsRemaining(untilMs),
     );
     switch (action) {
       case 'transferBlockedSoulbound':
@@ -1715,6 +1716,7 @@ export class BagsWindow {
         mode,
         s.instance,
         s.craftedRecipeId,
+        (untilMs) => this.deps.world().partyTradeMsRemaining(untilMs),
       );
       const extra = key ? `<div class="tt-sub">${esc(t(key))}</div>` : '';
       // Advertise the shift-click partial deposit on a splittable stack, the bank

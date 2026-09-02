@@ -156,6 +156,26 @@ export type BagTooltipHintKey =
   | 'hudChrome.mailbox.cannotMail'
   | '';
 
+/** Whether a soulbound copy's bind-on-pickup party trade window
+ *  (src/sim/loot/bop_trade_window.ts) is still open, as far as the bags side
+ *  can tell: the marker is present and the world's clock says time remains.
+ *  WHY IT EXISTS: before this gate the bag click refused every soulbound def
+ *  on sight (the Heartspring Amulet report: the tooltip promised a party
+ *  trade the click then denied as Soulbound), while the sim's trade offer arm
+ *  (social/trade.ts) accepts exactly these windowed copies. The bags side only
+ *  opens the CLICK; who may receive the copy stays the server's decision
+ *  (hud.errors.tradeWindowIneligible on a non-drop-mate), so this reads the
+ *  clock and nothing else. Mail, market, and vendor never consult it: the
+ *  window opens the trade channel alone. */
+export function bopWindowOpen(
+  instance: ItemInstancePayload | undefined,
+  partyTradeMsRemaining: ((untilMs: number) => number) | undefined,
+): boolean {
+  const untilMs = instance?.partyTrade?.untilMs;
+  if (untilMs === undefined || !Number.isFinite(untilMs) || !partyTradeMsRemaining) return false;
+  return partyTradeMsRemaining(untilMs) > 0;
+}
+
 /** Decide what a click on a bag item does. Mirrors the original click handler's
  *  priority order exactly: trade > mail-attach > market-sell > vendor >
  *  guild-bank-deposit > bank-deposit > vault-deposit > bank-open-no-target >
@@ -173,8 +193,18 @@ export function bagItemAction(
    *  by the bank socket arm (bank sockets store bare ids, so a marked bag
    *  deposits instead). The vault preserves it, so it never blocks there. */
   craftedRecipeId?: string,
+  /** IWorld.partyTradeMsRemaining: the ONE clock that can judge the copy's
+   *  bind-on-pickup party trade window (bopWindowOpen below). Absent, a
+   *  soulbound copy reads as windowless (the safe direction). */
+  partyTradeMsRemaining?: (untilMs: number) => number,
 ): BagAction {
-  if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
+  if (
+    item.soulbound &&
+    (mode.mailAttach ||
+      mode.marketSell ||
+      mode.vendorOpen ||
+      (mode.tradeOpen && !bopWindowOpen(instance, partyTradeMsRemaining)))
+  )
     return 'transferBlockedSoulbound';
   if (mode.tradeOpen) return 'trade';
   if (mode.mailAttach) {
@@ -435,8 +465,17 @@ export function bagTooltipHintKey(
   /** The slot's crafting provenance marker, the bagItemAction twin: read only
    *  by the vaultDeposit arm. */
   craftedRecipeId?: string,
+  /** The bagItemAction twin: the world's party-trade clock, so the hint
+   *  advertises the trade click exactly when the click would stage it. */
+  partyTradeMsRemaining?: (untilMs: number) => number,
 ): BagTooltipHintKey {
-  if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
+  if (
+    item.soulbound &&
+    (mode.mailAttach ||
+      mode.marketSell ||
+      mode.vendorOpen ||
+      (mode.tradeOpen && !bopWindowOpen(instance, partyTradeMsRemaining)))
+  )
     return 'hudChrome.itemSoulbound';
   if (mode.tradeOpen) return 'itemUi.tooltip.clickTradeOffer';
   if (mode.mailAttach) {
