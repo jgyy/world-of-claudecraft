@@ -171,6 +171,9 @@ import {
 } from './content/palmreach';
 import {
   HUB_PRACTICE_DUMMY_CAMPS,
+  HUB_PRACTICE_NPCS,
+  HUB_PRACTICE_QUEST_ORDER,
+  HUB_PRACTICE_QUESTS,
   PRACTICE_DUMMY_CAMPS,
   PRACTICE_DUMMY_MOBS,
 } from './content/practice_dummies';
@@ -457,6 +460,9 @@ export const NPCS: Record<string, NpcDef> = {
   // loop skips it). Kept in NPCS so the online client and world_entity_i18n can
   // resolve its name; spirit.ts spawns a copy at every graveyard.
   [SPIRIT_HEALER_NPC_ID]: SPIRIT_HEALER,
+  // The Eastbrook quay's sparring master (content/practice_dummies.ts),
+  // appended last of all for the same insertion-order stability reason.
+  ...HUB_PRACTICE_NPCS,
 };
 
 // Graveyards + the Spirit Healer: re-exported so the Sim and spirit.ts import the
@@ -481,6 +487,7 @@ export const QUESTS: Record<string, QuestDef> = {
   ...FARSHORE_QUESTS,
   ...PROVING_SHORE_QUESTS,
   ...IGNIVAR_RAID_LORE_QUESTS,
+  ...HUB_PRACTICE_QUESTS,
 };
 
 export const QUEST_ORDER: string[] = [
@@ -501,6 +508,7 @@ export const QUEST_ORDER: string[] = [
   ...FARSHORE_QUEST_ORDER,
   ...PROVING_SHORE_QUEST_ORDER,
   ...IGNIVAR_RAID_LORE_QUEST_ORDER,
+  ...HUB_PRACTICE_QUEST_ORDER,
 ];
 
 // The Book of Deeds catalog (content/deeds.ts) is deliberately NOT re-exported

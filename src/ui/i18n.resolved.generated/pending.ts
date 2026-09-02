@@ -10,6 +10,13 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -21,6 +28,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "es_ES": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -32,6 +46,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "fr_FR": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -43,6 +64,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "fr_CA": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -55,6 +83,13 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -66,6 +101,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "de_DE": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -109,6 +151,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.runSummary"
   ],
   "pt_BR": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -128,6 +177,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.runSummary"
   ],
   "cs_CZ": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -139,6 +195,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "nl_NL": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -150,6 +213,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "pl_PL": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -161,6 +231,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "id_ID": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -172,6 +249,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "tr_TR": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -183,6 +267,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "sv_SE": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -194,6 +285,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "vi_VN": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",
@@ -205,6 +303,13 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.practiceDps.title"
   ],
   "da_DK": [
+    "entities.npcs.drillmaster_hale.greeting",
+    "entities.npcs.drillmaster_hale.name",
+    "entities.npcs.drillmaster_hale.title",
+    "entities.quests.q_hub_know_your_numbers.completion",
+    "entities.quests.q_hub_know_your_numbers.objectives.0.label",
+    "entities.quests.q_hub_know_your_numbers.text",
+    "entities.quests.q_hub_know_your_numbers.title",
     "hudChrome.meters.millions",
     "hudChrome.meters.thousands",
     "hudChrome.practiceDps.liveDps",

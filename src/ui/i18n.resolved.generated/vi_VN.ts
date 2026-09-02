@@ -15921,6 +15921,11 @@ export const vi_VN: EnTranslations = {
         "title": "Người Giữ Bờ Cát",
         "greeting": "Thủy triều lấy đi và thủy triều trả lại, {playerName}. Ta ghi sổ cả hai: những gì lũ kẻ bò cắp đi từ xác tàu, và những gì đôi tay lương thiện mang trở lên theo con đường này."
       },
+      "drillmaster_hale": {
+        "name": "Drillmaster Hale",
+        "title": "Quay Sparring Master",
+        "greeting": "That post behind me is a training dummy, {className}: hit it as hard and as often as you like, it never swings back and it never goes down. What it is FOR is the tally. Hold Shift and press H to open your Damage Meters: every blow you land on it is counted there, per second and in total, and the practice strip beside it keeps your best run so you can tell whether a new weapon, a new talent or a new rotation actually made you stronger."
+      },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
         "title": "Người Canh Thủy Triều",
@@ -18113,6 +18118,16 @@ export const vi_VN: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Vệ Quan Xác Tàu bị hạ gục"
+          }
+        }
+      },
+      "q_hub_know_your_numbers": {
+        "title": "Know Your Numbers",
+        "text": "Strength you cannot measure is strength you cannot improve, {playerName}. Left-click the training dummy behind me to make it your target, then hold Shift and press H to open your Damage Meters before you swing. Now land ten blows on it, swings or spells, and watch the window while you do: it counts what you deal per second and in total, and the practice strip beside it remembers your best run. When the ten are in, come back and tell me the number.",
+        "completion": "Ten blows, and now you know what they are worth. Every time you take a new weapon, a new talent or a new idea, {playerName}, come back to this post and put a number on it. The meters are honest even when the vale is not.",
+        "objectives": {
+          "0": {
+            "label": "Blow landed on the Training Dummy"
           }
         }
       },
