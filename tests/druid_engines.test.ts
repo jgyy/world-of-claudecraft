@@ -530,5 +530,12 @@ describe('Loping Stride', () => {
     completed(sim, 'bear_form');
     expect(player.auras.some((aura) => aura.id === 'loping_stride')).toBe(false);
     expect(moveSpeedMult(player)).toBe(1);
+
+    // The ICD decays through the authoritative tick: past 20s the next shift
+    // grants the sprint again.
+    for (let tick = 0; tick < 20 * 20 + 1; tick++) sim.tick();
+    completed(sim, 'cat_form');
+    expect(player.auras.some((aura) => aura.id === 'loping_stride')).toBe(true);
+    expect(moveSpeedMult(player)).toBeCloseTo(1.6);
   });
 });
