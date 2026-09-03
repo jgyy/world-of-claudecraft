@@ -4631,15 +4631,9 @@ export const en_XA: EnTranslations = {
         "normal": "[Ñóŕɱáļ]",
         "heroic": "[Ĥéŕóíç]"
       },
-      "riftRank": {
-        "C": "[Ŕíƒţ Ŕáñķ Ç]",
-        "B": "[Ŕíƒţ Ŕáñķ Ɓ]",
-        "A": "[Ŕíƒţ Ŕáñķ Á]",
-        "S": "[Ŕíƒţ Ŕáñķ Š]"
-      },
+      "riftRankLabel": "[Ŕíƒţ Ŕáñķ {rank}]",
       "source": "[{category}: {name}]",
       "sourceWithContext": "[{category}: {name} ({context})]",
-      "riftRankSource": "[{rank}]",
       "chance": "[{pct}% çĥáñçé]",
       "guaranteed": "[Ĝúáŕáñţééð]",
       "gatedByQuest": "[Ŵĥíļé ɋúéšţíñĝ: {quest}]",

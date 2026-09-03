@@ -1,30 +1,23 @@
-// Thin DOM consumer for the Loot Explorer window (#loot-explorer-window): a
-// searchable, filterable catalog of every item in the game and where to get
-// it (bosses by dungeon/raid/delve/open-world/rift, vendors, quests, world
-// objects, starting gear), grouped by encounter and difficulty on request.
+// Thin DOM consumer for the Loot Explorer window (#loot-explorer-window),
+// the deeds/reliquary/dungeon-finder pure-core + thin-consumer family: the
+// static index and its filtering live in loot_explorer_view.ts; this module
+// only paints and wires callbacks through injected deps, never imports Hud,
+// never hardcodes the window id (Hud owns it, see src/ui/hud.ts).
 //
-// Pure-core + thin-consumer split (the deeds/reliquary/dungeon-finder
-// family): the static index and its filtering live in loot_explorer_view.ts;
-// this module only paints and wires callbacks through injected deps. It never
-// imports Hud and never hardcodes the window id (Hud owns #loot-explorer-window,
-// see src/ui/hud.ts).
+// Cold window (src/ui/hud/CLAUDE.md): no live IWorld read, so no signature to
+// poll and Hud.update() never touches this file; it rebuilds only on open and
+// on a search/filter/tab interaction (no relocalize() arm, matching the
+// Reliquary/Deeds precedent).
 //
-// Cold window: nothing here reads live IWorld state, so there is no signature
-// to poll and Hud.update() never touches this file (see the root CLAUDE.md
-// pointer to src/ui/hud/CLAUDE.md, the cold-window default). It rebuilds only
-// on open and on a search/filter/tab interaction (no relocalize() fan-out
-// arm, matching the Reliquary/Deeds precedent for this cold-window family).
-//
-// Every row is built as a plain HTML string and inserted via innerHTML, never
-// via document.createElement: this module never reaches a bare document/window
-// global at all (everything it touches comes through the injected root
-// element), so it needs no UI_DOM_MODULES entry (tests/architecture.test.ts).
-// A tooltip is wired AFTER the string lands (querySelector over the real
-// parsed node), never on a node built and discarded before serialization,
-// which is inert (attachTooltip's listeners never reach the document).
+// Every row is a plain HTML string inserted via innerHTML, never
+// document.createElement: this module never reaches a bare document/window
+// global (everything comes through the injected root element), so it needs
+// no UI_DOM_MODULES entry (tests/architecture.test.ts). A tooltip is wired
+// AFTER the string lands (querySelector over the real parsed node), never on
+// a node built and discarded before serialization, which is inert.
 
 import { ITEMS } from '../../../sim/data';
-import type { ItemDef, PlayerClass } from '../../../sim/types';
+import { ALL_CLASSES, type ItemDef, type PlayerClass } from '../../../sim/types';
 import { markDialogRoot } from '../../dialog_root';
 import { itemDisplayName, tEntity } from '../../entity_i18n';
 import { esc } from '../../esc';
@@ -52,17 +45,6 @@ import {
 
 const QUALITY_DEFAULT_COLOR = 'var(--color-quality-default)';
 const STAT_FILTER_KEYS = ['str', 'agi', 'sta', 'int', 'spi', 'armor'] as const;
-const CLASS_FILTER_KEYS = [
-  'warrior',
-  'paladin',
-  'hunter',
-  'rogue',
-  'priest',
-  'shaman',
-  'mage',
-  'warlock',
-  'druid',
-] as const;
 type LootExplorerTab = 'items' | 'encounters';
 
 export interface LootExplorerWindowDeps extends PainterHostPresentation {
@@ -104,9 +86,7 @@ function sourceLine(source: LootExplorerSource): string {
         : t('hudChrome.lootExplorer.source', { category, name: mobName });
     }
     case 'rift':
-      return t('hudChrome.lootExplorer.riftRankSource', {
-        rank: t(`hudChrome.lootExplorer.riftRank.${source.sourceId}` as TranslationKey),
-      });
+      return t('hudChrome.lootExplorer.riftRankLabel', { rank: source.sourceId });
     case 'vendor':
       return t('hudChrome.lootExplorer.source', {
         category,
@@ -168,9 +148,8 @@ function itemRowHtml(item: LootExplorerItem, deps: LootExplorerWindowDeps): stri
     )
     .join('');
   return (
-    // No aria-label override: letting the accessible name compute from the
-    // visible text content (name + every source line) is what makes the
-    // full row content reachable in one focus stop, not just the item name.
+    // No aria-label override: the accessible name computes from the visible
+    // text (name + every source line), reachable in one focus stop.
     `<div class="loot-explorer-row" tabindex="0" role="group" data-focus-key="item:${esc(item.itemId)}">` +
     `${deps.itemIcon(def)}<div class="loot-explorer-row-body">` +
     `<span class="loot-explorer-item-name" style="color:${color}">${esc(name)}</span>` +
@@ -183,19 +162,15 @@ function encounterCardHtml(enc: LootExplorerEncounter, deps: LootExplorerWindowD
   const category = t(categoryLabelKey(enc.category));
   const heading =
     enc.category === 'rift'
-      ? t('hudChrome.lootExplorer.riftRankSource', {
-          rank: t(`hudChrome.lootExplorer.riftRank.${enc.sourceId}` as TranslationKey),
-        })
+      ? t('hudChrome.lootExplorer.riftRankLabel', { rank: enc.sourceId })
       : sourceLine({ category: enc.category, sourceId: enc.sourceId, contextId: enc.contextId });
   const diff = enc.difficulty
     ? ` <span class="loot-explorer-diff">${esc(t(`hudChrome.lootExplorer.difficulty.${enc.difficulty}` as TranslationKey))}</span>`
     : '';
-  // No attachTooltip() here: this cell is serialized to an HTML STRING
-  // (encounterCardHtml returns a string, joined into the panel's innerHTML),
-  // so any listener attached to a live element built here would bind to a
-  // node that is thrown away, never the parsed node that actually lands in
-  // the document. The tooltip is wired in renderBody() after the string is
-  // inserted, the same two-step split itemRowHtml/renderBody already use.
+  // No attachTooltip() here: this cell is serialized to an HTML string, so a
+  // listener bound now would attach to a node that is thrown away, never the
+  // parsed node that lands in the document. Wired in renderBody() instead,
+  // after the string is inserted (same split itemRowHtml/renderBody use).
   const drops = enc.drops
     .map((drop) => {
       const def = itemDefFor(drop.itemId);
@@ -217,7 +192,7 @@ function encounterCardHtml(enc: LootExplorerEncounter, deps: LootExplorerWindowD
     .join('');
   return (
     `<div class="loot-explorer-encounter">` +
-    `<div class="loot-explorer-encounter-title"><span class="loot-explorer-cat-badge loot-explorer-cat-${esc(enc.category)}">${esc(category)}</span>${esc(heading)}${diff}</div>` +
+    `<div class="loot-explorer-encounter-title"><span class="loot-explorer-cat-badge">${esc(category)}</span>${esc(heading)}${diff}</div>` +
     `<div class="loot-explorer-drop-grid">${drops}</div>` +
     `</div>`
   );
@@ -276,10 +251,8 @@ export class LootExplorerWindow {
     this.deps.hideTooltip();
     const el = this.deps.root();
     el.style.display = 'none';
-    // Per-visit, like every sibling catalog window (deeds/reliquary): a
-    // needle typed last session must not silently hide the catalog on the
-    // next open. The category/class/stat/quality filters and the active tab
-    // stay put for the session, the ownership-chip policy those windows use.
+    // Per-visit, like deeds/reliquary: a needle typed last session must not
+    // hide the catalog on the next open. Filters and the active tab persist.
     this.search = '';
     this.deps.restoreFocus(this.openerFocus);
     this.openerFocus = null;
@@ -325,7 +298,7 @@ export class LootExplorerWindow {
       `<div class="loot-explorer-toolbar">` +
       `<input type="search" class="loot-explorer-search" data-search data-focus-key="search" value="${esc(this.search)}" placeholder="${esc(t('hudChrome.lootExplorer.searchPlaceholder'))}" aria-label="${esc(t('hudChrome.lootExplorer.searchAria'))}">` +
       `<select class="loot-explorer-filter" data-filter="category" aria-label="${esc(t('hudChrome.lootExplorer.filterCategoryAria'))}">${optionsHtml(LOOT_EXPLORER_CATEGORIES, this.filters.category, (c) => t(categoryLabelKey(c)))}</select>` +
-      `<select class="loot-explorer-filter" data-filter="requiredClass" aria-label="${esc(t('hudChrome.lootExplorer.filterClassAria'))}">${optionsHtml(CLASS_FILTER_KEYS, this.filters.requiredClass, (c) => tEntity({ kind: 'class', id: c, field: 'name' }))}</select>` +
+      `<select class="loot-explorer-filter" data-filter="requiredClass" aria-label="${esc(t('hudChrome.lootExplorer.filterClassAria'))}">${optionsHtml(ALL_CLASSES, this.filters.requiredClass, (c) => tEntity({ kind: 'class', id: c, field: 'name' }))}</select>` +
       `<select class="loot-explorer-filter" data-filter="statKey" aria-label="${esc(t('hudChrome.lootExplorer.filterStatAria'))}">${optionsHtml(STAT_FILTER_KEYS, this.filters.statKey, (s) => t(statNameKey(s) as TranslationKey))}</select>` +
       `<select class="loot-explorer-filter" data-filter="quality" aria-label="${esc(t('hudChrome.lootExplorer.filterQualityAria'))}">${optionsHtml(['poor', 'common', 'uncommon', 'rare', 'epic', 'legendary'] as const, this.filters.quality, (q) => t(ITEM_QUALITY_LABEL_KEYS[q]))}</select>` +
       `</div>` +

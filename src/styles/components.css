@@ -17926,11 +17926,12 @@
 
 /* ---------- Loot Explorer ---------- */
 /* Cold window (src/ui/hud/loot_explorer/loot_explorer_window.ts): a
-     searchable, filterable catalog of every item and where to get it.
-     Reuses the shared .item-icon quality frame (components.css above) and
-     the .soc-tabs/.soc-tab WAI-ARIA strip look under its own class names
-     (no cross-window class sharing; the reliquary-search precedent for the
-     search field). */
+     searchable, filterable catalog of every item and where to get it. Reuses
+     the shared .item-icon quality frame above and the .soc-tabs/.soc-tab
+     WAI-ARIA strip look under its own class names (the reliquary-search
+     precedent for the search field). Rows and encounter cards share one
+     card look (border/radius/fill); the 16px search font is the iOS
+     anti-zoom floor (.reliquary-search / .deed-search), not a taste call. */
 #loot-explorer-window {
   width: min(90vw, 760px);
   height: min(85vh, 760px);
@@ -17946,41 +17947,34 @@
   padding: 4px 0 8px;
   flex: none;
 }
-/* 16px is the iOS anti-zoom floor (the .reliquary-search / .deed-search
-     contract), not a taste call. */
-.loot-explorer-search {
-  flex: 1 1 180px;
-  min-width: 120px;
+.loot-explorer-search,
+.loot-explorer-filter {
   font-family: var(--ui-font);
-  font-size: 16px;
-  padding: 3px 7px;
+  padding: 3px 6px;
   border-radius: 4px;
   border: 1px solid #5a4a2e;
   background: #14110b;
   color: inherit;
 }
-.loot-explorer-search:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 1px;
-}
-body.mobile-touch .loot-explorer-search {
-  min-height: 40px;
+.loot-explorer-search {
+  flex: 1 1 180px;
+  min-width: 120px;
+  font-size: 16px;
 }
 .loot-explorer-filter {
   flex: 1 1 120px;
   min-width: 100px;
-  font-family: var(--ui-font);
   font-size: 13px;
-  padding: 3px 5px;
-  border-radius: 4px;
-  border: 1px solid #5a4a2e;
-  background: #14110b;
-  color: inherit;
 }
-.loot-explorer-filter:focus-visible {
+.loot-explorer-search:focus-visible,
+.loot-explorer-filter:focus-visible,
+.loot-explorer-tab:focus-visible,
+.loot-explorer-row:focus-visible,
+.loot-explorer-drop:focus-visible {
   outline: 2px solid var(--color-border-focus);
   outline-offset: 1px;
 }
+body.mobile-touch .loot-explorer-search,
 body.mobile-touch .loot-explorer-filter {
   min-height: 40px;
 }
@@ -18005,10 +17999,6 @@ body.mobile-touch .loot-explorer-filter {
 .loot-explorer-tab:hover {
   color: var(--gold);
 }
-.loot-explorer-tab:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 2px;
-}
 .loot-explorer-tab.on {
   color: var(--gold);
   border-color: #6f5a2a;
@@ -18028,17 +18018,16 @@ body.mobile-touch .loot-explorer-filter {
   color: var(--color-text-muted);
   font-size: 13px;
 }
-.loot-explorer-row {
-  display: flex;
-  gap: 8px;
+.loot-explorer-row,
+.loot-explorer-encounter {
   padding: 6px 8px;
   border-radius: 4px;
   border: 1px solid var(--color-border-showcase);
   background: #14110b;
 }
-.loot-explorer-row:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 1px;
+.loot-explorer-row {
+  display: flex;
+  gap: 8px;
 }
 .loot-explorer-row-body {
   display: flex;
@@ -18077,12 +18066,6 @@ body.mobile-touch .loot-explorer-filter {
   flex: none;
   color: var(--gold-dim);
 }
-.loot-explorer-encounter {
-  padding: 6px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--color-border-showcase);
-  background: #14110b;
-}
 .loot-explorer-encounter-title {
   display: flex;
   align-items: center;
@@ -18118,10 +18101,6 @@ body.mobile-touch .loot-explorer-filter {
   background: #1a1410;
   font-size: 11px;
   max-width: 220px;
-}
-.loot-explorer-drop:focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 1px;
 }
 .loot-explorer-drop span:first-of-type {
   overflow: hidden;

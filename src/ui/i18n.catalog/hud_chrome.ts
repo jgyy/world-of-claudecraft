@@ -6615,21 +6615,13 @@ export const hudChromeStrings = {
       ground_object: 'World Object',
       starting_equipment: 'Starting Equipment',
     },
-    difficulty: {
-      normal: 'Normal',
-      heroic: 'Heroic',
-    },
-    riftRank: {
-      C: 'Rift Rank C',
-      B: 'Rift Rank B',
-      A: 'Rift Rank A',
-      S: 'Rift Rank S',
-    },
+    difficulty: { normal: 'Normal', heroic: 'Heroic' },
+    // {rank} is the bare rank letter (C/B/A/S), which needs no translation.
+    riftRankLabel: 'Rift Rank {rank}',
     // {category} is one of the category.* labels above, {name} the resolved
     // boss/vendor/quest/class name, {context} the dungeon/raid/delve name.
     source: '{category}: {name}',
     sourceWithContext: '{category}: {name} ({context})',
-    riftRankSource: '{rank}',
     chance: '{pct}% chance',
     guaranteed: 'Guaranteed',
     gatedByQuest: 'While questing: {quest}',

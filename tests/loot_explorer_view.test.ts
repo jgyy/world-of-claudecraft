@@ -29,37 +29,28 @@ import {
   resetLootExplorerIndexCache,
 } from '../src/ui/hud/loot_explorer/loot_explorer_view';
 
-beforeEach(() => {
-  resetLootExplorerIndexCache();
-});
+beforeEach(() => resetLootExplorerIndexCache());
 
 describe('buildLootExplorerIndex', () => {
-  it('memoizes: repeat calls return the identical object until reset', () => {
+  it('memoizes until reset, and every row resolves against a real item with sources', () => {
     const first = buildLootExplorerIndex();
-    const second = buildLootExplorerIndex();
-    expect(second).toBe(first);
+    expect(buildLootExplorerIndex()).toBe(first);
     resetLootExplorerIndexCache();
     expect(buildLootExplorerIndex()).not.toBe(first);
-  });
-
-  it('every row resolves against a real ITEMS entry', () => {
-    const { items } = buildLootExplorerIndex();
-    expect(items.length).toBeGreaterThan(0);
-    for (const item of items) {
+    expect(first.items.length).toBeGreaterThan(0);
+    for (const item of first.items) {
       expect(ITEMS[item.itemId]).toBeDefined();
       expect(item.sources.length).toBeGreaterThan(0);
     }
   });
 
-  it('covers every category the taxonomy declares that live content can actually populate', () => {
-    const { items } = buildLootExplorerIndex();
+  // 'delve' is excluded: both current delve bosses drop only copper, no
+  // itemId, so the category is correctly empty; its classification is pinned
+  // directly below (buildMobToDelve), not through the built index.
+  it('covers every category live content can populate today', () => {
     const seen = new Set<LootExplorerCategory>();
-    for (const item of items) for (const s of item.sources) seen.add(s.category);
-    // 'delve' is deliberately excluded here: both current delve bosses
-    // (deacon_varric, sister_nhalia_drowned_canticle) drop only copper, no
-    // itemId, so the category is correctly empty today. Its classification
-    // logic is covered directly below (buildMobToDelve), independent of
-    // whether any delve boss currently carries an itemized drop.
+    for (const item of buildLootExplorerIndex().items)
+      for (const s of item.sources) seen.add(s.category);
     const expected: LootExplorerCategory[] = [
       'raid',
       'dungeon',
@@ -71,216 +62,163 @@ describe('buildLootExplorerIndex', () => {
       'ground_object',
       'starting_equipment',
     ];
-    for (const category of expected) {
-      expect(seen.has(category), `no source of category "${category}" was catalogued`).toBe(true);
-    }
+    for (const category of expected) expect(seen.has(category), category).toBe(true);
   });
 
-  it('places every dungeon boss mob under dungeon or raid, never open_world', () => {
+  it('classifies every mob correctly: dungeon spawns to raid/dungeon (never open_world), delve bosses to their delve, and the two never overlap', () => {
     const { items } = buildLootExplorerIndex();
-    const mobIdsInDungeons = new Set<string>();
-    for (const dungeon of Object.values(DUNGEONS)) {
-      for (const spawn of dungeon.spawns) mobIdsInDungeons.add(spawn.mobId);
-    }
+    const mobToDungeon = buildMobToDungeon();
+    const mobToDelve = buildMobToDelve();
+    const dungeonKind = buildDungeonKind();
+    for (const mobId of mobToDungeon.keys()) expect(mobToDelve.has(mobId)).toBe(false);
     for (const item of items) {
       for (const s of item.sources) {
-        if (!mobIdsInDungeons.has(s.sourceId)) continue;
-        if (s.category === 'vendor' || s.category === 'quest_reward') continue; // different source kind, same mob id space collision is not expected but guard anyway
-        expect(['raid', 'dungeon']).toContain(s.category);
+        const dungeonId = mobToDungeon.get(s.sourceId);
+        if (dungeonId && (s.category === 'raid' || s.category === 'dungeon')) {
+          expect(s.category).toBe(dungeonKind.get(dungeonId));
+        }
       }
     }
-  });
-
-  it('classifies every delve boss to its delve id (buildMobToDelve), whether or not it currently drops an item', () => {
-    const mobToDelve = buildMobToDelve();
-    let checked = 0;
+    for (const activity of FINDER_ACTIVITIES) {
+      expect(dungeonKind.get(activity.dungeonId)).toBe(
+        activity.kind === 'raid' ? 'raid' : 'dungeon',
+      );
+    }
+    for (const dungeon of Object.values(DUNGEONS)) expect(dungeonKind.has(dungeon.id)).toBe(true);
+    let delveChecked = 0;
     for (const delve of Object.values(DELVES)) {
       for (const bossId of delve.bosses) {
         expect(mobToDelve.get(bossId)).toBe(delve.id);
-        checked++;
+        delveChecked++;
       }
     }
-    expect(checked).toBeGreaterThan(0);
+    expect(delveChecked).toBeGreaterThan(0);
   });
 
-  it('a mob placed in a dungeon spawn list is never also classified as a delve boss', () => {
-    const mobToDungeon = buildMobToDungeon();
-    const mobToDelve = buildMobToDelve();
-    for (const mobId of mobToDungeon.keys()) {
-      expect(mobToDelve.has(mobId)).toBe(false);
-    }
-  });
-
-  it('buildDungeonKind classifies every raid dungeonId from FINDER_ACTIVITIES as raid, every plain dungeon as dungeon', () => {
-    const kind = buildDungeonKind();
-    for (const activity of FINDER_ACTIVITIES) {
-      const expectedKind = activity.kind === 'raid' ? 'raid' : 'dungeon';
-      expect(kind.get(activity.dungeonId)).toBe(expectedKind);
-    }
-    // Total over every DUNGEONS key (the fallback arm), not just finder-listed ids.
-    for (const dungeon of Object.values(DUNGEONS)) {
-      expect(kind.has(dungeon.id)).toBe(true);
-    }
-  });
-
-  it('mirrors the roller difficulty gate: a normalOnly mob-loot entry never emits a heroic row', () => {
+  it('mirrors the roller difficulty gate: normalOnly entries never get a heroic row, HEROIC_BOSS_LOOT entries are heroic-only', () => {
     const { items } = buildLootExplorerIndex();
-    const mobToDungeon = new Map<string, string>();
-    for (const dungeon of Object.values(DUNGEONS)) {
-      for (const spawn of dungeon.spawns) mobToDungeon.set(spawn.mobId, dungeon.id);
-    }
+    const mobToDungeon = buildMobToDungeon();
     let normalOnlyChecked = 0;
     for (const mob of Object.values(MOBS)) {
       if (!mobToDungeon.has(mob.id)) continue;
       for (const entry of mob.loot ?? []) {
         if (!entry.itemId || !entry.normalOnly) continue;
+        expect(lootEntryRollsOnClaim(entry, true)).toBe(false);
         const item = items.find((i) => i.itemId === entry.itemId);
-        if (!item) continue;
-        const heroicRowsForThisMob = item.sources.filter(
+        const heroicRows = item?.sources.filter(
           (s) => s.sourceId === mob.id && s.difficulty === 'heroic' && s.chance === entry.chance,
         );
-        expect(lootEntryRollsOnClaim(entry, true)).toBe(false);
-        expect(heroicRowsForThisMob.length).toBe(0);
+        expect(heroicRows ?? []).toHaveLength(0);
         normalOnlyChecked++;
       }
     }
-    // At least one normalOnly entry exists in live content; if this ever hits
-    // zero the assertion above is vacuous and the test needs a new fixture.
     expect(normalOnlyChecked).toBeGreaterThan(0);
-  });
-
-  it('every HEROIC_BOSS_LOOT entry appears only as a heroic row for its boss', () => {
-    const { items } = buildLootExplorerIndex();
-    let checked = 0;
+    let heroicAppendChecked = 0;
     for (const [bossId, entries] of Object.entries(HEROIC_BOSS_LOOT)) {
       for (const entry of entries) {
         if (!entry.itemId || !ITEMS[entry.itemId]) continue;
-        const item = items.find((i) => i.itemId === entry.itemId);
-        expect(
-          item,
-          `${entry.itemId} (heroic append for ${bossId}) missing from index`,
-        ).toBeDefined();
-        const rows = item?.sources.filter((s) => s.sourceId === bossId) ?? [];
+        const rows =
+          items
+            .find((i) => i.itemId === entry.itemId)
+            ?.sources.filter((s) => s.sourceId === bossId) ?? [];
         expect(rows.length).toBeGreaterThan(0);
         for (const row of rows) expect(row.difficulty).toBe('heroic');
-        checked++;
+        heroicAppendChecked++;
       }
     }
-    expect(checked).toBeGreaterThan(0);
+    expect(heroicAppendChecked).toBeGreaterThan(0);
   });
 
-  it('every vendor row matches a real NPC vendorItems entry', () => {
+  it('every vendor, quest, ground-object, and starting-equipment source matches its live content record', () => {
     const { items } = buildLootExplorerIndex();
+    const has = (itemId: string, pred: (s: { category: string; sourceId: string }) => boolean) =>
+      items.find((i) => i.itemId === itemId)?.sources.some(pred) ?? false;
+
     for (const npc of Object.values(NPCS)) {
       for (const itemId of npc.vendorItems ?? []) {
-        if (!ITEMS[itemId]) continue;
-        const item = items.find((i) => i.itemId === itemId);
-        expect(item?.sources.some((s) => s.category === 'vendor' && s.sourceId === npc.id)).toBe(
-          true,
-        );
+        if (ITEMS[itemId])
+          expect(has(itemId, (s) => s.category === 'vendor' && s.sourceId === npc.id)).toBe(true);
       }
     }
-  });
-
-  it('every quest collect objective and class item reward is catalogued', () => {
-    const { items } = buildLootExplorerIndex();
-    let objectivesChecked = 0;
+    let questChecked = 0;
     for (const quest of Object.values(QUESTS)) {
       for (const obj of quest.objectives ?? []) {
         if (obj.type !== 'collect' || !obj.itemId || !ITEMS[obj.itemId]) continue;
-        const item = items.find((i) => i.itemId === obj.itemId);
         expect(
-          item?.sources.some((s) => s.category === 'quest_objective' && s.sourceId === quest.id),
+          has(obj.itemId, (s) => s.category === 'quest_objective' && s.sourceId === quest.id),
         ).toBe(true);
-        objectivesChecked++;
+        questChecked++;
       }
     }
-    expect(objectivesChecked).toBeGreaterThan(0);
-  });
-
-  it('every class starting weapon/chest is catalogued as starting_equipment', () => {
-    const { items } = buildLootExplorerIndex();
+    expect(questChecked).toBeGreaterThan(0);
     for (const [cls, def] of Object.entries(CLASSES)) {
       for (const itemId of [def.startWeapon, def.startChest]) {
-        if (!itemId) continue;
-        const item = items.find((i) => i.itemId === itemId);
-        expect(
-          item?.sources.some((s) => s.category === 'starting_equipment' && s.sourceId === cls),
-        ).toBe(true);
+        if (itemId)
+          expect(
+            has(itemId, (s) => s.category === 'starting_equipment' && s.sourceId === cls),
+          ).toBe(true);
       }
     }
-  });
-
-  it('every ground object resolves to a guaranteed (chance 1) source', () => {
-    const { items } = buildLootExplorerIndex();
     expect(GROUND_OBJECTS.length).toBeGreaterThan(0);
     for (const obj of GROUND_OBJECTS) {
       if (!ITEMS[obj.itemId]) continue;
-      const item = items.find((i) => i.itemId === obj.itemId);
-      const row = item?.sources.find((s) => s.category === 'ground_object');
+      const row = items
+        .find((i) => i.itemId === obj.itemId)
+        ?.sources.find((s) => s.category === 'ground_object');
       expect(row?.chance).toBe(1);
     }
   });
 });
 
 describe('filterLootExplorerItems', () => {
-  it('the default filters (all "all") return the full index unnarrowed', () => {
-    const index = buildLootExplorerIndex();
-    const filtered = filterLootExplorerItems(index, LOOT_EXPLORER_DEFAULT_FILTERS);
-    expect(filtered.length).toBe(index.items.length);
+  const index = () => buildLootExplorerIndex();
+
+  it('the default filters return the full index unnarrowed', () => {
+    expect(filterLootExplorerItems(index(), LOOT_EXPLORER_DEFAULT_FILTERS).length).toBe(
+      index().items.length,
+    );
   });
 
-  it('quality narrows to exactly the matching tier', () => {
-    const index = buildLootExplorerIndex();
-    const filtered = filterLootExplorerItems(index, {
+  it('quality/category/requiredClass/statKey each narrow to a matching, non-empty, non-full subset', () => {
+    const total = index().items.length;
+
+    const epic = filterLootExplorerItems(index(), {
       ...LOOT_EXPLORER_DEFAULT_FILTERS,
       quality: 'epic',
     });
-    expect(filtered.length).toBeGreaterThan(0);
-    expect(filtered.length).toBeLessThan(index.items.length);
-    for (const item of filtered) expect(item.quality).toBe('epic');
-  });
+    expect(epic.length).toBeGreaterThan(0);
+    expect(epic.length).toBeLessThan(total);
+    for (const item of epic) expect(item.quality).toBe('epic');
 
-  it('category narrows sources to only that category, dropping items with none', () => {
-    const index = buildLootExplorerIndex();
-    const filtered = filterLootExplorerItems(index, {
+    const vendor = filterLootExplorerItems(index(), {
       ...LOOT_EXPLORER_DEFAULT_FILTERS,
       category: 'vendor',
     });
-    expect(filtered.length).toBeGreaterThan(0);
-    for (const item of filtered) {
-      expect(item.sources.length).toBeGreaterThan(0);
-      for (const s of item.sources) expect(s.category).toBe('vendor');
-    }
-  });
+    expect(vendor.length).toBeGreaterThan(0);
+    for (const item of vendor) for (const s of item.sources) expect(s.category).toBe('vendor');
 
-  it('requiredClass excludes items locked to a different class, keeps class-free items', () => {
-    const index = buildLootExplorerIndex();
-    const filtered = filterLootExplorerItems(index, {
+    const mage = filterLootExplorerItems(index(), {
       ...LOOT_EXPLORER_DEFAULT_FILTERS,
       requiredClass: 'mage',
     });
-    for (const item of filtered) {
-      if (item.requiredClass) expect(item.requiredClass).toContain('mage');
-    }
-    const excluded = index.items.find((i) => i.requiredClass && !i.requiredClass.includes('mage'));
+    for (const item of mage) if (item.requiredClass) expect(item.requiredClass).toContain('mage');
+    const excluded = index().items.find(
+      (i) => i.requiredClass && !i.requiredClass.includes('mage'),
+    );
     expect(excluded).toBeDefined();
-    expect(filtered.some((i) => i.itemId === excluded?.itemId)).toBe(false);
-  });
+    expect(mage.some((i) => i.itemId === excluded?.itemId)).toBe(false);
 
-  it('statKey keeps only items carrying that non-zero stat', () => {
-    const index = buildLootExplorerIndex();
-    const filtered = filterLootExplorerItems(index, {
+    const int = filterLootExplorerItems(index(), {
       ...LOOT_EXPLORER_DEFAULT_FILTERS,
       statKey: 'int',
     });
-    expect(filtered.length).toBeGreaterThan(0);
-    for (const item of filtered) expect(item.statKeys).toContain('int');
+    expect(int.length).toBeGreaterThan(0);
+    for (const item of int) expect(item.statKeys).toContain('int');
   });
 });
 
 describe('groupLootExplorerBySource', () => {
-  it('every drop in a group traces back to an item in the input list', () => {
+  it('every drop traces back to the input list, and normal/heroic split into separate groups', () => {
     const items = buildLootExplorerIndex().items;
     const groups = groupLootExplorerBySource(items);
     expect(groups.length).toBeGreaterThan(0);
@@ -289,19 +227,10 @@ describe('groupLootExplorerBySource', () => {
       expect(group.drops.length).toBeGreaterThan(0);
       for (const drop of group.drops) expect(itemIds.has(drop.itemId)).toBe(true);
     }
-  });
-
-  it('normal and heroic variants of the same dungeon boss group separately', () => {
-    const activity = FINDER_ACTIVITIES.find(
+    const bossId = FINDER_ACTIVITIES.find(
       (a) => a.kind === 'dungeon' && a.encounters.some((e) => MOBS[e.mobId]?.loot?.length),
-    );
-    expect(activity).toBeDefined();
-    const items = buildLootExplorerIndex().items;
-    const groups = groupLootExplorerBySource(items);
-    const bossId = activity?.encounters.find((e) => MOBS[e.mobId]?.loot?.length)?.mobId;
+    )?.encounters.find((e) => MOBS[e.mobId]?.loot?.length)?.mobId;
     expect(bossId).toBeDefined();
-    const forBoss = groups.filter((g) => g.sourceId === bossId);
-    const difficulties = new Set(forBoss.map((g) => g.difficulty));
-    expect(difficulties.has('normal')).toBe(true);
+    expect(groups.some((g) => g.sourceId === bossId && g.difficulty === 'normal')).toBe(true);
   });
 });

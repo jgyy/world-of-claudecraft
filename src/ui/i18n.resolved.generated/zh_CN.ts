@@ -4631,15 +4631,9 @@ export const zh_CN: EnTranslations = {
         "normal": "普通",
         "heroic": "英雄"
       },
-      "riftRank": {
-        "C": "Rift Rank C",
-        "B": "Rift Rank B",
-        "A": "Rift Rank A",
-        "S": "Rift Rank S"
-      },
+      "riftRankLabel": "Rift Rank {rank}",
       "source": "{category}: {name}",
       "sourceWithContext": "{category}: {name} ({context})",
-      "riftRankSource": "{rank}",
       "chance": "{pct}% 掉落几率",
       "guaranteed": "必得",
       "gatedByQuest": "任务进行中：{quest}",

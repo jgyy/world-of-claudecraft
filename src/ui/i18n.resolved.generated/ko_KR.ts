@@ -4631,15 +4631,9 @@ export const ko_KR: EnTranslations = {
         "normal": "일반",
         "heroic": "영웅"
       },
-      "riftRank": {
-        "C": "Rift Rank C",
-        "B": "Rift Rank B",
-        "A": "Rift Rank A",
-        "S": "Rift Rank S"
-      },
+      "riftRankLabel": "Rift Rank {rank}",
       "source": "{category}: {name}",
       "sourceWithContext": "{category}: {name} ({context})",
-      "riftRankSource": "{rank}",
       "chance": "드롭 확률 {pct}%",
       "guaranteed": "확정",
       "gatedByQuest": "퀘스트 진행 중: {quest}",

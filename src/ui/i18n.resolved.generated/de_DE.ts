@@ -4631,15 +4631,9 @@ export const de_DE: EnTranslations = {
         "normal": "Normal",
         "heroic": "Heroic"
       },
-      "riftRank": {
-        "C": "Rift Rank C",
-        "B": "Rift Rank B",
-        "A": "Rift Rank A",
-        "S": "Rift Rank S"
-      },
+      "riftRankLabel": "Rift Rank {rank}",
       "source": "{category}: {name}",
       "sourceWithContext": "{category}: {name} ({context})",
-      "riftRankSource": "{rank}",
       "chance": "{pct}% chance",
       "guaranteed": "Guaranteed",
       "gatedByQuest": "While questing: {quest}",

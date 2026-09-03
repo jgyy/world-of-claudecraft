@@ -1,19 +1,16 @@
 // Loot Explorer: the pure view core. Builds a searchable, filterable index of
-// every item the game can hand a player, and where it comes from: mob drops
-// (open world, dungeon, raid, delve, rift), vendor stock, quest rewards and
-// collect objectives, ground-pickup objects, and class starting equipment.
+// every item the game can hand a player and where it comes from (mob drops
+// across open world/dungeon/raid/delve/rift, vendor stock, quest rewards and
+// objectives, ground objects, class starting gear).
 //
-// This is a STATIC CONTENT browser, not live world state: every input is a
-// content table already bundled with the client (the same tables
-// scripts/export_loot_spreadsheet.mjs reads for the maintainer spreadsheet),
-// so, per the Dungeon Finder precedent (src/ui/dungeon_finder_view.ts), it
-// needs no new IWorld/world_api facet member at all. DOM-free and i18n-free:
-// it emits raw ids, numbers, and flags; the painter (loot_explorer_window.ts)
-// localizes names via tEntity/itemDisplayName and performs the text search,
-// so this module never has to carry a locale to be testable.
+// STATIC CONTENT only, not live world state (the same tables
+// scripts/export_loot_spreadsheet.mjs reads), so per the Dungeon Finder
+// precedent (src/ui/dungeon_finder_view.ts) it needs no IWorld/world_api
+// facet. DOM-free and i18n-free: emits raw ids/numbers/flags; the painter
+// (loot_explorer_window.ts) localizes names and performs the text search.
 //
-// Registered in UI_PURE_CORES (tests/architecture.test.ts) and driven
-// directly by tests/loot_explorer_view.test.ts.
+// Registered in UI_PURE_CORES (tests/architecture.test.ts); driven directly
+// by tests/loot_explorer_view.test.ts.
 
 import { FINDER_ACTIVITIES } from '../../../sim/content/dungeon_finder';
 import { HEROIC_BOSS_LOOT } from '../../../sim/content/heroic_loot';
@@ -111,10 +108,9 @@ function statKeysOf(item: ItemDef): readonly (keyof NonNullable<ItemDef['stats']
   return STAT_KEYS.filter((key) => (item.stats?.[key] ?? 0) !== 0);
 }
 
-/** mobId -> the dungeon/raid it is placed in, derived from every DungeonDef's
- *  spawn list (trash included, not just the Dungeon Finder's named
- *  encounters), so a mob never falls through to Open World just because it
- *  isn't a boss. */
+/** mobId -> the dungeon/raid it is placed in, from every DungeonDef's spawn
+ *  list (trash included, not just the finder's named encounters), so a mob
+ *  never falls through to Open World just because it isn't a boss. */
 export function buildMobToDungeon(): Map<string, string> {
   const out = new Map<string, string>();
   for (const dungeon of Object.values(DUNGEONS)) {
@@ -124,10 +120,10 @@ export function buildMobToDungeon(): Map<string, string> {
 }
 
 /** dungeonId -> 'raid' | 'dungeon', from the Dungeon Finder's authored
- *  activity kind (the canonical fact, never derived from spawn lists). A
- *  dungeonId absent from the finder registry (a development-only room) falls
- *  back to the same five-man/raid size split loot_pools.ts uses. Total over
- *  every DUNGEONS key, so every dungeon classifies without a second lookup. */
+ *  activity kind (never derived from spawn lists). A dungeonId absent from
+ *  the finder registry (a development-only room) falls back to the same
+ *  five-man/raid size split loot_pools.ts uses. Total over every DUNGEONS
+ *  key, so every dungeon classifies without a second lookup. */
 export function buildDungeonKind(): Map<string, 'raid' | 'dungeon'> {
   const out = new Map<string, 'raid' | 'dungeon'>();
   for (const activity of FINDER_ACTIVITIES) {

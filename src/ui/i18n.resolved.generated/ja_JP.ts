@@ -4631,15 +4631,9 @@ export const ja_JP: EnTranslations = {
         "normal": "ノーマル",
         "heroic": "ヒロイック"
       },
-      "riftRank": {
-        "C": "Rift Rank C",
-        "B": "Rift Rank B",
-        "A": "Rift Rank A",
-        "S": "Rift Rank S"
-      },
+      "riftRankLabel": "Rift Rank {rank}",
       "source": "{category}: {name}",
       "sourceWithContext": "{category}: {name} ({context})",
-      "riftRankSource": "{rank}",
       "chance": "ドロップ率 {pct}%",
       "guaranteed": "確定",
       "gatedByQuest": "クエスト進行中: {quest}",
