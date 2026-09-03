@@ -11772,6 +11772,22 @@ export const TARGETS = [
       return { clip: '#ui' };
     },
   },
+  {
+    key: 'loot-explorer-window',
+    label: 'Loot Explorer: the By Item catalog with search and filters',
+    when: ['ui/hud/loot_explorer/'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      await page.evaluate(() => {
+        document.querySelector('#gpu-notice')?.remove();
+        document.querySelector('.camera-prompt-confirm')?.click();
+      });
+      await page.evaluate(() => window.__game?.hud?.toggleLootExplorer?.());
+      const opened = await pollForSize(page, '#loot-explorer-window');
+      if (!opened) throw new Error('loot explorer window did not open');
+      return { clip: '#loot-explorer-window' };
+    },
+  },
 ];
 
 // Grant one staged stack (a plain count, or a specific ItemInstancePayload) and
