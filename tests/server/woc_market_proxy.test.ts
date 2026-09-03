@@ -444,15 +444,38 @@ describe('the price and estimate caches at the proxy (H11)', () => {
     expect(await economy.price()).toMatchObject({ available: true, healthy: false });
   });
 
-  it('recovery from a pause is visible within the failure memo, not a full TTL', async () => {
+  it('a sustained pause is probed on the success TTL, never the short transport memo', async () => {
+    // The probe-rate contract: an unhealthy answer is a failure for the
+    // stale-serve rule but keeps the 15s memo it had as a success, so an
+    // operator pause costs the hottest shared read no extra service calls.
     vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(1_820_000_000_000);
-    respond = () => ({ status: 200, body: { healthy: false, reason: 'halted' } });
+    respond = () => ({ status: 200, body: { healthy: false, reason: 'operator_paused' } });
     const economy = createWocMarketEconomyProxy();
     expect((await economy.price()).healthy).toBe(false);
+    for (let i = 1; i <= 4; i++) {
+      vi.setSystemTime(1_820_000_000_000 + i * 3_100);
+      expect((await economy.price()).healthy).toBe(false);
+    }
+    // 12.4s of reads inside the memo: still the one cold probe.
+    expect(seen.filter((s) => s.url.endsWith('price'))).toHaveLength(1);
+    vi.setSystemTime(1_820_000_015_100);
+    respond = () => ({ status: 200, body: healthyBody });
+    // The memo lapses at the TTL and recovery lands on that read.
+    expect((await economy.price()).healthy).toBe(true);
+    expect(seen.filter((s) => s.url.endsWith('price'))).toHaveLength(2);
+  });
+
+  it('a transport failure keeps the short memo, so recovery is visible in seconds', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(1_820_000_000_000);
+    respond = () => ({ status: 500, body: {} });
+    const economy = createWocMarketEconomyProxy();
+    expect((await economy.price()).available).toBe(false);
     vi.setSystemTime(1_820_000_003_100);
     respond = () => ({ status: 200, body: healthyBody });
     expect((await economy.price()).healthy).toBe(true);
+    expect(seen.filter((s) => s.url.endsWith('price'))).toHaveLength(2);
   });
 
   it('a cold failure is cached briefly, so recovery is visible in seconds, not a TTL', async () => {
