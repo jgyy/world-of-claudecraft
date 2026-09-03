@@ -396,6 +396,65 @@ describe('the price and estimate caches at the proxy (H11)', () => {
     expect(after.healthy).toBe(true);
   });
 
+  // The Discord report behind these four: an auction winner trying to pay saw
+  // "trading is paused" come and go while the item was theirs. The service's
+  // price gate is a breaker that halts on a single out-of-bound print and
+  // clears on the next one, and the cache used to swap that healthy:false
+  // answer in the instant it landed (a reachable service was a SUCCESS
+  // whatever it said), so every blip paused the whole market for a TTL and
+  // refused the settlement quote. Health now rides the same stale-serve rule
+  // as transport: a recent healthy print keeps the market open through a blip
+  // shorter than the bound, and a real pause still lands within it.
+  it('an unhealthy blip inside the stale-serve bound keeps serving the recent healthy print', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(1_820_000_000_000);
+    respond = () => ({ status: 200, body: healthyBody });
+    const economy = createWocMarketEconomyProxy();
+    expect((await economy.price()).healthy).toBe(true);
+    // Past the TTL, inside the bound: the gate reports a halt.
+    vi.setSystemTime(1_820_000_016_000);
+    respond = () => ({ status: 200, body: { healthy: false, reason: 'halted' } });
+    const during = await economy.price();
+    expect(during.healthy).toBe(true);
+    await Promise.resolve();
+    await Promise.resolve();
+    // The halt answer landed in the background and did NOT replace the print.
+    const after = await economy.price();
+    expect(after).toMatchObject({ available: true, healthy: true, tokensPerUsd: 100 });
+    expect(economy.priceCacheAges?.().failureAgeMs).not.toBeNull();
+  });
+
+  it('a pause outlasting the stale-serve bound reaches the market within the bound', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(1_820_000_000_000);
+    respond = () => ({ status: 200, body: healthyBody });
+    const economy = createWocMarketEconomyProxy();
+    expect((await economy.price()).healthy).toBe(true);
+    respond = () => ({ status: 200, body: { healthy: false, reason: 'operator_paused' } });
+    // Exactly at the bound the old print is unservable: the read blocks on
+    // the refresh and answers the pause truthfully.
+    vi.setSystemTime(1_820_000_030_000);
+    const paused = await economy.price();
+    expect(paused).toMatchObject({ available: true, healthy: false });
+  });
+
+  it('a cold unhealthy answer is reported as-is: no health is invented', async () => {
+    respond = () => ({ status: 200, body: { healthy: false, reason: 'no_price' } });
+    const economy = createWocMarketEconomyProxy();
+    expect(await economy.price()).toMatchObject({ available: true, healthy: false });
+  });
+
+  it('recovery from a pause is visible within the failure memo, not a full TTL', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(1_820_000_000_000);
+    respond = () => ({ status: 200, body: { healthy: false, reason: 'halted' } });
+    const economy = createWocMarketEconomyProxy();
+    expect((await economy.price()).healthy).toBe(false);
+    vi.setSystemTime(1_820_000_003_100);
+    respond = () => ({ status: 200, body: healthyBody });
+    expect((await economy.price()).healthy).toBe(true);
+  });
+
   it('a cold failure is cached briefly, so recovery is visible in seconds, not a TTL', async () => {
     vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(1_820_000_000_000);

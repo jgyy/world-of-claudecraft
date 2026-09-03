@@ -296,10 +296,17 @@ function toQuote(wire: WireQuote | null): WocQuoteIntent {
 }
 
 export function createWocMarketEconomyProxy(): WocMarketEconomy {
-  // available:false means the TRANSPORT failed (env unset, unreachable,
-  // non-2xx, timeout): that is the failure the short memo bounds. A reachable
-  // service answering healthy:false is a SUCCESS (its truthful paused answer)
-  // and caches for the full TTL like any other.
+  // Two answers count as a failure for the cache's stale-serve rule:
+  // available:false, the TRANSPORT failing (env unset, unreachable, non-2xx,
+  // timeout), and a reachable service answering healthy:false (its price
+  // gate halted, or an operator pause). Both are memoized briefly and neither
+  // replaces a healthy print still inside the stale-serve bound. The second
+  // arm used to be a full-TTL success, and the service's breaker halts on ONE
+  // out-of-bound print and clears on the next, so every blip paused the whole
+  // market for a TTL (and refused an auction winner's settlement quote, the
+  // "trading is paused" flicker players reported). A pause that outlasts the
+  // bound still reaches the market within it; a cold read reports the
+  // unhealthy answer as-is (no health is ever invented).
   const priceCache = createWocPriceCache<WocPriceInfo>(
     async () => {
       const wire = await callService<WirePrice>({ method: 'GET', path: 'price' });
@@ -312,7 +319,7 @@ export function createWocMarketEconomyProxy(): WocMarketEconomy {
         asOfMs: wire.asOfMs ?? null,
       };
     },
-    { isFailure: (value) => !value.available },
+    { isFailure: (value) => !value.available || !value.healthy },
   );
 
   const estimateCache = new KeyedCachedRead<WocEstimate>(
