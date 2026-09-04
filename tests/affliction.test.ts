@@ -4,6 +4,7 @@ import {
   AFFLICTION_DOOM_DURATION,
   AFFLICTION_DOOM_MAX,
   AFFLICTION_EYE_DEATH_GAIN,
+  afflictionConsumeThreadDoomBonus,
   completeNeedleOfFateCast,
   consumeDoom,
   doomValue,
@@ -568,6 +569,51 @@ describe('Affliction Warlock', () => {
     expect(sim.player.castingAbility).toBe('drain_life');
     expect(sim.player.channeling).toBe(true);
     expect(sim.player.queuedCastAbility).toBeNull();
+  });
+
+  it('fires Hour of Judgment at once inside the cast-queue tail instead of queueing it', () => {
+    const sim = makeAffliction();
+    const target = addTarget(sim, 8);
+    finishCast(sim, 'evil_eye', target);
+    sim.player.resource = sim.player.maxResource;
+    sim.castAbility('needle_of_fate');
+    while (sim.player.castRemaining > CAST_QUEUE_WINDOW_SEC) sim.tick();
+    expect(sim.player.castingAbility).toBe('needle_of_fate');
+
+    sim.castAbility('hour_of_judgment');
+
+    // Through-cast, not queued: the opener lands on the press tick and the
+    // Needle in flight is what gets doubled, exactly like a press earlier in
+    // the cast.
+    expect(sim.player.queuedCastAbility).toBeNull();
+    expect(doomValue(sim.player)).toBe(40);
+    expect(sim.player.cooldowns.get('hour_of_judgment')).toBe(90);
+    expect(sim.player.castingAbility).toBe('needle_of_fate');
+    for (let i = 0; i < 20 * 5 && sim.player.castingAbility; i++) sim.tick();
+    for (let i = 0; i < 200 && ctx(sim).pendingProjectiles.length > 0; i++) sim.tick();
+    expect(doomValue(sim.player)).toBe(58);
+  });
+
+  it('keeps a running Consume on the Threads it consumed when Hour of Judgment lands mid-channel', () => {
+    const sim = makeAffliction();
+    const target = addTarget(sim, 8);
+    finishCast(sim, 'evil_eye', target);
+    sim.player.resource = sim.player.maxResource;
+    sim.castAbility('drain_life');
+    for (let i = 0; i < 5; i++) sim.tick();
+    expect(sim.player.channeling).toBe(true);
+    const consumeThreads = afflictionConsumeThreadDoomBonus(sim.player);
+
+    sim.castAbility('hour_of_judgment');
+    sim.tick();
+
+    // The three granted Threads stay banked on the warlock for the next
+    // Sentence; the channel already running keeps the (zero) Thread bonus it
+    // consumed at its start rather than re-reading the new ones each tick.
+    expect(ownedFateThreads(sim.player)).toBe(3);
+    expect(afflictionConsumeThreadDoomBonus(sim.player)).toBe(consumeThreads);
+    expect(sim.player.castingAbility).toBe('drain_life');
+    expect(sim.player.channeling).toBe(true);
   });
 
   it('promotes a Coven target before applying Hour of Judgment Needle generation', () => {

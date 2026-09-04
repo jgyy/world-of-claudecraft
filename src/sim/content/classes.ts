@@ -5246,7 +5246,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     cooldown: 45,
     offGcd: true,
     // An off-GCD burst opener pressed in the middle of the Needle cast or Consume
-    // channel it empowers (the same door Combustion and Phoenix Trance use):
+    // channel it empowers (the same door Cinderfall and Phoenix Trance use):
     // without this the busy guard rejected the press and the player gained no
     // Condemnation.
     usableWhileCasting: true,
