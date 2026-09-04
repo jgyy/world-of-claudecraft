@@ -117,19 +117,27 @@ export function partyFrameHealthText(
  *  Shared by the live party painter and the Edit Frames preview so both read the
  *  same keys with the same fallbacks. */
 export function readPartyFrameDisplayConfig(
-  settings: { get(key: PartyFrameSettingKey): number | boolean } | undefined,
+  settings: { get(key: PartyFrameSettingKey): number | boolean | undefined } | undefined,
 ): PartyFrameDisplayConfig {
   const d = DEFAULT_PARTY_FRAME_DISPLAY;
   if (!settings) return { ...d };
+  const bool = (key: PartyFrameSettingKey, fallback: boolean): boolean => {
+    const v = settings.get(key);
+    return v === undefined ? fallback : !!v;
+  };
+  const choice = <T extends number>(key: PartyFrameSettingKey, fallback: T): T => {
+    const v = Number(settings.get(key));
+    return Number.isFinite(v) ? (Math.round(v) as T) : fallback;
+  };
   return {
-    showSelf: !!settings.get('partyFrameShowSelf'),
-    showResource: !!settings.get('partyFrameShowResource'),
-    showAbsorbs: !!settings.get('partyFrameShowAbsorbs'),
-    showAuras: !!settings.get('partyFrameShowAuras'),
-    showPets: !!settings.get('partyFrameShowPets'),
-    presentation: Math.round(Number(settings.get('partyFrameStyle'))) as PartyFrameStyleMode,
+    showSelf: bool('partyFrameShowSelf', d.showSelf),
+    showResource: bool('partyFrameShowResource', d.showResource),
+    showAbsorbs: bool('partyFrameShowAbsorbs', d.showAbsorbs),
+    showAuras: bool('partyFrameShowAuras', d.showAuras),
+    showPets: bool('partyFrameShowPets', d.showPets),
+    presentation: choice<PartyFrameStyleMode>('partyFrameStyle', d.presentation),
     healthText: healthTextMode(Number(settings.get('partyFrameHealthText')), d.healthText),
-    sort: Math.round(Number(settings.get('partyFrameSort'))) as PartyFrameSortMode,
+    sort: choice<PartyFrameSortMode>('partyFrameSort', d.sort),
   };
 }
 

@@ -6,12 +6,15 @@
 
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import { SETTING_RANGES } from '../src/game/settings';
 import {
+  HEALTH_TEXT_MODE_MAX,
   healthTextForMode,
   healthTextMode,
   unitFrameCurrentMaxText,
   unitFrameHealthText,
 } from '../src/ui/hud_frames';
+import { unitFrameView } from '../src/ui/unit_frame';
 
 describe('unitFrameCurrentMaxText', () => {
   it('formats a current/max pair, matching the historical hand-built "current / max"', () => {
@@ -63,6 +66,57 @@ describe('unitFrameHealthText', () => {
 
   it('clamps negative health to zero and a zero maximum to one', () => {
     expect(unitFrameHealthText(-5, 0, 4)).toBe('0 / 1 (0%)');
+  });
+});
+
+describe('health text mode ceiling', () => {
+  it('matches the max of every Health Text setting range', () => {
+    expect(SETTING_RANGES.playerFrameHealthText.max).toBe(HEALTH_TEXT_MODE_MAX);
+    expect(SETTING_RANGES.targetFrameHealthText.max).toBe(HEALTH_TEXT_MODE_MAX);
+    expect(SETTING_RANGES.partyFrameHealthText.max).toBe(HEALTH_TEXT_MODE_MAX);
+  });
+});
+
+describe('unit frame absorb suffix composition', () => {
+  const descriptor = (hpText: string, showAbsorbText: boolean) => ({
+    present: true,
+    hpFrac: 0.5,
+    hpText,
+    showAbsorbText,
+    resourceKind: 'mana' as const,
+    resFrac: 1,
+    resText: '',
+    levelText: '60',
+    name: 'Aerwynn',
+    portraitKey: 'player',
+    absorb: {
+      hp: 300,
+      maxHp: 600,
+      auras: [
+        {
+          id: 'power_word_shield',
+          name: 'Power Word: Shield',
+          kind: 'absorb' as const,
+          remaining: 30,
+          duration: 30,
+          value: 60,
+          sourceId: 1,
+          school: 'holy' as const,
+        },
+      ],
+    },
+    dead: false,
+    outOfRange: false,
+  });
+
+  it('appends the shield total after the mode 4 text', () => {
+    const v = unitFrameView(descriptor(unitFrameHealthText(300, 600, 4), true));
+    expect(v.hpText).toBe('300 / 600 (50%) (60)');
+  });
+
+  it('prints nothing at all in mode 0, shield included', () => {
+    const v = unitFrameView(descriptor(unitFrameHealthText(300, 600, 0), false));
+    expect(v.hpText).toBe('');
   });
 });
 

@@ -597,6 +597,12 @@ describe('readPartyFrameDisplayConfig', () => {
     expect(readPartyFrameDisplayConfig(undefined)).toEqual(DEFAULT_PARTY_FRAME_DISPLAY);
   });
 
+  it('keeps every default for a store whose keys are all missing', () => {
+    expect(readPartyFrameDisplayConfig({ get: () => undefined })).toEqual(
+      DEFAULT_PARTY_FRAME_DISPLAY,
+    );
+  });
+
   it('reads every key from the store, rounding the choice values', () => {
     const values: Record<string, number | boolean> = {
       partyFrameShowSelf: true,
