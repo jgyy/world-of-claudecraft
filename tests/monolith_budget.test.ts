@@ -273,7 +273,11 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 18905,
+    // Lowered 18905 -> 18898 by the Riftbound band item-level ladder: the
+    // rift tooltip lines moved into src/ui/rift_band_tooltip.ts (with the
+    // per-copy item-level readout), the compare block only threaded the
+    // hovered and worn instances through. Exact count, zero slack.
+    ceiling: 18898,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {

@@ -838,7 +838,6 @@ const HEAVY_SELF_CMDS = new Set<string>([
   // complete-time loot event is a HEAVY_SELF_EVENTS member, so listing it
   // here would buy a wasted heavy re-serialize per cast start.
   'rift_upgrade_item',
-  'rift_enchant_item',
   'rift_socket_gem',
   'equip_bag',
   'unequip_bag',
@@ -1404,11 +1403,13 @@ function identityFields(e: Entity): Record<string, unknown> {
     // payload, riding the identity record (wireCacheFor diffs the identity
     // JSON, so an equip/unequip of an instanced piece re-emits automatically).
     // Data minimization: only the cosmetic inspect fields (signer, enchant,
-    // rolled) leave the server; boundTo, charges, and the bindOnTrade
-    // arm are gameplay state no inspecting client needs and never ride this key.
-    // The pub allowlist below (signer/enchant/rolled ONLY) is what enforces this,
-    // so a new non-cosmetic ItemInstancePayload field is excluded by construction;
-    // the owner still sees their own payload in full via the self `inv` mirror.
+    // rolled, and a Riftbound band's rift record: its rank, upgrades, and
+    // gems, which the band tooltip's item level and rank lines read) leave the
+    // server; boundTo, charges, and the bindOnTrade arm are gameplay state no
+    // inspecting client needs and never ride this key. The pub allowlist below
+    // (signer/enchant/rolled/rift ONLY) is what enforces this, so a new
+    // non-cosmetic ItemInstancePayload field is excluded by construction; the
+    // owner still sees their own payload in full via the self `inv` mirror.
     let eqi: Record<string, unknown> | undefined;
     for (const [slot, inst] of Object.entries(e.equippedInstances)) {
       if (!inst) continue;
@@ -1416,6 +1417,7 @@ function identityFields(e: Entity): Record<string, unknown> {
       if (inst.signer !== undefined) pub.signer = inst.signer;
       if (inst.enchant !== undefined) pub.enchant = inst.enchant;
       if (inst.rolled !== undefined) pub.rolled = inst.rolled;
+      if (inst.rift !== undefined) pub.rift = inst.rift;
       for (const _ in pub) {
         if (eqi === undefined) eqi = {};
         eqi[slot] = pub;
@@ -7087,14 +7089,11 @@ export class GameServer {
         }
         break;
       case 'rift_enchant_item':
-        if (typeof msg.item === 'string' && typeof msg.stat === 'string') {
-          sim.enchantRiftItem(
-            msg.item,
-            msg.stat,
-            pid,
-            Number.isInteger(msg.slot) ? Number(msg.slot) : undefined,
-          );
-        }
+        // Retired tombstone: the forge enchant went away with the Riftbound
+        // band item-level ladder (rift/band_ladder.ts), but wire tokens are
+        // append-only (COMMAND_NAMES), so the arm stays and does nothing.
+        // No stock client has ever sent it (the forge UI shipped after the
+        // removal); a crafted frame gets the same silence as any other no-op.
         break;
       case 'rift_socket_gem':
         if (typeof msg.item === 'string' && typeof msg.gem === 'string') {

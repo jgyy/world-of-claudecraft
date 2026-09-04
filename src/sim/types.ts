@@ -1286,18 +1286,27 @@ export interface ItemInstancePayload {
    *  ordinary soulbound copy. */
   partyTrade?: { untilMs: number; eligible: string[]; eligibleIds?: number[] };
   /** Long-term Rift gear progression. `rolled.stats` is the authoritative
-   * aggregate bonus consumed by recalcPlayerStats; this record explains how it
-   * was earned and lets forge operations rebuild it deterministically. */
+   * aggregate consumed by recalcPlayerStats (the band's whole stat line plus
+   * its gem ratings); this record is the bounded input it is rebuilt from
+   * (rift/progression.ts rebuildRolledStats, priced by rift/band_ladder.ts):
+   * the clear's rank sets the base item level, every essence upgrade raises it
+   * by one, and each socketed gem adds one rating line. `power` is the rank's
+   * essence weight (salvage yield and first-clear essence count). */
   rift?: {
     sourceEventId: string;
     tier: RiftTier;
     power: number;
     upgradeLevel: number;
     maxUpgradeLevel: number;
-    baseStats: Record<string, number>;
-    enchant?: { stat: string; value: number };
     gemSlots: number;
     gems: string[];
+    /** LEGACY (pre-ladder payloads only): the old additive base line. Never
+     *  read; the load rebuild drops it. Kept optional so a persisted copy
+     *  still types. */
+    baseStats?: Record<string, number>;
+    /** LEGACY (pre-ladder payloads only): the retired forge enchant. Never
+     *  read; the load rebuild drops it. */
+    enchant?: { stat: string; value: number };
   };
 }
 
@@ -1325,7 +1334,7 @@ export function cloneItemInstancePayload(src: ItemInstancePayload): ItemInstance
   if (src.rift) {
     instance.rift = {
       ...src.rift,
-      baseStats: { ...src.rift.baseStats },
+      ...(src.rift.baseStats && { baseStats: { ...src.rift.baseStats } }),
       ...(src.rift.enchant && { enchant: { ...src.rift.enchant } }),
       ...(Array.isArray(src.rift.gems) ? { gems: [...src.rift.gems] } : {}),
     };
@@ -6476,6 +6485,8 @@ export type SimEvent = { pid?: number } & (
         // and the identical-enchant-id re-apply denied on every arm.
         | 'already_enchanted'
         | 'same_enchant'
+        // A Riftbound band: forge-only gear (professions/enchanting.ts).
+        | 'rift_gear'
         | 'busy';
     }
   // Outcome of applying a loadout's saved gear set. TEXT-FREE on purpose: the sim
@@ -6751,23 +6762,23 @@ export type SimEvent = { pid?: number } & (
       type: 'riftForgeResult';
       pid: number;
       ok: boolean;
-      action: 'upgrade' | 'enchant' | 'socket';
+      action: 'upgrade' | 'socket';
       itemId: string;
       reason?:
         | 'not_found'
         | 'not_rift_gear'
         | 'max_upgrade'
         | 'insufficient_essence'
-        | 'invalid_stat'
         | 'invalid_gem'
-        | 'sockets_full'
         // Type-level only: the while-dead refusal is returned to callers but
-        // never emitted (the three dead-gate early returns in
+        // never emitted (the two dead-gate early returns in
         // rift/progression.ts sit ABOVE emitResult); its one player-facing
         // surface is the shared "You can't do that while dead." error line.
         | 'dead';
       upgradeLevel?: number;
       essenceSpent?: number;
+      /** The gem a socket destroyed to make room (sockets are replaceable). */
+      replacedGem?: string;
     }
   // Gather-node harvest outcome (#1729): a successful resource harvest emits
   // this so the client can play a gathering audio cue for the acting player.

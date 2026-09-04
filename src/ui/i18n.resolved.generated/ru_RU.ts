@@ -3022,6 +3022,7 @@ export const ru_RU: EnTranslations = {
       "riftTier": "Предмет разлома ранга {tier}",
       "riftUpgrade": "Улучшение разлома {level}/{max}",
       "riftSockets": "Самоцветы разлома {used}/{total}",
+      "riftGemSocket": "Бонус гнезда для кольца разлома",
       "statEnchanted": "+{value} {stat} (зачаровано)",
       "enchantedFallback": "Зачаровано",
       "partyTradeWindow": "Вы можете передать этот предмет игрокам, разделившим эту добычу, ещё в течение {time}. Надев предмет, вы завершите период обмена."
@@ -3946,6 +3947,7 @@ export const ru_RU: EnTranslations = {
       "yieldLineRange": "{item}: {min}-{max}",
       "alreadyEnchanted": "Этот предмет уже зачарован.",
       "sameEnchant": "На этом предмете уже есть эти чары.",
+      "riftGear": "Кольца разлома принимают самоцветы разлома, а не чары.",
       "replaceTag": "Заменяет «{enchant}»",
       "sameEnchantTag": "Уже наложено",
       "plainTag": "Без чар",
@@ -7931,6 +7933,7 @@ export const ru_RU: EnTranslations = {
       "forgeUpgraded": "Улучшение разлома завершено для {name}.",
       "forgeEnchanted": "Зачарование разлома завершено для {name}.",
       "forgeSocketed": "Самоцвет разлома вставлен в {name}.",
+      "forgeGemReplaced": "Самоцвет разлома в {name} заменён: {gem} уничтожен.",
       "detonateGlacialGrave": "Ледяная могила взрывается!",
       "detonateAbsoluteZero": "Абсолютный ноль вырывается!",
       "detonateMagmaWell": "Магматический колодец вырывается!",

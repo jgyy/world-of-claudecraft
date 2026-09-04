@@ -72,8 +72,12 @@ export interface IWorldInventory {
     instance?: ItemInstancePayload,
     craftedRecipeId?: string,
   ): void;
+  /** The Riftbound band forge (rift/progression.ts): an essence upgrade
+   *  raises the copy's item level by one; a gem socket adds (or, on a full
+   *  band, replaces the oldest) rating line. The retired forge enchant
+   *  (`rift_enchant_item`) has no member: the wire token survives as a
+   *  dispatch-only tombstone because the vocabulary is append-only. */
   upgradeRiftItem(itemId: string, target?: { slotIndex: number }): void;
-  enchantRiftItem(itemId: string, stat: string, target?: { slotIndex: number }): void;
   socketRiftGem(itemId: string, gemId: string, target?: { slotIndex: number }): void;
   /** Milliseconds left before the bind-on-pickup party trade deadline
    *  `untilMs` (an ItemInstancePayload.partyTrade.untilMs value), clamped to

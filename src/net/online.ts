@@ -4200,10 +4200,6 @@ export class ClientWorld extends ReconWireState implements IWorld {
     if (target === undefined) this.cmd({ cmd: 'rift_upgrade_item', item: itemId });
     else this.cmd({ cmd: 'rift_upgrade_item', item: itemId, slot: target.slotIndex });
   }
-  enchantRiftItem(itemId: string, stat: string, target?: { slotIndex: number }): void {
-    if (target === undefined) this.cmd({ cmd: 'rift_enchant_item', item: itemId, stat });
-    else this.cmd({ cmd: 'rift_enchant_item', item: itemId, stat, slot: target.slotIndex });
-  }
   socketRiftGem(itemId: string, gemId: string, target?: { slotIndex: number }): void {
     if (target === undefined) this.cmd({ cmd: 'rift_socket_gem', item: itemId, gem: gemId });
     else this.cmd({ cmd: 'rift_socket_gem', item: itemId, gem: gemId, slot: target.slotIndex });

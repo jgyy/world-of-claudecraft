@@ -9,6 +9,10 @@ import { type TranslationKey, t } from './i18n';
 import { itemNumber } from './item_instance_tooltip';
 import { statNameKey } from './stat_tooltip_view';
 
+// The compare-row label key lives beside the per-copy bonus lines that share
+// it (item_instance_tooltip.ts); re-exported so hud.ts keeps one import site.
+export { compareStatLabelKey } from './item_instance_tooltip';
+
 function affixLine(value: number, labelKey: string): string {
   if (value <= 0) return '';
   return `<div class="tt-green">${esc(
@@ -17,13 +21,6 @@ function affixLine(value: number, labelKey: string): string {
       stat: t(labelKey as TranslationKey),
     }),
   )}</div>`;
-}
-
-/** Compare-row label key: healPower has no StatId cell, so it resolves here. */
-export function compareStatLabelKey(stat: string): string {
-  return stat === 'healPower'
-    ? 'hudChrome.statInfo.names.healPower'
-    : statNameKey(stat as Parameters<typeof statNameKey>[0]);
 }
 
 /** Both affix lines for an item, or '' when it carries neither. */

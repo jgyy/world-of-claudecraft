@@ -12,6 +12,8 @@ export const pending: Record<string, readonly string[]> = {
   "es": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -20,11 +22,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "es_ES": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -33,11 +38,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "fr_FR": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -46,11 +54,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "fr_CA": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -59,12 +70,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "en_CA": [],
   "it_IT": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -73,11 +87,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "de_DE": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -86,7 +103,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -95,6 +113,8 @@ export const pending: Record<string, readonly string[]> = {
   "pt_BR": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -103,12 +123,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "ru_RU": [],
   "cs_CZ": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -117,11 +140,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "nl_NL": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -130,11 +156,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "pl_PL": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -143,11 +172,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "id_ID": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -156,11 +188,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "tr_TR": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -169,11 +204,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "sv_SE": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -182,11 +220,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "vi_VN": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -195,11 +236,14 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ],
   "da_DK": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "hudChrome.enchanting.riftGear",
+    "hudChrome.itemTooltip.riftGemSocket",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -208,6 +252,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_mech_bird",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
-    "hudChrome.wocStore.mountsTitle"
+    "hudChrome.wocStore.mountsTitle",
+    "sim.rift.forgeGemReplaced"
   ]
 };

@@ -57,6 +57,15 @@ const themeSeed = (preset) => async (page) => {
   );
 };
 
+// The band tooltip rig: the standing lowest graphics preset, plus the
+// off-by-default item-level readout (Esc options), which is the line the
+// Riftbound band ladder exists to make true. String form: this runs under tsx.
+const riftBandRigSeed = async (page) => {
+  await page.evaluateOnNewDocument(
+    "try { localStorage.setItem('woc_settings', JSON.stringify({ graphicsPreset: 1, showItemLevel: true })); } catch {}",
+  );
+};
+
 /** High-contrast theme plus the browser/OS forced-colors mode. Raw CDP is
  *  required because Puppeteer's media wrapper rejects this feature name on
  *  some bundled versions even though Chromium supports it. */
@@ -2975,6 +2984,83 @@ export const TARGETS = [
           );
         }
       });
+      await wait(600);
+      return { clip: '#ui' };
+    },
+  },
+  {
+    key: 'riftbound-band-tooltip',
+    label: 'Riftbound band and Rift gem tooltips on the item-level ladder',
+    when: ['rift/band_ladder', 'rift_band_tooltip', 'rift/progression', 'content/rift/items'],
+    // Two standalone shots, desktop only (the synthetic hover path does not
+    // raise #tooltip on the touch layout, and the tooltip content is
+    // byte-identical on mobile): a bagged band beside its worn twin (the
+    // per-copy item level, the ladder-priced stat line, the gem rating line,
+    // and the instance-aware compare block) and a Rift gem's own tooltip
+    // (its socket-bonus line).
+    variants: [
+      { key: 'band', charClass: 'warrior', charName: 'Thorgar', beforeLoad: riftBandRigSeed },
+      { key: 'gem', charClass: 'warrior', charName: 'Thorgar', beforeLoad: riftBandRigSeed },
+    ],
+    async capture(page, variant) {
+      await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 90000 });
+      await dismissEntryOverlays(page);
+      const hoverId = variant?.key === 'gem' ? 'rift_gem_verdant' : 'riftbound_band_of_might';
+      await page.evaluate((id) => {
+        const sim = window.__game?.sim;
+        try {
+          sim?.setPlayerLevel?.(20);
+        } catch {}
+        if (id === 'rift_gem_verdant') {
+          for (const gem of ['rift_gem_verdant', 'rift_gem_crimson']) {
+            try {
+              sim?.addItem(gem, 1);
+            } catch {}
+          }
+        } else {
+          // The dev kit mints two maxed S bands on the fingers; moving one to
+          // the bags lets the hover show the copy AND the compare against its
+          // worn twin.
+          try {
+            sim?.chat?.('/dev bis prot');
+          } catch {}
+          try {
+            sim?.unequipItem?.('ring2');
+          } catch {}
+        }
+        const el = document.querySelector('#bags');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleBags?.();
+      }, hoverId);
+      await pollForSize(page, '#bags');
+      // Hover through the REAL pointer path so the tooltip is the one a player
+      // sees, not a hand-built string (the rod-ladder recipe).
+      await page.evaluate((id) => {
+        const cells = [...document.querySelectorAll('#bags *')];
+        const el = cells.find((c) => {
+          const bg = c instanceof HTMLElement ? c.style.backgroundImage : '';
+          const img = c.querySelector?.('img');
+          return bg?.includes(id) || img?.getAttribute('src')?.includes(id);
+        });
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        for (const type of [
+          'pointerenter',
+          'pointerover',
+          'mouseenter',
+          'mouseover',
+          'pointermove',
+          'mousemove',
+        ]) {
+          el.dispatchEvent(
+            new MouseEvent(type, {
+              bubbles: true,
+              clientX: r.left + r.width / 2,
+              clientY: r.top + r.height / 2,
+            }),
+          );
+        }
+      }, hoverId);
       await wait(600);
       return { clip: '#ui' };
     },

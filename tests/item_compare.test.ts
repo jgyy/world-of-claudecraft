@@ -56,6 +56,32 @@ describe('itemStatDeltas', () => {
     expect(itemStatDeltas(same, dup)).toEqual([]);
   });
 
+  it('reads each side through its copy: a stat-free shell compares by its rolled line', () => {
+    // A Riftbound band's ItemDef carries nothing; the copy carries the whole
+    // ring (primary stats plus gem ratings). Without the instances the band
+    // would read as an empty ring against whatever is worn.
+    const shell = armor('band', {});
+    const worn = armor('worn', { str: 5, sta: 4 }, { hitRating: 25 });
+    expect(itemStatDeltas(shell, worn).map((d) => d.stat)).toEqual(['str', 'sta', 'hitRating']);
+    const copy = { rolled: { stats: { str: 8, sta: 6, hitRating: 12 } } };
+    const byStat = Object.fromEntries(
+      itemStatDeltas(shell, worn, copy).map((d) => [d.stat, d.delta]),
+    );
+    expect(byStat).toEqual({ str: 3, sta: 2, hitRating: -13 });
+    // Both sides are per-copy: the same shell against a worn band of its own.
+    const wornCopy = { rolled: { stats: { str: 8, sta: 6, critRating: 12 } } };
+    const bothSides = Object.fromEntries(
+      itemStatDeltas(shell, shell, copy, wornCopy).map((d) => [d.stat, d.delta]),
+    );
+    expect(bothSides).toEqual({ hitRating: 12, critRating: -12 });
+    // An enchanted worn piece keeps its baked bonus in the comparison.
+    const plain = armor('plain', { sta: 10 });
+    const enchantedWorn = { rolled: { stats: { sta: 4 } } };
+    expect(itemStatDeltas(plain, armor('base', { sta: 10 }), undefined, enchantedWorn)).toEqual([
+      { stat: 'sta', delta: -4, decimals: 0 },
+    ]);
+  });
+
   it('computes a fractional weapon DPS delta at one decimal of precision', () => {
     // 10-20 @ 2.0s = 7.5 dps vs 8-12 @ 2.0s = 5.0 dps -> +2.5
     const candidate = weapon('big', 10, 20, 2.0);
