@@ -976,6 +976,8 @@ export function interact(
         return;
       }
       if (target.kind === 'npc' && isRiftForgeNpc(target)) {
+        // Still an NPC conversation for the deeds ledger (Saul's streak resets).
+        deedsMod.onNpcTalkedForDeeds(ctx, r.meta, target.templateId);
         ctx.emit({ type: 'riftForge', pid: p.id });
         return;
       }
@@ -1083,6 +1085,8 @@ export function interact(
     return;
   }
   if (questEntity && isRiftForgeNpc(questEntity)) {
+    // Still an NPC conversation for the deeds ledger (Saul's streak resets).
+    deedsMod.onNpcTalkedForDeeds(ctx, r.meta, questEntity.templateId);
     ctx.emit({ type: 'riftForge', pid: p.id });
     return;
   }

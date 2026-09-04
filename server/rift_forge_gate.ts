@@ -7,7 +7,8 @@
 // it from a crafted frame. Now that the forge intentionally ships, the default
 // is OPEN and the variable is an ops kill switch: RIFT_FORGE_ENABLED=0 closes
 // the three dispatch arms on a realm that needs the forge paused (an economy
-// incident, a PTR comparison); anything else, including unset, keeps it open.
+// incident, a PTR comparison), as do the obvious off spellings ('false', 'off',
+// 'no', any case); unset and anything else keep it open.
 //
 // The env var is read per verdict, never captured at import, so a supervised
 // restart and the tests both see the live value. That per-verdict read is
@@ -32,11 +33,18 @@ export const RIFT_FORGE_WIRE_COMMANDS = [
 
 const RIFT_FORGE_CMD_SET: ReadonlySet<string> = new Set(RIFT_FORGE_WIRE_COMMANDS);
 
-/** True unless the realm has explicitly closed the forge wire (exactly '0'). */
+/** The spellings that close the wire (trimmed, case-insensitive): a kill
+ *  switch that only understood one of them would leave a realm open while the
+ *  operator believed it closed. Unset and every other value keep it open. */
+export const RIFT_FORGE_CLOSED_VALUES = ['0', 'false', 'off', 'no'] as const;
+
+/** True unless the realm has explicitly closed the forge wire. */
 export function riftForgeWireEnabled(
   env: Readonly<Record<string, string | undefined>> = process.env,
 ): boolean {
-  return env.RIFT_FORGE_ENABLED !== '0';
+  const raw = env.RIFT_FORGE_ENABLED;
+  if (raw === undefined) return true;
+  return !(RIFT_FORGE_CLOSED_VALUES as readonly string[]).includes(raw.trim().toLowerCase());
 }
 
 /**

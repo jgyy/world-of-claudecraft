@@ -125,12 +125,15 @@ from a riftForge NPC with the shared "too far from the Rift Forge" error line
 contract), so the offline world, the headless env, and the authoritative server
 enforce it identically. Only bagged bands are forgeable (the sim resolves the
 target through the inventory); the window lists a worn band with an unequip
-hint.
+hint. The forge currency ladder is the sim's own (`riftUpgradeCost`, 2 essence
+at the first step rising by 2 per step to the fifth; `RIFT_ENCHANT_COST`, a
+flat 4; one gem per socket), quoted by the window from those exports rather
+than re-derived.
 
 The server's `RIFT_FORGE_ENABLED` gate (`server/rift_forge_gate.ts`, pinned by
 `tests/rift_forge_gate.test.ts`) is now an ops kill switch rather than an
-opt-in: exactly `0` closes the three wire commands, anything else (including
-unset) keeps them open. The three dispatch arms (`server/rift_forge_dispatch.ts`)
+opt-in: `0` (or `false`, `off`, `no`) closes the three wire commands, unset
+and anything else keeps them open. The three dispatch arms (`server/rift_forge_dispatch.ts`)
 answer the `commandOutcome` ack with the sim verdict, and the client sends
 them through `cmdWithOutcome`, so a closed realm or a sim refusal always
 surfaces as a visible status line in the window, never as silence. Each

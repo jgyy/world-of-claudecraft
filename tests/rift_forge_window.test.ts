@@ -32,6 +32,8 @@ describe('RiftForgeWindow', () => {
       inventory,
       equipment: {},
       equipmentInstances: {},
+      cfg: { seed: 1, playerClass: 'warrior' },
+      player: { name: 'Forgeproof', level: 20 },
       upgradeRiftItem: (itemId: string, target?: { slotIndex: number }) => {
         calls.push({ cmd: 'upgrade', itemId, slotIndex: target?.slotIndex });
         return outcome;
@@ -103,14 +105,21 @@ describe('RiftForgeWindow', () => {
 
   it('routes the buttons to the IWorld trio with the exact bag slot and the picked option', async () => {
     win.open();
+    // Each click holds the controls until its result event lands (the
+    // double-spend pin below), so the sim's event is fed back between clicks.
+    const settle = (action: 'upgrade' | 'enchant' | 'socket') =>
+      win.onResult({ type: 'riftForgeResult', pid: 1, ok: true, action, itemId: gear.itemId });
     root.querySelector<HTMLButtonElement>('[data-upgrade]')?.click();
     await Promise.resolve();
+    settle('upgrade');
     const statPick = root.querySelector<HTMLSelectElement>('[data-stat]');
     if (statPick) statPick.value = 'hasteRating';
     root.querySelector<HTMLButtonElement>('[data-enchant]')?.click();
     await Promise.resolve();
+    settle('enchant');
     root.querySelector<HTMLButtonElement>('[data-socket]')?.click();
     await Promise.resolve();
+    settle('socket');
     expect(calls).toEqual([
       { cmd: 'upgrade', itemId: gear.itemId, slotIndex: 1 },
       { cmd: 'enchant', itemId: gear.itemId, arg: 'hasteRating', slotIndex: 1 },
@@ -180,6 +189,46 @@ describe('RiftForgeWindow', () => {
     empty.open();
     expect(root.querySelector('.lb-empty')?.textContent).toContain('No Riftbound band');
     empty.close();
+  });
+
+  it('quotes the Riftwright greeting with the class spliced in', () => {
+    win.open();
+    const greeting = root.querySelector('.rf-greeting')?.textContent ?? '';
+    expect(greeting).toContain('A Riftbound band remembers the break that made it');
+    expect(greeting).not.toContain('$C');
+  });
+
+  it('holds the controls from the click until the result event lands (no double spend)', async () => {
+    let resolveAck: (ok: boolean) => void = () => {};
+    outcome = new Promise<boolean>((resolve) => {
+      resolveAck = resolve;
+    }) as unknown as { ok: boolean };
+    win.open();
+    const upgrade = () => root.querySelector<HTMLButtonElement>('[data-upgrade]');
+    upgrade()?.click();
+    await Promise.resolve();
+    // The row re-rendered disabled while the ack is pending; a second click
+    // (on the fresh button) sends nothing.
+    expect(upgrade()?.disabled).toBe(true);
+    upgrade()?.click();
+    await Promise.resolve();
+    expect(calls).toHaveLength(1);
+    resolveAck(true);
+    await Promise.resolve();
+    await Promise.resolve();
+    // A true ack alone does not release: the bags are still the old ones.
+    expect(upgrade()?.disabled).toBe(true);
+    win.onResult({
+      type: 'riftForgeResult',
+      pid: 1,
+      ok: true,
+      action: 'upgrade',
+      itemId: gear.itemId,
+      upgradeLevel: 1,
+    } as Extract<SimEvent, { type: 'riftForgeResult' }>);
+    expect(upgrade()?.disabled).toBe(false);
+    upgrade()?.click();
+    expect(calls).toHaveLength(2);
   });
 
   it('close restores focus to the opener and is idempotent', () => {

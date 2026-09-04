@@ -107,20 +107,19 @@ function recordingRefusalSink(): { count: () => number } {
 }
 
 describe('rift forge wire gate: the pure verdict', () => {
-  it('is open unless RIFT_FORGE_ENABLED is exactly 0 (the kill switch)', () => {
+  it('is open unless RIFT_FORGE_ENABLED spells off (the kill switch)', () => {
     expect(riftForgeWireEnabled({})).toBe(true);
     expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: undefined })).toBe(true);
     expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '1' })).toBe(true);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '0' })).toBe(false);
-    // Strict kill switch, not falsiness: "false"/"off" must not close a realm
-    // by accident, the mirror of the old strict opt-in.
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'false' })).toBe(true);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'off' })).toBe(true);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'no' })).toBe(true);
-    // The near-miss shapes a hand-edited .env actually produces stay open too.
+    // Every obvious off spelling closes it, trimmed and case-insensitive: an
+    // operator pausing the forge in an incident must not be left open by a
+    // spelling (the reason a kill switch is looser than the old strict opt-in).
+    for (const off of ['0', 'false', 'off', 'no', 'FALSE', 'Off', ' 0', '0 ']) {
+      expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: off }), off).toBe(false);
+    }
+    // Empty and unrecognized values keep it open (nothing was asked for).
     expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '' })).toBe(true);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: ' 0' })).toBe(true);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '0 ' })).toBe(true);
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'closed' })).toBe(true);
   });
 
   it('refuses exactly the three forge tokens while closed, and nothing else ever', () => {

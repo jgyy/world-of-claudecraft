@@ -273,7 +273,11 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 18905,
+    // Lowered 18905 -> 18897 by the Rift Forge: the rift payload and the
+    // combat-rating tooltip lines moved into item_instance_tooltip.ts and
+    // item_affix_tooltip.ts (the gather_tool_tooltip pattern), which paid
+    // for the forge window's wiring with slack to spare. Exact count.
+    ceiling: 18897,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {

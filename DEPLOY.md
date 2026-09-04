@@ -594,7 +594,7 @@ For off-box safety, sync the directory to S3 occasionally:
   grants, mob spawns, instance teleports, and the dev command GUI).
 - `RIFT_FORGE_ENABLED` is a kill switch, not an opt-in: the Rift forge wire
   commands (upgrade/enchant/socket at the Riftwright) are open by default.
-  Set it to exactly `0` to pause the forge on a realm
+  Set it to `0` (or `false`, `off`, `no`) to pause the forge on a realm
   (`server/rift_forge_gate.ts`); leave it unset otherwise.
 - **Community test profile**: on a disposable public test realm, set
   `PROVISION_TEST_ACCOUNTS=1` in the host `.env`, then restart the game

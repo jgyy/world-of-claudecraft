@@ -103,6 +103,17 @@ describe('rift forge place gate', () => {
     expect(evs[0]).toMatchObject({ type: 'riftForge', pid: sim.player.id });
   });
 
+  it("a Riftwright visit resets Saul's consecutive-talk ledger like any NPC talk", () => {
+    const { sim } = forgeWorld();
+    const forge = moveToRiftForge(sim);
+    // biome-ignore lint/suspicious/noExplicitAny: the deed runtime is a private ctx view
+    const runtime = (sim as any).ctx.deedRuntime as { saulTalks: Map<number, number> };
+    runtime.saulTalks.set(sim.player.id, 8);
+    sim.player.targetId = forge.id;
+    sim.interact();
+    expect(runtime.saulTalks.has(sim.player.id)).toBe(false);
+  });
+
   it('an untargeted proximity interact at the Riftwright emits exactly one riftForge event', () => {
     const { sim } = forgeWorld();
     moveToRiftForge(sim);

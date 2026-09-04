@@ -16,7 +16,7 @@
 
 import { NPCS } from '../data';
 import type { SimContext } from '../sim_context';
-import { dist2d, type Entity, INTERACT_RANGE } from '../types';
+import { type Entity, INTERACT_RANGE } from '../types';
 
 /** How close a player must stand to the Riftwright: INTERACT_RANGE + 2,
  *  inclusive, the same reach the bank and the World Market use. */
@@ -30,8 +30,10 @@ export function isRiftForgeNpc(e: Entity): boolean {
 /** True when the player entity stands within RIFT_FORGE_RANGE of a riftForge NPC. */
 export function nearRiftForge(ctx: SimContext, p: Entity): boolean {
   let near = false;
+  // The grid already filters on the squared radius (inclusive), so the
+  // callback only has to recognize the NPC.
   ctx.grid.forEachInRadius(p.pos.x, p.pos.z, RIFT_FORGE_RANGE, (e) => {
-    if (!near && isRiftForgeNpc(e) && dist2d(p.pos, e.pos) <= RIFT_FORGE_RANGE) near = true;
+    if (!near && isRiftForgeNpc(e)) near = true;
   });
   return near;
 }

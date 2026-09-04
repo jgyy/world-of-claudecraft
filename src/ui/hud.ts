@@ -12534,7 +12534,9 @@ export class Hud {
           this.openBank();
           break;
         case 'riftForge':
-          // Interact at the Riftwright: open the Rift Forge window.
+          // Interact at the Riftwright: open the Rift Forge window (which
+          // quotes her greeting) and speak the greeting cue.
+          voice.play('greeting__riftwright_maelis');
           this.openRiftForge();
           break;
         case 'noticeboard':

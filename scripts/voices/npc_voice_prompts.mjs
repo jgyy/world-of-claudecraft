@@ -1073,7 +1073,7 @@ export const VOICE_PROMPTS = [
 // Recurring NPC records → the base voice that speaks for them. gen_npc_lines.mjs
 // consults this so every Aldric/Maren/Halven zone variant reuses one designed voice.
 export const VOICE_ALIAS = {
-  // Riftwright Maelis, the Rift Forgemaster in Gullhaven, borrows Quartermaster
+  // Riftwright Maelis, the Rift Forgemaster in the Watch Meadow on the Farshore, borrows Quartermaster
   // Edda's steel-and-salt Redoubt register (the same forge-and-anvil trade, the
   // same shore) until the forge receives its own designed voice.
   riftwright_maelis: 'quartermaster_edda',

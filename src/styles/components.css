@@ -1947,6 +1947,12 @@
   /* The Riftwright's window (src/ui/hud/rift_forge/): a wallet strip, one
      card per Riftbound band with its three forge lines, and a status line.
      Rides the leaderboard family's column shell and lb-* empty state. */
+  #rift-forge-window .rf-greeting {
+    padding: 4px 2px 2px;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
   #rift-forge-window .rf-wallet {
     display: flex;
     flex-wrap: wrap;

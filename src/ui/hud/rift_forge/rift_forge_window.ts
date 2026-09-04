@@ -20,12 +20,13 @@ import { ITEMS } from '../../../sim/data';
 import type { ItemDef, ItemInstancePayload, SimEvent } from '../../../sim/types';
 import type { IWorld } from '../../../world_api';
 import { markDialogRoot } from '../../dialog_root';
+import { npcGreeting } from '../../entity_display_labels';
 import { itemDisplayName } from '../../entity_i18n';
 import { esc } from '../../esc';
 import { formatNumber, type TranslationKey, t } from '../../i18n';
 import { iconDataUrl } from '../../icons';
-import { itemNameColor } from '../../item_name_color';
 import { itemStatName } from '../../item_instance_tooltip';
+import { itemNameColor } from '../../item_name_color';
 import { svgIcon } from '../../ui_icons';
 import { buildRiftForgeView, type RiftForgeRingRow } from './rift_forge_view';
 
@@ -65,12 +66,22 @@ const ACTION_DONE_KEYS: Record<ForgeResultEvent['action'], TranslationKey> = {
 
 const n = (value: number) => formatNumber(value, { maximumFractionDigits: 0 });
 
+/** The Riftwright (content/farshore.ts): the greeting the window quotes. */
+const RIFT_FORGE_NPC_ID = 'riftwright_maelis';
+/** How long a click may hold the row controls waiting for its result event. */
+const BUSY_BACKSTOP_MS = 6000;
+
 export class RiftForgeWindow {
   private openerFocus: HTMLElement | null = null;
   /** The last outcome's localized status line (null = nothing to say). */
   private status: { text: string; error: boolean } | null = null;
-  /** Serializes an in-flight action so a double click cannot spend twice. */
+  /** Serializes an in-flight action so a double click cannot spend twice.
+   *  Held from the click until the riftForgeResult event lands (online the
+   *  ack arrives a broadcast BEFORE the mutated bags do, so releasing on the
+   *  ack alone would re-enable a button over stale rows), with a timer
+   *  backstop for an event that never comes. */
   private busy = false;
+  private busyTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(private readonly deps: RiftForgeWindowDeps) {}
 
@@ -94,6 +105,7 @@ export class RiftForgeWindow {
 
   close(): void {
     const el = this.deps.root();
+    this.releaseBusy();
     if (el.style.display !== 'flex') {
       this.openerFocus = null;
       return;
@@ -113,13 +125,21 @@ export class RiftForgeWindow {
   /** A riftForgeResult event for this player: the sim's structured verdict
    *  becomes the status line, and the rows re-read the mutated payload. */
   onResult(ev: ForgeResultEvent): void {
+    this.releaseBusy();
     if (!this.isOpen) return;
     const item = ITEMS[ev.itemId];
     const name = item ? itemDisplayName(item) : ev.itemId;
+    const reasonKey = ev.reason ? REASON_KEYS[ev.reason] : 'hudChrome.riftForge.refused';
     this.status = ev.ok
       ? { text: t(ACTION_DONE_KEYS[ev.action], { name }), error: false }
-      : { text: t(REASON_KEYS[ev.reason ?? 'not_found']), error: true };
+      : { text: t(reasonKey), error: true };
     this.render();
+  }
+
+  private releaseBusy(): void {
+    this.busy = false;
+    if (this.busyTimer !== null) clearTimeout(this.busyTimer);
+    this.busyTimer = null;
   }
 
   render(): void {
@@ -140,7 +160,10 @@ export class RiftForgeWindow {
       )
       .join('');
     const essence = `<span class="rf-currency">${this.iconHtml(ITEMS.rift_essence)}${esc(
-      t('hudChrome.riftForge.currency', { name: this.itemName('rift_essence'), count: n(view.essence) }),
+      t('hudChrome.riftForge.currency', {
+        name: this.itemName('rift_essence'),
+        count: n(view.essence),
+      }),
     )}</span>`;
     const rows =
       view.rings.length === 0
@@ -149,10 +172,16 @@ export class RiftForgeWindow {
     const status = this.status
       ? `<div class="rf-status${this.status.error ? ' rf-status-error' : ''}" role="${this.status.error ? 'alert' : 'status'}">${esc(this.status.text)}</div>`
       : '<div class="rf-status" role="status"></div>';
+    // The Riftwright's own greeting: the interact path opens this window
+    // instead of the gossip dialog, so the line is spoken here.
+    const greeting = `<div class="rf-greeting">${esc(
+      npcGreeting(RIFT_FORGE_NPC_ID, world.cfg.playerClass, world.player.name),
+    )}</div>`;
     el.innerHTML =
       `<div class="panel-title"><span id="rift-forge-title">${esc(t('hudChrome.riftForge.title'))} ` +
       `<span class="lb-subtitle">${esc(t('hudChrome.riftForge.subtitle'))}</span></span>` +
       `<button type="button" class="x-btn" data-close aria-label="${esc(t('hudChrome.leaderboard.close'))}">${svgIcon('close')}</button></div>` +
+      greeting +
       `<div class="rf-wallet">${essence}${gems}</div>` +
       `<div class="rf-body window-fill" role="region" aria-labelledby="rift-forge-title">${rows}</div>` +
       status;
@@ -195,21 +224,28 @@ export class RiftForgeWindow {
       return `<div class="rf-ring rf-ring-worn">${head}<div class="rf-hint">${esc(t('hudChrome.riftForge.wornHint'))}</div></div>`;
     }
     const upgradeLabel = esc(
-      t('hudChrome.itemTooltip.riftUpgrade', { level: n(r.upgradeLevel), max: n(r.maxUpgradeLevel) }),
+      t('hudChrome.itemTooltip.riftUpgrade', {
+        level: n(r.upgradeLevel),
+        max: n(r.maxUpgradeLevel),
+      }),
     );
+    const off = (ok: boolean) => (ok && !this.busy ? '' : ' disabled');
     const upgradeBtn =
       r.nextUpgradeCost === null
         ? `<span class="rf-max">${esc(t('hudChrome.riftForge.upgradeMax'))}</span>`
-        : `<button type="button" class="rf-btn" data-upgrade="${index}"${r.canUpgrade ? '' : ' disabled'}>${esc(
+        : `<button type="button" class="rf-btn" data-upgrade="${index}"${off(r.canUpgrade)}>${esc(
             t('hudChrome.riftForge.upgradeBtn', { cost: n(r.nextUpgradeCost) }),
           )}</button>`;
     const statOptions = enchantStats
-      .map((s) => `<option value="${esc(s)}"${r.enchant?.stat === s ? ' selected' : ''}>${esc(itemStatName(s))}</option>`)
+      .map(
+        (s) =>
+          `<option value="${esc(s)}"${r.enchant?.stat === s ? ' selected' : ''}>${esc(itemStatName(s))}</option>`,
+      )
       .join('');
     const enchantLine =
       `<div class="rf-line"><span class="rf-line-label">${enchantNow}</span>` +
       `<select class="rf-select" data-stat="${index}" aria-label="${esc(t('hudChrome.riftForge.statPickAria'))}">${statOptions}</select>` +
-      `<button type="button" class="rf-btn" data-enchant="${index}"${r.canEnchant ? '' : ' disabled'}>${esc(
+      `<button type="button" class="rf-btn" data-enchant="${index}"${off(r.canEnchant)}>${esc(
         t('hudChrome.riftForge.enchantBtn', { cost: n(r.enchantCost) }),
       )}</button></div>`;
     const socketsLabel = esc(
@@ -224,9 +260,8 @@ export class RiftForgeWindow {
         : r.socketable.length === 0
           ? `<span class="rf-max">${esc(t('hudChrome.riftForge.noGems'))}</span>`
           : `<select class="rf-select" data-gem="${index}" aria-label="${esc(t('hudChrome.riftForge.gemPickAria'))}">${gemOptions}</select>` +
-            `<button type="button" class="rf-btn" data-socket="${index}">${esc(t('hudChrome.riftForge.socketBtn'))}</button>`;
-    const socketLine =
-      `<div class="rf-line"><span class="rf-line-label">${socketsLabel} <span class="rf-gems">${gemsNow}</span></span>${socketControls}</div>`;
+            `<button type="button" class="rf-btn" data-socket="${index}"${off(true)}>${esc(t('hudChrome.riftForge.socketBtn'))}</button>`;
+    const socketLine = `<div class="rf-line"><span class="rf-line-label">${socketsLabel} <span class="rf-gems">${gemsNow}</span></span>${socketControls}</div>`;
     const upgradeLine = `<div class="rf-line"><span class="rf-line-label">${upgradeLabel}</span>${upgradeBtn}</div>`;
     return `<div class="rf-ring">${head}${upgradeLine}${enchantLine}${socketLine}</div>`;
   }
@@ -242,7 +277,9 @@ export class RiftForgeWindow {
       btn.addEventListener('click', () => {
         const r = ringAt(btn.dataset.upgrade);
         if (r?.source.kind === 'bag')
-          void this.act(this.deps.world().upgradeRiftItem(r.itemId, { slotIndex: r.source.slotIndex }));
+          void this.act(
+            this.deps.world().upgradeRiftItem(r.itemId, { slotIndex: r.source.slotIndex }),
+          );
       });
     });
     el.querySelectorAll<HTMLButtonElement>('[data-enchant]').forEach((btn) => {
@@ -251,7 +288,9 @@ export class RiftForgeWindow {
         const pick = el.querySelector<HTMLSelectElement>(`[data-stat="${btn.dataset.enchant}"]`);
         if (r?.source.kind === 'bag' && pick)
           void this.act(
-            this.deps.world().enchantRiftItem(r.itemId, pick.value, { slotIndex: r.source.slotIndex }),
+            this.deps
+              .world()
+              .enchantRiftItem(r.itemId, pick.value, { slotIndex: r.source.slotIndex }),
           );
       });
     });
@@ -269,17 +308,27 @@ export class RiftForgeWindow {
     });
   }
 
-  /** Await one forge outcome, then re-render. A `false` ack with no event
-   *  behind it (the realm closed the forge, or the ack timed out) still gets
-   *  a visible line: the doc's "never pure silence" rule for this trio. */
+  /** Await one forge outcome. A `false` ack with no event behind it (the
+   *  realm closed the forge, or the ack timed out) still gets a visible line:
+   *  the doc's "never pure silence" rule for this trio. A truthy outcome keeps
+   *  the controls held until onResult re-reads the mutated payload. */
   private async act(outcome: ReturnType<IWorld['upgradeRiftItem']>): Promise<void> {
     if (this.busy) return;
     this.busy = true;
+    this.busyTimer = setTimeout(() => {
+      this.releaseBusy();
+      if (this.isOpen) this.render();
+    }, BUSY_BACKSTOP_MS);
+    if (this.isOpen) this.render();
+    let result: Awaited<typeof outcome> | false = false;
     try {
-      const result = await outcome;
-      if (result === false) this.status = { text: t('hudChrome.riftForge.refused'), error: true };
-    } finally {
-      this.busy = false;
+      result = await outcome;
+    } catch {
+      result = false;
+    }
+    if (result === false) {
+      this.releaseBusy();
+      this.status = { text: t('hudChrome.riftForge.refused'), error: true };
     }
     if (this.isOpen) this.render();
   }
