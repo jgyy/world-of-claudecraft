@@ -528,18 +528,27 @@ export class PgSocialDb implements SocialDb {
   }
 
   // Compare-and-set: the page is bought only if the guild still stands at
-  // exactly `expectedPages` bought pages (the count the caller priced from)
-  // and the ladder is not already complete. A concurrent purchase (the
-  // double-click race, or a second officer's client) therefore reports
-  // 'stale' instead of charging twice for one page or skipping a rung.
+  // exactly `expectedPages` bought pages (the count the caller priced from),
+  // the ladder is not already complete, and the buyer is STILL the Guild
+  // Master. A concurrent purchase (the double-click race, or a second client)
+  // therefore reports 'stale' instead of charging twice for one page or
+  // skipping a rung, and a demotion racing the purchase misses the write
+  // instead of expanding on a stale rank. The stored count is compared
+  // FLOORED (GREATEST(.., 0)), the same load path the caller priced from, so
+  // a tampered negative column can never become a charge-refund loop.
   async buyGuildRosterPage(
     guildId: number,
     expectedPages: number,
+    leaderCharId: number,
   ): Promise<'ok' | 'stale' | 'no_guild'> {
     const res = await this.pool.query(
       `UPDATE guilds SET roster_pages = roster_pages + 1
-        WHERE id = $1 AND roster_pages = $2 AND roster_pages < $3`,
-      [guildId, expectedPages, GUILD_ROSTER_MAX_PAGES],
+        WHERE id = $1 AND GREATEST(roster_pages, 0) = $2 AND roster_pages < $3
+          AND EXISTS (
+            SELECT 1 FROM guild_members
+             WHERE guild_id = $1 AND character_id = $4 AND rank = 'leader'
+          )`,
+      [guildId, expectedPages, GUILD_ROSTER_MAX_PAGES, leaderCharId],
     );
     if ((res.rowCount ?? 0) > 0) return 'ok';
     const exists = await this.pool.query('SELECT 1 FROM guilds WHERE id = $1', [guildId]);

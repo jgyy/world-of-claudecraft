@@ -4764,7 +4764,7 @@ export const hudChromeStrings = {
     // Guild roster expansion (docs/prd/guild-roster-expansion.md): the seat
     // count against the guild's cap, the Guild Master's buy button and its
     // confirm prompt, the guild-wide success line, and the refusal codes the
-    // server answers with (hud.ts renders them from guild_result_keys.ts).
+    // server answers with (hud.ts renders them from result_code_keys.ts).
     // {seats} is the page size, {price} the formatted page price, {cap} the
     // seat cap, {name} the buyer's character name spliced verbatim.
     // Wordy, M16: the five non-Latin fills land in this same change.

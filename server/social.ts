@@ -175,10 +175,15 @@ export interface SocialDb {
     requirePledge?: boolean,
   ): Promise<'ok' | 'full' | 'already_member' | 'no_guild' | 'no_pledge'>;
   // Buy the next roster page, compare-and-set on the pages-bought count the
-  // caller priced from: 'stale' when another purchase landed first (the
-  // caller refunds and asks the buyer to retry from the fresh price), 'no_guild'
-  // when the guild is gone.
-  buyGuildRosterPage(guildId: number, expectedPages: number): Promise<'ok' | 'stale' | 'no_guild'>;
+  // caller priced from AND on the buyer still holding the leader rank:
+  // 'stale' when another purchase landed first or the buyer was demoted
+  // meanwhile (the caller refunds and asks the buyer to retry from the fresh
+  // price), 'no_guild' when the guild is gone.
+  buyGuildRosterPage(
+    guildId: number,
+    expectedPages: number,
+    leaderCharId: number,
+  ): Promise<'ok' | 'stale' | 'no_guild'>;
   removeGuildMember(charId: number): Promise<void>;
   // Rank write predicated on BOTH the character and the guild the caller
   // authorized against, returning whether a row actually moved. False means
@@ -1948,9 +1953,12 @@ export class SocialService {
   // Master only, priced from the guild row, paid from the buyer's OWN purse.
   // RESERVE-AT-GATE, the creation fee's flow: the purse is charged
   // synchronously BEFORE the DB write and refunded on every refusal arm, so a
-  // buyer who logs out mid-flight has already paid and a refused page never
-  // costs anything. The compare-and-set write lets a double-click (or two
-  // clients) pay for one page at most: the loser is refunded and asked to
+  // buyer who logs out mid-flight has already paid rather than dodging the
+  // charge. The one arm that cannot make the buyer whole is a refusal racing
+  // that logout (no live purse to refund into); the transport logs it loudly
+  // for operator compensation, the creation fee's trade. The compare-and-set
+  // write lets a double-click (or two clients) pay for one page at most and
+  // re-checks the buyer's rank at commit: the loser is refunded and asked to
   // retry from the fresh price.
   async guildBuyRosterPage(actor: SocialActor): Promise<void> {
     const membership = await this.db.guildMembership(actor.characterId);
@@ -1977,9 +1985,17 @@ export class SocialService {
     }
     let result: 'ok' | 'stale' | 'no_guild';
     try {
-      result = await this.db.buyGuildRosterPage(membership.guildId, membership.rosterPages);
+      result = await this.db.buyGuildRosterPage(
+        membership.guildId,
+        membership.rosterPages,
+        actor.characterId,
+      );
     } catch (err) {
+      // The write failed for a reason that is not the buyer's: refund, tell
+      // them to try again (the one line that fits an unexplained miss), and
+      // let the dispatcher log the cause.
       this.tx.refundPurse(actor.characterId, charged);
+      this.rosterResult(actor.characterId, 'retry');
       throw err;
     }
     if (result !== 'ok') {

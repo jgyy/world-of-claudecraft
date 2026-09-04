@@ -439,7 +439,14 @@ describe('social_window: guild roster expansion (source pins)', () => {
     expect(body).toContain('() => w.guildBuyRosterPage()');
   });
 
-  it('the catalog carries every roster key the painter and hud read', () => {
+  it('the catalog carries the roster block with every key the painter and hud read', () => {
+    // Scoped to the `roster: {` block under `social`, so a same-named key
+    // elsewhere in the catalog (there are several `maxed:` / `retry:` leaves)
+    // cannot satisfy this pin; tests/result_code_keys.test.ts resolves the
+    // hud-side keys through the generated bundle.
+    const start = hudChromeCatalog.indexOf('    roster: {');
+    expect(start).toBeGreaterThan(-1);
+    const block = hudChromeCatalog.slice(start, hudChromeCatalog.indexOf('\n    },\n', start));
     for (const key of [
       'seats:',
       'expand:',
@@ -447,11 +454,12 @@ describe('social_window: guild roster expansion (source pins)', () => {
       'confirm:',
       'confirmAction:',
       'expandedLine:',
+      'result: {',
       'notLeader:',
       'cannotAfford:',
       'retry:',
     ]) {
-      expect(hudChromeCatalog, key).toContain(key);
+      expect(block, key).toContain(key);
     }
   });
 });

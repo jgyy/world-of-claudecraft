@@ -199,11 +199,39 @@ export function guildView(social: SocialInfo | null, myName: string): GuildView 
       motdSetBy: guild.motdSetBy ?? '',
       canEditMotd: me === 'leader' || me === 'officer',
       tier: guild.tier ?? 0,
-      memberCap: guild.memberCap ?? GUILD_ROSTER_BASE_MEMBERS,
-      nextRosterPrice: guild.nextRosterPrice ?? null,
-      canExpandRoster: me === 'leader' && (guild.nextRosterPrice ?? null) !== null,
+      ...rosterOf(guild),
       rows,
     },
+  };
+}
+
+/** Roster expansion (docs/prd/guild-roster-expansion.md), as the Guild tab
+ *  footer and its buy prompt read it: the guild's seat cap, the copper price
+ *  of the next page (null once the ladder is complete), and whether the
+ *  viewer may buy it (leader only, and only while a page is left). UX only:
+ *  the server re-prices from the guild row and refuses everyone else. */
+export interface GuildRosterView {
+  memberCap: number;
+  nextRosterPrice: number | null;
+  canExpandRoster: boolean;
+}
+
+/** The roster view WITHOUT the per-member rows guildView also maps: the
+ *  footer and the click handler only need these three facts, and a 500-seat
+ *  roster makes the row mapping the expensive half of a rebuild. Null for a
+ *  guildless viewer. A mirror from an older server carries neither roster
+ *  field and falls back to the base roster with nothing to buy. */
+export function guildRosterView(social: SocialInfo | null): GuildRosterView | null {
+  const guild = social?.guild ?? null;
+  return guild ? rosterOf(guild) : null;
+}
+
+function rosterOf(guild: NonNullable<SocialInfo['guild']>): GuildRosterView {
+  const nextRosterPrice = guild.nextRosterPrice ?? null;
+  return {
+    memberCap: guild.memberCap ?? GUILD_ROSTER_BASE_MEMBERS,
+    nextRosterPrice,
+    canExpandRoster: guild.rank === 'leader' && nextRosterPrice !== null,
   };
 }
 

@@ -57,8 +57,12 @@ The flow is reserve-at-gate, like the creation fee:
    (`chargeGuildRosterPage`). A short purse is refunded and refused with the
    price.
 3. The page is bought with a compare-and-set on `guilds.roster_pages`
-   (`buyGuildRosterPage`): a double-click or a second client pays for one page
-   at most; the loser is refunded and told to retry from the fresh price.
+   (`buyGuildRosterPage`) that also re-checks the buyer still holds the
+   leader rank: a double-click, a second client, or a demotion racing the
+   purchase pays for one page at most; the loser is refunded and told to
+   retry from the fresh price. The stored count is compared floored, the same
+   load path the price came from, so a tampered negative column cannot turn
+   into a charge-and-refund loop.
 4. On commit the transport persists the charged purse now
    (`server/guild_roster_transport.ts`), is loud if the save cannot become
    durable, and writes one audit line naming the guild, the page, the buyer,

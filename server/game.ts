@@ -1478,12 +1478,6 @@ function identityFields(e: Entity): Record<string, unknown> {
   return out;
 }
 
-/**
- * The flair a chat line carries for its SENDER, or undefined when the account has
- * none, so an ordinary player's chat event is byte-unchanged on the wire. The links
- * run through the same wireStreamerLinks gate the entity encoding uses: an account
- * whose streamer flag is off ships no links here either, whatever is stored.
- */
 // Dynamic fields are re-sent whole in every full or lite record, so the
 // conditional ones keep their absent-means-unset semantics.
 function dynamicFields(e: Entity, includeAuras = true): Record<string, unknown> {

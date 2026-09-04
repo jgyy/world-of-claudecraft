@@ -40,6 +40,7 @@ import {
   type GuildView,
   guildDisplayedRole,
   guildRosterItems,
+  guildRosterView,
   guildView,
   ignoreRows,
   myPledgeView,
@@ -880,7 +881,7 @@ export class SocialWindow {
     // the server re-prices and refuses everyone but the Guild Master anyway):
     // the leader sees the next page's price on the button, or a disabled
     // button once the ladder is complete; other ranks see nothing here.
-    const roster = guildView(this.deps.world().socialInfo, this.deps.world().player.name).guild;
+    const roster = guildRosterView(this.deps.world().socialInfo);
     if (roster && guild.rank === 'leader') {
       const label =
         roster.nextRosterPrice === null
@@ -960,7 +961,7 @@ export class SocialWindow {
         // Gold leaves the buyer's own purse and never comes back, so the page
         // is bought through the shared confirm prompt like a disband. The
         // prompt re-reads the price from the pure core at click time.
-        const roster = guildView(w.socialInfo, w.player.name).guild;
+        const roster = guildRosterView(w.socialInfo);
         if (roster?.canExpandRoster && roster.nextRosterPrice !== null) {
           this.deps.showPrompt(
             esc(

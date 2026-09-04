@@ -6,6 +6,7 @@ import {
   type GuildRosterItem,
   guildDisplayedRole,
   guildRosterItems,
+  guildRosterView,
   guildView,
   ignoreRows,
   myPledgeView,
@@ -630,5 +631,25 @@ describe('guild roster expansion (docs/prd/guild-roster-expansion.md)', () => {
     expect(view.memberCap).toBe(100);
     expect(view.nextRosterPrice).toBeNull();
     expect(view.canExpandRoster).toBe(false);
+  });
+});
+
+describe('guildRosterView (the footer read, no row mapping)', () => {
+  it('matches guildView for every rank and is null for a guildless viewer', () => {
+    for (const rank of ['leader', 'officer', 'member'] as const) {
+      const social: SocialInfo = {
+        ...SOCIAL,
+        guild: { ...(SOCIAL.guild as GuildInfo), rank, memberCap: 140, nextRosterPrice: 1_800_000 },
+      };
+      const full = guildView(social, 'Me').guild!;
+      expect(guildRosterView(social), rank).toEqual({
+        memberCap: full.memberCap,
+        nextRosterPrice: full.nextRosterPrice,
+        canExpandRoster: full.canExpandRoster,
+      });
+      expect(guildRosterView(social)?.canExpandRoster, rank).toBe(rank === 'leader');
+    }
+    expect(guildRosterView({ ...SOCIAL, guild: null })).toBeNull();
+    expect(guildRosterView(null)).toBeNull();
   });
 });

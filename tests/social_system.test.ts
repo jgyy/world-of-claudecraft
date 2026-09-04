@@ -213,10 +213,15 @@ class FakeDb implements SocialDb {
   async buyGuildRosterPage(
     guildId: number,
     expectedPages: number,
+    leaderCharId: number,
   ): Promise<'ok' | 'stale' | 'no_guild'> {
     if (!this.guilds.has(guildId)) return 'no_guild';
-    const pages = this.rosterPages.get(guildId) ?? 0;
+    // Mirrors the real compare-and-set: the floored count must still match,
+    // the ladder must have a page left, and the buyer must STILL be leader.
+    const pages = Math.max(0, this.rosterPages.get(guildId) ?? 0);
+    const buyer = this.members.get(leaderCharId);
     if (pages !== expectedPages || pages >= GUILD_ROSTER_MAX_PAGES) return 'stale';
+    if (!buyer || buyer.guildId !== guildId || buyer.rank !== 'leader') return 'stale';
     this.rosterPages.set(guildId, pages + 1);
     return 'ok';
   }
@@ -3081,8 +3086,27 @@ describe('guild roster expansion', () => {
     await expect(h.svc.guildBuyRosterPage(h.actor(1))).rejects.toThrow('boom');
     expect(h.tx.purse.get(1)).toBe(50 * GOLD);
     expect(h.tx.refunds).toEqual([{ characterId: 1, copper: PAGE_ONE }]);
-    expect(rosterEvents(h, 1)).toEqual([]);
+    // The buyer is not left staring at a button that did nothing: the retry
+    // line lands before the cause goes to the dispatcher's log.
+    expect(rosterEvents(h, 1)).toEqual([{ type: 'guildRosterResult', code: 'retry' }]);
     expect(h.tx.rosterExpansions).toEqual([]);
+  });
+
+  it('a Guild Master demoted between the read and the write is refunded and told to retry', async () => {
+    const h = await founded();
+    const realBuy = h.db.buyGuildRosterPage.bind(h.db);
+    h.db.buyGuildRosterPage = async (guildId, expectedPages, leaderCharId) => {
+      // The leadership hand-off lands after the service's membership read
+      // but before its compare-and-set: the seat of consent is gone.
+      await h.db.transferGuildLeader(guildId, 1, 2);
+      return realBuy(guildId, expectedPages, leaderCharId);
+    };
+    h.tx.purse.set(1, 50 * GOLD);
+    await h.svc.guildBuyRosterPage(h.actor(1));
+    expect(rosterEvents(h, 1)).toEqual([{ type: 'guildRosterResult', code: 'retry' }]);
+    expect(h.tx.purse.get(1)).toBe(50 * GOLD);
+    expect(h.tx.rosterExpansions).toEqual([]);
+    expect(await h.db.guildMembership(1)).toMatchObject({ rank: 'officer', rosterPages: 0 });
   });
 
   it('the invite gate and the atomic seat both honour the bought cap', async () => {
