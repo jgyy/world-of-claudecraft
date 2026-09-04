@@ -3448,6 +3448,12 @@ export interface NpcDef {
   // A flag on the warfareVendor precedent so a second placement never widens a
   // hard-keyed constant.
   crucibleVendor?: boolean;
+  // The Riftwright: talking to this NPC opens the Rift Forge window (upgrade,
+  // enchant, socket on Riftbound rings, src/sim/rift/progression.ts), and the
+  // three forge commands gate on standing within reach of one of these (the
+  // banker precedent, src/sim/rift/forge_gate.ts). A flag rather than a
+  // hard-keyed id so a second forge placement never widens a constant.
+  riftForge?: true;
   // The Card Master: talking to this NPC joins/leaves the Card Duel minigame
   // queue (src/sim/social/card_duel.ts) instead of any vendor/bank flow.
   cardMaster?: boolean;
@@ -5798,6 +5804,9 @@ export type SimEvent = { pid?: number } & (
   // Structured data only (pid supplied by the union intersection); the client
   // builds every visible string, the mailbox precedent.
   | { type: 'bank' }
+  // Asks the client to open the Rift Forge window (the interact path at a
+  // riftForge NPC). Structured only, the bank precedent above.
+  | { type: 'riftForge' }
   // Interacting with a town noticeboard. Structured and personal: the client
   // owns localized feedback, and online routing sends it only to the reader.
   // 'listings' carries the board's posted notices verbatim (guild names and
@@ -6765,7 +6774,10 @@ export type SimEvent = { pid?: number } & (
         // never emitted (the three dead-gate early returns in
         // rift/progression.ts sit ABOVE emitResult); its one player-facing
         // surface is the shared "You can't do that while dead." error line.
-        | 'dead';
+        | 'dead'
+        // Type-level only as well: the away-from-forge refusal (forge_gate.ts)
+        // returns above emitResult; its surface is the too-far error line.
+        | 'too_far';
       upgradeLevel?: number;
       essenceSpent?: number;
     }

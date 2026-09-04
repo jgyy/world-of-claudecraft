@@ -4196,17 +4196,17 @@ export class ClientWorld extends ReconWireState implements IWorld {
   unequipItem(slot: EquipSlot): void {
     this.cmd({ cmd: 'unequip_item', slot });
   }
-  upgradeRiftItem(itemId: string, target?: { slotIndex: number }): void {
-    if (target === undefined) this.cmd({ cmd: 'rift_upgrade_item', item: itemId });
-    else this.cmd({ cmd: 'rift_upgrade_item', item: itemId, slot: target.slotIndex });
+  private forgeCmd(cmd: ClientCommand, f: Record<string, unknown>, at?: { slotIndex: number }) {
+    return this.cmdWithOutcome({ cmd, ...f, slot: at?.slotIndex });
   }
-  enchantRiftItem(itemId: string, stat: string, target?: { slotIndex: number }): void {
-    if (target === undefined) this.cmd({ cmd: 'rift_enchant_item', item: itemId, stat });
-    else this.cmd({ cmd: 'rift_enchant_item', item: itemId, stat, slot: target.slotIndex });
+  upgradeRiftItem(itemId: string, target?: { slotIndex: number }): Promise<boolean> {
+    return this.forgeCmd('rift_upgrade_item', { item: itemId }, target);
   }
-  socketRiftGem(itemId: string, gemId: string, target?: { slotIndex: number }): void {
-    if (target === undefined) this.cmd({ cmd: 'rift_socket_gem', item: itemId, gem: gemId });
-    else this.cmd({ cmd: 'rift_socket_gem', item: itemId, gem: gemId, slot: target.slotIndex });
+  enchantRiftItem(itemId: string, stat: string, target?: { slotIndex: number }): Promise<boolean> {
+    return this.forgeCmd('rift_enchant_item', { item: itemId, stat }, target);
+  }
+  socketRiftGem(itemId: string, gemId: string, target?: { slotIndex: number }): Promise<boolean> {
+    return this.forgeCmd('rift_socket_gem', { item: itemId, gem: gemId }, target);
   }
   // IWorldInventory: server-stamped untilMs vs Date.now(), riftEventMsRemaining's clock.
   partyTradeMsRemaining(untilMs: number): number {

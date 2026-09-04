@@ -73,6 +73,7 @@ import {
 import { isQuestGatedGroundObjectHidden } from './quest_gated_entity';
 import { noteReliquaryMark } from './reliquary';
 import { corpseHasDecayed } from './respawn_policy';
+import { isRiftForgeNpc } from './rift/forge_gate';
 import type { SimContext } from './sim_context';
 import { interactSoulwell } from './soulwell';
 import { creditSignpostRead } from './tutorial/signpost_read';
@@ -974,6 +975,10 @@ export function interact(
         ctx.emit({ type: 'bank', pid: p.id });
         return;
       }
+      if (target.kind === 'npc' && isRiftForgeNpc(target)) {
+        ctx.emit({ type: 'riftForge', pid: p.id });
+        return;
+      }
       if (ctx.isQuestInteractionEntity(target)) {
         ctx.talkToNpc(target.id, p.id);
         return;
@@ -1075,6 +1080,10 @@ export function interact(
     // Opening the bank window counts as banker business for the NPC ledger.
     deedsMod.onBankerBusinessForDeeds(ctx, r.meta, questEntity.templateId);
     ctx.emit({ type: 'bank', pid: p.id });
+    return;
+  }
+  if (questEntity && isRiftForgeNpc(questEntity)) {
+    ctx.emit({ type: 'riftForge', pid: p.id });
     return;
   }
   if (questEntity) ctx.talkToNpc(questEntity.id, p.id);

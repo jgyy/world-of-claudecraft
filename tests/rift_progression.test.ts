@@ -3,6 +3,7 @@ import { RIFT_ESSENCE_ITEM_ID, RIFT_GEM_IDS } from '../src/sim/content/rift/item
 import { createRiftGearInstance, riftSalvageYield } from '../src/sim/rift/progression';
 import { Sim } from '../src/sim/sim';
 import { runSalvage } from './helpers/enchant_family_cast';
+import { moveToRiftForge } from './helpers/rift_forge';
 
 describe('Rift gear progression', () => {
   it('upgrades, enchants, sockets, equips, and persists one non-fungible drop', () => {
@@ -10,6 +11,7 @@ describe('Rift gear progression', () => {
     sim.setPlayerLevel(20);
     const gear = createRiftGearInstance('rift-test', 'S', 'warrior', sim.player.id);
     sim.addItemInstance(gear.itemId, gear.instance);
+    moveToRiftForge(sim);
     sim.addItem(RIFT_ESSENCE_ITEM_ID, 20);
     sim.addItem(RIFT_GEM_IDS[0], 1);
 

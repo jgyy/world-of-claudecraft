@@ -114,17 +114,25 @@ ranked portal spawn cadence, never a re-grantable faucet, so closing its market
 and mail routes (the way a re-grantable faucet or a store SKU is closed
 elsewhere in the item catalog) has no exploit to guard against.
 
-The forge (upgrade, enchant, socket) has no shipped client UI yet, so the
-authoritative server refuses its three wire commands unless the realm opts in
-with RIFT_FORGE_ENABLED=1 (server/rift_forge_gate.ts, pinned by
-tests/rift_forge_gate.test.ts). Absent UI is not a gate: a crafted frame
-reaches the wire regardless, and players used exactly that path for premature
-progression before the gate landed. The sim methods stay live offline and in
-tests; only the online dispatch arms are closed. Each refused attempt books
-the woc_rift_forge_refused_total counter, the ops signal that probing
-continues (or that a realm forgot the flag once the UI ships).
+The forge (upgrade, enchant, socket) is an NPC service: Riftwright Maelis
+(`riftForge: true` in `content/farshore.ts`, Gullhaven's Watch Meadow) opens the
+Rift Forge window (`src/ui/hud/rift_forge/`, a pure view-core plus a thin
+window on the guild-board shape) through the structured `riftForge` interact
+event, the bank precedent. The place rule lives in the sim
+(`rift/forge_gate.ts`, `nearRiftForge`): all three forge operations refuse away
+from a riftForge NPC with the shared "too far from the Rift Forge" error line
+(returned as reason `too_far`, never emitted as a `riftForgeResult`, the `dead`
+contract), so the offline world, the headless env, and the authoritative server
+enforce it identically. Only bagged bands are forgeable (the sim resolves the
+target through the inventory); the window lists a worn band with an unequip
+hint.
 
-Note for whoever ships the forge UI: send the three commands through
-ClientWorld's cmdWithOutcome (not the fire-and-forget cmd sender), because a
-realm with the flag still off refuses with only a commandOutcome ok:false
-ack, and a rid-less sender would surface that as pure silence to the player.
+The server's `RIFT_FORGE_ENABLED` gate (`server/rift_forge_gate.ts`, pinned by
+`tests/rift_forge_gate.test.ts`) is now an ops kill switch rather than an
+opt-in: exactly `0` closes the three wire commands, anything else (including
+unset) keeps them open. The three dispatch arms (`server/rift_forge_dispatch.ts`)
+answer the `commandOutcome` ack with the sim verdict, and the client sends
+them through `cmdWithOutcome`, so a closed realm or a sim refusal always
+surfaces as a visible status line in the window, never as silence. Each
+refused-while-closed attempt still books the `woc_rift_forge_refused_total`
+counter.

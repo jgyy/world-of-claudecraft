@@ -4023,6 +4023,8 @@
   }
   body.mobile-touch #leaderboard-window,
   body.mobile-touch #guild-board-window,
+  body.mobile-touch #rift-forge-window,
+  body.mobile-touch #rift-forge-window,
   body.mobile-touch #daily-rewards-window {
     z-index: 95;
   }
@@ -4827,7 +4829,8 @@
   /* The leaderboard body (.lb-body) has its own 56vh scroll; cap the whole sheet to
      the viewport so a long board never runs the window past the bottom edge. */
   body.mobile-touch #leaderboard-window,
-  body.mobile-touch #guild-board-window {
+  body.mobile-touch #guild-board-window,
+  body.mobile-touch #rift-forge-window {
     max-height: calc(var(--app-vh) / var(--ui-scale, 1) - 20px);
   }
   /* Loot Settings is a small dialog; JS docks it beside the party frames on desktop

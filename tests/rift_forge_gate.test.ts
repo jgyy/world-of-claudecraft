@@ -1,23 +1,23 @@
 // The Rift forge wire gate (server/rift_forge_gate.ts).
 //
 // The forge trio (rift_upgrade_item / rift_enchant_item / rift_socket_gem)
-// shipped sim+wire complete with no client UI, and players proved the obvious:
-// a crafted authenticated frame reaches the dispatch arms fine, buying real
-// combat stats the stock client has no path to. The gate closes the wire
-// unless the realm opts in with RIFT_FORGE_ENABLED=1.
+// shipped sim+wire first and its client UI (the Rift Forge window) later. The
+// gate was a strict opt-in while no stock UI existed; now that the forge
+// ships it is an ops kill switch: RIFT_FORGE_ENABLED=0 closes the wire,
+// anything else (including unset) keeps it open.
 //
 // Pins, both arms of the flag:
-//  - closed (default): each forge command refuses BEFORE the sim (no essence
+//  - closed (RIFT_FORGE_ENABLED=0): each forge command refuses BEFORE the sim (no essence
 //    or gem spend, no payload mutation, zero riftForgeResult events), answers
 //    ok:false on the commandOutcome ack channel for rid frames AND stays
 //    refused for the rid-less frame shape an attacker actually sends, books
 //    one riftForgeRefused metric per attempt, and never sets the heavy-self
 //    dirty flag;
-//  - open: the same wire frames drive the sim forge exactly as
+//  - open (default): the same wire frames drive the sim forge exactly as
 //    tests/rift_progression.test.ts pins it offline (which is also the proof
-//    that the OFFLINE Sim stays ungated: that suite runs with no env set),
-//    with NO commandOutcome ack (so the closed arm's ok:false provably comes
-//    from the gate) and no refusal metric;
+//    that the OFFLINE Sim never reads the env), acking ok:true from the sim
+//    verdict (so the closed arm's ok:false provably comes from the gate), and
+//    a sim-side refusal acks ok:false with no refusal metric;
 //  - the flag is read per verdict on a LIVE server, not captured at
 //    construction;
 //  - completeness: every `case 'rift_*'` dispatch arm is either in
@@ -67,6 +67,7 @@ import {
 import { RIFT_ESSENCE_ITEM_ID, RIFT_GEM_IDS } from '../src/sim/content/rift/items';
 import { createRiftGearInstance } from '../src/sim/rift/progression';
 import { fakeWs, joinServer } from './helpers/bare_client';
+import { moveFarFromRiftForge, moveToRiftForge } from './helpers/rift_forge';
 
 /** A joined session holding one S-rank band, 20 essence, and one gem. */
 function forgeReadySession() {
@@ -78,6 +79,7 @@ function forgeReadySession() {
   server.sim.addItemInstance(gear.itemId, gear.instance, pid);
   server.sim.addItem(RIFT_ESSENCE_ITEM_ID, 20, pid);
   server.sim.addItem(RIFT_GEM_IDS[0], 1, pid);
+  moveToRiftForge(server.sim, pid);
   return { server, fc, session, pid, itemId: gear.itemId };
 }
 
@@ -105,19 +107,20 @@ function recordingRefusalSink(): { count: () => number } {
 }
 
 describe('rift forge wire gate: the pure verdict', () => {
-  it('is closed unless RIFT_FORGE_ENABLED is exactly 1', () => {
-    expect(riftForgeWireEnabled({})).toBe(false);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: undefined })).toBe(false);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '0' })).toBe(false);
-    // Strict opt-in, not truthiness: "true"/"yes" must not open a realm.
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'true' })).toBe(false);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'TRUE' })).toBe(false);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'yes' })).toBe(false);
-    // The near-miss shapes a hand-edited .env actually produces stay closed too.
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '' })).toBe(false);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: ' 1' })).toBe(false);
-    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '1 ' })).toBe(false);
+  it('is open unless RIFT_FORGE_ENABLED is exactly 0 (the kill switch)', () => {
+    expect(riftForgeWireEnabled({})).toBe(true);
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: undefined })).toBe(true);
     expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '1' })).toBe(true);
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '0' })).toBe(false);
+    // Strict kill switch, not falsiness: "false"/"off" must not close a realm
+    // by accident, the mirror of the old strict opt-in.
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'false' })).toBe(true);
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'off' })).toBe(true);
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'no' })).toBe(true);
+    // The near-miss shapes a hand-edited .env actually produces stay open too.
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '' })).toBe(true);
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: ' 0' })).toBe(true);
+    expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: '0 ' })).toBe(true);
   });
 
   it('refuses exactly the three forge tokens while closed, and nothing else ever', () => {
@@ -126,18 +129,16 @@ describe('rift forge wire gate: the pure verdict', () => {
       'rift_enchant_item',
       'rift_socket_gem',
     ]);
+    const closed = { RIFT_FORGE_ENABLED: '0' };
     for (const cmd of RIFT_FORGE_WIRE_COMMANDS) {
-      expect(refusedRiftForgeCommand(cmd, {}), `${cmd} must refuse while closed`).toBe(true);
-      expect(
-        refusedRiftForgeCommand(cmd, { RIFT_FORGE_ENABLED: '1' }),
-        `${cmd} must pass while open`,
-      ).toBe(false);
+      expect(refusedRiftForgeCommand(cmd, closed), `${cmd} must refuse while closed`).toBe(true);
+      expect(refusedRiftForgeCommand(cmd, {}), `${cmd} must pass by default`).toBe(false);
     }
     // Non-forge traffic never draws a verdict from this gate, open or closed.
-    expect(refusedRiftForgeCommand('salvage_item', {})).toBe(false);
-    expect(refusedRiftForgeCommand('castSlot', {})).toBe(false);
-    expect(refusedRiftForgeCommand(undefined, {})).toBe(false);
-    expect(refusedRiftForgeCommand(42, {})).toBe(false);
+    expect(refusedRiftForgeCommand('salvage_item', closed)).toBe(false);
+    expect(refusedRiftForgeCommand('castSlot', closed)).toBe(false);
+    expect(refusedRiftForgeCommand(undefined, closed)).toBe(false);
+    expect(refusedRiftForgeCommand(42, closed)).toBe(false);
   });
 });
 
@@ -195,8 +196,8 @@ describe('rift forge wire gate: server dispatch', () => {
     setGameMetricsCounters(noopGameMetricsCounters);
   });
 
-  it('closed (default): all three commands spend nothing, mutate nothing, answer ok:false', () => {
-    delete process.env.RIFT_FORGE_ENABLED;
+  it('closed (RIFT_FORGE_ENABLED=0): all three commands spend nothing, mutate nothing, answer ok:false', () => {
+    process.env.RIFT_FORGE_ENABLED = '0';
     const refusals = recordingRefusalSink();
     const { server, fc, session, pid, itemId } = forgeReadySession();
     const essenceBefore = server.sim.countItem(RIFT_ESSENCE_ITEM_ID, pid);
@@ -259,8 +260,8 @@ describe('rift forge wire gate: server dispatch', () => {
     expect(session.selfHeavyDirty).toBe(false);
   });
 
-  it('open (RIFT_FORGE_ENABLED=1): the same wire frames drive the sim forge as before', () => {
-    process.env.RIFT_FORGE_ENABLED = '1';
+  it('open (default): the same wire frames drive the sim forge and ack ok:true', () => {
+    delete process.env.RIFT_FORGE_ENABLED;
     const refusals = recordingRefusalSink();
     const { server, fc, session, pid, itemId } = forgeReadySession();
     const essenceBefore = server.sim.countItem(RIFT_ESSENCE_ITEM_ID, pid);
@@ -268,8 +269,9 @@ describe('rift forge wire gate: server dispatch', () => {
     server.sim.drainEvents();
 
     // Same rid-carrying shape as the closed arm, so the ack channel is the
-    // differential: the allowed arms send NO commandOutcome, proving the
-    // closed arm's ok:false frames come from the gate and nowhere else.
+    // differential: the allowed arms ack ok:true from the sim verdict
+    // (server/rift_forge_dispatch.ts), proving the closed arm's ok:false
+    // frames come from the gate and nowhere else.
     server.handleMessage(
       session,
       JSON.stringify({ t: 'cmd', cmd: 'rift_upgrade_item', item: itemId, rid: 21 }),
@@ -308,15 +310,44 @@ describe('rift forge wire gate: server dispatch', () => {
     const results = forgeResults(server);
     expect(results).toHaveLength(3);
     expect(results.every((ev) => ev.ok === true)).toBe(true);
-    expect(fc.sent.filter((m) => m.t === 'commandOutcome')).toEqual([]);
+    expect(fc.sent.filter((m) => m.t === 'commandOutcome')).toEqual([
+      { t: 'commandOutcome', rid: 21, ok: true },
+      { t: 'commandOutcome', rid: 22, ok: true },
+      { t: 'commandOutcome', rid: 23, ok: true },
+    ]);
     expect(refusals.count()).toBe(0);
     // An allowed forge command is inventory-mutating, so HEAVY_SELF_CMDS re-arms
     // the heavy self diff exactly as it did before the gate existed.
     expect(session.selfHeavyDirty).toBe(true);
   });
 
-  it('reads the flag per verdict on a live server, not captured at construction', () => {
+  it('open: a sim refusal (away from the Riftwright) acks ok:false with no gate metric', () => {
     delete process.env.RIFT_FORGE_ENABLED;
+    const refusals = recordingRefusalSink();
+    const { server, fc, session, pid, itemId } = forgeReadySession();
+    moveFarFromRiftForge(server.sim, pid);
+    server.sim.drainEvents();
+    server.handleMessage(
+      session,
+      JSON.stringify({ t: 'cmd', cmd: 'rift_upgrade_item', item: itemId, rid: 31 }),
+    );
+    // The wire was open (no refusal booked) but the sim's place gate said no:
+    // the ack carries that verdict so the forge window can show the refusal,
+    // and the essence stays untouched.
+    expect(fc.sent.filter((m) => m.t === 'commandOutcome')).toEqual([
+      { t: 'commandOutcome', rid: 31, ok: false },
+    ]);
+    expect(refusals.count()).toBe(0);
+    expect(server.sim.countItem(RIFT_ESSENCE_ITEM_ID, pid)).toBe(20);
+    expect(riftPayload(server, pid, itemId)?.upgradeLevel).toBe(0);
+    // A malformed frame (no item) gets no ack at all, like every other
+    // malformed command.
+    server.handleMessage(session, JSON.stringify({ t: 'cmd', cmd: 'rift_upgrade_item', rid: 32 }));
+    expect(fc.sent.filter((m) => m.t === 'commandOutcome' && m.rid === 32)).toEqual([]);
+  });
+
+  it('reads the flag per verdict on a live server, not captured at construction', () => {
+    process.env.RIFT_FORGE_ENABLED = '0';
     const { server, session, pid, itemId } = forgeReadySession();
     const frame = JSON.stringify({ t: 'cmd', cmd: 'rift_upgrade_item', item: itemId });
 
@@ -325,7 +356,7 @@ describe('rift forge wire gate: server dispatch', () => {
 
     // Flip the env on the SAME server instance: the very next frame forges,
     // which a constructor-captured flag could not do.
-    process.env.RIFT_FORGE_ENABLED = '1';
+    delete process.env.RIFT_FORGE_ENABLED;
     server.handleMessage(session, frame);
     expect(riftPayload(server, pid, itemId)?.upgradeLevel).toBe(1);
   });

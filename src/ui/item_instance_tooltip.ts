@@ -225,3 +225,26 @@ export function instanceMakersMarkLine(
     t('hudChrome.crafting.makersMark', { name: instance.signer }),
   )}</span></div>`;
 }
+
+/** The Riftbound payload lines (tier, upgrade ladder, sockets) every item
+ *  tooltip surface shares; the Rift Forge window quotes the same three. */
+export function instanceRiftLines(instance?: ItemInstancePayload): string {
+  const rift = instance?.rift;
+  if (!rift) return '';
+  const line = (text: string) => `<div class="tt-sub">${esc(text)}</div>`;
+  return (
+    line(t('hudChrome.itemTooltip.riftTier', { tier: rift.tier })) +
+    line(
+      t('hudChrome.itemTooltip.riftUpgrade', {
+        level: itemNumber(rift.upgradeLevel),
+        max: itemNumber(rift.maxUpgradeLevel),
+      }),
+    ) +
+    line(
+      t('hudChrome.itemTooltip.riftSockets', {
+        used: itemNumber(rift.gems.length),
+        total: itemNumber(rift.gemSlots),
+      }),
+    )
+  );
+}

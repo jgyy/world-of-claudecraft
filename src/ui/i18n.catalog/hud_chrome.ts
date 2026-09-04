@@ -4018,6 +4018,45 @@ export const hudChromeStrings = {
   // Item tooltip: the minimum character level needed to equip a piece (classic
   // "Requires Level N"). Shown red when the viewer is below it. {level} runs
   // through formatNumber.
+  // The Rift Forge window (src/ui/hud/rift_forge/): the Riftwright's
+  // upgrade / enchant / socket service on Riftbound bands. The tier, upgrade
+  // and socket labels reuse itemTooltip.rift* below; the reason.* rows map the
+  // sim's structured riftForgeResult reasons (src/sim/rift/progression.ts).
+  riftForge: {
+    title: 'Rift Forge',
+    subtitle: 'Riftbound bands',
+    currency: '{name}: {count}',
+    empty: 'No Riftbound band in your bags. A ranked Rift first clear mints one.',
+    wornHint: 'Worn. Unequip it to forge.',
+    upgradeBtn: 'Upgrade ({cost} essence)',
+    upgradeMax: 'Fully upgraded',
+    enchantCurrent: 'Enchant: +{value} {stat}',
+    enchantNone: 'Enchant: none',
+    enchantBtn: 'Enchant ({cost} essence)',
+    statPickAria: 'Enchant stat',
+    gemPickAria: 'Gem to socket',
+    socketBtn: 'Socket',
+    socketsNone: 'no gems',
+    socketsFull: 'All sockets filled',
+    noGems: 'No Rift gems in your bags',
+    refused: 'The forge refused. Stand at the Riftwright and try again.',
+    reason: {
+      notFound: 'That band is not in your bags.',
+      notRiftGear: 'Only a Riftbound band can be forged.',
+      maxUpgrade: 'That band is fully upgraded.',
+      insufficientEssence: 'Not enough Rift Essence.',
+      invalidStat: 'That stat cannot be enchanted here.',
+      invalidGem: 'You have no such Rift gem.',
+      socketsFull: 'Every socket on that band is filled.',
+      dead: "You can't do that while dead.",
+      tooFar: 'You are too far from the Rift Forge.',
+    },
+    done: {
+      upgrade: 'Upgraded {name}.',
+      enchant: 'Enchanted {name}.',
+      socket: 'Socketed a gem into {name}.',
+    },
+  },
   itemTooltip: {
     requiresLevel: 'Requires Level {level}',
     riftTier: '{tier}-rank Rift item',

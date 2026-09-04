@@ -33,3 +33,25 @@ export function itemAffixTooltipLines(item: ItemDef): string {
     affixLine(item.healPower ?? 0, 'hudChrome.statInfo.names.healPower')
   );
 }
+
+/** The combat-rating affix lines: the WARFARE rating (the lower of the two
+ *  PvP ratings, shown once) and the hit / crit / haste ratings as classic
+ *  "+N Rating" lines sharing the character-sheet labels. Hit answers the
+ *  higher-level miss/resist penalty; crit and haste add throughput. */
+export function itemRatingTooltipLines(item: ItemDef): string {
+  let html = '';
+  const line = (value: number, stat: string) =>
+    `<div class="tt-green">${esc(
+      t('itemUi.tooltip.stat', {
+        value: itemNumber(value),
+        stat: t(statNameKey(stat as Parameters<typeof statNameKey>[0]) as TranslationKey),
+      }),
+    )}</div>`;
+  const warfareRating = Math.min(item.pvpOffenseRating ?? 0, item.pvpDefenseRating ?? 0);
+  if (warfareRating > 0) html += line(warfareRating, 'warfare');
+  for (const ratingStat of ['hitRating', 'critRating', 'hasteRating'] as const) {
+    const value = item[ratingStat] ?? 0;
+    if (value > 0) html += line(value, ratingStat);
+  }
+  return html;
+}

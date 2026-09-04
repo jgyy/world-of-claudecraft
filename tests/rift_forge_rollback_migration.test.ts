@@ -393,11 +393,14 @@ describe('cost model parity with src/sim/rift/progression.ts', () => {
   const progressionSource = readFileSync('src/sim/rift/progression.ts', 'utf8');
 
   test('upgrade step cost in the sim is 2 + 2 * level', () => {
-    expect(progressionSource).toContain('const cost = 2 + gear.upgradeLevel * 2;');
+    // The ladder lives in riftUpgradeCost (the forge window quotes it too).
+    expect(progressionSource).toContain('return 2 + upgradeLevel * 2;');
+    expect(progressionSource).toContain('const cost = riftUpgradeCost(gear.upgradeLevel);');
   });
 
   test('enchant cost in the sim is a flat 4', () => {
-    expect(progressionSource).toContain('const cost = 4;');
+    expect(progressionSource).toContain('export const RIFT_ENCHANT_COST = 4;');
+    expect(progressionSource).toContain('const cost = RIFT_ENCHANT_COST;');
   });
 
   test('socketing consumes exactly one gem item and no essence', () => {
