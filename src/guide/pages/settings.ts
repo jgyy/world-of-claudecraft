@@ -357,6 +357,14 @@ const INTERFACE_TABS: InterfaceTabBlock[] = [
         setting: 'hudChrome.options.targetFrameScale',
         body: 'guide.settingsPage.ifTargetFrameScale',
       },
+      {
+        setting: 'hudChrome.options.playerHealthText',
+        body: 'guide.settingsPage.ifPlayerHealthText',
+      },
+      {
+        setting: 'hudChrome.options.targetHealthText',
+        body: 'guide.settingsPage.ifTargetHealthText',
+      },
       { setting: 'hudChrome.partyFrames.style', body: 'guide.settingsPage.ifPartyStyle' },
       { setting: 'hudChrome.partyFrames.healthText', body: 'guide.settingsPage.ifPartyHealthText' },
       { setting: 'hudChrome.partyFrames.sort', body: 'guide.settingsPage.ifPartySort' },

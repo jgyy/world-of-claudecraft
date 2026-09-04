@@ -1,5 +1,6 @@
 import { isPartyFrameRelevantAura } from '../sim/aura_classify';
 import type { PartyInfo, PartyMemberAura, PartyMemberInfo } from '../world_api';
+import { type HealthTextMode, healthTextForMode, healthTextMode } from './hud_frames';
 import type { PartyPetInfo } from './pet_frame_view';
 
 /**
@@ -34,10 +35,21 @@ export type PartyFrameMember = PartyMemberInfo & { oor: boolean; pet?: PartyPetI
 /** Owner entity id -> that owner's pet. Built once per repaint by the caller. */
 export type PartyPetMap = ReadonlyMap<number, PartyPetInfo>;
 
-export type PartyFrameHealthTextMode = 0 | 1 | 2 | 3;
+/** Same mode table as the player / target frames (hud_frames.ts). */
+export type PartyFrameHealthTextMode = HealthTextMode;
 export type PartyFrameSortMode = 0 | 1 | 2;
 export type PartyFrameStyleMode = 0 | 1 | 2;
 export type PartyFrameStyle = 'classic' | 'raid';
+
+export type PartyFrameSettingKey =
+  | 'partyFrameShowSelf'
+  | 'partyFrameShowResource'
+  | 'partyFrameShowAbsorbs'
+  | 'partyFrameShowAuras'
+  | 'partyFrameShowPets'
+  | 'partyFrameStyle'
+  | 'partyFrameHealthText'
+  | 'partyFrameSort';
 
 export interface PartyFrameDisplayConfig {
   showSelf: boolean;
@@ -97,12 +109,28 @@ export function partyFrameHealthText(
   mode: PartyFrameHealthTextMode,
   format: (value: number, percent?: boolean) => string,
 ): string {
-  const current = Math.max(0, Math.round(hp));
-  const maximum = Math.max(1, Math.round(maxHp));
-  if (mode === 1) return format(current / maximum, true);
-  if (mode === 2) return format(current);
-  if (mode === 3) return `${format(current)} / ${format(maximum)}`;
-  return '';
+  return healthTextForMode(hp, maxHp, mode, format);
+}
+
+/** Read the party-frame display profile from the live settings store (undefined
+ *  before the options hooks attach, in which case every field takes its default).
+ *  Shared by the live party painter and the Edit Frames preview so both read the
+ *  same keys with the same fallbacks. */
+export function readPartyFrameDisplayConfig(
+  settings: { get(key: PartyFrameSettingKey): number | boolean } | undefined,
+): PartyFrameDisplayConfig {
+  const d = DEFAULT_PARTY_FRAME_DISPLAY;
+  if (!settings) return { ...d };
+  return {
+    showSelf: !!settings.get('partyFrameShowSelf'),
+    showResource: !!settings.get('partyFrameShowResource'),
+    showAbsorbs: !!settings.get('partyFrameShowAbsorbs'),
+    showAuras: !!settings.get('partyFrameShowAuras'),
+    showPets: !!settings.get('partyFrameShowPets'),
+    presentation: Math.round(Number(settings.get('partyFrameStyle'))) as PartyFrameStyleMode,
+    healthText: healthTextMode(Number(settings.get('partyFrameHealthText')), d.healthText),
+    sort: Math.round(Number(settings.get('partyFrameSort'))) as PartyFrameSortMode,
+  };
 }
 
 const stableNameCompare = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
