@@ -1067,6 +1067,18 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.social.billboard.result.set': 'ギルド掲示板を更新しました。',
   'hudChrome.social.billboard.result.notOfficer':
     '掲示板を編集できるのは幹部とギルドマスターだけです。',
+  'hudChrome.social.roster.seats': '{count} / {cap} 席',
+  'hudChrome.social.roster.expand': '名簿を拡張（+{seats}席、{price}）',
+  'hudChrome.social.roster.maxed': '名簿はすでに最大です',
+  'hudChrome.social.roster.confirm':
+    '{price}でギルド名簿を{seats}席拡張しますか？ゴールドはあなた自身の所持金から支払われ、返金されません。',
+  'hudChrome.social.roster.confirmAction': '拡張',
+  'hudChrome.social.roster.expandedLine': '{name}がギルド名簿を{cap}人に拡張しました。',
+  'hudChrome.social.roster.result.notLeader': 'ギルド名簿を拡張できるのはギルドマスターだけです。',
+  'hudChrome.social.roster.result.maxed': 'ギルド名簿はこれ以上拡張できません。',
+  'hudChrome.social.roster.result.cannotAfford': 'ギルド名簿の拡張には{price}が必要です。',
+  'hudChrome.social.roster.result.retry':
+    '購入中にギルド名簿が変更されました。もう一度お試しください。',
   'hudChrome.party.promoteLeader': 'パーティリーダーに指定',
   'hudChrome.party.inviteUsage': '誰を招待しますか？使用法：/invite <名前>。',
   'hudChrome.masterLoot.thresholdLabel': '品質しきい値',

@@ -273,7 +273,9 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 18905,
+    // The result-code key maps (mail, calendar, billboard, roster, honor)
+    // moved to src/ui/result_code_keys.ts: the ratchet lowers with them.
+    ceiling: 18878,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -583,7 +585,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 10641,
+    // chatChannelHint and chatSenderFlair moved to their own server/ modules
+    // (the roster-expansion dispatch and transport spread landed in their
+    // place): the ratchet lowers with them.
+    ceiling: 10635,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -645,7 +650,9 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 5908,
+    // wrapAngle and copyPos moved to src/net/interp_math.ts: the ratchet
+    // lowers with them.
+    ceiling: 5896,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

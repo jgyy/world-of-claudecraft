@@ -157,6 +157,7 @@ import {
 } from './calibration_snapshot';
 import { RESTORE_ITEM_MAX_COUNT } from './character_professions';
 import { applyCharacterSaveFixups } from './character_save_fixups';
+import { chatChannelHint } from './chat_channel_hint';
 import { ChatFilter } from './chat_filter';
 import {
   isChatFilterWrite,
@@ -171,6 +172,7 @@ import {
   pushMuteChange,
   pushStrikesChange,
 } from './chat_mod_live';
+import { chatSenderFlair } from './chat_sender_flair';
 import {
   applyCheaterMarkLive as applyCheaterMarkLiveRuntime,
   persistCheaterMark,
@@ -274,6 +276,7 @@ import {
   loadGuildBanksIntoSim,
 } from './guild_bank_state';
 import { createPaidGuildWithLeaderAtomic } from './guild_create_db';
+import { guildRosterTransport } from './guild_roster_transport';
 import { gameMetricsCounters, type WsDropCause } from './http/game_signals';
 import { bgWideInterestApplies, buildSharedInterestCandidates } from './interest_candidates';
 import { IpBlockList } from './ip_block';
@@ -1481,15 +1484,6 @@ function identityFields(e: Entity): Record<string, unknown> {
  * run through the same wireStreamerLinks gate the entity encoding uses: an account
  * whose streamer flag is off ships no links here either, whatever is stored.
  */
-function chatSenderFlair(flair: AccountFlair): ChatSenderFlair | undefined {
-  const links = wireStreamerLinks(flair);
-  if (!flair.ai && !links) return undefined;
-  const out: ChatSenderFlair = {};
-  if (flair.ai) out.ai = true;
-  if (links) out.links = links;
-  return out;
-}
-
 // Dynamic fields are re-sent whole in every full or lite record, so the
 // conditional ones keep their absent-means-unset semantics.
 function dynamicFields(e: Entity, includeAuras = true): Record<string, unknown> {
@@ -1717,20 +1711,6 @@ function liteEntityJson(id: number, dynJson: string): string {
 
 function logSocialErr(err: unknown): void {
   console.error('social command failed:', err);
-}
-
-// Best-effort channel label for the violation log: the hard-word gate runs
-// before the message is routed, so infer the channel from its command prefix
-// (falling back to the player's last-used channel).
-function chatChannelHint(session: ClientSession, text: string): string {
-  if (/^\/(?:g|gu|guild)\s/i.test(text)) return 'guild';
-  if (/^\/(?:o|officer)\s/i.test(text)) return 'officer';
-  if (/^\/(?:w|whisper|t|tell|r|reply)\s/i.test(text)) return 'whisper';
-  if (/^\/(?:y|yell)\s/i.test(text)) return 'yell';
-  if (/^\/(?:p|party)\s/i.test(text)) return 'party';
-  if (/^\/(?:general|world)\s/i.test(text)) return 'general';
-  if (/^\/(?:s|say)\s/i.test(text)) return 'say';
-  return session.rememberedChat.channel;
 }
 
 function delay(ms: number): Promise<void> {
@@ -2493,6 +2473,15 @@ export class GameServer {
   private socialTransport(): SocialTransport {
     const actor = (s: ClientSession): SocialActor => ({ characterId: s.characterId, name: s.name });
     return {
+      // Roster expansion purse half (server/guild_roster_transport.ts).
+      ...guildRosterTransport({
+        ctx: this.sim.ctx,
+        pidOf: (id) => this.sessionByCharacterId(id)?.pid ?? null,
+        persistCharacter: (id) => {
+          const s = this.sessionByCharacterId(id);
+          return s ? this.saveCharacter(s) : Promise.resolve(false);
+        },
+      }),
       byCharacterId: (id) => {
         const s = this.sessionByCharacterId(id);
         return s ? actor(s) : null;
@@ -7697,6 +7686,11 @@ export class GameServer {
           void this.social.guildSetMotd(this.actorFor(session), msg.text).catch(logSocialErr);
         }
         break;
+      case 'guild_buy_roster_page':
+        // Roster expansion: no client-supplied fields at all (the service
+        // prices the page from the guild row and charges the live purse).
+        void this.social.guildBuyRosterPage(this.actorFor(session)).catch(logSocialErr);
+        break;
       // arena (Ashen Coliseum queue)
       case 'arena_queue': {
         const fmt =
@@ -10382,7 +10376,7 @@ export class GameServer {
     if (!hit) return false;
 
     const outcome = this.chatFilter.escalate(session.chatStrikes);
-    const channel = chatChannelHint(session, text);
+    const channel = chatChannelHint(session.rememberedChat.channel, text);
     // Optimistically advance the session so a rapid follow-up is already gated;
     // the DB write below returns the authoritative values and corrects any drift
     // (e.g. a second character on the same account raising strikes concurrently).

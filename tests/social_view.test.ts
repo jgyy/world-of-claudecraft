@@ -591,3 +591,44 @@ describe('ClientWorld-vs-Sim parity', () => {
     expect(raidView(sim.party, 1)).toEqual(raidView(cli.party, 1));
   });
 });
+
+describe('guild roster expansion (docs/prd/guild-roster-expansion.md)', () => {
+  const withRoster = (
+    rank: 'leader' | 'officer' | 'member',
+    roster: { memberCap?: number; nextRosterPrice?: number | null },
+  ): SocialInfo => ({
+    ...SOCIAL,
+    guild: { ...(SOCIAL.guild as GuildInfo), rank, ...roster },
+  });
+
+  it('passes the cap and the next price through, and only the leader may buy', () => {
+    const leader = guildView(
+      withRoster('leader', { memberCap: 120, nextRosterPrice: 800_000 }),
+      'Me',
+    ).guild!;
+    expect(leader.memberCap).toBe(120);
+    expect(leader.nextRosterPrice).toBe(800_000);
+    expect(leader.canExpandRoster).toBe(true);
+    for (const rank of ['officer', 'member'] as const) {
+      const view = guildView(withRoster(rank, { memberCap: 120, nextRosterPrice: 800_000 }), 'Me')
+        .guild!;
+      expect(view.memberCap, rank).toBe(120);
+      expect(view.canExpandRoster, rank).toBe(false);
+    }
+  });
+
+  it('a complete ladder (null price) leaves the leader nothing to buy', () => {
+    const view = guildView(withRoster('leader', { memberCap: 500, nextRosterPrice: null }), 'Me')
+      .guild!;
+    expect(view.nextRosterPrice).toBeNull();
+    expect(view.canExpandRoster).toBe(false);
+  });
+
+  it('a frame from an older server (no roster fields) falls back to the base roster', () => {
+    // SOCIAL carries neither field: the pre-expansion mirror shape.
+    const view = guildView(SOCIAL, 'Me').guild!;
+    expect(view.memberCap).toBe(100);
+    expect(view.nextRosterPrice).toBeNull();
+    expect(view.canExpandRoster).toBe(false);
+  });
+});

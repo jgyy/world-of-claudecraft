@@ -1,0 +1,139 @@
+// PgSocialDb's roster-expansion statements (docs/prd/guild-roster-expansion.md)
+// against a mocked pool: the membership read carries roster_pages, the atomic
+// seat reads the cap from the LOCKED guild row, and the page purchase is a
+// compare-and-set on the pages-bought count. The DB-free sibling of
+// social_db_seat_pledge.test.ts.
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+const mocks = vi.hoisted(() => ({
+  bustGuildList: vi.fn(),
+}));
+
+vi.mock('../server/admin_guilds_read', () => ({
+  bustAdminGuildListReads: mocks.bustGuildList,
+}));
+
+import { PgSocialDb } from '../server/social_db';
+import { GUILD_ROSTER_MAX_PAGES } from '../src/sim/guild_roster';
+
+function harness() {
+  const client = {
+    query: vi.fn(),
+    release: vi.fn(),
+  };
+  const pool = {
+    connect: vi.fn().mockResolvedValue(client),
+    query: vi.fn(),
+  };
+  return {
+    client,
+    db: new PgSocialDb(pool as never),
+    pool,
+  };
+}
+
+describe('PgSocialDb guild roster expansion', () => {
+  beforeEach(() => {
+    mocks.bustGuildList.mockReset();
+  });
+
+  it('reads roster_pages on the membership JOIN and floors it into the ladder', async () => {
+    const { pool, db } = harness();
+    pool.query.mockResolvedValueOnce({
+      rows: [{ guild_id: 4, guild_name: 'Knights', rank: 'leader', roster_pages: 3 }],
+    });
+    await expect(db.guildMembership(8)).resolves.toEqual({
+      guildId: 4,
+      guildName: 'Knights',
+      rank: 'leader',
+      rosterPages: 3,
+    });
+    expect(String(pool.query.mock.calls[0][0])).toContain('g.roster_pages');
+    expect(pool.query.mock.calls[0][1]).toEqual([8]);
+
+    // A legacy or tampered count never indexes a price it did not pay for.
+    pool.query.mockResolvedValueOnce({
+      rows: [{ guild_id: 4, guild_name: 'Knights', rank: 'member', roster_pages: 999 }],
+    });
+    expect((await db.guildMembership(8))?.rosterPages).toBe(GUILD_ROSTER_MAX_PAGES);
+    pool.query.mockResolvedValueOnce({
+      rows: [{ guild_id: 4, guild_name: 'Knights', rank: 'member', roster_pages: null }],
+    });
+    expect((await db.guildMembership(8))?.rosterPages).toBe(0);
+    pool.query.mockResolvedValueOnce({ rows: [] });
+    expect(await db.guildMembership(8)).toBeNull();
+  });
+
+  it('seats against the cap read from the LOCKED guild row: full at the bought cap', async () => {
+    const { client, db } = harness();
+    client.query
+      .mockResolvedValueOnce({ rows: [] }) // BEGIN
+      .mockResolvedValueOnce({ rows: [{ id: 7, roster_pages: 1 }], rowCount: 1 }) // FOR UPDATE
+      .mockResolvedValueOnce({ rows: [], rowCount: 0 }) // membership check
+      .mockResolvedValueOnce({ rows: [{ n: 120 }], rowCount: 1 }) // cap count: one page = 120
+      .mockResolvedValueOnce({ rows: [] }); // ROLLBACK
+
+    await expect(db.addGuildMemberAtomic(7, 44, 'member')).resolves.toBe('full');
+
+    const lock = client.query.mock.calls[1];
+    expect(String(lock[0])).toContain('roster_pages');
+    expect(String(lock[0])).toContain('FOR UPDATE');
+    expect(lock[1]).toEqual([7]);
+    const verbs = client.query.mock.calls.map(([sql]) => String(sql).trim().split(/\s+/)[0]);
+    expect(verbs).toEqual(['BEGIN', 'SELECT', 'SELECT', 'SELECT', 'ROLLBACK']);
+    expect(mocks.bustGuildList).not.toHaveBeenCalled();
+  });
+
+  it('seats below the bought cap, one seat past the base roster', async () => {
+    const { client, db } = harness();
+    client.query
+      .mockResolvedValueOnce({ rows: [] }) // BEGIN
+      .mockResolvedValueOnce({ rows: [{ id: 7, roster_pages: 1 }], rowCount: 1 })
+      .mockResolvedValueOnce({ rows: [], rowCount: 0 })
+      .mockResolvedValueOnce({ rows: [{ n: 100 }], rowCount: 1 }) // the base cap is behind us
+      .mockResolvedValueOnce({ rows: [], rowCount: 1 }) // member insert
+      .mockResolvedValueOnce({ rows: [] }); // COMMIT
+
+    await expect(db.addGuildMemberAtomic(7, 44, 'member')).resolves.toBe('ok');
+    const verbs = client.query.mock.calls.map(([sql]) => String(sql).trim().split(/\s+/)[0]);
+    expect(verbs).toEqual(['BEGIN', 'SELECT', 'SELECT', 'SELECT', 'INSERT', 'COMMIT']);
+    expect(mocks.bustGuildList).toHaveBeenCalledOnce();
+  });
+
+  it('a row with no pages yet caps at the base roster', async () => {
+    const { client, db } = harness();
+    client.query
+      .mockResolvedValueOnce({ rows: [] })
+      .mockResolvedValueOnce({ rows: [{ id: 7, roster_pages: 0 }], rowCount: 1 })
+      .mockResolvedValueOnce({ rows: [], rowCount: 0 })
+      .mockResolvedValueOnce({ rows: [{ n: 100 }], rowCount: 1 })
+      .mockResolvedValueOnce({ rows: [] }); // ROLLBACK
+    await expect(db.addGuildMemberAtomic(7, 44, 'member')).resolves.toBe('full');
+  });
+
+  it('buys a page with a compare-and-set on the pages-bought count, bounded by the ladder', async () => {
+    const { pool, db } = harness();
+    pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 });
+    await expect(db.buyGuildRosterPage(7, 2)).resolves.toBe('ok');
+    const [sql, params] = pool.query.mock.calls[0];
+    expect(String(sql)).toContain('roster_pages = roster_pages + 1');
+    expect(String(sql)).toContain('roster_pages = $2');
+    expect(String(sql)).toContain('roster_pages < $3');
+    expect(params).toEqual([7, 2, GUILD_ROSTER_MAX_PAGES]);
+    expect(pool.query).toHaveBeenCalledTimes(1);
+  });
+
+  it('reports stale when the count moved and no_guild when the row is gone', async () => {
+    const { pool, db } = harness();
+    pool.query
+      .mockResolvedValueOnce({ rows: [], rowCount: 0 }) // CAS missed
+      .mockResolvedValueOnce({ rows: [{ '?column?': 1 }], rowCount: 1 }); // guild exists
+    await expect(db.buyGuildRosterPage(7, 2)).resolves.toBe('stale');
+    expect(pool.query.mock.calls[1][1]).toEqual([7]);
+
+    pool.query
+      .mockResolvedValueOnce({ rows: [], rowCount: 0 })
+      .mockResolvedValueOnce({ rows: [], rowCount: 0 }); // no such guild
+    await expect(db.buyGuildRosterPage(7, 2)).resolves.toBe('no_guild');
+  });
+});

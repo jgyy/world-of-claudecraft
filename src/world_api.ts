@@ -609,6 +609,9 @@ export const COMMAND_NAMES = [
   // Guild billboard: set (or clear, with '') the officer-editable message
   // pinned atop the social window's Guild tab (SocialService.guildSetMotd).
   'guild_set_motd',
+  // Guild roster expansion: the Guild Master buys the next 20-seat page from
+  // their own purse (SocialService.guildBuyRosterPage); no client fields.
+  'guild_buy_roster_page',
   // Template-authored active on a controlled pet (Abyssal Chain, Felbolt)
   // plus its pet-bar autocast toggle.
   'pet_special',
@@ -937,6 +940,7 @@ export const COMMAND_FACETS = {
   guild_event_create: 'IWorldSocialGraph',
   guild_event_remove: 'IWorldSocialGraph',
   guild_set_motd: 'IWorldSocialGraph',
+  guild_buy_roster_page: 'IWorldSocialGraph',
   // IWorldMarket: World Market browse/list/buy/cancel/collect (snake_case wire
   // strings, by design). marketInfo is a snapshot read (no send, untagged).
   market_search: 'IWorldMarket',

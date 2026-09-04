@@ -4,6 +4,11 @@
 // stored now so cross-realm friends/guilds need no migration later).
 
 import type { Pool } from 'pg';
+import {
+  GUILD_ROSTER_MAX_PAGES,
+  guildRosterCap,
+  guildRosterPagesBought,
+} from '../src/sim/guild_roster';
 import { bustAdminGuildListReads } from './admin_guilds_read';
 import {
   GUILD_NAME_ADVISORY_LOCK_SQL,
@@ -143,6 +148,13 @@ ALTER TABLE guilds ADD COLUMN IF NOT EXISTS motd_set_by TEXT NOT NULL DEFAULT ''
 ALTER TABLE guilds ADD COLUMN IF NOT EXISTS pledges_enabled BOOLEAN NOT NULL DEFAULT TRUE;
 ALTER TABLE guilds ADD COLUMN IF NOT EXISTS pledge_min_level INT NOT NULL DEFAULT 1;
 ALTER TABLE guilds ADD COLUMN IF NOT EXISTS pledge_note TEXT NOT NULL DEFAULT '';
+
+-- Guild roster expansion (docs/prd/guild-roster-expansion.md): how many
+-- 20-seat pages the Guild Master has bought. The CAP derives from it
+-- (src/sim/guild_roster.ts guildRosterCap), never the other way round, so the
+-- next page's price always indexes the ladder by pages actually paid for.
+-- Additive and idempotent; 0 keeps every existing guild at the base roster.
+ALTER TABLE guilds ADD COLUMN IF NOT EXISTS roster_pages INT NOT NULL DEFAULT 0;
 
 -- One active pledge per character (the pledge is a public line on the
 -- character, singular by construction). Bounded at one row per character, so
@@ -421,22 +433,30 @@ export class PgSocialDb implements SocialDb {
 
   async guildMembership(
     charId: number,
-  ): Promise<{ guildId: number; guildName: string; rank: GuildRank } | null> {
+  ): Promise<{ guildId: number; guildName: string; rank: GuildRank; rosterPages: number } | null> {
+    // roster_pages rides the same JOIN the membership read already pays for,
+    // so the roster cap costs the snapshot and the invite gate no extra query.
     const res = await this.pool.query(
-      `SELECT gm.guild_id, g.name AS guild_name, gm.rank
+      `SELECT gm.guild_id, g.name AS guild_name, gm.rank, g.roster_pages
        FROM guild_members gm JOIN guilds g ON g.id = gm.guild_id
        WHERE gm.character_id = $1`,
       [charId],
     );
     const row = res.rows[0];
-    return row ? { guildId: row.guild_id, guildName: row.guild_name, rank: row.rank } : null;
+    return row
+      ? {
+          guildId: row.guild_id,
+          guildName: row.guild_name,
+          rank: row.rank,
+          rosterPages: guildRosterPagesBought(row.roster_pages),
+        }
+      : null;
   }
 
   async addGuildMemberAtomic(
     guildId: number,
     charId: number,
     rank: GuildRank,
-    limit: number,
     requirePledge = false,
   ): Promise<'ok' | 'full' | 'already_member' | 'no_guild' | 'no_pledge'> {
     const client = await this.pool.connect();
@@ -444,11 +464,17 @@ export class PgSocialDb implements SocialDb {
       await client.query('BEGIN');
       // lock the guild row so concurrent accepts serialize — without this the
       // count-then-insert races and N pending invitees can all pass the cap.
-      const g = await client.query('SELECT id FROM guilds WHERE id = $1 FOR UPDATE', [guildId]);
+      // The cap is read from the SAME locked row (bought roster pages), so a
+      // page purchase landing between a caller's snapshot and this seat is
+      // honoured, and a stale client-side cap can never widen it.
+      const g = await client.query('SELECT id, roster_pages FROM guilds WHERE id = $1 FOR UPDATE', [
+        guildId,
+      ]);
       if (g.rowCount === 0) {
         await client.query('ROLLBACK');
         return 'no_guild';
       }
+      const limit = guildRosterCap(guildRosterPagesBought(g.rows[0].roster_pages));
       const existing = await client.query('SELECT 1 FROM guild_members WHERE character_id = $1', [
         charId,
       ]);
@@ -499,6 +525,25 @@ export class PgSocialDb implements SocialDb {
     } finally {
       client.release();
     }
+  }
+
+  // Compare-and-set: the page is bought only if the guild still stands at
+  // exactly `expectedPages` bought pages (the count the caller priced from)
+  // and the ladder is not already complete. A concurrent purchase (the
+  // double-click race, or a second officer's client) therefore reports
+  // 'stale' instead of charging twice for one page or skipping a rung.
+  async buyGuildRosterPage(
+    guildId: number,
+    expectedPages: number,
+  ): Promise<'ok' | 'stale' | 'no_guild'> {
+    const res = await this.pool.query(
+      `UPDATE guilds SET roster_pages = roster_pages + 1
+        WHERE id = $1 AND roster_pages = $2 AND roster_pages < $3`,
+      [guildId, expectedPages, GUILD_ROSTER_MAX_PAGES],
+    );
+    if ((res.rowCount ?? 0) > 0) return 'ok';
+    const exists = await this.pool.query('SELECT 1 FROM guilds WHERE id = $1', [guildId]);
+    return (exists.rowCount ?? 0) > 0 ? 'stale' : 'no_guild';
   }
 
   async removeGuildMember(charId: number): Promise<void> {

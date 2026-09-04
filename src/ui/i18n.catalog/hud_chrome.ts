@@ -4761,6 +4761,28 @@ export const hudChromeStrings = {
         notOfficer: 'Only officers and the Guild Master may edit the billboard.',
       },
     },
+    // Guild roster expansion (docs/prd/guild-roster-expansion.md): the seat
+    // count against the guild's cap, the Guild Master's buy button and its
+    // confirm prompt, the guild-wide success line, and the refusal codes the
+    // server answers with (hud.ts renders them from guild_result_keys.ts).
+    // {seats} is the page size, {price} the formatted page price, {cap} the
+    // seat cap, {name} the buyer's character name spliced verbatim.
+    // Wordy, M16: the five non-Latin fills land in this same change.
+    roster: {
+      seats: '{count} of {cap} seats',
+      expand: 'Expand roster (+{seats} seats for {price})',
+      maxed: 'The roster is at its largest size',
+      confirm:
+        'Expand the guild roster by {seats} seats for {price}? The gold comes from your own purse and is not refunded.',
+      confirmAction: 'Expand',
+      expandedLine: '{name} has expanded the guild roster to {cap} members.',
+      result: {
+        notLeader: 'Only the Guild Master may expand the guild roster.',
+        maxed: 'The guild roster cannot grow any larger.',
+        cannotAfford: 'You need {price} to expand the guild roster.',
+        retry: 'The guild roster changed while you were buying. Try again.',
+      },
+    },
   },
   // Gathering proficiency section on the character sheet (#1124). Profession
   // display names mirror src/sim/content/professions.ts (GatheringProfessionId).

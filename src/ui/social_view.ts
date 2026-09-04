@@ -12,6 +12,7 @@
 // UI_PURE_CORES); world types are imported type-only from world_api so the same
 // model is derived from a Sim and a ClientWorld mirror.
 
+import { GUILD_ROSTER_BASE_MEMBERS } from '../sim/guild_roster';
 import type {
   FriendInfo,
   GuildMemberInfo,
@@ -145,6 +146,15 @@ export interface GuildView {
      *  from the server): styles the guild-head name, matching the nameplate
      *  ladder and the guild board. */
     tier: number;
+    /** Roster expansion (docs/prd/guild-roster-expansion.md): the seats the
+     *  guild may fill, the copper price of the next 20-seat page (null once
+     *  the ladder is complete), and whether the viewer may buy it (leader
+     *  only, and only while a page is left). UX only: the server re-prices
+     *  from the guild row and refuses everyone else. A mirror from an older
+     *  server carries neither field and falls back to the base roster. */
+    memberCap: number;
+    nextRosterPrice: number | null;
+    canExpandRoster: boolean;
     rows: GuildRow[];
   } | null;
 }
@@ -189,6 +199,9 @@ export function guildView(social: SocialInfo | null, myName: string): GuildView 
       motdSetBy: guild.motdSetBy ?? '',
       canEditMotd: me === 'leader' || me === 'officer',
       tier: guild.tier ?? 0,
+      memberCap: guild.memberCap ?? GUILD_ROSTER_BASE_MEMBERS,
+      nextRosterPrice: guild.nextRosterPrice ?? null,
+      canExpandRoster: me === 'leader' && (guild.nextRosterPrice ?? null) !== null,
       rows,
     },
   };

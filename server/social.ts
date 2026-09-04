@@ -11,6 +11,11 @@
 import type { ChatSenderFlair } from '../src/sim/account_flair';
 import { GUILD_CREATION_FEE_COPPER } from '../src/sim/guild_bank';
 import { pledgeCooldownActive } from '../src/sim/guild_pledge_ladder';
+import {
+  GUILD_ROSTER_MAX_MEMBERS,
+  guildRosterCap,
+  guildRosterNextPagePrice,
+} from '../src/sim/guild_roster';
 import { guildTierForLifetimeXp } from '../src/sim/guild_tier';
 import type { PlayerClass } from '../src/sim/types';
 
@@ -98,6 +103,14 @@ export interface GuildView {
   pledges: (CharInfo & { sinceMs: number })[];
   // The guild colour tier (sim/guild_tier.ts) for the nameplate line.
   tier: number;
+  // Roster expansion (docs/prd/guild-roster-expansion.md): the seats this
+  // guild may fill (base seats plus bought pages) and the copper price of the
+  // NEXT page, null once the ladder is complete. Server-derived from the
+  // guild row (src/sim/guild_roster.ts), never client-computed: the Guild tab
+  // renders the count against memberCap and the leader's buy button from the
+  // price, and the service re-prices from the row at purchase time anyway.
+  memberCap: number;
+  nextRosterPrice: number | null;
 }
 
 export interface SocialSnapshot {
@@ -141,10 +154,16 @@ export interface SocialDb {
   // duplicate create packet can never orphan a leaderless guild
   createGuildWithLeader(name: string, leaderId: number): Promise<GuildCreateResult>;
   deleteGuild(id: number): Promise<void>;
+  // rosterPages is the guild's bought roster pages (guilds.roster_pages,
+  // already floored into the ladder): the cap and the next page's price both
+  // derive from it (src/sim/guild_roster.ts), and it rides the membership
+  // read so neither the snapshot nor the invite gate pays a second query.
   guildMembership(
     charId: number,
-  ): Promise<{ guildId: number; guildName: string; rank: GuildRank } | null>;
-  // seat a member atomically, enforcing the cap under concurrent accepts.
+  ): Promise<{ guildId: number; guildName: string; rank: GuildRank; rosterPages: number } | null>;
+  // seat a member atomically, enforcing the cap under concurrent accepts. The
+  // cap is the guild's OWN (base seats plus bought pages), read from the guild
+  // row under the same lock as the seat, never a caller-supplied number.
   // requirePledge additionally consumes the character's pledge to THIS guild
   // inside the same transaction and refuses with 'no_pledge' when it is gone:
   // the pledge is the seat's consent, so a withdraw or decline racing the
@@ -153,9 +172,13 @@ export interface SocialDb {
     guildId: number,
     charId: number,
     rank: GuildRank,
-    limit: number,
     requirePledge?: boolean,
   ): Promise<'ok' | 'full' | 'already_member' | 'no_guild' | 'no_pledge'>;
+  // Buy the next roster page, compare-and-set on the pages-bought count the
+  // caller priced from: 'stale' when another purchase landed first (the
+  // caller refunds and asks the buyer to retry from the fresh price), 'no_guild'
+  // when the guild is gone.
+  buyGuildRosterPage(guildId: number, expectedPages: number): Promise<'ok' | 'stale' | 'no_guild'>;
   removeGuildMember(charId: number): Promise<void>;
   // Rank write predicated on BOTH the character and the guild the caller
   // authorized against, returning whether a row actually moved. False means
@@ -275,6 +298,19 @@ export interface SocialTransport {
   // (guildsFounded is the one server-produced DeedStatKey; see its doc in
   // src/sim/types.ts)
   onGuildFounded(characterId: number): void;
+  // Roster expansion purse half (docs/prd/guild-roster-expansion.md): the
+  // Guild Master pays a page from their OWN purse, reserve-at-gate like the
+  // creation fee. chargePurse deducts up to `copper` from the character's
+  // LIVE sim purse and returns what it actually took (0 for a character with
+  // no live session); refundPurse gives a reservation back on a refusal arm
+  // and returns what landed. Neither is ever called with a client-supplied
+  // amount: the service prices from the guild row. onGuildRosterExpanded fires
+  // once the page COMMITTED so the owner persists the charged purse (the live
+  // deduction is otherwise only as durable as the next autosave) and writes
+  // the audit line.
+  chargePurse(characterId: number, copper: number): number;
+  refundPurse(characterId: number, copper: number): number;
+  onGuildRosterExpanded(characterId: number, guildId: number, pages: number, copper: number): void;
   // A guild membership or rank mutation just COMMITTED in the DB for this
   // character. The transport owner re-stamps the live sim SYNCHRONOUSLY (the
   // session-only PlayerMeta.guildMembership stamp plus the nameplate guild
@@ -370,6 +406,14 @@ export type SocialEvent =
   | { type: 'calendarResult'; code: CalendarResultCode }
   // Structured guild-billboard outcome, same convention as calendarResult.
   | { type: 'motdResult'; code: MotdResultCode }
+  // Structured roster-expansion refusal, same convention as calendarResult:
+  // the client renders the line from the code. `price` (copper) rides only
+  // the cannotAfford arm so the line can name the page's price.
+  | { type: 'guildRosterResult'; code: GuildRosterResultCode; price?: number }
+  // A guild's roster just grew (the page COMMITTED): delivered to every
+  // online member, the buyer included, as the success line. Carries the
+  // buyer's display name and the new cap only, never English.
+  | { type: 'guildRosterExpanded'; byName: string; cap: number }
   // A guildmate's or followed friend's marquee deed unlock. Carries the deed
   // ID only, never English (the client composes the line from deed_i18n plus
   // its own chrome key, the calendarResult convention).
@@ -392,14 +436,18 @@ export type CalendarResultCode =
 // Guild billboard command outcomes ('set' is the success; the rest refusals).
 export type MotdResultCode = 'set' | 'notInGuild' | 'notOfficer';
 
+// Roster-expansion refusals (all refusals: the success is the guild-wide
+// guildRosterExpanded event). Mirrored in src/sim/types.ts for the client
+// event switch; tests/social_system.test.ts pins the two declarations equal.
+export type GuildRosterResultCode = 'notInGuild' | 'notLeader' | 'maxed' | 'cannotAfford' | 'retry';
+
 const FRIEND_LIMIT = 50;
 const BLOCK_LIMIT = 50;
 const IGNORE_LIMIT = 50;
-// Exported because the admin guild backoffice enforces the same roster cap: the
-// detail read pages the roster at it and the rename guard refuses above it. Two
-// copies would drift the day the cap moves, leaving guilds between the values
-// un-renameable and silently truncated in the dashboard.
-export const GUILD_MEMBER_LIMIT = 100;
+// The roster cap is PER GUILD now (base seats plus bought pages,
+// src/sim/guild_roster.ts guildRosterCap): every seat path reads it from the
+// guild row. GUILD_ROSTER_MAX_MEMBERS is the absolute bound the admin
+// backoffice pages at and the rename fan-out is capped by.
 const GUILD_INVITE_TTL_MS = 60_000;
 const GUILD_MESSAGE_MAX = 200;
 // Guild billboard: the officer-set message pinned atop the Guild tab.
@@ -530,6 +578,8 @@ export class SocialService {
         pledgeSettings,
         pledges,
         tier: guildTierForLifetimeXp(xpTotal),
+        memberCap: guildRosterCap(membership.rosterPages),
+        nextRosterPrice: guildRosterNextPagePrice(membership.rosterPages),
       };
     }
     const myPledgeRow = membership ? null : await this.db.pledgeOf(charId);
@@ -639,7 +689,7 @@ export class SocialService {
     for (const id of memberCharacterIds) {
       if (!Number.isInteger(id) || id <= 0) continue;
       members.add(id);
-      if (members.size >= GUILD_MEMBER_LIMIT) break;
+      if (members.size >= GUILD_ROSTER_MAX_MEMBERS) break;
     }
     const invitees = [...(this.pendingGuildInviteesByGuild.get(guildId) ?? [])];
     for (const inviteeId of invitees) {
@@ -1035,7 +1085,7 @@ export class SocialService {
       return 'refused';
     }
     const members = await this.db.guildMembers(membership.guildId);
-    if (members.length >= GUILD_MEMBER_LIMIT) {
+    if (members.length >= guildRosterCap(membership.rosterPages)) {
       this.err(actor.characterId, 'Your guild is full.');
       return 'refused';
     }
@@ -1071,12 +1121,7 @@ export class SocialService {
       this.err(actor.characterId, 'The guild invitation has expired.');
       return;
     }
-    const result = await this.db.addGuildMemberAtomic(
-      invite.guildId,
-      actor.characterId,
-      'member',
-      GUILD_MEMBER_LIMIT,
-    );
+    const result = await this.db.addGuildMemberAtomic(invite.guildId, actor.characterId, 'member');
     if (result === 'no_guild') {
       this.err(actor.characterId, 'That guild no longer exists.');
       return;
@@ -1295,7 +1340,6 @@ export class SocialService {
       membership.guildId,
       target.id,
       'member',
-      GUILD_MEMBER_LIMIT,
       true,
     );
     if (result === 'no_guild') {
@@ -1890,6 +1934,65 @@ export class SocialService {
 
   private motdResult(charId: number, code: MotdResultCode): void {
     this.tx.deliver(charId, [{ type: 'motdResult', code }]);
+  }
+
+  private rosterResult(charId: number, code: GuildRosterResultCode, price?: number): void {
+    this.tx.deliver(charId, [
+      price === undefined
+        ? { type: 'guildRosterResult', code }
+        : { type: 'guildRosterResult', code, price },
+    ]);
+  }
+
+  // Buy the next roster page (docs/prd/guild-roster-expansion.md): Guild
+  // Master only, priced from the guild row, paid from the buyer's OWN purse.
+  // RESERVE-AT-GATE, the creation fee's flow: the purse is charged
+  // synchronously BEFORE the DB write and refunded on every refusal arm, so a
+  // buyer who logs out mid-flight has already paid and a refused page never
+  // costs anything. The compare-and-set write lets a double-click (or two
+  // clients) pay for one page at most: the loser is refunded and asked to
+  // retry from the fresh price.
+  async guildBuyRosterPage(actor: SocialActor): Promise<void> {
+    const membership = await this.db.guildMembership(actor.characterId);
+    if (!membership) {
+      this.rosterResult(actor.characterId, 'notInGuild');
+      return;
+    }
+    if (membership.rank !== 'leader') {
+      this.rosterResult(actor.characterId, 'notLeader');
+      return;
+    }
+    const price = guildRosterNextPagePrice(membership.rosterPages);
+    if (price === null) {
+      this.rosterResult(actor.characterId, 'maxed');
+      return;
+    }
+    const charged = this.tx.chargePurse(actor.characterId, price);
+    if (charged < price) {
+      // A short purse (or no live session to charge): give back whatever was
+      // taken and refuse with the price. Never a discounted page.
+      if (charged > 0) this.tx.refundPurse(actor.characterId, charged);
+      this.rosterResult(actor.characterId, 'cannotAfford', price);
+      return;
+    }
+    let result: 'ok' | 'stale' | 'no_guild';
+    try {
+      result = await this.db.buyGuildRosterPage(membership.guildId, membership.rosterPages);
+    } catch (err) {
+      this.tx.refundPurse(actor.characterId, charged);
+      throw err;
+    }
+    if (result !== 'ok') {
+      this.tx.refundPurse(actor.characterId, charged);
+      this.rosterResult(actor.characterId, result === 'no_guild' ? 'notInGuild' : 'retry');
+      return;
+    }
+    const pages = membership.rosterPages + 1;
+    this.tx.onGuildRosterExpanded(actor.characterId, membership.guildId, pages, charged);
+    await this.broadcastGuild(membership.guildId, [
+      { type: 'guildRosterExpanded', byName: actor.name, cap: guildRosterCap(pages) },
+    ]);
+    await this.pushGuild(membership.guildId);
   }
 
   // Set (or clear, with '') the guild billboard. Officers + the Guild Master

@@ -410,3 +410,48 @@ describe('social_window: guild header copy', () => {
     expect(hudChromeCatalog).toContain("other: 'your guild rank is {rank}; {count} members'");
   });
 });
+
+describe('social_window: guild roster expansion (source pins)', () => {
+  // The painter renders what the pure core decided (guildView memberCap /
+  // nextRosterPrice / canExpandRoster), spends gold only through the shared
+  // confirm prompt, and formats the price with the money formatter.
+  it('reads the seat cap off the pure core and formats the price, never a raw number', () => {
+    expect(painter).toContain("t('hudChrome.social.roster.seats'");
+    expect(painter).toContain('cap: formatNumber(g.memberCap');
+    expect(painter).toContain('formatMoney(roster.nextRosterPrice)');
+    expect(painter).not.toMatch(/roster\.nextRosterPrice\s*\/\s*10_?000/);
+  });
+
+  it('shows the buy button to the leader only, disabled once the ladder is complete', () => {
+    expect(painter).toContain("if (roster && guild.rank === 'leader')");
+    expect(painter).toContain('data-act="guild-expand" disabled');
+    expect(painter).toContain("t('hudChrome.social.roster.maxed')");
+    expect(painter).toContain("t('hudChrome.social.roster.expand'");
+  });
+
+  it('buys through the shared confirm prompt, gated on the pure core permission', () => {
+    const handler = painter.slice(painter.indexOf("act === 'guild-expand'"));
+    const body = handler.slice(0, handler.indexOf("act === 'guild-leave'"));
+    expect(body).toContain('roster?.canExpandRoster && roster.nextRosterPrice !== null');
+    expect(body).toContain('this.deps.showPrompt(');
+    expect(body).toContain("t('hudChrome.social.roster.confirm'");
+    expect(body).toContain("t('hudChrome.social.roster.confirmAction')");
+    expect(body).toContain('() => w.guildBuyRosterPage()');
+  });
+
+  it('the catalog carries every roster key the painter and hud read', () => {
+    for (const key of [
+      'seats:',
+      'expand:',
+      'maxed:',
+      'confirm:',
+      'confirmAction:',
+      'expandedLine:',
+      'notLeader:',
+      'cannotAfford:',
+      'retry:',
+    ]) {
+      expect(hudChromeCatalog, key).toContain(key);
+    }
+  });
+});
