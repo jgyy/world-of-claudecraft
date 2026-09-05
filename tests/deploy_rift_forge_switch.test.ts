@@ -16,7 +16,8 @@ const deployDoc = readFileSync('DEPLOY.md', 'utf8');
 const envExample = readFileSync('.env.example', 'utf8');
 
 /** The game service's environment block: from its `environment:` key to the
- *  next top-level service key at the same indent. */
+ *  service's next sibling key (the four-space keys like `ports:`), which is
+ *  before any other service can start. */
 function gameServiceEnvironment(text: string): string {
   const service = text.indexOf('\n  game:\n');
   expect(service, 'docker-compose.yml declares the game service').toBeGreaterThan(-1);
@@ -35,9 +36,13 @@ describe('the Rift Forge kill switch reaches the shipped container', () => {
 
   it('documents the switch where an operator looks for it', () => {
     expect(deployDoc).toContain('RIFT_FORGE_ENABLED');
-    expect(envExample).toContain('#RIFT_FORGE_ENABLED=0');
+    const start = envExample.indexOf('# Rift forge wire commands');
+    const end = envExample.indexOf('#RIFT_FORGE_ENABLED=0', start);
+    expect(start, 'the env example carries the forge paragraph').toBeGreaterThan(-1);
+    expect(end, 'the paragraph ends on the commented-out switch').toBeGreaterThan(start);
     // The switch pauses the forge PAIR; the retired enchant is not a wire
-    // command an operator can close.
-    expect(envExample).not.toMatch(/enchant/i);
+    // command an operator can close. Scoped to the paragraph, so a future
+    // Enchanting-profession knob documented elsewhere in the file is not caught.
+    expect(envExample.slice(start, end)).not.toMatch(/enchant/i);
   });
 });
