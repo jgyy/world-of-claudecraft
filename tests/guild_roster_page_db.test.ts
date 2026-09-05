@@ -111,7 +111,9 @@ describe('buyGuildRosterPageAtomic: the committed path', () => {
   });
 
   it('pins the compare-and-set: floored count, ladder bound, leader re-check, RETURNING', () => {
-    expect(GUILD_ROSTER_PAGE_CAS_SQL).toContain('roster_pages = roster_pages + 1');
+    // Advanced from the floored count too: a tampered negative column becomes
+    // page one rather than a negative count the receipt guard refuses forever.
+    expect(GUILD_ROSTER_PAGE_CAS_SQL).toContain('roster_pages = GREATEST(roster_pages, 0) + 1');
     expect(GUILD_ROSTER_PAGE_CAS_SQL).toContain('GREATEST(roster_pages, 0) = $2');
     expect(GUILD_ROSTER_PAGE_CAS_SQL).toContain('roster_pages < $3');
     expect(GUILD_ROSTER_PAGE_CAS_SQL).toMatch(

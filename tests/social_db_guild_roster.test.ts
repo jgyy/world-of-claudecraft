@@ -13,8 +13,8 @@ vi.mock('../server/admin_guilds_read', () => ({
   bustAdminGuildListReads: mocks.bustGuildList,
 }));
 
-import { PgSocialDb } from '../server/social_db';
-import { GUILD_ROSTER_MAX_PAGES } from '../src/sim/guild_roster';
+import { PgSocialDb, SOCIAL_SCHEMA } from '../server/social_db';
+import { GUILD_ROSTER_MAX_PAGES, GUILD_ROSTER_PAGE_PRICES } from '../src/sim/guild_roster';
 
 function harness() {
   const client = {
@@ -114,4 +114,31 @@ describe('PgSocialDb guild roster expansion', () => {
   // The page purchase itself (compare-and-set, receipt, fenced purse save) is
   // one transaction in server/guild_roster_page_db.ts; its statements and
   // verdicts are pinned in tests/guild_roster_page_db.test.ts.
+
+  it('declares the receipts table after guilds and roster_pages, cascading, BIGINT copper, indexed', () => {
+    const table = SOCIAL_SCHEMA.indexOf('CREATE TABLE IF NOT EXISTS guild_roster_receipts');
+    expect(table).toBeGreaterThan(SOCIAL_SCHEMA.indexOf('CREATE TABLE IF NOT EXISTS guilds'));
+    expect(table).toBeGreaterThan(
+      SOCIAL_SCHEMA.indexOf('ALTER TABLE guilds ADD COLUMN IF NOT EXISTS roster_pages'),
+    );
+    const block = SOCIAL_SCHEMA.slice(table, SOCIAL_SCHEMA.indexOf(');', table));
+    expect(block).toContain('batch_key TEXT PRIMARY KEY');
+    expect(block).toContain('guild_id INT NOT NULL REFERENCES guilds(id) ON DELETE CASCADE');
+    expect(block).toContain(
+      'character_id INT NOT NULL REFERENCES characters(id) ON DELETE CASCADE',
+    );
+    // The ladder crosses INT4 at page 30, so the column must stay BIGINT.
+    expect(block).toContain('copper BIGINT NOT NULL');
+    expect(Math.max(...GUILD_ROSTER_PAGE_PRICES)).toBeGreaterThan(2 ** 31);
+    // No (guild_id, page) uniqueness: a lowered counter must be sellable again.
+    expect(block).not.toContain('UNIQUE');
+    expect(SOCIAL_SCHEMA).toContain('DROP CONSTRAINT IF EXISTS guild_roster_receipts_page_once');
+    // Both cascades are index-backed, the bank_ledger_batch_receipts precedent.
+    expect(SOCIAL_SCHEMA).toContain(
+      'CREATE INDEX IF NOT EXISTS guild_roster_receipts_guild_page\n  ON guild_roster_receipts (guild_id, page)',
+    );
+    expect(SOCIAL_SCHEMA).toContain(
+      'CREATE INDEX IF NOT EXISTS guild_roster_receipts_character\n  ON guild_roster_receipts (character_id)',
+    );
+  });
 });

@@ -115,7 +115,25 @@ database answer after COMMIT was refunded as if the page had not landed.
 5. On a known commit the coordinator writes one audit line naming the guild,
    the page, the buyer, the copper, and the receipt key, and acknowledges the
    save's effect prefix. Every online member sees the success line; the
-   snapshot re-pushes with the new cap.
+   snapshot re-pushes with the new cap. Any throw once the write may have run
+   (the acknowledgement included) is treated exactly like an unknown COMMIT:
+   the live copy is abandoned, never left to carry an unproven purse into its
+   next autosave. A throw before the write refunds and rethrows so the
+   dispatcher logs the cause; the `retry` refusal rethrows the same way.
+6. Bounds: one purchase per character is in flight at a time (a repeated
+   command answers nothing; the first one answers for itself), the wait for
+   the character's save slot is capped (`GUILD_ROSTER_PURCHASE_QUEUE_WAIT_MS`;
+   un-started work past it is cancelled with nothing charged and the buyer is
+   asked to retry), and the pool checkout rides the realm's one
+   major-background gate with the abort-aware checkout the paid guild create
+   uses, so purchases compose under the same budget as autosaves.
+
+Operator note: the receipt is reconcile evidence, not the ledger (the audit
+line is; the row cascades away with its guild or its character), and
+`(guild_id, page)` is deliberately NOT unique, so lowering a guild's
+`roster_pages` to compensate a player needs no receipt cleanup. Nothing yet
+detects a guild whose `roster_pages` and receipt count have diverged; an
+operator readout for that is a follow-up.
 
 Every refusal is a code the client localizes (`guildRosterResult`, the
 billboard convention), never server English.

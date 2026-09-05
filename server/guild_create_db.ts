@@ -231,11 +231,14 @@ function clientWithPermit(
  * permit releases with the rejection; the eventual client is destroyed in the
  * background and returns to the pool on arrival.
  */
-async function acquirePaidGuildCreateClient(
+export async function acquirePaidGuildCreateClient(
   deps: PaidGuildCreateDeps,
   signal: AbortSignal | undefined,
   operation = 'paid guild create',
 ): Promise<PaidGuildCreateDbClient> {
+  // Exported for the guild roster page purchase (server/guild_roster_page_db.ts),
+  // which rides the SAME gate and checkout so its transactions compose under
+  // the realm's one major-producer budget rather than beside it.
   const acquirePermit = deps.acquireBackgroundPermit ?? registeredAcquireBackgroundPermit;
   if (!acquirePermit) return acquirePaidGuildCreateCheckout(deps, signal, operation);
   // Bounded wait: the caller's signal may never fire once the queued create

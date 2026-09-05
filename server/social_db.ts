@@ -156,8 +156,16 @@ ALTER TABLE guilds ADD COLUMN IF NOT EXISTS roster_pages INT NOT NULL DEFAULT 0;
 -- page and the buyer's charged purse (server/guild_roster_page_db.ts). Its
 -- only reader is the reconcile step after a lost COMMIT answer: a matching
 -- row under the purchase's own key proves the page landed and must not be
--- refunded. Bounded by construction (one row per page, at most the ladder's
--- length per guild, gone with the guild), so no retention sweep is needed.
+-- refunded. Bounded by construction (the compare-and-set caps pages at the
+-- ladder's length, so at most that many rows per guild, gone with the
+-- guild), so no retention sweep is needed. copper is BIGINT on purpose: the
+-- ladder crosses INT4 at page 30. Uniqueness is the batch_key alone, NOT
+-- (guild_id, page): an operator who lowers roster_pages to compensate a
+-- player must be able to sell that page number again without deleting
+-- receipts first, so the page index below is a plain index (it serves the
+-- guild cascade). The inline CHECKs are frozen at first creation (CREATE
+-- TABLE IF NOT EXISTS never revisits the body, the bank_ledger_batch_db
+-- lesson); they interpolate no constant, so a change needs its own ALTER.
 CREATE TABLE IF NOT EXISTS guild_roster_receipts (
   batch_key TEXT PRIMARY KEY,
   guild_id INT NOT NULL REFERENCES guilds(id) ON DELETE CASCADE,
@@ -165,10 +173,16 @@ CREATE TABLE IF NOT EXISTS guild_roster_receipts (
   character_id INT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
   copper BIGINT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-  CONSTRAINT guild_roster_receipts_page_once UNIQUE (guild_id, page),
   CONSTRAINT guild_roster_receipts_page_positive CHECK (page > 0),
   CONSTRAINT guild_roster_receipts_copper_positive CHECK (copper > 0)
 );
+-- The first cut of this table (never released) made (guild_id, page) unique.
+ALTER TABLE guild_roster_receipts DROP CONSTRAINT IF EXISTS guild_roster_receipts_page_once;
+CREATE INDEX IF NOT EXISTS guild_roster_receipts_guild_page
+  ON guild_roster_receipts (guild_id, page);
+-- The character cascade (the account-delete path) must never scan this table.
+CREATE INDEX IF NOT EXISTS guild_roster_receipts_character
+  ON guild_roster_receipts (character_id);
 
 -- One active pledge per character (the pledge is a public line on the
 -- character, singular by construction). Bounded at one row per character, so

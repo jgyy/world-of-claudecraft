@@ -441,10 +441,11 @@ export type GuildRosterResultCode = 'notInGuild' | 'notLeader' | 'maxed' | 'cann
 // (server/guild_roster_transport.ts): 'ok' carries the pages now bought;
 // 'retry' may carry the cause the dispatcher should log; 'session_lost'
 // means the buyer's live session is gone or was abandoned to durable truth,
-// so there is nobody to answer.
+// so there is nobody to answer; 'busy' is a repeated command while the
+// character's own purchase is still in flight (its answer is coming).
 export type GuildRosterPurchase =
   | { outcome: 'ok'; pages: number }
-  | { outcome: 'cannotAfford' | 'stale' | 'no_guild' | 'session_lost' }
+  | { outcome: 'cannotAfford' | 'stale' | 'no_guild' | 'session_lost' | 'busy' }
   | { outcome: 'retry'; error?: unknown };
 
 const FRIEND_LIMIT = 50;
@@ -2001,8 +2002,9 @@ export class SocialService {
           if (purchase.error !== undefined) throw purchase.error;
           return;
         default:
-          // The buyer's live session is gone or was abandoned to durable
-          // truth: there is nobody to answer.
+          // session_lost: the buyer's live session is gone or was abandoned
+          // to durable truth, so there is nobody to answer. busy: their own
+          // purchase is still in flight and will answer for itself.
           return;
       }
     }

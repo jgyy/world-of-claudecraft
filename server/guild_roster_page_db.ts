@@ -34,6 +34,7 @@ import {
   type DbTransactionDeadlineClient,
   DbTransactionDeadlineExceeded,
 } from './db_transaction_deadline';
+import { acquirePaidGuildCreateClient, type PaidGuildCreateDeps } from './guild_create_db';
 import { throwProvedRollback } from './pg_rollback_proof';
 import type { StorageAppliedEffect } from './storage_purchase_db';
 
@@ -51,16 +52,10 @@ export interface GuildRosterPageDbPool {
   query(sql: string, values: unknown[]): Promise<{ rows: unknown[] }>;
 }
 
-export interface GuildRosterPageDeps {
+/** The paid guild create's deps shape (the checkout rides its gate), with
+ *  the reconcile read's pool query made mandatory. */
+export interface GuildRosterPageDeps extends Omit<PaidGuildCreateDeps, 'pool'> {
   readonly pool: GuildRosterPageDbPool;
-  /** Production wires db.ts's dedicated side-pool cancel hook so a deadline
-   *  cancel never rides the saturated main pool; the pool-derived form is
-   *  the fallback for narrow test worlds. */
-  readonly cancelBackend?: (processId: number) => Promise<void>;
-  /** PgSocialDb owns the roster cache, so its owner supplies the bust. */
-  readonly bustGuildRoster: (guildId: number) => void;
-  /** Transaction cleanup failures are operational, never a durability verdict. */
-  readonly onCleanupError?: (error: unknown) => void;
 }
 
 export interface GuildRosterPageReceipt {
@@ -101,13 +96,14 @@ export type GuildRosterPageResult =
 
 /** The compare-and-set. The page is bought only if the guild still stands at
  *  exactly the count the caller priced from (compared FLOORED, the load path
- *  the price came from, so a tampered negative column cannot become a
- *  charge-refund loop), the ladder has a page left, and the buyer is STILL
- *  the Guild Master: a double-click, a second client, or a demotion racing
- *  the purchase misses the write instead of charging twice or expanding on a
+ *  the price came from, and advanced from the same floor, so a tampered
+ *  negative column heals to page one instead of looping through a refused
+ *  write), the ladder has a page left, and the buyer is STILL the Guild
+ *  Master: a double-click, a second client, or a demotion racing the
+ *  purchase misses the write instead of charging twice or expanding on a
  *  stale rank. RETURNING carries the new count for the receipt and the
  *  caller's broadcast. */
-export const GUILD_ROSTER_PAGE_CAS_SQL = `UPDATE guilds SET roster_pages = roster_pages + 1
+export const GUILD_ROSTER_PAGE_CAS_SQL = `UPDATE guilds SET roster_pages = GREATEST(roster_pages, 0) + 1
   WHERE id = $1 AND GREATEST(roster_pages, 0) = $2 AND roster_pages < $3
     AND EXISTS (
       SELECT 1 FROM guild_members
@@ -229,7 +225,10 @@ const backoff = (attempt: number): Promise<void> =>
 
 /** One bounded look at the receipt table on a fresh pool connection. The
  *  JavaScript race bounds the wait the caller sees; a query that outlives it
- *  finishes on its own and its answer is simply not used. */
+ *  finishes on its own (a primary-key point read, so at most
+ *  GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS such reads can ever overlap) and
+ *  its answer is simply not used. No SET LOCAL here: the pool query owns
+ *  its own checkout, and the statement is bounded by the server default. */
 async function readReceiptOnce(
   deps: GuildRosterPageDeps,
   batchKey: string,
@@ -283,7 +282,15 @@ export async function buyGuildRosterPageAtomic(
   let transaction: DbTransactionDeadline | null = null;
   let commitIssued = false;
   try {
-    const client = await deps.pool.connect();
+    // Gate-then-checkout on the realm's one major-background gate (the paid
+    // guild create's acquirer, registered by main.ts), abort-aware while
+    // queued on the pool: this transaction rides the character save FIFO,
+    // so its checkout must count against the same budget as autosaves.
+    const client = await acquirePaidGuildCreateClient(
+      deps as PaidGuildCreateDeps,
+      input.signal,
+      'guild roster page',
+    );
     const cancelBackend =
       deps.cancelBackend ??
       backendCancelViaPool({ query: (sql, values) => deps.pool.query(sql, values) });
