@@ -66,8 +66,10 @@ rather than the staggered backstop.
   (`item_instance_tooltip.ts` `instanceDurabilityLine`), only while damaged,
   red at zero. The paperdoll reads the worn payload off
   `IWorldInventory.equipmentInstances` through `wornTooltipInstance`.
-- Sim text: "Your equipment has been damaged." on a loss, "Repaired all items
-  for {money}." on a repair; both re-localized by `src/ui/sim_i18n.ts`.
+- Sim text: "Repaired all items for {money}." on a repair (re-localized by
+  `src/ui/sim_i18n.ts`). A loss itself has no notice: the death recap stays
+  the one line the client renders, and the state shows on the paperdoll and
+  in the vendor window.
 
 ```mermaid
 flowchart LR

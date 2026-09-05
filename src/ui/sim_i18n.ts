@@ -434,9 +434,9 @@ const baseEnTable = {
   'log.discarded': 'Discarded {item}.',
   'log.equipped': 'Equipped {item}.',
   'log.unequipped': 'Unequipped {item}.',
-  // Gear durability (src/sim/durability.ts): the death / Spirit Healer loss
-  // notice, the Repair All receipt, and its nothing-to-repair refusal.
-  'log.gearDamaged': 'Your equipment has been damaged.',
+  // Gear durability (src/sim/durability.ts): the Repair All receipt and its
+  // nothing-to-repair refusal (a loss itself has no notice: the paperdoll and
+  // vendor window carry the state, and the death recap stays one line).
   'log.repairedAll': 'Repaired all items for {money}.',
   'error.nothingToRepair': 'Your equipment does not need repairing.',
   'log.noFish': 'No fish are biting.',

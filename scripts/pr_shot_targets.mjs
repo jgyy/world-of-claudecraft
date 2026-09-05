@@ -2185,7 +2185,9 @@ export const TARGETS = [
   {
     key: 'gear-durability',
     label: 'Gear durability: the vendor Repair All bill and the paperdoll durability line',
-    when: ['sim/durability', 'ui/hud/vendor/vendor_window', 'ui/item_instance_tooltip'],
+    // Keyed on the sim module only: the vendor and tooltip modules already
+    // resolve their own targets, and this one is about the durability state.
+    when: ['sim/durability'],
     // The same recipe shoots the honest BEFORE frame on a base build: the
     // death + Spirit Healer revive run there too but damage nothing, so the
     // vendor shows no Repair All row and the worn tooltip carries no

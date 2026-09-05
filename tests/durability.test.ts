@@ -10,7 +10,6 @@ import {
   applyDeathDurabilityLoss,
   applySpiritRezDurabilityLoss,
   durabilityLossExempt,
-  GEAR_DAMAGED_TEXT,
 } from '../src/sim/durability';
 import {
   currentDurability,
@@ -220,11 +219,8 @@ describe('durability: the death penalty', () => {
       expect(sim.equipmentInstances[slot]?.durability).toBeUndefined();
     }
     expect(JSON.stringify(sim.inventory)).toBe(bagsBefore);
-    expect(
-      events.some(
-        (ev) => ev.type === 'log' && ev.text === GEAR_DAMAGED_TEXT && ev.pid === sim.player.id,
-      ),
-    ).toBe(true);
+    // No sim-side notice: the death recap stays the one client-rendered line.
+    expect(events.filter((ev) => ev.type === 'log' && ev.pid === sim.player.id)).toHaveLength(0);
   });
 
   it('a death at or below level 5 costs nothing', () => {
@@ -236,7 +232,7 @@ describe('durability: the death penalty', () => {
     for (const slot of ALL_EQUIP_SLOTS) {
       expect(sim.equipmentInstances[slot]?.durability).toBeUndefined();
     }
-    expect(events.some((ev) => ev.type === 'log' && ev.text === GEAR_DAMAGED_TEXT)).toBe(false);
+    expect(events.filter((ev) => ev.type === 'log' && ev.pid === sim.player.id)).toHaveLength(0);
   });
 
   it('an arena death is exempt, a Thornhollow Fields death is not, and the level floor holds', () => {

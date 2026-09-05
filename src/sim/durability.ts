@@ -22,8 +22,6 @@ import type { PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
 import type { Entity } from './types';
 
-export const GEAR_DAMAGED_TEXT = 'Your equipment has been damaged.';
-
 /** The one exemption both loss arms share: below the level floor (a starter's
  *  deaths are free) or inside an arena match (the Ashen Coliseum is a sport,
  *  not a corpse run). Thornhollow Fields deaths DO cost gear, like the open
@@ -48,15 +46,9 @@ export function applyDeathDurabilityLoss(ctx: SimContext, meta: PlayerMeta, p: E
     DEATH_DURABILITY_LOSS,
     ITEMS,
   );
-  // The literal sits at the emit site (not the exported const) so the S3
-  // guard's literal scan sees it; tests read GEAR_DAMAGED_TEXT.
-  if (changed)
-    ctx.emit({
-      type: 'log',
-      text: 'Your equipment has been damaged.',
-      color: '#f88',
-      pid: meta.entityId,
-    });
+  // Deliberately no log line: the client renders the ONE death recap off the
+  // playerDeath event (combat/damage.ts), and the durability state shows on
+  // the paperdoll and vendor window instead.
   return changed;
 }
 
@@ -78,13 +70,6 @@ export function applySpiritRezDurabilityLoss(
     SPIRIT_REZ_DURABILITY_LOSS,
     ITEMS,
   );
-  if (changed)
-    ctx.emit({
-      type: 'log',
-      text: 'Your equipment has been damaged.',
-      color: '#f88',
-      pid: meta.entityId,
-    });
   return changed;
 }
 
