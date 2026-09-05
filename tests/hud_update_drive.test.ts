@@ -1193,6 +1193,14 @@ const HUD_UPDATE_DRIVES: readonly DriveRow[] = [
     why: 'closes the market window when the player leaves the auctioneer',
   },
   {
+    call: 'this.riftForgeWindow.close',
+    band: 'slow',
+    gate: 'this.riftForgeWindow.isOpen && !riftForgeInReach(p, this.sim.entities.values(), NPC_WINDOW_CLOSE_RANGE)',
+    surface: 'window',
+    guard: { kind: 'callsite' },
+    why: 'closes the Rift Forge window when the player leaves the Riftwright (the market rule; the sim place gate refuses the commands regardless)',
+  },
+  {
     call: 'this.marketWindow.refreshIfChanged',
     band: 'slow',
     gate: 'this.marketWindow.isOpen && !(!this.nearbyMarketNpc())',
@@ -1680,7 +1688,7 @@ describe('Hud.update() drives exactly the registered set, on the registered band
       // window 44 -> 46: the crucible vendor's out-of-range close (the third
       // #vendor-window tenant, on the heroic vendor's exact row shape).
       // Both deltas apply on the merged tree.
-    ).toEqual({ window: 46, chrome: 84, none: 17 });
+    ).toEqual({ window: 47, chrome: 84, none: 17 });
     const windows = HUD_UPDATE_DRIVES.filter((r) => r.surface === 'window');
     expect(windows.map((r) => r.call)).toContain('this.spellbookWindow.tickOpen');
     expect(windows.map((r) => r.call)).toContain('this.refreshOpenTownFocusIfChanged');
