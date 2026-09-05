@@ -660,10 +660,14 @@ export class WocMarketWindow {
       // rebuilds its own button disabled, so focus falls to prev, not to body.
       const byKey = (key: string) =>
         root.querySelector<HTMLElement>(`[data-focus-key="${key.replace(/["\\]/g, '\\$&')}"]`);
+      // The wallet card's dismiss glyph removes itself: focus falls to the
+      // selected tab, the nearest control that survives the rebuild.
       const ladder =
         focusKey === 'wm-page-next' || focusKey === 'wm-page-prev'
           ? [byKey(focusKey), byKey('wm-page-next'), byKey('wm-page-prev')]
-          : [byKey(focusKey)];
+          : focusKey === 'wm-wallet-dismiss'
+            ? [byKey(focusKey), root.querySelector<HTMLElement>('.wm-tab-selected')]
+            : [byKey(focusKey)];
       restoreFirstEnabled(ladder);
     }
   }

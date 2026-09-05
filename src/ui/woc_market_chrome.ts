@@ -257,7 +257,7 @@ export function wocBondScheduleNotesHtml(args: {
  * connected wallet included, because "Manage wallet" is the way to change or
  * unlink it from here. The button rides the window's connect-wallet click
  * action into the shared flow the store and daily rewards buttons open, one
- * click from where the player was told to link. The two LINKED states carry a
+ * click from where the player was told to link. The reconnect state carries a
  * dismiss button (woc_wallet_card_dismiss.ts): on a phone browser a desktop-
  * linked account always reads "reconnect", and that status line ate the
  * landscape sheet; the window drops the card while the state stays dismissed.
@@ -293,7 +293,7 @@ function wocWalletCardHtml(
   const balance = wocWalletBalanceHtml(wallet, tokensPerUsd);
   const dismiss = walletCardDismissible(wallet.kind)
     ? `<button type="button" class="x-btn wm-banner-dismiss" data-action="dismiss-wallet-card" ` +
-      `aria-label="${esc(t('hudChrome.wocMarket.walletCardDismiss'))}">${svgIcon('close')}</button>`
+      `${FOCUS_KEY_ATTR}="wm-wallet-dismiss" aria-label="${esc(t('hudChrome.wocMarket.walletCardDismiss'))}">${svgIcon('close')}</button>`
     : '';
   return (
     `<div class="wm-banner wm-banner-wallet" data-wallet-kind="${esc(wallet.kind)}">` +

@@ -19,16 +19,18 @@ import type { WalletConnectionKind } from './wallet_connection_view';
 /** The persisted dismissal's localStorage key: the dismissed connection kind. */
 export const WOC_WALLET_CARD_DISMISS_KEY = 'woc_exchange_wallet_card_dismissed';
 
-export type DismissibleWalletCardKind = 'linked_disconnected' | 'linked_connected';
+export type DismissibleWalletCardKind = 'linked_disconnected';
 
-/** Only the two LINKED states may be hidden: the address is on the account, so
+/** Only the reconnect state may be hidden: the address is on the account, so
  *  both buying (the on-demand wallet step-up) and selling already work, and the
  *  card is a status line, not a gate. Unlinked, connected-unlinked and mismatched
- *  are the player's only path to a working wallet and stay on screen. */
+ *  are the player's only path to a working wallet and stay on screen; the
+ *  connected card stays too, because it carries the verified balance readout
+ *  and this window's only Manage wallet entry, and there is no re-show control. */
 export function walletCardDismissible(
   kind: WalletConnectionKind,
 ): kind is DismissibleWalletCardKind {
-  return kind === 'linked_disconnected' || kind === 'linked_connected';
+  return kind === 'linked_disconnected';
 }
 
 /** Hide the card only while the wallet is still in the exact kind the player
@@ -42,7 +44,7 @@ export function walletCardHidden(
 
 /** Read the persisted dismissed kind. Null (nothing hidden) when storage is
  *  unavailable, the key is unset, a read throws, or the value is not one of the
- *  dismissible kinds (a corrupt row must never hide an actionable card). */
+ *  dismissible kind (a corrupt row must never hide an actionable card). */
 export function loadWalletCardDismissal(
   storage: Pick<Storage, 'getItem'> | null = safeLocalStorage(),
 ): DismissibleWalletCardKind | null {

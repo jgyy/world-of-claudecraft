@@ -81,11 +81,11 @@ const MONOLITHS: MonolithRow[] = [
     // Down 2487 -> 2475 at the desktop-signing round: the WocMarketHooks
     // contract moved to src/ui/woc_market_hooks.ts (wiring, window, and the
     // trade arm all consume it), paying for the signer-reference plumbing.
-    // Down 2475 -> 2447 at the wallet-card dismiss round: the payment-quote
+    // Down 2475 -> 2451 at the wallet-card dismiss round: the payment-quote
     // face moved verbatim to src/ui/woc_market_quote_html.ts (the activity
-    // tab's shape), paying for the dismiss click arm and the hidden-card
-    // render gate. Exact count, zero headroom.
-    ceiling: 2447,
+    // tab's shape), paying for the dismiss click arm, the hidden-card render
+    // gate and the glyph's focus-restore rung. Exact count, zero headroom.
+    ceiling: 2451,
     seam: 'a pure view-core module beside it (src/ui/woc_market_view.ts) that this window renders from',
   },
   {

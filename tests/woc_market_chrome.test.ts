@@ -248,8 +248,10 @@ describe('woc_market_chrome: the standing banners', () => {
     expect(mismatched).toContain(`>${t('hudChrome.wocStore.wallet.verify')}</button>`);
   });
 
-  it('offers a dismiss glyph on the two linked states only, ahead of the sentence', () => {
-    const dismiss = `<button type="button" class="x-btn wm-banner-dismiss" data-action="dismiss-wallet-card" aria-label="${t(
+  it('offers a dismiss glyph on the reconnect state only, ahead of the sentence', () => {
+    // Its own focus key: the window's restore ladder falls from it to the
+    // selected tab once the glyph has removed itself.
+    const dismiss = `<button type="button" class="x-btn wm-banner-dismiss" data-action="dismiss-wallet-card" data-focus-key="wm-wallet-dismiss" aria-label="${t(
       'hudChrome.wocMarket.walletCardDismiss',
     )}">`;
     const disconnected = wocMarketBannersHtml({ paused: false, wallet: view('L', null) });
@@ -259,9 +261,9 @@ describe('woc_market_chrome: the standing banners', () => {
       disconnected.indexOf('<strong>'),
     );
     expect(disconnected.indexOf('wm-banner-dismiss')).toBeLessThan(disconnected.indexOf('<p>'));
-    expect(wocMarketBannersHtml({ paused: false, wallet: view('L', 'L') })).toContain(dismiss);
-    // The states that gate buying or selling keep the card on screen.
-    for (const w of [view(null, null), view(null, 'C'), view('L', 'M')]) {
+    // The states that gate buying or selling keep the card on screen, and so
+    // does the connected card (balance readout + Manage wallet, no re-show).
+    for (const w of [view(null, null), view(null, 'C'), view('L', 'M'), view('L', 'L')]) {
       expect(wocMarketBannersHtml({ paused: false, wallet: w })).not.toContain('wm-banner-dismiss');
     }
   });

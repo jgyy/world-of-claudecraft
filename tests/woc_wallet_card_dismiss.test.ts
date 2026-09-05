@@ -38,15 +38,16 @@ const throwingStorage = {
 };
 
 describe('walletCardDismissible', () => {
-  it('only the two LINKED states are informational enough to hide', () => {
+  it('only the reconnect state is informational enough to hide', () => {
     expect(walletCardDismissible('linked_disconnected')).toBe(true);
-    expect(walletCardDismissible('linked_connected')).toBe(true);
   });
   it('a state that gates buying or selling stays on screen', () => {
     // Unlinked and connected-but-unlinked are the only path to linking, and a
     // mismatch needs the player to pick a wallet; hiding any of them would leave
     // disabled Buy / Sell buttons with no explanation.
     expect(walletCardDismissible('unlinked')).toBe(false);
+    // Connected carries the verified balance and the Manage entry: keep it.
+    expect(walletCardDismissible('linked_connected')).toBe(false);
     expect(walletCardDismissible('connected_unlinked')).toBe(false);
     expect(walletCardDismissible('mismatched')).toBe(false);
     expect(walletCardDismissible('disabled')).toBe(false);
@@ -72,13 +73,11 @@ describe('wallet card dismissal persistence', () => {
   it('pins the exact localStorage key (a rename would silently un-dismiss every card)', () => {
     expect(WOC_WALLET_CARD_DISMISS_KEY).toBe('woc_exchange_wallet_card_dismissed');
   });
-  it('round-trips a dismissible kind and clears on null', () => {
+  it('round-trips the dismissible kind and clears on null', () => {
     const s = fakeStorage();
     saveWalletCardDismissal('linked_disconnected', s);
     expect(s._map.get(WOC_WALLET_CARD_DISMISS_KEY)).toBe('linked_disconnected');
     expect(loadWalletCardDismissal(s)).toBe('linked_disconnected');
-    saveWalletCardDismissal('linked_connected', s);
-    expect(loadWalletCardDismissal(s)).toBe('linked_connected');
     saveWalletCardDismissal(null, s);
     expect(s._map.has(WOC_WALLET_CARD_DISMISS_KEY)).toBe(false);
     expect(loadWalletCardDismissal(s)).toBeNull();
@@ -91,6 +90,10 @@ describe('wallet card dismissal persistence', () => {
     ).toBeNull();
     expect(
       loadWalletCardDismissal(fakeStorage({ [WOC_WALLET_CARD_DISMISS_KEY]: 'unlinked' })),
+    ).toBeNull();
+    // A row written by an earlier build that allowed the connected card.
+    expect(
+      loadWalletCardDismissal(fakeStorage({ [WOC_WALLET_CARD_DISMISS_KEY]: 'linked_connected' })),
     ).toBeNull();
   });
   it('survives an unavailable storage on both read and write', () => {
