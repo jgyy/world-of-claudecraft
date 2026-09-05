@@ -206,10 +206,11 @@ describe('inspect_window painter instance threading (source pins)', () => {
     expect(painter).toContain('this.buildSlotRow(cell, e.equippedInstances[cell.slot])');
   });
 
-  it('the slot row forwards the instance into the tooltip builder', () => {
-    expect(painter).toContain(
-      'this.deps.attachTooltip(row, () => this.deps.itemTooltip(item, instance))',
-    );
+  it('the slot row forwards the instance into the tooltip builder through the worn projection', () => {
+    // Another player's worn copy takes the same worn-slot projection the
+    // paperdoll uses (item_instance_tooltip.ts wornTooltipInstance, def
+    // included), so a worn bind-on-equip piece reads Soulbound there too.
+    expect(painter).toContain('this.deps.itemTooltip(item, wornTooltipInstance(instance, item))');
   });
 
   it('hud.ts openInspect is now a thin delegate to the painter', () => {
