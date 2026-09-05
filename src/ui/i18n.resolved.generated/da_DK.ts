@@ -1307,6 +1307,11 @@ export const da_DK: EnTranslations = {
       "separate": "Adskil {meter}",
       "regroup": "Saml {meter} igen"
     },
+    "targetDots": {
+      "title": "Target Dots",
+      "row": "{aura} on {target}",
+      "overflow": "{count} more not shown"
+    },
     "targetAuras": {
       "title": "Målets auraer",
       "keybindLabel": "Målets forstærkninger og svækkelser",
@@ -1598,6 +1603,9 @@ export const da_DK: EnTranslations = {
       "showTargetOfTarget": "Vis målets mål",
       "showTargetSwingTimer": "Vis målets svingtimer",
       "showPetFrame": "Vis dit kæledyr",
+      "showNameplateDots": "Show My Dots on Nameplates",
+      "nameplateDotScale": "Nameplate Dot Size",
+      "showTargetDots": "Show Target Dots",
       "waterRipples": "Vandkrusninger (kølvand)",
       "showAttackButton": "Vis angrebsknap",
       "showDailyRewardsChest": "Vis kisten med daglige belønninger",
@@ -2985,7 +2993,8 @@ export const da_DK: EnTranslations = {
         "playerFrame": "Spiller",
         "targetFrame": "Mål",
         "partyFrames": "Gruppe",
-        "swingBar": "Autoangreb"
+        "swingBar": "Autoangreb",
+        "targetDots": "Target Dots"
       },
       "framesMenu": "Rammeindstillinger",
       "framesMenuTitle": "Vis eller skjul enkelte rammer. En fravalgt ramme forbliver skjult, indtil du vælger den igen eller nulstiller til standard.",

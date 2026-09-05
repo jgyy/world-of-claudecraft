@@ -1307,6 +1307,11 @@ export const vi_VN: EnTranslations = {
       "separate": "Tách {meter}",
       "regroup": "Ghép lại {meter}"
     },
+    "targetDots": {
+      "title": "Target Dots",
+      "row": "{aura} on {target}",
+      "overflow": "{count} more not shown"
+    },
     "targetAuras": {
       "title": "Hào Quang Mục Tiêu",
       "keybindLabel": "Buff và Debuff Mục Tiêu",
@@ -1598,6 +1603,9 @@ export const vi_VN: EnTranslations = {
       "showTargetOfTarget": "Hiện Mục Tiêu Của Mục Tiêu",
       "showTargetSwingTimer": "Hiển thị bộ đếm vung đòn của mục tiêu",
       "showPetFrame": "Hiện Thú Cưng Của Bạn",
+      "showNameplateDots": "Show My Dots on Nameplates",
+      "nameplateDotScale": "Nameplate Dot Size",
+      "showTargetDots": "Show Target Dots",
       "waterRipples": "Gợn nước (sóng rẽ nước)",
       "showAttackButton": "Hiển Thị Nút Tấn Công",
       "showDailyRewardsChest": "Hiện Rương Phần Thưởng Hằng Ngày",
@@ -2985,7 +2993,8 @@ export const vi_VN: EnTranslations = {
         "playerFrame": "Người Chơi",
         "targetFrame": "Mục Tiêu",
         "partyFrames": "Tổ Đội",
-        "swingBar": "Tự Đánh"
+        "swingBar": "Tự Đánh",
+        "targetDots": "Target Dots"
       },
       "framesMenu": "Cài Đặt Khung",
       "framesMenuTitle": "Hiện hoặc ẩn từng khung riêng lẻ. Một khung chưa được đánh dấu sẽ vẫn ẩn cho đến khi bạn đánh dấu lại hoặc đặt lại về mặc định.",

@@ -1307,6 +1307,11 @@ export const en_XA: EnTranslations = {
       "separate": "[Šéþáŕáţé {meter}]",
       "regroup": "[Ŕéĝŕóúþ {meter}]"
     },
+    "targetDots": {
+      "title": "[Ţáŕĝéţ Ðóţš]",
+      "row": "[{aura} óñ {target}]",
+      "overflow": "[{count} ɱóŕé ñóţ šĥóŵñ]"
+    },
     "targetAuras": {
       "title": "[Ţáŕĝéţ Áúŕáš]",
       "keybindLabel": "[Ţáŕĝéţ Ɓúƒƒš áñð Ðéƀúƒƒš]",
@@ -1598,6 +1603,9 @@ export const en_XA: EnTranslations = {
       "showTargetOfTarget": "[Šĥóŵ Ţáŕĝéţ óƒ Ţáŕĝéţ]",
       "showTargetSwingTimer": "[Šĥóŵ Ţáŕĝéţ Šŵíñĝ Ţíɱéŕ]",
       "showPetFrame": "[Šĥóŵ Ýóúŕ Þéţ]",
+      "showNameplateDots": "[Šĥóŵ Ɱý Ðóţš óñ Ñáɱéþļáţéš]",
+      "nameplateDotScale": "[Ñáɱéþļáţé Ðóţ Šížé]",
+      "showTargetDots": "[Šĥóŵ Ţáŕĝéţ Ðóţš]",
       "waterRipples": "[Ŵáţéŕ Ŕíþþļéš (Ŵáķéš)]",
       "showAttackButton": "[Šĥóŵ Áţţáçķ Ɓúţţóñ]",
       "showDailyRewardsChest": "[Šĥóŵ Ðáíļý Ŕéŵáŕðš Çĥéšţ]",
@@ -2985,7 +2993,8 @@ export const en_XA: EnTranslations = {
         "playerFrame": "[Þļáýéŕ]",
         "targetFrame": "[Ţáŕĝéţ]",
         "partyFrames": "[Þáŕţý]",
-        "swingBar": "[Áúţó Áţţáçķ]"
+        "swingBar": "[Áúţó Áţţáçķ]",
+        "targetDots": "[Ţáŕĝéţ Ðóţš]"
       },
       "framesMenu": "[Ƒŕáɱéš Šéţţíñĝš]",
       "framesMenuTitle": "[Šĥóŵ óŕ ĥíðé íñðíʋíðúáļ ƒŕáɱéš. Áñ úñţíçķéð ƒŕáɱé šţáýš ĥíððéñ úñţíļ ýóú ţíçķ íţ áĝáíñ óŕ ŕéšéţ ţó ðéƒáúļţš.]",

@@ -1307,6 +1307,11 @@ export const en_CA: EnTranslations = {
       "separate": "Separate {meter}",
       "regroup": "Regroup {meter}"
     },
+    "targetDots": {
+      "title": "Target Dots",
+      "row": "{aura} on {target}",
+      "overflow": "{count} more not shown"
+    },
     "targetAuras": {
       "title": "Target Auras",
       "keybindLabel": "Target Buffs and Debuffs",
@@ -1598,6 +1603,9 @@ export const en_CA: EnTranslations = {
       "showTargetOfTarget": "Show Target of Target",
       "showTargetSwingTimer": "Show Target Swing Timer",
       "showPetFrame": "Show Your Pet",
+      "showNameplateDots": "Show My Dots on Nameplates",
+      "nameplateDotScale": "Nameplate Dot Size",
+      "showTargetDots": "Show Target Dots",
       "waterRipples": "Water Ripples (Wakes)",
       "showAttackButton": "Show Attack Button",
       "showDailyRewardsChest": "Show Daily Rewards Chest",
@@ -2985,7 +2993,8 @@ export const en_CA: EnTranslations = {
         "playerFrame": "Player",
         "targetFrame": "Target",
         "partyFrames": "Party",
-        "swingBar": "Auto Attack"
+        "swingBar": "Auto Attack",
+        "targetDots": "Target Dots"
       },
       "framesMenu": "Frames Settings",
       "framesMenuTitle": "Show or hide individual frames. An unticked frame stays hidden until you tick it again or reset to defaults.",

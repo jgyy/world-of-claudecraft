@@ -273,13 +273,20 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // 18884 = 18878 (the guild roster expansion, PR #3874, which extracted
-    // 27 lines from this file) plus the six lines the Realm Builder
-    // monument's honour-roll card (PR #3695) cannot keep anywhere else: the
-    // import, the field, its relocalize() call, and the three-line event
-    // arm (the card itself is src/ui/realm_builder_popup.ts). Exact merged
-    // count, zero slack; maintainer-review item.
-    ceiling: 18884,
+    // LOWERED for the Target dots frame: the tracker's own view + painter live
+    // in src/ui/hud/target_dots/, and describeAbilitySummary +
+    // abilityRequirementLines (pure i18n mappers with no Hud state) moved out to
+    // ability_tooltip_lines.ts, which more than paid for the wiring (18905 ->
+    // 18879 on its own tree).
+    // The Realm Builder monument's honour-roll card (PR #3695) adds six lines
+    // here that cannot live anywhere else: the import, the field, its
+    // relocalize() call, and the three-line event arm (the card itself is
+    // src/ui/realm_builder_popup.ts). Re-measured on the merged tree: 18879
+    // plus those six (18885). Exact merged count, zero slack; maintainer-review item.
+    // Lowered 18885 -> 18858 by the guild roster expansion (PR #3874), which
+    // extracted 27 lines from this file into the roster page modules. Exact
+    // merged count, zero slack; maintainer-review item.
+    ceiling: 18858,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -803,7 +810,10 @@ const MONOLITHS: MonolithRow[] = [
     // (+70, one line under the old pin on its own tree) and this branch's
     // pledge nameplate line (+13) compound in the merged file. Exact count,
     // zero slack.
-    ceiling: 864,
+    // LOWERED for the nameplate dot row: the row's drawing moved to
+    // nameplate_dot_row.ts and the image cache to nameplate_image_cache.ts,
+    // which more than paid for the new draw step. Exact count, zero slack.
+    ceiling: 848,
     seam: 'the pure src/render/nameplate_heraldry_core.ts geometry module',
   },
   {
