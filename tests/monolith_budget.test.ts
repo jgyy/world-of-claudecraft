@@ -599,7 +599,9 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 10641,
+    // Lowered 10641 -> 10640 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
+    // Exact count, zero slack.
+    ceiling: 10640,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -661,7 +663,9 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 5908,
+    // Lowered 5908 -> 5904 by the Riftbound band item-level ladder (the retired forge enchant sender).
+    // Exact count, zero slack.
+    ceiling: 5904,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
