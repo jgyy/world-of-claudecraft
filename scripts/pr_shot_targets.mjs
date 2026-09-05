@@ -2301,6 +2301,18 @@ export const TARGETS = [
         throw new Error('vendor window did not open');
       }
       await wait(600);
+      // The service rows sit under the goods grid; a funded purse also opens
+      // the Buy Stack rows, so the window can outgrow the viewport. Scroll
+      // every scroller in it to the bottom so the Repair All row is in frame.
+      await page.evaluate(() => {
+        const win = document.querySelector('#vendor-window');
+        if (!win) return;
+        for (const el of [win, ...win.querySelectorAll('*')]) {
+          if (el.scrollHeight > el.clientHeight) el.scrollTop = el.scrollHeight;
+        }
+        document.querySelector('.vendor-repair')?.scrollIntoView({ block: 'end' });
+      });
+      await wait(300);
       return { clip: '#vendor-window' };
     },
   },
