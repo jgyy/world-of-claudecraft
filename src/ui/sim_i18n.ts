@@ -12670,20 +12670,20 @@ const RULES: Rule[] = [
   },
   {
     re: /^Rift upgrade completed for (.+)\.$/,
-    build: (m) => t('sim.rift.forgeUpgraded', { name: m[1] }),
+    build: (m) => t('sim.rift.forgeUpgraded', { name: locItem(m[1]) }),
   },
   {
     re: /^Rift enchant completed for (.+)\.$/,
-    build: (m) => t('sim.rift.forgeEnchanted', { name: m[1] }),
+    build: (m) => t('sim.rift.forgeEnchanted', { name: locItem(m[1]) }),
   },
   {
     re: /^Rift gem socketed for (.+)\.$/,
-    build: (m) => t('sim.rift.forgeSocketed', { name: m[1] }),
+    build: (m) => t('sim.rift.forgeSocketed', { name: locItem(m[1]) }),
   },
   {
     // A socket on a full band destroys its oldest gem; the line names it.
     re: /^Rift gem replaced for (.+): (.+) destroyed\.$/,
-    build: (m) => t('sim.rift.forgeGemReplaced', { name: m[1], gem: m[2] }),
+    build: (m) => t('sim.rift.forgeGemReplaced', { name: locItem(m[1]), gem: locItem(m[2]) }),
   },
   // Boss lethal death-zone detonation lines (src/sim/mob/locomotion.ts). The sim
   // emits def.detonateText verbatim at zone expiry; match each exact string here and

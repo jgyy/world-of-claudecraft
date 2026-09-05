@@ -15,7 +15,7 @@
 
 import type { TradeInfo } from '../../world_api';
 import { addStacked, bagPools, countFit } from '../bags';
-import { RIFT_GEAR_ITEM_IDS } from '../content/rift/items';
+import { RIFT_GEAR_ITEM_ID_SET } from '../content/rift/items';
 import { ITEMS } from '../data';
 import { itemCopyPin } from '../item_copy_ref';
 import { itemInstancePayloadsEqual } from '../item_instance_merge';
@@ -32,7 +32,7 @@ import { cloneItemInstancePayload, dist2d, type InvSlot, type ItemInstancePayloa
 // A trade is only offered/kept while both parties are within this many yards;
 // the drift sweep cancels an open session once they wander past TRADE_RANGE + 4.
 const TRADE_RANGE = 10;
-const RIFT_GEAR_ITEMS = new Set<string>(RIFT_GEAR_ITEM_IDS);
+const RIFT_GEAR_ITEMS = RIFT_GEAR_ITEM_ID_SET;
 
 // The one trade-locked predicate (Professions 2.0). A copy is
 // trade-locked once its payload carries boundTo: a bound instance stays with

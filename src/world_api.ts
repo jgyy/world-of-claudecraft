@@ -754,7 +754,8 @@ export type DispatchOnlyCommand = (typeof DISPATCH_ONLY_COMMANDS)[number];
 export type ClientCommand = Exclude<CommandName, DispatchOnlyCommand>;
 
 // ---------------------------------------------------------------------------
-// Command facet tags (W6+). APPEND-ONLY metadata that names, for each wire
+// Command facet tags (W6+). APPEND-ONLY metadata (a retired token's row goes
+// with it, since the map is keyed by ClientCommand) that names, for each wire
 // command, the IWorld facet whose method sends it, so the command universe is
 // discoverable by domain. Like COMMAND_NAMES this is types-as-data, not
 // player-facing copy (no t(), no DOM); it never gates the wire (COMMAND_NAMES is
