@@ -8,6 +8,7 @@
 import { Pool } from 'pg';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import type { CharacterState } from '../src/sim/character_state';
+import { Sim } from '../src/sim/sim';
 
 const ADMIN_URL = process.env.TEST_DATABASE_URL;
 const VERIFY_DB = 'wocc_guild_roster_page_verify';
@@ -27,6 +28,15 @@ const describeDb = ADMIN_URL ? describe : describe.skip;
 
 const REALM_NAME = 'roster-verify';
 const LEASE = 'lease-roster-1';
+
+/** A REAL serialized character (the save path sanitizes bags, quests, and
+ *  friends, so a bare object is not a CharacterState), with the purse set. */
+function characterState(copper: number): CharacterState {
+  const sim = new Sim({ seed: 3, playerClass: 'warrior', autoEquip: true });
+  const state = sim.serializeCharacter(sim.playerId);
+  if (!state) throw new Error('sim did not serialize its player');
+  return { ...state, copper };
+}
 
 describeDb('guild roster page purchase against real Postgres', () => {
   let admin: Pool;
@@ -104,7 +114,7 @@ describeDb('guild roster page purchase against real Postgres', () => {
       characterId: f.characterId,
       accountId: f.accountId,
       level: 10,
-      state: { copper: 100_000 } as unknown as CharacterState,
+      state: characterState(100_000),
       leaseNonce: LEASE,
       storageEffects: [],
       ledgerEffects: undefined,
@@ -160,7 +170,7 @@ describeDb('guild roster page purchase against real Postgres', () => {
     await pageDb.buyGuildRosterPageAtomic(deps(), args(f));
     const stale = await pageDb.buyGuildRosterPageAtomic(
       deps(),
-      args(f, { expectedPages: 0, state: { copper: 77_777 } as unknown as CharacterState }),
+      args(f, { expectedPages: 0, state: characterState(77_777) }),
     );
     expect(stale).toEqual({ durability: 'not_committed', reason: 'stale' });
     const state = await rosterState(f);
