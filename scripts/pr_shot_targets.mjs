@@ -2183,6 +2183,92 @@ export const TARGETS = [
     },
   },
   {
+    key: 'gear-durability',
+    label: 'Gear durability: the vendor Repair All bill and the paperdoll durability line',
+    when: ['sim/durability', 'ui/hud/vendor/vendor_window', 'ui/item_instance_tooltip'],
+    // The same recipe shoots the honest BEFORE frame on a base build: the
+    // death + Spirit Healer revive run there too but damage nothing, so the
+    // vendor shows no Repair All row and the worn tooltip carries no
+    // durability line. The level is set to 10 so the loss is not floored by
+    // the level-5 exemption.
+    variants: [
+      { key: 'vendor-repair-all-desktop', scene: 'vendor' },
+      { key: 'vendor-repair-all-mobile', scene: 'vendor', mobile: true },
+      { key: 'paperdoll-durability-desktop', scene: 'paperdoll' },
+    ],
+    async capture(page, variant) {
+      for (let i = 0; i < 6; i++) {
+        await page.evaluate(() => {
+          document.querySelector('.camera-prompt-confirm')?.click();
+          document.querySelector('.tut-skip')?.click();
+          document.querySelector('.gpu-notice-dismiss')?.click();
+          document.querySelector('#gpu-notice')?.remove();
+        });
+        await wait(400);
+      }
+      const setup = await page.evaluate((scene) => {
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!sim) return { ok: false, reason: 'no sim' };
+        const p = sim.player;
+        if (!p?.pos) return { ok: false, reason: 'no player' };
+        try {
+          sim.setPlayerLevel(10);
+        } catch {}
+        // Die, release, take the Spirit Healer: 10% + 15% off every worn pool.
+        try {
+          sim.dealDamage(null, p, p.maxHp + 100, false, 'physical', null, 'hit', true);
+          sim.tick();
+          sim.releaseSpirit();
+          sim.resurrectAtSpiritHealer();
+          sim.tick();
+        } catch {}
+        const vendor = [...sim.entities.values()].find(
+          (e) => e.templateId === 'quartermaster_bree',
+        );
+        if (!vendor) return { ok: false, reason: 'no vendor entity' };
+        p.pos.x = vendor.pos.x + 2;
+        p.pos.z = vendor.pos.z;
+        p.prevPos = { ...p.pos };
+        const banner = document.querySelector('#banner');
+        if (banner) banner.style.opacity = '0';
+        if (scene === 'vendor') {
+          const el = document.querySelector('#vendor-window');
+          if (el) el.style.display = 'none';
+          game.hud.openVendor(vendor.id);
+        } else {
+          const el = document.querySelector('#char-window');
+          if (el) el.style.display = 'none';
+          game.hud.toggleChar();
+        }
+        return { ok: true };
+      }, variant?.scene ?? 'vendor');
+      if (!setup.ok) throw new Error(`gear-durability setup failed: ${setup.reason}`);
+      if (variant?.scene === 'paperdoll') {
+        if (!(await pollForSize(page, '#char-window'))) {
+          throw new Error('character window did not open');
+        }
+        await page.evaluate(() => {
+          // Real focus fires attachTooltip's focusin arm (the bags-tooltip
+          // precedent): the worn chest row carries the durability line.
+          const row =
+            document.querySelector('#equip-slot-chest') ??
+            document.querySelector('#equip-slot-mainhand');
+          row?.scrollIntoView({ block: 'center' });
+          row?.focus();
+        });
+        await pollForSize(page, '#tooltip');
+        await wait(300);
+        return {};
+      }
+      if (!(await pollForSize(page, '#vendor-window'))) {
+        throw new Error('vendor window did not open');
+      }
+      await wait(600);
+      return { clip: '#vendor-window' };
+    },
+  },
+  {
     key: 'vendor-sell-confirm',
     label:
       'Vendor: a plain click on a valuable item confirms before selling; junk still sells instantly',

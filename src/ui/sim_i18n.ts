@@ -434,6 +434,11 @@ const baseEnTable = {
   'log.discarded': 'Discarded {item}.',
   'log.equipped': 'Equipped {item}.',
   'log.unequipped': 'Unequipped {item}.',
+  // Gear durability (src/sim/durability.ts): the death / Spirit Healer loss
+  // notice, the Repair All receipt, and its nothing-to-repair refusal.
+  'log.gearDamaged': 'Your equipment has been damaged.',
+  'log.repairedAll': 'Repaired all items for {money}.',
+  'error.nothingToRepair': 'Your equipment does not need repairing.',
   'log.noFish': 'No fish are biting.',
   'log.rareCatch': 'A rare catch! Something gleams on your line.',
   'log.sitEat': 'You sit down to eat.',
@@ -12198,6 +12203,10 @@ const RULES: Rule[] = [
   { re: /^You have already recovered this relic\.$/, build: () => tItemExtra('relicRecovered') },
   { re: /^Equipped (?!\()(.+)\.$/, build: (m) => tSim('log.equipped', { item: locItem(m[1]) }) },
   { re: /^Unequipped (.+)\.$/, build: (m) => tSim('log.unequipped', { item: locItem(m[1]) }) },
+  // Repair All receipt (src/sim/durability.ts): the money fragment is the
+  // sim's plain "3g 96s" form, re-rendered locale-aware by the hud's money
+  // pass like the guild treasury lines.
+  { re: /^Repaired all items for (.+)\.$/, build: (m) => tSim('log.repairedAll', { money: m[1] }) },
   // Bank bag sockets (src/sim/bank_sockets.ts). Anchored on the full phrase so
   // neither rule can swallow a future bare Socketed/Unsocketed line.
   {

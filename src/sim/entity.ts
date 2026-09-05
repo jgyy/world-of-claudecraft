@@ -2,6 +2,7 @@ import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
 import type { TalentModifiers } from './content/talents';
 import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
+import { isBrokenGear } from './durability_rules';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
 import { pvpFractionsFromRatings } from './pvp';
@@ -337,6 +338,9 @@ export function recalcPlayerStats(
     // level. This only arises for a character loaded wearing gear equipped before
     // the level gate existed; the equip path blocks equipping over-level gear.
     if (!meetsLevelRequirement(lvl, item)) continue;
+    // Broken gear (an empty durability pool, durability_rules.ts) is inert the
+    // same way: still worn and rendered, but granting nothing until repaired.
+    if (isBrokenGear(item, equipmentInstance?.[slot])) continue;
     if (item.set) setCounts.set(item.set, (setCounts.get(item.set) ?? 0) + 1);
     bonusSp += item.spellPower ?? 0;
     bonusHealPower += item.healPower ?? 0;
