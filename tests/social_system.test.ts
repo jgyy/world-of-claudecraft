@@ -2989,13 +2989,13 @@ describe('guild roster expansion', () => {
     expect(await h.db.guildMembership(2)).toMatchObject({ rosterPages: 0 });
   });
 
-  it('sells the Guild Master the first page for 20 gold, widens the cap, and tells the guild', async () => {
+  it('sells the Guild Master the first page for 40 gold, widens the cap, and tells the guild', async () => {
     const h = await founded();
     h.tx.purse.set(1, 50 * GOLD);
     await h.svc.guildBuyRosterPage(h.actor(1));
     // The page price left the purse; the commit hook saw exactly that charge.
-    expect(PAGE_ONE).toBe(20 * GOLD);
-    expect(h.tx.purse.get(1)).toBe(30 * GOLD);
+    expect(PAGE_ONE).toBe(40 * GOLD);
+    expect(h.tx.purse.get(1)).toBe(10 * GOLD);
     expect(h.tx.refunds).toEqual([]);
     expect(h.tx.rosterExpansions).toEqual([
       { characterId: 1, guildId: h.guildId, pages: 1, copper: PAGE_ONE },
@@ -3008,13 +3008,13 @@ describe('guild roster expansion', () => {
     expect(rosterEvents(h, 3)).toEqual([]);
     expect(rosterEvents(h, 4)).toEqual([]);
     // The snapshot re-pushed to the online members carries the new cap and
-    // the NEXT page's price (80 gold: 20 gold times two squared).
+    // the NEXT page's price (120 gold: the ramp's second step).
     expect(h.tx.snapshotCount.get(1)).toBe(1);
     expect(h.tx.snapshotCount.get(2)).toBe(1);
     const snap = await h.svc.snapshot(1);
     expect(snap.guild?.memberCap).toBe(120);
     expect(snap.guild?.nextRosterPrice).toBe(PAGE_TWO);
-    expect(PAGE_TWO).toBe(80 * GOLD);
+    expect(PAGE_TWO).toBe(120 * GOLD);
   });
 
   it('prices the next page from the row and refuses a short purse with the price, refunding the partial charge', async () => {

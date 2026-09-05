@@ -4,7 +4,8 @@ Status: implemented for release/v0.42.0. Owner ask captured 2026-09-04: Guild
 Masters can buy a larger guild for gold, 20 gold for the first 20 seats, scaling
 from there, with 500 seats costing a ridiculous amount. Amended 2026-09-05: the
 ladder keeps going past 500 seats at ever more gold, hard-capped at 1,000 seats
-to be safe.
+to be safe; then re-priced to a 40 gold first page, 1,000 gold for the first
+hundred extra seats, and rapid growth after that.
 
 ## Why
 
@@ -17,45 +18,50 @@ scaled so that the last seats are a realm-notable achievement.
 ## The angle: charter pages
 
 The roster grows in 20-seat PAGES, bought one at a time by the Guild Master.
-Page `n` (1-based) costs `20 gold x n squared`, so every seat on page `n` costs
-`n squared` gold: the first extra seat costs a gold, the last one costs four
-hundred.
+The first five pages (100 to 200 seats) are a flat ramp: 40 gold, then 80 gold
+more per page (120, 200, 280, 360), so the first hundred extra seats cost a
+round 1,000 gold. Every page after that costs 30% more than the one before it,
+rounded to whole gold, which is what runs the price away past 200 seats.
 
-| Page | Seats after | Page price | Cumulative |
-| ---- | ----------- | ---------- | ---------- |
-| 1    | 120         | 20g        | 20g        |
-| 2    | 140         | 80g        | 100g       |
-| 3    | 160         | 180g       | 280g       |
-| 5    | 200         | 500g       | 1,100g     |
-| 10   | 300         | 2,000g     | 7,700g     |
-| 15   | 400         | 4,500g     | 24,800g    |
-| 20   | 500         | 8,000g     | 57,400g    |
-| 25   | 600         | 12,500g    | 110,500g   |
-| 30   | 700         | 18,000g    | 189,100g   |
-| 45   | 1,000       | 40,500g    | 627,900g   |
+| Page | Seats after | Page price  | Cumulative  |
+| ---- | ----------- | ----------- | ----------- |
+| 1    | 120         | 40g         | 40g         |
+| 2    | 140         | 120g        | 160g        |
+| 3    | 160         | 200g        | 360g        |
+| 5    | 200         | 360g        | 1,000g      |
+| 10   | 300         | 1,335g      | 5,228g      |
+| 15   | 400         | 4,958g      | 20,927g     |
+| 20   | 500         | 18,409g     | 79,214g     |
+| 25   | 600         | 68,354g     | 295,638g    |
+| 30   | 700         | 253,793g    | 1,099,207g  |
+| 45   | 1,000       | 12,990,618g | 56,292,114g |
 
 Selected pages only: the cumulative column sums every page up to that row,
-including the ones the table skips (pages 16 to 19 alone total 24,600 gold,
-which is why 24,800 jumps to 57,400 rather than to 32,800).
+including the ones the table skips (pages 16 to 19 alone total 39,878 gold,
+which is why 20,927 jumps to 79,214 rather than to 39,336).
 
-Why a square rather than the doubling the bank ladders use: doubling every rung
-from 20 gold reaches ten million gold by page 20, and doubling every second rung
-makes 300 seats almost free (about 1,500 gold) while the last hundred seats cost
-forty thousand. The square keeps the early pages within reach of a guild that has
-just outgrown 100 members (200 seats for 1,100 gold total) and still makes a
-500-seat charter (57,400 gold) the largest single gold sink in the game (the
-priciest existing rung anywhere is 120 gold). The whole table is one
-data-as-code constant (`GUILD_ROSTER_PAGE_PRICES` in `src/sim/guild_roster.ts`)
-built from the formula, so the curve is a one-line change;
-`tests/guild_roster.test.ts` pins the formula and the totals.
+Why a flat ramp and then compounding, rather than the square this shipped with
+first or the doubling the bank ladders use: the owner's bars were a 40 gold
+first page, about 1,000 gold for the first hundred extra seats, rapid scaling
+after that, and nothing meaningfully past 500 seats reachable with the realm's
+whole gold supply. A square from 40 gold puts 200 seats at 2,200 gold; a pure
+doubling either makes 300 seats almost free or 400 seats impossible. The ramp
+hits 1,000 gold on the nose, and 30% per page after it puts 500 seats at 79,214
+gold (over half the gold in circulation, and the largest single gold sink in the
+game: the priciest existing bank rung is 120 gold) and 600 seats at 295,638,
+twice the realm's supply, so 540 seats is the most any guild could ever reach.
+The whole table is one data-as-code constant (`GUILD_ROSTER_PAGE_PRICES` in
+`src/sim/guild_roster.ts`) built from four numbers with integer arithmetic, so
+every host computes the identical table and the curve is a one-line change;
+`tests/guild_roster.test.ts` pins the rule and the totals.
 
 ## The hard cap: 1,000 seats
 
 The ladder does not stop at 500. It runs to 45 pages (1,000 seats), and the
-square is what makes everything meaningfully past 500 unreachable rather than a
-rule: 600 seats is 110,500 gold in total and 700 seats is 189,100, more than the
-whole gold supply in circulation on the realm when this shipped (on the order of
-150,000 gold). The cap itself (`GUILD_ROSTER_MAX_MEMBERS`) is an engineering
+compounding is what makes everything meaningfully past 500 unreachable rather
+than a rule: 600 seats is 295,638 gold in total and 700 seats is 1,099,207, far
+more than the whole gold supply in circulation on the realm when this shipped
+(on the order of 150,000 gold). The cap itself (`GUILD_ROSTER_MAX_MEMBERS`) is an engineering
 bound, chosen at the realm's concurrent-player target so a single guild can
 never outgrow what the server is sized for: the rename fan-out, the admin
 backoffice reads, the page compare-and-set, and the world map's label budget
