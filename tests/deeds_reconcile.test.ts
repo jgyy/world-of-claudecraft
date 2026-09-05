@@ -274,7 +274,7 @@ describe('reconcile through GameServer.join', () => {
       pledges: [],
       tier: 0,
       memberCap: 100,
-      nextRosterPrice: 200_000,
+      nextRosterPrice: 400_000,
     };
     vi.spyOn(server.social, 'snapshot').mockResolvedValue({
       friends: [],

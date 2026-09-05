@@ -269,7 +269,14 @@ export class SocialWindow {
     if (struct !== this.lastStruct) {
       this.lastStruct = struct;
       this.lastContent = this.contentSig();
+      // A structural change mid-session (a bought roster page re-pricing the
+      // footer button, a rank change) rebuilds the whole panel, which would
+      // otherwise wipe a half-typed invite or billboard draft: capture and
+      // restore them around the rebuild, the relocalize() recipe.
+      const el = this.deps.root();
+      const draft = captureFormDraft(el);
       this.render();
+      restoreFormDraft(el, draft);
     } else {
       const content = this.contentSig();
       if (content !== this.lastContent) {

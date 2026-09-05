@@ -17,7 +17,8 @@
 // rounded to whole gold, which is what runs the price away: 300 seats is
 // 5,228 gold in total, 500 seats is 79,214 (over half the gold in
 // circulation when this shipped), and 600 seats is 295,638, twice the
-// realm's whole supply, so 540 seats is the most any guild could reach. The
+// realm's whole supply when this shipped, so 540 seats was the most any
+// guild could then reach. The
 // growth step is integer arithmetic (times 13, plus 5, over 10, floored),
 // never a floating power, so the browser, the server, and the headless env
 // compute the identical table. tests/guild_roster.test.ts pins the rule,

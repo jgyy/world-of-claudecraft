@@ -174,16 +174,6 @@ export interface SocialDb {
     rank: GuildRank,
     requirePledge?: boolean,
   ): Promise<'ok' | 'full' | 'already_member' | 'no_guild' | 'no_pledge'>;
-  // Buy the next roster page, compare-and-set on the pages-bought count the
-  // caller priced from AND on the buyer still holding the leader rank:
-  // 'stale' when another purchase landed first or the buyer was demoted
-  // meanwhile (the caller refunds and asks the buyer to retry from the fresh
-  // price), 'no_guild' when the guild is gone.
-  buyGuildRosterPage(
-    guildId: number,
-    expectedPages: number,
-    leaderCharId: number,
-  ): Promise<'ok' | 'stale' | 'no_guild'>;
   removeGuildMember(charId: number): Promise<void>;
   // Rank write predicated on BOTH the character and the guild the caller
   // authorized against, returning whether a row actually moved. False means
@@ -303,19 +293,20 @@ export interface SocialTransport {
   // (guildsFounded is the one server-produced DeedStatKey; see its doc in
   // src/sim/types.ts)
   onGuildFounded(characterId: number): void;
-  // Roster expansion purse half (docs/prd/guild-roster-expansion.md): the
-  // Guild Master pays a page from their OWN purse, reserve-at-gate like the
-  // creation fee. chargePurse deducts up to `copper` from the character's
-  // LIVE sim purse and returns what it actually took (0 for a character with
-  // no live session); refundPurse gives a reservation back on a refusal arm
-  // and returns what landed. Neither is ever called with a client-supplied
-  // amount: the service prices from the guild row. onGuildRosterExpanded fires
-  // once the page COMMITTED so the owner persists the charged purse (the live
-  // deduction is otherwise only as durable as the next autosave) and writes
-  // the audit line.
-  chargePurse(characterId: number, copper: number): number;
-  refundPurse(characterId: number, copper: number): number;
-  onGuildRosterExpanded(characterId: number, guildId: number, pages: number, copper: number): void;
+  // Roster expansion (docs/prd/guild-roster-expansion.md): buy the NEXT page
+  // for the Guild Master, priced by the service from the guild row (never a
+  // client-supplied amount) and paid from their OWN purse. The transport owns
+  // the whole purchase (server/guild_roster_transport.ts): the live purse
+  // charge, the exact post-charge snapshot, and ONE atomic write that commits
+  // the page, a receipt, and the charged purse together, refunding the live
+  // purse on every known refusal and abandoning the live session on an
+  // unknown COMMIT rather than refunding a page that may have landed.
+  buyRosterPage(
+    characterId: number,
+    guildId: number,
+    expectedPages: number,
+    price: number,
+  ): Promise<GuildRosterPurchase>;
   // A guild membership or rank mutation just COMMITTED in the DB for this
   // character. The transport owner re-stamps the live sim SYNCHRONOUSLY (the
   // session-only PlayerMeta.guildMembership stamp plus the nameplate guild
@@ -445,6 +436,16 @@ export type MotdResultCode = 'set' | 'notInGuild' | 'notOfficer';
 // guildRosterExpanded event). Mirrored in src/sim/types.ts for the client
 // event switch; tests/social_system.test.ts pins the two declarations equal.
 export type GuildRosterResultCode = 'notInGuild' | 'notLeader' | 'maxed' | 'cannotAfford' | 'retry';
+
+// The outcome of one page purchase as the transport reports it
+// (server/guild_roster_transport.ts): 'ok' carries the pages now bought;
+// 'retry' may carry the cause the dispatcher should log; 'session_lost'
+// means the buyer's live session is gone or was abandoned to durable truth,
+// so there is nobody to answer.
+export type GuildRosterPurchase =
+  | { outcome: 'ok'; pages: number }
+  | { outcome: 'cannotAfford' | 'stale' | 'no_guild' | 'session_lost' }
+  | { outcome: 'retry'; error?: unknown };
 
 const FRIEND_LIMIT = 50;
 const BLOCK_LIMIT = 50;
@@ -1951,15 +1952,15 @@ export class SocialService {
 
   // Buy the next roster page (docs/prd/guild-roster-expansion.md): Guild
   // Master only, priced from the guild row, paid from the buyer's OWN purse.
-  // RESERVE-AT-GATE, the creation fee's flow: the purse is charged
-  // synchronously BEFORE the DB write and refunded on every refusal arm, so a
-  // buyer who logs out mid-flight has already paid rather than dodging the
-  // charge. The one arm that cannot make the buyer whole is a refusal racing
-  // that logout (no live purse to refund into); the transport logs it loudly
-  // for operator compensation, the creation fee's trade. The compare-and-set
-  // write lets a double-click (or two clients) pay for one page at most and
-  // re-checks the buyer's rank at commit: the loser is refunded and asked to
-  // retry from the fresh price.
+  // The transport owns the purchase itself (server/guild_roster_transport.ts):
+  // the live purse charge, the exact post-charge snapshot, and ONE atomic
+  // write that commits the page, a receipt, and the charged purse together
+  // (server/guild_roster_page_db.ts), so no crash, takeover, or lost answer
+  // can leave a page bought and unpaid, or a landed page refunded. This
+  // method prices, gates, and turns the outcome into player messages. The
+  // compare-and-set inside the write lets a double-click (or two clients) pay
+  // for one page at most and re-checks the buyer's rank at commit: the loser
+  // is refunded and asked to retry from the fresh price.
   async guildBuyRosterPage(actor: SocialActor): Promise<void> {
     const membership = await this.db.guildMembership(actor.characterId);
     if (!membership) {
@@ -1975,38 +1976,38 @@ export class SocialService {
       this.rosterResult(actor.characterId, 'maxed');
       return;
     }
-    const charged = this.tx.chargePurse(actor.characterId, price);
-    if (charged < price) {
-      // A short purse (or no live session to charge): give back whatever was
-      // taken and refuse with the price. Never a discounted page.
-      if (charged > 0) this.tx.refundPurse(actor.characterId, charged);
-      this.rosterResult(actor.characterId, 'cannotAfford', price);
-      return;
+    const purchase = await this.tx.buyRosterPage(
+      actor.characterId,
+      membership.guildId,
+      membership.rosterPages,
+      price,
+    );
+    if (purchase.outcome !== 'ok') {
+      switch (purchase.outcome) {
+        case 'cannotAfford':
+          this.rosterResult(actor.characterId, 'cannotAfford', price);
+          return;
+        case 'stale':
+          this.rosterResult(actor.characterId, 'retry');
+          return;
+        case 'no_guild':
+          this.rosterResult(actor.characterId, 'notInGuild');
+          return;
+        case 'retry':
+          // The write failed for a reason that is not the buyer's: the retry
+          // line lands first (the one line that fits an unexplained miss),
+          // then the cause goes to the dispatcher's log.
+          this.rosterResult(actor.characterId, 'retry');
+          if (purchase.error !== undefined) throw purchase.error;
+          return;
+        default:
+          // The buyer's live session is gone or was abandoned to durable
+          // truth: there is nobody to answer.
+          return;
+      }
     }
-    let result: 'ok' | 'stale' | 'no_guild';
-    try {
-      result = await this.db.buyGuildRosterPage(
-        membership.guildId,
-        membership.rosterPages,
-        actor.characterId,
-      );
-    } catch (err) {
-      // The write failed for a reason that is not the buyer's: refund, tell
-      // them to try again (the one line that fits an unexplained miss), and
-      // let the dispatcher log the cause.
-      this.tx.refundPurse(actor.characterId, charged);
-      this.rosterResult(actor.characterId, 'retry');
-      throw err;
-    }
-    if (result !== 'ok') {
-      this.tx.refundPurse(actor.characterId, charged);
-      this.rosterResult(actor.characterId, result === 'no_guild' ? 'notInGuild' : 'retry');
-      return;
-    }
-    const pages = membership.rosterPages + 1;
-    this.tx.onGuildRosterExpanded(actor.characterId, membership.guildId, pages, charged);
     await this.broadcastGuild(membership.guildId, [
-      { type: 'guildRosterExpanded', byName: actor.name, cap: guildRosterCap(pages) },
+      { type: 'guildRosterExpanded', byName: actor.name, cap: guildRosterCap(purchase.pages) },
     ]);
     await this.pushGuild(membership.guildId);
   }

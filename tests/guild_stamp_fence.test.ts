@@ -53,7 +53,7 @@ const guildSnap = (rank: 'leader' | 'officer' | 'member'): SocialSnapshot => ({
     pledges: [],
     tier: 0,
     memberCap: 100,
-    nextRosterPrice: 200_000,
+    nextRosterPrice: 400_000,
     members: [],
     events: [],
   },

@@ -4,11 +4,7 @@
 // stored now so cross-realm friends/guilds need no migration later).
 
 import type { Pool } from 'pg';
-import {
-  GUILD_ROSTER_MAX_PAGES,
-  guildRosterCap,
-  guildRosterPagesBought,
-} from '../src/sim/guild_roster';
+import { guildRosterCap, guildRosterPagesBought } from '../src/sim/guild_roster';
 import { bustAdminGuildListReads } from './admin_guilds_read';
 import {
   GUILD_NAME_ADVISORY_LOCK_SQL,
@@ -155,6 +151,24 @@ ALTER TABLE guilds ADD COLUMN IF NOT EXISTS pledge_note TEXT NOT NULL DEFAULT ''
 -- next page's price always indexes the ladder by pages actually paid for.
 -- Additive and idempotent; 0 keeps every existing guild at the base roster.
 ALTER TABLE guilds ADD COLUMN IF NOT EXISTS roster_pages INT NOT NULL DEFAULT 0;
+
+-- One receipt per bought roster page, written in the SAME transaction as the
+-- page and the buyer's charged purse (server/guild_roster_page_db.ts). Its
+-- only reader is the reconcile step after a lost COMMIT answer: a matching
+-- row under the purchase's own key proves the page landed and must not be
+-- refunded. Bounded by construction (one row per page, at most the ladder's
+-- length per guild, gone with the guild), so no retention sweep is needed.
+CREATE TABLE IF NOT EXISTS guild_roster_receipts (
+  batch_key TEXT PRIMARY KEY,
+  guild_id INT NOT NULL REFERENCES guilds(id) ON DELETE CASCADE,
+  page INT NOT NULL,
+  character_id INT NOT NULL REFERENCES characters(id) ON DELETE CASCADE,
+  copper BIGINT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  CONSTRAINT guild_roster_receipts_page_once UNIQUE (guild_id, page),
+  CONSTRAINT guild_roster_receipts_page_positive CHECK (page > 0),
+  CONSTRAINT guild_roster_receipts_copper_positive CHECK (copper > 0)
+);
 
 -- One active pledge per character (the pledge is a public line on the
 -- character, singular by construction). Bounded at one row per character, so
@@ -525,34 +539,6 @@ export class PgSocialDb implements SocialDb {
     } finally {
       client.release();
     }
-  }
-
-  // Compare-and-set: the page is bought only if the guild still stands at
-  // exactly `expectedPages` bought pages (the count the caller priced from),
-  // the ladder is not already complete, and the buyer is STILL the Guild
-  // Master. A concurrent purchase (the double-click race, or a second client)
-  // therefore reports 'stale' instead of charging twice for one page or
-  // skipping a rung, and a demotion racing the purchase misses the write
-  // instead of expanding on a stale rank. The stored count is compared
-  // FLOORED (GREATEST(.., 0)), the same load path the caller priced from, so
-  // a tampered negative column can never become a charge-refund loop.
-  async buyGuildRosterPage(
-    guildId: number,
-    expectedPages: number,
-    leaderCharId: number,
-  ): Promise<'ok' | 'stale' | 'no_guild'> {
-    const res = await this.pool.query(
-      `UPDATE guilds SET roster_pages = roster_pages + 1
-        WHERE id = $1 AND GREATEST(roster_pages, 0) = $2 AND roster_pages < $3
-          AND EXISTS (
-            SELECT 1 FROM guild_members
-             WHERE guild_id = $1 AND character_id = $4 AND rank = 'leader'
-          )`,
-      [guildId, expectedPages, GUILD_ROSTER_MAX_PAGES, leaderCharId],
-    );
-    if ((res.rowCount ?? 0) > 0) return 'ok';
-    const exists = await this.pool.query('SELECT 1 FROM guilds WHERE id = $1', [guildId]);
-    return (exists.rowCount ?? 0) > 0 ? 'stale' : 'no_guild';
   }
 
   async removeGuildMember(charId: number): Promise<void> {

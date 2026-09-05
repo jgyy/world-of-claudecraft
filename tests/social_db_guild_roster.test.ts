@@ -111,34 +111,7 @@ describe('PgSocialDb guild roster expansion', () => {
     await expect(db.addGuildMemberAtomic(7, 44, 'member')).resolves.toBe('full');
   });
 
-  it('buys a page with a compare-and-set on the pages-bought count, bounded by the ladder, leader-gated', async () => {
-    const { pool, db } = harness();
-    pool.query.mockResolvedValueOnce({ rows: [], rowCount: 1 });
-    await expect(db.buyGuildRosterPage(7, 2, 9)).resolves.toBe('ok');
-    const [sql, params] = pool.query.mock.calls[0];
-    expect(String(sql)).toContain('roster_pages = roster_pages + 1');
-    // The CAS compares the FLOORED count, the same value the service priced
-    // from, so a tampered negative column cannot turn into a refund loop.
-    expect(String(sql)).toContain('GREATEST(roster_pages, 0) = $2');
-    expect(String(sql)).toContain('roster_pages < $3');
-    // The buyer must STILL be the Guild Master at commit: a demotion racing
-    // the purchase misses the write instead of expanding on a stale rank.
-    expect(String(sql)).toMatch(/guild_members[\s\S]*character_id = \$4[\s\S]*rank = 'leader'/);
-    expect(params).toEqual([7, 2, GUILD_ROSTER_MAX_PAGES, 9]);
-    expect(pool.query).toHaveBeenCalledTimes(1);
-  });
-
-  it('reports stale when the count moved and no_guild when the row is gone', async () => {
-    const { pool, db } = harness();
-    pool.query
-      .mockResolvedValueOnce({ rows: [], rowCount: 0 }) // CAS missed
-      .mockResolvedValueOnce({ rows: [{ '?column?': 1 }], rowCount: 1 }); // guild exists
-    await expect(db.buyGuildRosterPage(7, 2, 9)).resolves.toBe('stale');
-    expect(pool.query.mock.calls[1][1]).toEqual([7]);
-
-    pool.query
-      .mockResolvedValueOnce({ rows: [], rowCount: 0 })
-      .mockResolvedValueOnce({ rows: [], rowCount: 0 }); // no such guild
-    await expect(db.buyGuildRosterPage(7, 2, 9)).resolves.toBe('no_guild');
-  });
+  // The page purchase itself (compare-and-set, receipt, fenced purse save) is
+  // one transaction in server/guild_roster_page_db.ts; its statements and
+  // verdicts are pinned in tests/guild_roster_page_db.test.ts.
 });

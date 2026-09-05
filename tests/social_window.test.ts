@@ -429,6 +429,22 @@ describe('social_window: guild roster expansion (source pins)', () => {
     expect(painter).toContain("t('hudChrome.social.roster.expand'");
   });
 
+  it('a bought page (a structural change) rebuilds the footer around a preserved draft', () => {
+    // The footer button is emitted by render(), which refreshIfChanged reaches
+    // only on a structural change; the roster cap and price are part of that
+    // signature (tests/social_view.test.ts), and the rebuild keeps the
+    // half-typed invite or billboard draft the relocalize() way.
+    const start = painter.indexOf('refreshIfChanged(): void {');
+    const body = painter.slice(start, painter.indexOf('relocalize(): void {', start));
+    expect(body).toContain('const draft = captureFormDraft(el);');
+    expect(body).toContain('this.render();');
+    expect(body).toContain('restoreFormDraft(el, draft);');
+    expect(body.indexOf('captureFormDraft(el)')).toBeLessThan(body.indexOf('this.render();'));
+    expect(body.indexOf('this.render();')).toBeLessThan(
+      body.indexOf('restoreFormDraft(el, draft)'),
+    );
+  });
+
   it('buys through the shared confirm prompt, gated on the pure core permission', () => {
     const handler = painter.slice(painter.indexOf("act === 'guild-expand'"));
     const body = handler.slice(0, handler.indexOf("act === 'guild-leave'"));

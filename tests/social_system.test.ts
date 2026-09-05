@@ -5,6 +5,7 @@ import {
   type CharRef,
   type GuildEventRow,
   type GuildRank,
+  type GuildRosterPurchase,
   PLEDGE_REPLEDGE_COOLDOWN_MS,
   type Presence,
   type SocialDb,
@@ -367,22 +368,43 @@ class FakeTransport implements SocialTransport {
   purse = new Map<number, number>();
   refunds: { characterId: number; copper: number }[] = [];
   rosterExpansions: { characterId: number; guildId: number; pages: number; copper: number }[] = [];
-  chargePurse(characterId: number, copper: number): number {
+  // The purchase seam, mirroring the real coordinator's arms
+  // (server/guild_roster_transport.ts) over the in-memory purse and the fake
+  // compare-and-set: a character with no purse entry has no live session,
+  // a short purse is refunded and refused, a refusal from the write refunds,
+  // and a landed page records the expansion the audit line would carry.
+  async buyRosterPage(
+    characterId: number,
+    guildId: number,
+    expectedPages: number,
+    price: number,
+  ): Promise<GuildRosterPurchase> {
     const have = this.purse.get(characterId);
-    if (have === undefined) return 0;
-    const took = Math.min(have, copper);
+    if (have === undefined) return { outcome: 'session_lost' };
+    const took = Math.min(have, price);
     this.purse.set(characterId, have - took);
-    return took;
+    if (took < price) {
+      this.refundPurse(characterId, took);
+      return { outcome: 'cannotAfford' };
+    }
+    let result: 'ok' | 'stale' | 'no_guild';
+    try {
+      result = await this.db.buyGuildRosterPage(guildId, expectedPages, characterId);
+    } catch (error) {
+      this.refundPurse(characterId, price);
+      return { outcome: 'retry', error };
+    }
+    if (result !== 'ok') {
+      this.refundPurse(characterId, price);
+      return { outcome: result };
+    }
+    const pages = expectedPages + 1;
+    this.rosterExpansions.push({ characterId, guildId, pages, copper: price });
+    return { outcome: 'ok', pages };
   }
-  refundPurse(characterId: number, copper: number): number {
+  private refundPurse(characterId: number, copper: number): void {
     this.refunds.push({ characterId, copper });
-    const have = this.purse.get(characterId);
-    if (have === undefined) return 0;
-    this.purse.set(characterId, have + copper);
-    return copper;
-  }
-  onGuildRosterExpanded(characterId: number, guildId: number, pages: number, copper: number): void {
-    this.rosterExpansions.push({ characterId, guildId, pages, copper });
+    this.purse.set(characterId, (this.purse.get(characterId) ?? 0) + copper);
   }
 
   constructor(private db: FakeDb) {}
@@ -3032,15 +3054,15 @@ describe('guild roster expansion', () => {
     expect(await h.db.guildMembership(1)).toMatchObject({ rosterPages: 1 });
   });
 
-  it('refuses a Guild Master with no live purse (offline) as cannotAfford without a refund', async () => {
+  it('a Guild Master whose live session is gone gets no answer and no charge', async () => {
     const h = await founded();
-    // No purse entry at all: the transport has nothing live to charge.
+    // No purse entry at all: the transport has no live session to charge, so
+    // the purchase reports session_lost and there is nobody to message.
     await h.svc.guildBuyRosterPage(h.actor(1));
-    expect(rosterEvents(h, 1)).toEqual([
-      { type: 'guildRosterResult', code: 'cannotAfford', price: PAGE_ONE },
-    ]);
+    expect(rosterEvents(h, 1)).toEqual([]);
     expect(h.tx.refunds).toEqual([]);
     expect(h.tx.rosterExpansions).toEqual([]);
+    expect(await h.db.guildMembership(1)).toMatchObject({ rosterPages: 0 });
   });
 
   it('refuses a complete ladder with maxed and charges nothing', async () => {

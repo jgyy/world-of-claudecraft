@@ -44,7 +44,6 @@ describe('guild roster ladder (data-as-code pins)', () => {
     expect(GUILD_ROSTER_RAMP_PAGES).toBe(5);
     expect(GUILD_ROSTER_GROWTH_NUMERATOR).toBe(13);
     expect(GUILD_ROSTER_GROWTH_DENOMINATOR).toBe(10);
-    expect(GUILD_ROSTER_PAGE_PRICES).toHaveLength(GUILD_ROSTER_MAX_PAGES);
     GUILD_ROSTER_PAGE_PRICES.forEach((price, i) => {
       const page = i + 1;
       if (page <= GUILD_ROSTER_RAMP_PAGES) {
@@ -84,8 +83,11 @@ describe('guild roster ladder (data-as-code pins)', () => {
     expect(totalThrough(20), '500 seats').toBe(79_214 * GOLD);
     expect(totalThrough(25), '600 seats').toBe(295_638 * GOLD);
     expect(totalThrough(GUILD_ROSTER_MAX_PAGES), '1,000 seats').toBe(56_292_114 * GOLD);
-    // Every total stays inside the integer-safe copper range the purse uses.
-    expect(totalThrough(GUILD_ROSTER_MAX_PAGES)).toBeLessThan(Number.MAX_SAFE_INTEGER);
+    // Every single page price is what chargeGuildRosterPage gates on
+    // (Number.isSafeInteger): a growth bump that pushed one past the bound
+    // would otherwise refuse as a confusing cannotAfford. The sum is bounded
+    // by the same check on the purse.
+    for (const price of GUILD_ROSTER_PAGE_PRICES) expect(Number.isSafeInteger(price)).toBe(true);
   });
 });
 

@@ -273,16 +273,12 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Up 18905 -> 18911 for the Realm Builder monument's honour-roll card
-    // (PR #3695, re-measured at its release/v0.42.0 base merge). The card
-    // is its own module (src/ui/realm_builder_popup.ts); what is left here
-    // is the six lines that cannot live anywhere else: the import, the
-    // field, its relocalize() call, and the three-line event arm. Exact
-    // merged count, zero slack; maintainer-review item.
-    // Re-measured at the merge of the guild roster expansion (PR #3874,
-    // which extracted 27 lines and pinned 18878) into that base: the
-    // composite is 18878 plus the six monument lines. Exact merged count,
-    // zero slack.
+    // 18884 = 18878 (the guild roster expansion, PR #3874, which extracted
+    // 27 lines from this file) plus the six lines the Realm Builder
+    // monument's honour-roll card (PR #3695) cannot keep anywhere else: the
+    // import, the field, its relocalize() call, and the three-line event
+    // arm (the card itself is src/ui/realm_builder_popup.ts). Exact merged
+    // count, zero slack; maintainer-review item.
     ceiling: 18884,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
@@ -602,7 +598,13 @@ const MONOLITHS: MonolithRow[] = [
     // chatChannelHint and chatSenderFlair moved to their own server/ modules
     // (the roster-expansion dispatch and transport spread landed in their
     // place): the ratchet lowers with them.
-    ceiling: 10635,
+    // Lowered 10635 -> 10614 by the guild roster purchase rework: the
+    // post-COMMIT save acknowledgement moved to
+    // server/character_save_acknowledge.ts (shared by the market custody
+    // path and the roster coordinator), which more than paid for the
+    // coordinator's wiring and the quarantine hook's audit surface. Exact
+    // count, zero slack.
+    ceiling: 10614,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {

@@ -27,9 +27,12 @@ export type SocialTab = 'friends' | 'guild' | 'pledges' | 'ignore' | 'block' | '
 
 /** Structural identity of the panel: which tab, online or not, and the guild
  *  membership/rank (which changes the footer AND the officer-only Pledges tab)
- *  plus the open-pledge count (the Pledges tab label carries it) and the raid
- *  roster shape. Content within a tab (a friend's zone, a member's hp) does NOT
- *  count, so it refreshes in place rather than triggering a full rebuild. */
+ *  plus the open-pledge count (the Pledges tab label carries it), the roster
+ *  cap and next page price (the footer's buy button is rendered from them, so
+ *  a bought page must rebuild it or it keeps advertising the old price), and
+ *  the raid roster shape. Content within a tab (a friend's zone, a member's
+ *  hp) does NOT count, so it refreshes in place rather than triggering a full
+ *  rebuild. */
 export function socialStructSig(
   tab: SocialTab,
   social: SocialInfo | null,
@@ -39,7 +42,8 @@ export function socialStructSig(
   const raidSig = party
     ? `${party.raid ? 1 : 0}:${party.leader}:${party.members.map((m) => `${m.pid}.${m.group}`).join(',')}`
     : 'solo';
-  return `${tab}|${social !== null}|${g?.id ?? 0}|${g?.rank ?? ''}|${g?.pledges?.length ?? 0}|${raidSig}`;
+  const rosterSig = `${g?.memberCap ?? 0}:${g?.nextRosterPrice ?? 'none'}`;
+  return `${tab}|${social !== null}|${g?.id ?? 0}|${g?.rank ?? ''}|${g?.pledges?.length ?? 0}|${rosterSig}|${raidSig}`;
 }
 
 /** The status dot kind for a presence row: 'off' when offline, otherwise the

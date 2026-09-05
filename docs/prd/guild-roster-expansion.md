@@ -49,11 +49,12 @@ doubling either makes 300 seats almost free or 400 seats impossible. The ramp
 hits 1,000 gold on the nose, and 30% per page after it puts 500 seats at 79,214
 gold (over half the gold in circulation, and the largest single gold sink in the
 game: the priciest existing bank rung is 120 gold) and 600 seats at 295,638,
-twice the realm's supply, so 540 seats is the most any guild could ever reach.
+twice the realm's supply, so 540 seats was the most any guild could reach with
+the gold in circulation when this shipped.
 The whole table is one data-as-code constant (`GUILD_ROSTER_PAGE_PRICES` in
 `src/sim/guild_roster.ts`) built from four numbers with integer arithmetic, so
-every host computes the identical table and the curve is a one-line change;
-`tests/guild_roster.test.ts` pins the rule and the totals.
+every host computes the identical table and the curve is a four-number
+change; `tests/guild_roster.test.ts` pins the rule and the totals.
 
 ## The hard cap: 1,000 seats
 
@@ -77,26 +78,44 @@ treasury-paid page would have to run through the guild bank's escrow ledger
 to pool gold withdraws it from the treasury to the Guild Master first, which the
 bank already supports.
 
-The flow is reserve-at-gate, like the creation fee:
+The purchase and the payment are ONE durable write, the paid guild creation's
+shape (`server/guild_create_db.ts`), because the first cut was not: it charged
+the live purse, wrote the page with the pool, and persisted the purse through
+a later character save, so a crash, a lease takeover, or a fenced-out save
+between the two writes left a page bought and never paid for, and a lost
+database answer after COMMIT was refunded as if the page had not landed.
 
 1. The service reads the guild row (`guildMembership` carries `rosterPages`)
    and prices the NEXT page from the ladder by pages already bought. The
    client-shown price is never trusted.
-2. The purse is charged synchronously through the live sim BEFORE the DB write
-   (`chargeGuildRosterPage`). A short purse is refunded and refused with the
-   price.
-3. The page is bought with a compare-and-set on `guilds.roster_pages`
-   (`buyGuildRosterPage`) that also re-checks the buyer still holds the
-   leader rank: a double-click, a second client, or a demotion racing the
-   purchase pays for one page at most; the loser is refunded and told to
-   retry from the fresh price. The stored count is compared floored, the same
-   load path the price came from, so a tampered negative column cannot turn
-   into a charge-and-refund loop.
-4. On commit the transport persists the charged purse now
-   (`server/guild_roster_transport.ts`), is loud if the save cannot become
-   durable, and writes one audit line naming the guild, the page, the buyer,
-   and the copper. Every online member sees the success line; the snapshot
-   re-pushes with the new cap.
+2. The coordinator (`server/guild_roster_transport.ts`) runs the rest as a job
+   on the buyer's character save FIFO, so nothing else can serialize or save
+   that character while it runs: it charges the live purse synchronously
+   (`chargeGuildRosterPage`; a short purse is refunded and refused with the
+   price), then captures the exact post-charge snapshot.
+3. One lease-fenced transaction (`server/guild_roster_page_db.ts`) commits the
+   compare-and-set on `guilds.roster_pages`, a receipt row keyed by the
+   purchase (`guild_roster_receipts`), and the snapshot itself. The
+   compare-and-set also re-checks the buyer still holds the leader rank: a
+   double-click, a second client, or a demotion racing the purchase pays for
+   one page at most; the loser is refunded and told to retry from the fresh
+   price. The stored count is compared floored, the same load path the price
+   came from, so a tampered negative column cannot turn into a
+   charge-and-refund loop. A save that misses its lease fence rolls the page
+   and the receipt back with it.
+4. Outcomes: a known refusal (short purse, stale count, guild gone, a write
+   that provably rolled back) refunds the live purse and answers. A lease
+   lost at COMMIT means another session owns the character, so the live copy
+   is abandoned and disconnected. A COMMIT whose answer was lost is checked
+   against the receipt: a matching row proves the page landed; no row after
+   the bounded looks is AMBIGUOUS, and an ambiguous purchase is never
+   refunded (that would pay the buyer twice if the page landed): the live
+   session is quarantined and kicked so durable truth stands when they log
+   back in, the market escrow's treatment of its own unknown COMMITs.
+5. On a known commit the coordinator writes one audit line naming the guild,
+   the page, the buyer, the copper, and the receipt key, and acknowledges the
+   save's effect prefix. Every online member sees the success line; the
+   snapshot re-pushes with the new cap.
 
 Every refusal is a code the client localizes (`guildRosterResult`, the
 billboard convention), never server English.

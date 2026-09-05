@@ -156,6 +156,7 @@ import {
   type DetectionCalibrationSnapshot,
 } from './calibration_snapshot';
 import { RESTORE_ITEM_MAX_COUNT } from './character_professions';
+import { acknowledgeSessionSaveEffects } from './character_save_acknowledge';
 import { applyCharacterSaveFixups } from './character_save_fixups';
 import { chatChannelHint } from './chat_channel_hint';
 import { ChatFilter } from './chat_filter';
@@ -276,6 +277,7 @@ import {
   loadGuildBanksIntoSim,
 } from './guild_bank_state';
 import { createPaidGuildWithLeaderAtomic } from './guild_create_db';
+import { buyGuildRosterPageAtomic } from './guild_roster_page_db';
 import { guildRosterTransport } from './guild_roster_transport';
 import { gameMetricsCounters, type WsDropCause } from './http/game_signals';
 import { bgWideInterestApplies, buildSharedInterestCandidates } from './interest_candidates';
@@ -2467,15 +2469,18 @@ export class GameServer {
   private socialTransport(): SocialTransport {
     const actor = (s: ClientSession): SocialActor => ({ characterId: s.characterId, name: s.name });
     return {
-      // Roster expansion purse half (server/guild_roster_transport.ts).
-      ...guildRosterTransport({
-        ctx: this.sim.ctx,
-        pidOf: (id) => this.sessionByCharacterId(id)?.pid ?? null,
-        persistCharacter: (id) => {
-          const s = this.sessionByCharacterId(id);
-          return s ? this.saveCharacter(s) : Promise.resolve(false);
-        },
-      }),
+      // Roster expansion (server/guild_roster_transport.ts): the coordinator
+      // rides this server's public session, save-FIFO, and quarantine ports.
+      ...guildRosterTransport(this, (args) =>
+        buyGuildRosterPageAtomic(
+          {
+            pool,
+            cancelBackend: cancelDetachedBackend,
+            bustGuildRoster: (guildId) => this.socialDb.bustGuildRoster(guildId),
+          },
+          args,
+        ),
+      ),
       byCharacterId: (id) => {
         const s = this.sessionByCharacterId(id);
         return s ? actor(s) : null;
@@ -4890,13 +4895,18 @@ export class GameServer {
    *  the live session unsaveable: a proven fence lost its lease, while an
    *  ambiguous result must let durable truth decide an unknown COMMIT. Pid is
    *  the extraction identity; books revert and the kick wires the takeover literal. */
-  escrowSessionLost(pid: number, characterId: number, kind: 'fenced' | 'ambiguous'): void {
+  escrowSessionLost(
+    pid: number,
+    characterId: number,
+    kind: 'fenced' | 'ambiguous',
+    surface = 'market escrow',
+  ): void {
     const session = this.sessionByCharacterId(characterId);
     if (!session || session.pid !== pid) return;
     session.escrowQuarantined = true;
     this.revertOwnGuildBookOps(session, [...session.dirtyGuildBanks.keys()]);
     if (!session.left) {
-      void this.kickSession(session, 'character taken over', `market escrow ${kind}`);
+      void this.kickSession(session, 'character taken over', `${surface} ${kind}`);
     }
   }
 
@@ -6046,35 +6056,10 @@ export class GameServer {
     return true;
   }
 
+  /** The post-COMMIT acknowledgement of a caller-owned save, one host
+   *  decision (server/character_save_acknowledge.ts owns the contract). */
   acknowledgeCharacterSaveEffects(save: CharacterSaveArgs): boolean {
-    const session = this.sessionByCharacterId(save.characterId);
-    const snapshot = save.bankLedgerSnapshot;
-    if (
-      !session ||
-      session.leaseNonce !== save.leaseNonce ||
-      !snapshot ||
-      snapshot.owner.realm !== REALM ||
-      snapshot.owner.characterId !== session.characterId ||
-      snapshot.owner.accountId !== session.accountId
-    ) {
-      return false;
-    }
-    const acknowledged = acknowledgeCommittedCharacterSaveEffects({
-      pendingStorageEffects: session.pendingStorageAppliedEffects,
-      storageSnapshot: save.storageEffects ?? [],
-      ledgerOutbox: session.bankLedgerJournal.outbox,
-      ledgerSnapshot: snapshot,
-      onStorageCommitted: storageAppliedEffectsCommitted,
-      onPostCommitFailure: (error) =>
-        console.error(
-          `storage recovery notification failed after WOC save for character ${session.characterId}:`,
-          error,
-        ),
-    });
-    if (acknowledged) {
-      visitGuildLedgerIdsForOps(snapshot.batches, GUILD_BANK_LOG_VISIBLE_OPS, bustGuildBankLog);
-    }
-    return acknowledged;
+    return acknowledgeSessionSaveEffects(this.sessionByCharacterId(save.characterId), save);
   }
 
   hasCharacterOnlySaveConflict(characterId: number): boolean {
