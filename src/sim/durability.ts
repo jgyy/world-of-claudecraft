@@ -24,6 +24,15 @@ import type { Entity } from './types';
 
 export const GEAR_DAMAGED_TEXT = 'Your equipment has been damaged.';
 
+/** The one exemption both loss arms share: below the level floor (a starter's
+ *  deaths are free) or inside an arena match (the Ashen Coliseum is a sport,
+ *  not a corpse run). Thornhollow Fields deaths DO cost gear, like the open
+ *  world (the bgMatches carve-out mirrors spirit.ts releasePlayerSpirit). */
+export function durabilityLossExempt(ctx: SimContext, p: Entity): boolean {
+  if (p.level < DURABILITY_LOSS_MIN_LEVEL) return true;
+  return ctx.arenaMatches.has(p.id) && !ctx.bgMatches.has(p.id);
+}
+
 /** The death penalty: every worn piece with a pool loses DEATH_DURABILITY_LOSS
  *  of its max. Skipped below DURABILITY_LOSS_MIN_LEVEL (a starter's deaths are
  *  free) and inside an arena match (the Ashen Coliseum is a sport, not a
@@ -32,21 +41,29 @@ export const GEAR_DAMAGED_TEXT = 'Your equipment has been damaged.';
  *  changed. Called from handleDeath's player arm; the body is dead, so the
  *  stat recalc waits for the revive that every way back to life runs. */
 export function applyDeathDurabilityLoss(ctx: SimContext, meta: PlayerMeta, p: Entity): boolean {
-  if (p.level < DURABILITY_LOSS_MIN_LEVEL) return false;
-  if (ctx.arenaMatches.has(p.id) && !ctx.bgMatches.has(p.id)) return false;
+  if (durabilityLossExempt(ctx, p)) return false;
   const changed = damageWornGear(
     meta.equipment,
     meta.equipmentInstance,
     DEATH_DURABILITY_LOSS,
     ITEMS,
   );
+  // The literal sits at the emit site (not the exported const) so the S3
+  // guard's literal scan sees it; tests read GEAR_DAMAGED_TEXT.
   if (changed)
-    ctx.emit({ type: 'log', text: GEAR_DAMAGED_TEXT, color: '#f88', pid: meta.entityId });
+    ctx.emit({
+      type: 'log',
+      text: 'Your equipment has been damaged.',
+      color: '#f88',
+      pid: meta.entityId,
+    });
   return changed;
 }
 
 /** The Spirit Healer surcharge: SPIRIT_REZ_DURABILITY_LOSS more of every pool,
- *  on top of the death loss already taken. Same level floor as the death arm.
+ *  on top of the death loss already taken. Same exemption as the death arm
+ *  (the arena arm is unreachable here today, since an arena death never
+ *  releases to a Spirit Healer, but the rule is stated once, not twice).
  *  Runs BEFORE the revive's recalcPlayerStats so a piece this pushes to zero
  *  is inert from the moment the body stands up. */
 export function applySpiritRezDurabilityLoss(
@@ -54,7 +71,7 @@ export function applySpiritRezDurabilityLoss(
   meta: PlayerMeta,
   p: Entity,
 ): boolean {
-  if (p.level < DURABILITY_LOSS_MIN_LEVEL) return false;
+  if (durabilityLossExempt(ctx, p)) return false;
   const changed = damageWornGear(
     meta.equipment,
     meta.equipmentInstance,
@@ -62,12 +79,17 @@ export function applySpiritRezDurabilityLoss(
     ITEMS,
   );
   if (changed)
-    ctx.emit({ type: 'log', text: GEAR_DAMAGED_TEXT, color: '#f88', pid: meta.entityId });
+    ctx.emit({
+      type: 'log',
+      text: 'Your equipment has been damaged.',
+      color: '#f88',
+      pid: meta.entityId,
+    });
   return changed;
 }
 
 /** Repair All at a merchant: charge repairAllCost from the purse and restore
- *  every worn piece to full. Refuse-whole: a purse short of the full bill
+ *  every worn piece, and every damaged copy in the bags, to full. Refuse-whole: a purse short of the full bill
  *  repairs nothing (the classic vendor has no partial-repair arm). Gated like
  *  buyItem on the merchant being a live vendor NPC; the sim re-derives the
  *  cost from its own equipment maps, never trusting a client quote. */
@@ -84,7 +106,7 @@ export function repairAllGear(ctx: SimContext, npcId: number, pid?: number): boo
     ctx.error(meta.entityId, 'That merchant is not available.');
     return false;
   }
-  const cost = repairAllCost(meta.equipment, meta.equipmentInstance, ITEMS);
+  const cost = repairAllCost(meta.equipment, meta.equipmentInstance, ITEMS, meta.inventory);
   if (cost <= 0) {
     ctx.error(meta.entityId, 'Your equipment does not need repairing.');
     return false;
@@ -94,7 +116,7 @@ export function repairAllGear(ctx: SimContext, npcId: number, pid?: number): boo
     return false;
   }
   meta.copper -= cost;
-  restoreWornGear(meta.equipmentInstance);
+  restoreWornGear(meta.equipmentInstance, meta.inventory);
   recalcPlayerStats(p, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance);
   ctx.emit({
     type: 'log',

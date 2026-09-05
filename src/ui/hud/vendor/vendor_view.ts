@@ -270,10 +270,11 @@ export function repairButtonState(
   world: {
     equipment: Partial<Record<EquipSlot, string>>;
     equipmentInstances: PlayerEquipmentInstances;
+    inventory: readonly InvSlot[];
     copper: number;
   },
   items: Readonly<Record<string, ItemDef>>,
 ): { enabled: boolean; cost: number; affordable: boolean } {
-  const cost = repairAllCost(world.equipment, world.equipmentInstances, items);
+  const cost = repairAllCost(world.equipment, world.equipmentInstances, items, world.inventory);
   return { enabled: cost > 0, cost, affordable: world.copper >= cost };
 }

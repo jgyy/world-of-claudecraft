@@ -453,7 +453,7 @@ describe('instanceDurabilityLine / the badge slot (gear durability)', () => {
 
   it('renders "Durability current / max" only for a damaged copy of a pooled def', () => {
     expect(instanceDurabilityLine({ durability: 63 }, chest)).toBe(
-      '<div class="tt-sub tt-durability" style="color:#ffe6a8">Durability 63 / 100</div>',
+      '<div class="tt-sub tt-durability">Durability 63 / 100</div>',
     );
     expect(instanceDurabilityLine({}, chest)).toBe('');
     expect(instanceDurabilityLine(undefined, chest)).toBe('');
@@ -462,7 +462,7 @@ describe('instanceDurabilityLine / the badge slot (gear durability)', () => {
   });
 
   it('turns red at zero (the piece is worn but inert)', () => {
-    expect(instanceDurabilityLine({ durability: 0 }, chest)).toContain('style="color:#f66"');
+    expect(instanceDurabilityLine({ durability: 0 }, chest)).toContain('tt-durability-broken');
     expect(instanceDurabilityLine({ durability: 0 }, chest)).toContain('Durability 0 / 100');
   });
 

@@ -6,7 +6,12 @@
 // code paths.
 import { describe, expect, it } from 'vitest';
 import { BUILTIN_WORLD, ITEMS } from '../src/sim/data';
-import { GEAR_DAMAGED_TEXT } from '../src/sim/durability';
+import {
+  applyDeathDurabilityLoss,
+  applySpiritRezDurabilityLoss,
+  durabilityLossExempt,
+  GEAR_DAMAGED_TEXT,
+} from '../src/sim/durability';
 import {
   currentDurability,
   DEATH_DURABILITY_LOSS,
@@ -24,6 +29,7 @@ import {
 } from '../src/sim/durability_rules';
 import { recalcPlayerStats } from '../src/sim/entity';
 import { itemLevel } from '../src/sim/item_level';
+import { createRiftGearInstance } from '../src/sim/rift/progression';
 import { Sim } from '../src/sim/sim';
 import {
   ALL_EQUIP_SLOTS,
@@ -233,6 +239,34 @@ describe('durability: the death penalty', () => {
     expect(events.some((ev) => ev.type === 'log' && ev.text === GEAR_DAMAGED_TEXT)).toBe(false);
   });
 
+  it('an arena death is exempt, a Thornhollow Fields death is not, and the level floor holds', () => {
+    // The exemption predicate both loss arms share, driven on the live
+    // SimContext (the arena death routing itself needs a real match, so the
+    // predicate is pinned directly rather than through a stubbed match).
+    const sim = makeSim();
+    sim.setPlayerLevel(10);
+    const ctx = sim.ctx;
+    const p = sim.player;
+    expect(durabilityLossExempt(ctx, p)).toBe(false);
+    sim.arenaMatches.set(p.id, {} as never);
+    expect(durabilityLossExempt(ctx, p)).toBe(true);
+    sim.bgMatches.set(p.id, {} as never);
+    expect(durabilityLossExempt(ctx, p)).toBe(false);
+    sim.arenaMatches.delete(p.id);
+    sim.bgMatches.delete(p.id);
+    sim.setPlayerLevel(DURABILITY_LOSS_MIN_LEVEL - 1);
+    expect(durabilityLossExempt(ctx, p)).toBe(true);
+    // Both arms consult it: a Spirit Healer surcharge inside an arena writes nothing.
+    sim.setPlayerLevel(10);
+    sim.arenaMatches.set(p.id, {} as never);
+    const meta = sim.meta(p.id)!;
+    expect(applySpiritRezDurabilityLoss(ctx, meta, p)).toBe(false);
+    expect(applyDeathDurabilityLoss(ctx, meta, p)).toBe(false);
+    for (const slot of ALL_EQUIP_SLOTS) {
+      expect(sim.equipmentInstances[slot]?.durability, slot).toBeUndefined();
+    }
+  });
+
   it('is deterministic: the same seed and deaths damage the same gear identically', () => {
     const run = () => {
       const sim = makeSim(7);
@@ -268,7 +302,8 @@ describe('durability: the death penalty', () => {
     sim.releaseSpirit();
     const p = sim.player as AnyEntity;
     // Walk the ghost back onto its corpse and resurrect there.
-    p.pos = { ...p.corpsePos };
+    const corpse = p.corpsePos as { x: number; y: number; z: number };
+    p.pos = { x: corpse.x, y: corpse.y, z: corpse.z };
     p.prevPos = { ...p.pos };
     sim.rebucket(p);
     sim.resurrectAtCorpse();
@@ -301,6 +336,43 @@ describe('durability: broken gear grants nothing until repaired', () => {
     meta.copper = 10_000_000;
     expect(sim.repairAllGear(npc.id)).toBe(true);
     expect(sim.player.stats.armor).toBe(before);
+  });
+});
+
+describe('durability: a broken weapon and shield are inert too', () => {
+  it('a broken mainhand swings unarmed, a broken shield blocks nothing, and repair restores both', () => {
+    const sim = makeSim();
+    sim.setPlayerLevel(10);
+    const meta = sim.meta(sim.player.id)!;
+    const mainhandId = sim.equipment.mainhand as string;
+    expect(ITEMS[mainhandId]?.weapon).toBeDefined();
+    const armedMax = sim.player.weapon.max;
+    expect(armedMax).toBeGreaterThan(2);
+    meta.equipmentInstance.mainhand = { durability: 0 };
+    recalcPlayerStats(
+      sim.player,
+      meta.cls,
+      meta.equipment,
+      meta.talentMods,
+      meta.equipmentInstance,
+    );
+    expect(sim.player.weapon).toEqual({ min: 1, max: 2, speed: 2 });
+    if (sim.equipment.offhand && ITEMS[sim.equipment.offhand]?.kind === 'armor') {
+      const blockBefore = sim.player.blockChance;
+      meta.equipmentInstance.offhand = { durability: 0 };
+      recalcPlayerStats(
+        sim.player,
+        meta.cls,
+        meta.equipment,
+        meta.talentMods,
+        meta.equipmentInstance,
+      );
+      expect(sim.player.blockChance).toBe(0);
+      expect(blockBefore).toBeGreaterThan(0);
+    }
+    meta.copper = 10_000_000;
+    expect(sim.repairAllGear(vendorNpc(sim).id)).toBe(true);
+    expect(sim.player.weapon.max).toBe(armedMax);
   });
 });
 
@@ -370,6 +442,31 @@ describe('durability: Repair All at a merchant', () => {
   });
 });
 
+describe('durability: Repair All covers damaged copies in the bags', () => {
+  it('quotes and restores an unequipped damaged piece too, and leaves its bag slot plain', () => {
+    const sim = makeSim();
+    sim.setPlayerLevel(10);
+    killPlayer(sim);
+    sim.releaseSpirit();
+    sim.resurrectAtSpiritHealer();
+    const slot = wornPoolSlots(sim)[0];
+    const itemId = sim.equipment[slot] as string;
+    expect(sim.unequipItem(slot)).toBe(true);
+    const meta = sim.meta(sim.player.id)!;
+    const bagged = meta.inventory.find((s) => s.itemId === itemId);
+    expect(bagged?.instance?.durability).toBeDefined();
+    const wornOnly = repairAllCost(sim.equipment, sim.equipmentInstances, ITEMS);
+    const withBags = repairAllCost(sim.equipment, sim.equipmentInstances, ITEMS, meta.inventory);
+    expect(withBags).toBeGreaterThan(wornOnly);
+    meta.copper = withBags;
+    sim.tick();
+    expect(sim.repairAllGear(vendorNpc(sim).id)).toBe(true);
+    expect(meta.copper).toBe(0);
+    expect(meta.inventory.find((s) => s.itemId === itemId)?.instance).toBeUndefined();
+    expect(repairAllCost(sim.equipment, sim.equipmentInstances, ITEMS, meta.inventory)).toBe(0);
+  });
+});
+
 describe('durability: the damaged copy travels with the piece', () => {
   it('unequipping a damaged piece carries its durability into the bags, and re-equipping brings it back', () => {
     const sim = makeSim();
@@ -389,6 +486,35 @@ describe('durability: the damaged copy travels with the piece', () => {
     sim.equipItem(itemId);
     expect(sim.equipment[slot]).toBe(itemId);
     expect(sim.equipmentInstances[slot]?.durability).toBe(worn);
+  });
+
+  it('a damaged Rift-forged worn copy survives its load-time rebuild', () => {
+    // Rift gear is REBUILT on load (rift/progression.ts sanitizeRiftGearInstance);
+    // a rebuild that dropped the field would hand every relog a free repair.
+    const sim = makeSim();
+    sim.setPlayerLevel(10);
+    const pid = sim.player.id;
+    const gear = createRiftGearInstance('durability-test', 'S', 'warrior', pid);
+    const meta = sim.meta(pid)!;
+    // Worn directly (the load path is what this pins, not the equip verb): a
+    // band carries no pool of its own, so the value is stamped on the copy to
+    // prove the rebuild carries whatever the copy holds.
+    const slot: EquipSlot = 'ring1';
+    meta.equipment[slot] = gear.itemId;
+    meta.equipmentInstance[slot] = { ...gear.instance, durability: 7 };
+    const saved = sim.serializeCharacter(pid)!;
+    const sim2 = new Sim({
+      seed: 42,
+      playerClass: 'warrior',
+      noPlayer: true,
+      world: WORLD,
+    }) as AnySim;
+    const pid2 = sim2.addPlayer('warrior', 'Loader', {
+      state: JSON.parse(JSON.stringify(saved)),
+      characterId: 1,
+    });
+    expect(sim2.meta(pid2)!.equipmentInstance[slot as EquipSlot]?.durability).toBe(7);
+    expect(sim2.meta(pid2)!.equipmentInstance[slot as EquipSlot]?.rift).toBeDefined();
   });
 
   it('a damaged worn copy survives the character save round-trip', () => {

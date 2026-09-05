@@ -18,9 +18,9 @@ Source of truth: `src/sim/durability_rules.ts` (the pure rules) and
 | Arena | no loss (the Coliseum is a sport); Thornhollow Fields DOES cost gear | `applyDeathDurabilityLoss` |
 | Corpse run | no loss beyond the death itself | (nothing runs on `resurrectAtCorpse`) |
 | Bags | never touched; only worn gear pays | `damageWornGear` walks `ALL_EQUIP_SLOTS` |
-| Repair cost | `5c x item level x missing points`, summed over every worn piece | `repairCostFor`, `repairAllCost` |
+| Repair cost | `5c x item level x missing points`, summed over every worn piece and every damaged copy in the bags | `repairCostFor`, `repairAllCost` |
 | Item level | the tooltip item level when the def has a source, else the required level | `repairItemLevel` |
-| Broken | a piece at 0 grants no stats, armor, ratings, or set pieces | `isBrokenGear`, gated in `recalcPlayerStats` beside the over-level gate |
+| Broken | a piece at 0 grants no stats, armor, ratings, or set pieces; a broken weapon swings unarmed and its procs are inert; a broken shield blocks nothing | `isBrokenGear`, the one `usableGear` gate in `recalcPlayerStats` beside the over-level rule, mirrored in `combat/equip_procs.ts` |
 | Refuse-whole | a purse short of the full bill repairs nothing | `repairAllGear` |
 
 Pool sizes (`maxDurability`): a per-slot ladder (chest 100, legs 75, helmet

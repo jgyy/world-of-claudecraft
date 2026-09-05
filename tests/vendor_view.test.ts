@@ -389,7 +389,12 @@ describe('repairButtonState (the Repair All quote)', () => {
 
   it('is disabled with a zero quote when nothing worn is damaged', () => {
     const state = repairButtonState(
-      { equipment: { chest: 'chest', ring1: 'ring' }, equipmentInstances: {}, copper: 0 },
+      {
+        equipment: { chest: 'chest', ring1: 'ring' },
+        equipmentInstances: {},
+        inventory: [],
+        copper: 0,
+      },
       items,
     );
     expect(state).toEqual({ enabled: false, cost: 0, affordable: true });
@@ -400,6 +405,7 @@ describe('repairButtonState (the Repair All quote)', () => {
     const world = {
       equipment: { chest: 'chest', ring1: 'ring' },
       equipmentInstances: { chest: { durability: 60 }, ring1: { durability: 0 } },
+      inventory: [] as InvSlot[],
       copper: 1999,
     };
     expect(repairButtonState(world, items)).toEqual({
@@ -412,5 +418,15 @@ describe('repairButtonState (the Repair All quote)', () => {
       cost: 2000,
       affordable: true,
     });
+  });
+
+  it('bills a damaged copy carried in the bags on the same quote', () => {
+    const world = {
+      equipment: {},
+      equipmentInstances: {},
+      inventory: [{ itemId: 'chest', count: 1, instance: { durability: 90 } }] as InvSlot[],
+      copper: 500,
+    };
+    expect(repairButtonState(world, items)).toEqual({ enabled: true, cost: 500, affordable: true });
   });
 });

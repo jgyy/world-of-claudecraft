@@ -26,6 +26,7 @@ import {
   ALL_EQUIP_SLOTS,
   type ArmorType,
   type EquipSlot,
+  type InvSlot,
   type ItemDef,
   type ItemInstancePayload,
 } from './types';
@@ -138,19 +139,28 @@ export function repairCostFor(
   return REPAIR_COPPER_PER_ILVL_POINT * repairItemLevel(def) * missing;
 }
 
-/** Copper to restore every worn piece to full (the vendor's Repair All quote).
+/** Copper to restore every worn piece, plus every damaged copy in the bags,
+ *  to full (the vendor's Repair All quote).
  *  Both hosts compute this from the same equipment + instance maps, so the
  *  window's preview and the server's charge agree by construction. */
 export function repairAllCost(
   equipment: Partial<Record<EquipSlot, string>>,
   instances: Partial<Record<EquipSlot, ItemInstancePayload>> | undefined,
   items: Readonly<Record<string, ItemDef>>,
+  inventory: readonly InvSlot[] = [],
 ): number {
   let total = 0;
   for (const slot of ALL_EQUIP_SLOTS) {
     const itemId = equipment[slot];
     if (!itemId) continue;
     total += repairCostFor(items[itemId], instances?.[slot]);
+  }
+  // Damaged copies carried in the bags (an unequipped piece keeps its damage)
+  // are on the same bill, the classic Repair All scope; a gear copy is one
+  // per slot, but the count is honored for safety.
+  for (const slot of inventory) {
+    if (slot.instance?.durability === undefined) continue;
+    total += repairCostFor(items[slot.itemId], slot.instance) * Math.max(1, slot.count);
   }
   return total;
 }
@@ -185,11 +195,12 @@ export function damageWornGear(
   return changed;
 }
 
-/** Restore every worn piece to full: strip the `durability` field, and drop a
- *  payload that held nothing else so the piece is plain again. Mutates in
- *  place; returns true when any slot changed. */
+/** Restore every worn piece (and every damaged bagged copy) to full: strip the
+ *  `durability` field, and drop a payload that held nothing else so the piece
+ *  is plain again. Mutates in place; returns true when any slot changed. */
 export function restoreWornGear(
   instances: Partial<Record<EquipSlot, ItemInstancePayload>>,
+  inventory: InvSlot[] = [],
 ): boolean {
   let changed = false;
   for (const slot of ALL_EQUIP_SLOTS) {
@@ -197,6 +208,13 @@ export function restoreWornGear(
     if (!inst || inst.durability === undefined) continue;
     delete inst.durability;
     if (Object.keys(inst).length === 0) delete instances[slot];
+    changed = true;
+  }
+  for (const slot of inventory) {
+    const inst = slot.instance;
+    if (!inst || inst.durability === undefined) continue;
+    delete inst.durability;
+    if (Object.keys(inst).length === 0) delete slot.instance;
     changed = true;
   }
   return changed;

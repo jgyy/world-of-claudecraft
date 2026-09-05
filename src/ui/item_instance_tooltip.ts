@@ -154,8 +154,8 @@ export function instanceDurabilityLine(instance?: ItemInstancePayload, item?: It
   const max = maxDurability(item);
   if (max === 0) return '';
   const current = currentDurability(item, instance);
-  const color = current === 0 ? '#f66' : '#ffe6a8';
-  return `<div class="tt-sub tt-durability" style="color:${color}">${esc(
+  const cls = current === 0 ? 'tt-sub tt-durability tt-durability-broken' : 'tt-sub tt-durability';
+  return `<div class="${cls}">${esc(
     t('hudChrome.itemTooltip.durability', { current: itemNumber(current), max: itemNumber(max) }),
   )}</div>`;
 }

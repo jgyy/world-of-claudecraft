@@ -2214,6 +2214,9 @@ export const TARGETS = [
         if (!p?.pos) return { ok: false, reason: 'no player' };
         try {
           sim.setPlayerLevel(10);
+          // A purse that covers the bill, so the row reads enabled (the
+          // starter's coppers would leave it disabled and quoting).
+          sim.meta(p.id).copper = 500000;
         } catch {}
         // Die, release, take the Spirit Healer: 10% + 15% off every worn pool.
         try {
@@ -2244,6 +2247,39 @@ export const TARGETS = [
         return { ok: true };
       }, variant?.scene ?? 'vendor');
       if (!setup.ok) throw new Error(`gear-durability setup failed: ${setup.reason}`);
+      // The Spirit Healer revive and the teleport to the vendor each raise the
+      // loading curtain on their own schedule; wait for it to stay hidden for
+      // a whole streak before opening the window, or the shot is the curtain.
+      let hiddenStreak = 0;
+      for (let i = 0; i < 60 && hiddenStreak < 6; i++) {
+        await wait(500);
+        const hidden = await page.evaluate(() => {
+          const veil = document.getElementById('loading-screen');
+          if (!veil) return true;
+          const st = getComputedStyle(veil);
+          return st.display === 'none' || st.visibility === 'hidden' || Number(st.opacity) === 0;
+        });
+        hiddenStreak = hidden ? hiddenStreak + 1 : 0;
+      }
+      await page.evaluate((scene) => {
+        const game = window.__game;
+        const banner = document.querySelector('#banner');
+        if (banner) banner.style.opacity = '0';
+        // The Proving Shore greeting (Ferryman Odo) lands after the teleport
+        // and would sit over the window; take its one button.
+        for (const b of document.querySelectorAll('button')) {
+          if (b.textContent?.trim() === 'Understood') b.click();
+        }
+        if (scene === 'vendor') {
+          const vendor = [...game.sim.entities.values()].find(
+            (e) => e.templateId === 'quartermaster_bree',
+          );
+          if (getComputedStyle(document.querySelector('#vendor-window')).display === 'none')
+            game.hud.openVendor(vendor.id);
+        } else if (getComputedStyle(document.querySelector('#char-window')).display === 'none') {
+          game.hud.toggleChar();
+        }
+      }, variant?.scene ?? 'vendor');
       if (variant?.scene === 'paperdoll') {
         if (!(await pollForSize(page, '#char-window'))) {
           throw new Error('character window did not open');
