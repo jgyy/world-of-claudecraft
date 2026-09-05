@@ -36,8 +36,7 @@ describe('dispatchRiftCommand', () => {
   it('routes both tokens with the Sim wrapper argument order', () => {
     const { calls, sim } = recorder();
     expect(
-      dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item', item: 'band', slot: 3 }, 7)
-        ?.ok,
+      dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item', item: 'band', slot: 3 }, 7)?.ok,
     ).toBe(true);
     expect(
       dispatchRiftCommand(
@@ -56,9 +55,7 @@ describe('dispatchRiftCommand', () => {
   it('answers null (no ack) for every malformed shape without touching the sim', () => {
     const { calls, sim } = recorder();
     expect(dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item' }, 7)).toBeNull();
-    expect(
-      dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item', item: 4 }, 7),
-    ).toBeNull();
+    expect(dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item', item: 4 }, 7)).toBeNull();
     // The retired forge enchant is a no-op tombstone in game.ts, never a
     // forge frame: the dispatcher does not know the token.
     expect(
@@ -71,9 +68,7 @@ describe('dispatchRiftCommand', () => {
     expect(
       dispatchRiftCommand(sim as never, { cmd: 'rift_socket_gem', item: 'band', gem: 1 }, 7),
     ).toBeNull();
-    expect(
-      dispatchRiftCommand(sim as never, { cmd: 'salvage_item', item: 'band' }, 7),
-    ).toBeNull();
+    expect(dispatchRiftCommand(sim as never, { cmd: 'salvage_item', item: 'band' }, 7)).toBeNull();
     expect(calls).toEqual([]);
   });
 });

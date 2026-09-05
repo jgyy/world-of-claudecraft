@@ -283,7 +283,9 @@ const MONOLITHS: MonolithRow[] = [
     // rift tooltip lines moved into src/ui/rift_band_tooltip.ts (with the
     // per-copy item-level readout), the compare block only threaded the
     // hovered and worn instances through. Exact merged count, zero slack.
-    ceiling: 18904,
+    // Re-pinned to the exact merged count (the Rift Forge window wiring on top of the ladder: the repaint-family line and the walk-away close, over the base retune).
+    // Exact merged count, zero slack.
+    ceiling: 18919,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -601,7 +603,9 @@ const MONOLITHS: MonolithRow[] = [
     // the composite is the honest size. Exact count, zero slack.
     // Lowered 10641 -> 10640 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
     // Exact count, zero slack.
-    ceiling: 10640,
+    // Re-pinned to the exact merged count (the forge dispatch extraction plus the retired enchant tombstone arm).
+    // Exact merged count, zero slack.
+    ceiling: 10631,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -665,7 +669,9 @@ const MONOLITHS: MonolithRow[] = [
     // the composite is the honest size. Exact count, zero slack.
     // Lowered 5908 -> 5904 by the Riftbound band item-level ladder (the retired forge enchant sender).
     // Exact count, zero slack.
-    ceiling: 5904,
+    // Re-pinned to the exact merged count (the forge pair senders awaiting their ack, over the retired enchant sender).
+    // Exact merged count, zero slack.
+    ceiling: 5910,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

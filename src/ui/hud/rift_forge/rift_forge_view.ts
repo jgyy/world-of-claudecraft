@@ -27,13 +27,7 @@ import {
 } from '../../../sim/rift/band_ladder';
 import { isRiftForgeNpc } from '../../../sim/rift/forge_gate';
 import { riftUpgradeCost } from '../../../sim/rift/progression';
-import type {
-  Entity,
-  EquipSlot,
-  InvSlot,
-  ItemInstancePayload,
-  RiftTier,
-} from '../../../sim/types';
+import type { Entity, EquipSlot, InvSlot, ItemInstancePayload, RiftTier } from '../../../sim/types';
 
 export interface RiftForgeInput {
   inventory: readonly InvSlot[];

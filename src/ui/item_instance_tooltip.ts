@@ -253,4 +253,3 @@ export function instanceMakersMarkLine(
     t('hudChrome.crafting.makersMark', { name: instance.signer }),
   )}</span></div>`;
 }
-

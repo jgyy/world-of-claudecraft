@@ -16,8 +16,8 @@
 // own; the row list rebuilds whole on render and rewires its buttons.
 
 import type { RiftGemId } from '../../../sim/content/rift/items';
-import { RIFT_GEM_RATING, RIFT_GEM_RATING_STAT } from '../../../sim/rift/band_ladder';
 import { ITEMS } from '../../../sim/data';
+import { RIFT_GEM_RATING, RIFT_GEM_RATING_STAT } from '../../../sim/rift/band_ladder';
 import type { ItemDef, ItemInstancePayload, SimEvent } from '../../../sim/types';
 import type { IWorld } from '../../../world_api';
 import { markDialogRoot } from '../../dialog_root';

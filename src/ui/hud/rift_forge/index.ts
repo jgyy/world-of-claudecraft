@@ -3,10 +3,10 @@
 
 export {
   buildRiftForgeView,
-  riftForgeInReach,
   type RiftForgeInput,
   type RiftForgeRingRow,
   type RiftForgeRingSource,
   type RiftForgeView,
+  riftForgeInReach,
 } from './rift_forge_view';
 export { RiftForgeWindow, type RiftForgeWindowDeps } from './rift_forge_window';
