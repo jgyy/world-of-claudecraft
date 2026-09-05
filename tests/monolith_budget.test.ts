@@ -279,10 +279,11 @@ const MONOLITHS: MonolithRow[] = [
     // is the six lines that cannot live anywhere else: the import, the
     // field, its relocalize() call, and the three-line event arm. Exact
     // merged count, zero slack; maintainer-review item.
-    // Down 18911 -> 18900 for the per-surface action-bar profiles: the
+    // Down 18911 -> 18902 for the per-surface action-bar profiles: the
     // world-entry restore moved into ActionBarController.restoreLayout, so
-    // the HUD keeps one poll and one refresh call. Exact count.
-    ceiling: 18900,
+    // the HUD keeps one poll, one refresh call, and the two-line per-frame
+    // surface-flip follow beside the form sync. Exact count.
+    ceiling: 18902,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {

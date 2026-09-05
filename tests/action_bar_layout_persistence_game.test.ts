@@ -173,27 +173,41 @@ describe('action-bar layout persistence (wire round trip)', () => {
     void owner;
   });
 
-  it('serializes concurrent saves per character in FIFO order (no reordered stale write)', async () => {
+  it('supersedes a still-queued save with the newer document and never reorders a started one', async () => {
     const server = new GameServer();
     const fc = fakeWs();
     const session = join(server, fc, 9, 'Ordered');
-    const first: ActionBarLayout = {
+    const layoutOf = (id: string): ActionBarLayout => ({
       v: 1,
-      forms: { normal: { bar: [{ type: 'ability', id: 'first' }] } },
-    };
-    const second: ActionBarLayout = {
-      v: 1,
-      forms: { normal: { bar: [{ type: 'ability', id: 'second' }] } },
-    };
-    // Two saves dispatched back to back: the per-character FIFO queue must commit
-    // them in arrival order so the newer layout is never overwritten by the older.
-    save(server, session, { profile: 'desktop', layout: first });
-    save(server, session, { profile: 'desktop', layout: second });
+      forms: { normal: { bar: [{ type: 'ability', id }] } },
+    });
+    // The first write starts and then blocks, holding the per-character FIFO.
+    let started!: () => void;
+    let release!: () => void;
+    const firstStarted = new Promise<void>((resolve) => {
+      started = resolve;
+    });
+    vi.mocked(setCharacterHotbarLayout).mockImplementationOnce(async () => {
+      started();
+      await new Promise<void>((resolve) => {
+        release = resolve;
+      });
+    });
+    save(server, session, { profile: 'desktop', layout: layoutOf('first') });
+    await firstStarted;
+    // Two more saves while the first is running: the second is queued and the
+    // third supersedes it (the session document already carries every merge),
+    // so exactly one more write lands, with the newest document, after the first.
+    save(server, session, { profile: 'touch', layout: layoutOf('second') });
+    save(server, session, { profile: 'desktop', layout: layoutOf('third') });
+    release();
     await vi.waitFor(() => expect(vi.mocked(setCharacterHotbarLayout)).toHaveBeenCalledTimes(2));
+    await new Promise((r) => setTimeout(r, 10));
+    expect(vi.mocked(setCharacterHotbarLayout)).toHaveBeenCalledTimes(2);
     const calls = vi.mocked(setCharacterHotbarLayout).mock.calls;
     expect(calls.map((c) => c[0])).toEqual([9, 9]);
-    expect(calls[0][1]).toEqual(docOf({ desktop: first }));
-    expect(calls[1][1]).toEqual(docOf({ desktop: second }));
+    expect(calls[0][1]).toEqual(docOf({ desktop: layoutOf('first') }));
+    expect(calls[1][1]).toEqual(docOf({ desktop: layoutOf('third'), touch: layoutOf('second') }));
   });
 
   it('validates + enqueues a save with the exact sanitized payload on a save_hotbar_layout command', async () => {
@@ -238,31 +252,52 @@ describe('action-bar layout persistence (wire round trip)', () => {
     );
   });
 
-  it('resumes with the freshly-read layout, not the stale join-time snapshot', () => {
+  it('resumes with the in-session document even when the row re-read is behind it', () => {
     const server = new GameServer();
     const firstFc = fakeWs();
     const session = join(server, firstFc, 11, 'Resumer', { hotbarLayout: LAYOUT });
     broadcast(server);
     expect(lastSnap(firstFc.sent).self.hbl).toEqual(wireOf(LAYOUT));
 
-    // The player edits and durably saves a new layout mid-session (the
-    // write already landed in the DB by the time the reconnect happens),
-    // then the socket drops into the linkdead grace window.
+    // The player edits the touch bar mid-session (the session document holds
+    // the merge at once; the FIFO write may still be queued), then the socket
+    // drops into the linkdead grace window.
+    save(server, session, { profile: 'touch', layout: TOUCH_LAYOUT });
     session.linkdead = true;
 
     // The reconnect's WS auth handshake re-reads the character row fresh
-    // (server/ws_auth.ts), so the resume's `meta.hotbarLayout` carries the
-    // durably saved edit, never the stale join-time value.
+    // (server/ws_auth.ts). This session is the character's only writer, so a
+    // row that has not caught up yet must never regress the merge base or the
+    // wire value: the other profile's edit would otherwise be dropped by the
+    // next save.
     const secondFc = fakeWs();
-    const resumed = join(server, secondFc, 11, 'Resumer', {
+    const resumed = join(server, secondFc, 11, 'Resumer', { hotbarLayout: LAYOUT });
+    expect(resumed).toBe(session);
+    broadcast(server);
+    const resumedSnap = lastSnap(secondFc.sent);
+    expect(resumedSnap.self.hbl).toEqual({
+      v: 2,
+      forms: LAYOUT.forms,
+      profiles: { desktop: LAYOUT, touch: TOUCH_LAYOUT },
+    });
+    expect(session.hotbarLayout).toEqual(docOf({ desktop: LAYOUT, touch: TOUCH_LAYOUT }));
+  });
+
+  it('a session holding no document takes the freshly-read row on resume', () => {
+    const server = new GameServer();
+    const firstFc = fakeWs();
+    const session = join(server, firstFc, 16, 'RowResumer');
+    broadcast(server);
+    expect(lastSnap(firstFc.sent).self.hbl).toBeNull();
+
+    session.linkdead = true;
+    const secondFc = fakeWs();
+    const resumed = join(server, secondFc, 16, 'RowResumer', {
       hotbarLayout: LAYOUT_AFTER_MIDSESSION_EDIT,
     });
     expect(resumed).toBe(session);
     broadcast(server);
-    const resumedSnap = lastSnap(secondFc.sent);
-    expect(resumedSnap.self.hbl).toEqual(wireOf(LAYOUT_AFTER_MIDSESSION_EDIT));
-    // The live merge target follows the fresh read too, so the next save
-    // merges into the durable document rather than the stale one.
+    expect(lastSnap(secondFc.sent).self.hbl).toEqual(wireOf(LAYOUT_AFTER_MIDSESSION_EDIT));
     expect(session.hotbarLayout).toEqual(docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT }));
   });
 

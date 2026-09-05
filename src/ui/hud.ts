@@ -2247,7 +2247,7 @@ export class Hud {
       showAttackButton: () => this.optionsHooks?.settings.get('showAttackButton') ?? true,
       // The arrangement profile for this device's interface (desktop or touch),
       // read from the same body.mobile-touch signal every touch-gated path uses.
-      profile: actionBarLayoutProfileForSurface(this.isMobileLayout()),
+      profile: () => actionBarLayoutProfileForSurface(this.isMobileLayout()),
       // Persistence seam: online, the ClientWorld debounces a per-character wire
       // save; offline, Sim.saveActionBarLayout is a no-op (localStorage is the
       // store). The controller always writes the localStorage mirror itself.
@@ -7188,7 +7188,9 @@ export class Hud {
   }
 
   private syncActiveHotbarForm(): void {
-    if (!this.actionBarController.syncActiveForm()) return;
+    const profileSwitched = this.actionBarController.syncProfile();
+    if (profileSwitched) this.spellbookWindow.refreshHotbarControls();
+    if (!profileSwitched && !this.actionBarController.syncActiveForm()) return;
     this.dragAction = null;
     this.mobileActionPage = this.currentMobileActionPage();
   }

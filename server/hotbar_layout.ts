@@ -8,7 +8,6 @@
 import {
   ACTION_BAR_LAYOUT_LEGACY_PROFILE,
   type ActionBarLayoutProfiles,
-  type ActionBarLayoutWire,
   actionBarLayoutWire,
   sanitizeActionBarLayout,
   sanitizeActionBarLayoutProfile,
@@ -16,15 +15,16 @@ import {
   withActionBarLayoutProfile,
 } from '../src/world_api/action_bar';
 import { setCharacterHotbarLayout } from './db';
-import { createKeyedSerialWriter } from './serial_writer';
+import { createKeyedSerialWriter, KeyedSerialWriteAborted } from './serial_writer';
 
 export interface HotbarLayoutState {
-  // Frozen at join: the `hbl` self wire value (the v2 document plus the desktop
-  // `forms` mirror for pre-profile clients), or null when the character has
-  // never saved one (wires as an explicit "seed from local"). Self-scoped, never
-  // an entity/broadcast field; lastSent diffing sends it exactly once, so a
-  // later client save never round-trips back to clobber an in-flight edit.
-  initialHotbarLayout: ActionBarLayoutWire | null;
+  // Frozen at join, serialized ONCE: the `hbl` self wire value (the v2 document
+  // plus the desktop `forms` mirror for pre-profile clients) as JSON text, or
+  // the text `null` when the character has never saved one (an explicit "seed
+  // from local"). Self-scoped, never an entity/broadcast field; the heavy self
+  // pass diffs the string against lastSent so it is sent exactly once and never
+  // re-stringified, and a later client save never round-trips back here.
+  initialHotbarLayoutJson: string;
   // Live: the stored document every save merges its ONE profile into, so a
   // touch save never clobbers the desktop arrangement (and vice versa).
   hotbarLayout: ActionBarLayoutProfiles | null;
@@ -32,11 +32,18 @@ export interface HotbarLayoutState {
 
 /** Session state for a stored column value (untrusted at rest: re-validated
  *  here before it can wire out). Spread into the session at join and assigned
- *  again on a resume, whose auth handshake re-reads the row fresh. */
-export function hotbarLayoutState(stored: unknown): HotbarLayoutState {
-  const doc = sanitizeActionBarLayoutProfiles(stored);
+ *  again on a resume, whose auth handshake re-reads the row fresh. A resume
+ *  passes the session's `live` document: this session is the character's only
+ *  writer, so a document it already holds is at least as new as the row (a
+ *  queued write may not have committed yet) and must never regress the merge
+ *  base or the wire value. */
+export function hotbarLayoutState(
+  stored: unknown,
+  live: ActionBarLayoutProfiles | null = null,
+): HotbarLayoutState {
+  const doc = live ?? sanitizeActionBarLayoutProfiles(stored);
   return {
-    initialHotbarLayout: doc ? actionBarLayoutWire(doc) : null,
+    initialHotbarLayoutJson: JSON.stringify(doc ? actionBarLayoutWire(doc) : null),
     hotbarLayout: doc,
   };
 }
@@ -61,11 +68,15 @@ export function mergeHotbarLayoutSave(
   return withActionBarLayoutProfile(current, profile, layout);
 }
 
-/** The per-character FIFO writer behind the `save_hotbar_layout` command: two
- *  saves dispatched back to back commit in arrival order, so the newer document
- *  is never overwritten by the older. */
+/** The per-character FIFO writer behind the `save_hotbar_layout` command. A
+ *  save that is still queued when the next one arrives is superseded (the
+ *  session document already holds every merge, so the newest write carries
+ *  them all), and a write that has started is never disturbed, so a burst or
+ *  a hostile flood costs at most one running plus one queued write per
+ *  character and the newer document is never overwritten by the older. */
 export class HotbarLayoutStore {
   private readonly queues = createKeyedSerialWriter<number>();
+  private readonly queued = new Map<number, AbortController>();
 
   /** Validate + merge a client save into the session's document, then persist
    *  the whole document. A dropped payload never crashes the session. */
@@ -73,10 +84,20 @@ export class HotbarLayoutStore {
     const doc = mergeHotbarLayoutSave(session.hotbarLayout, msg);
     if (doc === null) return;
     session.hotbarLayout = doc;
+    const characterId = session.characterId;
+    this.queued.get(characterId)?.abort();
+    const controller = new AbortController();
+    this.queued.set(characterId, controller);
     void this.queues
-      .enqueue(session.characterId, () => setCharacterHotbarLayout(session.characterId, doc))
+      .enqueueCancellable(characterId, controller.signal, () =>
+        setCharacterHotbarLayout(characterId, doc),
+      )
       .catch((err) => {
+        if (err instanceof KeyedSerialWriteAborted) return; // superseded before it started
         console.error('failed to save hotbar layout:', err);
+      })
+      .finally(() => {
+        if (this.queued.get(characterId) === controller) this.queued.delete(characterId);
       });
   }
 }

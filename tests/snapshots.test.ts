@@ -5257,15 +5257,16 @@ function dirtyEveryDeltaField(): {
   };
   // Session-scoped stored action-bar layout (`hbl`, self-only): set the frozen
   // join-time wire view (the per-profile document plus the desktop `forms`
-  // mirror) so the heavy self block wires it once.
+  // mirror), pre-serialized as the session holds it, so the heavy self block
+  // wires it once.
   const hotbarForms = {
     normal: { bar: [{ type: 'ability' as const, id: 'heroic_strike' }], attack: null },
   };
-  leader.initialHotbarLayout = {
+  leader.initialHotbarLayoutJson = JSON.stringify({
     v: 2,
     forms: hotbarForms,
     profiles: { desktop: { v: 1, forms: hotbarForms } },
-  };
+  });
 
   // Player Entity fields.
   p.cooldowns.set('heroic_strike', 5);

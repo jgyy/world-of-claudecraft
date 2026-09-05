@@ -4061,7 +4061,7 @@ export class GameServer {
     // rather than being reset to null, matching the sibling bankBonus
     // "absent means keep" pattern above.
     if (meta.hotbarLayout !== undefined) {
-      Object.assign(session, hotbarLayoutState(meta.hotbarLayout));
+      Object.assign(session, hotbarLayoutState(meta.hotbarLayout, session.hotbarLayout));
     }
     // The freshly-read look, same "absent means keep" contract as the layout
     // above. ws_auth always supplies it on a real reconnect, so a redesign
@@ -9333,10 +9333,10 @@ export class GameServer {
       });
       // IWorldActionBar login restore (self-scoped, never a broadcast/entity
       // field): the VIEWER's own stored layout, or an explicit null meaning "the
-      // server has no copy, seed from this device". Bound to the frozen join-time
-      // value, so lastSent-diffing sends it exactly once and a later client save
-      // never round-trips back to clobber an in-flight edit.
-      maybe('hbl', session.initialHotbarLayout);
+      // server has no copy, seed from this device". Serialized once at join and
+      // bound to that frozen text, so lastSent-diffing sends it exactly once and
+      // a later client save never round-trips back to clobber an in-flight edit.
+      maybeSerialized('hbl', session.initialHotbarLayoutJson);
     }
     selfLap?.('self.heavy');
     const assembled = extra === '' ? json : `${json.slice(0, -1)}${extra}}`;

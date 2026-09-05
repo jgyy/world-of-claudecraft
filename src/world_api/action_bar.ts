@@ -202,9 +202,12 @@ export function sanitizeActionBarLayoutProfile(value: unknown): ActionBarLayoutP
 /**
  * Validate + bound an untrusted stored/wired document. A v1 layout (no
  * `profiles` key) reads as the legacy (desktop) profile; a v2 document keeps
- * every known profile, ignores unknown profile keys (a newer bundle's surface),
- * and is rejected whole when a profile's layout is garbage or the key count is
- * abusive. Never throws.
+ * every known profile with a well-formed layout, drops unknown profile keys (a
+ * newer bundle's surface) and any profile whose layout is garbage (so a corrupt
+ * row at rest loses that one surface, never the others), and is rejected whole
+ * only when the key count is abusive or `profiles` is not an object. The server
+ * never runs client input through this arm (a save is one profile, validated by
+ * sanitizeActionBarLayout), so leniency here costs nothing. Never throws.
  */
 export function sanitizeActionBarLayoutProfiles(value: unknown): ActionBarLayoutProfiles | null {
   if (!isPlainObject(value)) return null;
@@ -222,7 +225,7 @@ export function sanitizeActionBarLayoutProfiles(value: unknown): ActionBarLayout
     const profile = sanitizeActionBarLayoutProfile(key);
     if (profile === null) continue;
     const layout = sanitizeActionBarLayout(rawProfiles[key]);
-    if (layout === null) return null; // a garbage profile rejects the payload
+    if (layout === null) continue; // a garbage profile is dropped, the rest kept
     profiles[profile] = layout;
   }
   return { v: ACTION_BAR_LAYOUT_PROFILES_VERSION, profiles };

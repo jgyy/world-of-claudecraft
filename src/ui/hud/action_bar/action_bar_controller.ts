@@ -4,7 +4,9 @@ import {
   ACTION_BAR_LAYOUT_LEGACY_PROFILE,
   type ActionBarLayout,
   type ActionBarLayoutProfile,
+  type ActionBarLayoutProfiles,
   type ActionBarLayoutRestore,
+  actionBarLayoutIsEmpty,
 } from '../../../world_api/action_bar';
 import { knownItemDef } from '../../known_item';
 import { isStanceBarAbilityGroup } from '../../stance_bar_view';
@@ -57,10 +59,12 @@ export interface ActionBarControllerDeps {
   hasAura(kind: string): boolean;
   showAttackButton(): boolean;
   // The input-surface profile this controller arranges (the desktop keyboard
-  // row or the touch ring): it scopes every localStorage key and every upload,
-  // so a phone's arrangement never overwrites a PC's. Absent means the legacy
-  // (desktop) keys, which is what every pre-profile device already holds.
-  profile?: ActionBarLayoutProfile;
+  // row or the touch ring), read LIVE like every sibling dep because the
+  // Interface Mode setting can flip the surface mid-session (syncProfile follows
+  // it). It scopes every localStorage key and every upload, so a phone's
+  // arrangement never overwrites a PC's. Absent means the legacy (desktop) keys,
+  // which is what every pre-profile device already holds.
+  profile?(): ActionBarLayoutProfile;
   // The persistence seam: called after a user-driven layout change (never during
   // initial load) with the profile and its FULL captured layout. Offline it is a
   // no-op (localStorage is the store); online the ClientWorld debounces a wire
@@ -86,8 +90,16 @@ export class ActionBarController {
   // storage: only user-driven changes after init should upload. Flipped true at
   // the end of init()/reload().
   private ready = false;
+  // The profile whose keys are loaded; every key and upload uses it, and
+  // syncProfile moves it when the live surface changes.
+  private activeProfile: ActionBarLayoutProfile;
+  // The login document the world-entry restore carried, kept so a mid-session
+  // surface flip can still restore that surface's own server copy.
+  private serverProfiles: ActionBarLayoutProfiles | null = null;
 
-  constructor(private readonly deps: ActionBarControllerDeps) {}
+  constructor(private readonly deps: ActionBarControllerDeps) {
+    this.activeProfile = this.resolveProfile();
+  }
 
   init(): void {
     this.loadActions();
@@ -111,10 +123,13 @@ export class ActionBarController {
    *  a first server copy is uploaded through the persistence seam. Returns true
    *  when the bars were re-seeded, so the caller can refresh any slot views. */
   restoreLayout(restore: ActionBarLayoutRestore): boolean {
+    this.serverProfiles = restore.source === 'server' ? restore.profiles : null;
     const plan = planActionBarRestore(restore, this.profile, (profile) =>
       this.captureLayout(profile),
     );
     if (plan.action === 'seed-local') {
+      // persist() re-captures the same keys the plan just read, so it uploads
+      // exactly plan.layout under this profile.
       this.persist();
       return false;
     }
@@ -131,7 +146,38 @@ export class ActionBarController {
   }
 
   get profile(): ActionBarLayoutProfile {
-    return this.deps.profile ?? ACTION_BAR_LAYOUT_LEGACY_PROFILE;
+    return this.activeProfile;
+  }
+
+  /** Per-frame: follow a mid-session surface flip (the Interface Mode setting)
+   *  onto that profile's keys. The keys being left are already up to date
+   *  (every edit saves at once), so nothing is written on the way out. The new
+   *  profile's own local copy wins; else its server copy as of login; else it
+   *  starts as a copy of the bar the player was just looking at, never uploaded
+   *  (the "follow until edited" rule). Returns true when the bars re-seeded. */
+  syncProfile(): boolean {
+    const next = this.resolveProfile();
+    if (next === this.activeProfile) return false;
+    const previous = this.activeProfile;
+    this.activeProfile = next;
+    if (actionBarLayoutIsEmpty(this.captureLayout(next))) {
+      const seed = this.serverProfiles?.profiles[next] ?? this.captureLayout(previous);
+      if (!actionBarLayoutIsEmpty(seed)) {
+        applyActionBarLayout(
+          this.deps.storage,
+          this.deps.playerClass,
+          this.deps.playerName,
+          next,
+          seed,
+        );
+      }
+    }
+    this.reload();
+    return true;
+  }
+
+  private resolveProfile(): ActionBarLayoutProfile {
+    return this.deps.profile?.() ?? ACTION_BAR_LAYOUT_LEGACY_PROFILE;
   }
 
   private captureLayout(profile: ActionBarLayoutProfile): ActionBarLayout {

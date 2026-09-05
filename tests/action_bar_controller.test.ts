@@ -728,7 +728,7 @@ function persistHarness(profile?: 'desktop' | 'touch'): {
     knownAbilityIds: () => ['heroic_strike', 'sunder_armor'],
     hasAura: () => false,
     showAttackButton: () => true,
-    profile,
+    profile: profile === undefined ? undefined : () => profile,
     persistLayout: (profile, layout) => persisted.push({ profile, layout }),
   });
   return { controller, storage, persisted };
@@ -901,6 +901,107 @@ describe('ActionBarController per-surface profiles', () => {
     expect(controller.restoreLayout({ source: 'noop' })).toBe(false);
     expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
     expect(persisted).toEqual([]);
+  });
+});
+
+describe('ActionBarController mid-session surface flip (Interface Mode)', () => {
+  const DESKTOP_KEY = 'woc_hotbar_warrior_ActionbarTester';
+  const TOUCH_KEY = 'woc_hotbar_warrior_ActionbarTester_touch';
+
+  function flipHarness(): {
+    controller: ActionBarController;
+    storage: MemoryStorage;
+    persisted: ActionBarLayoutSave[];
+    setTouch: (touch: boolean) => void;
+  } {
+    let touch = false;
+    const storage = new MemoryStorage();
+    const persisted: ActionBarLayoutSave[] = [];
+    const controller = new ActionBarController({
+      storage,
+      playerClass: 'warrior',
+      playerName: 'ActionbarTester',
+      playerLevel: () => 20,
+      talentSpec: () => null,
+      knownAbilityIds: () => ['heroic_strike', 'sunder_armor'],
+      hasAura: () => false,
+      showAttackButton: () => true,
+      profile: () => (touch ? 'touch' : 'desktop'),
+      persistLayout: (profile, layout) => persisted.push({ profile, layout }),
+    });
+    return {
+      controller,
+      storage,
+      persisted,
+      setTouch: (value) => {
+        touch = value;
+      },
+    };
+  }
+
+  it('does nothing while the surface is unchanged', () => {
+    const { controller, setTouch } = flipHarness();
+    controller.init();
+    expect(controller.syncProfile()).toBe(false);
+    setTouch(true);
+    expect(controller.syncProfile()).toBe(true);
+    expect(controller.syncProfile()).toBe(false);
+  });
+
+  it('follows the flip onto the touch keys, seeding them from the bar in view, never uploading', () => {
+    const { controller, storage, persisted, setTouch } = flipHarness();
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    setTouch(true);
+    expect(controller.syncProfile()).toBe(true);
+    expect(controller.profile).toBe('touch');
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(JSON.parse(storage.getItem(TOUCH_KEY) ?? 'null')[0]).toEqual({
+      type: 'ability',
+      id: 'sunder_armor',
+    });
+    expect(persisted).toEqual([]);
+    // An edit after the flip lands under touch; the desktop keys never move.
+    controller.replaceActions(bar('heroic_strike'));
+    controller.saveActions();
+    expect(persisted.map((entry) => entry.profile)).toEqual(['touch']);
+    expect(JSON.parse(storage.getItem(DESKTOP_KEY) ?? 'null')).toEqual(bar('sunder_armor'));
+  });
+
+  it("restores the touch surface's own server copy from the login document on a flip", () => {
+    const { controller, storage, persisted, setTouch } = flipHarness();
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    controller.restoreLayout({
+      source: 'server',
+      profiles: {
+        v: 2,
+        profiles: {
+          desktop: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'sunder_armor' }] } } },
+          touch: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'heroic_strike' }] } } },
+        },
+      },
+    });
+    setTouch(true);
+    expect(controller.syncProfile()).toBe(true);
+    // The phone's arrangement, not a copy of the desktop bar.
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
+    expect(persisted).toEqual([]);
+  });
+
+  it('keeps each surface its own keys when flipping back and forth', () => {
+    const { controller, storage, setTouch } = flipHarness();
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    storage.setItem(TOUCH_KEY, JSON.stringify(bar('heroic_strike')));
+    controller.init();
+    setTouch(true);
+    controller.syncProfile();
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
+    setTouch(false);
+    expect(controller.syncProfile()).toBe(true);
+    expect(controller.profile).toBe('desktop');
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(JSON.parse(storage.getItem(TOUCH_KEY) ?? 'null')).toEqual(bar('heroic_strike'));
   });
 });
 

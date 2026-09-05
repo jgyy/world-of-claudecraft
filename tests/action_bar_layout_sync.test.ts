@@ -147,19 +147,23 @@ describe('sanitizeActionBarLayoutProfiles (the stored per-surface document)', ()
     expect(wire.profiles.touch).toEqual(layoutOf('b'));
   });
 
-  it('ignores unknown profile keys but rejects a garbage profile whole', () => {
+  it('drops unknown profile keys and a garbage profile, keeping the well-formed rest', () => {
     expect(
       sanitizeActionBarLayoutProfiles({
         v: 2,
         profiles: { desktop: layoutOf('a'), vr: layoutOf('x') },
       })?.profiles,
     ).toEqual({ desktop: layoutOf('a') });
+    // A corrupt row at rest loses only the corrupt surface, never the others.
     expect(
       sanitizeActionBarLayoutProfiles({
         v: 2,
         profiles: { desktop: layoutOf('a'), touch: 'nope' },
-      }),
-    ).toBeNull();
+      })?.profiles,
+    ).toEqual({ desktop: layoutOf('a') });
+    expect(
+      sanitizeActionBarLayoutProfiles({ v: 2, profiles: { touch: { v: 1, forms: 'nope' } } }),
+    ).toEqual({ v: 2, profiles: {} });
   });
 
   it('rejects malformed documents and an abusive number of profile keys', () => {
