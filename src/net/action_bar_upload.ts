@@ -30,8 +30,11 @@ export type ActionBarSaveCommand = {
 
 export class ActionBarLayoutUploader {
   private timer: ReturnType<typeof setTimeout> | null = null;
-  private lastJson: string | null = null;
-  private pending: ActionBarLayoutSave | null = null;
+  // One pending save and one last-sent form PER PROFILE: a surface switch inside
+  // the debounce window (edit the desktop bar, flip to touch, edit there) must
+  // send both edits, never let the second profile's save replace the first.
+  private readonly lastJson = new Map<ActionBarLayoutProfile, string>();
+  private readonly pending = new Map<ActionBarLayoutProfile, ActionBarLayoutSave>();
 
   constructor(private readonly send: (command: ActionBarSaveCommand) => void) {}
 
@@ -40,24 +43,26 @@ export class ActionBarLayoutUploader {
   save(profile: ActionBarLayoutProfile, layout: ActionBarLayout): void {
     const clean = sanitizeActionBarLayout(layout);
     if (!clean || actionBarLayoutIsEmpty(clean)) return;
-    const pending: ActionBarLayoutSave = { profile, layout: clean };
-    const json = JSON.stringify(pending);
-    if (json === this.lastJson) return;
-    this.lastJson = json;
-    this.pending = pending;
+    const json = JSON.stringify(clean);
+    if (this.lastJson.get(profile) === json) return;
+    this.lastJson.set(profile, json);
+    this.pending.set(profile, { profile, layout: clean });
     if (this.timer !== null) clearTimeout(this.timer);
     this.timer = setTimeout(() => this.flush(), ACTION_BAR_SAVE_DEBOUNCE_MS);
   }
 
-  /** Send the pending save immediately; a no-op when nothing is pending. */
+  /** Send every pending save immediately, oldest profile first; a no-op when
+   *  nothing is pending. */
   flush(): void {
     if (this.timer !== null) {
       clearTimeout(this.timer);
       this.timer = null;
     }
-    const pending = this.pending;
-    if (pending === null) return;
-    this.pending = null;
-    this.send({ cmd: 'save_hotbar_layout', profile: pending.profile, layout: pending.layout });
+    if (this.pending.size === 0) return;
+    const saves = [...this.pending.values()];
+    this.pending.clear();
+    for (const save of saves) {
+      this.send({ cmd: 'save_hotbar_layout', profile: save.profile, layout: save.layout });
+    }
   }
 }

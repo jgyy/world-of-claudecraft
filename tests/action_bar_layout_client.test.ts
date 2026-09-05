@@ -65,6 +65,25 @@ describe('ActionBarLayoutUploader (debounce + dedup)', () => {
     expect(sent[1].layout).toEqual(B);
   });
 
+  it('keeps one pending save per profile, so a switch inside the window drops nothing', () => {
+    const { up, sent } = uploader();
+    up.save('desktop', A);
+    up.save('touch', B);
+    up.save('desktop', C); // the desktop edit is refined again before the window closes
+    vi.advanceTimersByTime(AFTER_DEBOUNCE);
+    expect(sent.map((command) => [command.profile, command.layout])).toEqual([
+      ['desktop', C],
+      ['touch', B],
+    ]);
+    // Dedupe is per profile too: the same layout again under desktop is skipped,
+    // while touch still sends its own change.
+    up.save('desktop', C);
+    up.save('touch', A);
+    vi.advanceTimersByTime(AFTER_DEBOUNCE);
+    expect(sent).toHaveLength(3);
+    expect(sent[2]).toEqual({ cmd: 'save_hotbar_layout', profile: 'touch', layout: A });
+  });
+
   it('treats the same layout under another profile as a genuine change', () => {
     const { up, sent } = uploader();
     up.save('desktop', A);

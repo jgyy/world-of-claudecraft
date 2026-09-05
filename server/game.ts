@@ -1822,7 +1822,7 @@ export class GameServer {
   // Action-bar layout is a whole-record replacement in its own character column.
   // One FIFO per character so a burst of debounced client saves cannot commit on
   // separate pool clients in reverse order and persist a stale layout.
-  private readonly hotbarLayouts = new HotbarLayoutStore();
+  readonly hotbarLayouts = new HotbarLayoutStore();
   // Serializes every write of the single global Market blob (the 30s autosave
   // and the leave-path combined save). Both serialize the whole market; without
   // a queue their transactions could commit out of capture order and persist an
@@ -3884,7 +3884,7 @@ export class GameServer {
       jailed: state?.jail ?? null,
       jailVisit: null,
       // Re-validate the stored layout (untrusted at rest) before it can wire out.
-      ...hotbarLayoutState(meta.hotbarLayout),
+      ...hotbarLayoutState(meta.hotbarLayout, this.hotbarLayouts.pending(characterId)),
     };
     if (session.jailed) this.teleportJailedSession(session);
     this.ipSessionCounts.set(sessionIp, (this.ipSessionCounts.get(sessionIp) ?? 0) + 1);

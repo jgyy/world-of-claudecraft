@@ -31,7 +31,7 @@ vi.mock('../server/db', () => ({
 
 import { setCharacterHotbarLayout } from '../server/db';
 import { type ClientSession, GameServer } from '../server/game';
-import { mergeHotbarLayoutSave } from '../server/hotbar_layout';
+import { HotbarLayoutStore, mergeHotbarLayoutSave } from '../server/hotbar_layout';
 import type { ActionBarLayout, ActionBarLayoutProfiles } from '../src/world_api/action_bar';
 
 interface FakeClient {
@@ -342,6 +342,77 @@ describe('action-bar layout persistence (wire round trip)', () => {
     // The session survives: a subsequent valid command still processes.
     save(server, session, { profile: 'desktop', layout: LAYOUT });
     await vi.waitFor(() => expect(vi.mocked(setCharacterHotbarLayout)).toHaveBeenCalledTimes(1));
+  });
+});
+
+describe('a queued write outliving its session (logout then a fresh join)', () => {
+  beforeEach(() => {
+    vi.mocked(setCharacterHotbarLayout).mockClear();
+  });
+
+  function deferFirstWrite(): { started: Promise<void>; release: () => void } {
+    let started!: () => void;
+    let release!: () => void;
+    const startedPromise = new Promise<void>((resolve) => {
+      started = resolve;
+    });
+    vi.mocked(setCharacterHotbarLayout).mockImplementationOnce(async () => {
+      started();
+      await new Promise<void>((resolve) => {
+        release = resolve;
+      });
+    });
+    return { started: startedPromise, release: () => release() };
+  }
+
+  it('the store reports the newest document as pending until its write settles', async () => {
+    const store = new HotbarLayoutStore();
+    const session = { characterId: 21, initialHotbarLayoutJson: 'null', hotbarLayout: null };
+    const gate = deferFirstWrite();
+    store.save(session, { profile: 'desktop', layout: LAYOUT });
+    expect(store.pending(21)).toEqual(docOf({ desktop: LAYOUT }));
+    await gate.started;
+    store.save(session, { profile: 'touch', layout: TOUCH_LAYOUT });
+    expect(store.pending(21)).toEqual(docOf({ desktop: LAYOUT, touch: TOUCH_LAYOUT }));
+    gate.release();
+    await vi.waitFor(() => expect(vi.mocked(setCharacterHotbarLayout)).toHaveBeenCalledTimes(2));
+    await vi.waitFor(() => expect(store.pending(21)).toBeNull());
+    expect(store.pending(22)).toBeNull();
+  });
+
+  it("a fresh join seeds from the previous session's still-queued document, not the stale row", async () => {
+    const server = new GameServer();
+    const firstFc = fakeWs();
+    const first = join(server, firstFc, 23, 'Relogger', { hotbarLayout: LAYOUT });
+    const gate = deferFirstWrite();
+    // The last desktop edit of the session is queued (its write is running and
+    // has not committed) when the player logs out.
+    save(server, first, { profile: 'desktop', layout: LAYOUT_AFTER_MIDSESSION_EDIT });
+    await gate.started;
+    await server.leave(first, 'logout');
+    expect(server.hotbarLayouts.pending(23)).toEqual(
+      docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT }),
+    );
+
+    // The fresh login's auth handshake read the row before that commit.
+    const secondFc = fakeWs();
+    const second = join(server, secondFc, 23, 'Relogger', { hotbarLayout: LAYOUT });
+    expect(second).not.toBe(first);
+    expect(second.hotbarLayout).toEqual(docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT }));
+    broadcast(server);
+    expect(lastSnap(secondFc.sent).self.hbl).toEqual(wireOf(LAYOUT_AFTER_MIDSESSION_EDIT));
+
+    // Its first save merges onto the pending document, so the desktop edit
+    // survives the touch save that follows it.
+    save(server, second, { profile: 'touch', layout: TOUCH_LAYOUT });
+    gate.release();
+    await vi.waitFor(() => expect(vi.mocked(setCharacterHotbarLayout)).toHaveBeenCalledTimes(2));
+    const calls = vi.mocked(setCharacterHotbarLayout).mock.calls;
+    expect(calls[0][1]).toEqual(docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT }));
+    expect(calls[1][1]).toEqual(
+      docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT, touch: TOUCH_LAYOUT }),
+    );
+    await vi.waitFor(() => expect(server.hotbarLayouts.pending(23)).toBeNull());
   });
 });
 

@@ -32,11 +32,12 @@ export interface HotbarLayoutState {
 
 /** Session state for a stored column value (untrusted at rest: re-validated
  *  here before it can wire out). Spread into the session at join and assigned
- *  again on a resume, whose auth handshake re-reads the row fresh. A resume
- *  passes the session's `live` document: this session is the character's only
- *  writer, so a document it already holds is at least as new as the row (a
- *  queued write may not have committed yet) and must never regress the merge
- *  base or the wire value. */
+ *  again on a resume, whose auth handshake re-reads the row fresh. `live` is a
+ *  document known to be at least as new as the row: a resume passes the
+ *  session's own (this session is the character's only writer), a fresh join
+ *  passes the store's still-pending document from the previous session, so a
+ *  queued write that has not committed yet never regresses the merge base or
+ *  the wire value. */
 export function hotbarLayoutState(
   stored: unknown,
   live: ActionBarLayoutProfiles | null = null,
@@ -77,6 +78,18 @@ export function mergeHotbarLayoutSave(
 export class HotbarLayoutStore {
   private readonly queues = createKeyedSerialWriter<number>();
   private readonly queued = new Map<number, AbortController>();
+  // The newest merged document per character until its write has settled. A
+  // queued write can outlive its session's logout, so a fresh join whose auth
+  // handshake read the row before that commit seeds from here instead of the
+  // stale row (otherwise its first save would merge onto the old document and
+  // drop the previous session's last edit of the other profile).
+  private readonly documents = new Map<number, ActionBarLayoutProfiles>();
+
+  /** The newest document still on its way to the database for this character,
+   *  or null once every write has settled (the row is then current). */
+  pending(characterId: number): ActionBarLayoutProfiles | null {
+    return this.documents.get(characterId) ?? null;
+  }
 
   /** Validate + merge a client save into the session's document, then persist
    *  the whole document. A dropped payload never crashes the session. */
@@ -88,6 +101,7 @@ export class HotbarLayoutStore {
     this.queued.get(characterId)?.abort();
     const controller = new AbortController();
     this.queued.set(characterId, controller);
+    this.documents.set(characterId, doc);
     void this.queues
       .enqueueCancellable(characterId, controller.signal, () =>
         setCharacterHotbarLayout(characterId, doc),
@@ -98,6 +112,7 @@ export class HotbarLayoutStore {
       })
       .finally(() => {
         if (this.queued.get(characterId) === controller) this.queued.delete(characterId);
+        if (this.documents.get(characterId) === doc) this.documents.delete(characterId);
       });
   }
 }

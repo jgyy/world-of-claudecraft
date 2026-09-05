@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ActionBarLayoutUploader } from '../src/net/action_bar_upload';
 import { ITEMS } from '../src/sim/data';
 import type { PlayerClass } from '../src/sim/types';
 import {
@@ -974,10 +975,9 @@ describe('ActionBarController mid-session surface flip (Interface Mode)', () => 
       type: 'ability',
       id: 'sunder_armor',
     });
-    // The outgoing desktop bar is flushed (under desktop); nothing lands under
-    // touch until the player edits there.
-    expect(persisted.map((entry) => entry.profile)).toEqual(['desktop']);
-    persisted.length = 0;
+    // Nothing uploads on the flip itself: every desktop edit already uploaded
+    // when it saved, and the seeded touch copy is not an edit.
+    expect(persisted).toEqual([]);
     // An edit after the flip lands under touch; the desktop keys never move.
     controller.replaceActions(bar('heroic_strike'));
     controller.saveActions();
@@ -1003,8 +1003,7 @@ describe('ActionBarController mid-session surface flip (Interface Mode)', () => 
     expect(controller.syncProfile()).toBe(true);
     // The phone's arrangement, not a copy of the desktop bar.
     expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
-    // Only the outgoing desktop flush; the touch profile is not re-uploaded.
-    expect(persisted.map((entry) => entry.profile)).toEqual(['desktop']);
+    expect(persisted).toEqual([]);
   });
 
   it('keeps each surface its own keys when flipping back and forth', () => {
@@ -1020,6 +1019,117 @@ describe('ActionBarController mid-session surface flip (Interface Mode)', () => 
     expect(controller.profile).toBe('desktop');
     expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
     expect(JSON.parse(storage.getItem(TOUCH_KEY) ?? 'null')).toEqual(bar('heroic_strike'));
+  });
+
+  it("the login document's newer copy beats this device's stale touch keys on first activation", () => {
+    const { controller, storage, persisted, setTouch } = flipHarness();
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    // Stale: an older session on this device arranged touch differently.
+    storage.setItem(TOUCH_KEY, JSON.stringify(bar('sunder_armor', 'heroic_strike')));
+    controller.init();
+    controller.restoreLayout({
+      source: 'server',
+      profiles: {
+        v: 2,
+        profiles: {
+          desktop: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'sunder_armor' }] } } },
+          touch: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'heroic_strike' }] } } },
+        },
+      },
+    });
+    setTouch(true);
+    expect(controller.syncProfile()).toBe(true);
+    // The other device's newer arrangement, not the stale local one.
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
+    expect(controller.actions[1]).toBeNull();
+    expect(persisted).toEqual([]);
+    // Edits made here this session then take precedence over the login copy on
+    // every later activation.
+    controller.replaceActions(bar('heroic_strike', 'sunder_armor'));
+    controller.saveActions();
+    setTouch(false);
+    controller.syncProfile();
+    setTouch(true);
+    controller.syncProfile();
+    expect(controller.actions[1]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(persisted.map((entry) => entry.profile)).toEqual(['touch']);
+  });
+
+  it('an untouched round trip never materializes the fallback as its own server profile', () => {
+    const { controller, storage, persisted, setTouch } = flipHarness();
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    controller.restoreLayout({
+      source: 'server',
+      profiles: {
+        v: 2,
+        profiles: {
+          desktop: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'sunder_armor' }] } } },
+        },
+      },
+    });
+    setTouch(true);
+    controller.syncProfile();
+    setTouch(false);
+    controller.syncProfile();
+    expect(persisted).toEqual([]);
+    // A desktop edit afterwards uploads under desktop only, so at the next login
+    // the touch surface still follows the desktop bar.
+    controller.replaceActions(bar('heroic_strike'));
+    controller.saveActions();
+    expect(persisted.map((entry) => entry.profile)).toEqual(['desktop']);
+  });
+
+  it('a switch still uploads the outgoing profile when it holds an unsaved in-memory bar', () => {
+    const { controller, storage, persisted, setTouch } = flipHarness();
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    controller.replaceActions(bar('heroic_strike')); // a loadout swap resolved this frame
+    setTouch(true);
+    controller.syncProfile();
+    expect(persisted.map((entry) => entry.profile)).toEqual(['desktop']);
+    expect(JSON.parse(storage.getItem(DESKTOP_KEY) ?? 'null')).toEqual(bar('heroic_strike'));
+  });
+});
+
+describe('ActionBarController + ActionBarLayoutUploader across a surface flip', () => {
+  const DESKTOP_KEY = 'woc_hotbar_warrior_ActionbarTester';
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => vi.useRealTimers());
+
+  it('uploads both profiles when the flip and the second edit land inside one debounce window', () => {
+    let touch = false;
+    const storage = new MemoryStorage();
+    const sent: { profile: string; slot0: unknown }[] = [];
+    const uploader = new ActionBarLayoutUploader((command) =>
+      sent.push({ profile: command.profile, slot0: command.layout.forms.normal?.bar[0] }),
+    );
+    const controller = new ActionBarController({
+      storage,
+      playerClass: 'warrior',
+      playerName: 'ActionbarTester',
+      playerLevel: () => 20,
+      talentSpec: () => null,
+      knownAbilityIds: () => ['heroic_strike', 'sunder_armor'],
+      hasAura: () => false,
+      showAttackButton: () => true,
+      profile: () => (touch ? 'touch' : 'desktop'),
+      persistLayout: (profile, layout) => uploader.save(profile, layout),
+    });
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    controller.replaceActions(bar('heroic_strike'));
+    controller.saveActions(); // desktop edit, still inside the debounce window
+    touch = true;
+    controller.syncProfile();
+    controller.replaceActions(bar('sunder_armor', 'heroic_strike'));
+    controller.saveActions(); // touch edit, same window
+    expect(sent).toEqual([]);
+    vi.advanceTimersByTime(2000);
+    expect(sent).toEqual([
+      { profile: 'desktop', slot0: { type: 'ability', id: 'heroic_strike' } },
+      { profile: 'touch', slot0: { type: 'ability', id: 'sunder_armor' } },
+    ]);
   });
 });
 
