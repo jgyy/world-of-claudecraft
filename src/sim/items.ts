@@ -56,6 +56,7 @@ import { canStackInstancePayloads, itemInstancePayloadsEqual } from './item_inst
 import { meetsLevelRequirement, requiredLevelFor } from './item_level_req';
 import { isItemLocked } from './item_lock';
 import { withoutPartyTradeMarker } from './loot/bop_trade_window';
+import { boundOnUnequipPayload } from './item_binding';
 import { mountOwned, summonMountItem } from './mounts';
 import { learnRiding } from './mounts_training';
 import { battlefieldExperienceTrickle } from './professions/battlefield_xp';
@@ -132,11 +133,25 @@ function payloadWithoutCraftedRecipeId(
   return Object.keys(instance).length > 0 ? instance : undefined;
 }
 
+// The payload a worn piece carries back to the bags. Bind on Equip lands
+// HERE (item_binding.ts): a worn BoE piece needs no marker of its own, but
+// the copy that leaves the paperdoll is bound for good, so it returns as a
+// soulbound instanced slot that can never merge into a plain tradeable
+// stack again. Shared by the bench and its capacity check so the two can
+// never disagree on whether the piece needs an instanced slot.
+function benchedPayloadFor(
+  itemId: string,
+  payload?: ItemInstancePayload,
+): ItemInstancePayload | undefined {
+  return boundOnUnequipPayload(ITEMS[itemId], payload);
+}
+
 function returnEquippedItemToBags(
   meta: PlayerMeta,
   itemId: string,
-  payload?: ItemInstancePayload,
+  worn?: ItemInstancePayload,
 ): void {
+  const payload = benchedPayloadFor(itemId, worn);
   const craftedRecipeId = payload?.craftedRecipeId;
   const instance = payload ? payloadWithoutCraftedRecipeId(payload) : undefined;
   if (instance || craftedRecipeId !== undefined) {
@@ -154,8 +169,9 @@ function returnEquippedItemToBags(
 function canReturnEquippedItemToBags(
   meta: PlayerMeta,
   itemId: string,
-  payload?: ItemInstancePayload,
+  worn?: ItemInstancePayload,
 ): boolean {
+  const payload = benchedPayloadFor(itemId, worn);
   const craftedRecipeId = payload?.craftedRecipeId;
   const instance = payload ? payloadWithoutCraftedRecipeId(payload) : undefined;
   return countFit(meta.inventory, bagPools(meta.bags), itemId, 1, instance, craftedRecipeId) >= 1;

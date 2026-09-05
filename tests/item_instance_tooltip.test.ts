@@ -19,11 +19,13 @@ import {
   instanceMakersMarkLine,
   instancePartyTradeLine,
   isGatheredProvenanceKind,
+  itemBindingLine,
   itemNumber,
   itemStatName,
   wornTooltipInstance,
 } from '../src/ui/item_instance_tooltip';
 import { svgIcon } from '../src/ui/ui_icons';
+import type { ItemDef } from '../src/sim/types';
 
 describe('item_instance_tooltip', () => {
   it('masterwork copy gets the gold seal and no enchanted marker', () => {
@@ -304,6 +306,34 @@ describe('wornTooltipInstance (the eqi-mirror worn projection)', () => {
     ).toBe('');
   });
 
+  it('a worn bind-on-equip piece projects the soulbound marker in both hosts', () => {
+    const boe = { id: 'x', name: 'X', kind: 'armor', slot: 'chest', quality: 'rare' } as ItemDef;
+    const white = { ...boe, quality: 'common' } as ItemDef;
+    // No worn payload at all (the plain worn copy): still bound by its slot.
+    expect(wornTooltipInstance(undefined, boe)).toEqual({ soulbound: true });
+    expect(wornTooltipInstance({ enchant: 'ench_x', boundTo: 7 }, boe)).toEqual({
+      enchant: 'ench_x',
+      soulbound: true,
+    });
+    expect(wornTooltipInstance(undefined, white)).toBeUndefined();
+    expect(wornTooltipInstance({ signer: 'A' }, white)).toEqual({ signer: 'A' });
+  });
+});
+
+// The binding line (src/sim/item_binding.ts itemBindingKind rendered): the
+// gold Soulbound for a BoP def or a copy bound by wearing it, Binds when
+// equipped for a never-worn BoE piece, nothing for gear that never binds.
+describe('itemBindingLine', () => {
+  const boe = { id: 'x', name: 'X', kind: 'armor', slot: 'chest', quality: 'rare' } as ItemDef;
+  it('renders Soulbound, Binds when equipped, or nothing', () => {
+    expect(itemBindingLine({ ...boe, soulbound: true })).toContain('>Soulbound<');
+    expect(itemBindingLine(boe, { soulbound: true })).toContain('>Soulbound<');
+    expect(itemBindingLine(boe)).toContain('>Binds when equipped<');
+    expect(itemBindingLine(boe)).toContain('color:var(--gold)');
+    expect(itemBindingLine({ ...boe, quality: 'common' } as ItemDef)).toBe('');
+    expect(itemBindingLine({ ...boe, kind: 'potion', slot: undefined } as ItemDef)).toBe('');
+  });
+
   it('char_window routes the paperdoll tooltip through the projection (source pin)', () => {
     const charWindow = readFileSync(new URL('../src/ui/char_window.ts', import.meta.url), 'utf8');
     expect(charWindow).toContain('wornTooltipInstance(');
@@ -368,7 +398,9 @@ describe('hud.itemTooltip composition order (source pins)', () => {
   // The mark line takes the def's kind too: the gathered-vs-crafted
   // wording split resolves from item.kind at the one composition site.
   const mark = hud.indexOf('instanceMakersMarkLine(instance, item.kind)');
-  const soulbound = hud.indexOf("t('hudChrome.itemSoulbound')");
+  // The def-level Soulbound line moved into itemBindingLine (bind on equip):
+  // one composition site renders Soulbound / Binds when equipped.
+  const soulbound = hud.indexOf('itemBindingLine(item, instance)');
   const setBlock = hud.indexOf('this.itemSetBlock(item)');
 
   it('composes all three instance line sets exactly once each', () => {

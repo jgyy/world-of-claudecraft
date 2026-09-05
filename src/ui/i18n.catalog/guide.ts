@@ -2466,6 +2466,11 @@ export const guideStrings = {
       'Honor is what fighting other players pays, and the honor quartermasters, FURY in Eastbrook and Warmarshal Draven Kole in Highwatch, keep the Warfare stores that Honor alone buys: whole armor families, jewelry, and weapons no coin merchant carries. The arena page covers how the Honor itself is earned.',
     sourcesRifts:
       'Rifts add one more source once you are at the level cap, and a rift is a race: the group that clears one first wins its rewards. That first clear pays gear on top of everything else the run leaves behind, including a Riftbound band cut to your class role, a ring you will not find anywhere else in the world. A group that finishes second still finishes its own run and keeps the credit for the clear; what it forfeits are the first-clear rewards. The rifts page covers the race itself.',
+    // Bind on equip: src/sim/item_binding.ts bindsOnEquip (every uncommon-or-better
+    // equippable piece that is not already soulbound or a quest item), stamped on
+    // the copy by items.ts the moment a worn piece returns to the bags.
+    bindOnEquipBody:
+      'Most gear sits between those two rules and binds when equipped. Any green, blue, purple, or orange piece you can wear is yours to trade, mail, or list on the market for as long as it has never been worn; the tooltip says "Binds when equipped" while that is true. The first time you put it on, it becomes soulbound to that character for good, and taking it off again does not undo that: a worn piece can still be sold to a vendor, but it never trades, mails, or lists again. Try a piece on only when you mean to keep it.',
     // Bind on trade: the per-copy lock in src/sim/item_instance_transfer.ts. An
     // armed copy may still pass face to face (trade.ts isTradeLocked is boundTo
     // only), which is exactly what stamps it; the anonymous pipes refuse both.

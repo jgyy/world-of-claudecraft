@@ -2619,6 +2619,10 @@ export const hudChromeStrings = {
   // Tooltip marker for a soulbound item (bound to its owner: cannot be traded, mailed,
   // listed, sold, or destroyed). Currency-like reward tokens (Heroic Marks) carry this.
   itemSoulbound: 'Soulbound',
+  // Tooltip marker for a bind-on-equip item that has never been worn
+  // (src/sim/item_binding.ts): it trades, mails, and lists freely until the first
+  // time it is equipped, then reads itemSoulbound above for good.
+  itemBindsOnEquip: 'Binds when equipped',
   // Tooltip marker for a unique-equipped item (every legendary): a character can wear
   // at most one copy of it at a time (src/sim/equipment_rules.ts isUniqueEquipped).
   itemUniqueEquipped: 'Unique-Equipped',

@@ -38,11 +38,13 @@ const RIFT_GEAR_ITEMS = new Set<string>(RIFT_GEAR_ITEM_IDS);
 // trade-locked once its payload carries boundTo: a bound instance stays with
 // its owner and is never offered, revalidated-in, or consumed by a swap.
 // (bindOnTrade only ARMS the lock; boundTo is the applied lock, stamped on the
-// recipient's copy in grantOffer below.) Used at the three trade sites: the
+// recipient's copy in grantOffer below.) A copy soulbound by wearing it
+// (item_binding.ts, the bind-on-equip stamp) is locked the same way, for good.
+// Used at the three trade sites: the
 // offerable-count gate in tradeSetOffer, the confirm-time revalidation in
 // offerCovered, and the removal preference in removeOffer/fitsAfterSwap.
 function isTradeLocked(instance: ItemInstancePayload | undefined): boolean {
-  return instance?.boundTo !== undefined;
+  return instance?.boundTo !== undefined || instance?.soulbound === true;
 }
 
 // The counterparty identity the window gate matches against: the display

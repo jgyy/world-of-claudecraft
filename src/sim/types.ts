@@ -954,6 +954,11 @@ interface BaseItemDef {
   // reward tokens can opt into permanent storage. Enforced in social/trade.ts,
   // mail/post_office.ts, market.ts, and items.ts.
   soulbound?: boolean;
+  // Bind on Equip override (item_binding.ts bindsOnEquip). Absent, every
+  // equippable piece of uncommon quality or better binds to the wearer the
+  // first time it is equipped; `false` keeps one freely tradeable for good,
+  // `true` opts a common piece in. Never combined with `soulbound`.
+  bindOnEquip?: boolean;
   // Vendor service entry: buying this "item" teaches the riding skill instead of
   // adding anything to the bags (items.ts buyItem delegates to learnRiding, which
   // owns every gate: already trained, level, the 80g fee). Only the stablemaster
@@ -1276,6 +1281,13 @@ export interface ItemInstancePayload {
    *  (items.ts): this is an optional mark the owner sets on an otherwise
    *  ordinary copy. */
   locked?: boolean;
+  /** Bound by wearing it (item_binding.ts): stamped `true` when a worn
+   *  bind-on-equip piece returns to the bags, after which the copy can never
+   *  be traded, mailed, listed, or guild-banked again (vendor sale stays
+   *  open). Distinct from `boundTo` above, which a station master can unbind
+   *  for a fee; this one is for good. Additive and JSONB-safe: an absent
+   *  flag is an ordinary never-worn copy. */
+  soulbound?: true;
   /** Bind-on-pickup party trade window (src/sim/loot/bop_trade_window.ts): a
    *  soulbound copy awarded from party boss loot stays tradeable until
    *  `untilMs` (the ctx.lockoutNowMs() clock), but only with the characters

@@ -10,6 +10,7 @@
 // lines it actually caused (instanceBonusStatLines), which is the fact a player
 // is reading the tooltip for.
 import { ENCHANTS } from '../sim/content/enchants';
+import { bindsOnEquip, itemBindingKind } from '../sim/item_binding';
 import { isCommissionEligibleKind } from '../sim/professions/commission';
 import { isEnchantedInstance } from '../sim/professions/enchanting';
 import type { ItemDef, ItemInstancePayload, Stats } from '../sim/types';
@@ -56,13 +57,32 @@ export function itemNumber(value: number, fractionDigits = 0): string {
  *  deliberate); both hosts now agree by sharing this one projection. */
 export function wornTooltipInstance(
   instance?: ItemInstancePayload,
+  /** The worn item's def: a bind-on-equip piece is bound by the slot it sits
+   *  in (item_binding.ts), so its worn tooltip reads Soulbound in both hosts
+   *  without the wire carrying any marker. */
+  item?: ItemDef,
 ): ItemInstancePayload | undefined {
-  if (!instance) return undefined;
+  const bound = bindsOnEquip(item);
+  if (!instance && !bound) return undefined;
   const worn: ItemInstancePayload = {};
-  if (instance.signer !== undefined) worn.signer = instance.signer;
-  if (instance.enchant !== undefined) worn.enchant = instance.enchant;
-  if (instance.rolled !== undefined) worn.rolled = instance.rolled;
+  if (instance?.signer !== undefined) worn.signer = instance.signer;
+  if (instance?.enchant !== undefined) worn.enchant = instance.enchant;
+  if (instance?.rolled !== undefined) worn.rolled = instance.rolled;
+  if (bound) worn.soulbound = true;
   return worn;
+}
+
+/** The item's binding line (item_binding.ts itemBindingKind): the classic gold
+ *  "Soulbound" for a bind-on-pickup def or a copy bound by wearing it, "Binds
+ *  when equipped" for a never-worn bind-on-equip piece, nothing otherwise.
+ *  Rendered where the def-level Soulbound line always sat, right under the
+ *  item-level readout, so the trade window and mail/market hints that key on
+ *  the same predicates agree with the card. */
+export function itemBindingLine(item: ItemDef, instance?: ItemInstancePayload): string {
+  const kind = itemBindingKind(item, instance);
+  if (kind === null) return '';
+  const key = kind === 'soulbound' ? 'hudChrome.itemSoulbound' : 'hudChrome.itemBindsOnEquip';
+  return `<div class="tt-sub" style="color:var(--gold)">${esc(t(key))}</div>`;
 }
 
 /** The Maker's Bond lines (Professions 2.0), rendered in the def

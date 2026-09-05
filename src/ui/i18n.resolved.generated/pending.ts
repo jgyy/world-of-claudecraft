@@ -12,6 +12,8 @@ export const pending: Record<string, readonly string[]> = {
   "es": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -33,6 +35,8 @@ export const pending: Record<string, readonly string[]> = {
   "es_ES": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -54,6 +58,8 @@ export const pending: Record<string, readonly string[]> = {
   "fr_FR": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -75,6 +81,8 @@ export const pending: Record<string, readonly string[]> = {
   "fr_CA": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -97,6 +105,8 @@ export const pending: Record<string, readonly string[]> = {
   "it_IT": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -118,6 +128,8 @@ export const pending: Record<string, readonly string[]> = {
   "de_DE": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -143,6 +155,8 @@ export const pending: Record<string, readonly string[]> = {
   "pt_BR": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -165,6 +179,8 @@ export const pending: Record<string, readonly string[]> = {
   "cs_CZ": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -186,6 +202,8 @@ export const pending: Record<string, readonly string[]> = {
   "nl_NL": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -207,6 +225,8 @@ export const pending: Record<string, readonly string[]> = {
   "pl_PL": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -228,6 +248,8 @@ export const pending: Record<string, readonly string[]> = {
   "id_ID": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -249,6 +271,8 @@ export const pending: Record<string, readonly string[]> = {
   "tr_TR": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -270,6 +294,8 @@ export const pending: Record<string, readonly string[]> = {
   "sv_SE": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -291,6 +317,8 @@ export const pending: Record<string, readonly string[]> = {
   "vi_VN": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",
@@ -312,6 +340,8 @@ export const pending: Record<string, readonly string[]> = {
   "da_DK": [
     "entities.items.reins_chimeglass_tortoise.name",
     "entities.items.reins_mech_bird.name",
+    "guide.gear.bindOnEquipBody",
+    "hudChrome.itemBindsOnEquip",
     "hudChrome.mounts.desc_chimeglass_tortoise",
     "hudChrome.mounts.desc_lanternback_troll",
     "hudChrome.mounts.desc_mech_bird",

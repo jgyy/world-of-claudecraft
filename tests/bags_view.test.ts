@@ -535,6 +535,36 @@ describe('bag mode chain order pin (insertion guard)', () => {
     );
   });
 
+  it('a copy soulbound by wearing it blocks trade, mail, and market but still vendors', () => {
+    const worn = { soulbound: true as const };
+    expect(bagItemAction(ITEMS.sword, { ...NO_MODE, tradeOpen: true }, worn)).toBe(
+      'transferBlockedSoulbound',
+    );
+    expect(bagItemAction(ITEMS.sword, { ...NO_MODE, mailAttach: true }, worn)).toBe(
+      'transferBlockedSoulbound',
+    );
+    expect(bagItemAction(ITEMS.sword, { ...NO_MODE, marketSell: true }, worn)).toBe(
+      'transferBlockedSoulbound',
+    );
+    // The bound copy is still the owner's to sell for gold.
+    expect(bagItemAction(ITEMS.sword, { ...NO_MODE, vendorOpen: true }, worn)).toBe('vendorSell');
+    // The guild pipe refuses it through the shared transfer-lock predicate.
+    expect(bagItemAction(ITEMS.sword, { ...NO_MODE, guildBankDeposit: true }, worn)).toBe(
+      'guildBankDepositBlockedNoTransfer',
+    );
+    // A never-worn copy of the same def keeps every pipe open.
+    expect(bagItemAction(ITEMS.sword, { ...NO_MODE, tradeOpen: true })).toBe('trade');
+    // The hint twin reads Soulbound on the blocked pipes and the sell hint at a vendor.
+    for (const mode of ['tradeOpen', 'mailAttach', 'marketSell'] as const) {
+      expect(bagTooltipHintKey(ITEMS.sword, { ...NO_MODE, [mode]: true }, worn), mode).toBe(
+        'hudChrome.itemSoulbound',
+      );
+    }
+    expect(bagTooltipHintKey(ITEMS.sword, { ...NO_MODE, vendorOpen: true }, worn)).toBe(
+      'itemUi.tooltip.clickSell',
+    );
+  });
+
   it('blocked variants block in place, they never fall through to a lower rung', () => {
     // A mail-blocked item must NOT fall to market-sell even with that mode on.
     expect(bagItemAction(ITEMS.questItem, { ...ALL_MODES, tradeOpen: false })).toBe(

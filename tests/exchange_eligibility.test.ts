@@ -77,6 +77,20 @@ describe('exchangeHardLock: which locks a category tolerates', () => {
     }
   });
 
+  it('a copy soulbound by wearing it (bind on equip) reads as soulbound, in every category', () => {
+    for (const d of [
+      def({ slot: 'chest' }),
+      def({ kind: 'mount', mount: 'valorsteed' }),
+      def({ use: { type: 'mechChroma', chromaId: 'onyx_gold' }, noMarketList: true }),
+    ]) {
+      expect(exchangeHardLock(d, { soulbound: true })).toBe('soulbound');
+    }
+    // The soulbound fact wins over a Maker's Bond on the same copy.
+    expect(exchangeHardLock(def({ slot: 'chest' }), { soulbound: true, boundTo: 7 })).toBe(
+      'soulbound',
+    );
+  });
+
   it('tolerates soulbound ONLY for a mount', () => {
     expect(
       exchangeHardLock(def({ kind: 'mount', mount: 'valorsteed', soulbound: true }), undefined),

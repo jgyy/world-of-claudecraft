@@ -575,6 +575,7 @@ import {
   instanceLockLine,
   instanceMakersMarkLine,
   instancePartyTradeLine,
+  itemBindingLine,
   itemNumber,
   itemStatName,
 } from './item_instance_tooltip';
@@ -6454,11 +6455,9 @@ export class Hud {
         )}</div>`;
       }
     }
-    // Bound-to-owner marker (marks and other soulbound tokens): shown like the
-    // classic "Soulbound" line so a player can see it cannot be traded or destroyed.
-    if (item.soulbound) {
-      html += `<div class="tt-sub" style="color:var(--gold)">${esc(t('hudChrome.itemSoulbound'))}</div>`;
-    }
+    // Binding line (item_instance_tooltip.ts): Soulbound for a bind-on-pickup
+    // def or a copy bound by wearing it, Binds when equipped for a never-worn one.
+    html += itemBindingLine(item, instance);
     // BoP party trade window: qualifies the Soulbound line above while this
     // copy can still be traded to the players who shared its drop
     // (item_instance_tooltip.ts owns the copy rules; the world owns the clock).

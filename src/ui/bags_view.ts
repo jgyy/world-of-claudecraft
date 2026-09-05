@@ -12,6 +12,7 @@
 import { poolCapacityOf, poolOccupancyOf } from '../sim/bag_pools';
 import { BACKPACK_SLOTS } from '../sim/bags';
 import { type BagCells, layoutBagCells } from '../sim/inventory_order';
+import { isSoulboundInstance } from '../sim/item_binding';
 import { isTransferLockedInstance } from '../sim/item_instance_transfer';
 import type { Quality } from '../sim/loot_master';
 import { isMaterialItemId } from '../sim/material_ids';
@@ -175,6 +176,11 @@ export function bagItemAction(
   craftedRecipeId?: string,
 ): BagAction {
   if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
+    return 'transferBlockedSoulbound';
+  // A copy bound by wearing it (item_binding.ts, the bind-on-equip stamp)
+  // refuses every player-to-player pipe like a soulbound def, but it is still
+  // the owner's to vendor, so the vendor arm below stays open.
+  if (isSoulboundInstance(instance) && (mode.tradeOpen || mode.mailAttach || mode.marketSell))
     return 'transferBlockedSoulbound';
   if (mode.tradeOpen) return 'trade';
   if (mode.mailAttach) {
@@ -437,6 +443,8 @@ export function bagTooltipHintKey(
   craftedRecipeId?: string,
 ): BagTooltipHintKey {
   if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
+    return 'hudChrome.itemSoulbound';
+  if (isSoulboundInstance(instance) && (mode.tradeOpen || mode.mailAttach || mode.marketSell))
     return 'hudChrome.itemSoulbound';
   if (mode.tradeOpen) return 'itemUi.tooltip.clickTradeOffer';
   if (mode.mailAttach) {

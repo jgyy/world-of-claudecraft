@@ -164,6 +164,9 @@ export function exchangeHardLock(
   // because `boundTo` is the stronger fact (pid 0 is a real character id, so the
   // read is presence, never truthiness).
   if (isTransferLockedInstance(instance)) {
+    // A copy soulbound by wearing it (the bind-on-equip stamp) reads as the
+    // soulbound fact it is, before the Maker's Bond states.
+    if (instance?.soulbound === true) return 'soulbound';
     return instance?.boundTo !== undefined ? 'bound_copy' : 'bind_armed';
   }
   if (def.soulbound && category !== 'mount') return 'soulbound';

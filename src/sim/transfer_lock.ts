@@ -7,7 +7,8 @@
 import type { ItemInstancePayload } from './types';
 
 /** True when this copy is locked out of the anonymous exchange pipes (market
- *  listing, mail attachment): armed (bindOnTrade) or bound (boundTo). The
+ *  listing, mail attachment): armed (bindOnTrade), bound (boundTo), or
+ *  soulbound by wearing it (item_binding.ts, the bind-on-equip stamp). The
  *  def-level rules (soulbound/quest/noMarketList) stay with each pipe; this is
  *  only the per-copy lock. A plain copy is never locked. NOT the same axis as
  *  the PLAYER item lock (item_lock_flag.ts `locked`, issue 3042): that one is
@@ -17,6 +18,9 @@ import type { ItemInstancePayload } from './types';
  *  a locked copy refuses listing while the seller can lift it in one click. */
 export function isTransferLockedInstance(instance: ItemInstancePayload | undefined): boolean {
   return (
-    instance !== undefined && (instance.bindOnTrade === true || instance.boundTo !== undefined)
+    instance !== undefined &&
+    (instance.bindOnTrade === true ||
+      instance.boundTo !== undefined ||
+      instance.soulbound === true)
   );
 }

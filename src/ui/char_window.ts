@@ -471,6 +471,7 @@ export class CharWindow {
         const world = this.deps.world();
         const instance = wornTooltipInstance(
           world.entities.get(world.playerId)?.equippedInstances?.[slot],
+          item,
         );
         return `${this.deps.itemTooltip(item, instance)}<div class="tt-sub">${esc(t('hudChrome.paperdoll.unequipHint'))}</div>`;
       });

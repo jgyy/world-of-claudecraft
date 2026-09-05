@@ -7919,6 +7919,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'entities.itemSets.wyrmshadow.bonus4': '攻擊強度提高 25 點。你的武器致命一擊有 50% 的機率觸發「獠牙疾襲」，使攻擊速度提高 15%，持續 8 秒。',
   'entities.itemSets.wyrmshadow.bonus6': '攻擊與施法速度提高 4%，命中提高 3%。你的武器致命一擊會撕開「撕裂傷口」，使目標每 2 秒流血 4 點傷害，持續 12 秒。最多疊加 3 層。',
   'hudChrome.itemSoulbound': '靈魂綁定',
+  'hudChrome.itemBindsOnEquip': '裝備後綁定',
   'hudChrome.itemUniqueEquipped': '裝備唯一',
   'hudChrome.itemSet.header': '{name} ({have}/{total})',
   'hudChrome.itemProc.onMeleeHit': '命中時機率（{chance}%）：{effect}',
@@ -12849,6 +12850,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'guide.faqPage.q16': '什麼是世界？',
   'guide.gear.bagsSort':
     '當背包變亂時，背包視窗中的「整理」按鈕一按就能把它收拾乾淨。同一種物品的零散堆疊會被合併，所有東西也會依好讀的順序重新排列：武器與護甲在前，接著是背包、消耗品、工具與坐騎，然後是製作材料，每一種優質材料都緊挨著它的普通版本，再來是任務物品，最後才是灰色雜物，讓你一眼看出該賣掉什麼。過程中絕不會憑空產生或遺失任何東西，只是重新排列，因此隨時按下都很安全。',
+  'guide.gear.bindOnEquipBody': '大多數裝備介於這兩條規則之間：裝備後綁定。任何你能穿戴的綠色、藍色、紫色或橙色物品，只要從未被穿戴過，就可以自由交易、郵寄或在市場上架；在此期間，提示資訊會顯示「裝備後綁定」。你第一次穿上它，它就永久靈魂綁定到該角色，再脫下來也不會解除：穿過的裝備仍可賣給商人，但再也不能交易、郵寄或上架。只有在真正打算留下它時才試穿。',
   'guide.gear.bindOnTradeBody':
     '同樣的想法還有一個較寬鬆的版本：有些東西是交易時綁定，意思是它們只能易手一次，之後便屬於收下它的人。受委託製作的成品會在製作者交出時綁定。遵循這條規則的副本絕不會出現在市場或郵驛上，因為那兩者都是匿名的；它要麼當面遞出，要麼哪兒也去不了，而一旦遞了出去，它就綁定了。物品提示會寫明一件裝備遵循哪條規則，所以在你打算轉賣之前先確認一下。',
   'guide.gear.cosmeticsWeapons':
