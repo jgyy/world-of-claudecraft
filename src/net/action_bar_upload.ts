@@ -13,6 +13,7 @@ import {
   type ActionBarLayout,
   type ActionBarLayoutProfile,
   type ActionBarLayoutSave,
+  actionBarLayoutIsEmpty,
   sanitizeActionBarLayout,
 } from '../world_api/action_bar';
 
@@ -34,10 +35,11 @@ export class ActionBarLayoutUploader {
 
   constructor(private readonly send: (command: ActionBarSaveCommand) => void) {}
 
-  /** Queue one profile's layout; a malformed layout is dropped without a send. */
+  /** Queue one profile's layout; a malformed or empty layout is dropped without
+   *  a send (an empty server copy would win over a real fallback profile). */
   save(profile: ActionBarLayoutProfile, layout: ActionBarLayout): void {
     const clean = sanitizeActionBarLayout(layout);
-    if (!clean) return;
+    if (!clean || actionBarLayoutIsEmpty(clean)) return;
     const pending: ActionBarLayoutSave = { profile, layout: clean };
     const json = JSON.stringify(pending);
     if (json === this.lastJson) return;

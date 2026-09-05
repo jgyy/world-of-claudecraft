@@ -880,6 +880,20 @@ describe('ActionBarController per-surface profiles', () => {
     });
   });
 
+  it('restoreLayout inherits the legacy keys and uploads them when the server holds nothing', () => {
+    const { controller, storage, persisted } = persistHarness('touch');
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    expect(controller.restoreLayout({ source: 'seed' })).toBe(true);
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(persisted).toHaveLength(1);
+    expect(persisted[0].profile).toBe('touch');
+    expect(persisted[0].layout.forms.normal?.bar[0]).toEqual({
+      type: 'ability',
+      id: 'sunder_armor',
+    });
+  });
+
   it('restoreLayout inherits the legacy desktop keys offline when the touch keys are empty', () => {
     const { controller, storage, persisted } = persistHarness('touch');
     storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
@@ -960,7 +974,10 @@ describe('ActionBarController mid-session surface flip (Interface Mode)', () => 
       type: 'ability',
       id: 'sunder_armor',
     });
-    expect(persisted).toEqual([]);
+    // The outgoing desktop bar is flushed (under desktop); nothing lands under
+    // touch until the player edits there.
+    expect(persisted.map((entry) => entry.profile)).toEqual(['desktop']);
+    persisted.length = 0;
     // An edit after the flip lands under touch; the desktop keys never move.
     controller.replaceActions(bar('heroic_strike'));
     controller.saveActions();
@@ -986,7 +1003,8 @@ describe('ActionBarController mid-session surface flip (Interface Mode)', () => 
     expect(controller.syncProfile()).toBe(true);
     // The phone's arrangement, not a copy of the desktop bar.
     expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
-    expect(persisted).toEqual([]);
+    // Only the outgoing desktop flush; the touch profile is not re-uploaded.
+    expect(persisted.map((entry) => entry.profile)).toEqual(['desktop']);
   });
 
   it('keeps each surface its own keys when flipping back and forth', () => {

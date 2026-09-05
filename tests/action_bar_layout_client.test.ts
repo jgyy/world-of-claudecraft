@@ -75,9 +75,10 @@ describe('ActionBarLayoutUploader (debounce + dedup)', () => {
     expect(sent[1].layout).toEqual(A);
   });
 
-  it('drops a malformed layout without scheduling a send', () => {
+  it('drops a malformed or empty layout without scheduling a send', () => {
     const { up, sent } = uploader();
     up.save('desktop', { forms: 'garbage' } as unknown as ActionBarLayout);
+    up.save('touch', { v: 1, forms: {} });
     vi.advanceTimersByTime(AFTER_DEBOUNCE);
     expect(sent).toHaveLength(0);
   });

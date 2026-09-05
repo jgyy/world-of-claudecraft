@@ -142,6 +142,7 @@ export class ActionBarController {
       plan.layout,
     );
     this.reload();
+    if (plan.action === 'seed-profile' && plan.upload) this.persist();
     return true;
   }
 
@@ -150,14 +151,19 @@ export class ActionBarController {
   }
 
   /** Per-frame: follow a mid-session surface flip (the Interface Mode setting)
-   *  onto that profile's keys. The keys being left are already up to date
-   *  (every edit saves at once), so nothing is written on the way out. The new
+   *  onto that profile's keys. The outgoing profile is saved first. The new
    *  profile's own local copy wins; else its server copy as of login; else it
    *  starts as a copy of the bar the player was just looking at, never uploaded
    *  (the "follow until edited" rule). Returns true when the bars re-seeded. */
   syncProfile(): boolean {
     const next = this.resolveProfile();
     if (next === this.activeProfile) return false;
+    // Flush the outgoing profile first, as a form swap does, so an in-memory
+    // bar (a loadout swap resolved this frame) is never stranded: both slots
+    // to storage, then one upload of that profile.
+    this.writeActions();
+    this.writeAttackAction();
+    this.persist();
     const previous = this.activeProfile;
     this.activeProfile = next;
     if (actionBarLayoutIsEmpty(this.captureLayout(next))) {
@@ -465,15 +471,24 @@ export class ActionBarController {
   }
 
   saveActions(): void {
+    this.writeActions();
+    this.persist();
+  }
+
+  saveAttackAction(): void {
+    this.writeAttackAction();
+    this.persist();
+  }
+
+  private writeActions(): void {
     try {
       this.deps.storage.setItem(this.slotMapKey(), JSON.stringify(this.actionState));
     } catch {
       // Storage can be unavailable in private browsing modes.
     }
-    this.persist();
   }
 
-  saveAttackAction(): void {
+  private writeAttackAction(): void {
     try {
       writeAttackSlotAction(
         this.deps.storage,
@@ -483,7 +498,6 @@ export class ActionBarController {
     } catch {
       // Storage can be unavailable in private browsing modes.
     }
-    this.persist();
   }
 
   private slotMapKey(form: HotbarForm = this.activeFormState): string {

@@ -134,17 +134,20 @@ export function applyActionBarLayout(
 //   1. the server holds this profile -> it wins ('apply-server');
 //   2. else the server holds another non-empty profile -> it seeds this one
 //      locally, never uploaded, so the surface follows that bar until edited
-//      here ('seed-profile');
+//      here ('seed-profile', upload false);
 //   3. else (no usable server copy) a non-empty local copy of this profile
 //      seeds the first server copy ('seed-local');
 //   4. else a non-desktop profile inherits the device's legacy (desktop) keys
-//      once, so an upgrade never blanks a phone's bar ('seed-profile');
+//      once, so an upgrade never blanks a phone's bar ('seed-profile'); when
+//      the server holds nothing at all that inherited bar also becomes the
+//      first server copy (upload true), so a touch-only player's arrangement
+//      is backed up without an edit;
 //   5. else nothing (defaults stand).
 // A 'noop' restore (offline, reconnect) keeps the local mirror authoritative
-// and only runs rule 4.
+// and only runs rule 4, without an upload.
 export type ActionBarRestorePlan =
   | { action: 'apply-server'; layout: ActionBarLayout }
-  | { action: 'seed-profile'; layout: ActionBarLayout }
+  | { action: 'seed-profile'; layout: ActionBarLayout; upload: boolean }
   | { action: 'seed-local'; layout: ActionBarLayout }
   | { action: 'none' };
 
@@ -153,26 +156,29 @@ export function planActionBarRestore(
   profile: ActionBarLayoutProfile,
   captureLocal: (profile: ActionBarLayoutProfile) => ActionBarLayout,
 ): ActionBarRestorePlan {
-  if (!restore || restore.source === 'noop') return planLegacyLocalSeed(profile, captureLocal);
+  if (!restore || restore.source === 'noop') {
+    return planLegacyLocalSeed(profile, captureLocal, false);
+  }
   if (restore.source === 'server') {
     const resolved = resolveActionBarLayoutProfile(restore.profiles, profile);
     if (resolved?.profile === profile) return { action: 'apply-server', layout: resolved.layout };
-    if (resolved) return { action: 'seed-profile', layout: resolved.layout };
+    if (resolved) return { action: 'seed-profile', layout: resolved.layout, upload: false };
   }
   const local = captureLocal(profile);
   if (!actionBarLayoutIsEmpty(local)) return { action: 'seed-local', layout: local };
-  return planLegacyLocalSeed(profile, captureLocal);
+  return planLegacyLocalSeed(profile, captureLocal, true);
 }
 
 function planLegacyLocalSeed(
   profile: ActionBarLayoutProfile,
   captureLocal: (profile: ActionBarLayoutProfile) => ActionBarLayout,
+  upload: boolean,
 ): ActionBarRestorePlan {
   if (profile === ACTION_BAR_LAYOUT_LEGACY_PROFILE) return { action: 'none' };
   if (!actionBarLayoutIsEmpty(captureLocal(profile))) return { action: 'none' };
   const legacy = captureLocal(ACTION_BAR_LAYOUT_LEGACY_PROFILE);
   if (actionBarLayoutIsEmpty(legacy)) return { action: 'none' };
-  return { action: 'seed-profile', layout: legacy };
+  return { action: 'seed-profile', layout: legacy, upload };
 }
 
 function safeParse(raw: string): unknown {

@@ -399,7 +399,7 @@ describe('planActionBarRestore (the locked merge rule)', () => {
       'touch',
       () => local,
     );
-    expect(plan).toEqual({ action: 'seed-profile', layout: server });
+    expect(plan).toEqual({ action: 'seed-profile', layout: server, upload: false });
   });
 
   it('a server document with nothing usable behaves like no copy at all', () => {
@@ -423,17 +423,27 @@ describe('planActionBarRestore (the locked merge rule)', () => {
     expect(touch).toEqual({ action: 'seed-local', layout: local });
   });
 
-  it('a non-desktop profile with nothing anywhere inherits the legacy desktop keys locally', () => {
+  it('a non-desktop profile with nothing anywhere inherits the legacy desktop keys', () => {
     const legacy = layoutOf('legacy');
+    // The server holds nothing: the inherited bar also becomes the first
+    // server copy, so a touch-only player is backed up without an edit.
     expect(
       planActionBarRestore({ source: 'seed' }, 'touch', localOnly({ desktop: legacy })),
-    ).toEqual({ action: 'seed-profile', layout: legacy });
+    ).toEqual({ action: 'seed-profile', layout: legacy, upload: true });
+    expect(
+      planActionBarRestore(
+        { source: 'server', profiles: { v: 2, profiles: {} } },
+        'touch',
+        localOnly({ desktop: legacy }),
+      ),
+    ).toEqual({ action: 'seed-profile', layout: legacy, upload: true });
+    // Offline / reconnect: local only, never an upload.
     expect(
       planActionBarRestore({ source: 'noop' }, 'touch', localOnly({ desktop: legacy })),
-    ).toEqual({ action: 'seed-profile', layout: legacy });
+    ).toEqual({ action: 'seed-profile', layout: legacy, upload: false });
     expect(
       planActionBarRestore({ source: 'noop' }, 'gamepad', localOnly({ desktop: legacy })),
-    ).toEqual({ action: 'seed-profile', layout: legacy });
+    ).toEqual({ action: 'seed-profile', layout: legacy, upload: false });
   });
 
   it('both absent seeds nothing (defaults stand)', () => {
