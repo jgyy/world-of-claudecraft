@@ -217,7 +217,7 @@ export interface GuildRosterView {
 }
 
 /** The roster view WITHOUT the per-member rows guildView also maps: the
- *  footer and the click handler only need these three facts, and a 500-seat
+ *  footer and the click handler only need these three facts, and a 1,000-seat
  *  roster makes the row mapping the expensive half of a rebuild. Null for a
  *  guildless viewer. A mirror from an older server carries neither roster
  *  field and falls back to the base roster with nothing to buy. */

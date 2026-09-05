@@ -387,8 +387,8 @@ describeDb('admin guild production SQL (real Postgres)', () => {
   });
 
   it('pins the roster bound the detail read and rename guard share', () => {
-    // The 500-seat charter: base seats plus every roster page.
-    expect(ROSTER_CAP).toBe(500);
+    // The 1,000-seat hard cap: base seats plus every roster page.
+    expect(ROSTER_CAP).toBe(1000);
   });
 
   it('pages and counts the name-sorted branch, scoped to this realm', async () => {

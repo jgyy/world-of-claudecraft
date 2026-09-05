@@ -27,11 +27,11 @@ const meta = (sim: Sim) => {
 };
 
 describe('guild roster ladder (data-as-code pins)', () => {
-  it('pins the base roster, the page size, and the 500-seat ceiling', () => {
+  it('pins the base roster, the page size, and the 1,000-seat hard cap', () => {
     expect(GUILD_ROSTER_BASE_MEMBERS).toBe(100);
     expect(GUILD_ROSTER_PAGE_SEATS).toBe(20);
-    expect(GUILD_ROSTER_MAX_PAGES).toBe(20);
-    expect(GUILD_ROSTER_MAX_MEMBERS).toBe(500);
+    expect(GUILD_ROSTER_MAX_PAGES).toBe(45);
+    expect(GUILD_ROSTER_MAX_MEMBERS).toBe(1000);
   });
 
   it('prices page n at 20 gold times n squared, in whole gold, rising every page', () => {
@@ -45,11 +45,22 @@ describe('guild roster ladder (data-as-code pins)', () => {
     });
   });
 
-  it('pins the headline prices: 20g first, 8,000g last, 57,400g for the whole charter', () => {
+  it('pins the headline prices: 20g first, 8,000g for page 20, 40,500g last', () => {
     expect(GUILD_ROSTER_PAGE_PRICES[0]).toBe(20 * GOLD);
-    expect(GUILD_ROSTER_PAGE_PRICES[GUILD_ROSTER_MAX_PAGES - 1]).toBe(8_000 * GOLD);
-    const total = GUILD_ROSTER_PAGE_PRICES.reduce((sum, p) => sum + p, 0);
-    expect(total).toBe(57_400 * GOLD);
+    expect(GUILD_ROSTER_PAGE_PRICES[19]).toBe(8_000 * GOLD);
+    expect(GUILD_ROSTER_PAGE_PRICES[GUILD_ROSTER_MAX_PAGES - 1]).toBe(40_500 * GOLD);
+  });
+
+  it('pins the totals: 500 seats for 57,400g, 700 for 189,100g, the hard cap for 627,900g', () => {
+    // The owner's bar (2026-09-05): the ladder keeps going past 500 seats, but
+    // the square must price anything meaningfully past it beyond the realm's
+    // whole gold supply (on the order of 150,000 gold when this shipped), so
+    // the 1,000-seat hard cap is an engineering bound the curve never reaches.
+    const totalThrough = (pages: number): number =>
+      GUILD_ROSTER_PAGE_PRICES.slice(0, pages).reduce((sum, p) => sum + p, 0);
+    expect(totalThrough(20), '500 seats').toBe(57_400 * GOLD);
+    expect(totalThrough(30), '700 seats').toBe(189_100 * GOLD);
+    expect(totalThrough(GUILD_ROSTER_MAX_PAGES), '1,000 seats').toBe(627_900 * GOLD);
   });
 });
 
@@ -84,7 +95,8 @@ describe('guildRosterCap / guildRosterNextPagePrice', () => {
   it('looks the next price up by pages bought and goes null once the ladder is done', () => {
     expect(guildRosterNextPagePrice(0)).toBe(20 * GOLD);
     expect(guildRosterNextPagePrice(1)).toBe(80 * GOLD);
-    expect(guildRosterNextPagePrice(GUILD_ROSTER_MAX_PAGES - 1)).toBe(8_000 * GOLD);
+    expect(guildRosterNextPagePrice(19)).toBe(8_000 * GOLD);
+    expect(guildRosterNextPagePrice(GUILD_ROSTER_MAX_PAGES - 1)).toBe(40_500 * GOLD);
     expect(guildRosterNextPagePrice(GUILD_ROSTER_MAX_PAGES)).toBeNull();
     expect(guildRosterNextPagePrice(GUILD_ROSTER_MAX_PAGES + 4)).toBeNull();
   });

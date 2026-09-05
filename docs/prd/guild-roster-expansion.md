@@ -2,7 +2,9 @@
 
 Status: implemented for release/v0.42.0. Owner ask captured 2026-09-04: Guild
 Masters can buy a larger guild for gold, 20 gold for the first 20 seats, scaling
-from there, with 500 seats costing a ridiculous amount.
+from there, with 500 seats costing a ridiculous amount. Amended 2026-09-05: the
+ladder keeps going past 500 seats at ever more gold, hard-capped at 1,000 seats
+to be safe.
 
 ## Why
 
@@ -28,16 +30,37 @@ hundred.
 | 10   | 300         | 2,000g     | 7,700g     |
 | 15   | 400         | 4,500g     | 24,800g    |
 | 20   | 500         | 8,000g     | 57,400g    |
+| 25   | 600         | 12,500g    | 110,500g   |
+| 30   | 700         | 18,000g    | 189,100g   |
+| 45   | 1,000       | 40,500g    | 627,900g   |
+
+Selected pages only: the cumulative column sums every page up to that row,
+including the ones the table skips (pages 16 to 19 alone total 24,600 gold,
+which is why 24,800 jumps to 57,400 rather than to 32,800).
 
 Why a square rather than the doubling the bank ladders use: doubling every rung
 from 20 gold reaches ten million gold by page 20, and doubling every second rung
 makes 300 seats almost free (about 1,500 gold) while the last hundred seats cost
 forty thousand. The square keeps the early pages within reach of a guild that has
-just outgrown 100 members (200 seats for 1,100 gold total) and still makes the
-full charter the largest single gold sink in the game (the priciest existing
-rung anywhere is 120 gold). The whole table is one data-as-code constant
-(`GUILD_ROSTER_PAGE_PRICES` in `src/sim/guild_roster.ts`), so the curve is a
-one-table change; `tests/guild_roster.test.ts` pins the formula and the totals.
+just outgrown 100 members (200 seats for 1,100 gold total) and still makes a
+500-seat charter (57,400 gold) the largest single gold sink in the game (the
+priciest existing rung anywhere is 120 gold). The whole table is one
+data-as-code constant (`GUILD_ROSTER_PAGE_PRICES` in `src/sim/guild_roster.ts`)
+built from the formula, so the curve is a one-line change;
+`tests/guild_roster.test.ts` pins the formula and the totals.
+
+## The hard cap: 1,000 seats
+
+The ladder does not stop at 500. It runs to 45 pages (1,000 seats), and the
+square is what makes everything meaningfully past 500 unreachable rather than a
+rule: 600 seats is 110,500 gold in total and 700 seats is 189,100, more than the
+whole gold supply in circulation on the realm when this shipped (on the order of
+150,000 gold). The cap itself (`GUILD_ROSTER_MAX_MEMBERS`) is an engineering
+bound, chosen at the realm's concurrent-player target so a single guild can
+never outgrow what the server is sized for: the rename fan-out, the admin
+backoffice reads, the page compare-and-set, and the world map's label budget
+are all bounded by it. If the economy ever grows past the curve, the cap is
+still one constant.
 
 ## Who pays, and from where
 
@@ -79,7 +102,7 @@ from the membership row; the atomic seat (`addGuildMemberAtomic`) reads
 `roster_pages` from the guild row under the same `FOR UPDATE` lock as the seat,
 so a page landing between a caller's snapshot and the seat is honoured and no
 caller-supplied limit exists any more. The admin backoffice pages the roster at
-the absolute ceiling (`GUILD_ROSTER_MAX_MEMBERS`, 500) and bounds the rename
+the absolute ceiling (`GUILD_ROSTER_MAX_MEMBERS`, 1,000) and bounds the rename
 fan-out by it.
 
 ## What the player sees
@@ -95,6 +118,7 @@ its largest size" and is disabled. Everyone else sees only the count.
 - Admin dashboard: surface the bought cap on the guild detail page.
 - A treasury-paid option, if wanted, needs a guild bank ledger op and belongs
   in a guild bank phase.
-- The world map's label-sprite budget was raised to cover a 500-seat guild
-  entirely online (`TEXT_SPRITE_LIMIT`); measure on low-end mobile if such a
-  guild ever exists.
+- The world map's label-sprite budget was raised to cover a 1,000-seat guild
+  entirely online (`TEXT_SPRITE_LIMIT`, about 27MB of canvas backing store in
+  that pathological case); measure on low-end mobile if such a guild ever
+  exists.

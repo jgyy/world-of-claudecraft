@@ -1222,7 +1222,7 @@ describe('guilds', () => {
       Array.from({ length: beyond }, (_, index) => index + 1),
     );
 
-    expect(GUILD_ROSTER_MAX_MEMBERS).toBe(500);
+    expect(GUILD_ROSTER_MAX_MEMBERS).toBe(1000);
     expect(h.tx.renamed).toHaveLength(GUILD_ROSTER_MAX_MEMBERS);
     expect(h.tx.renamed.at(-1)?.id).toBe(GUILD_ROSTER_MAX_MEMBERS);
   });
@@ -3051,7 +3051,7 @@ describe('guild roster expansion', () => {
     expect(rosterEvents(h, 1)).toEqual([{ type: 'guildRosterResult', code: 'maxed' }]);
     expect(h.tx.purse.get(1)).toBe(100_000 * GOLD);
     const snap = await h.svc.snapshot(1);
-    expect(snap.guild?.memberCap).toBe(500);
+    expect(snap.guild?.memberCap).toBe(1000);
     expect(snap.guild?.nextRosterPrice).toBeNull();
   });
 

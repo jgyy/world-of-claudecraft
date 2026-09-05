@@ -12,12 +12,20 @@
 // THE PRICE CURVE (data-as-code, ALWAYS a table lookup by pages already
 // bought, never a client-supplied value): page n (1-based) costs
 // GUILD_ROSTER_PAGE_BASE_COPPER * n * n, so the first page is 20 gold, the
-// second 80, the tenth 2,000, and the twentieth 8,000; every seat on page n
-// costs n squared gold. Filling the whole charter (500 seats) costs 57,400
-// gold in total. The square keeps the early pages within reach of a guild
-// that has just outgrown its base roster while making the last hundred seats
-// a realm-notable sink; tests/guild_roster.test.ts pins the formula, the
-// whole-gold property, and the totals.
+// second 80, the tenth 2,000, the twentieth 8,000 (500 seats for 57,400 gold
+// in total), and the forty-fifth 40,500; every seat on page n costs n squared
+// gold. The square keeps the early pages within reach of a guild that has
+// just outgrown its base roster while making everything past 500 seats cost
+// more than the realm holds: 700 seats (30 pages) is 189,100 gold in total,
+// above the whole gold supply in circulation when this shipped.
+// tests/guild_roster.test.ts pins the formula, the whole-gold property, and
+// the totals.
+//
+// THE HARD CAP (GUILD_ROSTER_MAX_MEMBERS, 1,000 seats, 45 pages, 627,900 gold
+// in total) is an engineering bound, not the design's ceiling: the rename
+// fan-out, the admin backoffice reads, the page compare-and-set, and the map
+// label budget are all bounded by it, and it sits where the curve has already
+// priced the roster far past any purse the realm can assemble.
 //
 // The persisted count is the number of pages BOUGHT (guilds.roster_pages), not
 // the cap: the cap and the next price both derive from it here, so a tampered
@@ -39,19 +47,22 @@ export const GUILD_ROSTER_PAGE_SEATS = 20;
 /** Copper price of the FIRST page (20 gold); page n costs this times n squared. */
 export const GUILD_ROSTER_PAGE_BASE_COPPER = 200_000;
 
+/** How many pages the ladder has: the purchase cap (the hard cap in the
+ *  header, 1,000 seats). */
+export const GUILD_ROSTER_MAX_PAGES = 45;
+
 /** Copper price of each page, indexed by pages ALREADY bought (index 0 is the
- *  first page). Literal on purpose, like the bank ladders: the table is the
- *  contract, and the formula in the header is what the test pins it to. */
-export const GUILD_ROSTER_PAGE_PRICES: readonly number[] = [
-  200_000, 800_000, 1_800_000, 3_200_000, 5_000_000, 7_200_000, 9_800_000, 12_800_000, 16_200_000,
-  20_000_000, 24_200_000, 28_800_000, 33_800_000, 39_200_000, 45_000_000, 51_200_000, 57_800_000,
-  64_800_000, 72_200_000, 80_000_000,
-];
+ *  first page): the header's formula, materialised once so every price read
+ *  stays a table lookup by pages bought (the bank ladder idiom) and never a
+ *  client-supplied value. tests/guild_roster.test.ts pins the headline
+ *  anchors as literals (20g first, 8,000g twentieth, 40,500g last, and the
+ *  57,400g and 627,900g totals), so a drift in the formula reddens there. */
+export const GUILD_ROSTER_PAGE_PRICES: readonly number[] = Array.from(
+  { length: GUILD_ROSTER_MAX_PAGES },
+  (_, index) => GUILD_ROSTER_PAGE_BASE_COPPER * (index + 1) * (index + 1),
+);
 
-/** How many pages the ladder has: the purchase cap. */
-export const GUILD_ROSTER_MAX_PAGES = GUILD_ROSTER_PAGE_PRICES.length;
-
-/** The largest roster any guild can reach (500): the absolute bound every
+/** The largest roster any guild can reach (1,000): the absolute bound every
  *  roster read pages at and every fan-out is bounded by. */
 export const GUILD_ROSTER_MAX_MEMBERS =
   GUILD_ROSTER_BASE_MEMBERS + GUILD_ROSTER_MAX_PAGES * GUILD_ROSTER_PAGE_SEATS;
