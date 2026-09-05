@@ -23,8 +23,8 @@ import { svgIcon } from './ui_icons';
 import { usdDollarsText } from './usd_text';
 import { walletCardKeys } from './wallet_card_keys';
 import type { WalletConnectionView } from './wallet_connection_view';
-import { walletCardDismissible } from './woc_wallet_card_dismiss';
 import { wocTokensText } from './woc_tokens_text';
+import { walletCardDismissible } from './woc_wallet_card_dismiss';
 
 /** The browse faces' control row: the sort control LEADS the row (the 15 QA
  *  sign-off note), the filters follow it, the pager closes the row. Pure

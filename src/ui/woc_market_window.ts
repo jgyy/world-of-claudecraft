@@ -49,12 +49,6 @@ import {
   walletBridgeReasonText,
 } from './wallet_bridge_reason_text';
 import { overWalletBalance } from './woc_affordable_core';
-import {
-  loadWalletCardDismissal,
-  saveWalletCardDismissal,
-  walletCardDismissible,
-  walletCardHidden,
-} from './woc_wallet_card_dismiss';
 import { wocActivityHtml } from './woc_market_activity_html';
 import {
   wocBidDisclosuresHtml,
@@ -72,8 +66,8 @@ import {
   wocWalletCardSig,
 } from './woc_market_chrome';
 import type { WocMarketHooks } from './woc_market_hooks';
-import { type PendingQuote, wocQuoteHtml } from './woc_market_quote_html';
 import { anyBondAwaitingChain, shouldPollWocMarket } from './woc_market_poll_core';
+import { type PendingQuote, wocQuoteHtml } from './woc_market_quote_html';
 import {
   wocBondPendingText,
   wocPaymentPendingText,
@@ -91,6 +85,12 @@ import {
   wocQuoteCountdownSig,
 } from './woc_market_view';
 import { wocTokensText } from './woc_tokens_text';
+import {
+  loadWalletCardDismissal,
+  saveWalletCardDismissal,
+  walletCardDismissible,
+  walletCardHidden,
+} from './woc_wallet_card_dismiss';
 
 // The hooks contract lives in its own leaf module (wiring, window, and the
 // trade arm all consume it); re-exported here so importers keep one home.
