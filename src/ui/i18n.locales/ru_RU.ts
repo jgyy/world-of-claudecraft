@@ -1077,6 +1077,19 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.social.billboard.result.set': 'Доска объявлений гильдии обновлена.',
   'hudChrome.social.billboard.result.notOfficer':
     'Редактировать доску объявлений могут только офицеры и глава гильдии.',
+  'hudChrome.social.roster.seats': '{count} из {cap} мест',
+  'hudChrome.social.roster.expand': 'Расширить состав (+{seats} мест за {price})',
+  'hudChrome.social.roster.maxed': 'Состав гильдии уже максимального размера',
+  'hudChrome.social.roster.confirm':
+    'Расширить состав гильдии на {seats} мест за {price}? Золото списывается из вашего собственного кошелька и не возвращается.',
+  'hudChrome.social.roster.confirmAction': 'Расширить',
+  'hudChrome.social.roster.expandedLine': '{name} расширяет состав гильдии до {cap} участников.',
+  'hudChrome.social.roster.result.notLeader':
+    'Расширять состав гильдии может только глава гильдии.',
+  'hudChrome.social.roster.result.maxed': 'Состав гильдии больше нельзя расширить.',
+  'hudChrome.social.roster.result.cannotAfford': 'Для расширения состава гильдии нужно {price}.',
+  'hudChrome.social.roster.result.retry':
+    'Состав гильдии изменился во время покупки. Попробуйте ещё раз.',
   'hudChrome.party.promoteLeader': 'Назначить лидером',
   'hudChrome.party.inviteUsage': 'Кого пригласить? Использование: /invite <имя>.',
   'hudChrome.masterLoot.thresholdLabel': 'Порог качества',

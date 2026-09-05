@@ -282,8 +282,11 @@ const MONOLITHS: MonolithRow[] = [
     // here that cannot live anywhere else: the import, the field, its
     // relocalize() call, and the three-line event arm (the card itself is
     // src/ui/realm_builder_popup.ts). Re-measured on the merged tree: 18879
-    // plus those six. Exact merged count, zero slack; maintainer-review item.
-    ceiling: 18885,
+    // plus those six (18885). Exact merged count, zero slack; maintainer-review item.
+    // Lowered 18885 -> 18858 by the guild roster expansion (PR #3874), which
+    // extracted 27 lines from this file into the roster page modules. Exact
+    // merged count, zero slack; maintainer-review item.
+    ceiling: 18858,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -599,7 +602,16 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 10641,
+    // chatChannelHint and chatSenderFlair moved to their own server/ modules
+    // (the roster-expansion dispatch and transport spread landed in their
+    // place): the ratchet lowers with them.
+    // Lowered 10635 -> 10614 by the guild roster purchase rework: the
+    // post-COMMIT save acknowledgement moved to
+    // server/character_save_acknowledge.ts (shared by the market custody
+    // path and the roster coordinator), which more than paid for the
+    // coordinator's wiring and the quarantine hook's audit surface. Exact
+    // count, zero slack.
+    ceiling: 10614,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -661,7 +673,9 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 5908,
+    // wrapAngle and copyPos moved to src/net/interp_math.ts: the ratchet
+    // lowers with them.
+    ceiling: 5896,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
