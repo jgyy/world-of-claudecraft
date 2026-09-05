@@ -510,7 +510,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "ec3fc2cb",
+      "state": "94870c0b",
       "events": "3bed5181",
       "rng": {
         "draws": 0,
@@ -584,6 +584,9 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             }
           ],
@@ -681,7 +684,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "c37ed30f",
+      "state": "794eb8ab",
       "events": "b8569d6c",
       "rng": {
         "draws": 0,
@@ -754,10 +757,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             }
           ],
@@ -855,7 +864,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "4c1d6eef",
+      "state": "55b4298b",
       "events": "47b456bf",
       "rng": {
         "draws": 0,
@@ -928,10 +937,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             }
           ],
@@ -1042,7 +1057,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "61e027a4",
+      "state": "d82b1e10",
       "events": "c6cc92f6",
       "rng": {
         "draws": 0,
@@ -1111,10 +1126,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             }
           ],
@@ -1225,7 +1246,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "397d50a9",
+      "state": "585c677d",
       "events": "a0a3df55",
       "rng": {
         "draws": 0,
@@ -1295,10 +1316,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             }
           ],
@@ -1419,7 +1446,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "e4a9dbfe",
+      "state": "b0484192",
       "events": "0bc06cb5",
       "rng": {
         "draws": 0,
@@ -1493,10 +1520,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             }
           ],
@@ -1617,7 +1650,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "04f11cfb",
+      "state": "7ce61947",
       "events": "a7c4dd14",
       "rng": {
         "draws": 0,
@@ -1692,10 +1725,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             },
             {
@@ -1820,7 +1859,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "44df1f0a",
+      "state": "5cdb1dae",
       "events": "d52c6f9c",
       "rng": {
         "draws": 0,
@@ -1895,10 +1934,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             },
             {
@@ -2029,7 +2074,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "99bd0517",
+      "state": "b9f8ea33",
       "events": "03450c48",
       "rng": {
         "draws": 0,
@@ -2105,10 +2150,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             },
             {
@@ -2243,7 +2294,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "ff923a22",
+      "state": "004fe4b6",
       "events": "80d9aa71",
       "rng": {
         "draws": 0,
@@ -2319,10 +2370,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             },
             {
@@ -2453,7 +2510,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 999,
-      "state": "ff923a22",
+      "state": "004fe4b6",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2529,10 +2586,16 @@
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "cryptbone_helm"
             },
             {
               "count": 1,
+              "instance": {
+                "soulbound": true
+              },
               "itemId": "roadwardens_helm"
             },
             {
