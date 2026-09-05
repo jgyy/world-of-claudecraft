@@ -1307,6 +1307,11 @@ export const nl_NL: EnTranslations = {
       "separate": "{meter} loskoppelen",
       "regroup": "{meter} weer samenvoegen"
     },
+    "targetDots": {
+      "title": "Target Dots",
+      "row": "{aura} on {target}",
+      "overflow": "{count} more not shown"
+    },
     "targetAuras": {
       "title": "Auras van het doel",
       "keybindLabel": "Buffs en debuffs van het doel",
@@ -1598,6 +1603,9 @@ export const nl_NL: EnTranslations = {
       "showTargetOfTarget": "Doelwit van doelwit tonen",
       "showTargetSwingTimer": "Aanvalstimer van doelwit tonen",
       "showPetFrame": "Je huisdier tonen",
+      "showNameplateDots": "Show My Dots on Nameplates",
+      "nameplateDotScale": "Nameplate Dot Size",
+      "showTargetDots": "Show Target Dots",
       "waterRipples": "Waterrimpels (kielzog)",
       "showAttackButton": "Aanvalsknop Tonen",
       "showDailyRewardsChest": "Kist met dagelijkse beloningen tonen",
@@ -2985,7 +2993,8 @@ export const nl_NL: EnTranslations = {
         "playerFrame": "Speler",
         "targetFrame": "Doelwit",
         "partyFrames": "Groep",
-        "swingBar": "Automatische Aanval"
+        "swingBar": "Automatische Aanval",
+        "targetDots": "Target Dots"
       },
       "framesMenu": "Frame-instellingen",
       "framesMenuTitle": "Toon of verberg afzonderlijke frames. Een uitgevinkt frame blijft verborgen tot je het weer aanvinkt of terugzet naar de standaardinstellingen.",

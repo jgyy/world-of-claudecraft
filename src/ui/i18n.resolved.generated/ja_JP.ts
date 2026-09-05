@@ -1307,6 +1307,11 @@ export const ja_JP: EnTranslations = {
       "separate": "{meter}を分離",
       "regroup": "{meter}を統合"
     },
+    "targetDots": {
+      "title": "ターゲットデバフ",
+      "row": "{aura} on {target}",
+      "overflow": "他に{count}件は非表示"
+    },
     "targetAuras": {
       "title": "ターゲットのオーラ",
       "keybindLabel": "ターゲットのバフとデバフ",
@@ -1598,6 +1603,9 @@ export const ja_JP: EnTranslations = {
       "showTargetOfTarget": "ターゲットのターゲットを表示",
       "showTargetSwingTimer": "ターゲットの攻撃タイマーを表示",
       "showPetFrame": "自分のペットを表示",
+      "showNameplateDots": "ネームプレートに自分のデバフを表示",
+      "nameplateDotScale": "ネームプレートのデバフ表示サイズ",
+      "showTargetDots": "ターゲットデバフ一覧を表示",
       "waterRipples": "水面の波紋（航跡）",
       "showAttackButton": "攻撃ボタンを表示",
       "showDailyRewardsChest": "デイリー報酬の宝箱を表示",
@@ -2985,7 +2993,8 @@ export const ja_JP: EnTranslations = {
         "playerFrame": "プレイヤー",
         "targetFrame": "ターゲット",
         "partyFrames": "パーティ",
-        "swingBar": "オートアタック"
+        "swingBar": "オートアタック",
+        "targetDots": "ターゲットデバフ"
       },
       "framesMenu": "フレーム設定",
       "framesMenuTitle": "各フレームの表示・非表示を切り替えます。チェックを外したフレームは、再度チェックするか初期設定に戻すまで非表示のままです。",
