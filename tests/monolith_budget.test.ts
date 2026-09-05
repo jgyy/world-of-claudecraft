@@ -279,7 +279,10 @@ const MONOLITHS: MonolithRow[] = [
     // is the six lines that cannot live anywhere else: the import, the
     // field, its relocalize() call, and the three-line event arm. Exact
     // merged count, zero slack; maintainer-review item.
-    ceiling: 18911,
+    // Down 18911 -> 18900 for the per-surface action-bar profiles: the
+    // world-entry restore moved into ActionBarController.restoreLayout, so
+    // the HUD keeps one poll and one refresh call. Exact count.
+    ceiling: 18900,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -595,7 +598,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 10641,
+    // Down 10641 -> 10624 for the per-surface action-bar profiles: the
+    // join read, the per-profile merge and the FIFO write moved to
+    // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
+    ceiling: 10624,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -657,7 +663,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    ceiling: 5908,
+    // Down 5908 -> 5883 for the per-surface action-bar profiles: the
+    // debounced upload moved to src/net/action_bar_upload.ts
+    // (ActionBarLayoutUploader). Exact count.
+    ceiling: 5883,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

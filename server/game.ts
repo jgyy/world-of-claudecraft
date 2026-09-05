@@ -111,7 +111,6 @@ import {
   STABLE_TIMER_WIRE_VERSION,
   type StableTimerWireVersion,
 } from '../src/world_api';
-import { type ActionBarLayout, sanitizeActionBarLayout } from '../src/world_api/action_bar';
 import { sameAppearance } from '../src/world_api/appearance';
 import { recordOnlineSample } from './admin_db';
 import { type AdminGuildBankView, adminGuildBankView } from './admin_guild_bank_view';
@@ -206,7 +205,6 @@ import {
   saveMarketState,
   saveRiftState,
   setAccountWeaponSkinLoadout,
-  setCharacterHotbarLayout,
   touchCharacterLogin,
   walletForAccount,
 } from './db';
@@ -274,6 +272,7 @@ import {
   loadGuildBanksIntoSim,
 } from './guild_bank_state';
 import { createPaidGuildWithLeaderAtomic } from './guild_create_db';
+import { type HotbarLayoutState, HotbarLayoutStore, hotbarLayoutState } from './hotbar_layout';
 import { gameMetricsCounters, type WsDropCause } from './http/game_signals';
 import { bgWideInterestApplies, buildSharedInterestCandidates } from './interest_candidates';
 import { IpBlockList } from './ip_block';
@@ -984,7 +983,7 @@ const DAILY_REWARD_ACTIVITY_MS = 60_000;
 const RELAY_COOLDOWN_MS = 8_000; // min gap between a player's "!" community posts
 const ADMIN_LOCATION_POI_RADIUS = 32;
 
-export interface ClientSession extends MovementInputSessionState {
+export interface ClientSession extends MovementInputSessionState, HotbarLayoutState {
   ws: WebSocket;
   accountId: number;
   accountCosmetics: AccountCosmetics;
@@ -1257,12 +1256,6 @@ export interface ClientSession extends MovementInputSessionState {
     priorGm: boolean;
     stowedPet: PetState | null;
   } | null;
-  // The character's stored action-bar layout as loaded at join (already
-  // bounds-validated), or null when the character has never saved one. Sent to
-  // the owning client exactly once via the `hbl` self field (self-scoped: never
-  // an entity/broadcast field), then frozen; subsequent client saves persist to
-  // the DB and never re-echo here. null wires as an explicit "seed from local".
-  initialHotbarLayout: ActionBarLayout | null;
 }
 
 interface SentEntityVersions {
@@ -1829,7 +1822,7 @@ export class GameServer {
   // Action-bar layout is a whole-record replacement in its own character column.
   // One FIFO per character so a burst of debounced client saves cannot commit on
   // separate pool clients in reverse order and persist a stale layout.
-  private readonly hotbarLayoutSaveQueues = createKeyedSerialWriter<number>();
+  private readonly hotbarLayouts = new HotbarLayoutStore();
   // Serializes every write of the single global Market blob (the 30s autosave
   // and the leave-path combined save). Both serialize the whole market; without
   // a queue their transactions could commit out of capture order and persist an
@@ -3624,14 +3617,6 @@ export class GameServer {
       });
   }
 
-  private enqueueHotbarLayoutSave(characterId: number, layout: ActionBarLayout): void {
-    void this.hotbarLayoutSaveQueues
-      .enqueue(characterId, () => setCharacterHotbarLayout(characterId, layout))
-      .catch((err) => {
-        console.error('failed to save hotbar layout:', err);
-      });
-  }
-
   join(
     ws: WebSocket,
     accountId: number,
@@ -3667,7 +3652,7 @@ export class GameServer {
         // The character's stored action-bar layout (characters.hotbar_layout),
         // passed through from the join handler's DB read. Untrusted at rest, so
         // it is re-validated here before it reaches the client.
-        hotbarLayout?: ActionBarLayout | null;
+        hotbarLayout?: unknown;
         // The character's authored modular look (characters.appearance),
         // normalized at write. Stamped onto the world entity so it rides the
         // identity wire (`app`) to every client in view.
@@ -3899,7 +3884,7 @@ export class GameServer {
       jailed: state?.jail ?? null,
       jailVisit: null,
       // Re-validate the stored layout (untrusted at rest) before it can wire out.
-      initialHotbarLayout: sanitizeActionBarLayout(meta.hotbarLayout),
+      ...hotbarLayoutState(meta.hotbarLayout),
     };
     if (session.jailed) this.teleportJailedSession(session);
     this.ipSessionCounts.set(sessionIp, (this.ipSessionCounts.get(sessionIp) ?? 0) + 1);
@@ -4076,7 +4061,7 @@ export class GameServer {
     // rather than being reset to null, matching the sibling bankBonus
     // "absent means keep" pattern above.
     if (meta.hotbarLayout !== undefined) {
-      session.initialHotbarLayout = sanitizeActionBarLayout(meta.hotbarLayout);
+      Object.assign(session, hotbarLayoutState(meta.hotbarLayout));
     }
     // The freshly-read look, same "absent means keep" contract as the layout
     // above. ws_auth always supplies it on a real reconnect, so a redesign
@@ -7236,15 +7221,13 @@ export class GameServer {
       case 'set_helm':
         sim.setHelmHidden(msg.hidden === true, pid);
         break;
-      // Per-character action-bar layout upload (untrusted client input). Validate
-      // + bound the payload; a malformed/oversized layout is dropped silently
-      // (never crashes the session). A clean layout is persisted to the
-      // character's own JSONB column via the per-character FIFO save queue.
-      case 'save_hotbar_layout': {
-        const layout = sanitizeActionBarLayout(msg.layout);
-        if (layout) this.enqueueHotbarLayoutSave(session.characterId, layout);
+      // Per-character action-bar layout upload (untrusted client input). The
+      // store validates + bounds the payload (a malformed one is dropped, never
+      // crashing the session), merges the named profile into the session's
+      // document, and persists it via the per-character FIFO save queue.
+      case 'save_hotbar_layout':
+        this.hotbarLayouts.save(session, msg);
         break;
-      }
       // Skin-select event lock-in. The Sim re-validates the skin against the
       // rank it rolled and consumes the event token; a forged claim no-ops.
       case 'claim_event_skin':

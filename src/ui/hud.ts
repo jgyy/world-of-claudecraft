@@ -387,11 +387,7 @@ import {
   ACTION_BAR_ABILITY_SLOTS_PER_ROW,
   actionBarRowForSlot,
 } from './hud/action_bar/action_bar_layout_core';
-import {
-  applyActionBarLayout,
-  captureActionBarLayout,
-  planActionBarRestore,
-} from './hud/action_bar/action_bar_layout_sync';
+import { actionBarLayoutProfileForSurface } from './hud/action_bar/action_bar_layout_sync';
 import { isActionBarEditAllowed } from './hud/action_bar/action_bar_lock';
 import { ActionBarPainter } from './hud/action_bar/action_bar_painter';
 import {
@@ -2249,10 +2245,13 @@ export class Hud {
       knownAbilityIds: () => this.sim.known.map((known) => known.def.id),
       hasAura: (kind) => this.sim.player.auras.some((aura) => aura.kind === kind),
       showAttackButton: () => this.optionsHooks?.settings.get('showAttackButton') ?? true,
+      // The arrangement profile for this device's interface (desktop or touch),
+      // read from the same body.mobile-touch signal every touch-gated path uses.
+      profile: actionBarLayoutProfileForSurface(this.isMobileLayout()),
       // Persistence seam: online, the ClientWorld debounces a per-character wire
       // save; offline, Sim.saveActionBarLayout is a no-op (localStorage is the
       // store). The controller always writes the localStorage mirror itself.
-      persistLayout: (layout) => this.sim.saveActionBarLayout(layout),
+      persistLayout: (profile, layout) => this.sim.saveActionBarLayout(profile, layout),
     });
     this.delveTracker = new DelveTrackerController({
       element: $('#delve-tracker'),
@@ -7162,26 +7161,16 @@ export class Hud {
   }
 
   // Runs once at world entry (polled each frame until the world resolves the
-  // decision): reconcile the device's local action-bar layout with the server
-  // copy. Offline resolves immediately to 'noop'. Online waits for the login
-  // self-payload, then either the server copy WINS (overwrite the local mirror
-  // and re-seed the controller) or the local layout seeds the first server copy.
+  // decision): reconcile this device's profile of the action-bar layout with
+  // the server copy (ActionBarController.restoreLayout owns the rule). Offline
+  // resolves immediately to 'noop'; online it waits for the login self-payload.
   private maybeRestoreActionBarLayout(): void {
     if (this.actionBarLayoutRestored) return;
     const restore = this.sim.takeActionBarLayoutRestore();
     if (restore === undefined) return; // still pending (online, pre-login-payload)
     this.actionBarLayoutRestored = true;
-    const playerClass = this.sim.cfg.playerClass;
-    const playerName = this.sim.player.name;
-    const plan = planActionBarRestore(restore, () =>
-      captureActionBarLayout(localStorage, playerClass, playerName),
-    );
-    if (plan.action === 'apply-server') {
-      applyActionBarLayout(localStorage, playerClass, playerName, plan.layout);
-      this.actionBarController.reload();
+    if (this.actionBarController.restoreLayout(restore)) {
       this.spellbookWindow.refreshHotbarControls();
-    } else if (plan.action === 'seed-local') {
-      this.sim.saveActionBarLayout(plan.layout);
     }
   }
 

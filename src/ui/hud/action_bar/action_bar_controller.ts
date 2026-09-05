@@ -1,6 +1,11 @@
 import { ABILITIES, ITEMS } from '../../../sim/data';
 import type { PlayerClass } from '../../../sim/types';
-import type { ActionBarLayout } from '../../../world_api/action_bar';
+import {
+  ACTION_BAR_LAYOUT_LEGACY_PROFILE,
+  type ActionBarLayout,
+  type ActionBarLayoutProfile,
+  type ActionBarLayoutRestore,
+} from '../../../world_api/action_bar';
 import { knownItemDef } from '../../known_item';
 import { isStanceBarAbilityGroup } from '../../stance_bar_view';
 import { ACTION_BAR_ABILITY_SLOTS } from './action_bar_layout_core';
@@ -8,7 +13,9 @@ import {
   actionBarFormSeededKey,
   actionBarSlotMapKey,
   actionBarStealthInitializedKey,
+  applyActionBarLayout,
   captureActionBarLayout,
+  planActionBarRestore,
 } from './action_bar_layout_sync';
 import {
   actionForAttackSlot,
@@ -49,12 +56,17 @@ export interface ActionBarControllerDeps {
   knownAbilityIds(): readonly string[];
   hasAura(kind: string): boolean;
   showAttackButton(): boolean;
+  // The input-surface profile this controller arranges (the desktop keyboard
+  // row or the touch ring): it scopes every localStorage key and every upload,
+  // so a phone's arrangement never overwrites a PC's. Absent means the legacy
+  // (desktop) keys, which is what every pre-profile device already holds.
+  profile?: ActionBarLayoutProfile;
   // The persistence seam: called after a user-driven layout change (never during
-  // initial load) with the FULL captured layout. Offline it is a no-op
-  // (localStorage is the store); online the ClientWorld debounces a wire save.
-  // Optional so an offline/test controller with no server persistence just skips
-  // it and keeps its byte-identical localStorage behavior.
-  persistLayout?(layout: ActionBarLayout): void;
+  // initial load) with the profile and its FULL captured layout. Offline it is a
+  // no-op (localStorage is the store); online the ClientWorld debounces a wire
+  // save. Optional so an offline/test controller with no server persistence just
+  // skips it and keeps its byte-identical localStorage behavior.
+  persistLayout?(profile: ActionBarLayoutProfile, layout: ActionBarLayout): void;
 }
 
 /** Owns action-bar pages, migrations, persistence, and attack-slot assignment. */
@@ -93,11 +105,47 @@ export class ActionBarController {
     this.ready = true;
   }
 
+  /** World-entry reconciliation of this profile's local mirror with the server
+   *  restore signal (planActionBarRestore owns the rule). A server copy or a
+   *  fallback seed is written into the mirror and the bars re-seed from it;
+   *  a first server copy is uploaded through the persistence seam. Returns true
+   *  when the bars were re-seeded, so the caller can refresh any slot views. */
+  restoreLayout(restore: ActionBarLayoutRestore): boolean {
+    const plan = planActionBarRestore(restore, this.profile, (profile) =>
+      this.captureLayout(profile),
+    );
+    if (plan.action === 'seed-local') {
+      this.persist();
+      return false;
+    }
+    if (plan.action === 'none') return false;
+    applyActionBarLayout(
+      this.deps.storage,
+      this.deps.playerClass,
+      this.deps.playerName,
+      this.profile,
+      plan.layout,
+    );
+    this.reload();
+    return true;
+  }
+
+  get profile(): ActionBarLayoutProfile {
+    return this.deps.profile ?? ACTION_BAR_LAYOUT_LEGACY_PROFILE;
+  }
+
+  private captureLayout(profile: ActionBarLayoutProfile): ActionBarLayout {
+    return captureActionBarLayout(
+      this.deps.storage,
+      this.deps.playerClass,
+      this.deps.playerName,
+      profile,
+    );
+  }
+
   private persist(): void {
     if (!this.ready || !this.deps.persistLayout) return;
-    this.deps.persistLayout(
-      captureActionBarLayout(this.deps.storage, this.deps.playerClass, this.deps.playerName),
-    );
+    this.deps.persistLayout(this.profile, this.captureLayout(this.profile));
   }
 
   get activeForm(): HotbarForm {
@@ -393,7 +441,7 @@ export class ActionBarController {
   }
 
   private slotMapKey(form: HotbarForm = this.activeFormState): string {
-    return actionBarSlotMapKey(this.deps.playerClass, this.deps.playerName, form);
+    return actionBarSlotMapKey(this.deps.playerClass, this.deps.playerName, this.profile, form);
   }
 
   private shouldAutoPlaceOnForm(id: string, form: HotbarForm): boolean {

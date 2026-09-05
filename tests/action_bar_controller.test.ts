@@ -6,7 +6,7 @@ import {
   ActionBarController,
 } from '../src/ui/hud/action_bar/action_bar_controller';
 import type { HotbarAction } from '../src/ui/hud/action_bar/hotbar';
-import type { ActionBarLayout } from '../src/world_api/action_bar';
+import type { ActionBarLayoutSave } from '../src/world_api/action_bar';
 
 class MemoryStorage {
   readonly values = new Map<string, string>();
@@ -712,28 +712,29 @@ describe('ActionBarController: passives never occupy an action slot', () => {
   });
 });
 
-describe('ActionBarController persistence seam', () => {
-  function persistHarness(): {
-    controller: ActionBarController;
-    storage: MemoryStorage;
-    persisted: ActionBarLayout[];
-  } {
-    const storage = new MemoryStorage();
-    const persisted: ActionBarLayout[] = [];
-    const controller = new ActionBarController({
-      storage,
-      playerClass: 'warrior',
-      playerName: 'ActionbarTester',
-      playerLevel: () => 20,
-      talentSpec: () => null,
-      knownAbilityIds: () => ['heroic_strike', 'sunder_armor'],
-      hasAura: () => false,
-      showAttackButton: () => true,
-      persistLayout: (layout) => persisted.push(layout),
-    });
-    return { controller, storage, persisted };
-  }
+function persistHarness(profile?: 'desktop' | 'touch'): {
+  controller: ActionBarController;
+  storage: MemoryStorage;
+  persisted: ActionBarLayoutSave[];
+} {
+  const storage = new MemoryStorage();
+  const persisted: ActionBarLayoutSave[] = [];
+  const controller = new ActionBarController({
+    storage,
+    playerClass: 'warrior',
+    playerName: 'ActionbarTester',
+    playerLevel: () => 20,
+    talentSpec: () => null,
+    knownAbilityIds: () => ['heroic_strike', 'sunder_armor'],
+    hasAura: () => false,
+    showAttackButton: () => true,
+    profile,
+    persistLayout: (profile, layout) => persisted.push({ profile, layout }),
+  });
+  return { controller, storage, persisted };
+}
 
+describe('ActionBarController persistence seam', () => {
   it('does NOT persist while loading during init (only user changes upload)', () => {
     const { controller, persisted } = persistHarness();
     controller.init();
@@ -746,7 +747,12 @@ describe('ActionBarController persistence seam', () => {
     controller.replaceActions(bar('heroic_strike'));
     controller.saveActions();
     expect(persisted).toHaveLength(1);
-    expect(persisted[0].forms.normal?.bar[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
+    // No profile wired means the legacy desktop keys and the desktop upload.
+    expect(persisted[0].profile).toBe('desktop');
+    expect(persisted[0].layout.forms.normal?.bar[0]).toEqual({
+      type: 'ability',
+      id: 'heroic_strike',
+    });
   });
 
   it('does NOT persist while re-seeding from storage in reload (server-wins restore)', () => {
@@ -780,6 +786,121 @@ describe('ActionBarController persistence seam', () => {
       type: 'ability',
       id: 'heroic_strike',
     });
+  });
+});
+
+describe('ActionBarController per-surface profiles', () => {
+  const DESKTOP_KEY = 'woc_hotbar_warrior_ActionbarTester';
+  const TOUCH_KEY = 'woc_hotbar_warrior_ActionbarTester_touch';
+
+  it('a touch controller reads and writes the touch keys and uploads the touch profile', () => {
+    const { controller, storage, persisted } = persistHarness('touch');
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    storage.setItem(TOUCH_KEY, JSON.stringify(bar('heroic_strike')));
+    controller.init();
+    expect(controller.profile).toBe('touch');
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
+
+    controller.replaceActions(bar('sunder_armor', 'heroic_strike'));
+    controller.saveActions();
+    // The touch keys moved; the desktop keys are byte-identical.
+    expect(JSON.parse(storage.getItem(TOUCH_KEY) ?? 'null')[1]).toEqual({
+      type: 'ability',
+      id: 'heroic_strike',
+    });
+    expect(JSON.parse(storage.getItem(DESKTOP_KEY) ?? 'null')).toEqual(bar('sunder_armor'));
+    expect(persisted).toHaveLength(1);
+    expect(persisted[0].profile).toBe('touch');
+    expect(persisted[0].layout.forms.normal?.bar[1]).toEqual({
+      type: 'ability',
+      id: 'heroic_strike',
+    });
+  });
+
+  it('restoreLayout applies the server copy of its own profile without re-uploading', () => {
+    const { controller, storage, persisted } = persistHarness('touch');
+    controller.init();
+    const reloaded = controller.restoreLayout({
+      source: 'server',
+      profiles: {
+        v: 2,
+        profiles: {
+          desktop: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'sunder_armor' }] } } },
+          touch: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'heroic_strike' }] } } },
+        },
+      },
+    });
+    expect(reloaded).toBe(true);
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
+    expect(JSON.parse(storage.getItem(TOUCH_KEY) ?? 'null')[0]).toEqual({
+      type: 'ability',
+      id: 'heroic_strike',
+    });
+    // The desktop profile never lands in this device's desktop keys.
+    expect(storage.getItem(DESKTOP_KEY)).toBeNull();
+    expect(persisted).toEqual([]);
+  });
+
+  it('restoreLayout seeds a surface with no copy from the desktop profile, never uploading', () => {
+    const { controller, storage, persisted } = persistHarness('touch');
+    controller.init();
+    const reloaded = controller.restoreLayout({
+      source: 'server',
+      profiles: {
+        v: 2,
+        profiles: {
+          desktop: { v: 1, forms: { normal: { bar: [{ type: 'ability', id: 'sunder_armor' }] } } },
+        },
+      },
+    });
+    expect(reloaded).toBe(true);
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(JSON.parse(storage.getItem(TOUCH_KEY) ?? 'null')[0]).toEqual({
+      type: 'ability',
+      id: 'sunder_armor',
+    });
+    // Following, not forking: the touch profile is uploaded only on a real edit.
+    expect(persisted).toEqual([]);
+    controller.replaceActions(bar('heroic_strike'));
+    controller.saveActions();
+    expect(persisted.map((entry) => entry.profile)).toEqual(['touch']);
+  });
+
+  it('restoreLayout uploads a non-empty local copy when the server has no document', () => {
+    const { controller, storage, persisted } = persistHarness('touch');
+    storage.setItem(TOUCH_KEY, JSON.stringify(bar('heroic_strike')));
+    controller.init();
+    const reloaded = controller.restoreLayout({ source: 'seed' });
+    expect(reloaded).toBe(false);
+    expect(persisted).toHaveLength(1);
+    expect(persisted[0].profile).toBe('touch');
+    expect(persisted[0].layout.forms.normal?.bar[0]).toEqual({
+      type: 'ability',
+      id: 'heroic_strike',
+    });
+  });
+
+  it('restoreLayout inherits the legacy desktop keys offline when the touch keys are empty', () => {
+    const { controller, storage, persisted } = persistHarness('touch');
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    const reloaded = controller.restoreLayout({ source: 'noop' });
+    expect(reloaded).toBe(true);
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(JSON.parse(storage.getItem(TOUCH_KEY) ?? 'null')[0]).toEqual({
+      type: 'ability',
+      id: 'sunder_armor',
+    });
+    expect(persisted).toEqual([]);
+  });
+
+  it('restoreLayout leaves a desktop controller alone offline (the legacy behavior)', () => {
+    const { controller, storage, persisted } = persistHarness();
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('sunder_armor')));
+    controller.init();
+    expect(controller.restoreLayout({ source: 'noop' })).toBe(false);
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(persisted).toEqual([]);
   });
 });
 

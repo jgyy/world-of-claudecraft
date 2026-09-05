@@ -212,8 +212,13 @@ export type {
   ActionBarFormLayout,
   ActionBarLayout,
   ActionBarLayoutForm,
+  ActionBarLayoutProfile,
+  ActionBarLayoutProfiles,
   ActionBarLayoutRestore,
+  ActionBarLayoutSave,
+  ActionBarLayoutWire,
   ActionBarSlotAction,
+  StoredActionBarLayout,
 } from './world_api/action_bar';
 export type { BankBonusSource, BankInfo, VaultInfo, VaultSpecialRef } from './world_api/bank';
 export type {

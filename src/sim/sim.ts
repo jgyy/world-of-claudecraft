@@ -1,6 +1,7 @@
 import type {
   AccountCosmetics,
   ActionBarLayout,
+  ActionBarLayoutProfile,
   ActionBarLayoutRestore,
   ActiveConsecration,
   ActiveFrostRing,
@@ -4258,7 +4259,7 @@ export class Sim {
   // reconcile ('noop' leaves the localStorage-loaded bars untouched). Keeping
   // these host-agnostic no-ops here is what stops the offline Sim ever becoming
   // aware of a persistence host.
-  saveActionBarLayout(_layout: ActionBarLayout): void {
+  saveActionBarLayout(_profile: ActionBarLayoutProfile, _layout: ActionBarLayout): void {
     // Offline: the controller already wrote localStorage; nothing else to do.
   }
 
