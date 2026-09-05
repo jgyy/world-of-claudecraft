@@ -93,6 +93,13 @@ export interface DungeonMinimapPaintModel {
   markers: DungeonMapMarker[];
 }
 
+/** A world position that selects which instance to draw: the local player's by
+ *  default, or a party member's when the plan is viewed from outside. */
+export interface MapAnchor {
+  x: number;
+  z: number;
+}
+
 export interface DungeonMapLocal {
   dungeonId: string;
   layout: DungeonLayout;
@@ -298,8 +305,13 @@ function collectMarkers(
     }
   }
 
-  const playerPoint = projection.point(local.lx, local.lz);
-  markers.push({ kind: 'player', ...playerPoint, angle: -p.facing });
+  // The player arrow only when the local player stands in THIS instance: a plan
+  // drawn for a party member's dungeon from outside carries no own-position.
+  const self = dungeonMapLocal(p.pos.x, p.pos.z);
+  if (self && self.originX === local.originX && self.originZ === local.originZ) {
+    const playerPoint = projection.point(self.lx, self.lz);
+    markers.push({ kind: 'player', ...playerPoint, angle: -p.facing });
+  }
   return markers;
 }
 
@@ -354,9 +366,10 @@ function buildModel(
   canvasWidth: number,
   canvasHeight: number,
   cacheKey: string | null,
+  anchor: MapAnchor | undefined,
 ): DungeonMapModel | null {
-  const p = world.player;
-  const local = dungeonMapLocal(p.pos.x, p.pos.z);
+  const at = anchor ?? world.player.pos;
+  const local = dungeonMapLocal(at.x, at.z);
   if (!local) return null;
   const plan = planFor(local.layout);
   const projection = projectionFor(local, plan);
@@ -403,6 +416,7 @@ export function buildDungeonMinimapModel(
     canvasSize,
     canvasSize,
     null,
+    undefined,
   );
 }
 
@@ -462,6 +476,7 @@ export function buildDungeonWorldMapModel(
   world: IWorld,
   canvasSize: number,
   pad: number,
+  anchor?: MapAnchor,
 ): DungeonMapModel | null {
   return buildModel(
     world,
@@ -484,6 +499,7 @@ export function buildDungeonWorldMapModel(
     canvasSize,
     canvasSize,
     `world:${canvasSize}:${pad}`,
+    anchor,
   );
 }
 
@@ -609,9 +625,12 @@ class DungeonMarkerBuffer {
       }
     }
 
-    const playerCx = baseX - (player.pos.x - frame.ox) * scale;
-    const playerCy = baseY - (player.pos.z - frame.oz) * scale;
-    this.next('player', playerCx, playerCy).angle = -player.facing;
+    const self = dungeonInstanceAt(player.pos.x, player.pos.z);
+    if (self && self.ox === frame.ox && self.oz === frame.oz) {
+      const playerCx = baseX - (player.pos.x - frame.ox) * scale;
+      const playerCy = baseY - (player.pos.z - frame.oz) * scale;
+      this.next('player', playerCx, playerCy).angle = -player.facing;
+    }
     return this.markers;
   }
 }
@@ -679,9 +698,14 @@ export class DungeonMapViewCore {
     return this.minimapModel;
   }
 
-  worldMap(world: IWorld, canvasSize: number, pad: number): DungeonMapModel | null {
-    const player = world.player;
-    const frame = dungeonInstanceAt(player.pos.x, player.pos.z);
+  worldMap(
+    world: IWorld,
+    canvasSize: number,
+    pad: number,
+    anchor?: MapAnchor,
+  ): DungeonMapModel | null {
+    const at = anchor ?? world.player.pos;
+    const frame = dungeonInstanceAt(at.x, at.z);
     if (!frame || hasDedicatedCastleMap(frame.interior)) return null;
     const plan = planFor(frame.layout);
     if (
@@ -690,7 +714,7 @@ export class DungeonMapViewCore {
       this.worldSize !== canvasSize ||
       this.worldPad !== pad
     ) {
-      const cold = buildDungeonWorldMapModel(world, canvasSize, pad);
+      const cold = buildDungeonWorldMapModel(world, canvasSize, pad, anchor);
       if (!cold) return null;
       if (!this.worldModel) {
         this.worldModel = { ...cold, markers: this.worldMarkers.markers };
