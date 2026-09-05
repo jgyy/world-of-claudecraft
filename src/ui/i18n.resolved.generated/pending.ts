@@ -20,10 +20,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "es_ES": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -36,10 +44,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "fr_FR": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -52,10 +68,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "fr_CA": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -68,10 +92,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "en_CA": [],
   "it_IT": [
@@ -85,10 +117,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "de_DE": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -101,10 +141,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "zh_CN": [],
   "zh_TW": [],
@@ -121,10 +169,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "ru_RU": [],
   "cs_CZ": [
@@ -138,10 +194,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "nl_NL": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -154,10 +218,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "pl_PL": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -170,10 +242,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "id_ID": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -186,10 +266,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "tr_TR": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -202,10 +290,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "sv_SE": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -218,10 +314,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "vi_VN": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -234,10 +338,18 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ],
   "da_DK": [
     "entities.items.reins_chimeglass_tortoise.name",
@@ -250,9 +362,17 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.mounts.name_chimeglass_tortoise",
     "hudChrome.mounts.name_lanternback_troll",
     "hudChrome.mounts.name_mech_bird",
+    "hudChrome.realmBuilder.close",
+    "hudChrome.realmBuilder.currentLabel",
+    "hudChrome.realmBuilder.pastEmpty",
+    "hudChrome.realmBuilder.pastTitle",
+    "hudChrome.realmBuilder.placeholderHint",
+    "hudChrome.realmBuilder.placeholderName",
+    "hudChrome.realmBuilder.title",
     "hudChrome.wocStore.mountBuyAria",
     "hudChrome.wocStore.mountsEyebrow",
     "hudChrome.wocStore.mountsTitle",
-    "sim.rift.forgeGemReplaced"
+    "sim.rift.forgeGemReplaced",
+    "worldContent.realmBuilderMonumentName"
   ]
 };
