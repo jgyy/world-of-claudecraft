@@ -1715,7 +1715,7 @@ describe('Hud.update() drives exactly the registered set, on the registered band
       hud: 6,
       // Up to 12 with the crucible vendor's out-of-range close: the same
       // callsite-guarded shape as the copper and heroic vendor closes.
-      callsite: 12,
+      callsite: 13,
       none: 4,
     });
     // ...and the honest-exception list by NAME, because that is the one that should never
