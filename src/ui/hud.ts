@@ -571,7 +571,7 @@ import {
 } from './item_affix_tooltip';
 import { itemArmorTypeLabelKey } from './item_armor_type';
 import { requiredClassesForTooltip } from './item_class_restriction';
-import { itemStatDeltas } from './item_compare';
+import { itemStatDeltas, shouldCompareCopies } from './item_compare';
 import { ItemDragState } from './item_drag_state';
 import {
   instanceBadgeLines,
@@ -6736,11 +6736,11 @@ export class Hud {
     instance?: ItemInstancePayload,
   ): string {
     const equippedId = this.sim.equipment[slot];
-    // A same-id hover still compares per copy (a Riftbound band vs the worn band).
-    if (!equippedId || (equippedId === item.id && !instance?.rift)) return '';
+    const worn = wornTooltipInstance(this.sim.equipmentInstances[slot]);
+    // Same-id hovers compare per copy, never a copy against itself (item_compare.ts).
+    if (!equippedId || !shouldCompareCopies(item.id, equippedId, instance, worn)) return '';
     const equipped = ITEMS[equippedId];
     if (!equipped) return '';
-    const worn = wornTooltipInstance(this.sim.equipmentInstances[slot]);
     const deltas = itemStatDeltas(item, equipped, instance, worn)
       .map((d) => {
         const cls = d.delta > 0 ? 'tt-green' : 'tt-red';
