@@ -22,6 +22,7 @@ vi.mock('../server/bank_ledger_save_effects_db', () => ({
 vi.mock('../server/admin_guilds_read', () => ({ bustAdminGuildListReads: mocks.bustAdmin }));
 
 import { DbTransactionDeadlineExceeded } from '../server/db_transaction_deadline';
+import { PAID_GUILD_RECEIPT_RECONCILE_QUERY_TIMEOUT_MS } from '../server/guild_create_db';
 import {
   buyGuildRosterPageAtomic,
   GUILD_ROSTER_PAGE_CAS_SQL,
@@ -50,22 +51,91 @@ function args(overrides: Partial<GuildRosterPageArgs> = {}): GuildRosterPageArgs
   };
 }
 
-function harness() {
+/** What one reconcile look answers: rows, a rejection, or a read that never
+ *  returns (a lost connection), which only the deadline can end. */
+type ReceiptAnswer = { rows: unknown[] } | Error | 'hang';
+
+function harness(opts: { receipt?: () => ReceiptAnswer; gate?: boolean } = {}) {
   const transaction = {
     query: vi.fn(),
     commit: vi.fn(async () => {}),
     rollback: vi.fn(async () => {}),
     release: vi.fn(),
   };
-  const client = { release: vi.fn() };
-  const pool = { connect: vi.fn(async () => client), query: vi.fn() };
+  // The reconcile reads run the REAL deadline wrapper over this client: it
+  // attaches an error listener, issues BEGIN READ ONLY, the SET LOCAL
+  // budget, the SELECT, and ROLLBACK, and destroys the client (release with
+  // an error) plus cancels the backend when its deadline fires.
+  let outstandingReads = 0;
+  let maxOutstandingReads = 0;
+  // A destroyed socket fails every in-flight query, the way pg does when the
+  // deadline wrapper releases the client with an error.
+  const hungReads: ((error: Error) => void)[] = [];
+  const client = {
+    query: vi.fn(async (sql: string, _values?: unknown[]) => {
+      if (!sql.includes('FROM guild_roster_receipts')) return { rows: [] };
+      const answer = opts.receipt?.() ?? { rows: [] };
+      if (answer instanceof Error) throw answer;
+      if (answer === 'hang') {
+        outstandingReads += 1;
+        maxOutstandingReads = Math.max(maxOutstandingReads, outstandingReads);
+        return new Promise<never>((_resolve, reject) => {
+          hungReads.push(reject);
+        });
+      }
+      return answer;
+    }),
+    release: vi.fn((error?: unknown) => {
+      if (!error) return;
+      outstandingReads = 0;
+      const death = new Error('Connection terminated');
+      for (const reject of hungReads.splice(0)) reject(death);
+    }),
+    on: vi.fn(),
+    removeListener: vi.fn(),
+    processID: 4242,
+  };
+  const pool = { connect: vi.fn(async () => client), query: vi.fn(async () => ({ rows: [] })) };
   const bustGuildRoster = vi.fn();
-  mocks.begin.mockResolvedValue(transaction);
+  const cancelBackend = vi.fn(async () => {});
+  const permits: { release: ReturnType<typeof vi.fn> }[] = [];
+  const acquireBackgroundPermit = vi.fn(async () => {
+    const permit = { release: vi.fn() };
+    permits.push(permit);
+    return permit;
+  });
+  // The (mocked) save transaction releases the client it was opened on, so
+  // the write's own permit is freed exactly as the real wrapper frees it.
+  mocks.begin.mockImplementation(async (client: { release(): void }) => {
+    transaction.release.mockImplementation(() => client.release());
+    return transaction;
+  });
   mocks.lock.mockResolvedValue(ACCOUNT_LOCK);
   mocks.save.mockResolvedValue(true);
   const run = (a: GuildRosterPageArgs = args()) =>
-    buyGuildRosterPageAtomic({ pool: pool as never, bustGuildRoster }, a);
-  return { transaction, pool, bustGuildRoster, run };
+    buyGuildRosterPageAtomic(
+      {
+        pool: pool as never,
+        bustGuildRoster,
+        cancelBackend,
+        ...(opts.gate ? { acquireBackgroundPermit } : {}),
+      },
+      a,
+    );
+  const receiptReads = () =>
+    client.query.mock.calls.filter(([sql]) => String(sql).includes('FROM guild_roster_receipts'));
+  return {
+    transaction,
+    client,
+    pool,
+    bustGuildRoster,
+    cancelBackend,
+    acquireBackgroundPermit,
+    permits,
+    run,
+    receiptReads,
+    maxOutstandingReads: () => maxOutstandingReads,
+  };
 }
 
 const sqlOf = (call: unknown[]): string => String(call[0]);
@@ -186,8 +256,10 @@ describe('buyGuildRosterPageAtomic: known refusals roll back before any save', (
 });
 
 describe('buyGuildRosterPageAtomic: a lost COMMIT answer', () => {
-  function lostCommit() {
-    const h = harness();
+  const MATCHING = { rows: [{ guild_id: '42', page: '3', character_id: '7', copper: '400000' }] };
+
+  function lostCommit(opts: Parameters<typeof harness>[0] = {}) {
+    const h = harness(opts);
     h.transaction.query
       .mockResolvedValueOnce({ rows: [{ roster_pages: 3 }], rowCount: 1 })
       .mockResolvedValueOnce({ rows: [], rowCount: 1 });
@@ -195,45 +267,80 @@ describe('buyGuildRosterPageAtomic: a lost COMMIT answer', () => {
     return h;
   }
 
-  it('is proved committed by a matching receipt under the purchase key', async () => {
-    const h = lostCommit();
-    h.pool.query.mockResolvedValueOnce({
-      rows: [{ guild_id: '42', page: '3', character_id: '7', copper: '400000' }],
-    });
+  it('is proved committed by a matching receipt, read inside a bounded READ ONLY transaction', async () => {
+    const h = lostCommit({ receipt: () => MATCHING });
     await expect(h.run()).resolves.toEqual({ durability: 'committed', pages: 3 });
-    expect(sqlOf(h.pool.query.mock.calls[0])).toBe(GUILD_ROSTER_RECEIPT_SELECT_SQL);
-    expect(h.pool.query.mock.calls[0][1]).toEqual(['roster:test']);
+    const statements = h.client.query.mock.calls.map(([sql]) => String(sql));
+    expect(statements[0]).toBe('BEGIN READ ONLY');
+    expect(statements[1]).toMatch(/SET LOCAL statement_timeout = \d+/);
+    expect(statements[1]).toMatch(/SET LOCAL lock_timeout = \d+/);
+    expect(statements[2]).toBe(GUILD_ROSTER_RECEIPT_SELECT_SQL);
+    expect(h.client.query.mock.calls[2][1]).toEqual(['roster:test']);
+    expect(statements[3]).toBe('ROLLBACK');
+    // The read never rides the bare pool: it is a checkout of its own.
+    expect(h.pool.query).not.toHaveBeenCalled();
     expect(h.transaction.rollback).toHaveBeenCalledTimes(1);
     expect(h.bustGuildRoster).toHaveBeenCalledWith(42);
   });
 
   it('is ambiguous (never a refusal) when no receipt turns up after every attempt', async () => {
     const h = lostCommit();
-    h.pool.query.mockResolvedValue({ rows: [] });
     const result = await h.run();
     expect(result.durability).toBe('commit_ambiguous');
-    expect(h.pool.query).toHaveBeenCalledTimes(GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS);
+    expect(h.receiptReads()).toHaveLength(GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS);
     expect(h.bustGuildRoster).toHaveBeenCalledWith(42);
   });
 
   it('a receipt that does not match the purchase is no proof', async () => {
-    const h = lostCommit();
-    h.pool.query.mockResolvedValue({
-      rows: [{ guild_id: '42', page: '3', character_id: '99', copper: '400000' }],
+    const h = lostCommit({
+      receipt: () => ({
+        rows: [{ guild_id: '42', page: '3', character_id: '99', copper: '400000' }],
+      }),
     });
     const result = await h.run();
     expect(result.durability).toBe('commit_ambiguous');
-    expect(h.pool.query).toHaveBeenCalledTimes(1);
+    expect(h.receiptReads()).toHaveLength(1);
   });
 
   it('a failed look is retried, not read as a "no"', async () => {
-    const h = lostCommit();
-    h.pool.query.mockRejectedValueOnce(new Error('pool draining')).mockResolvedValueOnce({
-      rows: [{ guild_id: '42', page: '3', character_id: '7', copper: '400000' }],
+    let looks = 0;
+    const h = lostCommit({
+      receipt: () => (++looks === 1 ? new Error('pool draining') : MATCHING),
     });
     await expect(h.run()).resolves.toEqual({ durability: 'committed', pages: 3 });
-    expect(h.pool.query).toHaveBeenCalledTimes(2);
+    expect(h.receiptReads()).toHaveLength(2);
   });
+
+  it('every reconcile look takes a background permit and releases it with its client', async () => {
+    const h = lostCommit({ gate: true });
+    const result = await h.run();
+    expect(result.durability).toBe('commit_ambiguous');
+    // One permit for the write itself, one per receipt look.
+    expect(h.acquireBackgroundPermit).toHaveBeenCalledTimes(
+      1 + GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS,
+    );
+    expect(h.permits).toHaveLength(1 + GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS);
+    for (const permit of h.permits) expect(permit.release).toHaveBeenCalled();
+  });
+
+  it('a look that never returns is cancelled by its deadline before the next look, so reads never stack', async () => {
+    const h = lostCommit({ receipt: () => 'hang' });
+    const started = Date.now();
+    const result = await h.run();
+    expect(result.durability).toBe('commit_ambiguous');
+    // Three looks, each ended by its own deadline rather than by an answer.
+    expect(h.receiptReads()).toHaveLength(GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS);
+    expect(Date.now() - started).toBeGreaterThanOrEqual(
+      GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS * PAID_GUILD_RECEIPT_RECONCILE_QUERY_TIMEOUT_MS - 50,
+    );
+    // Each deadline destroyed its socket and cancelled its backend.
+    const destroyed = h.client.release.mock.calls.filter(([error]) => error instanceof Error);
+    expect(destroyed).toHaveLength(GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS);
+    expect(h.cancelBackend).toHaveBeenCalledTimes(GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS);
+    expect(h.cancelBackend).toHaveBeenCalledWith(4242);
+    // At no point did a second read start while an earlier one still hung.
+    expect(h.maxOutstandingReads()).toBe(1);
+  }, 10_000);
 
   it('a deadline that fired before COMMIT was sent is a proven rollback, not ambiguity', async () => {
     const h = lostCommit();
@@ -242,7 +349,7 @@ describe('buyGuildRosterPageAtomic: a lost COMMIT answer', () => {
     );
     const result = await h.run();
     expect(result.durability).toBe('not_committed');
-    expect(h.pool.query).not.toHaveBeenCalled();
+    expect(h.receiptReads()).toHaveLength(0);
   });
 });
 

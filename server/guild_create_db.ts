@@ -358,11 +358,20 @@ function receiptDeadlineClient(
   } as PaidGuildCreateDbClient;
 }
 
-async function readPaidGuildReceiptOnce(
+/**
+ * One bounded, gated, cancellable point read for receipt reconciliation: a
+ * major-background permit before the checkout, a wall-clock deadline that
+ * destroys the socket and cancels the backend when it fires, and scoped
+ * statement/lock/idle timeouts inside a READ ONLY transaction, so a slow or
+ * lost database can never leave a reconcile read running behind the caller.
+ * Shared with the guild roster page purchase (server/guild_roster_page_db.ts).
+ */
+export async function readReceiptRowOnce<Row>(
   deps: PaidGuildCreateDeps,
-  batchKey: string,
-): Promise<PaidGuildReceiptRow | null> {
-  const operation = 'paid guild receipt reconciliation';
+  operation: string,
+  sql: string,
+  values: unknown[],
+): Promise<Row | null> {
   const deadlineAtMs = Date.now() + PAID_GUILD_RECEIPT_RECONCILE_QUERY_TIMEOUT_MS;
   const controller = new AbortController();
   const timeout = setTimeout(
@@ -437,12 +446,7 @@ async function readPaidGuildReceiptOnce(
         `SET LOCAL lock_timeout = ${statementBudgetMs}; ` +
         `SET LOCAL idle_in_transaction_session_timeout = ${statementBudgetMs}`,
     );
-    const result = await transaction.query(
-      `SELECT realm, character_id, account_id, row_count, payload_sha256
-         FROM bank_ledger_batch_receipts
-        WHERE batch_key = $1`,
-      [batchKey],
-    );
+    const result = await transaction.query(sql, values);
     // No write exists to commit. ROLLBACK ends the snapshot and clears every
     // LOCAL setting; cleanup failure cannot erase the already-known read.
     try {
@@ -455,7 +459,7 @@ async function readPaidGuildReceiptOnce(
     } catch (error) {
       reportCleanupError(deps, error);
     }
-    return (result.rows[0] as PaidGuildReceiptRow | undefined) ?? null;
+    return (result.rows[0] as Row | undefined) ?? null;
   } catch (error) {
     if (transaction) await rollbackAndRelease(deps, transaction);
     throw error;
@@ -469,6 +473,20 @@ async function readPaidGuildReceiptOnce(
       }
     }
   }
+}
+
+async function readPaidGuildReceiptOnce(
+  deps: PaidGuildCreateDeps,
+  batchKey: string,
+): Promise<PaidGuildReceiptRow | null> {
+  return readReceiptRowOnce<PaidGuildReceiptRow>(
+    deps,
+    'paid guild receipt reconciliation',
+    `SELECT realm, character_id, account_id, row_count, payload_sha256
+       FROM bank_ledger_batch_receipts
+      WHERE batch_key = $1`,
+    [batchKey],
+  );
 }
 
 async function rollbackAndRelease(

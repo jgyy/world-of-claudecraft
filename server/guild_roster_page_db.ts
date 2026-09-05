@@ -34,7 +34,11 @@ import {
   type DbTransactionDeadlineClient,
   DbTransactionDeadlineExceeded,
 } from './db_transaction_deadline';
-import { acquirePaidGuildCreateClient, type PaidGuildCreateDeps } from './guild_create_db';
+import {
+  acquirePaidGuildCreateClient,
+  type PaidGuildCreateDeps,
+  readReceiptRowOnce,
+} from './guild_create_db';
 import { throwProvedRollback } from './pg_rollback_proof';
 import type { StorageAppliedEffect } from './storage_purchase_db';
 
@@ -42,10 +46,12 @@ import type { StorageAppliedEffect } from './storage_purchase_db';
  *  before the purchase is declared ambiguous, and the backoff between checks.
  *  The paid guild create's figures: a receipt written by a COMMIT the server
  *  did process is visible on another connection at once, so three short
- *  looks bound the wait without turning contention into a false "no". */
+ *  looks bound the wait without turning contention into a false "no". Each
+ *  look is the paid guild create's gated, deadline-cancelled point read
+ *  (readReceiptRowOnce), so a slow database never accumulates reads. */
 export const GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS = 3;
 export const GUILD_ROSTER_RECEIPT_RECONCILE_BACKOFF_MS = 25;
-export const GUILD_ROSTER_RECEIPT_RECONCILE_QUERY_TIMEOUT_MS = 500;
+export const GUILD_ROSTER_RECEIPT_RECONCILE_OPERATION = 'guild roster receipt reconciliation';
 
 export interface GuildRosterPageDbPool {
   connect(): Promise<DbTransactionDeadlineClient>;
@@ -223,45 +229,26 @@ const backoff = (attempt: number): Promise<void> =>
     setTimeout(resolve, GUILD_ROSTER_RECEIPT_RECONCILE_BACKOFF_MS * attempt).unref?.(),
   );
 
-/** One bounded look at the receipt table on a fresh pool connection. The
- *  JavaScript race bounds the wait the caller sees; a query that outlives it
- *  finishes on its own (a primary-key point read, so at most
- *  GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS such reads can ever overlap) and
- *  its answer is simply not used. No SET LOCAL here: the pool query owns
- *  its own checkout, and the statement is bounded by the server default. */
-async function readReceiptOnce(
-  deps: GuildRosterPageDeps,
-  batchKey: string,
-): Promise<ReceiptRow | null | 'timeout'> {
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  const timeout = new Promise<'timeout'>((resolve) => {
-    timer = setTimeout(() => resolve('timeout'), GUILD_ROSTER_RECEIPT_RECONCILE_QUERY_TIMEOUT_MS);
-    timer.unref?.();
-  });
-  try {
-    const result = await Promise.race([
-      deps.pool.query(GUILD_ROSTER_RECEIPT_SELECT_SQL, [batchKey]),
-      timeout,
-    ]);
-    if (result === 'timeout') return 'timeout';
-    return (result.rows[0] as ReceiptRow | undefined) ?? null;
-  } finally {
-    if (timer !== undefined) clearTimeout(timer);
-  }
-}
-
 /** A matching receipt under the purchase's own key proves the otherwise-lost
- *  COMMIT landed; a row that does not match is treated as no proof. */
+ *  COMMIT landed; a row that does not match is treated as no proof. Every
+ *  look takes a background permit and is torn down by its own deadline
+ *  (socket destroyed, backend cancelled) before the next one starts, so
+ *  retries can never stack reads on a struggling pool. */
 async function reconcileReceipt(
   deps: GuildRosterPageDeps,
   args: GuildRosterPageArgs,
 ): Promise<boolean> {
   for (let attempt = 1; attempt <= GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS; attempt += 1) {
     try {
-      const row = await readReceiptOnce(deps, args.receipt.batchKey);
-      if (row !== null && row !== 'timeout') return receiptMatches(row, args);
+      const row = await readReceiptRowOnce<ReceiptRow>(
+        deps as PaidGuildCreateDeps,
+        GUILD_ROSTER_RECEIPT_RECONCILE_OPERATION,
+        GUILD_ROSTER_RECEIPT_SELECT_SQL,
+        [args.receipt.batchKey],
+      );
+      if (row !== null) return receiptMatches(row, args);
     } catch {
-      // A failed look is not a "no": the next attempt asks again.
+      // A failed or timed-out look is not a "no": the next attempt asks again.
     }
     if (attempt < GUILD_ROSTER_RECEIPT_RECONCILE_ATTEMPTS) await backoff(attempt);
   }
