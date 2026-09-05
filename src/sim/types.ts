@@ -3459,7 +3459,7 @@ export interface NpcDef {
   // hard-keyed constant.
   crucibleVendor?: boolean;
   // The Riftwright: talking to this NPC opens the Rift Forge window (upgrade,
-  // enchant, socket on Riftbound rings, src/sim/rift/progression.ts), and the
+  // socket on Riftbound rings, src/sim/rift/progression.ts), and the
   // two forge commands gate on standing within reach of one of these (the
   // banker precedent, src/sim/rift/forge_gate.ts). A flag rather than a
   // hard-keyed id so a second forge placement never widens a constant.
