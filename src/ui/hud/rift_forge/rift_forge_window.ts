@@ -73,11 +73,13 @@ export class RiftForgeWindow {
   private openerFocus: HTMLElement | null = null;
   /** The last outcome's localized status line (null = nothing to say). */
   private status: { text: string; error: boolean } | null = null;
-  /** Serializes an in-flight action so a double click cannot spend twice.
-   *  Held from the click until the riftForgeResult event lands (online the
+  /** Held from a click until its riftForgeResult event lands (online the
    *  ack arrives a broadcast BEFORE the mutated bags do, so releasing on the
    *  ack alone would re-enable a button over stale rows), with a timer
-   *  backstop for an event that never comes. */
+   *  backstop for an event that never comes. The double-spend guard itself is
+   *  the disabled attribute this flag paints onto the row controls on every
+   *  render: a click on a live button has already dispatched by the time
+   *  act() reads the flag. */
   private busy = false;
   private busyTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -128,9 +130,19 @@ export class RiftForgeWindow {
     const item = ITEMS[ev.itemId];
     const name = item ? itemDisplayName(item) : ev.itemId;
     const reasonKey = ev.reason ? REASON_KEYS[ev.reason] : 'hudChrome.riftForge.refused';
-    this.status = ev.ok
-      ? { text: t(ACTION_DONE_KEYS[ev.action], { name }), error: false }
-      : { text: t(reasonKey), error: true };
+    // A socket on a full band destroyed the oldest gem: the status says which.
+    const replaced = ev.replacedGem ? ITEMS[ev.replacedGem] : undefined;
+    this.status = !ev.ok
+      ? { text: t(reasonKey), error: true }
+      : replaced
+        ? {
+            text: t('hudChrome.riftForge.done.socketReplaced', {
+              name,
+              gem: itemDisplayName(replaced),
+            }),
+            error: false,
+          }
+        : { text: t(ACTION_DONE_KEYS[ev.action], { name }), error: false };
     this.render();
   }
 
@@ -300,7 +312,7 @@ export class RiftForgeWindow {
 
   /** Await one forge outcome. A `false` ack with no event behind it (the
    *  realm closed the forge, or the ack timed out) still gets a visible line:
-   *  the doc's "never pure silence" rule for this trio. A truthy outcome keeps
+   *  the doc's "never pure silence" rule for this pair. A truthy outcome keeps
    *  the controls held until onResult re-reads the mutated payload. */
   private async act(outcome: ReturnType<IWorld['upgradeRiftItem']>): Promise<void> {
     if (this.busy) return;

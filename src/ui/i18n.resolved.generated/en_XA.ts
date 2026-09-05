@@ -3030,7 +3030,6 @@ export const en_XA: EnTranslations = {
       "socketReplaceHint": "[Šóçķéţš ƒúļļ: ţĥé ñéẋţ ĝéɱ ŕéþļáçéš ţĥé óļðéšţ, {gem}.]",
       "socketBtn": "[Šóçķéţ]",
       "socketsNone": "[ñó ĝéɱš]",
-      "socketsFull": "[Áļļ šóçķéţš ƒíļļéð]",
       "noGems": "[Ñó Ŕíƒţ ĝéɱš íñ ýóúŕ ƀáĝš]",
       "refused": "[Ţĥé ƒóŕĝé ŕéƒúšéð. Šţáñð áţ ţĥé Ŕíƒţŵŕíĝĥţ áñð ţŕý áĝáíñ.]",
       "reason": {
@@ -3044,7 +3043,8 @@ export const en_XA: EnTranslations = {
       },
       "done": {
         "upgrade": "[Úþĝŕáðéð {name}.]",
-        "socket": "[Šóçķéţéð á ĝéɱ íñţó {name}.]"
+        "socket": "[Šóçķéţéð á ĝéɱ íñţó {name}.]",
+        "socketReplaced": "[Šóçķéţéð á ĝéɱ íñţó {name}; {gem} ŵáš ðéšţŕóýéð.]"
       }
     },
     "itemTooltip": {

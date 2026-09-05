@@ -3030,7 +3030,6 @@ export const ko_KR: EnTranslations = {
       "socketReplaceHint": "소켓이 가득 찼습니다. 다음 보석은 가장 오래된 {gem}을(를) 대체합니다.",
       "socketBtn": "박기",
       "socketsNone": "보석 없음",
-      "socketsFull": "모든 홈이 채워졌습니다",
       "noGems": "가방에 균열 보석이 없습니다",
       "refused": "화로가 거부했습니다. 균열장인 곁에 서서 다시 시도하세요.",
       "reason": {
@@ -3044,7 +3043,8 @@ export const ko_KR: EnTranslations = {
       },
       "done": {
         "upgrade": "{name}을(를) 강화했습니다.",
-        "socket": "{name}에 보석을 박았습니다."
+        "socket": "{name}에 보석을 박았습니다.",
+        "socketReplaced": "{name}에 보석을 박았습니다. {gem}은(는) 파괴되었습니다."
       }
     },
     "itemTooltip": {

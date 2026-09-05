@@ -3030,7 +3030,6 @@ export const zh_TW: EnTranslations = {
       "socketReplaceHint": "插槽已滿：下一顆寶石將替換最早鑲嵌的 {gem}。",
       "socketBtn": "鑲嵌",
       "socketsNone": "沒有寶石",
-      "socketsFull": "所有插槽已填滿",
       "noGems": "背包裡沒有裂隙寶石",
       "refused": "熔爐拒絕了。請站在裂隙鍛匠身旁再試。",
       "reason": {
@@ -3044,7 +3043,8 @@ export const zh_TW: EnTranslations = {
       },
       "done": {
         "upgrade": "已強化{name}。",
-        "socket": "已為{name}鑲嵌一顆寶石。"
+        "socket": "已為{name}鑲嵌一顆寶石。",
+        "socketReplaced": "已將寶石鑲入{name}；{gem}已被摧毀。"
       }
     },
     "itemTooltip": {

@@ -99,7 +99,6 @@ describe('RiftForgeWindow', () => {
       `Upgrade to item level ${riftBandItemLevel('S', 1)} (2 essence)`,
     );
     expect(root.querySelector<HTMLButtonElement>('[data-upgrade]')?.disabled).toBe(false);
-    expect(root.querySelector('[data-enchant]')).toBeNull();
     // Only the owned gem is offered, labelled with the rating its colour grants.
     const gemPick = root.querySelector<HTMLSelectElement>('[data-gem]');
     expect([...(gemPick?.options ?? [])].map((o) => o.value)).toEqual([RIFT_GEM_IDS[2]]);
@@ -144,6 +143,33 @@ describe('RiftForgeWindow', () => {
     expect(status?.classList.contains('rf-status-error')).toBe(true);
     expect(status?.getAttribute('role')).toBe('alert');
     expect(status?.textContent).toContain('The forge refused');
+  });
+
+  it('releases a synchronous refusal (the offline Sim answer) and speaks its reason', async () => {
+    // too_far and dead are returned, never emitted: without this arm the row
+    // would sit disabled until the 6 s backstop with nothing said.
+    outcome = { ok: false, reason: 'too_far' } as unknown as { ok: boolean };
+    win.open();
+    root.querySelector<HTMLButtonElement>('[data-upgrade]')?.click();
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(root.querySelector('.rf-status')?.textContent).toContain('too far from the Rift Forge');
+    expect(root.querySelector<HTMLButtonElement>('[data-upgrade]')?.disabled).toBe(false);
+  });
+
+  it('names the destroyed gem when a socket on a full band replaced it', () => {
+    win.open();
+    win.onResult({
+      type: 'riftForgeResult',
+      pid: 1,
+      ok: true,
+      action: 'socket',
+      itemId: gear.itemId,
+      replacedGem: RIFT_GEM_IDS[0],
+    } as Extract<SimEvent, { type: 'riftForgeResult' }>);
+    expect(root.querySelector('.rf-status')?.textContent).toContain(
+      'Crimson Rift Gem was destroyed',
+    );
   });
 
   it('maps a riftForgeResult reason to the status line and re-reads the payload', () => {

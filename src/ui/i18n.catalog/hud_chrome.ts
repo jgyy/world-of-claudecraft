@@ -4019,7 +4019,7 @@ export const hudChromeStrings = {
   // "Requires Level N"). Shown red when the viewer is below it. {level} runs
   // through formatNumber.
   // The Rift Forge window (src/ui/hud/rift_forge/): the Riftwright's
-  // upgrade / enchant / socket service on Riftbound bands. The tier, upgrade
+  // upgrade / socket service on Riftbound bands. The tier, upgrade
   // and socket labels reuse itemTooltip.rift* below; the reason.* rows map the
   // sim's structured riftForgeResult reasons (src/sim/rift/progression.ts).
   riftForge: {
@@ -4039,7 +4039,6 @@ export const hudChromeStrings = {
     socketReplaceHint: 'Sockets full: the next gem replaces the oldest, {gem}.',
     socketBtn: 'Socket',
     socketsNone: 'no gems',
-    socketsFull: 'All sockets filled',
     noGems: 'No Rift gems in your bags',
     refused: 'The forge refused. Stand at the Riftwright and try again.',
     reason: {
@@ -4054,6 +4053,8 @@ export const hudChromeStrings = {
     done: {
       upgrade: 'Upgraded {name}.',
       socket: 'Socketed a gem into {name}.',
+      // The same success on a full band: the oldest gem was destroyed.
+      socketReplaced: 'Socketed a gem into {name}; {gem} was destroyed.',
     },
   },
   itemTooltip: {

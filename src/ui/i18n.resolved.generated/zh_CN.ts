@@ -3030,7 +3030,6 @@ export const zh_CN: EnTranslations = {
       "socketReplaceHint": "插槽已满：下一颗宝石将替换最早镶嵌的 {gem}。",
       "socketBtn": "镶嵌",
       "socketsNone": "没有宝石",
-      "socketsFull": "所有插槽已填满",
       "noGems": "背包里没有裂隙宝石",
       "refused": "熔炉拒绝了。请站在裂隙锻匠身旁再试。",
       "reason": {
@@ -3044,7 +3043,8 @@ export const zh_CN: EnTranslations = {
       },
       "done": {
         "upgrade": "已强化{name}。",
-        "socket": "已为{name}镶嵌一颗宝石。"
+        "socket": "已为{name}镶嵌一颗宝石。",
+        "socketReplaced": "已将宝石镶入{name}；{gem}已被摧毁。"
       }
     },
     "itemTooltip": {

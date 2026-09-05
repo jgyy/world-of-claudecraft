@@ -1,4 +1,4 @@
-// Rift Forge test placement (src/sim/rift/forge_gate.ts): the three forge
+// Rift Forge test placement (src/sim/rift/forge_gate.ts): both forge
 // operations refuse away from a riftForge NPC, so every suite that forges
 // stands the player at the Riftwright first. Mirrors the banker helpers in
 // tests/bank.test.ts: resolve the LIVE entity (content coords run through the

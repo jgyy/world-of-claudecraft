@@ -6675,7 +6675,7 @@ export class GameServer {
       this.sendCommandOutcome(session, msg, false);
       return;
     }
-    // The Rift forge trio is open by default now that the forge window ships;
+    // The Rift forge pair is open by default now that the forge window ships;
     // RIFT_FORGE_ENABLED=0 is the ops kill switch (server/rift_forge_gate.ts).
     // Refused ABOVE the heavy-self dirty flag below, so a closed command
     // cannot force a re-diff either.
@@ -7090,7 +7090,7 @@ export class GameServer {
         break;
       case 'rift_upgrade_item':
       case 'rift_socket_gem': {
-        // The forge trio answers the commandOutcome ack with the sim verdict
+        // The forge pair answers the commandOutcome ack with the sim verdict
         // (server/rift_forge_dispatch.ts): the forge window awaits it.
         const forged = dispatchRiftCommand(sim, msg, pid);
         if (forged) this.sendCommandOutcome(session, msg, forged.ok);

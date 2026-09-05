@@ -3030,7 +3030,6 @@ export const ja_JP: EnTranslations = {
       "socketReplaceHint": "ソケットは満杯です。次の宝石は最も古い{gem}と入れ替わります。",
       "socketBtn": "はめ込む",
       "socketsNone": "宝石なし",
-      "socketsFull": "すべてのソケットが埋まっています",
       "noGems": "カバンにリフトの宝石がありません",
       "refused": "炉に拒まれました。リフトライトのそばに立ってやり直してください。",
       "reason": {
@@ -3044,7 +3043,8 @@ export const ja_JP: EnTranslations = {
       },
       "done": {
         "upgrade": "{name}を強化しました。",
-        "socket": "{name}に宝石をはめ込みました。"
+        "socket": "{name}に宝石をはめ込みました。",
+        "socketReplaced": "{name}に宝石をはめ込みました。{gem}は破壊されました。"
       }
     },
     "itemTooltip": {

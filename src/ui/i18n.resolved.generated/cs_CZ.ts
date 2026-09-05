@@ -3030,7 +3030,6 @@ export const cs_CZ: EnTranslations = {
       "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
-      "socketsFull": "All sockets filled",
       "noGems": "No Rift gems in your bags",
       "refused": "The forge refused. Stand at the Riftwright and try again.",
       "reason": {
@@ -3044,7 +3043,8 @@ export const cs_CZ: EnTranslations = {
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "socket": "Socketed a gem into {name}."
+        "socket": "Socketed a gem into {name}.",
+        "socketReplaced": "Socketed a gem into {name}; {gem} was destroyed."
       }
     },
     "itemTooltip": {

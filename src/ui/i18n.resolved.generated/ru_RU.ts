@@ -3030,7 +3030,6 @@ export const ru_RU: EnTranslations = {
       "socketReplaceHint": "Гнёзда заполнены: следующий самоцвет заменит самый старый, {gem}.",
       "socketBtn": "Вставить",
       "socketsNone": "без самоцветов",
-      "socketsFull": "Все гнезда заполнены",
       "noGems": "В сумках нет самоцветов разлома",
       "refused": "Горн отказал. Встаньте рядом с кузнецом разлома и попробуйте снова.",
       "reason": {
@@ -3044,7 +3043,8 @@ export const ru_RU: EnTranslations = {
       },
       "done": {
         "upgrade": "{name}: улучшено.",
-        "socket": "{name}: самоцвет вставлен."
+        "socket": "{name}: самоцвет вставлен.",
+        "socketReplaced": "Самоцвет вставлен в {name}; {gem} уничтожен."
       }
     },
     "itemTooltip": {

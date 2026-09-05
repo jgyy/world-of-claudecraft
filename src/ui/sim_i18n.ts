@@ -59,7 +59,7 @@ const baseEnTable = {
   'error.bankCannotAfford': 'You cannot afford that bank expansion.',
   'error.bankMaxSlots': 'Your bank cannot be expanded further.',
   'error.bankTooFar': 'You are too far from the banker.',
-  // The Rift Forge place gate (src/sim/rift/forge_gate.ts): the three forge
+  // The Rift Forge place gate (src/sim/rift/forge_gate.ts): both forge
   // operations refuse away from the Riftwright.
   'error.riftForgeTooFar': 'You are too far from the Rift Forge.',
   // The purchase-mutex refusal ('Your bank has a purchase in progress.') is a
