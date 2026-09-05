@@ -2183,6 +2183,84 @@ export const TARGETS = [
     },
   },
   {
+    key: 'bind-on-equip',
+    label:
+      'Bag tooltip on a green blade: Binds when equipped while never worn, Soulbound once it has been worn',
+    when: ['sim/item_binding', 'ui/item_instance_tooltip'],
+    // The same recipe on a base checkout renders NO binding line at all (green
+    // gear never bound), which is the honest BEFORE state. The bound variant
+    // wears the blade once (equip, then unequip) so the copy comes back
+    // stamped and the tooltip reads Soulbound.
+    variants: [{ key: 'never-worn' }, { key: 'bound', worn: true }],
+    async capture(page, variant) {
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('.gpu-notice-dismiss')?.click();
+        document.querySelector('#gpu-notice')?.remove();
+        document.getElementById('tutorial-greeting')?.remove();
+      });
+      await wait(300);
+      const setup = await page.evaluate((worn) => {
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!sim) return { ok: false, reason: 'no sim' };
+        try {
+          sim.addItem('redbrook_blade', 1);
+        } catch {}
+        if (worn) {
+          sim.equipItem('redbrook_blade');
+          sim.unequipItem('mainhand');
+        }
+        const el = document.querySelector('#bags');
+        if (el && getComputedStyle(el).display === 'none') game.hud.toggleBags?.();
+        return { ok: true };
+      }, Boolean(variant?.worn));
+      if (!setup.ok) throw new Error(`bind-on-equip setup failed: ${setup.reason}`);
+      if (!(await pollForSize(page, '#bags'))) throw new Error('bags window did not open');
+      await wait(400);
+      const cell = await page.evaluate(() => {
+        const b = Array.from(document.querySelectorAll('#bags button')).find((el) =>
+          el.getAttribute('aria-label')?.includes('Redbrook Militia Blade'),
+        );
+        if (!b) return null;
+        const r = b.getBoundingClientRect();
+        return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+      });
+      if (!cell) throw new Error('blade cell not found in bags');
+      await page.mouse.move(cell.x, cell.y);
+      await wait(500);
+      const shown = await page.evaluate(() => {
+        const tip = document.querySelector('#tooltip');
+        return (
+          !!tip &&
+          getComputedStyle(tip).display !== 'none' &&
+          tip.textContent?.includes('Redbrook Militia Blade')
+        );
+      });
+      if (!shown) throw new Error('bag tooltip did not appear through the hover path');
+      // The tooltip floats outside #bags, so the runner's selector clip cannot
+      // union the two; shoot the union rect here (full frame is the fallback).
+      const rect = await page.evaluate(() => {
+        const a = document.querySelector('#bags')?.getBoundingClientRect();
+        const b = document.querySelector('#tooltip')?.getBoundingClientRect();
+        if (!a || !b) return null;
+        const x0 = Math.max(0, Math.min(a.x, b.x) - 12);
+        const y0 = Math.max(0, Math.min(a.y, b.y) - 12);
+        const x1 = Math.min(innerWidth, Math.max(a.right, b.right) + 12);
+        const y1 = Math.min(innerHeight, Math.max(a.bottom, b.bottom) + 12);
+        return { x: x0, y: y0, width: x1 - x0, height: y1 - y0 };
+      });
+      if (rect && process.env.SHOTS_DIR) {
+        await page.screenshot({
+          path: `${process.env.SHOTS_DIR}/bind-on-equip-${variant?.key ?? 'desktop'}-tooltip.png`,
+          clip: rect,
+        });
+      }
+      return {};
+    },
+  },
+  {
     key: 'vendor-sell-confirm',
     label:
       'Vendor: a plain click on a valuable item confirms before selling; junk still sells instantly',
