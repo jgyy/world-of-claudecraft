@@ -435,6 +435,7 @@ export interface LastKeepMapModel {
 // Shared marker collector: projects exit/loot objects, party members, and the
 // player through the surface's local->canvas transform, in draw order.
 function collectMarkers(
+  interior: string,
   world: IWorld,
   local: LastKeepLocalPos,
   toCanvas: (lx: number, lz: number) => { cx: number; cy: number },
@@ -457,6 +458,9 @@ function collectMarkers(
   if (party) {
     for (const m of party.members) {
       if (m.pid === p.id) continue;
+      // Same instance copy only: local coordinates repeat per copy.
+      const mLocal = castleLocal(interior, m.x, m.z);
+      if (!mLocal || mLocal.originX !== local.originX || mLocal.originZ !== local.originZ) continue;
       const { cx, cy } = toCanvas(m.x - local.originX, m.z - local.originZ);
       if (!visible(cx, cy)) continue;
       markers.push({ kind: 'party', cx, cy, cls: m.cls, dead: m.dead !== 0 });
@@ -505,7 +509,11 @@ function buildMinimapModel<S extends string>(
   });
   const visible = (cx: number, cy: number): boolean =>
     (cx - half) * (cx - half) + (cy - half) * (cy - half) <= rim2;
-  return { storyId, plate, markers: collectMarkers(world, local, toCanvas, visible, local) };
+  return {
+    storyId,
+    plate,
+    markers: collectMarkers(spec.interior, world, local, toCanvas, visible, local),
+  };
 }
 
 /**
@@ -538,7 +546,11 @@ function buildWorldMapModel<S extends string>(
   });
   const visible = (cx: number, cy: number): boolean => cx >= 0 && cx <= S_ && cy >= 0 && cy <= S_;
   const playerLocal = castleLocal(spec.interior, p.pos.x, p.pos.z);
-  return { storyId, plate, markers: collectMarkers(world, local, toCanvas, visible, playerLocal) };
+  return {
+    storyId,
+    plate,
+    markers: collectMarkers(spec.interior, world, local, toCanvas, visible, playerLocal),
+  };
 }
 
 export function buildLastKeepMinimapModel(

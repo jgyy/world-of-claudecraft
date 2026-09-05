@@ -108,6 +108,20 @@ describe('generic dungeon map view', () => {
     expect(model).not.toBeNull();
     expect(model?.dungeonId).toBe('hollow_crypt');
     expect(model?.markers.map((m) => m.kind)).toEqual(['party']);
+    // A member in ANOTHER copy of the same dungeon shares the local coordinates
+    // but not the origin: never a marker on this plan (both builders).
+    const other = instanceOrigin(DUNGEONS.hollow_crypt.index, 4);
+    outside.partyInfo = {
+      members: [
+        { pid: 7, name: 'Ally', cls: 'mage', dead: 0, x: origin.x + 3, z: origin.z + 2 },
+        { pid: 8, name: 'Elsewhere', cls: 'rogue', dead: 0, x: other.x + 3, z: other.z + 2 },
+      ],
+    };
+    const filtered = buildDungeonWorldMapModel(world, 560, 34, {
+      x: origin.x + 3,
+      z: origin.z + 2,
+    });
+    expect(filtered?.markers.map((m) => m.kind)).toEqual(['party']);
     // The stateful core takes the same anchor and agrees.
     const core = new DungeonMapViewCore();
     const hot = core.worldMap(world, 560, 34, { x: origin.x + 3, z: origin.z + 2 });
