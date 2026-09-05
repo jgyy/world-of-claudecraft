@@ -50,7 +50,10 @@ describe('sameItemCopy', () => {
       gems: ['rift_gem_verdant'],
     };
     const worn = { boundTo: 7, rolled: { stats: { str: 8, sta: 6, hitRating: 12 } }, rift };
-    const projected = { rolled: worn.rolled, rift: worn.rift };
+    // A structural clone, never a shared reference: both hosts hand the
+    // paperdoll and the compare block distinct objects for the same copy.
+    const projected = structuredClone({ rolled: worn.rolled, rift: worn.rift });
+    expect(projected.rift).not.toBe(worn.rift);
     expect(sameItemCopy(projected, worn)).toBe(true);
     expect(sameItemCopy(worn, { ...worn, rift: { ...rift, upgradeLevel: 3 } })).toBe(false);
     expect(sameItemCopy(worn, { ...worn, rolled: { stats: { str: 9 } } })).toBe(false);
