@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ITEMS } from '../src/sim/data';
 import type { CoreStats, ItemDef } from '../src/sim/types';
-import { itemStatDeltas } from '../src/ui/item_compare';
+import { itemStatDeltas, sameItemCopy, shouldCompareCopies } from '../src/ui/item_compare';
 
 function armor(
   id: string,
@@ -37,6 +37,35 @@ function weapon(id: string, min: number, max: number, speed: number): ItemDef {
     weapon: { min, max, speed },
   };
 }
+
+describe('sameItemCopy', () => {
+  it('matches a copy against its own projection and tells two bands apart', () => {
+    const rift = {
+      sourceEventId: 'e',
+      tier: 'S' as const,
+      power: 4,
+      upgradeLevel: 2,
+      maxUpgradeLevel: 5,
+      gemSlots: 2,
+      gems: ['rift_gem_verdant'],
+    };
+    const worn = { boundTo: 7, rolled: { stats: { str: 8, sta: 6, hitRating: 12 } }, rift };
+    const projected = { rolled: worn.rolled, rift: worn.rift };
+    expect(sameItemCopy(projected, worn)).toBe(true);
+    expect(sameItemCopy(worn, { ...worn, rift: { ...rift, upgradeLevel: 3 } })).toBe(false);
+    expect(sameItemCopy(worn, { ...worn, rolled: { stats: { str: 9 } } })).toBe(false);
+    expect(sameItemCopy(undefined, undefined)).toBe(true);
+    expect(sameItemCopy(worn, undefined)).toBe(false);
+    // The compare decision: a different item always; the same id only for a
+    // per-copy piece that is not the worn copy itself.
+    expect(shouldCompareCopies('a', 'b')).toBe(true);
+    expect(shouldCompareCopies('a', 'a')).toBe(false);
+    expect(shouldCompareCopies('band', 'band', projected, worn)).toBe(false);
+    expect(
+      shouldCompareCopies('band', 'band', { ...worn, rift: { ...rift, upgradeLevel: 5 } }, worn),
+    ).toBe(true);
+  });
+});
 
 describe('itemStatDeltas', () => {
   it('reports positive deltas for an upgrade and negative for a downgrade', () => {

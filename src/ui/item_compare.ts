@@ -19,6 +19,33 @@ export type CompareStat =
   | 'spellPower'
   | 'healPower';
 
+/** Whether two per-copy payloads are the same copy for compare purposes: the
+ *  paperdoll hovers the worn copy itself (projected twice), and a band against
+ *  its own payload has nothing to say. Compares the rift record and the rolled
+ *  line by value, which is what the deltas read. */
+export function sameItemCopy(a?: ItemInstancePayload, b?: ItemInstancePayload): boolean {
+  if (!a || !b) return a === b;
+  return (
+    JSON.stringify(a.rift ?? null) === JSON.stringify(b.rift ?? null) &&
+    JSON.stringify(a.rolled ?? null) === JSON.stringify(b.rolled ?? null)
+  );
+}
+
+/** Whether hovering `hoveredId` (carrying `hovered`) should compare against
+ *  the worn `equippedId` (carrying `worn`): a different item always does; the
+ *  same item id only when both are per-copy pieces that differ (a bagged
+ *  Riftbound band against the worn band), never a copy against itself (the
+ *  paperdoll hovering the worn band). */
+export function shouldCompareCopies(
+  hoveredId: string,
+  equippedId: string,
+  hovered?: ItemInstancePayload,
+  worn?: ItemInstancePayload,
+): boolean {
+  if (hoveredId !== equippedId) return true;
+  return !!hovered?.rift && !sameItemCopy(hovered, worn);
+}
+
 export interface StatDelta {
   stat: CompareStat;
   delta: number; // candidate minus equipped; positive = upgrade

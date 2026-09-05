@@ -7092,8 +7092,8 @@ export class GameServer {
         // Retired tombstone: the forge enchant went away with the Riftbound
         // band item-level ladder (rift/band_ladder.ts), but wire tokens are
         // append-only (COMMAND_NAMES), so the arm stays and does nothing.
-        // No stock client has ever sent it (the forge UI shipped after the
-        // removal); a crafted frame gets the same silence as any other no-op.
+        // No stock client has ever sent it (no forge UI had shipped when it was
+        // retired); a crafted frame gets the same silence as any other no-op.
         break;
       case 'rift_socket_gem':
         if (typeof msg.item === 'string' && typeof msg.gem === 'string') {

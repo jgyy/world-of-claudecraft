@@ -4,7 +4,7 @@ import type { TalentAllocation } from '../src/sim/content/talents';
 import { ITEMS, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { updateMobTarget } from '../src/sim/mob/targeting';
-import { RIFT_BAND_MAX_UPGRADE } from '../src/sim/rift/band_ladder';
+import { RIFT_BAND_GEM_SLOTS, RIFT_BAND_MAX_UPGRADE } from '../src/sim/rift/band_ladder';
 import { sanitizeRiftGearInstance } from '../src/sim/rift/progression';
 import { Sim } from '../src/sim/sim';
 import {
@@ -492,10 +492,10 @@ function equipExactLoadout(sim: Sim, loadout: PbeLoadout): void {
           rift: {
             sourceEventId: 'probe-bis',
             tier: 'S',
-            power: 4,
+            power: 4, // re-derived by the sanitizer from the tier
             upgradeLevel: RIFT_BAND_MAX_UPGRADE,
             maxUpgradeLevel: RIFT_BAND_MAX_UPGRADE,
-            gemSlots: 2,
+            gemSlots: RIFT_BAND_GEM_SLOTS.S,
             gems: ['rift_gem_verdant', 'rift_gem_crimson'],
           },
         },
