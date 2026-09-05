@@ -300,7 +300,7 @@ for (const mode of ['unreleased', 'ghost'] as const) {
       expect(deadErrors(sim.drainEvents())).toBe(1);
     });
 
-    it('the rift forge trio is refused and spends no essence', () => {
+    it('the rift forge pair is refused and spends no essence', () => {
       const sim = makeSim();
       sim.setPlayerLevel(20);
       const gear = createRiftGearInstance('rift-dead-gate', 'S', 'warrior', sim.player.id);
@@ -315,10 +315,9 @@ for (const mode of ['unreleased', 'ghost'] as const) {
       makeDead(sim, mode);
       sim.drainEvents();
       expect(sim.upgradeRiftItem(gear.itemId).reason).toBe('dead');
-      expect(sim.enchantRiftItem(gear.itemId, 'critRating').reason).toBe('dead');
       expect(sim.socketRiftGem(gear.itemId, RIFT_GEM_IDS[0]).reason).toBe('dead');
       const events = sim.drainEvents();
-      expect(deadErrors(events)).toBe(3);
+      expect(deadErrors(events)).toBe(2);
       expect(resultEvents(events, 'riftForgeResult').length).toBe(0);
       expect(sim.countItem(RIFT_ESSENCE_ITEM_ID)).toBe(essenceAfterUpgrade);
       const slot = sim.inventory.find((s: any) => s.itemId === gear.itemId);

@@ -2,7 +2,7 @@
 // interact path (src/sim/interaction.ts).
 //
 // Pins:
-//  - the three forge operations refuse away from a riftForge NPC with the
+//  - both forge operations refuse away from a riftForge NPC with the
 //    'too_far' reason, one shared error line, no riftForgeResult event, and no
 //    essence or gem spent; standing at the Riftwright lets the same calls land;
 //  - the reach is RIFT_FORGE_RANGE inclusive (INTERACT_RANGE + 2, the bank rule);
@@ -46,22 +46,17 @@ describe('rift forge place gate', () => {
     expect(RIFT_FORGE_RANGE).toBe(INTERACT_RANGE + 2);
   });
 
-  it('refuses all three operations away from the forge: too_far, one error line each, nothing spent', () => {
+  it('refuses both operations away from the forge: too_far, one error line each, nothing spent', () => {
     const { sim, itemId } = forgeWorld();
     moveFarFromRiftForge(sim);
     sim.drainEvents();
     expect(sim.upgradeRiftItem(itemId)).toMatchObject({ ok: false, reason: 'too_far' });
-    expect(sim.enchantRiftItem(itemId, 'critRating')).toMatchObject({
-      ok: false,
-      reason: 'too_far',
-    });
     expect(sim.socketRiftGem(itemId, RIFT_GEM_IDS[0])).toMatchObject({
       ok: false,
       reason: 'too_far',
     });
     const evs = sim.drainEvents();
     expect(errors(evs)).toEqual([
-      'You are too far from the Rift Forge.',
       'You are too far from the Rift Forge.',
       'You are too far from the Rift Forge.',
     ]);
@@ -71,7 +66,7 @@ describe('rift forge place gate', () => {
     expect(sim.countItem(RIFT_GEM_IDS[0])).toBe(1);
   });
 
-  it('lands all three at the Riftwright, and the reach edge is inclusive', () => {
+  it('lands both at the Riftwright, and the reach edge is inclusive', () => {
     const { sim, itemId } = forgeWorld();
     const forge = moveToRiftForge(sim);
     const p = sim.player;
@@ -86,9 +81,8 @@ describe('rift forge place gate', () => {
     sim.rebucket(p);
     expect(sim.upgradeRiftItem(itemId)).toMatchObject({ ok: false, reason: 'too_far' });
     moveToRiftForge(sim);
-    expect(sim.enchantRiftItem(itemId, 'critRating')).toMatchObject({ ok: true });
     expect(sim.socketRiftGem(itemId, RIFT_GEM_IDS[0])).toMatchObject({ ok: true });
-    expect(sim.countItem(RIFT_ESSENCE_ITEM_ID)).toBe(20 - 2 - 4);
+    expect(sim.countItem(RIFT_ESSENCE_ITEM_ID)).toBe(20 - 2);
   });
 
   it('a targeted interact at the Riftwright emits exactly one riftForge event for the caller', () => {

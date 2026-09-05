@@ -2,8 +2,8 @@
 // The Rift Forge window (src/ui/hud/rift_forge/rift_forge_window.ts), the thin
 // painter over rift_forge_view.ts.
 //
-// Pins: open renders the wallet, one card per band with the three forge lines,
-// and the buttons call the IWorld trio with the exact bag slot; a `false`
+// Pins: open renders the wallet, one card per band with the ladder and socket
+// lines, and the buttons call the IWorld pair with the exact bag slot; a `false`
 // outcome (the online mirror's refused / closed ack) renders a visible refusal
 // line rather than silence; a riftForgeResult event maps its structured reason
 // to the localized status line and re-reads the payload; worn bands render the
@@ -11,6 +11,7 @@
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { RIFT_ESSENCE_ITEM_ID, RIFT_GEM_IDS } from '../src/sim/content/rift/items';
+import { riftBandItemLevel } from '../src/sim/rift/band_ladder';
 import { createRiftGearInstance } from '../src/sim/rift/progression';
 import type { InvSlot, SimEvent } from '../src/sim/types';
 import { RiftForgeWindow, type RiftForgeWindowDeps } from '../src/ui/hud/rift_forge';
@@ -36,10 +37,6 @@ describe('RiftForgeWindow', () => {
       player: { name: 'Forgeproof', level: 20 },
       upgradeRiftItem: (itemId: string, target?: { slotIndex: number }) => {
         calls.push({ cmd: 'upgrade', itemId, slotIndex: target?.slotIndex });
-        return outcome;
-      },
-      enchantRiftItem: (itemId: string, stat: string, target?: { slotIndex: number }) => {
-        calls.push({ cmd: 'enchant', itemId, arg: stat, slotIndex: target?.slotIndex });
         return outcome;
       },
       socketRiftGem: (itemId: string, gemId: string, target?: { slotIndex: number }) => {
@@ -86,7 +83,7 @@ describe('RiftForgeWindow', () => {
 
   const text = () => root.textContent ?? '';
 
-  it('opens with the wallet, one band card, and the three forge controls', () => {
+  it('opens with the wallet, one band card, the ladder line, and both forge controls', () => {
     win.open();
     expect(win.isOpen).toBe(true);
     expect(root.getAttribute('role')).toBe('dialog');
@@ -95,36 +92,46 @@ describe('RiftForgeWindow', () => {
     expect(root.querySelectorAll('.rf-ring')).toHaveLength(1);
     expect(text()).toContain('Rift upgrade 0/5');
     expect(text()).toContain('Rift gems 0/2');
+    // The ladder line: the band's item level now, and what the next essence
+    // step buys, quoted from band_ladder.ts.
+    expect(text()).toContain(`Item Level ${riftBandItemLevel('S', 0)}`);
+    expect(root.querySelector('[data-upgrade]')?.textContent).toContain(
+      `Upgrade to item level ${riftBandItemLevel('S', 1)} (2 essence)`,
+    );
     expect(root.querySelector<HTMLButtonElement>('[data-upgrade]')?.disabled).toBe(false);
-    expect(root.querySelector<HTMLButtonElement>('[data-enchant]')?.disabled).toBe(false);
-    // Only the owned gem is offered.
+    expect(root.querySelector('[data-enchant]')).toBeNull();
+    // Only the owned gem is offered, labelled with the rating its colour grants.
     const gemPick = root.querySelector<HTMLSelectElement>('[data-gem]');
     expect([...(gemPick?.options ?? [])].map((o) => o.value)).toEqual([RIFT_GEM_IDS[2]]);
+    expect(gemPick?.options[0]?.textContent).toContain('+12 Hit Rating');
+    expect(text()).not.toContain('replaces the oldest');
     expect(document.activeElement).toBe(root.querySelector('[data-close]'));
   });
 
-  it('routes the buttons to the IWorld trio with the exact bag slot and the picked option', async () => {
+  it('routes the buttons to the IWorld pair with the exact bag slot and the picked gem', async () => {
     win.open();
     // Each click holds the controls until its result event lands (the
     // double-spend pin below), so the sim's event is fed back between clicks.
-    const settle = (action: 'upgrade' | 'enchant' | 'socket') =>
+    const settle = (action: 'upgrade' | 'socket') =>
       win.onResult({ type: 'riftForgeResult', pid: 1, ok: true, action, itemId: gear.itemId });
     root.querySelector<HTMLButtonElement>('[data-upgrade]')?.click();
     await Promise.resolve();
     settle('upgrade');
-    const statPick = root.querySelector<HTMLSelectElement>('[data-stat]');
-    if (statPick) statPick.value = 'hasteRating';
-    root.querySelector<HTMLButtonElement>('[data-enchant]')?.click();
-    await Promise.resolve();
-    settle('enchant');
     root.querySelector<HTMLButtonElement>('[data-socket]')?.click();
     await Promise.resolve();
     settle('socket');
     expect(calls).toEqual([
       { cmd: 'upgrade', itemId: gear.itemId, slotIndex: 1 },
-      { cmd: 'enchant', itemId: gear.itemId, arg: 'hasteRating', slotIndex: 1 },
       { cmd: 'socket', itemId: gear.itemId, arg: RIFT_GEM_IDS[2], slotIndex: 1 },
     ]);
+  });
+
+  it('keeps the gem picker on a full band and names the gem the next socket replaces', () => {
+    gear.instance.rift?.gems.push(RIFT_GEM_IDS[0], RIFT_GEM_IDS[1]);
+    win.open();
+    expect(text()).toContain('Rift gems 2/2');
+    expect(root.querySelector('[data-socket]')).not.toBeNull();
+    expect(text()).toContain('replaces the oldest, Crimson Rift Gem');
   });
 
   it('turns a false outcome (closed or refused wire) into a visible refusal line', async () => {

@@ -4028,13 +4028,15 @@ export const hudChromeStrings = {
     currency: '{name}: {count}',
     empty: 'No Riftbound band in your bags. A ranked Rift first clear mints one.',
     wornHint: 'Worn. Unequip it to forge.',
-    upgradeBtn: 'Upgrade ({cost} essence)',
+    upgradeBtn: 'Upgrade to item level {level} ({cost} essence)',
     upgradeMax: 'Fully upgraded',
-    enchantCurrent: 'Enchant: +{value} {stat}',
-    enchantNone: 'Enchant: none',
-    enchantBtn: 'Enchant ({cost} essence)',
-    statPickAria: 'Enchant stat',
     gemPickAria: 'Gem to socket',
+    // A gem in the socket picker: its name and the rating line its colour
+    // grants (itemUi.tooltip.stat), never concatenated.
+    gemOption: '{name} ({bonus})',
+    // Sockets are replaceable (rift/progression.ts socketRiftGem): on a full
+    // band the next gem destroys the oldest, and the hint names it first.
+    socketReplaceHint: 'Sockets full: the next gem replaces the oldest, {gem}.',
     socketBtn: 'Socket',
     socketsNone: 'no gems',
     socketsFull: 'All sockets filled',
@@ -4045,15 +4047,12 @@ export const hudChromeStrings = {
       notRiftGear: 'Only a Riftbound band can be forged.',
       maxUpgrade: 'That band is fully upgraded.',
       insufficientEssence: 'Not enough Rift Essence.',
-      invalidStat: 'That stat cannot be enchanted here.',
       invalidGem: 'You have no such Rift gem.',
-      socketsFull: 'Every socket on that band is filled.',
       dead: "You can't do that while dead.",
       tooFar: 'You are too far from the Rift Forge.',
     },
     done: {
       upgrade: 'Upgraded {name}.',
-      enchant: 'Enchanted {name}.',
       socket: 'Socketed a gem into {name}.',
     },
   },
@@ -4062,6 +4061,9 @@ export const hudChromeStrings = {
     riftTier: '{tier}-rank Rift item',
     riftUpgrade: 'Rift upgrade {level}/{max}',
     riftSockets: 'Rift gems {used}/{total}',
+    // On a Rift gem's own tooltip, above the rating line its colour grants
+    // once socketed (src/ui/rift_band_tooltip.ts).
+    riftGemSocket: 'Socket bonus for a Riftbound band',
     // The enchant-attributed sibling of itemUi.tooltip.stat, rendered on the
     // share of a per-copy bonus stat that an applied enchant granted
     // (item_instance_tooltip.ts instanceBonusStatLines). It replaced the old
@@ -4423,6 +4425,23 @@ export const hudChromeStrings = {
     // (src/ui/noticeboard_popup.ts). Guild names and notes are world data,
     // spliced verbatim like player names, never translated.
     popupTitle: 'Guild Signpost',
+    close: 'Close',
+  },
+  // The Eastbrook Vale Realm Builder monument's honour roll
+  // (src/ui/realm_builder_popup.ts), opened by inspecting the statue. Honouree
+  // names are world data and splice verbatim like player names, never
+  // translated; only this chrome and the Intl-formatted month localize.
+  realmBuilder: {
+    title: 'Realm Builder of the Month',
+    currentLabel: 'Honoured this month',
+    // The unclaimed plate's stand-in name (src/sim/content/realm_builders.ts
+    // ships the English constant; every surface substitutes this key for it).
+    placeholderName: 'Your Name Here',
+    // Shown only while the plate still carries the unclaimed placeholder name,
+    // so nobody reads the placeholder as a real award.
+    placeholderHint: 'This plate is waiting for its first name.',
+    pastTitle: 'Past honourees',
+    pastEmpty: 'No names on the roll yet.',
     close: 'Close',
   },
   // The bank window (the Gilded Strongbox): a pooled deposit box shown while standing
@@ -5591,6 +5610,9 @@ export const hudChromeStrings = {
     // ruling; the cost line states the reagents being paid before they are.
     alreadyEnchanted: 'That item is already enchanted.',
     sameEnchant: 'That item already has that enchant.',
+    // Riftbound bands are forge-only (rift/band_ladder.ts); the enchanting
+    // profession refuses them by id.
+    riftGear: 'Riftbound bands take Rift gems, not enchants.',
     replaceTag: 'Replaces {enchant}',
     sameEnchantTag: 'Already applied',
     // The tag on the PLAIN twin of a mixed holding (#2421): one item id held

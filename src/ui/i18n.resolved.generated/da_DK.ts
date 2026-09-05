@@ -3023,13 +3023,11 @@ export const da_DK: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const da_DK: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const da_DK: EnTranslations = {
       "riftTier": "{tier}-rangs Rift-genstand",
       "riftUpgrade": "Rift-opgradering {level}/{max}",
       "riftSockets": "Rift-juveler {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Fortryllet)",
       "enchantedFallback": "Fortryllet",
       "partyTradeWindow": "Du kan handle denne genstand til spillere, der delte dens bytte, i de næste {time}. Udstyrer du den, afsluttes handelsvinduet."
@@ -3336,6 +3332,15 @@ export const da_DK: EnTranslations = {
       "back": "Tilbage",
       "popupTitle": "Laugsskilt",
       "close": "Luk"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Bank",
@@ -3981,6 +3986,7 @@ export const da_DK: EnTranslations = {
       "yieldLineRange": "{min} til {max} {item}",
       "alreadyEnchanted": "Den genstand er allerede fortryllet.",
       "sameEnchant": "Den genstand har allerede den fortryllelse.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Erstatter {enchant}",
       "sameEnchantTag": "Allerede anvendt",
       "plainTag": "Ikke fortryllet",
@@ -7968,6 +7974,7 @@ export const da_DK: EnTranslations = {
       "forgeUpgraded": "Rift-opgradering fuldført for {name}.",
       "forgeEnchanted": "Rift-fortryllelse fuldført for {name}.",
       "forgeSocketed": "Rift-juvel indsat for {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Iskold Grav detonerer!",
       "detonateAbsoluteZero": "Absolut Nulpunkt bryder ud!",
       "detonateMagmaWell": "Magmakilde bryder ud!",
@@ -19184,6 +19191,7 @@ export const da_DK: EnTranslations = {
     "delveRiteShrineReedInteract": "Sivskrin: Tryk på F for at røre det",
     "delveRiteShrineSkullInteract": "Kranieskrin: Tryk på F for at røre det",
     "mailboxName": "Postkasse",
-    "noticeboardName": "Opslagstavle"
+    "noticeboardName": "Opslagstavle",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

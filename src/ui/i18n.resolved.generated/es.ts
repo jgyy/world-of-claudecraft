@@ -3023,13 +3023,11 @@ export const es: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const es: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const es: EnTranslations = {
       "riftTier": "Objeto de Brecha de rango {tier}",
       "riftUpgrade": "Mejora de brecha {level}/{max}",
       "riftSockets": "Gemas de brecha {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Encantado)",
       "enchantedFallback": "Encantado",
       "partyTradeWindow": "Puedes intercambiar este objeto con jugadores que compartieron su botín durante los próximos {time}. Equiparlo termina la ventana de intercambio."
@@ -3336,6 +3332,15 @@ export const es: EnTranslations = {
       "back": "Atrás",
       "popupTitle": "Cartel de la hermandad",
       "close": "Cerrar"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Banco",
@@ -3981,6 +3986,7 @@ export const es: EnTranslations = {
       "yieldLineRange": "{min} a {max} {item}",
       "alreadyEnchanted": "Ese objeto ya está encantado.",
       "sameEnchant": "Ese objeto ya tiene ese encantamiento.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Reemplaza {enchant}",
       "sameEnchantTag": "Ya aplicado",
       "plainTag": "Sin encantar",
@@ -7968,6 +7974,7 @@ export const es: EnTranslations = {
       "forgeUpgraded": "Mejora de brecha completada para {name}.",
       "forgeEnchanted": "Encantamiento de brecha completado para {name}.",
       "forgeSocketed": "Gema de brecha engarzada para {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "¡La Tumba Glacial detona!",
       "detonateAbsoluteZero": "¡Cero Absoluto estalla!",
       "detonateMagmaWell": "¡El Pozo de Magma estalla!",
@@ -19184,6 +19191,7 @@ export const es: EnTranslations = {
     "delveRiteShrineReedInteract": "Santuario del Junco: pulsa F para tocarlo",
     "delveRiteShrineSkullInteract": "Santuario de la Calavera: pulsa F para tocarlo",
     "mailboxName": "Buzón",
-    "noticeboardName": "Tablón de anuncios"
+    "noticeboardName": "Tablón de anuncios",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

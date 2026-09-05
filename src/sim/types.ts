@@ -3,6 +3,7 @@
 import type { ChatSenderFlair, StreamerLinks } from './account_flair';
 import type { MountKey } from './content/mounts';
 import type { GatheringProfessionId, ToolEffectId } from './content/professions';
+import type { RealmBuilderHonour } from './content/realm_builders';
 import type { LockSession, LootTier, PickAction, StepResult, VisibleCell } from './lockpick';
 import type { HarvestYield } from './professions/harvest_yields';
 import type { RespawnWindow } from './respawn_policy';
@@ -1286,18 +1287,27 @@ export interface ItemInstancePayload {
    *  ordinary soulbound copy. */
   partyTrade?: { untilMs: number; eligible: string[]; eligibleIds?: number[] };
   /** Long-term Rift gear progression. `rolled.stats` is the authoritative
-   * aggregate bonus consumed by recalcPlayerStats; this record explains how it
-   * was earned and lets forge operations rebuild it deterministically. */
+   * aggregate consumed by recalcPlayerStats (the band's whole stat line plus
+   * its gem ratings); this record is the bounded input it is rebuilt from
+   * (rift/progression.ts rebuildRolledStats, priced by rift/band_ladder.ts):
+   * the clear's rank sets the base item level, every essence upgrade raises it
+   * by one, and each socketed gem adds one rating line. `power` is the rank's
+   * essence weight (salvage yield and first-clear essence count). */
   rift?: {
     sourceEventId: string;
     tier: RiftTier;
     power: number;
     upgradeLevel: number;
     maxUpgradeLevel: number;
-    baseStats: Record<string, number>;
-    enchant?: { stat: string; value: number };
     gemSlots: number;
     gems: string[];
+    /** LEGACY (pre-ladder payloads only): the old additive base line. Never
+     *  read; the load rebuild drops it. Kept optional so a persisted copy
+     *  still types. */
+    baseStats?: Record<string, number>;
+    /** LEGACY (pre-ladder payloads only): the retired forge enchant. Never
+     *  read; the load rebuild drops it. */
+    enchant?: { stat: string; value: number };
   };
 }
 
@@ -1325,7 +1335,7 @@ export function cloneItemInstancePayload(src: ItemInstancePayload): ItemInstance
   if (src.rift) {
     instance.rift = {
       ...src.rift,
-      baseStats: { ...src.rift.baseStats },
+      ...(src.rift.baseStats && { baseStats: { ...src.rift.baseStats } }),
       ...(src.rift.enchant && { enchant: { ...src.rift.enchant } }),
       ...(Array.isArray(src.rift.gems) ? { gems: [...src.rift.gems] } : {}),
     };
@@ -3453,7 +3463,7 @@ export interface NpcDef {
   // three forge commands gate on standing within reach of one of these (the
   // banker precedent, src/sim/rift/forge_gate.ts). A flag rather than a
   // hard-keyed id so a second forge placement never widens a constant.
-  riftForge?: true;
+  riftForge?: boolean;
   // The Card Master: talking to this NPC joins/leaves the Card Duel minigame
   // queue (src/sim/social/card_duel.ts) instead of any vendor/bank flow.
   cardMaster?: boolean;
@@ -5812,6 +5822,15 @@ export type SimEvent = { pid?: number } & (
   // 'listings' carries the board's posted notices verbatim (guild names and
   // notes are world data, spliced by the client like player names, never
   // translated); a board with nothing posted stays the bare 'empty' shape.
+  | {
+      // The Realm Builder monument was inspected. Carries the whole roll so
+      // the card renders identically offline and online, and so a later live
+      // source (Postgres, or the Discord role sync) only has to change what
+      // fills these fields. Honouree names splice verbatim, like player names.
+      type: 'realmBuilder';
+      current: RealmBuilderHonour;
+      past: readonly RealmBuilderHonour[];
+    }
   | { type: 'noticeboard'; noticeboardId: string; state: 'empty' }
   | {
       type: 'noticeboard';
@@ -6485,6 +6504,8 @@ export type SimEvent = { pid?: number } & (
         // and the identical-enchant-id re-apply denied on every arm.
         | 'already_enchanted'
         | 'same_enchant'
+        // A Riftbound band: forge-only gear (professions/enchanting.ts).
+        | 'rift_gear'
         | 'busy';
     }
   // Outcome of applying a loadout's saved gear set. TEXT-FREE on purpose: the sim
@@ -6760,18 +6781,16 @@ export type SimEvent = { pid?: number } & (
       type: 'riftForgeResult';
       pid: number;
       ok: boolean;
-      action: 'upgrade' | 'enchant' | 'socket';
+      action: 'upgrade' | 'socket';
       itemId: string;
       reason?:
         | 'not_found'
         | 'not_rift_gear'
         | 'max_upgrade'
         | 'insufficient_essence'
-        | 'invalid_stat'
         | 'invalid_gem'
-        | 'sockets_full'
         // Type-level only: the while-dead refusal is returned to callers but
-        // never emitted (the three dead-gate early returns in
+        // never emitted (the two dead-gate early returns in
         // rift/progression.ts sit ABOVE emitResult); its one player-facing
         // surface is the shared "You can't do that while dead." error line.
         | 'dead'
@@ -6780,6 +6799,8 @@ export type SimEvent = { pid?: number } & (
         | 'too_far';
       upgradeLevel?: number;
       essenceSpent?: number;
+      /** The gem a socket destroyed to make room (sockets are replaceable). */
+      replacedGem?: string;
     }
   // Gather-node harvest outcome (#1729): a successful resource harvest emits
   // this so the client can play a gathering audio cue for the acting player.
@@ -7145,6 +7166,23 @@ export interface MailboxDef {
    *  always had; content sets it only where a slot faces the wrong way. */
   facing?: number;
 }
+
+// The Eastbrook Vale Realm Builder monument. One singleton static service, so
+// it needs a templateId rather than a def list: interaction.ts recognises the
+// entity by this id and the client sizes its click range from it.
+export const REALM_BUILDER_MONUMENT_TEMPLATE_ID = 'realm_builder_monument' as const;
+/**
+ * How close (yards, from the statue's centre) a player must stand for the
+ * monument to be the object an interact press picks. Its collider keeps the
+ * player 3.19 yd out, so the live band is 3.19 to 4 yd: arm's reach from the
+ * plinth. The Ravenpost mailbox stands 6.21 yd from the centre and its posting
+ * spot about 7 yd, so a player who walked up to post a letter is outside this
+ * band, and one pressed against the plinth on the mailbox's side is nearer
+ * the mailbox anyway: nearest wins, and the monument never takes the press
+ * from it. The client sizes its click range from the same constant
+ * (src/game/interactions.ts objectInteractionRange).
+ */
+export const REALM_BUILDER_MONUMENT_INTERACT_RADIUS = 4;
 
 // Noticeboards currently have one complete cross-platform implementation. Keep
 // the world-content shape closed over that renderer/collider contract instead

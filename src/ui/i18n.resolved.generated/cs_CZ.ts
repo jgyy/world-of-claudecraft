@@ -3023,13 +3023,11 @@ export const cs_CZ: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const cs_CZ: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const cs_CZ: EnTranslations = {
       "riftTier": "Trhlinový předmět stupně {tier}",
       "riftUpgrade": "Vylepšení trhliny {level}/{max}",
       "riftSockets": "Trhlinové drahokamy {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (okouzleno)",
       "enchantedFallback": "Okouzlený",
       "partyTradeWindow": "Tento předmět můžeš dalších {time} směňovat s hráči, kteří sdíleli jeho kořist. Nasazení předmětu okno pro směnu ukončí."
@@ -3336,6 +3332,15 @@ export const cs_CZ: EnTranslations = {
       "back": "Zpět",
       "popupTitle": "Cechovní vývěska",
       "close": "Zavřít"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Banka",
@@ -3981,6 +3986,7 @@ export const cs_CZ: EnTranslations = {
       "yieldLineRange": "{min} až {max} {item}",
       "alreadyEnchanted": "Tento předmět je již okouzlený.",
       "sameEnchant": "Tento předmět už má toto okouzlení.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Nahradí {enchant}",
       "sameEnchantTag": "Již aplikováno",
       "plainTag": "Bez okouzlení",
@@ -7968,6 +7974,7 @@ export const cs_CZ: EnTranslations = {
       "forgeUpgraded": "Vylepšení trhliny dokončeno pro {name}.",
       "forgeEnchanted": "Okouzlení trhliny dokončeno pro {name}.",
       "forgeSocketed": "Trhlinový drahokam osazen pro {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Ledovcový hrob detonuje!",
       "detonateAbsoluteZero": "Absolutní nula vybuchuje!",
       "detonateMagmaWell": "Magmová studna vybuchuje!",
@@ -19184,6 +19191,7 @@ export const cs_CZ: EnTranslations = {
     "delveRiteShrineReedInteract": "Rákosová svatyně: stiskni F a dotkni se jí",
     "delveRiteShrineSkullInteract": "Lebková svatyně: stiskni F a dotkni se jí",
     "mailboxName": "Poštovní schránka",
-    "noticeboardName": "Vývěska"
+    "noticeboardName": "Vývěska",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

@@ -3023,13 +3023,11 @@ export const id_ID: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const id_ID: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const id_ID: EnTranslations = {
       "riftTier": "Barang Rift peringkat {tier}",
       "riftUpgrade": "Peningkatan Rift {level}/{max}",
       "riftSockets": "Permata Rift {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Dimantrai)",
       "enchantedFallback": "Dimantrai",
       "partyTradeWindow": "Kamu dapat memperdagangkan barang ini kepada pemain yang berbagi jarahannya selama {time} berikutnya. Memakainya mengakhiri jendela perdagangan."
@@ -3336,6 +3332,15 @@ export const id_ID: EnTranslations = {
       "back": "Kembali",
       "popupTitle": "Papan Petunjuk Guild",
       "close": "Tutup"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Bank",
@@ -3981,6 +3986,7 @@ export const id_ID: EnTranslations = {
       "yieldLineRange": "{min} hingga {max} {item}",
       "alreadyEnchanted": "Barang itu sudah dimantrai.",
       "sameEnchant": "Barang itu sudah memiliki mantra itu.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Menggantikan {enchant}",
       "sameEnchantTag": "Sudah diterapkan",
       "plainTag": "Belum dimantrai",
@@ -7968,6 +7974,7 @@ export const id_ID: EnTranslations = {
       "forgeUpgraded": "Peningkatan Rift untuk {name} selesai.",
       "forgeEnchanted": "Pemantraan Rift untuk {name} selesai.",
       "forgeSocketed": "Permata Rift terpasang untuk {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Makam Glasial meledak!",
       "detonateAbsoluteZero": "Nol Mutlak meletus!",
       "detonateMagmaWell": "Sumur Magma meletus!",
@@ -19184,6 +19191,7 @@ export const id_ID: EnTranslations = {
     "delveRiteShrineReedInteract": "Altar Buluh: Tekan F untuk menyentuhnya",
     "delveRiteShrineSkullInteract": "Altar Tengkorak: Tekan F untuk menyentuhnya",
     "mailboxName": "Kotak Surat",
-    "noticeboardName": "Papan Pengumuman"
+    "noticeboardName": "Papan Pengumuman",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

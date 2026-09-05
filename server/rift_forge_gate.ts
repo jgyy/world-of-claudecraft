@@ -1,12 +1,12 @@
 // The Rift forge wire gate.
 //
-// The forge (upgrade / enchant / socket on Riftbound bands) shipped sim+wire
+// The forge (upgrade / socket on Riftbound bands) shipped sim+wire
 // first and its client UI later (the Rift Forge window, src/ui/hud/rift_forge/,
 // opened at the Riftwright NPC). While no stock UI existed the wire stayed
 // closed by default, because hiding a feature from the stock client never hid
 // it from a crafted frame. Now that the forge intentionally ships, the default
 // is OPEN and the variable is an ops kill switch: RIFT_FORGE_ENABLED=0 closes
-// the three dispatch arms on a realm that needs the forge paused (an economy
+// the forge dispatch arms on a realm that needs the forge paused (an economy
 // incident, a PTR comparison), as do the obvious off spellings ('false', 'off',
 // 'no', any case); unset and anything else keep it open.
 //
@@ -24,10 +24,9 @@
 
 import type { CommandName } from '../src/world_api';
 
-/** The three forge wire tokens, pinned to the shared command vocabulary. */
+/** The forge wire tokens, pinned to the shared command vocabulary. */
 export const RIFT_FORGE_WIRE_COMMANDS = [
   'rift_upgrade_item',
-  'rift_enchant_item',
   'rift_socket_gem',
 ] as const satisfies readonly CommandName[];
 

@@ -3023,13 +3023,11 @@ export const ja_JP: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "カバンにリフトバウンドリングがありません。ランク付きリフトの初回踏破で1つ鋳造されます。",
       "wornHint": "装備中です。炉にかけるには外してください。",
-      "upgradeBtn": "強化（エッセンス {cost}）",
+      "upgradeBtn": "アイテムレベル{level}へ強化（エッセンス {cost}）",
       "upgradeMax": "強化完了",
-      "enchantCurrent": "エンチャント: +{value} {stat}",
-      "enchantNone": "エンチャント: なし",
-      "enchantBtn": "エンチャント（エッセンス {cost}）",
-      "statPickAria": "エンチャントする能力値",
       "gemPickAria": "はめ込む宝石",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "ソケットは満杯です。次の宝石は最も古い{gem}と入れ替わります。",
       "socketBtn": "はめ込む",
       "socketsNone": "宝石なし",
       "socketsFull": "すべてのソケットが埋まっています",
@@ -3040,15 +3038,12 @@ export const ja_JP: EnTranslations = {
         "notRiftGear": "炉にかけられるのはリフトバウンドリングだけです。",
         "maxUpgrade": "そのリングは強化しきっています。",
         "insufficientEssence": "リフトのエッセンスが足りません。",
-        "invalidStat": "その能力値はここではエンチャントできません。",
         "invalidGem": "そのリフトの宝石を持っていません。",
-        "socketsFull": "そのリングのソケットはすべて埋まっています。",
         "dead": "死亡中はできません。",
         "tooFar": "リフトの炉から離れすぎています。"
       },
       "done": {
         "upgrade": "{name}を強化しました。",
-        "enchant": "{name}にエンチャントしました。",
         "socket": "{name}に宝石をはめ込みました。"
       }
     },
@@ -3057,6 +3052,7 @@ export const ja_JP: EnTranslations = {
       "riftTier": "{tier}ランク・リフト装備",
       "riftUpgrade": "リフト強化 {level}/{max}",
       "riftSockets": "リフト宝石 {used}/{total}",
+      "riftGemSocket": "リフトバウンドリングのソケット効果",
       "statEnchanted": "+{value} {stat}（エンチャント）",
       "enchantedFallback": "エンチャント済み",
       "partyTradeWindow": "このアイテムはあと{time}の間、同じドロップを分かち合ったプレイヤーと取引できます。装備すると取引期間は終了します。"
@@ -3335,6 +3331,15 @@ export const ja_JP: EnTranslations = {
       "rosterTitle": "{guild}のメンバー一覧を見る",
       "back": "戻る",
       "popupTitle": "ギルドの掲示柱",
+      "close": "閉じる"
+    },
+    "realmBuilder": {
+      "title": "今月の王国建設者",
+      "currentLabel": "今月の受賞者",
+      "placeholderName": "あなたの名前",
+      "placeholderHint": "この銘板は最初の名前を待っています。",
+      "pastTitle": "これまでの受賞者",
+      "pastEmpty": "まだ名前が刻まれていません。",
       "close": "閉じる"
     },
     "bank": {
@@ -3981,6 +3986,7 @@ export const ja_JP: EnTranslations = {
       "yieldLineRange": "{item} {min}から{max}個",
       "alreadyEnchanted": "そのアイテムにはすでにエンチャントが付与されています。",
       "sameEnchant": "そのアイテムにはすでに同じエンチャントが付与されています。",
+      "riftGear": "リフトバウンドリングはリフト宝石を嵌めるもので、エンチャントはできません。",
       "replaceTag": "{enchant}を置き換え",
       "sameEnchantTag": "付与済み",
       "plainTag": "エンチャントなし",
@@ -7968,6 +7974,7 @@ export const ja_JP: EnTranslations = {
       "forgeUpgraded": "{name} のリフト強化が完了しました。",
       "forgeEnchanted": "{name} のリフト付与が完了しました。",
       "forgeSocketed": "{name} にリフトの宝石をはめ込みました。",
+      "forgeGemReplaced": "{name} のリフトの宝石を交換しました。{gem} は破壊されました。",
       "detonateGlacialGrave": "氷河の墓が炸裂する！",
       "detonateAbsoluteZero": "絶対零度が爆発する！",
       "detonateMagmaWell": "マグマの泉が噴出する！",
@@ -19184,6 +19191,7 @@ export const ja_JP: EnTranslations = {
     "delveRiteShrineReedInteract": "葦の祠：Fで触れる",
     "delveRiteShrineSkullInteract": "髑髏の祠：Fで触れる",
     "mailboxName": "メールボックス",
-    "noticeboardName": "掲示板"
+    "noticeboardName": "掲示板",
+    "realmBuilderMonumentName": "王国建設者の記念碑"
   }
 };

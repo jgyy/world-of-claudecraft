@@ -3023,13 +3023,11 @@ export const zh_TW: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "背包裡沒有裂隙之戒。首次通關排位裂隙會鑄造一枚。",
       "wornHint": "已裝備。卸下後才能鍛造。",
-      "upgradeBtn": "強化（{cost} 精華）",
+      "upgradeBtn": "強化至物品等級 {level}（{cost} 精華）",
       "upgradeMax": "已強化至滿級",
-      "enchantCurrent": "附魔：+{value} {stat}",
-      "enchantNone": "附魔：無",
-      "enchantBtn": "附魔（{cost} 精華）",
-      "statPickAria": "要附魔的屬性",
       "gemPickAria": "要鑲嵌的寶石",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "插槽已滿：下一顆寶石將替換最早鑲嵌的 {gem}。",
       "socketBtn": "鑲嵌",
       "socketsNone": "沒有寶石",
       "socketsFull": "所有插槽已填滿",
@@ -3040,15 +3038,12 @@ export const zh_TW: EnTranslations = {
         "notRiftGear": "只有裂隙之戒才能鍛造。",
         "maxUpgrade": "那枚戒指已強化至滿級。",
         "insufficientEssence": "裂隙精華不足。",
-        "invalidStat": "那項屬性無法在此附魔。",
         "invalidGem": "你沒有那種裂隙寶石。",
-        "socketsFull": "那枚戒指的插槽都已填滿。",
         "dead": "死亡時無法這麼做。",
         "tooFar": "你離裂隙熔爐太遠了。"
       },
       "done": {
         "upgrade": "已強化{name}。",
-        "enchant": "已為{name}附魔。",
         "socket": "已為{name}鑲嵌一顆寶石。"
       }
     },
@@ -3057,6 +3052,7 @@ export const zh_TW: EnTranslations = {
       "riftTier": "{tier}級裂隙物品",
       "riftUpgrade": "裂隙強化 {level}/{max}",
       "riftSockets": "裂隙寶石 {used}/{total}",
+      "riftGemSocket": "裂隙之戒的鑲嵌加成",
       "statEnchanted": "+{value} {stat}（附魔）",
       "enchantedFallback": "已附魔",
       "partyTradeWindow": "在接下來的{time}內，你可以將此物品交易給共同獲得該掉落的玩家。裝備後交易期限即告結束。"
@@ -3335,6 +3331,15 @@ export const zh_TW: EnTranslations = {
       "rosterTitle": "查看{guild}的成員名單",
       "back": "返回",
       "popupTitle": "公會告示柱",
+      "close": "關閉"
+    },
+    "realmBuilder": {
+      "title": "本月王國建造者",
+      "currentLabel": "本月榮譽獲得者",
+      "placeholderName": "你的名字",
+      "placeholderHint": "這塊銘牌還在等待它的第一個名字。",
+      "pastTitle": "歷屆榮譽獲得者",
+      "pastEmpty": "榮譽榜上還沒有名字。",
       "close": "關閉"
     },
     "bank": {
@@ -3981,6 +3986,7 @@ export const zh_TW: EnTranslations = {
       "yieldLineRange": "{item} {min} 至 {max} 個",
       "alreadyEnchanted": "那件物品已經附魔。",
       "sameEnchant": "那件物品已經擁有該附魔。",
+      "riftGear": "裂隙之戒只能鑲嵌裂隙寶石，無法附魔。",
       "replaceTag": "替換{enchant}",
       "sameEnchantTag": "已施加",
       "plainTag": "未附魔",
@@ -7968,6 +7974,7 @@ export const zh_TW: EnTranslations = {
       "forgeUpgraded": "{name} 的裂隙強化已完成。",
       "forgeEnchanted": "{name} 的裂隙附魔已完成。",
       "forgeSocketed": "已為 {name} 鑲嵌裂隙寶石。",
+      "forgeGemReplaced": "已為 {name} 更換裂隙寶石：{gem} 已被摧毀。",
       "detonateGlacialGrave": "冰川之墓引爆！",
       "detonateAbsoluteZero": "絕對零度爆發！",
       "detonateMagmaWell": "岩漿泉噴湧！",
@@ -19184,6 +19191,7 @@ export const zh_TW: EnTranslations = {
     "delveRiteShrineReedInteract": "蘆葦神龕：按 F 觸碰",
     "delveRiteShrineSkullInteract": "骷髏神龕：按 F 觸碰",
     "mailboxName": "郵箱",
-    "noticeboardName": "告示板"
+    "noticeboardName": "告示板",
+    "realmBuilderMonumentName": "王國建造者紀念碑"
   }
 };

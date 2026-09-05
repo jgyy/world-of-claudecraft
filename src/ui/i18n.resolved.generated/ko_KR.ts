@@ -3023,13 +3023,11 @@ export const ko_KR: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "가방에 균열결속 반지가 없습니다. 등급 균열의 첫 완파가 하나를 만들어 냅니다.",
       "wornHint": "착용 중입니다. 화로에 올리려면 벗으세요.",
-      "upgradeBtn": "강화 (정수 {cost})",
+      "upgradeBtn": "아이템 레벨 {level}(으)로 강화 (정수 {cost})",
       "upgradeMax": "강화 완료",
-      "enchantCurrent": "마법부여: +{value} {stat}",
-      "enchantNone": "마법부여: 없음",
-      "enchantBtn": "마법부여 (정수 {cost})",
-      "statPickAria": "마법부여할 능력치",
       "gemPickAria": "박을 보석",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "소켓이 가득 찼습니다. 다음 보석은 가장 오래된 {gem}을(를) 대체합니다.",
       "socketBtn": "박기",
       "socketsNone": "보석 없음",
       "socketsFull": "모든 홈이 채워졌습니다",
@@ -3040,15 +3038,12 @@ export const ko_KR: EnTranslations = {
         "notRiftGear": "균열결속 반지만 화로에 올릴 수 있습니다.",
         "maxUpgrade": "그 반지는 이미 최대로 강화되었습니다.",
         "insufficientEssence": "균열의 정수가 부족합니다.",
-        "invalidStat": "그 능력치는 여기서 마법부여할 수 없습니다.",
         "invalidGem": "그런 균열 보석이 없습니다.",
-        "socketsFull": "그 반지의 홈은 모두 채워졌습니다.",
         "dead": "죽은 상태에서는 할 수 없습니다.",
         "tooFar": "균열의 화로에서 너무 멀리 떨어져 있습니다."
       },
       "done": {
         "upgrade": "{name}을(를) 강화했습니다.",
-        "enchant": "{name}에 마법부여했습니다.",
         "socket": "{name}에 보석을 박았습니다."
       }
     },
@@ -3057,6 +3052,7 @@ export const ko_KR: EnTranslations = {
       "riftTier": "{tier} 등급 균열 아이템",
       "riftUpgrade": "균열 강화 {level}/{max}",
       "riftSockets": "균열 보석 {used}/{total}",
+      "riftGemSocket": "균열결속 반지 소켓 보너스",
       "statEnchanted": "+{value} {stat} (마법부여)",
       "enchantedFallback": "마법부여됨",
       "partyTradeWindow": "앞으로 {time} 동안 이 아이템을 같은 전리품을 함께 획득한 플레이어와 거래할 수 있습니다. 착용하면 거래 기간이 끝납니다."
@@ -3335,6 +3331,15 @@ export const ko_KR: EnTranslations = {
       "rosterTitle": "{guild}의 명단 보기",
       "back": "뒤로",
       "popupTitle": "길드 게시 기둥",
+      "close": "닫기"
+    },
+    "realmBuilder": {
+      "title": "이달의 왕국 건설자",
+      "currentLabel": "이달의 수상자",
+      "placeholderName": "당신의 이름",
+      "placeholderHint": "이 명판은 첫 번째 이름을 기다리고 있습니다.",
+      "pastTitle": "역대 수상자",
+      "pastEmpty": "아직 명단에 이름이 없습니다.",
       "close": "닫기"
     },
     "bank": {
@@ -3981,6 +3986,7 @@ export const ko_KR: EnTranslations = {
       "yieldLineRange": "{item} {min}~{max}개",
       "alreadyEnchanted": "해당 아이템에는 이미 마법부여가 되어 있습니다.",
       "sameEnchant": "해당 아이템에는 이미 같은 마법부여가 되어 있습니다.",
+      "riftGear": "균열결속 반지는 균열 보석만 장착할 수 있으며 마법부여는 불가능합니다.",
       "replaceTag": "{enchant} 대체",
       "sameEnchantTag": "이미 적용됨",
       "plainTag": "마법부여 없음",
@@ -7968,6 +7974,7 @@ export const ko_KR: EnTranslations = {
       "forgeUpgraded": "{name}의 균열 강화가 완료되었습니다.",
       "forgeEnchanted": "{name}의 균열 마법부여가 완료되었습니다.",
       "forgeSocketed": "{name}에 균열 보석을 장착했습니다.",
+      "forgeGemReplaced": "{name}의 균열 보석을 교체했습니다. {gem}은(는) 파괴되었습니다.",
       "detonateGlacialGrave": "빙하의 무덤이 폭발합니다!",
       "detonateAbsoluteZero": "절대 영도가 폭발합니다!",
       "detonateMagmaWell": "마그마 우물이 분출합니다!",
@@ -19184,6 +19191,7 @@ export const ko_KR: EnTranslations = {
     "delveRiteShrineReedInteract": "갈대 제단: F를 눌러 만지기",
     "delveRiteShrineSkullInteract": "해골 제단: F를 눌러 만지기",
     "mailboxName": "우편함",
-    "noticeboardName": "게시판"
+    "noticeboardName": "게시판",
+    "realmBuilderMonumentName": "왕국 건설자 기념비"
   }
 };

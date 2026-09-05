@@ -4024,7 +4024,6 @@
   body.mobile-touch #leaderboard-window,
   body.mobile-touch #guild-board-window,
   body.mobile-touch #rift-forge-window,
-  body.mobile-touch #rift-forge-window,
   body.mobile-touch #daily-rewards-window {
     z-index: 95;
   }
@@ -4832,6 +4831,12 @@
   body.mobile-touch #guild-board-window,
   body.mobile-touch #rift-forge-window {
     max-height: calc(var(--app-vh) / var(--ui-scale, 1) - 20px);
+  }
+  /* The forge row controls: the gem picker and the two action buttons are the
+     only interactive controls on the sheet, so they take the touch floor. */
+  body.mobile-touch #rift-forge-window .rf-select,
+  body.mobile-touch #rift-forge-window .rf-btn {
+    min-height: 40px;
   }
   /* Loot Settings is a small dialog; JS docks it beside the party frames on desktop
      but on touch it joins the sheet. Its select is the one interactive control, so

@@ -3023,13 +3023,11 @@ export const vi_VN: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const vi_VN: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const vi_VN: EnTranslations = {
       "riftTier": "Vật phẩm Rạn Nứt hạng {tier}",
       "riftUpgrade": "Nâng cấp Rạn Nứt {level}/{max}",
       "riftSockets": "Ngọc Rạn Nứt {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Đã Pháp Khắc)",
       "enchantedFallback": "Đã Pháp Khắc",
       "partyTradeWindow": "Bạn có thể giao dịch vật phẩm này cho những người chơi đã cùng nhận nó rơi ra, trong {time} tới. Trang bị nó sẽ kết thúc khoảng thời gian giao dịch này."
@@ -3336,6 +3332,15 @@ export const vi_VN: EnTranslations = {
       "back": "Quay Lại",
       "popupTitle": "Bảng Thông Báo Bang Hội",
       "close": "Đóng"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Ngân Hàng",
@@ -3981,6 +3986,7 @@ export const vi_VN: EnTranslations = {
       "yieldLineRange": "{min} đến {max} {item}",
       "alreadyEnchanted": "Vật phẩm đó đã được pháp khắc rồi.",
       "sameEnchant": "Vật phẩm đó đã có phép khắc đó rồi.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Thay Thế {enchant}",
       "sameEnchantTag": "Đã Áp Dụng",
       "plainTag": "Chưa pháp khắc",
@@ -7968,6 +7974,7 @@ export const vi_VN: EnTranslations = {
       "forgeUpgraded": "Đã hoàn tất nâng cấp Rạn Nứt cho {name}.",
       "forgeEnchanted": "Đã hoàn tất phù phép Rạn Nứt cho {name}.",
       "forgeSocketed": "Đã gắn ngọc Rạn Nứt cho {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Nấm Mồ Băng Hà phát nổ!",
       "detonateAbsoluteZero": "Độ Không Tuyệt Đối bùng nổ!",
       "detonateMagmaWell": "Giếng Dung Nham bùng nổ!",
@@ -19184,6 +19191,7 @@ export const vi_VN: EnTranslations = {
     "delveRiteShrineReedInteract": "Miếu Lau Sậy: Nhấn F để chạm vào",
     "delveRiteShrineSkullInteract": "Miếu Đầu Lâu: Nhấn F để chạm vào",
     "mailboxName": "Hòm Thư",
-    "noticeboardName": "Bảng Thông Báo"
+    "noticeboardName": "Bảng Thông Báo",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

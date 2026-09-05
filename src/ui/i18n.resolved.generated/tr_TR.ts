@@ -3023,13 +3023,11 @@ export const tr_TR: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const tr_TR: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const tr_TR: EnTranslations = {
       "riftTier": "{tier} dereceli Yarık eşyası",
       "riftUpgrade": "Yarık yükseltmesi {level}/{max}",
       "riftSockets": "Yarık mücevherleri {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Büyülü)",
       "enchantedFallback": "Büyülü",
       "partyTradeWindow": "Bu eşyayı, düşüşünü paylaşan oyunculara önümüzdeki {time} boyunca takas edebilirsin. Kuşanmak takas penceresini sona erdirir."
@@ -3336,6 +3332,15 @@ export const tr_TR: EnTranslations = {
       "back": "Geri",
       "popupTitle": "Lonca Tabelası",
       "close": "Kapat"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Banka",
@@ -3981,6 +3986,7 @@ export const tr_TR: EnTranslations = {
       "yieldLineRange": "{min} ile {max} arası {item}",
       "alreadyEnchanted": "O eşya zaten büyülü.",
       "sameEnchant": "O eşyada zaten bu büyü var.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "{enchant} yerine geçer",
       "sameEnchantTag": "Zaten uygulandı",
       "plainTag": "Büyüsüz",
@@ -7968,6 +7974,7 @@ export const tr_TR: EnTranslations = {
       "forgeUpgraded": "{name} için Yarık yükseltmesi tamamlandı.",
       "forgeEnchanted": "{name} için Yarık büyüsü tamamlandı.",
       "forgeSocketed": "{name} için Yarık mücevheri yuvalandı.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Buzul Mezarı patlıyor!",
       "detonateAbsoluteZero": "Mutlak Sıfır patlıyor!",
       "detonateMagmaWell": "Magma Kuyusu patlıyor!",
@@ -19184,6 +19191,7 @@ export const tr_TR: EnTranslations = {
     "delveRiteShrineReedInteract": "Saz Sunağı: Dokunmak için F'ye bas",
     "delveRiteShrineSkullInteract": "Kafatası Sunağı: Dokunmak için F'ye bas",
     "mailboxName": "Posta Kutusu",
-    "noticeboardName": "İlan Tahtası"
+    "noticeboardName": "İlan Tahtası",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

@@ -87,7 +87,7 @@ import {
 } from '../sim/data';
 import { specialRoleColor } from '../sim/discord_roles';
 import { canEquipItem, isUniqueEquipped, weaponHand } from '../sim/equipment_rules';
-import { isItemLevelEligible, itemLevel, itemScore } from '../sim/item_level';
+import { isItemLevelEligible } from '../sim/item_level';
 import { requiredLevelFor } from '../sim/item_level_req';
 import type { Ante, PickAction } from '../sim/lockpick';
 import { petCanForceTaunt } from '../sim/pet/pet_taunt_gate';
@@ -516,7 +516,7 @@ import { QuestTrackerController } from './hud/quest/quest_tracker_controller';
 import { QuestLogWindow } from './hud/quest/questlog_window';
 import { RiftMapPainter } from './hud/rift';
 import { RiftFloorTrackerController } from './hud/rift/rift_floor_tracker_controller';
-import { RiftForgeWindow } from './hud/rift_forge';
+import { RiftForgeWindow, riftForgeInReach } from './hud/rift_forge';
 import { StanceBarController } from './hud/stance';
 import { closeOpenTouchMenu } from './hud/tap_menu';
 import { dismissBuyQuantityPrompts } from './hud/vendor/buy_quantity_prompt_window';
@@ -580,9 +580,9 @@ import {
   instanceLockLine,
   instanceMakersMarkLine,
   instancePartyTradeLine,
-  instanceRiftLines,
   itemNumber,
   itemStatName,
+  wornTooltipInstance,
 } from './item_instance_tooltip';
 import { itemKindLabel, itemQualityLabel } from './item_kind_label';
 import { itemNameColor } from './item_name_color';
@@ -722,6 +722,7 @@ import { questProgressEventText } from './quest_progress_text';
 import { RaidBossGuideWindow, raidBossGuideContextFallback } from './raid_boss_guide_window';
 import { lockoutParts, lockoutShape } from './raid_lockout';
 import { type RaidLockoutI18n, raidLockoutPanelHtml } from './raid_lockout_view';
+import { presentRealmBuilder, RealmBuilderPopup } from './realm_builder_popup';
 import {
   reliquaryIlluminationBroadcastLine,
   reliquaryIlluminationBroadcastRendered,
@@ -746,6 +747,7 @@ import {
 } from './reliquary_view';
 import { curatorRankNameKey, ReliquaryWindow } from './reliquary_window';
 import { restView } from './rest_indicator';
+import { itemLevelReadout, riftBandTooltipLines, riftGemTooltipLines } from './rift_band_tooltip';
 import { isTalentRowUnlockLevel } from './row_unlock_toast';
 import { localizeServerText } from './server_i18n';
 import {
@@ -2132,6 +2134,7 @@ export class Hud {
   private tutorial = new TutorialOverlay();
   private bootcamp = new BootcampOverlay();
   private noticeboardPopup = new NoticeboardPopup();
+  private realmBuilderPopup = new RealmBuilderPopup();
   private lastPetBarSig = '';
   // Value-diffed body-class flag: true while a live pet bar is shown. The mobile
   // top-band layout reads body.mobile-pet-active to yield the top-centre line to the
@@ -6455,14 +6458,14 @@ export class Hud {
     // hover. Combat gear only: sourceless items (vendor/starter) have no level,
     // and non-combat items never get an item-level line.
     if (isItemLevelEligible(item) && this.optionsHooks?.settings.get('showItemLevel')) {
-      const level = itemLevel(item);
-      if (level !== undefined) {
+      const readout = itemLevelReadout(item, instance);
+      if (readout !== undefined) {
         html += `<div class="tt-stat" style="color:var(--gold)">${esc(
-          t('hudChrome.options.itemLevelLine', { level: itemNumber(level) }),
+          t('hudChrome.options.itemLevelLine', { level: itemNumber(readout.level) }),
         )}</div>`;
         html += `<div class="tt-sub">${esc(
           t('hudChrome.options.itemScoreLine', {
-            score: itemNumber(itemScore(item), 1),
+            score: itemNumber(readout.score, 1),
           }),
         )}</div>`;
       }
@@ -6518,8 +6521,9 @@ export class Hud {
       }
     }
     html += instanceBonusStatLines(instance);
-    html += instanceRiftLines(instance);
+    html += riftBandTooltipLines(instance);
     html += itemAffixTooltipLines(item);
+    html += riftGemTooltipLines(item);
     html += itemRatingTooltipLines(item);
     if (item.foodHp)
       html += `<div class="tt-desc">${esc(t('itemUi.tooltip.useFood', { amount: itemNumber(item.foodHp), seconds: itemNumber(CONSUME_DURATION) }))}</div>`;
@@ -6617,7 +6621,7 @@ export class Hud {
     // player actively tries to sell back.
     if (item.sellValue > 0 && !item.noVendorSell && !item.soulbound)
       html += `<div class="tt-sub">${esc(t('itemUi.tooltip.sellPrice', { money: formatLocalizedMoney(item.sellValue) }))}</div>`;
-    if (compare) html += this.itemCompareBlock(item);
+    if (compare) html += this.itemCompareBlock(item, instance);
     return html;
   }
 
@@ -6718,20 +6722,26 @@ export class Hud {
   // item currently worn in that slot plus the stat change you'd see if you
   // swapped to it (green = gain, red = loss). Reads IWorld.equipment, so it
   // works identically offline and online.
-  private itemCompareBlock(item: ItemDef): string {
+  private itemCompareBlock(item: ItemDef, instance?: ItemInstancePayload): string {
     if (!item.slot) return '';
     // A hovered ring compares against BOTH worn rings (classic behavior); every
     // other slot kind is its own single equipment key.
     const slots: readonly EquipSlot[] = item.slot === 'ring' ? ['ring1', 'ring2'] : [item.slot];
-    return slots.map((slot) => this.itemCompareBlockForSlot(item, slot)).join('');
+    return slots.map((slot) => this.itemCompareBlockForSlot(item, slot, instance)).join('');
   }
 
-  private itemCompareBlockForSlot(item: ItemDef, slot: EquipSlot): string {
+  private itemCompareBlockForSlot(
+    item: ItemDef,
+    slot: EquipSlot,
+    instance?: ItemInstancePayload,
+  ): string {
     const equippedId = this.sim.equipment[slot];
-    if (!equippedId || equippedId === item.id) return '';
+    // A same-id hover still compares per copy (a Riftbound band vs the worn band).
+    if (!equippedId || (equippedId === item.id && !instance?.rift)) return '';
     const equipped = ITEMS[equippedId];
     if (!equipped) return '';
-    const deltas = itemStatDeltas(item, equipped)
+    const worn = wornTooltipInstance(this.sim.equipmentInstances[slot]);
+    const deltas = itemStatDeltas(item, equipped, instance, worn)
       .map((d) => {
         const cls = d.delta > 0 ? 'tt-green' : 'tt-red';
         const sign = d.delta > 0 ? '+' : '−'; // proper minus sign
@@ -6745,7 +6755,7 @@ export class Hud {
       })
       .join('');
     let html = `<div class="tt-cmp"><div class="tt-cmp-head">${esc(t('itemUi.tooltip.currentlyEquipped'))}</div>`;
-    html += `<div class="tt-cmp-body">${this.itemTooltip(equipped, false)}</div>`;
+    html += `<div class="tt-cmp-body">${this.itemTooltip(equipped, false, worn)}</div>`;
     if (deltas)
       html += `<div class="tt-cmp-head">${esc(t('itemUi.tooltip.ifYouEquip'))}</div>${deltas}`;
     html += `</div>`;
@@ -6980,6 +6990,7 @@ export class Hud {
     this.tutorial.relocalize(this.sim, this.keybinds);
     this.bootcamp.relocalize(this.sim, this.keybinds);
     this.noticeboardPopup.relocalize();
+    this.realmBuilderPopup.relocalize();
     this.guildBoardWindow.relocalize();
     this.riftForgeWindow.relocalize();
     // The ring latches its page indicator on the page/count pair; dropping the
@@ -9710,6 +9721,13 @@ export class Hud {
     if (slowHud && this.marketWindow.isOpen) {
       if (!this.nearbyMarketNpc()) this.marketWindow.close();
       else this.marketWindow.refreshIfChanged();
+    }
+    // The forge window follows the player out of the Riftwright's reach (the
+    // market rule); the sim's own place gate refuses the commands regardless.
+    if (slowHud && this.riftForgeWindow.isOpen) {
+      const p = this.sim.player;
+      if (!riftForgeInReach(p, this.sim.entities.values(), NPC_WINDOW_CLOSE_RANGE))
+        this.riftForgeWindow.close();
     }
     // The mailbox closes itself when the mail mirror goes null (walked away).
     if (slowHud && this.mailboxWindow.isOpen) this.mailboxWindow.refreshIfChanged();
@@ -12555,6 +12573,9 @@ export class Hud {
             // looks inert on any host.
             this.openGuildBoard();
           }
+          break;
+        case 'realmBuilder':
+          presentRealmBuilder(this.realmBuilderPopup, this.renderer, ev.current, ev.past);
           break;
         case 'mailArrived': {
           // Player names splice verbatim; authored letters carry their
@@ -16514,6 +16535,7 @@ export class Hud {
       this.renderTrain();
     if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
       this.renderUnbind();
+    if (this.riftForgeWindow.isOpen) this.riftForgeWindow.render();
   }
 
   onCosmeticsChanged(): void {

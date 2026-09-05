@@ -3023,13 +3023,11 @@ export const ru_RU: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "В сумках нет кольца разлома. Первое прохождение рангового разлома выковывает одно.",
       "wornHint": "Надето. Снимите, чтобы ковать.",
-      "upgradeBtn": "Улучшить ({cost} эссенции)",
+      "upgradeBtn": "Улучшить до уровня предмета {level} ({cost} эссенции)",
       "upgradeMax": "Улучшено полностью",
-      "enchantCurrent": "Чары: +{value} {stat}",
-      "enchantNone": "Чары: нет",
-      "enchantBtn": "Зачаровать ({cost} эссенции)",
-      "statPickAria": "Характеристика для чар",
       "gemPickAria": "Самоцвет для гнезда",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Гнёзда заполнены: следующий самоцвет заменит самый старый, {gem}.",
       "socketBtn": "Вставить",
       "socketsNone": "без самоцветов",
       "socketsFull": "Все гнезда заполнены",
@@ -3040,15 +3038,12 @@ export const ru_RU: EnTranslations = {
         "notRiftGear": "Ковать можно только кольцо разлома.",
         "maxUpgrade": "Это кольцо улучшено полностью.",
         "insufficientEssence": "Недостаточно эссенции разлома.",
-        "invalidStat": "Эту характеристику здесь нельзя зачаровать.",
         "invalidGem": "У вас нет такого самоцвета разлома.",
-        "socketsFull": "Все гнезда этого кольца заполнены.",
         "dead": "Нельзя сделать это, пока вы мертвы.",
         "tooFar": "Вы слишком далеко от горна разлома."
       },
       "done": {
         "upgrade": "{name}: улучшено.",
-        "enchant": "{name}: зачаровано.",
         "socket": "{name}: самоцвет вставлен."
       }
     },
@@ -3057,6 +3052,7 @@ export const ru_RU: EnTranslations = {
       "riftTier": "Предмет разлома ранга {tier}",
       "riftUpgrade": "Улучшение разлома {level}/{max}",
       "riftSockets": "Самоцветы разлома {used}/{total}",
+      "riftGemSocket": "Бонус гнезда для кольца разлома",
       "statEnchanted": "+{value} {stat} (зачаровано)",
       "enchantedFallback": "Зачаровано",
       "partyTradeWindow": "Вы можете передать этот предмет игрокам, разделившим эту добычу, ещё в течение {time}. Надев предмет, вы завершите период обмена."
@@ -3335,6 +3331,15 @@ export const ru_RU: EnTranslations = {
       "rosterTitle": "Просмотреть состав гильдии {guild}",
       "back": "Назад",
       "popupTitle": "Гильдейский столб",
+      "close": "Закрыть"
+    },
+    "realmBuilder": {
+      "title": "Зодчий месяца",
+      "currentLabel": "Отмечен в этом месяце",
+      "placeholderName": "Ваше имя",
+      "placeholderHint": "Эта табличка ждёт своего первого имени.",
+      "pastTitle": "Прежние зодчие",
+      "pastEmpty": "В списке пока нет имён.",
       "close": "Закрыть"
     },
     "bank": {
@@ -3981,6 +3986,7 @@ export const ru_RU: EnTranslations = {
       "yieldLineRange": "{item}: {min}-{max}",
       "alreadyEnchanted": "Этот предмет уже зачарован.",
       "sameEnchant": "На этом предмете уже есть эти чары.",
+      "riftGear": "Кольца разлома принимают самоцветы разлома, а не чары.",
       "replaceTag": "Заменяет «{enchant}»",
       "sameEnchantTag": "Уже наложено",
       "plainTag": "Без чар",
@@ -7968,6 +7974,7 @@ export const ru_RU: EnTranslations = {
       "forgeUpgraded": "Улучшение разлома завершено для {name}.",
       "forgeEnchanted": "Зачарование разлома завершено для {name}.",
       "forgeSocketed": "Самоцвет разлома вставлен в {name}.",
+      "forgeGemReplaced": "Самоцвет разлома в {name} заменён: {gem} уничтожен.",
       "detonateGlacialGrave": "Ледяная могила взрывается!",
       "detonateAbsoluteZero": "Абсолютный ноль вырывается!",
       "detonateMagmaWell": "Магматический колодец вырывается!",
@@ -19184,6 +19191,7 @@ export const ru_RU: EnTranslations = {
     "delveRiteShrineReedInteract": "Святилище тростника: нажмите F, чтобы коснуться",
     "delveRiteShrineSkullInteract": "Святилище черепа: нажмите F, чтобы коснуться",
     "mailboxName": "Почтовый ящик",
-    "noticeboardName": "Доска объявлений"
+    "noticeboardName": "Доска объявлений",
+    "realmBuilderMonumentName": "Памятник зодчим королевства"
   }
 };

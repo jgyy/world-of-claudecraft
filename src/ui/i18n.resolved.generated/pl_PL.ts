@@ -3023,13 +3023,11 @@ export const pl_PL: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const pl_PL: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const pl_PL: EnTranslations = {
       "riftTier": "Przedmiot Szczeliny rangi {tier}",
       "riftUpgrade": "Ulepszenie Szczeliny {level}/{max}",
       "riftSockets": "Klejnoty Szczeliny {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Zaklęty)",
       "enchantedFallback": "Zaklęty",
       "partyTradeWindow": "Możesz wymienić ten przedmiot z graczami, z którymi wypadł, jeszcze przez {time}. Założenie go kończy okno wymiany."
@@ -3336,6 +3332,15 @@ export const pl_PL: EnTranslations = {
       "back": "Wstecz",
       "popupTitle": "Tablica gildii",
       "close": "Zamknij"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Bank",
@@ -3981,6 +3986,7 @@ export const pl_PL: EnTranslations = {
       "yieldLineRange": "od {min} do {max} {item}",
       "alreadyEnchanted": "Ten przedmiot jest już zaklęty.",
       "sameEnchant": "Ten przedmiot już ma to zaklęcie.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Zastępuje {enchant}",
       "sameEnchantTag": "Już zastosowane",
       "plainTag": "Bez zaklęcia",
@@ -7968,6 +7974,7 @@ export const pl_PL: EnTranslations = {
       "forgeUpgraded": "Ukończono ulepszenie Szczeliny dla {name}.",
       "forgeEnchanted": "Ukończono zaklęcie Szczeliny dla {name}.",
       "forgeSocketed": "Osadzono klejnot Szczeliny w {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Lodowaty Grób eksploduje!",
       "detonateAbsoluteZero": "Zero Absolutne wybucha!",
       "detonateMagmaWell": "Studnia Magmy wybucha!",
@@ -19184,6 +19191,7 @@ export const pl_PL: EnTranslations = {
     "delveRiteShrineReedInteract": "Kapliczka Trzciny: Naciśnij F, aby jej dotknąć",
     "delveRiteShrineSkullInteract": "Kapliczka Czaszki: Naciśnij F, aby jej dotknąć",
     "mailboxName": "Skrzynka pocztowa",
-    "noticeboardName": "Tablica ogłoszeń"
+    "noticeboardName": "Tablica ogłoszeń",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

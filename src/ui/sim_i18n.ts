@@ -12680,6 +12680,11 @@ const RULES: Rule[] = [
     re: /^Rift gem socketed for (.+)\.$/,
     build: (m) => t('sim.rift.forgeSocketed', { name: m[1] }),
   },
+  {
+    // A socket on a full band destroys its oldest gem; the line names it.
+    re: /^Rift gem replaced for (.+): (.+) destroyed\.$/,
+    build: (m) => t('sim.rift.forgeGemReplaced', { name: m[1], gem: m[2] }),
+  },
   // Boss lethal death-zone detonation lines (src/sim/mob/locomotion.ts). The sim
   // emits def.detonateText verbatim at zone expiry; match each exact string here and
   // re-render via its sim.rift.detonate* catalog key. One rule per mechanic so each

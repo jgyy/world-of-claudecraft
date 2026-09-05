@@ -1,7 +1,9 @@
 // The Rift forge wire gate (server/rift_forge_gate.ts).
 //
-// The forge trio (rift_upgrade_item / rift_enchant_item / rift_socket_gem)
-// shipped sim+wire first and its client UI (the Rift Forge window) later. The
+// The forge pair (rift_upgrade_item / rift_socket_gem; the original third arm,
+// rift_enchant_item, retired with the band item-level ladder and is a
+// dispatch-only no-op tombstone now) shipped sim+wire first and its client UI
+// (the Rift Forge window) later. The
 // gate was a strict opt-in while no stock UI existed; now that the forge
 // ships it is an ops kill switch: RIFT_FORGE_ENABLED=0 closes the wire,
 // anything else (including unset) keeps it open.
@@ -122,12 +124,8 @@ describe('rift forge wire gate: the pure verdict', () => {
     expect(riftForgeWireEnabled({ RIFT_FORGE_ENABLED: 'closed' })).toBe(true);
   });
 
-  it('refuses exactly the three forge tokens while closed, and nothing else ever', () => {
-    expect(RIFT_FORGE_WIRE_COMMANDS).toEqual([
-      'rift_upgrade_item',
-      'rift_enchant_item',
-      'rift_socket_gem',
-    ]);
+  it('refuses exactly the two forge tokens while closed, and nothing else ever', () => {
+    expect(RIFT_FORGE_WIRE_COMMANDS).toEqual(['rift_upgrade_item', 'rift_socket_gem']);
     const closed = { RIFT_FORGE_ENABLED: '0' };
     for (const cmd of RIFT_FORGE_WIRE_COMMANDS) {
       expect(refusedRiftForgeCommand(cmd, closed), `${cmd} must refuse while closed`).toBe(true);
@@ -143,11 +141,15 @@ describe('rift forge wire gate: the pure verdict', () => {
 
 describe('rift forge wire gate: completeness and the ops contract', () => {
   /**
-   * A future rift dispatch arm that must NOT be forge-gated earns an entry
-   * here with a written reason (the item_copy_addressing_guard shape). Empty
-   * today: every rift_* wire command is a forge command.
+   * A rift dispatch arm that must NOT be forge-gated earns an entry here with
+   * a written reason (the item_copy_addressing_guard shape).
    */
-  const EXEMPT: ReadonlyArray<{ cmd: string; why: string }> = [];
+  const EXEMPT: ReadonlyArray<{ cmd: string; why: string }> = [
+    {
+      cmd: 'rift_enchant_item',
+      why: 'retired tombstone: the forge enchant went away with the band item-level ladder (rift/band_ladder.ts); the append-only vocabulary keeps the token and the arm is a no-op that spends and mutates nothing, so there is nothing for the gate to close',
+    },
+  ];
 
   it("every case 'rift_*' dispatch arm is gated or exempted with a reason", () => {
     // Source scan, like tests/item_copy_addressing_guard.test.ts: behavior
@@ -156,7 +158,7 @@ describe('rift forge wire gate: completeness and the ops contract', () => {
     const source = readFileSync(new URL('../server/game.ts', import.meta.url), 'utf8');
     const labels = new Set<string>();
     for (const m of source.matchAll(/case '(rift_[a-z_]+)':/g)) labels.add(m[1]);
-    expect(labels.size, 'expected the scan to find the forge arms').toBeGreaterThanOrEqual(3);
+    expect(labels.size, 'expected the scan to find the forge arms').toBeGreaterThanOrEqual(2);
     const classified = new Set<string>([
       ...RIFT_FORGE_WIRE_COMMANDS,
       ...EXEMPT.map((row) => row.cmd),
@@ -195,7 +197,7 @@ describe('rift forge wire gate: server dispatch', () => {
     setGameMetricsCounters(noopGameMetricsCounters);
   });
 
-  it('closed (RIFT_FORGE_ENABLED=0): all three commands spend nothing, mutate nothing, answer ok:false', () => {
+  it('closed (RIFT_FORGE_ENABLED=0): both commands spend nothing, mutate nothing, answer ok:false', () => {
     process.env.RIFT_FORGE_ENABLED = '0';
     const refusals = recordingRefusalSink();
     const { server, fc, session, pid, itemId } = forgeReadySession();
@@ -208,16 +210,6 @@ describe('rift forge wire gate: server dispatch', () => {
     server.handleMessage(
       session,
       JSON.stringify({ t: 'cmd', cmd: 'rift_upgrade_item', item: itemId, rid: 11 }),
-    );
-    server.handleMessage(
-      session,
-      JSON.stringify({
-        t: 'cmd',
-        cmd: 'rift_enchant_item',
-        item: itemId,
-        stat: 'critRating',
-        rid: 12,
-      }),
     );
     server.handleMessage(
       session,
@@ -239,7 +231,6 @@ describe('rift forge wire gate: server dispatch', () => {
 
     const rift = riftPayload(server, pid, itemId);
     expect(rift?.upgradeLevel).toBe(0);
-    expect(rift?.enchant).toBeUndefined();
     expect(rift?.gems).toEqual([]);
     expect(server.sim.countItem(RIFT_ESSENCE_ITEM_ID, pid)).toBe(essenceBefore);
     expect(server.sim.countItem(RIFT_GEM_IDS[0], pid)).toBe(gemBefore);
@@ -250,11 +241,10 @@ describe('rift forge wire gate: server dispatch', () => {
     // and only for the rid frames.
     expect(fc.sent.filter((m) => m.t === 'commandOutcome')).toEqual([
       { t: 'commandOutcome', rid: 11, ok: false },
-      { t: 'commandOutcome', rid: 12, ok: false },
       { t: 'commandOutcome', rid: 13, ok: false },
     ]);
     // Every attempt books the ops counter, the rid-less one included.
-    expect(refusals.count()).toBe(4);
+    expect(refusals.count()).toBe(3);
     // Refused ABOVE the heavy-self dirty flag: a blocked frame cannot force a re-diff.
     expect(session.selfHeavyDirty).toBe(false);
   });
@@ -279,39 +269,32 @@ describe('rift forge wire gate: server dispatch', () => {
       session,
       JSON.stringify({
         t: 'cmd',
-        cmd: 'rift_enchant_item',
-        item: itemId,
-        stat: 'critRating',
-        rid: 22,
-      }),
-    );
-    server.handleMessage(
-      session,
-      JSON.stringify({
-        t: 'cmd',
         cmd: 'rift_socket_gem',
         item: itemId,
         gem: RIFT_GEM_IDS[0],
         rid: 23,
       }),
     );
+    // The retired token: dispatched (no unknown-command path), but a no-op
+    // with the wire open too. It must neither spend nor answer.
+    server.handleMessage(
+      session,
+      JSON.stringify({ t: 'cmd', cmd: 'rift_enchant_item', item: itemId, stat: 'critRating' }),
+    );
 
     const rift = riftPayload(server, pid, itemId);
     expect(rift?.upgradeLevel).toBe(1);
-    // S rank is power 4, so the enchant value is ceil(4 / 2) = 2.
-    expect(rift?.enchant).toEqual({ stat: 'critRating', value: 2 });
     expect(rift?.gems).toEqual([RIFT_GEM_IDS[0]]);
-    // Upgrade at level 0 costs 2 essence, the enchant a flat 4.
-    expect(server.sim.countItem(RIFT_ESSENCE_ITEM_ID, pid)).toBe(essenceBefore - 6);
+    // Upgrade at level 0 costs 2 essence; the socket costs the gem only.
+    expect(server.sim.countItem(RIFT_ESSENCE_ITEM_ID, pid)).toBe(essenceBefore - 2);
     expect(server.sim.countItem(RIFT_GEM_IDS[0], pid)).toBe(0);
     // Positive control for the closed arm's zero: the sim really does queue
     // one ok result per forge action when allowed to run.
     const results = forgeResults(server);
-    expect(results).toHaveLength(3);
+    expect(results).toHaveLength(2);
     expect(results.every((ev) => ev.ok === true)).toBe(true);
     expect(fc.sent.filter((m) => m.t === 'commandOutcome')).toEqual([
       { t: 'commandOutcome', rid: 21, ok: true },
-      { t: 'commandOutcome', rid: 22, ok: true },
       { t: 'commandOutcome', rid: 23, ok: true },
     ]);
     expect(refusals.count()).toBe(0);

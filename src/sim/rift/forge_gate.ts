@@ -1,8 +1,8 @@
-// The Rift Forge place gate: may this player forge (upgrade / enchant / socket
-// a Riftbound ring) from where they stand?
+// The Rift Forge place gate: may this player forge (upgrade / socket a
+// Riftbound ring) from where they stand?
 //
-// The forge is an NPC service, the bank precedent (bank.ts nearBanker): the
-// three forge operations in progression.ts refuse unless the player stands
+// The forge is an NPC service, the bank precedent (bank.ts nearBanker): both
+// forge operations in progression.ts refuse unless the player stands
 // within reach of a riftForge-flagged NPC (the Riftwright, content/farshore.ts).
 // The rule lives in the sim so all three hosts (offline browser, authoritative
 // server, headless env) enforce it identically; the server's env gate

@@ -1,4 +1,4 @@
-// The forge trio's wire dispatch (server/rift_forge_dispatch.ts).
+// The forge pair's wire dispatch (server/rift_forge_dispatch.ts).
 //
 // Pins: each well-formed frame reaches its sim method with the exact argument
 // order the Sim wrappers expect (item, [stat | gem], pid, slot), a slot reads
@@ -7,7 +7,7 @@
 // caller sends no ack, the same silence every other malformed command gets.
 
 import { describe, expect, it } from 'vitest';
-import { dispatchRiftForgeCommand } from '../server/rift_forge_dispatch';
+import { dispatchRiftCommand } from '../server/rift_forge_dispatch';
 import type { RiftForgeResult } from '../src/sim/rift/progression';
 
 function recorder() {
@@ -24,10 +24,6 @@ function recorder() {
         calls.push(['upgrade', ...args]);
         return ok('upgrade');
       },
-      enchantRiftItem: (...args: unknown[]) => {
-        calls.push(['enchant', ...args]);
-        return ok('enchant');
-      },
       socketRiftGem: (...args: unknown[]) => {
         calls.push(['socket', ...args]);
         return ok('socket');
@@ -36,22 +32,15 @@ function recorder() {
   };
 }
 
-describe('dispatchRiftForgeCommand', () => {
-  it('routes the three tokens with the Sim wrapper argument order', () => {
+describe('dispatchRiftCommand', () => {
+  it('routes both tokens with the Sim wrapper argument order', () => {
     const { calls, sim } = recorder();
     expect(
-      dispatchRiftForgeCommand(sim as never, { cmd: 'rift_upgrade_item', item: 'band', slot: 3 }, 7)
+      dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item', item: 'band', slot: 3 }, 7)
         ?.ok,
     ).toBe(true);
     expect(
-      dispatchRiftForgeCommand(
-        sim as never,
-        { cmd: 'rift_enchant_item', item: 'band', stat: 'critRating' },
-        7,
-      )?.action,
-    ).toBe('enchant');
-    expect(
-      dispatchRiftForgeCommand(
+      dispatchRiftCommand(
         sim as never,
         { cmd: 'rift_socket_gem', item: 'band', gem: 'rift_gem_azure', slot: '2' },
         7,
@@ -59,7 +48,6 @@ describe('dispatchRiftForgeCommand', () => {
     ).toBe('socket');
     expect(calls).toEqual([
       ['upgrade', 'band', 7, 3],
-      ['enchant', 'band', 'critRating', 7, undefined],
       // A string slot is not an integer: undefined, never 0 or 2.
       ['socket', 'band', 'rift_gem_azure', 7, undefined],
     ]);
@@ -67,18 +55,24 @@ describe('dispatchRiftForgeCommand', () => {
 
   it('answers null (no ack) for every malformed shape without touching the sim', () => {
     const { calls, sim } = recorder();
-    expect(dispatchRiftForgeCommand(sim as never, { cmd: 'rift_upgrade_item' }, 7)).toBeNull();
+    expect(dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item' }, 7)).toBeNull();
     expect(
-      dispatchRiftForgeCommand(sim as never, { cmd: 'rift_upgrade_item', item: 4 }, 7),
+      dispatchRiftCommand(sim as never, { cmd: 'rift_upgrade_item', item: 4 }, 7),
+    ).toBeNull();
+    // The retired forge enchant is a no-op tombstone in game.ts, never a
+    // forge frame: the dispatcher does not know the token.
+    expect(
+      dispatchRiftCommand(
+        sim as never,
+        { cmd: 'rift_enchant_item', item: 'band', stat: 'critRating' },
+        7,
+      ),
     ).toBeNull();
     expect(
-      dispatchRiftForgeCommand(sim as never, { cmd: 'rift_enchant_item', item: 'band' }, 7),
+      dispatchRiftCommand(sim as never, { cmd: 'rift_socket_gem', item: 'band', gem: 1 }, 7),
     ).toBeNull();
     expect(
-      dispatchRiftForgeCommand(sim as never, { cmd: 'rift_socket_gem', item: 'band', gem: 1 }, 7),
-    ).toBeNull();
-    expect(
-      dispatchRiftForgeCommand(sim as never, { cmd: 'salvage_item', item: 'band' }, 7),
+      dispatchRiftCommand(sim as never, { cmd: 'salvage_item', item: 'band' }, 7),
     ).toBeNull();
     expect(calls).toEqual([]);
   });

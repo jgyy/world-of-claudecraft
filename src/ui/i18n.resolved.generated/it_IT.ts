@@ -3023,13 +3023,11 @@ export const it_IT: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const it_IT: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const it_IT: EnTranslations = {
       "riftTier": "Oggetto dello Squarcio di rango {tier}",
       "riftUpgrade": "Potenziamento dello squarcio {level}/{max}",
       "riftSockets": "Gemme dello squarcio {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Incantato)",
       "enchantedFallback": "Incantato",
       "partyTradeWindow": "Puoi scambiare questo oggetto con i giocatori che hanno condiviso il suo bottino per i prossimi {time}. Indossarlo pone fine alla finestra di scambio."
@@ -3336,6 +3332,15 @@ export const it_IT: EnTranslations = {
       "back": "Indietro",
       "popupTitle": "Cartello della Gilda",
       "close": "Chiudi"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Banca",
@@ -3981,6 +3986,7 @@ export const it_IT: EnTranslations = {
       "yieldLineRange": "Da {min} a {max} {item}",
       "alreadyEnchanted": "Quell'oggetto è già incantato.",
       "sameEnchant": "Quell'oggetto ha già quell'incantesimo.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Sostituisce {enchant}",
       "sameEnchantTag": "Già applicato",
       "plainTag": "Non incantato",
@@ -7968,6 +7974,7 @@ export const it_IT: EnTranslations = {
       "forgeUpgraded": "Potenziamento dello squarcio completato per {name}.",
       "forgeEnchanted": "Incantesimo dello squarcio completato per {name}.",
       "forgeSocketed": "Gemma dello squarcio incastonata per {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Tomba Glaciale detona!",
       "detonateAbsoluteZero": "Zero Assoluto erompe!",
       "detonateMagmaWell": "Il Pozzo di Magma erompe!",
@@ -19184,6 +19191,7 @@ export const it_IT: EnTranslations = {
     "delveRiteShrineReedInteract": "Santuario delle Canne: premi F per toccarlo",
     "delveRiteShrineSkullInteract": "Santuario del Teschio: premi F per toccarlo",
     "mailboxName": "Cassetta postale",
-    "noticeboardName": "Bacheca degli annunci"
+    "noticeboardName": "Bacheca degli annunci",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

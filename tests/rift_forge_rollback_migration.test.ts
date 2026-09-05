@@ -398,9 +398,11 @@ describe('cost model parity with src/sim/rift/progression.ts', () => {
     expect(progressionSource).toContain('const cost = riftUpgradeCost(gear.upgradeLevel);');
   });
 
-  test('enchant cost in the sim is a flat 4', () => {
-    expect(progressionSource).toContain('export const RIFT_ENCHANT_COST = 4;');
-    expect(progressionSource).toContain('const cost = RIFT_ENCHANT_COST;');
+  test('the forge enchant the rollback refunded no longer exists in the sim', () => {
+    // The migration refunded a flat 4 essence per enchant; the enchant itself
+    // retired with the band item-level ladder, so nothing can mint one again.
+    expect(progressionSource).not.toContain('enchantRiftItem');
+    expect(progressionSource).not.toContain('const cost = 4;');
   });
 
   test('socketing consumes exactly one gem item and no essence', () => {

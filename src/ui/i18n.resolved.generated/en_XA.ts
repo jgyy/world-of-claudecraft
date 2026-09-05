@@ -3023,13 +3023,11 @@ export const en_XA: EnTranslations = {
       "currency": "[{name}: {count}]",
       "empty": "[Ñó Ŕíƒţƀóúñð ƀáñð íñ ýóúŕ ƀáĝš. Á ŕáñķéð Ŕíƒţ ƒíŕšţ çļéáŕ ɱíñţš óñé.]",
       "wornHint": "[Ŵóŕñ. Úñéɋúíþ íţ ţó ƒóŕĝé.]",
-      "upgradeBtn": "[Úþĝŕáðé ({cost} éššéñçé)]",
+      "upgradeBtn": "[Úþĝŕáðé ţó íţéɱ ļéʋéļ {level} ({cost} éššéñçé)]",
       "upgradeMax": "[Ƒúļļý úþĝŕáðéð]",
-      "enchantCurrent": "[Éñçĥáñţ: +{value} {stat}]",
-      "enchantNone": "[Éñçĥáñţ: ñóñé]",
-      "enchantBtn": "[Éñçĥáñţ ({cost} éššéñçé)]",
-      "statPickAria": "[Éñçĥáñţ šţáţ]",
       "gemPickAria": "[Ĝéɱ ţó šóçķéţ]",
+      "gemOption": "[{name} ({bonus})]",
+      "socketReplaceHint": "[Šóçķéţš ƒúļļ: ţĥé ñéẋţ ĝéɱ ŕéþļáçéš ţĥé óļðéšţ, {gem}.]",
       "socketBtn": "[Šóçķéţ]",
       "socketsNone": "[ñó ĝéɱš]",
       "socketsFull": "[Áļļ šóçķéţš ƒíļļéð]",
@@ -3040,15 +3038,12 @@ export const en_XA: EnTranslations = {
         "notRiftGear": "[Óñļý á Ŕíƒţƀóúñð ƀáñð çáñ ƀé ƒóŕĝéð.]",
         "maxUpgrade": "[Ţĥáţ ƀáñð íš ƒúļļý úþĝŕáðéð.]",
         "insufficientEssence": "[Ñóţ éñóúĝĥ Ŕíƒţ Éššéñçé.]",
-        "invalidStat": "[Ţĥáţ šţáţ çáññóţ ƀé éñçĥáñţéð ĥéŕé.]",
         "invalidGem": "[Ýóú ĥáʋé ñó šúçĥ Ŕíƒţ ĝéɱ.]",
-        "socketsFull": "[Éʋéŕý šóçķéţ óñ ţĥáţ ƀáñð íš ƒíļļéð.]",
         "dead": "[Ýóú çáñ'ţ ðó ţĥáţ ŵĥíļé ðéáð.]",
         "tooFar": "[Ýóú áŕé ţóó ƒáŕ ƒŕóɱ ţĥé Ŕíƒţ Ƒóŕĝé.]"
       },
       "done": {
         "upgrade": "[Úþĝŕáðéð {name}.]",
-        "enchant": "[Éñçĥáñţéð {name}.]",
         "socket": "[Šóçķéţéð á ĝéɱ íñţó {name}.]"
       }
     },
@@ -3057,6 +3052,7 @@ export const en_XA: EnTranslations = {
       "riftTier": "[{tier}-ŕáñķ Ŕíƒţ íţéɱ]",
       "riftUpgrade": "[Ŕíƒţ úþĝŕáðé {level}/{max}]",
       "riftSockets": "[Ŕíƒţ ĝéɱš {used}/{total}]",
+      "riftGemSocket": "[Šóçķéţ ƀóñúš ƒóŕ á Ŕíƒţƀóúñð ƀáñð]",
       "statEnchanted": "[+{value} {stat} (Éñçĥáñţéð)]",
       "enchantedFallback": "[Éñçĥáñţéð]",
       "partyTradeWindow": "[Ýóú ɱáý ţŕáðé ţĥíš íţéɱ ţó þļáýéŕš ŵĥó šĥáŕéð íţš ðŕóþ ƒóŕ ţĥé ñéẋţ {time}. Éɋúíþþíñĝ íţ éñðš ţĥé ţŕáðé ŵíñðóŵ.]"
@@ -3335,6 +3331,15 @@ export const en_XA: EnTranslations = {
       "rosterTitle": "[Ʋíéŵ ţĥé ŕóšţéŕ óƒ {guild}]",
       "back": "[Ɓáçķ]",
       "popupTitle": "[Ĝúíļð Šíĝñþóšţ]",
+      "close": "[Çļóšé]"
+    },
+    "realmBuilder": {
+      "title": "[Ŕéáļɱ Ɓúíļðéŕ óƒ ţĥé Ɱóñţĥ]",
+      "currentLabel": "[Ĥóñóúŕéð ţĥíš ɱóñţĥ]",
+      "placeholderName": "[Ýóúŕ Ñáɱé Ĥéŕé]",
+      "placeholderHint": "[Ţĥíš þļáţé íš ŵáíţíñĝ ƒóŕ íţš ƒíŕšţ ñáɱé.]",
+      "pastTitle": "[Þášţ ĥóñóúŕééš]",
+      "pastEmpty": "[Ñó ñáɱéš óñ ţĥé ŕóļļ ýéţ.]",
       "close": "[Çļóšé]"
     },
     "bank": {
@@ -3981,6 +3986,7 @@ export const en_XA: EnTranslations = {
       "yieldLineRange": "[{min} ţó {max} {item}]",
       "alreadyEnchanted": "[Ţĥáţ íţéɱ íš áļŕéáðý éñçĥáñţéð.]",
       "sameEnchant": "[Ţĥáţ íţéɱ áļŕéáðý ĥáš ţĥáţ éñçĥáñţ.]",
+      "riftGear": "[Ŕíƒţƀóúñð ƀáñðš ţáķé Ŕíƒţ ĝéɱš, ñóţ éñçĥáñţš.]",
       "replaceTag": "[Ŕéþļáçéš {enchant}]",
       "sameEnchantTag": "[Áļŕéáðý áþþļíéð]",
       "plainTag": "[Ñóţ éñçĥáñţéð]",
@@ -7968,6 +7974,7 @@ export const en_XA: EnTranslations = {
       "forgeUpgraded": "[Ŕíƒţ úþĝŕáðé çóɱþļéţéð ƒóŕ {name}.]",
       "forgeEnchanted": "[Ŕíƒţ éñçĥáñţ çóɱþļéţéð ƒóŕ {name}.]",
       "forgeSocketed": "[Ŕíƒţ ĝéɱ šóçķéţéð ƒóŕ {name}.]",
+      "forgeGemReplaced": "[Ŕíƒţ ĝéɱ ŕéþļáçéð ƒóŕ {name}: {gem} ðéšţŕóýéð.]",
       "detonateGlacialGrave": "[Ĝļáçíáļ Ĝŕáʋé ðéţóñáţéš!]",
       "detonateAbsoluteZero": "[Áƀšóļúţé Žéŕó éŕúþţš!]",
       "detonateMagmaWell": "[Ɱáĝɱá Ŵéļļ éŕúþţš!]",
@@ -19184,6 +19191,7 @@ export const en_XA: EnTranslations = {
     "delveRiteShrineReedInteract": "[Ŕééð Šĥŕíñé: Þŕéšš Ƒ ţó ţóúçĥ íţ]",
     "delveRiteShrineSkullInteract": "[Šķúļļ Šĥŕíñé: Þŕéšš Ƒ ţó ţóúçĥ íţ]",
     "mailboxName": "[Ɱáíļƀóẋ]",
-    "noticeboardName": "[Ñóţíçé Ɓóáŕð]"
+    "noticeboardName": "[Ñóţíçé Ɓóáŕð]",
+    "realmBuilderMonumentName": "[Ŕéáļɱ Ɓúíļðéŕ Ɱóñúɱéñţ]"
   }
 };

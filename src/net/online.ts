@@ -4196,17 +4196,19 @@ export class ClientWorld extends ReconWireState implements IWorld {
   unequipItem(slot: EquipSlot): void {
     this.cmd({ cmd: 'unequip_item', slot });
   }
-  private forgeCmd(cmd: ClientCommand, f: Record<string, unknown>, at?: { slotIndex: number }) {
-    return this.cmdWithOutcome({ cmd, ...f, slot: at?.slotIndex });
-  }
+  // The forge pair awaits the commandOutcome ack (the forge window renders a
+  // false ack as a visible refusal). Literal tokens on purpose: the command
+  // schema and copy-addressing guards scan these sends by their string.
   upgradeRiftItem(itemId: string, target?: { slotIndex: number }): Promise<boolean> {
-    return this.forgeCmd('rift_upgrade_item', { item: itemId }, target);
-  }
-  enchantRiftItem(itemId: string, stat: string, target?: { slotIndex: number }): Promise<boolean> {
-    return this.forgeCmd('rift_enchant_item', { item: itemId, stat }, target);
+    return this.cmdWithOutcome({ cmd: 'rift_upgrade_item', item: itemId, slot: target?.slotIndex });
   }
   socketRiftGem(itemId: string, gemId: string, target?: { slotIndex: number }): Promise<boolean> {
-    return this.forgeCmd('rift_socket_gem', { item: itemId, gem: gemId }, target);
+    return this.cmdWithOutcome({
+      cmd: 'rift_socket_gem',
+      item: itemId,
+      gem: gemId,
+      slot: target?.slotIndex,
+    });
   }
   // IWorldInventory: server-stamped untilMs vs Date.now(), riftEventMsRemaining's clock.
   partyTradeMsRemaining(untilMs: number): number {

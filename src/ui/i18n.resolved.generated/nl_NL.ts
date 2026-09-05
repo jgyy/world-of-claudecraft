@@ -3023,13 +3023,11 @@ export const nl_NL: EnTranslations = {
       "currency": "{name}: {count}",
       "empty": "No Riftbound band in your bags. A ranked Rift first clear mints one.",
       "wornHint": "Worn. Unequip it to forge.",
-      "upgradeBtn": "Upgrade ({cost} essence)",
+      "upgradeBtn": "Upgrade to item level {level} ({cost} essence)",
       "upgradeMax": "Fully upgraded",
-      "enchantCurrent": "Enchant: +{value} {stat}",
-      "enchantNone": "Enchant: none",
-      "enchantBtn": "Enchant ({cost} essence)",
-      "statPickAria": "Enchant stat",
       "gemPickAria": "Gem to socket",
+      "gemOption": "{name} ({bonus})",
+      "socketReplaceHint": "Sockets full: the next gem replaces the oldest, {gem}.",
       "socketBtn": "Socket",
       "socketsNone": "no gems",
       "socketsFull": "All sockets filled",
@@ -3040,15 +3038,12 @@ export const nl_NL: EnTranslations = {
         "notRiftGear": "Only a Riftbound band can be forged.",
         "maxUpgrade": "That band is fully upgraded.",
         "insufficientEssence": "Not enough Rift Essence.",
-        "invalidStat": "That stat cannot be enchanted here.",
         "invalidGem": "You have no such Rift gem.",
-        "socketsFull": "Every socket on that band is filled.",
         "dead": "You can't do that while dead.",
         "tooFar": "You are too far from the Rift Forge."
       },
       "done": {
         "upgrade": "Upgraded {name}.",
-        "enchant": "Enchanted {name}.",
         "socket": "Socketed a gem into {name}."
       }
     },
@@ -3057,6 +3052,7 @@ export const nl_NL: EnTranslations = {
       "riftTier": "{tier}-rangs Rift-voorwerp",
       "riftUpgrade": "Rift-verbetering {level}/{max}",
       "riftSockets": "Riftjuwelen {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Betoverd)",
       "enchantedFallback": "Betoverd",
       "partyTradeWindow": "Je kunt dit voorwerp de komende {time} ruilen met spelers die deze buit deelden. Uitrusten beëindigt het ruilvenster."
@@ -3336,6 +3332,15 @@ export const nl_NL: EnTranslations = {
       "back": "Terug",
       "popupTitle": "Gildebord",
       "close": "Sluiten"
+    },
+    "realmBuilder": {
+      "title": "Realm Builder of the Month",
+      "currentLabel": "Honoured this month",
+      "placeholderName": "Your Name Here",
+      "placeholderHint": "This plate is waiting for its first name.",
+      "pastTitle": "Past honourees",
+      "pastEmpty": "No names on the roll yet.",
+      "close": "Close"
     },
     "bank": {
       "title": "Bank",
@@ -3981,6 +3986,7 @@ export const nl_NL: EnTranslations = {
       "yieldLineRange": "{min} tot {max} {item}",
       "alreadyEnchanted": "Dat voorwerp is al betoverd.",
       "sameEnchant": "Dat voorwerp heeft die betovering al.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Vervangt {enchant}",
       "sameEnchantTag": "Al toegepast",
       "plainTag": "Niet betoverd",
@@ -7968,6 +7974,7 @@ export const nl_NL: EnTranslations = {
       "forgeUpgraded": "Rift-verbetering voltooid voor {name}.",
       "forgeEnchanted": "Rift-betovering voltooid voor {name}.",
       "forgeSocketed": "Riftjuweel geplaatst voor {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "IJzig Graf ontploft!",
       "detonateAbsoluteZero": "Absoluut Nulpunt barst los!",
       "detonateMagmaWell": "Magmabron barst los!",
@@ -19184,6 +19191,7 @@ export const nl_NL: EnTranslations = {
     "delveRiteShrineReedInteract": "Rietschrijn: druk op F om het aan te raken",
     "delveRiteShrineSkullInteract": "Schedelschrijn: druk op F om het aan te raken",
     "mailboxName": "Brievenbus",
-    "noticeboardName": "Mededelingenbord"
+    "noticeboardName": "Mededelingenbord",
+    "realmBuilderMonumentName": "Realm Builder Monument"
   }
 };

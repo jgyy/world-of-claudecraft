@@ -538,6 +538,7 @@ import {
   WARFARE_QUARTERMASTER_NPC_ID,
 } from './pvp/warfare_quartermaster';
 import { sanitizeCreditedObjects } from './quests/interact_object_credit';
+import { spawnRealmBuilderMonument } from './realm_builder_monument_spawn';
 import {
   catalogRankOwned,
   catalogRelicCompletion,
@@ -645,7 +646,6 @@ import {
 import { migrateRestoredQuestProgress } from './quests/quest_progress_migration';
 import { type NaturalRiftPortal, updateRiftPortals as updateRiftPortalsImpl } from './rift/portals';
 import {
-  enchantRiftItem as enchantRiftItemImpl,
   type RiftForgeResult,
   sanitizeRiftGearInstance,
   socketRiftGem as socketRiftGemImpl,
@@ -2415,6 +2415,7 @@ export class Sim {
       this.addEntity(board);
     }
 
+    spawnRealmBuilderMonument(this.ctx, this.worldContent.props);
     if (cfg.noPlayer && this.devCommands) this.spawnHealerPracticeDummy();
 
     if (!cfg.noPlayer) {
@@ -9388,16 +9389,6 @@ export class Sim {
   ): RiftForgeResult {
     const { pid, named } = foldNamedSlotTarget(pidOrTarget, slotIndex);
     return upgradeRiftItemImpl(this.ctx, itemId, pid, named);
-  }
-
-  enchantRiftItem(
-    itemId: string,
-    stat: string,
-    pidOrTarget?: number | { slotIndex: number },
-    slotIndex?: number,
-  ): RiftForgeResult {
-    const { pid, named } = foldNamedSlotTarget(pidOrTarget, slotIndex);
-    return enchantRiftItemImpl(this.ctx, itemId, stat, pid, named);
   }
 
   socketRiftGem(

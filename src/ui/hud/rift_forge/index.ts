@@ -3,6 +3,7 @@
 
 export {
   buildRiftForgeView,
+  riftForgeInReach,
   type RiftForgeInput,
   type RiftForgeRingRow,
   type RiftForgeRingSource,
