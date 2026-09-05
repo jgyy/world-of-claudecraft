@@ -56,6 +56,7 @@ import {
   type InspectHeaderModel,
   type InspectHolderModel,
 } from './inspect_view';
+import { wornTooltipInstance } from './item_instance_tooltip';
 import type { PainterHostPresentation } from './painter_host';
 import { hydratePortraits, portraitChipHtml } from './portrait_chip';
 import { qualityGlowShadow } from './quality_glow';
@@ -311,7 +312,12 @@ export class InspectWindow {
     if (item) {
       const iconEl = row.querySelector<HTMLImageElement>('.item-icon');
       if (iconEl) iconEl.style.boxShadow = qualityGlowShadow(qColor);
-      this.deps.attachTooltip(row, () => this.deps.itemTooltip(item, instance));
+      // Another player's worn copy: the eqi-trimmed wire payload, projected
+      // through the same worn rule the paperdoll uses so a worn bind-on-equip
+      // piece reads Soulbound rather than Binds when equipped.
+      this.deps.attachTooltip(row, () =>
+        this.deps.itemTooltip(item, wornTooltipInstance(instance, item)),
+      );
     }
     return row;
   }

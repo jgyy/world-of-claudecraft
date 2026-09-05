@@ -47,6 +47,7 @@ import { useBrinyLure } from './interactions/crab_summon';
 import { throwFirebottleAtNearestHut } from './interactions/firebottle_hut';
 import { moveStackToCell } from './inventory_order';
 import { sortInventoryStacks } from './inventory_sort';
+import { boundOnUnequipPayload } from './item_binding';
 import {
   consumeNewestInventoryUnit,
   consumeSelectedInventorySlot,
@@ -56,7 +57,6 @@ import { canStackInstancePayloads, itemInstancePayloadsEqual } from './item_inst
 import { meetsLevelRequirement, requiredLevelFor } from './item_level_req';
 import { isItemLocked } from './item_lock';
 import { withoutPartyTradeMarker } from './loot/bop_trade_window';
-import { boundOnUnequipPayload } from './item_binding';
 import { mountOwned, summonMountItem } from './mounts';
 import { learnRiding } from './mounts_training';
 import { battlefieldExperienceTrickle } from './professions/battlefield_xp';

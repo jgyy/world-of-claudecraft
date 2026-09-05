@@ -19,8 +19,6 @@ import type { ItemInstancePayload } from './types';
 export function isTransferLockedInstance(instance: ItemInstancePayload | undefined): boolean {
   return (
     instance !== undefined &&
-    (instance.bindOnTrade === true ||
-      instance.boundTo !== undefined ||
-      instance.soulbound === true)
+    (instance.bindOnTrade === true || instance.boundTo !== undefined || instance.soulbound === true)
   );
 }

@@ -33,7 +33,16 @@ describe('bindsOnEquip', () => {
   });
 
   it('only paperdoll kinds bind: a green potion, bag, or mount never does', () => {
-    for (const kind of ['potion', 'food', 'drink', 'tool', 'bag', 'mount', 'junk', 'quest'] as const) {
+    for (const kind of [
+      'potion',
+      'food',
+      'drink',
+      'tool',
+      'bag',
+      'mount',
+      'junk',
+      'quest',
+    ] as const) {
       expect(bindsOnEquip(def({ kind, quality: 'epic', slot: undefined })), kind).toBe(false);
     }
   });
@@ -47,7 +56,8 @@ describe('bindsOnEquip', () => {
   it('holds over the shipped catalog: BoE is exactly green-plus gear that is not BoP or quest', () => {
     let boe = 0;
     for (const item of Object.values(ITEMS)) {
-      const equippable = item.kind === 'weapon' || item.kind === 'armor' || item.kind === 'held_offhand';
+      const equippable =
+        item.kind === 'weapon' || item.kind === 'armor' || item.kind === 'held_offhand';
       const green = QUALITY_RANK[item.quality ?? 'common'] >= QUALITY_RANK.uncommon;
       const expected =
         item.bindOnEquip ?? (equippable && green && !item.soulbound && item.questId === undefined);
@@ -87,7 +97,9 @@ describe('the per-copy soulbound marker', () => {
     const plain = def({ quality: 'common' });
     expect(boundOnUnequipPayload(plain, undefined)).toBeUndefined();
     expect(boundOnUnequipPayload(plain, worn)).toBe(worn);
-    expect(boundOnUnequipPayload(def({ quality: 'epic', soulbound: true }), undefined)).toBeUndefined();
+    expect(
+      boundOnUnequipPayload(def({ quality: 'epic', soulbound: true }), undefined),
+    ).toBeUndefined();
   });
 });
 
@@ -97,11 +109,8 @@ describe('itemBindingKind (the tooltip line)', () => {
     expect(itemBindingKind(def({ quality: 'rare' }), { soulbound: true })).toBe('soulbound');
     expect(itemBindingKind(def({ quality: 'rare' }), undefined)).toBe('bindOnEquip');
     expect(itemBindingKind(def({ quality: 'rare' }), { enchant: 'x' })).toBe('bindOnEquip');
-    // Worn: a BoE piece is bound by the slot it sits in.
-    expect(itemBindingKind(def({ quality: 'rare' }), undefined, true)).toBe('soulbound');
     // Nothing binds a white, a potion, or a quest item.
     expect(itemBindingKind(def({ quality: 'common' }), undefined)).toBeNull();
-    expect(itemBindingKind(def({ quality: 'common' }), undefined, true)).toBeNull();
     expect(itemBindingKind(def({ kind: 'potion', quality: 'rare' }), undefined)).toBeNull();
     expect(itemBindingKind(undefined, { soulbound: true })).toBeNull();
   });

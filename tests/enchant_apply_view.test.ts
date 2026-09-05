@@ -624,14 +624,17 @@ describe('enchant_apply_view: preservedReplaceTraits (#2421)', () => {
   // the tooltip copy to be found later. Cross-pinned here instead: the two
   // consumers of one policy must agree, mechanically.
   it('pins wornTooltipInstance to that same allowlist, so both consumers move together', () => {
-    const worn = wornTooltipInstance({
-      signer: 'Tester',
-      enchant: 'enchant_chest_stamina',
-      rolled: { masterwork: true, stats: { sta: 4 } },
-      boundTo: 7,
-      bindOnTrade: true,
-      charges: { some_effect: 2 },
-    });
+    const worn = wornTooltipInstance(
+      {
+        signer: 'Tester',
+        enchant: 'enchant_chest_stamina',
+        rolled: { masterwork: true, stats: { sta: 4 } },
+        boundTo: 7,
+        bindOnTrade: true,
+        charges: { some_effect: 2 },
+      },
+      undefined,
+    );
     expect(
       Object.keys(worn ?? {}).sort(),
       'wornTooltipInstance and the eqi wire encode one policy: widen both or neither',

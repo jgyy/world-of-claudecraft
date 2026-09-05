@@ -12,6 +12,7 @@ import {
 import { ALL_RECIPES } from '../src/sim/content/recipes';
 import { ITEMS } from '../src/sim/data';
 import { NODE_MATERIAL_TABLE } from '../src/sim/professions/gathering';
+import type { ItemDef } from '../src/sim/types';
 import {
   instanceBadgeLines,
   instanceBindingLines,
@@ -25,7 +26,6 @@ import {
   wornTooltipInstance,
 } from '../src/ui/item_instance_tooltip';
 import { svgIcon } from '../src/ui/ui_icons';
-import type { ItemDef } from '../src/sim/types';
 
 describe('item_instance_tooltip', () => {
   it('masterwork copy gets the gold seal and no enchanted marker', () => {
@@ -286,23 +286,29 @@ describe('instanceBindingLines (commission lines)', () => {
 describe('wornTooltipInstance (the eqi-mirror worn projection)', () => {
   it('keeps exactly signer/enchant/rolled and drops the bond and charges fields', () => {
     expect(
-      wornTooltipInstance({
-        signer: 'Aldric',
-        enchant: 'ench_x',
-        rolled: { masterwork: true, stats: { str: 2 } },
-        bindOnTrade: true,
-        boundTo: 7,
-        charges: { fireball: 2 },
-      }),
+      wornTooltipInstance(
+        {
+          signer: 'Aldric',
+          enchant: 'ench_x',
+          rolled: { masterwork: true, stats: { str: 2 } },
+          bindOnTrade: true,
+          boundTo: 7,
+          charges: { fireball: 2 },
+        },
+        undefined,
+      ),
     ).toEqual({
       signer: 'Aldric',
       enchant: 'ench_x',
       rolled: { masterwork: true, stats: { str: 2 } },
     });
-    expect(wornTooltipInstance(undefined)).toBeUndefined();
+    expect(wornTooltipInstance(undefined, undefined)).toBeUndefined();
     // A bond-only payload projects to an EMPTY worn payload: no line renders.
     expect(
-      instanceBindingLines(wornTooltipInstance({ bindOnTrade: true, boundTo: 7 }), 'armor'),
+      instanceBindingLines(
+        wornTooltipInstance({ bindOnTrade: true, boundTo: 7 }, undefined),
+        'armor',
+      ),
     ).toBe('');
   });
 
@@ -318,6 +324,24 @@ describe('wornTooltipInstance (the eqi-mirror worn projection)', () => {
     expect(wornTooltipInstance(undefined, white)).toBeUndefined();
     expect(wornTooltipInstance({ signer: 'A' }, white)).toEqual({ signer: 'A' });
   });
+  it('char_window and inspect_window route worn tooltips through the projection, def included (source pins)', () => {
+    const charWindow = readFileSync(new URL('../src/ui/char_window.ts', import.meta.url), 'utf8');
+    expect(charWindow).toContain('wornTooltipInstance(');
+    // The raw equippedInstances read feeds ONLY the projection, never the
+    // tooltip directly.
+    const site = charWindow.indexOf('equippedInstances?.[slot]');
+    expect(site).toBeGreaterThan(-1);
+    const before = charWindow.slice(Math.max(0, site - 220), site);
+    expect(before).toContain('wornTooltipInstance(');
+    // The def rides along (a worn bind-on-equip piece reads Soulbound), and
+    // the inspect window's other-player rows take the same projection.
+    expect(charWindow).toMatch(
+      /wornTooltipInstance\([\s\S]*?equippedInstances\?\.\[slot\],\s*item,\s*\)/,
+    );
+    const inspect = readFileSync(new URL('../src/ui/inspect_window.ts', import.meta.url), 'utf8');
+    expect(inspect).toContain('this.deps.itemTooltip(item, wornTooltipInstance(instance, item))');
+    expect(inspect).not.toContain('this.deps.itemTooltip(item, instance)');
+  });
 });
 
 // The binding line (src/sim/item_binding.ts itemBindingKind rendered): the
@@ -332,17 +356,6 @@ describe('itemBindingLine', () => {
     expect(itemBindingLine(boe)).toContain('color:var(--gold)');
     expect(itemBindingLine({ ...boe, quality: 'common' } as ItemDef)).toBe('');
     expect(itemBindingLine({ ...boe, kind: 'potion', slot: undefined } as ItemDef)).toBe('');
-  });
-
-  it('char_window routes the paperdoll tooltip through the projection (source pin)', () => {
-    const charWindow = readFileSync(new URL('../src/ui/char_window.ts', import.meta.url), 'utf8');
-    expect(charWindow).toContain('wornTooltipInstance(');
-    // The raw equippedInstances read feeds ONLY the projection, never the
-    // tooltip directly.
-    const site = charWindow.indexOf('equippedInstances?.[slot]');
-    expect(site).toBeGreaterThan(-1);
-    const before = charWindow.slice(Math.max(0, site - 220), site);
-    expect(before).toContain('wornTooltipInstance(');
   });
 });
 

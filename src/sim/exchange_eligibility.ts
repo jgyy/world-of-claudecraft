@@ -165,7 +165,10 @@ export function exchangeHardLock(
   // read is presence, never truthiness).
   if (isTransferLockedInstance(instance)) {
     // A copy soulbound by wearing it (the bind-on-equip stamp) reads as the
-    // soulbound fact it is, before the Maker's Bond states.
+    // soulbound fact it is, before the Maker's Bond states. Deliberately
+    // ABOVE the mount carve-out below: that tolerance is for the def-level
+    // flag on reins, and a mount can never be stamped (item_binding.ts only
+    // binds paperdoll kinds), so a stamped copy is always refused.
     if (instance?.soulbound === true) return 'soulbound';
     return instance?.boundTo !== undefined ? 'bound_copy' : 'bind_armed';
   }

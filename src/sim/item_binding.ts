@@ -58,8 +58,10 @@ export function isSoulboundInstance(instance: ItemInstancePayload | undefined): 
 
 /** The payload a worn copy of `item` carries back to the bags: the input
  *  with the soulbound marker stamped when the item binds on equip, else the
- *  input untouched. Returns a NEW object when it stamps (the worn payload is
- *  never mutated) and the same reference otherwise, so a caller can keep
+ *  input untouched. Returns a NEW top-level object when it stamps (a shallow
+ *  spread: the input object itself is never mutated, its sub-objects are
+ *  shared, which every bench site tolerates because it drops the worn slot
+ *  in the same step) and the same reference otherwise, so a caller can keep
  *  treating "no payload" as the plain-stack signal. */
 export function boundOnUnequipPayload(
   item: ItemDef | undefined,
@@ -72,15 +74,15 @@ export function boundOnUnequipPayload(
 export type ItemBindingKind = 'soulbound' | 'bindOnEquip' | null;
 
 /** Which binding line an item tooltip shows: `soulbound` for a bind-on-pickup
- *  def, a copy bound by wearing it, or a BoE piece that is currently worn;
- *  `bindOnEquip` for a never-worn BoE copy; null for everything else. */
+ *  def or a copy bound by wearing it; `bindOnEquip` for a never-worn BoE
+ *  copy; null for everything else. A WORN BoE piece reads `soulbound` because
+ *  the paperdoll projection stamps the marker from the def
+ *  (src/ui/item_instance_tooltip.ts wornTooltipInstance). */
 export function itemBindingKind(
   item: ItemDef | undefined,
   instance: ItemInstancePayload | undefined,
-  worn = false,
 ): ItemBindingKind {
   if (!item) return null;
   if (item.soulbound || isSoulboundInstance(instance)) return 'soulbound';
-  if (!bindsOnEquip(item)) return null;
-  return worn ? 'soulbound' : 'bindOnEquip';
+  return bindsOnEquip(item) ? 'bindOnEquip' : null;
 }

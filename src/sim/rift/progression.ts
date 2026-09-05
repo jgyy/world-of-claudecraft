@@ -130,6 +130,10 @@ export function sanitizeRiftGearInstance(
   }
   const clean: ItemInstancePayload = {
     boundTo: ownerId,
+    // The bind-on-equip marker (item_binding.ts) is a bind for good, so the
+    // rebuild carries it: dropping it here would downgrade a worn rift piece
+    // to a fee-unbindable Maker's Bond on every relog.
+    ...(input.soulbound === true ? { soulbound: true as const } : {}),
     rolled: { quality: 'epic', stats: {} },
     rift: {
       sourceEventId: source.sourceEventId,

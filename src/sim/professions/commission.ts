@@ -33,6 +33,7 @@
 
 import { bagPools, countFit } from '../bags';
 import { ITEMS } from '../data';
+import { isSoulboundInstance } from '../item_binding';
 import type { PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
 import { cloneItemInstancePayload, type ItemDef, type StationDef } from '../types';
@@ -96,7 +97,15 @@ function firstBoundSlotIndex(meta: PlayerMeta, itemId: string): number {
   const inventory = meta.inventory ?? [];
   for (let i = 0; i < inventory.length; i++) {
     const slot = inventory[i];
-    if (slot.itemId === itemId && slot.instance?.boundTo !== undefined) return i;
+    // A copy soulbound by wearing it (item_binding.ts) has no peelable bond:
+    // the service never lists it, never charges for it, and reads it as not
+    // bound (the marker outranks the Maker's Bond it may also carry).
+    if (
+      slot.itemId === itemId &&
+      slot.instance?.boundTo !== undefined &&
+      !isSoulboundInstance(slot.instance)
+    )
+      return i;
   }
   return -1;
 }

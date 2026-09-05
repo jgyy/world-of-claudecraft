@@ -56,11 +56,12 @@ export function itemNumber(value: number, fractionDigits = 0): string {
  *  is a bag-surface fact by construction (the eqi data minimization is
  *  deliberate); both hosts now agree by sharing this one projection. */
 export function wornTooltipInstance(
-  instance?: ItemInstancePayload,
-  /** The worn item's def: a bind-on-equip piece is bound by the slot it sits
-   *  in (item_binding.ts), so its worn tooltip reads Soulbound in both hosts
-   *  without the wire carrying any marker. */
-  item?: ItemDef,
+  instance: ItemInstancePayload | undefined,
+  /** The worn item's def (required, so no worn-slot caller can forget it): a
+   *  bind-on-equip piece is bound by the slot it sits in (item_binding.ts),
+   *  so its worn tooltip reads Soulbound in both hosts and on the inspect
+   *  window without the wire carrying any marker. */
+  item: ItemDef | undefined,
 ): ItemInstancePayload | undefined {
   const bound = bindsOnEquip(item);
   if (!instance && !bound) return undefined;

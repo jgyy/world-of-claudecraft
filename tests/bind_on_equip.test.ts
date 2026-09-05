@@ -5,10 +5,12 @@
 // guild bank) while vendor sale stays open. Pure rule semantics live in
 // tests/item_binding.test.ts.
 import { describe, expect, it } from 'vitest';
-import { groundHeight } from '../src/sim/world';
 import { guildBankPipeRefusal } from '../src/sim/guild_bank';
+import { resolveUnbind, unbindItem } from '../src/sim/professions/commission';
+import { sanitizeRiftGearInstance } from '../src/sim/rift/progression';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { groundHeight } from '../src/sim/world';
 import { expectDefined } from './helpers/defined';
 import { EMPTY_TEST_WORLD } from './sim_shared';
 
@@ -197,7 +199,8 @@ describe('bind on equip: the pipes', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
     const pid = sim.addPlayer('warrior', 'Seller');
     let vendor: Entity | undefined;
-    for (const e of sim.entities.values()) if (e.kind === 'npc' && e.vendorItems.length > 0) vendor = e;
+    for (const e of sim.entities.values())
+      if (e.kind === 'npc' && e.vendorItems.length > 0) vendor = e;
     placeAt(sim, pid, expectDefined(vendor).pos);
     sim.addItem(BLADE, 1, pid);
     wearOnce(sim, pid);
@@ -205,5 +208,47 @@ describe('bind on equip: the pipes', () => {
     sim.sellItem(BLADE, pid);
     expect(sim.countItem(BLADE, pid)).toBe(0);
     expect(meta(sim, pid).copper).toBeGreaterThan(before);
+  });
+
+  it("the Maker's Bond unbind service never lists, charges for, or peels a bound copy", () => {
+    const sim = makeWorld();
+    const pid = sim.addPlayer('warrior', 'Wearer');
+    // A commissioned copy that was ALSO worn: both bind fields on one payload.
+    sim.addItemInstance(BLADE, { bindOnTrade: true, boundTo: 999, soulbound: true }, pid);
+    const m = meta(sim, pid);
+    m.copper = 100000;
+    const before = m.copper;
+    // The pure resolver reads it as not bound (no fee arm is ever reached).
+    const resolved = resolveUnbind(sim.ctx.stationPlacements, m, { x: 0, z: 0 }, BLADE);
+    expect(resolved).toMatchObject({ ok: false, reason: 'unbind_not_bound' });
+    const result = unbindItem(sim.ctx, BLADE, pid);
+    expect(result.ok).toBe(false);
+    expect(m.copper).toBe(before);
+    expect(bladeSlot(sim, pid).instance).toEqual({
+      bindOnTrade: true,
+      boundTo: 999,
+      soulbound: true,
+    });
+  });
+});
+
+describe('bind on equip: the rift gear load rebuild', () => {
+  it('carries the marker through sanitizeRiftGearInstance instead of rebuilding it away', () => {
+    const rift = {
+      sourceEventId: 'evt_1',
+      tier: 'C' as const,
+      power: 1,
+      upgradeLevel: 0,
+      maxUpgradeLevel: 5,
+      baseStats: {},
+      gemSlots: 1,
+      gems: [],
+    };
+    const worn = sanitizeRiftGearInstance('riftbound_band_of_might', { rift, soulbound: true }, 7);
+    expect(worn?.soulbound).toBe(true);
+    expect(worn?.boundTo).toBe(7);
+    const fresh = sanitizeRiftGearInstance('riftbound_band_of_might', { rift }, 7);
+    expect(fresh).toBeDefined();
+    expect(fresh?.soulbound).toBeUndefined();
   });
 });

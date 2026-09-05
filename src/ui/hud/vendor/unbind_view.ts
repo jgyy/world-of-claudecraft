@@ -17,6 +17,7 @@
 // row is the honest rendering. The service is master-independent (any
 // station master offers every row), so the view needs no masterNpcId input.
 
+import { isSoulboundInstance } from '../../../sim/item_binding';
 import { isCommissionEligible, unbindFeeFor } from '../../../sim/professions/commission';
 import type { InvSlot, ItemDef, ItemInstancePayload } from '../../../sim/types';
 
@@ -56,7 +57,9 @@ export interface UnbindViewDeps {
 export function buildUnbindView(deps: UnbindViewDeps): UnbindView {
   const byItemId = new Map<string, UnbindRow>();
   for (const slot of deps.inventory) {
-    if (slot.instance?.boundTo === undefined) continue;
+    // Mirrors the resolver: a copy soulbound by wearing it has no peelable
+    // bond, so it never earns a row (item_binding.ts).
+    if (slot.instance?.boundTo === undefined || isSoulboundInstance(slot.instance)) continue;
     const def = deps.items[slot.itemId];
     if (!isCommissionEligible(def)) continue;
     const existing = byItemId.get(slot.itemId);

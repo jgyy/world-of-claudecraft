@@ -44,16 +44,23 @@ binds to that character for good:
   gold, the classic rule; only transfer to another player is closed.
 - **Not the Maker's Bond.** `boundTo` is the commission lock a station master
   can unbind for a fee. The soulbound marker is a separate field on purpose so
-  the unbind service never peels a BoE bind.
+  the unbind service never peels a BoE bind: a copy carrying both reads as not
+  bound to the service (`src/sim/professions/commission.ts` and the
+  `unbind_view.ts` row predicate), so it is never listed and never charged.
+- **Load rebuilds carry it.** The rift gear load rebuild
+  (`src/sim/rift/progression.ts` `sanitizeRiftGearInstance`) reconstructs the
+  payload from a fixed key list and copies the marker across, so a worn rift
+  piece cannot lose its bind on relog.
 
 ## Tooltips and the bag gates
 
 `src/ui/item_instance_tooltip.ts` `itemBindingLine` renders the one binding
 line under the item-level readout: "Soulbound" for a BoP def or a copy bound
 by wearing it, "Binds when equipped" for a never-worn BoE piece. The paperdoll
-projects a worn BoE piece through `wornTooltipInstance(instance, item)`, which
-adds the marker from the def so the offline Sim and the online eqi-trimmed
-mirror render the same worn tooltip without the wire carrying anything new.
+and the inspect window both project a worn BoE piece through
+`wornTooltipInstance(instance, item)`, which adds the marker from the def so
+the offline Sim and the online eqi-trimmed mirror render the same worn tooltip
+without the wire carrying anything new.
 `src/ui/bags_view.ts` blocks the trade, mail, and market clicks on a bound copy
 in place (the `transferBlockedSoulbound` arm) and leaves the vendor click open.
 
