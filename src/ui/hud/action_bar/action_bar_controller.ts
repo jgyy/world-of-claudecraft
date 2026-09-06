@@ -150,7 +150,22 @@ export class ActionBarController {
     const plan = planActionBarRestore(this.loginRestore ?? undefined, profile, (target) =>
       this.captureLayout(target),
     );
-    if (plan.action === 'none') return false;
+    if (plan.action === 'none') {
+      // No server copy, no local keys, no legacy seed: the profile would load
+      // empty and the next ability sync would generate defaults. On a surface
+      // flip the bar in view is still the right seed (a phone-first character
+      // reaching a keyboard for the first time), so copy it, never uploaded.
+      if (inView === null || actionBarLayoutIsEmpty(inView)) return false;
+      if (!actionBarLayoutIsEmpty(this.captureLayout(profile))) return false;
+      applyActionBarLayout(
+        this.deps.storage,
+        this.deps.playerClass,
+        this.deps.playerName,
+        profile,
+        inView,
+      );
+      return true;
+    }
     if (plan.action === 'seed-local') {
       // persist() re-captures the same keys the plan just read, so it uploads
       // exactly plan.layout under this profile.

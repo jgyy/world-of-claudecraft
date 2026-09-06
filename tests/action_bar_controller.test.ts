@@ -923,13 +923,15 @@ describe('ActionBarController mid-session surface flip (Interface Mode)', () => 
   const DESKTOP_KEY = 'woc_hotbar_warrior_ActionbarTester';
   const TOUCH_KEY = 'woc_hotbar_warrior_ActionbarTester_touch';
 
-  function flipHarness(): {
+  function flipHarness(startOnTouch = false): {
     controller: ActionBarController;
     storage: MemoryStorage;
     persisted: ActionBarLayoutSave[];
     setTouch: (touch: boolean) => void;
   } {
-    let touch = false;
+    // The controller resolves its profile at construction, so a phone-first
+    // character starts on touch here rather than flipping after init().
+    let touch = startOnTouch;
     const storage = new MemoryStorage();
     const persisted: ActionBarLayoutSave[] = [];
     const controller = new ActionBarController({
@@ -961,6 +963,57 @@ describe('ActionBarController mid-session surface flip (Interface Mode)', () => 
     setTouch(true);
     expect(controller.syncProfile()).toBe(true);
     expect(controller.syncProfile()).toBe(false);
+  });
+
+  it('seeds an empty desktop from the touch bar in view when the login plan is none (touch-first, no server document)', () => {
+    // A phone-first character: the touch surface is active at login and the
+    // server holds no document (the seed signal), so no desktop keys exist.
+    const { controller, storage, persisted, setTouch } = flipHarness(true);
+    controller.init();
+    controller.restoreLayout({ source: 'seed' });
+    controller.replaceActions(bar('sunder_armor', 'heroic_strike'));
+    controller.saveActions();
+    expect(persisted.map((entry) => entry.profile)).toEqual(['touch']);
+    expect(storage.getItem(DESKTOP_KEY)).toBeNull();
+
+    // The flip onto desktop finds no server copy, no local keys and no legacy
+    // seed (the restore plan is none), but the bar in view is still the seed.
+    setTouch(false);
+    expect(controller.syncProfile()).toBe(true);
+    expect(controller.profile).toBe('desktop');
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(controller.actions[1]).toEqual({ type: 'ability', id: 'heroic_strike' });
+    expect(JSON.parse(storage.getItem(DESKTOP_KEY) ?? 'null')).toEqual(
+      bar('sunder_armor', 'heroic_strike'),
+    );
+    // A flip is not an edit: the seeded desktop copy never uploads.
+    expect(persisted.map((entry) => entry.profile)).toEqual(['touch']);
+  });
+
+  it('offline (no restore signal at all) seeds the empty desktop keys from the touch bar the same way', () => {
+    const { controller, storage, persisted, setTouch } = flipHarness(true);
+    controller.init();
+    controller.replaceActions(bar('sunder_armor', 'heroic_strike'));
+    controller.saveActions();
+    setTouch(false);
+    expect(controller.syncProfile()).toBe(true);
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
+    expect(JSON.parse(storage.getItem(DESKTOP_KEY) ?? 'null')).toEqual(
+      bar('sunder_armor', 'heroic_strike'),
+    );
+    expect(persisted.map((entry) => entry.profile)).toEqual(['touch']);
+  });
+
+  it('never overwrites a destination that already holds its own keys with the bar in view', () => {
+    const { controller, storage, setTouch } = flipHarness(true);
+    storage.setItem(DESKTOP_KEY, JSON.stringify(bar('heroic_strike')));
+    controller.init();
+    controller.replaceActions(bar('sunder_armor'));
+    controller.saveActions();
+    setTouch(false);
+    expect(controller.syncProfile()).toBe(true);
+    expect(controller.actions[0]).toEqual({ type: 'ability', id: 'heroic_strike' });
+    expect(JSON.parse(storage.getItem(DESKTOP_KEY) ?? 'null')).toEqual(bar('heroic_strike'));
   });
 
   it('follows the flip onto the touch keys, seeding them from the bar in view, never uploading', () => {

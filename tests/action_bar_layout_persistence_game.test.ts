@@ -32,6 +32,8 @@ vi.mock('../server/db', () => ({
 import { setCharacterHotbarLayout } from '../server/db';
 import { type ClientSession, GameServer } from '../server/game';
 import { HotbarLayoutStore, mergeHotbarLayoutSave } from '../server/hotbar_layout';
+import { createWsAuth } from '../server/ws_auth';
+import { ONLINE_WORLD_AUTH_TYPE } from '../src/world_api';
 import type { ActionBarLayout, ActionBarLayoutProfiles } from '../src/world_api/action_bar';
 
 interface FakeClient {
@@ -413,6 +415,162 @@ describe('a queued write outliving its session (logout then a fresh join)', () =
       docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT, touch: TOUCH_LAYOUT }),
     );
     await vi.waitFor(() => expect(server.hotbarLayouts.pending(23)).toBeNull());
+  });
+});
+
+describe('the auth handshake: a queued write that settles between the row reads and join', () => {
+  beforeEach(() => {
+    vi.mocked(setCharacterHotbarLayout).mockClear();
+  });
+
+  function deferFirstWrite(): { started: Promise<void>; release: () => void } {
+    let started!: () => void;
+    let release!: () => void;
+    const startedPromise = new Promise<void>((resolve) => {
+      started = resolve;
+    });
+    vi.mocked(setCharacterHotbarLayout).mockImplementationOnce(async () => {
+      started();
+      await new Promise<void>((resolve) => {
+        release = resolve;
+      });
+    });
+    return { started: startedPromise, release: () => release() };
+  }
+
+  // The socket the handshake admits: the real GameServer joins it, so it needs
+  // the OPEN constant the mid-handshake death re-check compares against and the
+  // listener hooks ws_auth attaches after join.
+  function fakeAuthWs(): FakeClient & { ws: { OPEN: number; close: () => void; on: () => void } } {
+    const sent: any[] = [];
+    return {
+      sent,
+      ws: {
+        readyState: 1,
+        OPEN: 1,
+        send: (p: string) => sent.push(JSON.parse(p)),
+        close: () => {},
+        on: () => {},
+      },
+    };
+  }
+
+  // ws_auth.ts takes every DB call through its deps bag; only getCharacter
+  // matters here (the lease and the rest pass), and the game is the REAL
+  // server whose store the handshake must consult.
+  function authDeps(
+    server: GameServer,
+    getCharacter: () => Promise<unknown>,
+  ): Parameters<typeof createWsAuth>[0] {
+    return {
+      game: server,
+      accountAndScopeForToken: async () => ({ accountId: 23, scope: 'full' as const }),
+      moderationStatusForAccount: async () => ({ locked: false, chatStrikes: 0 }),
+      getCharacter,
+      chatMuteStatusForAccount: async () => ({ mutedUntil: null, reason: null }),
+      adminRolesForAccount: async () => null,
+      permissionsForRoles: () => new Set<string>(),
+      metaRequestUserData: () => ({}),
+      metaEventSourceUrl: () => undefined,
+      loadAccountCosmetics: async () => ({ completedQuestIds: [], mechChromaIds: [] }),
+      isConnectionRefused: () => false,
+      bufferHandshakeMessages: () => () => {},
+      requestMetadata: () => ({ ip: '1.2.3.4', userAgent: 'test' }),
+      maxWsPerIpHard: 100,
+      maxPlayersPerRealm: 0,
+      acquireCharacterLease: async () => true,
+      releaseCharacterLease: async () => {},
+      bankBonusForAccount: async () => ({ bonusSlots: 0, sources: [], characterCount: 1 }),
+    } as unknown as Parameters<typeof createWsAuth>[0];
+  }
+
+  it("seeds the fresh join from the previous session's last save even when that write commits after the handshake's row reads", async () => {
+    const server = new GameServer();
+    const first = join(server, fakeWs(), 23, 'Relogger', { hotbarLayout: LAYOUT });
+    const gate = deferFirstWrite();
+    save(server, first, { profile: 'desktop', layout: LAYOUT_AFTER_MIDSESSION_EDIT });
+    await gate.started;
+    await server.leave(first, 'logout');
+    expect(server.hotbarLayouts.pending(23)).toEqual(
+      docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT }),
+    );
+
+    // Both handshake reads of the row (the ownership check and the post-lease
+    // reload) return the stale layout, and the queued write commits DURING the
+    // reload: by the time game.join runs, the store has forgotten its pending
+    // document and the only fresh copy is the one the handshake captured.
+    const staleRow = {
+      id: 23,
+      name: 'Relogger',
+      class: 'warrior',
+      state: null,
+      is_gm: false,
+      force_rename: false,
+      hotbar_layout: LAYOUT,
+    };
+    let reads = 0;
+    const getCharacter = async () => {
+      reads++;
+      if (reads === 2) {
+        gate.release();
+        await vi.waitFor(() => expect(server.hotbarLayouts.pending(23)).toBeNull());
+      }
+      return staleRow;
+    };
+    const client = fakeAuthWs();
+    const auth = createWsAuth(authDeps(server, getCharacter));
+    await auth.authenticateWebSocket(
+      client.ws as any,
+      JSON.stringify({ t: ONLINE_WORLD_AUTH_TYPE, token: 'tok', character: 23 }),
+      {} as any,
+    );
+    expect(reads).toBe(2);
+    const second = [...server.clients.values()].find((s) => s.characterId === 23);
+    expect(second).toBeDefined();
+    if (!second) return;
+    expect(second.hotbarLayout).toEqual(docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT }));
+    // The wire value the client restores from is the committed edit, not the
+    // row the handshake raced.
+    expect(JSON.parse(second.initialHotbarLayoutJson)).toEqual(
+      wireOf(LAYOUT_AFTER_MIDSESSION_EDIT),
+    );
+    // Its first save merges onto the fresh document, so the desktop edit
+    // survives the touch save that follows it.
+    second.blockListLoaded = true;
+    save(server, second, { profile: 'touch', layout: TOUCH_LAYOUT });
+    await vi.waitFor(() => expect(vi.mocked(setCharacterHotbarLayout)).toHaveBeenCalledTimes(2));
+    const calls = vi.mocked(setCharacterHotbarLayout).mock.calls;
+    expect(calls[1][1]).toEqual(
+      docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT, touch: TOUCH_LAYOUT }),
+    );
+    await vi.waitFor(() => expect(server.hotbarLayouts.pending(23)).toBeNull());
+  });
+
+  it('with nothing queued, the fresh join takes the post-lease reload of the row, not the ownership read', async () => {
+    const server = new GameServer();
+    let reads = 0;
+    const getCharacter = async () => {
+      reads++;
+      return {
+        id: 23,
+        name: 'Relogger',
+        class: 'warrior',
+        state: null,
+        is_gm: false,
+        force_rename: false,
+        // The row moved between the two reads (another process committed the
+        // character's last save before this handshake's lease landed).
+        hotbar_layout: reads === 1 ? LAYOUT : LAYOUT_AFTER_MIDSESSION_EDIT,
+      };
+    };
+    const auth = createWsAuth(authDeps(server, getCharacter));
+    await auth.authenticateWebSocket(
+      fakeAuthWs().ws as any,
+      JSON.stringify({ t: ONLINE_WORLD_AUTH_TYPE, token: 'tok', character: 23 }),
+      {} as any,
+    );
+    const session = [...server.clients.values()].find((s) => s.characterId === 23);
+    expect(session?.hotbarLayout).toEqual(docOf({ desktop: LAYOUT_AFTER_MIDSESSION_EDIT }));
   });
 });
 
