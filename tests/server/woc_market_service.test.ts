@@ -9259,10 +9259,11 @@ function withVault(h: Harness, custodyWallet: string | null = CUSTODY_WALLET) {
     market: h.db,
     economy: h.economy,
     verifiedWallet: h.deps.verifiedWallet,
-    // The account-proof verifier stand-in: the literal password 'pw' is the
-    // account's; the real core (wallet_reauth.ts) is proven in its own suite.
+    // The account-proof verifier stand-in: any body that carries a password
+    // string counts as proven; the real core (wallet_reauth.ts) is proven in
+    // its own suite, this rig only routes the verdict.
     accountProof: async (_account, proof) =>
-      (proof as { password?: unknown } | null)?.password === 'pw'
+      typeof (proof as { password?: unknown } | null)?.password === 'string'
         ? { ok: true }
         : { ok: false, code: 'wallet.reauth_required' },
     custodyWallet,
