@@ -108,6 +108,21 @@ describe('HUD_FRAME_SPECS', () => {
     expect(box).toEqual(['buffBar', 'debuffBar', 'targetDots']);
   });
 
+  it('declares a resolved stock slot for exactly the rows that share a detaching sibling', () => {
+    // The two player aura rows are the only detaching frames whose stock parent
+    // (#aura-stack) holds ANOTHER detaching frame, so a slot remembered at detach
+    // time can point at a sibling that has since left; they declare the slot
+    // instead. Every other detaching frame keeps the captured-slot path.
+    const declared = HUD_FRAME_SPECS.filter((s) => s.stockHome).map((s) => [s.id, s.stockHome]);
+    expect(declared).toEqual([
+      ['buffBar', { parentId: 'aura-stack', slot: 'first' }],
+      ['debuffBar', { parentId: 'aura-stack', slot: 'last' }],
+    ]);
+    for (const spec of HUD_FRAME_SPECS) {
+      if (spec.stockHome) expect(spec.detachToUiRoot, `${spec.id} declares a home`).toBe(true);
+    }
+  });
+
   it('names every frame with a label key so no placeholder is anonymous', () => {
     for (const spec of HUD_FRAME_SPECS) {
       expect(spec.labelKey, `frame ${spec.id} has no name chip key`).toBeTruthy();
