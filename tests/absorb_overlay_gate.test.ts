@@ -64,6 +64,13 @@ describe('absorb overlay gate wiring', () => {
     expect(body).toContain('settings.set(key, !!value)');
   });
 
+  it('main.ts replays every persisted setting through applySetting at boot, so a saved off survives reload', () => {
+    const main = readFileSync('src/main.ts', 'utf8');
+    expect(main).toMatch(
+      /const saved = settings\.all\(\);\s*for \(const k of Object\.keys\(saved\) as \(keyof GameSettings\)\[\]\) applySetting\(k, saved\[k\]\);/,
+    );
+  });
+
   it('the option key still exists with shields shown by default', () => {
     expect(BOOL_SETTINGS.partyFrameShowAbsorbs).toEqual({ def: true });
   });

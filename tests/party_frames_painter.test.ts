@@ -540,8 +540,11 @@ describe('PartyFramesPainter: keyed pool over the elided writers', () => {
           call.m === 'toggleClass' && call.args[0] === 'pf-hide-auras' && call.args[1] === true,
       ),
     ).toBe(true);
+    // showAbsorbs off: a zero-width segment in the row's quantized form.
     expect(
-      calls.some((call) => call.m === 'setTransform' && call.args[0] === 'scaleX(0.000)'),
+      calls.some(
+        (call) => call.m === 'setTransform' && call.args[0] === 'translateX(0%) scaleX(0.000)',
+      ),
     ).toBe(true);
   });
 
@@ -681,6 +684,13 @@ describe('PartyFramesPainter: keyed pool over the elided writers', () => {
     // each show at least once across the three members.
     expect(has('setDisplay', (c) => c.args[0] === '')).toBe(true);
     expect(has('setDisplay', (c) => c.args[0] === 'none')).toBe(true);
+  });
+
+  it('quantizes a non-round shield segment so the elided transform key is stable', () => {
+    painter.sync([member({ pid: 2, hp: 37, mhp: 100, absorb: 11 })], 2, false);
+    expect(
+      calls.some((c) => c.m === 'setTransform' && c.args[0] === 'translateX(37%) scaleX(0.110)'),
+    ).toBe(true);
   });
 
   it('emits a visually-hidden "Group n" raid label per member only in raid mode', () => {

@@ -85,11 +85,24 @@ describe('absorb_bar view', () => {
 });
 
 describe('absorbSegmentTransform', () => {
-  it('collapses to scaleX(0) with no shield, so an unshielded bar carries no hatch', () => {
+  it('collapses to a zero-width segment with no shield, so an unshielded bar carries no hatch', () => {
     const v = absorbBarView({ hp: 615, maxHp: 615, auras: [] });
-    expect(absorbSegmentTransform(v.startFrac, v.sizeFrac)).toBe('scaleX(0)');
-    expect(absorbSegmentTransform(0.5, 0)).toBe('scaleX(0)');
-    expect(absorbSegmentTransform(0.5, -1)).toBe('scaleX(0)');
+    expect(absorbSegmentTransform(v.startFrac, v.sizeFrac)).toBe('translateX(100%) scaleX(0)');
+    expect(absorbSegmentTransform(0.5, 0)).toBe('translateX(50%) scaleX(0)');
+    expect(absorbSegmentTransform(0.5, -1)).toBe('translateX(50%) scaleX(0)');
+  });
+
+  it('keeps a constant two-function list shape so the CSS transition interpolates in place', () => {
+    const shape = (t: string) => t.replace(/[-\d.]+/g, 'N');
+    expect(shape(absorbSegmentTransform(0.5, 0))).toBe(shape(absorbSegmentTransform(0.5, 0.25)));
+  });
+
+  it('quantizes the translate to three decimals for a stable elision cache key', () => {
+    expect(absorbSegmentTransform(37 / 100, 11 / 100)).toBe('translateX(37%) scaleX(0.11)');
+    expect(absorbSegmentTransform(5 / 12, 1 / 12)).toBe(`translateX(41.667%) scaleX(${1 / 12})`);
+    expect(absorbSegmentTransform(5 / 12, 1 / 12, (f) => `scaleX(${f.toFixed(3)})`)).toBe(
+      'translateX(41.667%) scaleX(0.083)',
+    );
   });
 
   it('places the segment at the health edge spanning only the shield width', () => {
