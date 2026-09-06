@@ -9,7 +9,9 @@
 import { describe, expect, it } from 'vitest';
 import { colliderInternalsForTest } from '../src/sim/colliders';
 import { DRAKELANDS_PORTALS, WYRMGATE_WAYSTONE_TOLL_COPPER } from '../src/sim/content/drakelands';
+import { REALM_PORTALS } from '../src/sim/content/realm';
 import { PORTALS, ZONES, zoneAt } from '../src/sim/data';
+import { POI_VISIT_RADIUS } from '../src/sim/deeds';
 import { settlePortalToll } from '../src/sim/portal_toll';
 import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
@@ -42,10 +44,10 @@ function errorTexts(events: SimEvent[]): string[] {
 }
 
 describe('the Wyrmgate Waystone record', () => {
-  it('is registered in the merged portal table with a one-gold toll', () => {
+  it('is registered in the merged portal table with a fifty-silver toll', () => {
     expect(PORTALS.some((p) => p.id === 'wyrmgate_waystone')).toBe(true);
     expect(PORTAL.tollCopper).toBe(WYRMGATE_WAYSTONE_TOLL_COPPER);
-    expect(WYRMGATE_WAYSTONE_TOLL_COPPER).toBe(10_000);
+    expect(WYRMGATE_WAYSTONE_TOLL_COPPER).toBe(5_000);
     expect(PORTAL.gate).toBe('waystone');
     expect(PORTAL.tollText).toBeTruthy();
   });
@@ -70,11 +72,23 @@ describe('the Wyrmgate Waystone record', () => {
 
   it('adds no cave-mouth flank colliders (the arch stands in the open)', () => {
     const shapes = colliderInternalsForTest.staticWorldColliders(42);
-    for (const side of [PORTAL.a, PORTAL.b]) {
-      const near = shapes.filter(
-        (s) => s.type === 'circle' && Math.hypot(s.x - side.x, s.z - side.z) < 5,
-      );
-      expect(near).toEqual([]);
+    const near = (side: { x: number; z: number }) =>
+      shapes.filter((s) => s.type === 'circle' && Math.hypot(s.x - side.x, s.z - side.z) < 5);
+    for (const side of [PORTAL.a, PORTAL.b]) expect(near(side)).toEqual([]);
+    // The skip is keyed on the gate kind: the Duskfall cave keeps its flanks.
+    const cave = REALM_PORTALS[0];
+    expect(cave.gate).toBeUndefined();
+    expect(near(cave.a).length).toBeGreaterThan(0);
+    expect(near(cave.b).length).toBeGreaterThan(0);
+  });
+
+  it('stands each side at least two visit radii from its hub (the wayfarer deed sweep)', () => {
+    for (const [zoneId, side] of [
+      ['thornpeak_heights', PORTAL.a],
+      ['drakelands', PORTAL.b],
+    ] as const) {
+      const hub = ZONES.find((z) => z.id === zoneId)!.hub;
+      expect(Math.hypot(side.x - hub.x, side.z - hub.z)).toBeGreaterThan(2 * POI_VISIT_RADIUS);
     }
   });
 });

@@ -4644,6 +4644,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.zones.thornpeak_heights.pois.7.label': 'Шатры Культа Вирма',
   'entities.zones.thornpeak_heights.pois.8.label': 'Поля ревенантов',
   'entities.zones.thornpeak_heights.pois.9.label': 'Святилище Могильного Вирма',
+  'entities.zones.thornpeak_heights.pois.10.label': 'Путевой камень Змеиных врат',
   'entities.zones.veiled_hollow.name': 'Сокрытая лощина',
   'entities.zones.veiled_hollow.welcome':
     'Воздух гудит от древней магии. Найдите хранительницу Сэльвин под великим древом Элдерглима.',
@@ -4671,6 +4672,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.zones.drakelands.pois.4.label': 'Последний оплот',
   'entities.zones.drakelands.pois.5.label': 'Кровостеклянные поля',
   'entities.zones.drakelands.pois.6.label': 'Кальдера Дрейкмо',
+  'entities.zones.drakelands.pois.7.label': 'Путевой камень Змеиных врат',
   'entities.zones.frostveil.name': 'Морозный Предел',
   'entities.zones.frostveil.welcome':
     'Снег глотает каждый звук. Под танцующим сиянием сам холод кажется живым.',

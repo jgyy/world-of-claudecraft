@@ -4587,6 +4587,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.zones.thornpeak_heights.pois.7.label': '고룡교단 천막',
   'entities.zones.thornpeak_heights.pois.8.label': '망령 들판',
   'entities.zones.thornpeak_heights.pois.9.label': '무덤고룡 성소',
+  'entities.zones.thornpeak_heights.pois.10.label': '와이름 관문 길잡이돌',
   'entities.zones.veiled_hollow.name': '장막의 골짜기',
   'entities.zones.veiled_hollow.welcome':
     '대기가 오래된 마법으로 웅웅거린다. 엘더글림의 큰 나무 아래에서 수호자 샐윈을 찾아가라.',
@@ -4614,6 +4615,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'entities.zones.drakelands.pois.4.label': '마지막 요새',
   'entities.zones.drakelands.pois.5.label': '핏빛유리 벌판',
   'entities.zones.drakelands.pois.6.label': '드레이크모 화산구',
+  'entities.zones.drakelands.pois.7.label': '와이름 관문 길잡이돌',
   'entities.zones.frostveil.name': '서리장막 봉우리',
   'entities.zones.frostveil.welcome':
     '눈이 모든 소리를 삼킨다. 춤추는 오로라 아래, 추위 그 자체가 깨어 있는 듯하다.',

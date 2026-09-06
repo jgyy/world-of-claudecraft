@@ -769,10 +769,10 @@ const baseEnTable = {
   'log.veilEnter': 'A veil of dusk parts before you, and the Hollow opens ahead.',
   'log.veilLeave': 'The veil closes behind you, and the mountain air bites again.',
   'log.wyrmgateEnter':
-    'The waystone drinks a gold coin and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
+    'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
   'log.wyrmgateLeave':
-    'The waystone drinks a gold coin and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
-  'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 1 gold.',
+    'The waystone takes its silver and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
+  'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 50 silver.',
   'log.ferryEnter': 'The ferry bell rings once, and the Farshore rises out of the spray.',
   'log.ferryLeave': 'The bell answers from the vale, and the mainland takes you back.',
   // The Proving Shore (tutorial island): the greeting's ferry ride, the two
@@ -936,10 +936,10 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'A veil of dusk parts before you, and the Hollow opens ahead.',
     'log.veilLeave': 'The veil closes behind you, and the mountain air bites again.',
     'log.wyrmgateEnter':
-      'The waystone drinks a gold coin and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
+      'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
     'log.wyrmgateLeave':
-      'The waystone drinks a gold coin and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
-    'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 1 gold.',
+      'The waystone takes its silver and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
+    'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 50 silver.',
     'log.ferryEnter': 'The ferry bell rings once, and the Farshore rises out of the spray.',
     'log.ferryLeave': 'The bell answers from the vale, and the mainland takes you back.',
     'log.provingFerry': 'The ferry sets you down on the Proving Shore.',
@@ -1320,10 +1320,10 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Un velo de crepúsculo se abre ante ti, y la Hondonada se despliega adelante.',
     'log.veilLeave': 'El velo se cierra a tu espalda, y el aire de la montaña vuelve a morder.',
     'log.wyrmgateEnter':
-      'La piedra de paso se traga una moneda de oro y la Wyrmgate se enciende: viento caliente de ceniza, y las torres de Wyrmwatch al frente.',
+      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: viento caliente de ceniza, y las torres de Wyrmwatch al frente.',
     'log.wyrmgateLeave':
-      'La piedra de paso se traga una moneda de oro y la Wyrmgate se enciende: aire fino de montaña, y las murallas de Highwatch al frente.',
-    'error.wyrmgateToll': 'La piedra de paso sigue apagada. Cruzar la Wyrmgate cuesta 1 de oro.',
+      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: aire fino de montaña, y las murallas de Highwatch al frente.',
+    'error.wyrmgateToll': 'La piedra de paso sigue apagada. Cruzar la Wyrmgate cuesta 50 de plata.',
     'log.ferryEnter': 'La campana del ferry suena una vez, y la Costa Lejana surge de la espuma.',
     'log.ferryLeave': 'La campana responde desde el valle, y tierra firme te recibe de vuelta.',
     'log.learnedAbility': 'Has aprendido una nueva habilidad: {name}.',
@@ -1805,10 +1805,10 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Un velo de crepúsculo se abre ante ti, y la Hondonada se despliega adelante.',
     'log.veilLeave': 'El velo se cierra a tu espalda, y el aire de la montaña vuelve a morder.',
     'log.wyrmgateEnter':
-      'La piedra de paso se traga una moneda de oro y la Wyrmgate se enciende: viento caliente de ceniza, y las torres de Wyrmwatch al frente.',
+      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: viento caliente de ceniza, y las torres de Wyrmwatch al frente.',
     'log.wyrmgateLeave':
-      'La piedra de paso se traga una moneda de oro y la Wyrmgate se enciende: aire fino de montaña, y las murallas de Highwatch al frente.',
-    'error.wyrmgateToll': 'La piedra de paso sigue apagada. Cruzar la Wyrmgate cuesta 1 de oro.',
+      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: aire fino de montaña, y las murallas de Highwatch al frente.',
+    'error.wyrmgateToll': 'La piedra de paso sigue apagada. Cruzar la Wyrmgate cuesta 50 de plata.',
     'log.ferryEnter': 'La campana del ferry suena una vez, y la Costa Lejana surge de la espuma.',
     'log.ferryLeave': 'La campana responde desde el valle, y tierra firme te recibe de vuelta.',
     'log.learnedAbility': 'Has aprendido una nueva habilidad: {name}.',
@@ -2302,11 +2302,11 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': "Un voile de crépuscule s'écarte, et la Combe s'ouvre devant vous.",
     'log.veilLeave': "Le voile se referme derrière vous, et l'air des montagnes mord de nouveau.",
     'log.wyrmgateEnter':
-      "La pierre de passage avale une pièce d'or et la Wyrmgate s'embrase : vent brûlant de cendres, et les tours de Wyrmwatch droit devant.",
+      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : vent brûlant de cendres, et les tours de Wyrmwatch droit devant.",
     'log.wyrmgateLeave':
-      "La pierre de passage avale une pièce d'or et la Wyrmgate s'embrase : air vif des montagnes, et les murs de Highwatch droit devant.",
+      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : air vif des montagnes, et les murs de Highwatch droit devant.",
     'error.wyrmgateToll':
-      "La pierre de passage reste éteinte. Franchir la Wyrmgate coûte 1 pièce d'or.",
+      "La pierre de passage reste éteinte. Franchir la Wyrmgate coûte 50 pièces d'argent.",
     'log.ferryEnter': 'La cloche du bac sonne une fois, et le Rivage Lointain surgit des embruns.',
     'log.ferryLeave': 'La cloche repond depuis le val, et la terre ferme vous reprend.',
     'log.learnedAbility': 'Vous avez appris une nouvelle technique : {name}.',
@@ -2803,11 +2803,11 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': "Un voile de crépuscule s'écarte, et la Combe s'ouvre devant vous.",
     'log.veilLeave': "Le voile se referme derrière vous, et l'air des montagnes mord de nouveau.",
     'log.wyrmgateEnter':
-      "La pierre de passage avale une pièce d'or et la Wyrmgate s'embrase : vent brûlant de cendres, et les tours de Wyrmwatch droit devant.",
+      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : vent brûlant de cendres, et les tours de Wyrmwatch droit devant.",
     'log.wyrmgateLeave':
-      "La pierre de passage avale une pièce d'or et la Wyrmgate s'embrase : air vif des montagnes, et les murs de Highwatch droit devant.",
+      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : air vif des montagnes, et les murs de Highwatch droit devant.",
     'error.wyrmgateToll':
-      "La pierre de passage reste éteinte. Franchir la Wyrmgate coûte 1 pièce d'or.",
+      "La pierre de passage reste éteinte. Franchir la Wyrmgate coûte 50 pièces d'argent.",
     'log.ferryEnter': 'La cloche du bac sonne une fois, et le Rivage Lointain surgit des embruns.',
     'log.ferryLeave': 'La cloche repond depuis le val, et la terre ferme vous reprend.',
     'log.learnedAbility': 'Vous avez appris une nouvelle technique : {name}.',
@@ -3125,10 +3125,10 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'A veil of dusk parts before you, and the Hollow opens ahead.',
     'log.veilLeave': 'The veil closes behind you, and the mountain air bites again.',
     'log.wyrmgateEnter':
-      'The waystone drinks a gold coin and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
+      'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
     'log.wyrmgateLeave':
-      'The waystone drinks a gold coin and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
-    'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 1 gold.',
+      'The waystone takes its silver and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
+    'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 50 silver.',
     'log.ferryEnter': 'The ferry bell rings once, and the Farshore rises out of the spray.',
     'log.ferryLeave': 'The bell answers from the vale, and the mainland takes you back.',
     'log.provingFerry': 'The ferry sets you down on the Proving Shore.',
@@ -3505,11 +3505,11 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Un velo di crepuscolo si apre davanti a te, e la Conca si rivela più avanti.',
     'log.veilLeave': "Il velo si richiude alle tue spalle, e l'aria di montagna torna a pungere.",
     'log.wyrmgateEnter':
-      "La pietra di passaggio inghiotte una moneta d'oro e la Wyrmgate divampa: vento caldo di cenere, e le torri di Wyrmwatch davanti a te.",
+      'La pietra di passaggio inghiotte il tuo argento e la Wyrmgate divampa: vento caldo di cenere, e le torri di Wyrmwatch davanti a te.',
     'log.wyrmgateLeave':
-      "La pietra di passaggio inghiotte una moneta d'oro e la Wyrmgate divampa: aria sottile di montagna, e le mura di Highwatch davanti a te.",
+      'La pietra di passaggio inghiotte il tuo argento e la Wyrmgate divampa: aria sottile di montagna, e le mura di Highwatch davanti a te.',
     'error.wyrmgateToll':
-      'La pietra di passaggio resta spenta. Attraversare la Wyrmgate costa 1 oro.',
+      'La pietra di passaggio resta spenta. Attraversare la Wyrmgate costa 50 argento.',
     'log.ferryEnter':
       'La campana del traghetto suona una volta, e la Riva Lontana emerge dagli spruzzi.',
     'log.ferryLeave': 'La campana risponde dalla valle, e la terraferma ti riaccoglie.',
@@ -4001,11 +4001,11 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
       'Ein Schleier aus Dämmerung teilt sich vor dir, und die Senke öffnet sich dahinter.',
     'log.veilLeave': 'Der Schleier schließt sich hinter dir, und die Bergluft beißt wieder.',
     'log.wyrmgateEnter':
-      'Der Wegstein schluckt eine Goldmünze und das Wyrmgate flammt auf: heißer Aschewind, und die Türme von Wyrmwatch voraus.',
+      'Der Wegstein schluckt dein Silber und das Wyrmgate flammt auf: heißer Aschewind, und die Türme von Wyrmwatch voraus.',
     'log.wyrmgateLeave':
-      'Der Wegstein schluckt eine Goldmünze und das Wyrmgate flammt auf: dünne Bergluft, und die Mauern von Highwatch voraus.',
+      'Der Wegstein schluckt dein Silber und das Wyrmgate flammt auf: dünne Bergluft, und die Mauern von Highwatch voraus.',
     'error.wyrmgateToll':
-      'Der Wegstein bleibt dunkel. Der Übergang durch das Wyrmgate kostet 1 Gold.',
+      'Der Wegstein bleibt dunkel. Der Übergang durch das Wyrmgate kostet 50 Silber.',
     'log.ferryEnter': 'Die Faehrglocke schlaegt einmal, und das Fernufer steigt aus der Gischt.',
     'log.ferryLeave': 'Die Glocke antwortet aus dem Tal, und das Festland nimmt dich zurueck.',
     'log.learnedAbility': 'Ihr habt eine neue Fähigkeit erlernt: {name}.',
@@ -4536,9 +4536,9 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '暮色的帷幕在你面前分开，幽谷在前方展开。',
     'log.veilLeave': '帷幕在你身后合拢，山间的寒风再次刺骨。',
     'log.wyrmgateEnter':
-      '路碑吞下一枚金币，龙门骤然亮起：灼热的灰烬风扑面而来，望龙哨的塔楼就在前方。',
-    'log.wyrmgateLeave': '路碑吞下一枚金币，龙门骤然亮起：稀薄的山风扑面而来，高望的城墙就在前方。',
-    'error.wyrmgateToll': '路碑依旧黯淡。穿越龙门需要 1 金币。',
+      '路碑吞下你的银币，龙门骤然亮起：灼热的灰烬风扑面而来，望龙哨的塔楼就在前方。',
+    'log.wyrmgateLeave': '路碑吞下你的银币，龙门骤然亮起：稀薄的山风扑面而来，高望的城墙就在前方。',
+    'error.wyrmgateToll': '路碑依旧黯淡。穿越龙门需要 50 银币。',
     'log.ferryEnter': '渡船的钟声响起一声，远岸从浪花中浮现。',
     'log.ferryLeave': '钟声自谷中回应，大陆将你迎回。',
     'log.learnedAbility': '你学会了新技能：{name}。',
@@ -5006,9 +5006,9 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '暮色的帷幕在你面前分開，幽谷在前方展開。',
     'log.veilLeave': '帷幕在你身後合攏，山間的寒風再次刺骨。',
     'log.wyrmgateEnter':
-      '路碑吞下一枚金幣，龍門驟然亮起：灼熱的灰燼風撲面而來，望龍哨的塔樓就在前方。',
-    'log.wyrmgateLeave': '路碑吞下一枚金幣，龍門驟然亮起：稀薄的山風撲面而來，高望的城牆就在前方。',
-    'error.wyrmgateToll': '路碑依舊黯淡。穿越龍門需要 1 金幣。',
+      '路碑吞下你的銀幣，龍門驟然亮起：灼熱的灰燼風撲面而來，望龍哨的塔樓就在前方。',
+    'log.wyrmgateLeave': '路碑吞下你的銀幣，龍門驟然亮起：稀薄的山風撲面而來，高望的城牆就在前方。',
+    'error.wyrmgateToll': '路碑依舊黯淡。穿越龍門需要 50 銀幣。',
     'log.ferryEnter': '渡船的鐘聲響起一聲，遠岸從浪花中浮現。',
     'log.ferryLeave': '鐘聲自谷中回應，大陸將你迎回。',
     'log.learnedAbility': '你學會了新技能：{name}。',
@@ -5483,11 +5483,11 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '황혼의 장막이 눈앞에서 갈라지고, 골짜기가 앞에 펼쳐진다.',
     'log.veilLeave': '장막이 등 뒤에서 닫히고, 산바람이 다시 살을 엔다.',
     'log.wyrmgateEnter':
-      '길잡이돌이 금화 한 닢을 삼키고 와이름 관문이 타오릅니다. 뜨거운 잿바람이 불어오고, 와이름 감시탑의 탑들이 앞에 보입니다.',
+      '길잡이돌이 은화를 삼키고 와이름 관문이 타오릅니다. 뜨거운 잿바람이 불어오고, 와이름 감시탑의 탑들이 앞에 보입니다.',
     'log.wyrmgateLeave':
-      '길잡이돌이 금화 한 닢을 삼키고 와이름 관문이 타오릅니다. 희박한 산바람이 불어오고, 하이워치의 성벽이 앞에 보입니다.',
+      '길잡이돌이 은화를 삼키고 와이름 관문이 타오릅니다. 희박한 산바람이 불어오고, 하이워치의 성벽이 앞에 보입니다.',
     'error.wyrmgateToll':
-      '길잡이돌은 어둡게 남아 있습니다. 와이름 관문을 건너려면 1골드가 필요합니다.',
+      '길잡이돌은 어둡게 남아 있습니다. 와이름 관문을 건너려면 50실버가 필요합니다.',
     'log.ferryEnter': '나룻배의 종이 한 번 울리고, 먼기슭이 물보라 속에서 떠오른다.',
     'log.ferryLeave': '골짜기에서 종소리가 화답하고, 뭍이 너를 다시 맞이한다.',
     'log.learnedAbility': '새로운 기술을 배웠습니다: {name}.',
@@ -5973,10 +5973,10 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '黄昏の帳が目の前で開き、幽谷が行く手に広がる。',
     'log.veilLeave': '帳が背後で閉じ、山の空気が再び肌を刺す。',
     'log.wyrmgateEnter':
-      '道標石が金貨を一枚飲み込み、ワームゲートが燃え上がる。熱い灰の風が吹き、前方にワームウォッチの塔が見える。',
+      '道標石が銀貨を飲み込み、ワームゲートが燃え上がる。熱い灰の風が吹き、前方にワームウォッチの塔が見える。',
     'log.wyrmgateLeave':
-      '道標石が金貨を一枚飲み込み、ワームゲートが燃え上がる。薄い山の空気が流れ、前方にハイウォッチの城壁が見える。',
-    'error.wyrmgateToll': '道標石は暗いままだ。ワームゲートの通行には金貨1枚が必要だ。',
+      '道標石が銀貨を飲み込み、ワームゲートが燃え上がる。薄い山の空気が流れ、前方にハイウォッチの城壁が見える。',
+    'error.wyrmgateToll': '道標石は暗いままだ。ワームゲートの通行には銀貨50枚が必要だ。',
     'log.ferryEnter': '渡し船の鐘が一度鳴り、遠つ岸がしぶきの中から現れる。',
     'log.ferryLeave': '谷から鐘が応え、本土がお前を迎え戻す。',
     'log.learnedAbility': '新しいアビリティ「{name}」を習得しました。',
@@ -6410,11 +6410,11 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Um véu de crepúsculo se abre à sua frente, e o Vale Oculto surge adiante.',
     'log.veilLeave': 'O véu se fecha às suas costas, e o ar da montanha volta a morder.',
     'log.wyrmgateEnter':
-      'A pedra de passagem engole uma moeda de ouro e o Wyrmgate se acende: vento quente de cinzas, e as torres de Wyrmwatch adiante.',
+      'A pedra de passagem engole sua prata e o Wyrmgate se acende: vento quente de cinzas, e as torres de Wyrmwatch adiante.',
     'log.wyrmgateLeave':
-      'A pedra de passagem engole uma moeda de ouro e o Wyrmgate se acende: ar rarefeito de montanha, e as muralhas de Highwatch adiante.',
+      'A pedra de passagem engole sua prata e o Wyrmgate se acende: ar rarefeito de montanha, e as muralhas de Highwatch adiante.',
     'error.wyrmgateToll':
-      'A pedra de passagem continua apagada. Atravessar o Wyrmgate custa 1 de ouro.',
+      'A pedra de passagem continua apagada. Atravessar o Wyrmgate custa 50 de prata.',
     'log.ferryEnter': 'O sino da balsa toca uma vez, e a Costa Distante ergue-se da espuma.',
     'log.ferryLeave': 'O sino responde do vale, e o continente o recebe de volta.',
     'log.learnedAbility': 'Você aprendeu uma nova habilidade: {name}.',
@@ -6955,11 +6955,11 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Сумеречная завеса расступается перед вами, и впереди открывается Лощина.',
     'log.veilLeave': 'Завеса смыкается за спиной, и горный воздух снова обжигает холодом.',
     'log.wyrmgateEnter':
-      'Путевой камень поглощает золотую монету, и Змеиные врата вспыхивают: горячий пепельный ветер, а впереди башни Змеиного дозора.',
+      'Путевой камень поглощает ваше серебро, и Змеиные врата вспыхивают: горячий пепельный ветер, а впереди башни Змеиного дозора.',
     'log.wyrmgateLeave':
-      'Путевой камень поглощает золотую монету, и Змеиные врата вспыхивают: разреженный горный воздух, а впереди стены Хайвотча.',
+      'Путевой камень поглощает ваше серебро, и Змеиные врата вспыхивают: разреженный горный воздух, а впереди стены Хайвотча.',
     'error.wyrmgateToll':
-      'Путевой камень остаётся тёмным. Проход через Змеиные врата стоит 1 золотой.',
+      'Путевой камень остаётся тёмным. Проход через Змеиные врата стоит 50 серебряных.',
     'log.ferryEnter': 'Колокол парома звонит один раз, и Дальний берег встаёт из брызг.',
     'log.ferryLeave': 'Колокол отвечает из долины, и большая земля принимает вас обратно.',
     'log.learnedAbility': 'Вы изучили новое умение: {name}.',

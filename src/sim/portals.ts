@@ -45,7 +45,8 @@ export function updatePortalTriggers(ctx: SimContext, p: Entity): void {
       continue;
     }
     // The toll (portal_toll.ts) is settled first: an unpaid crossing refuses
-    // once and moves nobody.
+    // once and moves nobody. `return`, not `continue`: the player is inside
+    // THIS portal's trigger, and no two portals overlap.
     if (!settlePortalToll(ctx, p, portal)) return;
     if (inA) teleport(ctx, p, portal.b, portal.enterText);
     else teleport(ctx, p, portal.a, portal.leaveText);

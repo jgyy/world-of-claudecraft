@@ -18370,7 +18370,7 @@ export const zh_CN: EnTranslations = {
             "label": "墓龙圣所"
           },
           "10": {
-            "label": "Wyrmgate Waystone"
+            "label": "龙门路碑"
           }
         }
       },
@@ -18430,7 +18430,7 @@ export const zh_CN: EnTranslations = {
             "label": "龙喉火山口"
           },
           "7": {
-            "label": "Wyrmgate Waystone"
+            "label": "龙门路碑"
           }
         }
       },

@@ -4611,6 +4611,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.zones.thornpeak_heights.pois.7.label': 'ワーム教団の天幕',
   'entities.zones.thornpeak_heights.pois.8.label': '亡霊の野',
   'entities.zones.thornpeak_heights.pois.9.label': '墓ワームの聖所',
+  'entities.zones.thornpeak_heights.pois.10.label': 'ワームゲートの道標石',
   'entities.zones.veiled_hollow.name': 'ヴェールの幽谷',
   'entities.zones.veiled_hollow.welcome':
     '大気は古の魔力に満ちて震えている。エルダーグリームの大樹の下で、守り手セルウィンを訪ねよ。',
@@ -4638,6 +4639,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'entities.zones.drakelands.pois.4.label': '最後の砦',
   'entities.zones.drakelands.pois.5.label': 'ブラッドグラスの平原',
   'entities.zones.drakelands.pois.6.label': 'ドレイクモウ火口',
+  'entities.zones.drakelands.pois.7.label': 'ワームゲートの道標石',
   'entities.zones.frostveil.name': 'フロストヴェイルの果て',
   'entities.zones.frostveil.welcome':
     '雪がすべての音を呑み込む。揺らめくオーロラの下で、寒さそのものが目覚めているかのようだ。',

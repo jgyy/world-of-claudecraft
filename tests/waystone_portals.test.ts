@@ -8,6 +8,8 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import type * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
+import { measureFeatureFootprint } from '../src/render/renderer_diagnostics';
+import { isSharedGeometry, isSharedMaterial } from '../src/render/shared_resource';
 import { buildStaticWorldDressing } from '../src/render/static_world_dressing';
 import {
   buildWaystonePortals,
@@ -84,6 +86,37 @@ describe('buildWaystonePortals', () => {
     const expected = parentWorld.clone().multiply(swirl.matrix);
     expect(swirl.matrixWorld.equals(expected)).toBe(true);
     expect(swirl.matrixWorld.equals(before)).toBe(false);
+    // The dirty bit is cleared, so the next scene walk does not recompose it again.
+    expect(swirl.matrixWorldNeedsUpdate).toBe(false);
+    const opacity = (swirl.material as THREE.MeshBasicMaterial).opacity;
+    expect(opacity).toBeGreaterThanOrEqual(0.3);
+    expect(opacity).toBeLessThanOrEqual(0.6);
+  });
+
+  it('registers one cull group per arch, each with a compact footprint', () => {
+    const view = buildWaystonePortals(42, false);
+    expect(view.cullGroups).toHaveLength(2);
+    expect(view.cullGroups).toEqual(view.group.children);
+    view.group.updateMatrixWorld(true);
+    for (const cullGroup of view.cullGroups) {
+      const fp = measureFeatureFootprint(cullGroup);
+      expect(fp).not.toBeNull();
+      expect(fp!.halfX).toBeLessThan(10);
+      expect(fp!.halfZ).toBeLessThan(10);
+    }
+  });
+
+  it('owns its swirl material (the door membrane is pulsed per frame elsewhere) and shares the geometry', () => {
+    const { group } = buildWaystonePortals(42, false);
+    const body = group.children[0] as THREE.Group;
+    const swirl = body.children.find((c) => c.userData.waystoneSwirl) as THREE.Mesh;
+    // An owned clone: never the shared door membrane the entity loop pulses.
+    expect(isSharedMaterial(swirl.material as THREE.Material)).toBe(false);
+    expect(isSharedGeometry(swirl.geometry)).toBe(true);
+    const other = (group.children[1] as THREE.Group).children.find(
+      (c) => c.userData.waystoneSwirl,
+    ) as THREE.Mesh;
+    expect(other.material).not.toBe(swirl.material);
   });
 
   it('builds nothing when no portal wears an arch', () => {

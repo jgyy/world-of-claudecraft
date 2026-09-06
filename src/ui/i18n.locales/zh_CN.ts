@@ -4446,6 +4446,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'entities.zones.thornpeak_heights.pois.7.label': '龙教帐篷',
   'entities.zones.thornpeak_heights.pois.8.label': '亡魂战场',
   'entities.zones.thornpeak_heights.pois.9.label': '墓龙圣所',
+  'entities.zones.thornpeak_heights.pois.10.label': '龙门路碑',
   'entities.zones.veiled_hollow.name': '帷幕幽谷',
   'entities.zones.veiled_hollow.welcome':
     '空气中回荡着古老魔法的低鸣。到古辉镇的巨树下寻找守护者塞尔文吧。',
@@ -4471,6 +4472,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'entities.zones.drakelands.pois.4.label': '最后的堡垒',
   'entities.zones.drakelands.pois.5.label': '血玻璃原野',
   'entities.zones.drakelands.pois.6.label': '龙喉火山口',
+  'entities.zones.drakelands.pois.7.label': '龙门路碑',
   'entities.zones.frostveil.name': '霜幕之境',
   'entities.zones.frostveil.welcome': '白雪吞没了一切声响。在舞动的极光之下，寒冷本身仿佛苏醒了。',
   'entities.zones.frostveil.pois.0.label': '冰幔镇',

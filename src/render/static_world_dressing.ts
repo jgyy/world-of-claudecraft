@@ -2,7 +2,8 @@
 // each entry through attachZoneFeature (so the distance cull and the gated
 // program link apply): the Duskfall cave mouths (built by the caller, which
 // also drives their occluder fade each frame), lily-and-reed water flora on
-// every temperate lake, the Farshore's palm strand, and the waystone arches.
+// every temperate lake, the Farshore's palm strand, and the waystone arches
+// (one cull group per arch: its two sides stand zones apart).
 // A new world-wide static feature is a new entry here, never another inline
 // builder in renderer.ts.
 
