@@ -3547,6 +3547,20 @@ export const ko_KR: EnTranslations = {
           "set": "길드 게시판이 업데이트되었습니다.",
           "notOfficer": "게시판은 임원과 길드 마스터만 수정할 수 있습니다."
         }
+      },
+      "roster": {
+        "seats": "{count} / {cap} 자리",
+        "expand": "명단 확장 (+{seats}자리, {price})",
+        "maxed": "명단이 이미 최대 규모입니다",
+        "confirm": "{price}(으)로 길드 명단을 {seats}자리 확장하시겠습니까? 골드는 본인의 소지금에서 차감되며 환불되지 않습니다.",
+        "confirmAction": "확장",
+        "expandedLine": "{name}님이 길드 명단을 {cap}명으로 확장했습니다.",
+        "result": {
+          "notLeader": "길드 명단은 길드 마스터만 확장할 수 있습니다.",
+          "maxed": "길드 명단은 더 이상 확장할 수 없습니다.",
+          "cannotAfford": "길드 명단을 확장하려면 {price}이(가) 필요합니다.",
+          "retry": "구매 중에 길드 명단이 변경되었습니다. 다시 시도하세요."
+        }
       }
     },
     "gathering": {

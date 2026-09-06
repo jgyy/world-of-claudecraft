@@ -283,11 +283,14 @@ const MONOLITHS: MonolithRow[] = [
     // relocalize() call, and the three-line event arm (the card itself is
     // src/ui/realm_builder_popup.ts). Re-measured on the merged tree: 18879
     // plus those six (18885). Exact merged count, zero slack; maintainer-review item.
-    // Down 18885 -> 18876 for the per-surface action-bar profiles: the
+    // Lowered 18885 -> 18858 by the guild roster expansion (PR #3874), which
+    // extracted 27 lines from this file into the roster page modules. Exact
+    // merged count, zero slack; maintainer-review item.
+    // Down 18858 -> 18849 for the per-surface action-bar profiles: the
     // world-entry restore moved into ActionBarController.restoreLayout, so
     // the HUD keeps one poll, one refresh call, and the two-line per-frame
     // surface-flip follow beside the form sync. Exact merged count.
-    ceiling: 18876,
+    ceiling: 18849,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -603,10 +606,19 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Down 10641 -> 10624 for the per-surface action-bar profiles: the
+    // chatChannelHint and chatSenderFlair moved to their own server/ modules
+    // (the roster-expansion dispatch and transport spread landed in their
+    // place): the ratchet lowers with them.
+    // Lowered 10635 -> 10614 by the guild roster purchase rework: the
+    // post-COMMIT save acknowledgement moved to
+    // server/character_save_acknowledge.ts (shared by the market custody
+    // path and the roster coordinator), which more than paid for the
+    // coordinator's wiring and the quarantine hook's audit surface. Exact
+    // count, zero slack.
+    // Down 10614 -> 10597 for the per-surface action-bar profiles: the
     // join read, the per-profile merge and the FIFO write moved to
     // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
-    ceiling: 10624,
+    ceiling: 10597,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -668,10 +680,12 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Down 5908 -> 5883 for the per-surface action-bar profiles: the
+    // wrapAngle and copyPos moved to src/net/interp_math.ts: the ratchet
+    // lowers with them.
+    // Down 5896 -> 5871 for the per-surface action-bar profiles: the
     // debounced upload moved to src/net/action_bar_upload.ts
     // (ActionBarLayoutUploader). Exact count.
-    ceiling: 5883,
+    ceiling: 5871,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
