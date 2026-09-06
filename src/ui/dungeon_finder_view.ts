@@ -229,12 +229,19 @@ function blockReasonFor(
   return null;
 }
 
+// The longest remaining lock across the activity's rooms: a family that locks
+// per boss room (the Ignivar raid) reads every room it declares, so a player
+// locked to Varkhul alone still sees the lock on the one catalogue row.
 function lockoutMinutesFor(activity: FinderActivity, lockouts: RaidLockout[]): number {
-  const key =
-    activity.difficulty === 'heroic' ? `${activity.dungeonId}:heroic` : activity.dungeonId;
-  const hit = lockouts.find((l) => l.id === key);
-  if (!hit || activity.lockout === 'none') return 0;
-  return Math.max(1, Math.ceil(hit.msRemaining / 60000));
+  if (activity.lockout === 'none') return 0;
+  const ids = [activity.dungeonId, ...(activity.lockoutDungeonIds ?? [])];
+  let ms = 0;
+  for (const id of ids) {
+    const key = activity.difficulty === 'heroic' ? `${id}:heroic` : id;
+    const hit = lockouts.find((l) => l.id === key);
+    if (hit) ms = Math.max(ms, hit.msRemaining);
+  }
+  return ms > 0 ? Math.max(1, Math.ceil(ms / 60000)) : 0;
 }
 
 function lootItem(entry: { itemId?: string; chance: number }): FinderLootItemView | null {

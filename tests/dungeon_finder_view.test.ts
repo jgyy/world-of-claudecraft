@@ -265,6 +265,23 @@ describe('dungeon finder view core', () => {
     );
     expect(heroic.detail?.lockout).toBe('weekly');
     expect(heroic.detail?.lockedMinutes).toBe(0);
+    // The family locks per boss room: a Varkhul-only lock (the Inner Crucible)
+    // still surfaces on the one catalogue row, and the longest lock wins.
+    const varkhulOnly = live(
+      buildDungeonFinderView(
+        input({
+          playerLevel: 20,
+          specRole: 'tank',
+          selectedActivityId: 'ignivar_raid_arena_heroic',
+          lockouts: [
+            { id: 'ignivar_raid_arena:heroic', msRemaining: 60_000 },
+            { id: 'ignivar_inner_crucible:heroic', msRemaining: 2 * 86_400_000 },
+            { id: 'ignivar_inner_crucible', msRemaining: 5 * 86_400_000 },
+          ],
+        }),
+      ),
+    );
+    expect(varkhulOnly.detail?.lockedMinutes).toBe(2 * 24 * 60);
   });
 
   it('surfaces my lockout on the matching difficulty only (minute granularity)', () => {

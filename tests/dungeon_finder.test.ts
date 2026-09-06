@@ -216,8 +216,10 @@ describe('finder catalogue metadata', () => {
       expect(DUNGEONS[a?.entranceDungeonId ?? '']?.doorPos).toEqual(
         DUNGEONS.ignivar_raid_arena.doorPos,
       );
-      // Both boss rooms run on the weekly reset (WEEKLY_LOCKOUT_RAID_ROOMS).
+      // Both boss rooms run on the weekly reset (WEEKLY_LOCKOUT_RAID_ROOMS),
+      // one lock per room, so the row reads the Inner Crucible's lock too.
       expect(a?.lockout).toBe('weekly');
+      expect(a?.lockoutDungeonIds).toEqual(['ignivar_inner_crucible']);
       expect(a?.attunementQuestId).toBeUndefined();
       expect(a?.encounters.map((e) => e.mobId)).toEqual([
         'ignivar_herald_of_the_last_flame',

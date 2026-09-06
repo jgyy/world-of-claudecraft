@@ -100,6 +100,10 @@ export interface FinderActivity {
   // boundary (WEEKLY_LOCKOUT_RAID_ROOMS in src/sim/instances/dungeons.ts);
   // normal five-mans and the crypt have no lockout.
   lockout: 'none' | 'daily' | 'weekly';
+  // Display-only: the extra dungeon ids whose lockouts this activity reads
+  // besides `dungeonId`, for a family that locks per boss room (the Ignivar
+  // raid's Inner Crucible). The heroic key derives per id the same way.
+  lockoutDungeonIds?: readonly string[];
 }
 
 const FIVE_MAN: FinderComposition = { tank: 1, healer: 1, dps: 3 };
@@ -438,6 +442,7 @@ export const FINDER_ACTIVITIES: readonly FinderActivity[] = [
     entranceDungeonId: 'ignivar_forge_lift',
     encounters: IGNIVAR_RAID_ENCOUNTERS,
     lockout: 'weekly',
+    lockoutDungeonIds: ['ignivar_inner_crucible'],
   },
   {
     id: 'ignivar_raid_arena_heroic',
@@ -452,6 +457,7 @@ export const FINDER_ACTIVITIES: readonly FinderActivity[] = [
     entranceDungeonId: 'ignivar_forge_lift',
     encounters: IGNIVAR_RAID_ENCOUNTERS_HEROIC,
     lockout: 'weekly',
+    lockoutDungeonIds: ['ignivar_inner_crucible'],
   },
 ];
 
