@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 import {
   RIFT_PLATFORM_WALL_INSET,
   type RiftPlatformShell,
+  riftPlatformHalfWidthAt,
   riftPlatformSlabs,
 } from '../src/render/rift_platform_core';
 import { polygonXAtZ } from '../src/sim/geometry2d';
@@ -24,6 +25,10 @@ describe('riftPlatformSlabs', () => {
     for (const s of slabs) {
       expect(s.halfW).toBeCloseTo(39 - RIFT_PLATFORM_WALL_INSET, 5);
     }
+    // A constant-width shell keeps the rear deck as ONE slab (no gratuitous bands).
+    const deck = slabs.filter((s) => s.z >= platform.rampZ1);
+    expect(deck).toHaveLength(1);
+    expect(deck[0].depth).toBeCloseTo(shell.zMax - platform.rampZ1 + 0.05, 5);
   });
 
   it('hugs a polygon shell: never past the wall, never more than a step inside it', () => {
@@ -41,11 +46,17 @@ describe('riftPlatformSlabs', () => {
       const z0 = s.z - s.depth / 2;
       const z1 = s.z + s.depth / 2;
       const wallAt = (z: number) => polygonXAtZ(shellPolygon, z, 1) ?? 38;
+      const widest = Math.max(wallAt(z0), wallAt(z1));
       const narrowest = Math.min(wallAt(z0), wallAt(z1));
-      expect(s.halfW).toBeLessThanOrEqual(narrowest - RIFT_PLATFORM_WALL_INSET + 0.05);
-      expect(s.halfW).toBeGreaterThan(narrowest - RIFT_PLATFORM_WALL_INSET - 0.5);
+      // Never short of the wall anywhere in the band (that is the floating strip),
+      // never past the band's widest crossing (tucks under the panel at most). The
+      // 0.05 slack is the slabs' z-overlap pad against hairline seams.
+      expect(s.halfW).toBeGreaterThanOrEqual(narrowest - RIFT_PLATFORM_WALL_INSET - 0.05);
+      expect(s.halfW).toBeLessThanOrEqual(widest - RIFT_PLATFORM_WALL_INSET + 0.05);
       expect(s.halfW).toBeGreaterThan(22); // the old cap would have left a bare strip
     }
+    // The taper actually produces bands: more than one deck slab here.
+    expect(slabs.filter((s) => s.z >= platform.rampZ1).length).toBeGreaterThan(1);
   });
 
   it('rises from the ramp foot to the deck and covers the deck through zMax', () => {
@@ -77,20 +88,48 @@ describe('riftPlatformSlabs', () => {
       const slabs = riftPlatformSlabs(floor.layout, floor.platform);
       const poly = floor.layout.shellPolygon;
       for (const s of slabs) {
-        const wallAt = poly
-          ? Math.min(
-              polygonXAtZ(poly, s.z - s.depth / 2, 1) ?? wallX,
-              polygonXAtZ(poly, s.z + s.depth / 2, 1) ?? wallX,
-            )
-          : wallX;
-        expect(s.halfW, `seed ${seed} z ${s.z}`).toBeGreaterThan(
-          wallAt - RIFT_PLATFORM_WALL_INSET - 0.5,
+        const ends = [s.z - s.depth / 2, s.z + s.depth / 2].map((z) =>
+          poly ? (polygonXAtZ(poly, z, 1) ?? wallX) : wallX,
+        );
+        const narrowest = Math.min(...ends);
+        const widest = Math.max(...ends);
+        expect(s.halfW, `seed ${seed} z ${s.z}`).toBeGreaterThanOrEqual(
+          narrowest - RIFT_PLATFORM_WALL_INSET - 0.05,
         );
         expect(s.halfW, `seed ${seed} z ${s.z}`).toBeLessThanOrEqual(
-          wallAt - RIFT_PLATFORM_WALL_INSET + 0.05,
+          Math.min(wallX, widest) - RIFT_PLATFORM_WALL_INSET + 0.05,
         );
       }
     }
     expect(checked).toBeGreaterThan(0);
+  });
+
+  it('riftPlatformHalfWidthAt guards: wallX fallback, tiny polygon, off-band z, clamp', () => {
+    // No wallX and no polygon: the historical `layout.wallX ?? 18` default survives.
+    expect(riftPlatformHalfWidthAt({ zMax: 50 }, 10, 12)).toBeCloseTo(
+      18 - RIFT_PLATFORM_WALL_INSET,
+      5,
+    );
+    // A degenerate polygon (fewer than 3 points) is ignored in favour of wallX.
+    expect(
+      riftPlatformHalfWidthAt({ zMax: 50, wallX: 30, shellPolygon: [{ x: 5, z: 0 }] }, 10, 12),
+    ).toBeCloseTo(30 - RIFT_PLATFORM_WALL_INSET, 5);
+    // A band entirely outside the polygon's z span falls back to wallX.
+    const poly = [
+      { x: 10, z: 0 },
+      { x: 10, z: 20 },
+      { x: -10, z: 20 },
+      { x: -10, z: 0 },
+    ];
+    expect(
+      riftPlatformHalfWidthAt({ zMax: 50, wallX: 30, shellPolygon: poly }, 40, 42),
+    ).toBeCloseTo(30 - RIFT_PLATFORM_WALL_INSET, 5);
+    // Inside the span the polygon wins over a wider wallX.
+    expect(riftPlatformHalfWidthAt({ zMax: 50, wallX: 30, shellPolygon: poly }, 5, 7)).toBeCloseTo(
+      10 - RIFT_PLATFORM_WALL_INSET,
+      5,
+    );
+    // A pinhole shell never plans a slab thinner than 1 yd half-width.
+    expect(riftPlatformHalfWidthAt({ zMax: 50, wallX: 0.2 }, 10, 12)).toBe(1);
   });
 });

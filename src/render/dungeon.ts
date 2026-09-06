@@ -1233,15 +1233,20 @@ export class DungeonInteriors {
     layout: DungeonLayout,
     platform: { rampZ0: number; rampZ1: number; height: number },
   ): void {
-    // Slab plan (stairs + banded rear deck, each slab out to the room's own wall
-    // face at its z) lives in rift_platform_core.ts; this is the Three consumer.
-    const mat = new THREE.MeshLambertMaterial({ color: 0x4a4652, emissive: 0x0a0a12 });
-    for (const s of riftPlatformSlabs(layout, platform)) {
-      const slab = new THREE.Mesh(new THREE.BoxGeometry(s.halfW * 2, s.top, s.depth), mat);
-      slab.position.set(0, s.top / 2, s.z);
-      slab.receiveShadow = true;
-      group.add(slab);
-    }
+    // Slab plan lives in rift_platform_core.ts (each slab out to the room's own wall
+    // face); one shared material, so the slabs merge into ONE geometry / draw call.
+    const parts = riftPlatformSlabs(layout, platform).map((s) =>
+      new THREE.BoxGeometry(s.halfW * 2, s.top, s.depth).translate(0, s.top / 2, s.z),
+    );
+    const merged = mergeGeometries(parts, false);
+    for (const g of parts) g.dispose();
+    if (!merged) return;
+    const deck = new THREE.Mesh(
+      merged,
+      new THREE.MeshLambertMaterial({ color: 0x4a4652, emissive: 0x0a0a12 }),
+    );
+    deck.receiveShadow = true;
+    group.add(deck);
   }
 
   private placeAquaticDressing(group: THREE.Group, layout: DungeonLayout): void {

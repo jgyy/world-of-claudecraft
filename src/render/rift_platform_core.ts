@@ -42,23 +42,50 @@ const DECK_SLICE = 2.5;
  *  long gentle climb both read as proper stairs, not a few giant blocks. */
 const TREAD = 2.2;
 
-/** Half-width available to a slab spanning [z0, z1]: the narrowest wall crossing
- *  over that band (either end), less the inset. Never wider than the rectangular
- *  wallX so a polygon that bulges past its bounding wall cannot push a slab out. */
+/** Half-width available to a slab spanning [z0, z1]: the WIDEST wall crossing
+ *  over that band (both ends and the midpoint), less the inset. Widest, not
+ *  narrowest: the sim lifts a walker across the whole width, so a slab that
+ *  stops short of the wall anywhere in its band leaves a floating strip, while
+ *  one that reaches the band's widest point merely tucks under the wall panel
+ *  where the shell is narrower. Never wider than the rectangular wallX, so a
+ *  polygon that bulges past its bounding wall cannot push a slab out. */
 export function riftPlatformHalfWidthAt(shell: RiftPlatformShell, z0: number, z1: number): number {
   const wallX = shell.wallX ?? DEFAULT_WALL_X;
   let w = wallX;
   const poly = shell.shellPolygon;
   if (poly && poly.length >= 3) {
-    const a = polygonXAtZ(poly, z0, 1);
-    const b = polygonXAtZ(poly, z1, 1);
-    for (const x of [a, b]) if (x !== null && x < w) w = x;
+    let widest: number | null = null;
+    for (const z of [z0, (z0 + z1) / 2, z1]) {
+      const x = polygonXAtZ(poly, z, 1);
+      if (x !== null && (widest === null || x > widest)) widest = x;
+    }
+    if (widest !== null && widest < w) w = widest;
   }
   return Math.max(1, w - RIFT_PLATFORM_WALL_INSET);
 }
 
+/** Merge runs of adjacent deck slices that share a half-width into one slab, so a
+ *  rectangular room's rear deck stays the single box it always was and only a
+ *  shell that actually changes width pays for extra bands. */
+function coalesce(slabs: RiftPlatformSlab[]): RiftPlatformSlab[] {
+  const out: RiftPlatformSlab[] = [];
+  for (const s of slabs) {
+    const prev = out[out.length - 1];
+    if (prev && Math.abs(prev.top - s.top) < 1e-6 && Math.abs(prev.halfW - s.halfW) < 1e-6) {
+      const z0 = Math.min(prev.z - prev.depth / 2, s.z - s.depth / 2);
+      const z1 = Math.max(prev.z + prev.depth / 2, s.z + s.depth / 2);
+      prev.z = (z0 + z1) / 2;
+      prev.depth = z1 - z0;
+    } else {
+      out.push({ ...s });
+    }
+  }
+  return out;
+}
+
 /** Plan the staircase (rampZ0..rampZ1, tops approximating the linear sim lift at
- *  each step's centre) followed by the rear deck (rampZ1..zMax) at `height`. */
+ *  each step's centre) followed by the rear deck (rampZ1..zMax) at `height`.
+ *  Same-width deck slices are coalesced (see `coalesce`). */
 export function riftPlatformSlabs(
   shell: RiftPlatformShell,
   platform: RiftPlatform,
@@ -81,15 +108,16 @@ export function riftPlatformSlabs(
   const deckDepth = Math.max(2, shell.zMax - rampZ1);
   const slices = Math.max(1, Math.ceil(deckDepth / DECK_SLICE));
   const sliceDepth = deckDepth / slices;
+  const deck: RiftPlatformSlab[] = [];
   for (let i = 0; i < slices; i++) {
     const z0 = rampZ1 + i * sliceDepth;
     const z1 = z0 + sliceDepth;
-    out.push({
+    deck.push({
       z: z0 + sliceDepth / 2,
       depth: sliceDepth + 0.05,
       halfW: riftPlatformHalfWidthAt(shell, z0, z1),
       top: height,
     });
   }
-  return out;
+  return out.concat(coalesce(deck));
 }
