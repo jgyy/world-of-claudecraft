@@ -293,7 +293,11 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count (the Rift Forge window wiring on top of the ladder: the repaint-family line and the walk-away close, over the base retune).
     // Exact merged count, zero slack.
     // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 18851 plus this branch's +15.
-    ceiling: 18866,
+    // Down 18866 -> 18857 for the per-surface action-bar profiles: the
+    // world-entry restore moved into ActionBarController.restoreLayout, so
+    // the HUD keeps one poll, one refresh call, and the two-line per-frame
+    // surface-flip follow beside the form sync. Exact merged count.
+    ceiling: 18857,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -623,7 +627,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count (the forge dispatch extraction plus the retired enchant tombstone arm).
     // Exact merged count, zero slack.
     // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 10613 plus this branch's -9.
-    ceiling: 10604,
+    // Down 10604 -> 10587 for the per-surface action-bar profiles: the
+    // join read, the per-profile merge and the FIFO write moved to
+    // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
+    ceiling: 10587,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -692,7 +699,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count (the forge pair senders awaiting their ack, over the retired enchant sender).
     // Exact merged count, zero slack.
     // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 5892 plus this branch's +6.
-    ceiling: 5898,
+    // Down 5898 -> 5873 for the per-surface action-bar profiles: the
+    // debounced upload moved to src/net/action_bar_upload.ts
+    // (ActionBarLayoutUploader). Exact count.
+    ceiling: 5873,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
