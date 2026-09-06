@@ -4,6 +4,7 @@
 // Wyrmgate arch, a sutler at the market row, a sergeant by the well, and a
 // chaplain at the chapel, and no camp mob's id moved to make room for them.
 import { describe, expect, it } from 'vitest';
+import { resolvePosition } from '../src/sim/colliders';
 import { DRAKELANDS_NPCS, DRAKELANDS_PORTALS } from '../src/sim/content/drakelands';
 import { FURY_ENTITY_ID } from '../src/sim/content/pvp_honor';
 import { NPCS } from '../src/sim/data';
@@ -15,6 +16,7 @@ import {
 } from '../src/sim/last_keep_garrison';
 import { Sim } from '../src/sim/sim';
 import { type Entity, STATIC_WORLD_SERVICE_ENTITY_ID_MIN } from '../src/sim/types';
+import { groundHeight, waterLevel } from '../src/sim/world';
 
 // Bailey inner faces (src/sim/castle_layout.ts CASTLE curtain walls).
 const BAILEY = { xMin: 361.5, xMax: 435.3, zMin: 1989.5, zMax: 2070.3 };
@@ -45,10 +47,29 @@ describe('the garrison records', () => {
         const d = Math.hypot(defs[i].pos.x - defs[j].pos.x, defs[i].pos.z - defs[j].pos.z);
         expect(d, `${defs[i].id} vs ${defs[j].id}`).toBeGreaterThanOrEqual(4);
       }
-      const side = DRAKELANDS_PORTALS[0].b;
+      const side = DRAKELANDS_PORTALS.find((p) => p.id === 'wyrmgate_waystone')!.b;
       for (const pt of [side, side.landing]) {
         expect(Math.hypot(defs[i].pos.x - pt.x, defs[i].pos.z - pt.z), defs[i].id).toBeGreaterThan(
           DRAKELANDS_PORTALS[0].radius + 2,
+        );
+      }
+    }
+  });
+
+  it('stands on clear, dry, walkable ground (no building, stall, well, or wall pushes them)', () => {
+    for (const id of LAST_KEEP_GARRISON_NPC_IDS) {
+      const { x, z } = NPCS[id].pos;
+      expect(groundHeight(x, z, 42), id).toBeGreaterThan(waterLevel() + 0.6);
+      for (const [dx, dz] of [
+        [0, 0],
+        [0.6, 0],
+        [-0.6, 0],
+        [0, 0.6],
+        [0, -0.6],
+      ]) {
+        const r = resolvePosition(42, x + dx, z + dz);
+        expect(Math.hypot(r.x - (x + dx), r.z - (z + dz)), `${id} at +${dx},${dz}`).toBeLessThan(
+          1e-6,
         );
       }
     }

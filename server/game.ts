@@ -9431,8 +9431,10 @@ export class GameServer {
     // inline.
     const deedUnlocks = new Map<ClientSession, string[]>();
     for (const ev of events) {
-      // Unstuck records + tick-driven copper flows (tick_event_bookings.ts).
-      if (ev.pid !== undefined) bookTickEvent(ev, this.clients.get(ev.pid));
+      // Unstuck records + tick-driven copper flows (tick_event_bookings.ts);
+      // the type gate keeps the session lookup off the common combat event.
+      if ((ev.type === 'unstuck' || ev.type === 'portalToll') && ev.pid !== undefined)
+        bookTickEvent(ev, this.clients.get(ev.pid));
       if (ev.type === 'deedUnlocked' && ev.pid !== undefined) {
         const s = this.clients.get(ev.pid);
         if (s) {
