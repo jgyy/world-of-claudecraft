@@ -37,11 +37,15 @@ function decayOffset(offset: Vec3Like, dt: number, maxDistance = Number.POSITIVE
 // and must snap: captured as an offset it would be rewound at
 // MAX_SELF_REWIND_YD_PER_SEC, walking the camera across the world for hours
 // (the delve "sent flying across the map" report).
+function exceedsSnapDistance(gap: Vec3Like): boolean {
+  return gap.x * gap.x + gap.y * gap.y + gap.z * gap.z > SELF_MOTION_SNAP_DIST_SQ;
+}
+
 function captureHandoffOffset(offset: Vec3Like, from: Vec3Like, to: Vec3Like): void {
   const dx = from.x - to.x;
   const dy = from.y - to.y;
   const dz = from.z - to.z;
-  if (dx * dx + dy * dy + dz * dz > SELF_MOTION_SNAP_DIST_SQ) {
+  if (exceedsSnapDistance({ x: dx, y: dy, z: dz })) {
     offset.x = 0;
     offset.y = 0;
     offset.z = 0;
@@ -146,10 +150,13 @@ export function updateSelfRenderPosition(
       } else if (state.ready && !state.active) {
         captureHandoffOffset(state.offset, state.position, predicted);
       }
-      if (reconciled.kind === 'reconciled' && reconciled.residual) {
-        state.offset.x += reconciled.residual.x;
-        state.offset.y += reconciled.residual.y;
-        state.offset.z += reconciled.residual.z;
+      // A replay residual is the same kind of gap: a teleport-scale one is
+      // dropped rather than glided (same rule as captureHandoffOffset).
+      const residual = reconciled.kind === 'reconciled' ? reconciled.residual : null;
+      if (residual && !exceedsSnapDistance(residual)) {
+        state.offset.x += residual.x;
+        state.offset.y += residual.y;
+        state.offset.z += residual.z;
       }
       decayOffset(state.offset, dt);
       state.position.x = predicted.x + state.offset.x;
