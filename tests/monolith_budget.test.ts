@@ -286,11 +286,18 @@ const MONOLITHS: MonolithRow[] = [
     // Lowered 18885 -> 18858 by the guild roster expansion (PR #3874), which
     // extracted 27 lines from this file into the roster page modules. Exact
     // merged count, zero slack; maintainer-review item.
-    // Down 18858 -> 18849 for the per-surface action-bar profiles: the
+    // Lowered 18858 -> 18851 by the Riftbound band item-level ladder: the
+    // rift tooltip lines moved into src/ui/rift_band_tooltip.ts (with the
+    // per-copy item-level readout), the compare block only threaded the
+    // hovered and worn instances through. Exact merged count, zero slack.
+    // Re-pinned to the exact merged count (the Rift Forge window wiring on top of the ladder: the repaint-family line and the walk-away close, over the base retune).
+    // Exact merged count, zero slack.
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 18851 plus this branch's +15.
+    // Down 18866 -> 18857 for the per-surface action-bar profiles: the
     // world-entry restore moved into ActionBarController.restoreLayout, so
     // the HUD keeps one poll, one refresh call, and the two-line per-frame
     // surface-flip follow beside the form sync. Exact merged count.
-    ceiling: 18849,
+    ceiling: 18857,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -615,10 +622,15 @@ const MONOLITHS: MonolithRow[] = [
     // path and the roster coordinator), which more than paid for the
     // coordinator's wiring and the quarantine hook's audit surface. Exact
     // count, zero slack.
-    // Down 10614 -> 10597 for the per-surface action-bar profiles: the
+    // Lowered 10614 -> 10613 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
+    // Exact count, zero slack.
+    // Re-pinned to the exact merged count (the forge dispatch extraction plus the retired enchant tombstone arm).
+    // Exact merged count, zero slack.
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 10613 plus this branch's -9.
+    // Down 10604 -> 10587 for the per-surface action-bar profiles: the
     // join read, the per-profile merge and the FIFO write moved to
     // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
-    ceiling: 10597,
+    ceiling: 10587,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -682,10 +694,15 @@ const MONOLITHS: MonolithRow[] = [
     // the composite is the honest size. Exact count, zero slack.
     // wrapAngle and copyPos moved to src/net/interp_math.ts: the ratchet
     // lowers with them.
-    // Down 5896 -> 5871 for the per-surface action-bar profiles: the
+    // Lowered 5896 -> 5892 by the Riftbound band item-level ladder (the retired forge enchant sender).
+    // Exact count, zero slack.
+    // Re-pinned to the exact merged count (the forge pair senders awaiting their ack, over the retired enchant sender).
+    // Exact merged count, zero slack.
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 5892 plus this branch's +6.
+    // Down 5898 -> 5873 for the per-surface action-bar profiles: the
     // debounced upload moved to src/net/action_bar_upload.ts
     // (ActionBarLayoutUploader). Exact count.
-    ceiling: 5871,
+    ceiling: 5873,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

@@ -355,6 +355,7 @@ import { eventLeadDayKey, resetDayKey } from './raid_reset';
 import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
 import { createRealmReadoutMemo, realmReadoutJson, realmReadoutObject } from './realm_readout_memo';
 import { RiftAssetCoordinator, riftAssetConfigFromEnv } from './rift_assets';
+import { dispatchRiftCommand } from './rift_forge_dispatch';
 import { refusedRiftForgeCommand } from './rift_forge_gate';
 import { RiftUpgradeCoordinator, riftUpgraderConfigFromEnv } from './rift_upgrader';
 import {
@@ -842,7 +843,6 @@ const HEAVY_SELF_CMDS = new Set<string>([
   // complete-time loot event is a HEAVY_SELF_EVENTS member, so listing it
   // here would buy a wasted heavy re-serialize per cast start.
   'rift_upgrade_item',
-  'rift_enchant_item',
   'rift_socket_gem',
   'equip_bag',
   'unequip_bag',
@@ -1402,11 +1402,13 @@ function identityFields(e: Entity): Record<string, unknown> {
     // payload, riding the identity record (wireCacheFor diffs the identity
     // JSON, so an equip/unequip of an instanced piece re-emits automatically).
     // Data minimization: only the cosmetic inspect fields (signer, enchant,
-    // rolled) leave the server; boundTo, charges, and the bindOnTrade
-    // arm are gameplay state no inspecting client needs and never ride this key.
-    // The pub allowlist below (signer/enchant/rolled ONLY) is what enforces this,
-    // so a new non-cosmetic ItemInstancePayload field is excluded by construction;
-    // the owner still sees their own payload in full via the self `inv` mirror.
+    // rolled, and a Riftbound band's rift record: its rank, upgrades, and
+    // gems, which the band tooltip's item level and rank lines read) leave the
+    // server; boundTo, charges, and the bindOnTrade arm are gameplay state no
+    // inspecting client needs and never ride this key. The pub allowlist below
+    // (signer/enchant/rolled/rift ONLY) is what enforces this, so a new
+    // non-cosmetic ItemInstancePayload field is excluded by construction; the
+    // owner still sees their own payload in full via the self `inv` mirror.
     let eqi: Record<string, unknown> | undefined;
     for (const [slot, inst] of Object.entries(e.equippedInstances)) {
       if (!inst) continue;
@@ -1414,6 +1416,7 @@ function identityFields(e: Entity): Record<string, unknown> {
       if (inst.signer !== undefined) pub.signer = inst.signer;
       if (inst.enchant !== undefined) pub.enchant = inst.enchant;
       if (inst.rolled !== undefined) pub.rolled = inst.rolled;
+      if (inst.rift !== undefined) pub.rift = inst.rift;
       for (const _ in pub) {
         if (eqi === undefined) eqi = {};
         eqi[slot] = pub;
@@ -6625,15 +6628,13 @@ export class GameServer {
       this.sendCommandOutcome(session, msg, false);
       return;
     }
-    // The Rift forge trio shipped sim+wire complete with no client UI, so the
-    // arms stay closed until the realm explicitly opts in (RIFT_FORGE_ENABLED=1;
-    // rationale in server/rift_forge_gate.ts): a crafted frame must not buy
-    // progression the stock client cannot reach. Refused ABOVE the heavy-self
-    // dirty flag below, so a blocked command cannot force a re-diff either.
+    // The Rift forge pair is open by default now that the forge window ships;
+    // RIFT_FORGE_ENABLED=0 is the ops kill switch (server/rift_forge_gate.ts).
+    // Refused ABOVE the heavy-self dirty flag below, so a closed command
+    // cannot force a re-diff either.
     if (refusedRiftForgeCommand(msg.cmd)) {
-      // Label-free by contract (game_signals.ts): the stock client never sends
-      // these, so the counter is the ops signal that a modified client probes
-      // the closed forge (and that a realm forgot the flag once the UI ships).
+      // Label-free by contract (game_signals.ts): the counter is the ops
+      // signal that forge attempts keep arriving at a realm that closed it.
       gameMetricsCounters().riftForgeRefused();
       this.sendCommandOutcome(session, msg, false);
       return;
@@ -7033,32 +7034,21 @@ export class GameServer {
       case 'deliver_commission_order':
         if (typeof msg.order === 'number') sim.deliverCommissionOrder(msg.order, pid);
         break;
-      case 'rift_upgrade_item':
-        if (typeof msg.item === 'string') {
-          const slot = Number.isInteger(msg.slot) ? Number(msg.slot) : undefined;
-          sim.upgradeRiftItem(msg.item, pid, slot);
-        }
-        break;
       case 'rift_enchant_item':
-        if (typeof msg.item === 'string' && typeof msg.stat === 'string') {
-          sim.enchantRiftItem(
-            msg.item,
-            msg.stat,
-            pid,
-            Number.isInteger(msg.slot) ? Number(msg.slot) : undefined,
-          );
-        }
+        // Retired tombstone: the forge enchant went away with the Riftbound
+        // band item-level ladder (rift/band_ladder.ts), but wire tokens are
+        // append-only (COMMAND_NAMES), so the arm stays and does nothing.
+        // Never routed to the forge dispatch: a crafted frame gets the same
+        // silence as any other no-op.
         break;
-      case 'rift_socket_gem':
-        if (typeof msg.item === 'string' && typeof msg.gem === 'string') {
-          sim.socketRiftGem(
-            msg.item,
-            msg.gem,
-            pid,
-            Number.isInteger(msg.slot) ? Number(msg.slot) : undefined,
-          );
-        }
+      case 'rift_upgrade_item':
+      case 'rift_socket_gem': {
+        // The forge pair answers the commandOutcome ack with the sim verdict
+        // (server/rift_forge_dispatch.ts): the forge window awaits it.
+        const forged = dispatchRiftCommand(sim, msg, pid);
+        if (forged) this.sendCommandOutcome(session, msg, forged.ok);
         break;
+      }
       case 'place_mobile_station':
         if (typeof msg.craft === 'string') sim.placeMobileStation(msg.craft, pid);
         break;

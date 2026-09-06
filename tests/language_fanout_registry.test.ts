@@ -170,6 +170,7 @@ const FANOUT_ARMS: readonly string[] = [
   // moves both without any state changing.
   'this.realmBuilderPopup.relocalize|',
   'this.guildBoardWindow.relocalize|',
+  'this.riftForgeWindow.relocalize|',
   'this.mobileActionRingPainter.relocalize|',
   'this.mountRaceStrip.relocalize|',
   'this.mountRaceControls.relocalize|',

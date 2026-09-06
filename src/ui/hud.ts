@@ -88,7 +88,7 @@ import {
 } from '../sim/data';
 import { specialRoleColor } from '../sim/discord_roles';
 import { canEquipItem, isUniqueEquipped, weaponHand } from '../sim/equipment_rules';
-import { isItemLevelEligible, itemLevel, itemScore } from '../sim/item_level';
+import { isItemLevelEligible } from '../sim/item_level';
 import { requiredLevelFor } from '../sim/item_level_req';
 import type { Ante, PickAction } from '../sim/lockpick';
 import { petCanForceTaunt } from '../sim/pet/pet_taunt_gate';
@@ -505,6 +505,7 @@ import { QuestTrackerController } from './hud/quest/quest_tracker_controller';
 import { QuestLogWindow } from './hud/quest/questlog_window';
 import { RiftMapPainter } from './hud/rift';
 import { RiftFloorTrackerController } from './hud/rift/rift_floor_tracker_controller';
+import { RiftForgeWindow, riftForgeInReach } from './hud/rift_forge';
 import { StanceBarController } from './hud/stance';
 import { closeOpenTouchMenu } from './hud/tap_menu';
 import { createTargetDotsView, type TargetDotsInput, TargetDotsPainter } from './hud/target_dots';
@@ -553,10 +554,14 @@ import {
 } from './interface_unlock_menu_core';
 import { InterfaceUnlockPreview } from './interface_unlock_preview';
 import { InteriorMapController } from './interior_map_controller';
-import { compareStatLabelKey, itemAffixTooltipLines } from './item_affix_tooltip';
+import {
+  compareStatLabelKey,
+  itemAffixTooltipLines,
+  itemRatingTooltipLines,
+} from './item_affix_tooltip';
 import { itemArmorTypeLabelKey } from './item_armor_type';
 import { requiredClassesForTooltip } from './item_class_restriction';
-import { itemStatDeltas } from './item_compare';
+import { itemStatDeltas, shouldCompareCopies } from './item_compare';
 import { ItemDragState } from './item_drag_state';
 import {
   instanceBadgeLines,
@@ -567,6 +572,7 @@ import {
   instancePartyTradeLine,
   itemNumber,
   itemStatName,
+  wornTooltipInstance,
 } from './item_instance_tooltip';
 import { itemKindLabel, itemQualityLabel } from './item_kind_label';
 import { itemNameColor } from './item_name_color';
@@ -743,6 +749,7 @@ import {
   MOTD_RESULT_FALLBACK_KEY,
   MOTD_RESULT_KEYS,
 } from './result_code_keys';
+import { itemLevelReadout, riftBandTooltipLines, riftGemTooltipLines } from './rift_band_tooltip';
 import { isTalentRowUnlockLevel } from './row_unlock_toast';
 import { localizeServerText } from './server_i18n';
 import {
@@ -770,12 +777,7 @@ import {
   type StatTooltipModel,
   weaponDps,
 } from './stat_tooltip';
-import {
-  type StatTooltipI18n,
-  statCellHtml,
-  statNameKey,
-  statTooltipHtml,
-} from './stat_tooltip_view';
+import { type StatTooltipI18n, statCellHtml, statTooltipHtml } from './stat_tooltip_view';
 import { clearOpenStoreResult } from './store_decision_prompt';
 import { mountStorePromoCard, type StorePromoCardController } from './store_promo_card';
 import { recordStoreStackSample } from './store_stack_diag';
@@ -3657,6 +3659,9 @@ export class Hud {
       case 'guild-board-window':
         this.guildBoardWindow.close();
         break;
+      case 'rift-forge-window':
+        this.riftForgeWindow.close();
+        break;
       case 'daily-rewards-window':
         this.dailyRewardsWindow.close();
         break;
@@ -5616,6 +5621,17 @@ export class Hud {
     onVisibilityChange: () => this.syncAnyWindowOpenState(),
     maskPlayerText: (text) => this.maskChat(text),
   });
+  // The Rift Forge (src/ui/hud/rift_forge/): opened by the Riftwright's
+  // interaction event, never a menu button; the forge lives in the world.
+  private readonly riftForgeWindow = new RiftForgeWindow({
+    root: () => $('#rift-forge-window'),
+    world: () => this.sim,
+    closeOthers: () => this.closeOtherWindows('#rift-forge-window'),
+    ...this.windowFocus('#rift-forge-window'),
+    onVisibilityChange: () => this.syncAnyWindowOpenState(),
+    itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
+    attachTooltip: (el, html) => this.attachTooltip(el, html),
+  });
   // The $WOC Exchange is online-only, browser web + website desktop. Its
   // launcher stays hidden until main.ts attaches hooks; a denied non-native
   // desktop shell can instead reveal the SAME launcher wired to a browser
@@ -6430,14 +6446,14 @@ export class Hud {
     // hover. Combat gear only: sourceless items (vendor/starter) have no level,
     // and non-combat items never get an item-level line.
     if (isItemLevelEligible(item) && this.optionsHooks?.settings.get('showItemLevel')) {
-      const level = itemLevel(item);
-      if (level !== undefined) {
+      const readout = itemLevelReadout(item, instance);
+      if (readout !== undefined) {
         html += `<div class="tt-stat" style="color:var(--gold)">${esc(
-          t('hudChrome.options.itemLevelLine', { level: itemNumber(level) }),
+          t('hudChrome.options.itemLevelLine', { level: itemNumber(readout.level) }),
         )}</div>`;
         html += `<div class="tt-sub">${esc(
           t('hudChrome.options.itemScoreLine', {
-            score: itemNumber(itemScore(item), 1),
+            score: itemNumber(readout.score, 1),
           }),
         )}</div>`;
       }
@@ -6493,46 +6509,10 @@ export class Hud {
       }
     }
     html += instanceBonusStatLines(instance);
-    if (instance?.rift) {
-      html += `<div class="tt-sub">${esc(
-        t('hudChrome.itemTooltip.riftTier', { tier: instance.rift.tier }),
-      )}</div>`;
-      html += `<div class="tt-sub">${esc(
-        t('hudChrome.itemTooltip.riftUpgrade', {
-          level: itemNumber(instance.rift.upgradeLevel),
-          max: itemNumber(instance.rift.maxUpgradeLevel),
-        }),
-      )}</div>`;
-      html += `<div class="tt-sub">${esc(
-        t('hudChrome.itemTooltip.riftSockets', {
-          used: itemNumber(instance.rift.gems.length),
-          total: itemNumber(instance.rift.gemSlots),
-        }),
-      )}</div>`;
-    }
+    html += riftBandTooltipLines(instance);
     html += itemAffixTooltipLines(item);
-    const warfareRating = Math.min(item.pvpOffenseRating ?? 0, item.pvpDefenseRating ?? 0);
-    if (warfareRating > 0) {
-      html += `<div class="tt-green">${esc(
-        t('itemUi.tooltip.stat', {
-          value: itemNumber(warfareRating),
-          stat: t(statNameKey('warfare') as TranslationKey),
-        }),
-      )}</div>`;
-    }
-    // Combat ratings (hit / crit / haste): shown as classic "+N Rating" affix lines,
-    // sharing the character-sheet HUD-chrome labels. Hit answers the higher-level
-    // miss/resist penalty; crit and haste add throughput.
-    for (const ratingStat of ['hitRating', 'critRating', 'hasteRating'] as const) {
-      const value = item[ratingStat] ?? 0;
-      if (value <= 0) continue;
-      html += `<div class="tt-green">${esc(
-        t('itemUi.tooltip.stat', {
-          value: itemNumber(value),
-          stat: t(statNameKey(ratingStat) as TranslationKey),
-        }),
-      )}</div>`;
-    }
+    html += riftGemTooltipLines(item);
+    html += itemRatingTooltipLines(item);
     if (item.foodHp)
       html += `<div class="tt-desc">${esc(t('itemUi.tooltip.useFood', { amount: itemNumber(item.foodHp), seconds: itemNumber(CONSUME_DURATION) }))}</div>`;
     if (item.drinkMana)
@@ -6629,7 +6609,7 @@ export class Hud {
     // player actively tries to sell back.
     if (item.sellValue > 0 && !item.noVendorSell && !item.soulbound)
       html += `<div class="tt-sub">${esc(t('itemUi.tooltip.sellPrice', { money: formatLocalizedMoney(item.sellValue) }))}</div>`;
-    if (compare) html += this.itemCompareBlock(item);
+    if (compare) html += this.itemCompareBlock(item, instance);
     return html;
   }
 
@@ -6730,20 +6710,26 @@ export class Hud {
   // item currently worn in that slot plus the stat change you'd see if you
   // swapped to it (green = gain, red = loss). Reads IWorld.equipment, so it
   // works identically offline and online.
-  private itemCompareBlock(item: ItemDef): string {
+  private itemCompareBlock(item: ItemDef, instance?: ItemInstancePayload): string {
     if (!item.slot) return '';
     // A hovered ring compares against BOTH worn rings (classic behavior); every
     // other slot kind is its own single equipment key.
     const slots: readonly EquipSlot[] = item.slot === 'ring' ? ['ring1', 'ring2'] : [item.slot];
-    return slots.map((slot) => this.itemCompareBlockForSlot(item, slot)).join('');
+    return slots.map((slot) => this.itemCompareBlockForSlot(item, slot, instance)).join('');
   }
 
-  private itemCompareBlockForSlot(item: ItemDef, slot: EquipSlot): string {
+  private itemCompareBlockForSlot(
+    item: ItemDef,
+    slot: EquipSlot,
+    instance?: ItemInstancePayload,
+  ): string {
     const equippedId = this.sim.equipment[slot];
-    if (!equippedId || equippedId === item.id) return '';
+    const worn = wornTooltipInstance(this.sim.equipmentInstances[slot]);
+    // Same-id hovers compare per copy, never a copy against itself (item_compare.ts).
+    if (!equippedId || !shouldCompareCopies(item.id, equippedId, instance, worn)) return '';
     const equipped = ITEMS[equippedId];
     if (!equipped) return '';
-    const deltas = itemStatDeltas(item, equipped)
+    const deltas = itemStatDeltas(item, equipped, instance, worn)
       .map((d) => {
         const cls = d.delta > 0 ? 'tt-green' : 'tt-red';
         const sign = d.delta > 0 ? '+' : '−'; // proper minus sign
@@ -6757,7 +6743,7 @@ export class Hud {
       })
       .join('');
     let html = `<div class="tt-cmp"><div class="tt-cmp-head">${esc(t('itemUi.tooltip.currentlyEquipped'))}</div>`;
-    html += `<div class="tt-cmp-body">${this.itemTooltip(equipped, false)}</div>`;
+    html += `<div class="tt-cmp-body">${this.itemTooltip(equipped, false, worn)}</div>`;
     if (deltas)
       html += `<div class="tt-cmp-head">${esc(t('itemUi.tooltip.ifYouEquip'))}</div>${deltas}`;
     html += `</div>`;
@@ -6999,6 +6985,7 @@ export class Hud {
     this.noticeboardPopup.relocalize();
     this.realmBuilderPopup.relocalize();
     this.guildBoardWindow.relocalize();
+    this.riftForgeWindow.relocalize();
     // The ring latches its page indicator on the page/count pair; dropping the
     // latch relabels it on the next paint (mobile layouts only build the ring).
     this.mobileActionRingPainter?.relocalize();
@@ -9731,6 +9718,13 @@ export class Hud {
     if (slowHud && this.marketWindow.isOpen) {
       if (!this.nearbyMarketNpc()) this.marketWindow.close();
       else this.marketWindow.refreshIfChanged();
+    }
+    // The forge window follows the player out of the Riftwright's reach (the
+    // market rule); the sim's own place gate refuses the commands regardless.
+    if (slowHud && this.riftForgeWindow.isOpen) {
+      const p = this.sim.player;
+      if (!riftForgeInReach(p, this.sim.entities.values(), NPC_WINDOW_CLOSE_RANGE))
+        this.riftForgeWindow.close();
     }
     // The mailbox closes itself when the mail mirror goes null (walked away).
     if (slowHud && this.mailboxWindow.isOpen) this.mailboxWindow.refreshIfChanged();
@@ -12554,6 +12548,12 @@ export class Hud {
           // Keyboard/sim interact at a banker NPC: open the bank window.
           this.openBank();
           break;
+        case 'riftForge':
+          // Interact at the Riftwright: open the Rift Forge window (which
+          // quotes her greeting) and speak the greeting cue.
+          voice.play('greeting__riftwright_maelis');
+          this.openRiftForge();
+          break;
         case 'noticeboard':
           // The structured private event keeps this feedback localized and
           // identical offline and online. A board carrying authored listings
@@ -13618,8 +13618,10 @@ export class Hud {
           }
           break;
         case 'riftRaceWorld':
+          break; // its localized log line carries the non-modal detail
         case 'riftForgeResult':
-          break; // their localized log line carries the non-modal detail
+          this.riftForgeWindow.onResult(ev); // the window owns the reason line
+          break;
         case 'companionBark': {
           // Acolyte Tessa's voice line: overhead bubble over her (when on-screen),
           // plus an attributed combat-log line so it is never missed off-screen.
@@ -16548,6 +16550,7 @@ export class Hud {
       this.renderTrain();
     if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
       this.renderUnbind();
+    if (this.riftForgeWindow.isOpen) this.riftForgeWindow.render();
   }
 
   onCosmeticsChanged(): void {
@@ -17404,6 +17407,11 @@ export class Hud {
    *  (and the E2E capture rigs); there is no menu launcher on purpose. */
   openGuildBoard(): void {
     this.guildBoardWindow.open();
+  }
+
+  /** The Rift Forge: opened by the Riftwright interaction (and the capture rigs). */
+  openRiftForge(): void {
+    this.riftForgeWindow.open();
   }
 
   toggleDailyRewards(): void {
