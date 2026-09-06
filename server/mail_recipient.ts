@@ -10,12 +10,8 @@
 // Block semantics stay exactly as before: a recipient who has blocked the
 // sender resolves to "no such recipient", revealing nothing more.
 import type { MailRecipient } from '../src/sim/mail/account_bound';
+import { type AccountLookupPool, characterAccountId } from './mail_recipient_db';
 import type { CharRef } from './social';
-
-/** The slice of a pg Pool this module needs (a Vitest fakes it). */
-export interface AccountLookupPool {
-  query(text: string, params: unknown[]): Promise<{ rows: { account_id: number }[] }>;
-}
 
 /** The sender's identity the resolution compares against. */
 export interface MailSender {
@@ -46,15 +42,14 @@ export function mailRecipientFor(
 
 /** Whether the character row belongs to `accountId`. A missing row (deleted
  *  between the name lookup and this read) answers false: never same-account
- *  by accident. Parameterized, realm-agnostic (character ids are global). */
+ *  by accident. The read lives in mail_recipient_db.ts (SQL stays in *_db). */
 export async function characterSharesAccount(
   pool: AccountLookupPool,
   characterId: number,
   accountId: number,
 ): Promise<boolean> {
-  const res = await pool.query('SELECT account_id FROM characters WHERE id = $1', [characterId]);
-  const row = res.rows[0];
-  return row !== undefined && Number(row.account_id) === accountId;
+  const owner = await characterAccountId(pool, characterId);
+  return owner !== null && owner === accountId;
 }
 
 /** The offline arm: resolve a typed name against the character directory,

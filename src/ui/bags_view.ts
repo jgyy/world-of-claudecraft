@@ -38,7 +38,8 @@ export interface BagItemInfo {
   use?: unknown;
   /** Protected from destruction (the sim's discardItem also no-ops these). */
   noDiscard?: boolean;
-  /** Bound to its owner: cannot be traded, mailed, listed, or sold. */
+  /** Account bound: cannot be traded, listed, or sold; mails only to the
+   *  owner's own characters (src/sim/mail/account_bound.ts). */
   soulbound?: boolean;
   /** The catalog mount a kind:'mount' reins item owns (see MountItemDef). */
   mount?: string;
