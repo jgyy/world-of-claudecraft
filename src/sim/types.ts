@@ -5426,6 +5426,12 @@ export type CalendarResultCode =
 // `set` is the success, the rest refusals).
 export type MotdResultCode = 'set' | 'notInGuild' | 'notOfficer';
 
+// Guild roster expansion refusals (mirrors server/social.ts
+// GuildRosterResultCode; every code is a refusal, the success is the
+// guild-wide guildRosterExpanded event). Redeclared here because src/sim
+// never imports server/; tests/social_system.test.ts pins the two in lockstep.
+export type GuildRosterResultCode = 'notInGuild' | 'notLeader' | 'maxed' | 'cannotAfford' | 'retry';
+
 // An in-flight party/raid ready check (social/ready_check.ts). Keyed on Sim by party
 // id. Each member is 'pending' until they answer; anyone still 'pending' when the
 // timeout fires is counted as "no response" (there is no separate afk state).
@@ -5856,6 +5862,13 @@ export type SimEvent = { pid?: number } & (
   // sim never edits the billboard); declared here, like calendarResult, so the
   // one client event switch stays exhaustively typed.
   | { type: 'motdResult'; code: MotdResultCode }
+  // Guild roster expansion refusal (a code, never English; `price` in copper
+  // rides only the cannotAfford arm) and the guild-wide success line: the
+  // buyer's name and the new seat cap. Both emitted only by the server's
+  // SocialService (the sim never seats guild members); declared here, like
+  // calendarResult, so the one client event switch stays exhaustively typed.
+  | { type: 'guildRosterResult'; code: GuildRosterResultCode; price?: number }
+  | { type: 'guildRosterExpanded'; byName: string; cap: number }
   // A guildmate's or followed friend's marquee deed unlock. Emitted only by
   // the server's SocialService (the sim never sees other players' social
   // graphs); declared here, like calendarResult, so the one client event

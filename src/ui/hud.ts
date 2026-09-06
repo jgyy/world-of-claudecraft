@@ -104,7 +104,6 @@ import { questObjectivesForMob } from '../sim/quest_targets';
 import type { ResolvedAbility } from '../sim/sim';
 import {
   type AuraKind,
-  type CalendarResultCode,
   CONSUME_DURATION,
   CRAFT_CAST_ID,
   canPrestige,
@@ -115,15 +114,12 @@ import {
   type EquipSlot,
   FISHING_CAST_ID,
   GATHER_CAST_ID,
-  type HonorReason,
   type InvSlot,
   type ItemDef,
   type ItemInstancePayload,
   isMechWearer,
   isPetClass,
   MAX_LEVEL,
-  type MailResultCode,
-  type MotdResultCode,
   type PetMode,
   type PlayerClass,
   type ResourceType,
@@ -745,6 +741,18 @@ import {
 } from './reliquary_view';
 import { curatorRankNameKey, ReliquaryWindow } from './reliquary_window';
 import { restView } from './rest_indicator';
+import {
+  CALENDAR_RESULT_FALLBACK_KEY,
+  CALENDAR_RESULT_KEYS,
+  GUILD_ROSTER_RESULT_FALLBACK_KEY,
+  GUILD_ROSTER_RESULT_KEYS,
+  HONOR_REASON_FALLBACK_KEY,
+  HONOR_REASON_KEYS,
+  MAIL_RESULT_ERROR_KEYS,
+  MAIL_RESULT_FALLBACK_KEY,
+  MOTD_RESULT_FALLBACK_KEY,
+  MOTD_RESULT_KEYS,
+} from './result_code_keys';
 import { itemLevelReadout, riftBandTooltipLines, riftGemTooltipLines } from './rift_band_tooltip';
 import { isTalentRowUnlockLevel } from './row_unlock_toast';
 import { localizeServerText } from './server_i18n';
@@ -1070,53 +1078,8 @@ const castDisplayName = (id: string): string => {
   return ability ? abilityDisplayName(ability) : id;
 };
 
-// Ravenpost mailResult refusal codes to their toast lines. `sent`/`collected`
-// are successes rendered as chat-log lines in handleEvents, but they map here
-// too; codes outside THIS bundle's union take the fallback below.
-const MAIL_RESULT_ERROR_KEYS: Record<MailResultCode, TranslationKey> = {
-  sent: 'hudChrome.mailbox.result.sent',
-  collected: 'hudChrome.mailbox.result.collected',
-  tooFar: 'hudChrome.mailbox.result.tooFar',
-  needRecipient: 'hudChrome.mailbox.result.needRecipient',
-  noRecipient: 'hudChrome.mailbox.result.noRecipient',
-  tooManyParcels: 'hudChrome.mailbox.result.tooManyParcels',
-  noMailQuestItems: 'hudChrome.mailbox.result.noMailQuestItems',
-  noMailBound: 'hudChrome.mailbox.result.noMailBound',
-  noMailSoulbound: 'hudChrome.itemSoulbound',
-  notEnoughItems: 'hudChrome.mailbox.result.notEnoughItems',
-  cantAffordPostage: 'hudChrome.mailbox.result.cantAffordPostage',
-  recipientBoxFull: 'hudChrome.mailbox.result.recipientBoxFull',
-  letterGone: 'hudChrome.mailbox.result.letterGone',
-  takeParcelsFirst: 'hudChrome.mailbox.result.takeParcelsFirst',
-};
-// Guild calendar outcome lines (created/removed are chat-log successes).
-const CALENDAR_RESULT_KEYS: Record<CalendarResultCode, TranslationKey> = {
-  created: 'hudChrome.calendar.result.created',
-  removed: 'hudChrome.calendar.result.removed',
-  notInGuild: 'hudChrome.calendar.result.notInGuild',
-  notOfficer: 'hudChrome.calendar.result.notOfficer',
-  badInput: 'hudChrome.calendar.result.badInput',
-  calendarFull: 'hudChrome.calendar.result.calendarFull',
-  eventGone: 'hudChrome.calendar.result.eventGone',
-};
-// Guild billboard outcome lines (`set` is the chat-log success).
-const MOTD_RESULT_KEYS: Record<MotdResultCode, TranslationKey> = {
-  set: 'hudChrome.social.billboard.result.set',
-  notInGuild: 'hudChrome.calendar.result.notInGuild',
-  notOfficer: 'hudChrome.social.billboard.result.notOfficer',
-};
-const HONOR_REASON_KEYS: Record<HonorReason, TranslationKey> = {
-  arena_win: 'hudChrome.warfare.reasons.arenaWin',
-  arena_complete: 'hudChrome.warfare.reasons.arenaComplete',
-  fiesta_kill: 'hudChrome.warfare.reasons.fiestaKill',
-  fiesta_complete: 'hudChrome.warfare.reasons.fiestaComplete',
-  fiesta_win: 'hudChrome.warfare.reasons.fiestaWin',
-  battleground_win: 'hudChrome.warfare.reasons.battlegroundWin',
-  battleground_first_win: 'hudChrome.warfare.reasons.battlegroundFirstWin',
-  battleground_complete: 'hudChrome.warfare.reasons.battlegroundComplete',
-  battleground_kill: 'hudChrome.warfare.reasons.battlegroundKill',
-  battleground_assist: 'hudChrome.warfare.reasons.battlegroundAssist',
-};
+// The wire-union result-code key maps (mail, calendar, billboard, roster
+// expansion, honor) and their fallbacks live in result_code_keys.ts.
 // The combat-log color for each Thornhollow Fields finish-line tone. WHICH lines
 // exist and what they say is the pure core's decision
 // (hud/battleground/bg_end_banner_view.ts); only the color stays here, because
@@ -1131,14 +1094,6 @@ const BG_END_LOG_COLORS: Record<BgEndLogTone, string> = {
 /** The remaining-time call's own log colour, the same gold the capture line
  *  uses: it is a match-critical call, not a result. */
 const BG_TIME_WARNING_LOG_COLOR = '#ffd24a';
-// The wire-union fallbacks (R34's enum axis): every code above is a SERVER
-// value a newer deploy can widen, and t() throws on an undefined key, so an
-// off-vocabulary code degrades to the family's most generic line instead of
-// killing the event batch (the RAID_MARKER_LABEL_KEYS idiom below).
-const MAIL_RESULT_FALLBACK_KEY: TranslationKey = 'hudChrome.mailbox.result.letterGone';
-const CALENDAR_RESULT_FALLBACK_KEY: TranslationKey = 'hudChrome.calendar.result.badInput';
-const MOTD_RESULT_FALLBACK_KEY: TranslationKey = 'hudChrome.social.billboard.result.notOfficer';
-const HONOR_REASON_FALLBACK_KEY: TranslationKey = 'hudChrome.warfare.reasons.arenaWin';
 const RAID_MARKER_LABEL_KEYS = [
   'hud.markers.names.star',
   'hud.markers.names.circle',
@@ -12681,6 +12636,24 @@ export class Hud {
           }
           break;
         }
+        case 'guildRosterResult': {
+          // Every code is a refusal (the success is the guild-wide line below);
+          // {price} is only read by the cannotAfford line.
+          const values = { price: formatLocalizedMoney(ev.price ?? 0) };
+          this.showError(
+            t(GUILD_ROSTER_RESULT_KEYS[ev.code] ?? GUILD_ROSTER_RESULT_FALLBACK_KEY, values),
+          );
+          break;
+        }
+        case 'guildRosterExpanded':
+          this.log(
+            t('hudChrome.social.roster.expandedLine', {
+              name: ev.byName,
+              cap: formatNumber(ev.cap, { maximumFractionDigits: 0 }),
+            }),
+            '#40ff7f',
+          );
+          break;
         case 'deedBroadcast': {
           // A guildmate's or followed friend's marquee unlock. Id-based on
           // the wire (server sends the deed id, never English); the visible

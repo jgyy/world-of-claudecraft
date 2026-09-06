@@ -283,14 +283,17 @@ const MONOLITHS: MonolithRow[] = [
     // relocalize() call, and the three-line event arm (the card itself is
     // src/ui/realm_builder_popup.ts). Re-measured on the merged tree: 18879
     // plus those six (18885). Exact merged count, zero slack; maintainer-review item.
-    // Lowered 18885 -> 18878 by the Riftbound band item-level ladder: the
+    // Lowered 18885 -> 18858 by the guild roster expansion (PR #3874), which
+    // extracted 27 lines from this file into the roster page modules. Exact
+    // merged count, zero slack; maintainer-review item.
+    // Lowered 18858 -> 18851 by the Riftbound band item-level ladder: the
     // rift tooltip lines moved into src/ui/rift_band_tooltip.ts (with the
     // per-copy item-level readout), the compare block only threaded the
     // hovered and worn instances through. Exact merged count, zero slack.
     // Re-pinned to the exact merged count (the Rift Forge window wiring on top of the ladder: the repaint-family line and the walk-away close, over the base retune).
-    // Re-measured at the release/v0.42.0 sync that brought in the Target dots frame (PR #3853): 18878 for the ladder plus this branch's fifteen forge lines = 18893.
     // Exact merged count, zero slack.
-    ceiling: 18893,
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 18851 plus this branch's +15.
+    ceiling: 18866,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -606,11 +609,21 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Lowered 10641 -> 10640 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
+    // chatChannelHint and chatSenderFlair moved to their own server/ modules
+    // (the roster-expansion dispatch and transport spread landed in their
+    // place): the ratchet lowers with them.
+    // Lowered 10635 -> 10614 by the guild roster purchase rework: the
+    // post-COMMIT save acknowledgement moved to
+    // server/character_save_acknowledge.ts (shared by the market custody
+    // path and the roster coordinator), which more than paid for the
+    // coordinator's wiring and the quarantine hook's audit surface. Exact
+    // count, zero slack.
+    // Lowered 10614 -> 10613 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
     // Exact count, zero slack.
     // Re-pinned to the exact merged count (the forge dispatch extraction plus the retired enchant tombstone arm).
     // Exact merged count, zero slack.
-    ceiling: 10631,
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 10613 plus this branch's -9.
+    ceiling: 10604,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -672,11 +685,14 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Lowered 5908 -> 5904 by the Riftbound band item-level ladder (the retired forge enchant sender).
+    // wrapAngle and copyPos moved to src/net/interp_math.ts: the ratchet
+    // lowers with them.
+    // Lowered 5896 -> 5892 by the Riftbound band item-level ladder (the retired forge enchant sender).
     // Exact count, zero slack.
     // Re-pinned to the exact merged count (the forge pair senders awaiting their ack, over the retired enchant sender).
     // Exact merged count, zero slack.
-    ceiling: 5910,
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 5892 plus this branch's +6.
+    ceiling: 5898,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
