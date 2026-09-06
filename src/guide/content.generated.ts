@@ -2177,8 +2177,7 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "Trollmoot",
       "The Last Keep",
       "Bloodglass Fields",
-      "Drakemaw Caldera",
-      "Wyrmgate Waystone"
+      "Drakemaw Caldera"
     ],
     "welcome": "Hot wind rolls off the wastes ahead. Dragons wheel over the Drakemaw, and troll fires burn in the dunes.",
     "families": [

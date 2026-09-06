@@ -1,6 +1,6 @@
 // The Wyrmgate Waystone (src/sim/content/drakelands.ts DRAKELANDS_PORTALS):
 // a tolled walk-in portal between the Highwatch green (Thornpeak Heights) and
-// Wyrmwatch's southeast yard (the Drakelands). src/sim/portals.ts runs the
+// the Last Keep's bailey (the Drakelands). src/sim/portals.ts runs the
 // trigger; src/sim/portal_toll.ts settles the coin: a traveler with the toll
 // is charged and moved, one without is refused ONCE per approach (the
 // Entity.portalHoldId latch) and never moved. Both sides stand in open ground,
@@ -12,10 +12,12 @@ import { DRAKELANDS_PORTALS, WYRMGATE_WAYSTONE_TOLL_COPPER } from '../src/sim/co
 import { REALM_PORTALS } from '../src/sim/content/realm';
 import { PORTALS, ZONES, zoneAt } from '../src/sim/data';
 import { POI_VISIT_RADIUS } from '../src/sim/deeds';
-import { settlePortalToll } from '../src/sim/portal_toll';
+import { PORTAL_TOLL_COMBAT_REFUSAL, settlePortalToll } from '../src/sim/portal_toll';
 import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 import { groundHeight, waterLevel } from '../src/sim/world';
+import { ensureLocaleLoaded, setLanguage } from '../src/ui/i18n';
+import { localizeSimText } from '../src/ui/sim_i18n';
 
 const PORTAL = DRAKELANDS_PORTALS[0];
 
@@ -63,11 +65,46 @@ describe('the Wyrmgate Waystone record', () => {
     }
   });
 
-  it('each side is a named place on its zone map', () => {
-    const poiOf = (zoneId: string) =>
-      ZONES.find((z) => z.id === zoneId)!.pois.find((p) => p.id === 'wyrmgate_waystone');
-    expect(poiOf('thornpeak_heights')).toMatchObject({ x: PORTAL.a.x, z: PORTAL.a.z });
-    expect(poiOf('drakelands')).toMatchObject({ x: PORTAL.b.x, z: PORTAL.b.z });
+  it('the Highwatch side is a named place; the keep side is found by the Last Keep mark', () => {
+    const poiOf = (zoneId: string, id: string) =>
+      ZONES.find((z) => z.id === zoneId)!.pois.find((p) => p.id === id);
+    expect(poiOf('thornpeak_heights', 'wyrmgate_waystone')).toMatchObject({
+      x: PORTAL.a.x,
+      z: PORTAL.a.z,
+    });
+    expect(poiOf('drakelands', 'wyrmgate_waystone')).toBeUndefined();
+    const keep = poiOf('drakelands', 'the_last_keep')!;
+    expect(Math.hypot(PORTAL.b.x - keep.x, PORTAL.b.z - keep.z)).toBeLessThan(30);
+  });
+
+  it('the keep side stands inside the curtain walls, on the gatehouse road axis', () => {
+    // Bailey inner faces (src/sim/castle_layout.ts CASTLE walls): x 361.5..435.3,
+    // z 1989.5..2070.3; the main gate opening spans z 2028.2..2031.6.
+    for (const pt of [PORTAL.b, PORTAL.b.landing]) {
+      expect(pt.x).toBeGreaterThan(361.5 + 4);
+      expect(pt.x).toBeLessThan(435.3 - 4);
+      expect(pt.z).toBeGreaterThan(1989.5 + 4);
+      expect(pt.z).toBeLessThan(2070.3 - 4);
+    }
+    expect(PORTAL.b.z).toBeGreaterThan(2028.2);
+    expect(PORTAL.b.z).toBeLessThan(2031.6);
+  });
+
+  it('every line the record emits resolves in the sim message matcher', async () => {
+    await ensureLocaleLoaded('es_ES');
+    setLanguage('es_ES');
+    try {
+      for (const portal of PORTALS) {
+        for (const text of [portal.enterText, portal.leaveText, portal.tollText]) {
+          if (text === undefined) continue;
+          const localized = localizeSimText(text);
+          expect(localized, `${portal.id}: ${text}`).not.toBeNull();
+          expect(localized, `${portal.id}: ${text}`).not.toBe(text);
+        }
+      }
+    } finally {
+      setLanguage('en');
+    }
   });
 
   it('adds no cave-mouth flank colliders (the arch stands in the open)', () => {
@@ -82,14 +119,11 @@ describe('the Wyrmgate Waystone record', () => {
     expect(near(cave.b).length).toBeGreaterThan(0);
   });
 
-  it('stands each side at least two visit radii from its hub (the wayfarer deed sweep)', () => {
-    for (const [zoneId, side] of [
-      ['thornpeak_heights', PORTAL.a],
-      ['drakelands', PORTAL.b],
-    ] as const) {
-      const hub = ZONES.find((z) => z.id === zoneId)!.hub;
-      expect(Math.hypot(side.x - hub.x, side.z - hub.z)).toBeGreaterThan(2 * POI_VISIT_RADIUS);
-    }
+  it('stands the marked Highwatch side at least two visit radii from its hub (the wayfarer deed sweep)', () => {
+    const hub = ZONES.find((z) => z.id === 'thornpeak_heights')!.hub;
+    expect(Math.hypot(PORTAL.a.x - hub.x, PORTAL.a.z - hub.z)).toBeGreaterThan(
+      2 * POI_VISIT_RADIUS,
+    );
   });
 });
 
@@ -110,6 +144,42 @@ describe('crossing the Wyrmgate Waystone', () => {
     expect(meta.copper).toBe(250);
     expect(logTexts(events)).toContain(PORTAL.enterText);
     expect(errorTexts(events)).toEqual([]);
+    // The text-free booking marker the server turns into a 'travel' copper flow.
+    expect(events).toContainEqual({
+      type: 'portalToll',
+      pid: a,
+      copper: WYRMGATE_WAYSTONE_TOLL_COPPER,
+    });
+  });
+
+  it('refuses a traveler in combat, once, and never takes their coin', () => {
+    const sim = makeWorld();
+    const a = sim.addPlayer('warrior', 'Aleph');
+    sim.tick();
+    const meta = sim.players.get(a)!;
+    meta.copper = WYRMGATE_WAYSTONE_TOLL_COPPER * 2;
+    const p = sim.entities.get(a)!;
+    place(sim, a, PORTAL.a.x, PORTAL.a.z);
+    p.inCombat = true;
+    p.combatTimer = 99;
+    const first = sim.tick();
+    expect(errorTexts(first)).toEqual([PORTAL_TOLL_COMBAT_REFUSAL]);
+    expect(zoneAt(p.pos.x, p.pos.z).id).toBe('thornpeak_heights');
+    expect(meta.copper).toBe(WYRMGATE_WAYSTONE_TOLL_COPPER * 2);
+    let later: SimEvent[] = [];
+    for (let i = 0; i < 20; i++) {
+      p.inCombat = true;
+      p.combatTimer = 99;
+      later = later.concat(sim.tick());
+    }
+    expect(errorTexts(later)).toEqual([]);
+    // Combat ends while standing in the arch: the crossing takes hold (the
+    // latch only silences repeat refusals; it never blocks a payable crossing).
+    p.inCombat = false;
+    p.combatTimer = 0;
+    expect(logTexts(sim.tick())).toContain(PORTAL.enterText);
+    expect(zoneAt(p.pos.x, p.pos.z).id).toBe('drakelands');
+    expect(meta.copper).toBe(WYRMGATE_WAYSTONE_TOLL_COPPER);
   });
 
   it('charges again on the way back to Highwatch', () => {
@@ -237,5 +307,17 @@ describe('settlePortalToll', () => {
     const free = { ...PORTAL, tollCopper: undefined };
     expect(settlePortalToll((sim as any).ctx, sim.entities.get(a)!, free)).toBe(true);
     expect(meta.copper).toBe(7);
+  });
+
+  it('refuses an entity with no purse silently (nobody to toast, nothing to charge)', () => {
+    const sim = makeWorld();
+    const a = sim.addPlayer('warrior', 'Aleph');
+    sim.tick();
+    const p = sim.entities.get(a)!;
+    const orphan = { ...p, id: 424242 };
+    const before = sim.events.length;
+    expect(settlePortalToll((sim as any).ctx, orphan as typeof p, PORTAL)).toBe(false);
+    expect(orphan.portalHoldId).toBeUndefined();
+    expect(sim.events.length).toBe(before);
   });
 });

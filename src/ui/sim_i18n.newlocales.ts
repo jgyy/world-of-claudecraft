@@ -67,7 +67,7 @@ export const BASE_NEW = {
     'groundPickup.ferryBellDeny': 'Převoznický zvon visí mlčky.',
     'groundPickup.ferryBellEnough': 'Převoznický zvon nemá co dát.',
     'log.wyrmgateEnter':
-      'Poutní kámen pohltí tvé stříbro a Wyrmgate vzplane: horký popelnatý vítr a před tebou věže Dračí hlídky.',
+      'Poutní kámen pohltí tvé stříbro a Wyrmgate vzplane: horký popelnatý vítr a před tebou nádvoří Poslední tvrze.',
     'log.wyrmgateLeave':
       'Poutní kámen pohltí tvé stříbro a Wyrmgate vzplane: řídký horský vzduch a před tebou hradby Highwatch.',
     'error.wyrmgateToll':
@@ -401,7 +401,7 @@ export const BASE_NEW = {
     'log.veilEnter': 'Et slør af tusmørke deler sig foran dig, og Lavningen åbner sig forude.',
     'log.veilLeave': 'Sløret lukker sig bag dig, og bjergluften bider igen.',
     'log.wyrmgateEnter':
-      'Vejstenen sluger dit sølv, og Ormeporten blusser op: varm askevind, og Ormevagts tårne forude.',
+      'Vejstenen sluger dit sølv, og Ormeporten blusser op: varm askevind, og Den Sidste Borgs gård forude.',
     'log.wyrmgateLeave':
       'Vejstenen sluger dit sølv, og Ormeporten blusser op: tynd bjergluft, og Højvagtens mure forude.',
     'error.wyrmgateToll': 'Vejstenen forbliver mørk. Overgangen gennem Ormeporten koster 50 sølv.',
@@ -710,7 +710,7 @@ export const BASE_NEW = {
       'Tabir senja terbuka di hadapanmu, dan Lembah Tersembunyi terbentang di depan.',
     'log.veilLeave': 'Tabir menutup di belakangmu, dan udara pegunungan kembali menggigit.',
     'log.wyrmgateEnter':
-      'Batu jalan menelan perakmu dan Wyrmgate menyala: angin abu yang panas, dan menara-menara Wyrmwatch di depan.',
+      'Batu jalan menelan perakmu dan Wyrmgate menyala: angin abu yang panas, dan halaman Benteng Terakhir di depan.',
     'log.wyrmgateLeave':
       'Batu jalan menelan perakmu dan Wyrmgate menyala: udara gunung yang tipis, dan tembok Menara Pengawas di depan.',
     'error.wyrmgateToll': 'Batu jalan tetap gelap. Melintasi Wyrmgate membutuhkan 50 perak.',
@@ -1018,7 +1018,7 @@ export const BASE_NEW = {
     'log.veilEnter': 'Een sluier van schemering wijkt voor je, en de Kom opent zich verderop.',
     'log.veilLeave': 'De sluier sluit zich achter je, en de berglucht bijt weer.',
     'log.wyrmgateEnter':
-      'De wegsteen slikt je zilver en de Wurmpoort laait op: hete aswind, en de torens van Wurmwacht in het verschiet.',
+      'De wegsteen slikt je zilver en de Wurmpoort laait op: hete aswind, en de binnenplaats van De Laatste Burcht in het verschiet.',
     'log.wyrmgateLeave':
       'De wegsteen slikt je zilver en de Wurmpoort laait op: ijle berglucht, en de muren van Hoogwacht in het verschiet.',
     'error.wyrmgateToll':
@@ -1326,7 +1326,7 @@ export const BASE_NEW = {
     'log.veilEnter': 'Zasłona zmierzchu rozstępuje się, a przed tobą otwiera się Kotlina.',
     'log.veilLeave': 'Zasłona zamyka się za tobą, a górskie powietrze znów szczypie.',
     'log.wyrmgateEnter':
-      'Kamień drogi połyka twoje srebro i Smocza Brama rozbłyska: gorący wiatr niosący popiół, a przed tobą wieże Wyrmwatch.',
+      'Kamień drogi połyka twoje srebro i Smocza Brama rozbłyska: gorący wiatr niosący popiół, a przed tobą dziedziniec Ostatniej Twierdzy.',
     'log.wyrmgateLeave':
       'Kamień drogi połyka twoje srebro i Smocza Brama rozbłyska: rzadkie górskie powietrze, a przed tobą mury Wysokiej Strażnicy.',
     'error.wyrmgateToll':
@@ -1632,7 +1632,7 @@ export const BASE_NEW = {
     'log.veilEnter': 'En skymningsslöja delar sig framför dig, och Dälden öppnar sig där framme.',
     'log.veilLeave': 'Slöjan sluter sig bakom dig, och bergsluften biter igen.',
     'log.wyrmgateEnter':
-      'Vägstenen slukar ditt silver och Drakporten flammar upp: het askvind, och Drakvaktens torn där framme.',
+      'Vägstenen slukar ditt silver och Drakporten flammar upp: het askvind, och Sista fästets borggård där framme.',
     'log.wyrmgateLeave':
       'Vägstenen slukar ditt silver och Drakporten flammar upp: tunn bergsluft, och Högvaktens murar där framme.',
     'error.wyrmgateToll': 'Vägstenen förblir mörk. Att korsa Drakporten kostar 50 silver.',
@@ -1932,7 +1932,7 @@ export const BASE_NEW = {
     'log.veilEnter': 'Alacakaranlık perdesi önünde aralanır ve Kuytu Vadi ileride açılır.',
     'log.veilLeave': 'Perde ardında kapanır ve dağ havası yeniden ısırır.',
     'log.wyrmgateEnter':
-      "Yol taşı gümüşünü yutar ve Wyrmgate alevlenir: sıcak kül rüzgarı ve ileride Wyrmwatch'ın kuleleri.",
+      'Yol taşı gümüşünü yutar ve Wyrmgate alevlenir: sıcak kül rüzgarı ve ileride Son Kale avlusu.',
     'log.wyrmgateLeave':
       "Yol taşı gümüşünü yutar ve Wyrmgate alevlenir: ince dağ havası ve ileride Yüksek Gözcü'nün surları.",
     'error.wyrmgateToll': 'Yol taşı karanlık kalır. Wyrmgate geçişi 50 gümüşe mal olur.',
@@ -2236,7 +2236,7 @@ export const BASE_NEW = {
     'log.veilEnter': 'Bức màn hoàng hôn hé mở trước mặt bạn, và Thung Lũng Ẩn hiện ra phía trước.',
     'log.veilLeave': 'Bức màn khép lại sau lưng bạn, và khí núi lại buốt giá.',
     'log.wyrmgateEnter':
-      'Thạch lộ nuốt bạc của bạn và Wyrmgate bùng sáng: gió tro nóng rát, và những ngọn tháp Wyrmwatch ở phía trước.',
+      'Thạch lộ nuốt bạc của bạn và Wyrmgate bùng sáng: gió tro nóng rát, và sân trong Pháo Đài Cuối Cùng ở phía trước.',
     'log.wyrmgateLeave':
       'Thạch lộ nuốt bạc của bạn và Wyrmgate bùng sáng: không khí núi loãng, và tường thành Vọng Đài Cao ở phía trước.',
     'error.wyrmgateToll': 'Thạch lộ vẫn tối. Băng qua Wyrmgate tốn 50 bạc.',

@@ -59,10 +59,9 @@ describe('buildWaystonePortals', () => {
       expect(Math.sin(yaw)).toBeCloseTo(dx / len, 6);
       expect(Math.cos(yaw)).toBeCloseTo(dz / len, 6);
     }
-    // Highwatch's arch opens west into town, Wyrmwatch's northwest at the hub.
+    // Highwatch's arch opens west into town; the keep's opens east up the bailey.
     expect(Math.sin(waystoneFacing(WYRMGATE.a))).toBeLessThan(-0.9);
-    expect(Math.sin(waystoneFacing(WYRMGATE.b))).toBeLessThan(-0.6);
-    expect(Math.cos(waystoneFacing(WYRMGATE.b))).toBeLessThan(-0.6);
+    expect(Math.sin(waystoneFacing(WYRMGATE.b))).toBeGreaterThan(0.9);
   });
 
   it('the swirl hook recomposes only its own matrices against the frozen parent', () => {

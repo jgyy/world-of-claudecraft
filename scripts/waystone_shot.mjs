@@ -16,7 +16,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const ENTRY_OPTS = { settleMs: 3000, selectorTimeoutMs: 90000, gameBootTimeoutMs: 60000 };
 
 const SIDE_A = { x: 52, z: 668 };
-const SIDE_B = { x: 444, z: 1934 };
+const SIDE_B = { x: 383, z: 2029 };
 
 async function seed(page) {
   await page.evaluateOnNewDocument(() => {
@@ -104,10 +104,14 @@ try {
   await stand(page, SIDE_A.x - 7, SIDE_A.z + 1, -Math.PI / 2, 0);
   await wait(4000);
   await shoot(page, 'highwatch-arch');
-  // 2. The Wyrmwatch arch, seen from the yard.
-  await stand(page, SIDE_B.x - 5, SIDE_B.z - 5, -Math.PI * 0.75, 0);
+  // 2. The Last Keep arch, seen from just inside the main gate (facing east).
+  await stand(page, SIDE_B.x - 7, SIDE_B.z + 0.5, -Math.PI / 2, 0);
   await wait(4000);
-  await shoot(page, 'wyrmwatch-arch');
+  await shoot(page, 'last-keep-arch');
+  // 2b. The keep's market row: the sutler and the sergeant (facing the well).
+  await stand(page, 404, 2040, -0.9, 0);
+  await wait(4000);
+  await shoot(page, 'last-keep-bailey');
   if (MODE === 'after') {
     // 3. Broke: step into the Highwatch arch, the toll refusal.
     await stand(page, SIDE_A.x - 7, SIDE_A.z + 1, -Math.PI / 2, 0);
@@ -120,7 +124,7 @@ try {
     await wait(1500);
     await stand(page, SIDE_A.x, SIDE_A.z, -Math.PI / 2, 10_000);
     await wait(5000);
-    await shoot(page, 'wyrmwatch-arrival');
+    await shoot(page, 'last-keep-arrival');
     await page.close();
     // 5. Mobile (landscape): the paid crossing landing.
     const mobile = await browser.newPage();
@@ -138,7 +142,7 @@ try {
     await wait(2500);
     await stand(mobile, SIDE_A.x, SIDE_A.z, -Math.PI / 2, 10_000);
     await wait(5000);
-    await shoot(mobile, 'wyrmwatch-arrival-mobile');
+    await shoot(mobile, 'last-keep-arrival-mobile');
     await mobile.close();
   }
 } finally {

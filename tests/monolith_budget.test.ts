@@ -638,7 +638,9 @@ const MONOLITHS: MonolithRow[] = [
     // Down 10604 -> 10587 for the per-surface action-bar profiles: the
     // join read, the per-profile merge and the FIFO write moved to
     // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
-    ceiling: 10587,
+    // Lowered 10587 -> 10577 after the tick's per-event bookings (unstuck
+    // records, tick-driven copper flows) moved to server/tick_event_bookings.ts.
+    ceiling: 10577,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
