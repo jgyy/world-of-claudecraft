@@ -769,7 +769,7 @@ const baseEnTable = {
   'log.veilEnter': 'A veil of dusk parts before you, and the Hollow opens ahead.',
   'log.veilLeave': 'The veil closes behind you, and the mountain air bites again.',
   'log.wyrmgateEnter':
-    'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
+    'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the bailey of the Last Keep ahead.',
   'log.wyrmgateLeave':
     'The waystone takes its silver and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
   'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 50 silver.',
@@ -936,7 +936,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'A veil of dusk parts before you, and the Hollow opens ahead.',
     'log.veilLeave': 'The veil closes behind you, and the mountain air bites again.',
     'log.wyrmgateEnter':
-      'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
+      'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the bailey of the Last Keep ahead.',
     'log.wyrmgateLeave':
       'The waystone takes its silver and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
     'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 50 silver.',
@@ -1320,7 +1320,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Un velo de crepúsculo se abre ante ti, y la Hondonada se despliega adelante.',
     'log.veilLeave': 'El velo se cierra a tu espalda, y el aire de la montaña vuelve a morder.',
     'log.wyrmgateEnter':
-      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: viento caliente de ceniza, y las torres de Wyrmwatch al frente.',
+      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: viento caliente de ceniza, y el patio de la Última Fortaleza al frente.',
     'log.wyrmgateLeave':
       'La piedra de paso se traga tu plata y la Wyrmgate se enciende: aire fino de montaña, y las murallas de Highwatch al frente.',
     'error.wyrmgateToll': 'La piedra de paso sigue apagada. Cruzar la Wyrmgate cuesta 50 de plata.',
@@ -1805,7 +1805,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Un velo de crepúsculo se abre ante ti, y la Hondonada se despliega adelante.',
     'log.veilLeave': 'El velo se cierra a tu espalda, y el aire de la montaña vuelve a morder.',
     'log.wyrmgateEnter':
-      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: viento caliente de ceniza, y las torres de Wyrmwatch al frente.',
+      'La piedra de paso se traga tu plata y la Wyrmgate se enciende: viento caliente de ceniza, y el patio de la Última Fortaleza al frente.',
     'log.wyrmgateLeave':
       'La piedra de paso se traga tu plata y la Wyrmgate se enciende: aire fino de montaña, y las murallas de Highwatch al frente.',
     'error.wyrmgateToll': 'La piedra de paso sigue apagada. Cruzar la Wyrmgate cuesta 50 de plata.',
@@ -2302,7 +2302,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': "Un voile de crépuscule s'écarte, et la Combe s'ouvre devant vous.",
     'log.veilLeave': "Le voile se referme derrière vous, et l'air des montagnes mord de nouveau.",
     'log.wyrmgateEnter':
-      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : vent brûlant de cendres, et les tours de Wyrmwatch droit devant.",
+      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : vent brûlant de cendres, et la cour du Dernier Donjon droit devant.",
     'log.wyrmgateLeave':
       "La pierre de passage avale votre argent et la Wyrmgate s'embrase : air vif des montagnes, et les murs de Highwatch droit devant.",
     'error.wyrmgateToll':
@@ -2803,7 +2803,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': "Un voile de crépuscule s'écarte, et la Combe s'ouvre devant vous.",
     'log.veilLeave': "Le voile se referme derrière vous, et l'air des montagnes mord de nouveau.",
     'log.wyrmgateEnter':
-      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : vent brûlant de cendres, et les tours de Wyrmwatch droit devant.",
+      "La pierre de passage avale votre argent et la Wyrmgate s'embrase : vent brûlant de cendres, et la cour du Dernier Donjon droit devant.",
     'log.wyrmgateLeave':
       "La pierre de passage avale votre argent et la Wyrmgate s'embrase : air vif des montagnes, et les murs de Highwatch droit devant.",
     'error.wyrmgateToll':
@@ -3125,7 +3125,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'A veil of dusk parts before you, and the Hollow opens ahead.',
     'log.veilLeave': 'The veil closes behind you, and the mountain air bites again.',
     'log.wyrmgateEnter':
-      'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
+      'The waystone takes its silver and the Wyrmgate flares: hot ash wind, and the bailey of the Last Keep ahead.',
     'log.wyrmgateLeave':
       'The waystone takes its silver and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
     'error.wyrmgateToll': 'The waystone stays dark. The Wyrmgate crossing costs 50 silver.',
@@ -3505,7 +3505,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Un velo di crepuscolo si apre davanti a te, e la Conca si rivela più avanti.',
     'log.veilLeave': "Il velo si richiude alle tue spalle, e l'aria di montagna torna a pungere.",
     'log.wyrmgateEnter':
-      'La pietra di passaggio inghiotte il tuo argento e la Wyrmgate divampa: vento caldo di cenere, e le torri di Wyrmwatch davanti a te.',
+      "La pietra di passaggio inghiotte il tuo argento e la Wyrmgate divampa: vento caldo di cenere, e il cortile dell'Ultima Rocca davanti a te.",
     'log.wyrmgateLeave':
       'La pietra di passaggio inghiotte il tuo argento e la Wyrmgate divampa: aria sottile di montagna, e le mura di Highwatch davanti a te.',
     'error.wyrmgateToll':
@@ -4001,7 +4001,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
       'Ein Schleier aus Dämmerung teilt sich vor dir, und die Senke öffnet sich dahinter.',
     'log.veilLeave': 'Der Schleier schließt sich hinter dir, und die Bergluft beißt wieder.',
     'log.wyrmgateEnter':
-      'Der Wegstein schluckt dein Silber und das Wyrmgate flammt auf: heißer Aschewind, und die Türme von Wyrmwatch voraus.',
+      'Der Wegstein schluckt dein Silber und das Wyrmgate flammt auf: heißer Aschewind, und der Burghof der Letzten Feste voraus.',
     'log.wyrmgateLeave':
       'Der Wegstein schluckt dein Silber und das Wyrmgate flammt auf: dünne Bergluft, und die Mauern von Highwatch voraus.',
     'error.wyrmgateToll':
@@ -4536,7 +4536,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '暮色的帷幕在你面前分开，幽谷在前方展开。',
     'log.veilLeave': '帷幕在你身后合拢，山间的寒风再次刺骨。',
     'log.wyrmgateEnter':
-      '路碑吞下你的银币，龙门骤然亮起：灼热的灰烬风扑面而来，望龙哨的塔楼就在前方。',
+      '路碑吞下你的银币，龙门骤然亮起：灼热的灰烬风扑面而来，最后的堡垒的内院就在前方。',
     'log.wyrmgateLeave': '路碑吞下你的银币，龙门骤然亮起：稀薄的山风扑面而来，高望的城墙就在前方。',
     'error.wyrmgateToll': '路碑依旧黯淡。穿越龙门需要 50 银币。',
     'log.ferryEnter': '渡船的钟声响起一声，远岸从浪花中浮现。',
@@ -5006,7 +5006,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '暮色的帷幕在你面前分開，幽谷在前方展開。',
     'log.veilLeave': '帷幕在你身後合攏，山間的寒風再次刺骨。',
     'log.wyrmgateEnter':
-      '路碑吞下你的銀幣，龍門驟然亮起：灼熱的灰燼風撲面而來，望龍哨的塔樓就在前方。',
+      '路碑吞下你的銀幣，龍門驟然亮起：灼熱的灰燼風撲面而來，最後的堡壘的內院就在前方。',
     'log.wyrmgateLeave': '路碑吞下你的銀幣，龍門驟然亮起：稀薄的山風撲面而來，高望的城牆就在前方。',
     'error.wyrmgateToll': '路碑依舊黯淡。穿越龍門需要 50 銀幣。',
     'log.ferryEnter': '渡船的鐘聲響起一聲，遠岸從浪花中浮現。',
@@ -5483,7 +5483,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '황혼의 장막이 눈앞에서 갈라지고, 골짜기가 앞에 펼쳐진다.',
     'log.veilLeave': '장막이 등 뒤에서 닫히고, 산바람이 다시 살을 엔다.',
     'log.wyrmgateEnter':
-      '길잡이돌이 은화를 삼키고 와이름 관문이 타오릅니다. 뜨거운 잿바람이 불어오고, 와이름 감시탑의 탑들이 앞에 보입니다.',
+      '길잡이돌이 은화를 삼키고 와이름 관문이 타오릅니다. 뜨거운 잿바람이 불어오고, 마지막 요새의 안뜰이 앞에 보입니다.',
     'log.wyrmgateLeave':
       '길잡이돌이 은화를 삼키고 와이름 관문이 타오릅니다. 희박한 산바람이 불어오고, 하이워치의 성벽이 앞에 보입니다.',
     'error.wyrmgateToll':
@@ -5973,7 +5973,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': '黄昏の帳が目の前で開き、幽谷が行く手に広がる。',
     'log.veilLeave': '帳が背後で閉じ、山の空気が再び肌を刺す。',
     'log.wyrmgateEnter':
-      '道標石が銀貨を飲み込み、ワームゲートが燃え上がる。熱い灰の風が吹き、前方にワームウォッチの塔が見える。',
+      '道標石が銀貨を飲み込み、ワームゲートが燃え上がる。熱い灰の風が吹き、前方に最後の砦の中庭が見える。',
     'log.wyrmgateLeave':
       '道標石が銀貨を飲み込み、ワームゲートが燃え上がる。薄い山の空気が流れ、前方にハイウォッチの城壁が見える。',
     'error.wyrmgateToll': '道標石は暗いままだ。ワームゲートの通行には銀貨50枚が必要だ。',
@@ -6410,7 +6410,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Um véu de crepúsculo se abre à sua frente, e o Vale Oculto surge adiante.',
     'log.veilLeave': 'O véu se fecha às suas costas, e o ar da montanha volta a morder.',
     'log.wyrmgateEnter':
-      'A pedra de passagem engole sua prata e o Wyrmgate se acende: vento quente de cinzas, e as torres de Wyrmwatch adiante.',
+      'A pedra de passagem engole sua prata e o Wyrmgate se acende: vento quente de cinzas, e o pátio do Último Reduto adiante.',
     'log.wyrmgateLeave':
       'A pedra de passagem engole sua prata e o Wyrmgate se acende: ar rarefeito de montanha, e as muralhas de Highwatch adiante.',
     'error.wyrmgateToll':
@@ -6955,7 +6955,7 @@ const BASE_DICT: Record<SupportedLanguage, Partial<Record<BaseSimMessageKey, str
     'log.veilEnter': 'Сумеречная завеса расступается перед вами, и впереди открывается Лощина.',
     'log.veilLeave': 'Завеса смыкается за спиной, и горный воздух снова обжигает холодом.',
     'log.wyrmgateEnter':
-      'Путевой камень поглощает ваше серебро, и Змеиные врата вспыхивают: горячий пепельный ветер, а впереди башни Змеиного дозора.',
+      'Путевой камень поглощает ваше серебро, и Змеиные врата вспыхивают: горячий пепельный ветер, а впереди двор Последнего оплота.',
     'log.wyrmgateLeave':
       'Путевой камень поглощает ваше серебро, и Змеиные врата вспыхивают: разреженный горный воздух, а впереди стены Хайвотча.',
     'error.wyrmgateToll':
