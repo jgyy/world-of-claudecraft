@@ -658,11 +658,14 @@ describe('PartyFramesPainter: keyed pool over the elided writers', () => {
     // A combat member is NOT also dead (dead wins), so its combat is on but dead off.
     // The hp bar keeps the inline .toFixed(3) precision via formatScaleX.
     expect(has('setTransform', (c) => /^scaleX\(\d\.\d{3}\)$/.test(String(c.args[0])))).toBe(true);
-    // Party frames reuse the shared UnitFramePainter's classic absorb overlay (a
-    // left-origin scaleX to (hp + absorb) / maxHp), matching the player and target
-    // frames, so there is no positioned --absorb-start segment here.
+    // Party frames reuse the shared UnitFramePainter's absorb SEGMENT (a translate
+    // to the health edge plus a quantized scaleX of the shield width), matching the
+    // player and target frames, so there is no positioned --absorb-start segment
+    // here and the hatch never covers the health fill itself (hp 50 + shield 25 of
+    // 100 hatches 50%..75%, not 0%..75%).
     expect(has('setStyleProp', (c) => c.args[0] === '--absorb-start')).toBe(false);
-    expect(has('setTransform', (c) => c.args[0] === 'scaleX(0.750)')).toBe(true);
+    expect(has('setTransform', (c) => c.args[0] === 'translateX(50%) scaleX(0.250)')).toBe(true);
+    expect(has('setTransform', (c) => c.args[0] === 'scaleX(0.750)')).toBe(false);
     // The compact party row never appends the absorb total to the HP text (that is a
     // player/target-frame affordance), so "(25)" must not appear.
     expect(has('setText', (c) => String(c.args[0]).includes('(25)'))).toBe(false);
