@@ -297,7 +297,11 @@ const MONOLITHS: MonolithRow[] = [
     // world-entry restore moved into ActionBarController.restoreLayout, so
     // the HUD keeps one poll, one refresh call, and the two-line per-frame
     // surface-flip follow beside the form sync. Exact merged count.
-    ceiling: 18857,
+    // Lowered 18857 -> 18851 by the aura-strip column: the buff row's lazily
+    // captured home and the dead body class left applyAuraAnchor for
+    // restoreFrameHome (src/ui/interface_unlock.ts), and Reset Frame Positions
+    // re-applies the anchor in one line. Exact merged count.
+    ceiling: 18851,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
