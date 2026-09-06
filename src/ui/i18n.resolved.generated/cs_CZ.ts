@@ -3031,6 +3031,7 @@ export const cs_CZ: EnTranslations = {
       "riftTier": "Trhlinový předmět stupně {tier}",
       "riftUpgrade": "Vylepšení trhliny {level}/{max}",
       "riftSockets": "Trhlinové drahokamy {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (okouzleno)",
       "enchantedFallback": "Okouzlený",
       "partyTradeWindow": "Tento předmět můžeš dalších {time} směňovat s hráči, kteří sdíleli jeho kořist. Nasazení předmětu okno pro směnu ukončí."
@@ -3978,6 +3979,7 @@ export const cs_CZ: EnTranslations = {
       "yieldLineRange": "{min} až {max} {item}",
       "alreadyEnchanted": "Tento předmět je již okouzlený.",
       "sameEnchant": "Tento předmět už má toto okouzlení.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Nahradí {enchant}",
       "sameEnchantTag": "Již aplikováno",
       "plainTag": "Bez okouzlení",
@@ -7963,6 +7965,7 @@ export const cs_CZ: EnTranslations = {
       "forgeUpgraded": "Vylepšení trhliny dokončeno pro {name}.",
       "forgeEnchanted": "Okouzlení trhliny dokončeno pro {name}.",
       "forgeSocketed": "Trhlinový drahokam osazen pro {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Ledovcový hrob detonuje!",
       "detonateAbsoluteZero": "Absolutní nula vybuchuje!",
       "detonateMagmaWell": "Magmová studna vybuchuje!",

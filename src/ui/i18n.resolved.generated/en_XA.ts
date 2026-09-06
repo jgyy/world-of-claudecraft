@@ -3031,6 +3031,7 @@ export const en_XA: EnTranslations = {
       "riftTier": "[{tier}-ŕáñķ Ŕíƒţ íţéɱ]",
       "riftUpgrade": "[Ŕíƒţ úþĝŕáðé {level}/{max}]",
       "riftSockets": "[Ŕíƒţ ĝéɱš {used}/{total}]",
+      "riftGemSocket": "[Šóçķéţ ƀóñúš ƒóŕ á Ŕíƒţƀóúñð ƀáñð]",
       "statEnchanted": "[+{value} {stat} (Éñçĥáñţéð)]",
       "enchantedFallback": "[Éñçĥáñţéð]",
       "partyTradeWindow": "[Ýóú ɱáý ţŕáðé ţĥíš íţéɱ ţó þļáýéŕš ŵĥó šĥáŕéð íţš ðŕóþ ƒóŕ ţĥé ñéẋţ {time}. Éɋúíþþíñĝ íţ éñðš ţĥé ţŕáðé ŵíñðóŵ.]"
@@ -3978,6 +3979,7 @@ export const en_XA: EnTranslations = {
       "yieldLineRange": "[{min} ţó {max} {item}]",
       "alreadyEnchanted": "[Ţĥáţ íţéɱ íš áļŕéáðý éñçĥáñţéð.]",
       "sameEnchant": "[Ţĥáţ íţéɱ áļŕéáðý ĥáš ţĥáţ éñçĥáñţ.]",
+      "riftGear": "[Ŕíƒţƀóúñð ƀáñðš ţáķé Ŕíƒţ ĝéɱš, ñóţ éñçĥáñţš.]",
       "replaceTag": "[Ŕéþļáçéš {enchant}]",
       "sameEnchantTag": "[Áļŕéáðý áþþļíéð]",
       "plainTag": "[Ñóţ éñçĥáñţéð]",
@@ -7963,6 +7965,7 @@ export const en_XA: EnTranslations = {
       "forgeUpgraded": "[Ŕíƒţ úþĝŕáðé çóɱþļéţéð ƒóŕ {name}.]",
       "forgeEnchanted": "[Ŕíƒţ éñçĥáñţ çóɱþļéţéð ƒóŕ {name}.]",
       "forgeSocketed": "[Ŕíƒţ ĝéɱ šóçķéţéð ƒóŕ {name}.]",
+      "forgeGemReplaced": "[Ŕíƒţ ĝéɱ ŕéþļáçéð ƒóŕ {name}: {gem} ðéšţŕóýéð.]",
       "detonateGlacialGrave": "[Ĝļáçíáļ Ĝŕáʋé ðéţóñáţéš!]",
       "detonateAbsoluteZero": "[Áƀšóļúţé Žéŕó éŕúþţš!]",
       "detonateMagmaWell": "[Ɱáĝɱá Ŵéļļ éŕúþţš!]",

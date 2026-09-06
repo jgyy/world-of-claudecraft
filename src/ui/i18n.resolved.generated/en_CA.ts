@@ -3031,6 +3031,7 @@ export const en_CA: EnTranslations = {
       "riftTier": "{tier}-rank Rift item",
       "riftUpgrade": "Rift upgrade {level}/{max}",
       "riftSockets": "Rift gems {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Enchanted)",
       "enchantedFallback": "Enchanted",
       "partyTradeWindow": "You may trade this item to players who shared its drop for the next {time}. Equipping it ends the trade window."
@@ -3978,6 +3979,7 @@ export const en_CA: EnTranslations = {
       "yieldLineRange": "{min} to {max} {item}",
       "alreadyEnchanted": "That item is already enchanted.",
       "sameEnchant": "That item already has that enchant.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Replaces {enchant}",
       "sameEnchantTag": "Already applied",
       "plainTag": "Not enchanted",
@@ -7963,6 +7965,7 @@ export const en_CA: EnTranslations = {
       "forgeUpgraded": "Rift upgrade completed for {name}.",
       "forgeEnchanted": "Rift enchant completed for {name}.",
       "forgeSocketed": "Rift gem socketed for {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Glacial Grave detonates!",
       "detonateAbsoluteZero": "Absolute Zero erupts!",
       "detonateMagmaWell": "Magma Well erupts!",

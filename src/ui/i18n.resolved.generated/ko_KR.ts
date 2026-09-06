@@ -3031,6 +3031,7 @@ export const ko_KR: EnTranslations = {
       "riftTier": "{tier} 등급 균열 아이템",
       "riftUpgrade": "균열 강화 {level}/{max}",
       "riftSockets": "균열 보석 {used}/{total}",
+      "riftGemSocket": "균열결속 반지 소켓 보너스",
       "statEnchanted": "+{value} {stat} (마법부여)",
       "enchantedFallback": "마법부여됨",
       "partyTradeWindow": "앞으로 {time} 동안 이 아이템을 같은 전리품을 함께 획득한 플레이어와 거래할 수 있습니다. 착용하면 거래 기간이 끝납니다."
@@ -3978,6 +3979,7 @@ export const ko_KR: EnTranslations = {
       "yieldLineRange": "{item} {min}~{max}개",
       "alreadyEnchanted": "해당 아이템에는 이미 마법부여가 되어 있습니다.",
       "sameEnchant": "해당 아이템에는 이미 같은 마법부여가 되어 있습니다.",
+      "riftGear": "균열결속 반지는 균열 보석만 장착할 수 있으며 마법부여는 불가능합니다.",
       "replaceTag": "{enchant} 대체",
       "sameEnchantTag": "이미 적용됨",
       "plainTag": "마법부여 없음",
@@ -7963,6 +7965,7 @@ export const ko_KR: EnTranslations = {
       "forgeUpgraded": "{name}의 균열 강화가 완료되었습니다.",
       "forgeEnchanted": "{name}의 균열 마법부여가 완료되었습니다.",
       "forgeSocketed": "{name}에 균열 보석을 장착했습니다.",
+      "forgeGemReplaced": "{name}의 균열 보석을 교체했습니다. {gem}은(는) 파괴되었습니다.",
       "detonateGlacialGrave": "빙하의 무덤이 폭발합니다!",
       "detonateAbsoluteZero": "절대 영도가 폭발합니다!",
       "detonateMagmaWell": "마그마 우물이 분출합니다!",

@@ -1916,7 +1916,7 @@ export const guideStrings = {
     // Spoiler-safe: the rank letters, the level gate, the shape of a run, and the race
     // rule are all broadcast to the whole realm in chat, so they are public. NO rank
     // multipliers, mob levels, drop rates, coin amounts, or boss scripts. The "Rift
-    // Forge" is deliberately unnamed: the upgrade/enchant/socket seam has no client
+    // Forge" is deliberately unnamed: the upgrade/socket seam has no client
     // caller and the server refuses its wire commands until the feature ships
     // (server/rift_forge_gate.ts).
     heading: 'Rifts',

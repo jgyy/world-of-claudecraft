@@ -3031,6 +3031,7 @@ export const pl_PL: EnTranslations = {
       "riftTier": "Przedmiot Szczeliny rangi {tier}",
       "riftUpgrade": "Ulepszenie Szczeliny {level}/{max}",
       "riftSockets": "Klejnoty Szczeliny {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Zaklęty)",
       "enchantedFallback": "Zaklęty",
       "partyTradeWindow": "Możesz wymienić ten przedmiot z graczami, z którymi wypadł, jeszcze przez {time}. Założenie go kończy okno wymiany."
@@ -3978,6 +3979,7 @@ export const pl_PL: EnTranslations = {
       "yieldLineRange": "od {min} do {max} {item}",
       "alreadyEnchanted": "Ten przedmiot jest już zaklęty.",
       "sameEnchant": "Ten przedmiot już ma to zaklęcie.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Zastępuje {enchant}",
       "sameEnchantTag": "Już zastosowane",
       "plainTag": "Bez zaklęcia",
@@ -7963,6 +7965,7 @@ export const pl_PL: EnTranslations = {
       "forgeUpgraded": "Ukończono ulepszenie Szczeliny dla {name}.",
       "forgeEnchanted": "Ukończono zaklęcie Szczeliny dla {name}.",
       "forgeSocketed": "Osadzono klejnot Szczeliny w {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Lodowaty Grób eksploduje!",
       "detonateAbsoluteZero": "Zero Absolutne wybucha!",
       "detonateMagmaWell": "Studnia Magmy wybucha!",

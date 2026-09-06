@@ -3031,6 +3031,7 @@ export const vi_VN: EnTranslations = {
       "riftTier": "Vật phẩm Rạn Nứt hạng {tier}",
       "riftUpgrade": "Nâng cấp Rạn Nứt {level}/{max}",
       "riftSockets": "Ngọc Rạn Nứt {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Đã Pháp Khắc)",
       "enchantedFallback": "Đã Pháp Khắc",
       "partyTradeWindow": "Bạn có thể giao dịch vật phẩm này cho những người chơi đã cùng nhận nó rơi ra, trong {time} tới. Trang bị nó sẽ kết thúc khoảng thời gian giao dịch này."
@@ -3978,6 +3979,7 @@ export const vi_VN: EnTranslations = {
       "yieldLineRange": "{min} đến {max} {item}",
       "alreadyEnchanted": "Vật phẩm đó đã được pháp khắc rồi.",
       "sameEnchant": "Vật phẩm đó đã có phép khắc đó rồi.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Thay Thế {enchant}",
       "sameEnchantTag": "Đã Áp Dụng",
       "plainTag": "Chưa pháp khắc",
@@ -7963,6 +7965,7 @@ export const vi_VN: EnTranslations = {
       "forgeUpgraded": "Đã hoàn tất nâng cấp Rạn Nứt cho {name}.",
       "forgeEnchanted": "Đã hoàn tất phù phép Rạn Nứt cho {name}.",
       "forgeSocketed": "Đã gắn ngọc Rạn Nứt cho {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Nấm Mồ Băng Hà phát nổ!",
       "detonateAbsoluteZero": "Độ Không Tuyệt Đối bùng nổ!",
       "detonateMagmaWell": "Giếng Dung Nham bùng nổ!",

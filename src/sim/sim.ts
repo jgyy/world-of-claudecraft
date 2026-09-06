@@ -646,7 +646,6 @@ import {
 import { migrateRestoredQuestProgress } from './quests/quest_progress_migration';
 import { type NaturalRiftPortal, updateRiftPortals as updateRiftPortalsImpl } from './rift/portals';
 import {
-  enchantRiftItem as enchantRiftItemImpl,
   type RiftForgeResult,
   sanitizeRiftGearInstance,
   socketRiftGem as socketRiftGemImpl,
@@ -9390,16 +9389,6 @@ export class Sim {
   ): RiftForgeResult {
     const { pid, named } = foldNamedSlotTarget(pidOrTarget, slotIndex);
     return upgradeRiftItemImpl(this.ctx, itemId, pid, named);
-  }
-
-  enchantRiftItem(
-    itemId: string,
-    stat: string,
-    pidOrTarget?: number | { slotIndex: number },
-    slotIndex?: number,
-  ): RiftForgeResult {
-    const { pid, named } = foldNamedSlotTarget(pidOrTarget, slotIndex);
-    return enchantRiftItemImpl(this.ctx, itemId, stat, pid, named);
   }
 
   socketRiftGem(

@@ -1,13 +1,15 @@
 // The Rift forge wire gate.
 //
-// The forge (upgrade / enchant / socket on Riftbound bands) shipped end to end
+// The forge (upgrade / socket on Riftbound bands) shipped end to end
 // in the sim and on the wire, but its client UI never did: no stock caller
 // exists (none ever has, per git history), the wiki deliberately does not name
 // the feature, and the only live users are crafted wire frames from modified
 // clients spending real essence and gems for real combat stats. Hiding a
 // feature from the stock UI does not hide it from DevTools or a custom client,
-// so the authoritative server refuses the three dispatch arms unless the realm
-// explicitly opts in.
+// so the authoritative server refuses the forge dispatch arms unless the realm
+// explicitly opts in. (The third original arm, rift_enchant_item, retired
+// with the band item-level ladder; its token is a dispatch-only no-op now, so
+// there is nothing left for the gate to close on it.)
 //
 // RIFT_FORGE_ENABLED=1 opens the wire (PTR, internal playtests, or the future
 // intentional ship). Anything else, including unset, keeps it closed in every
@@ -27,10 +29,9 @@
 
 import type { CommandName } from '../src/world_api';
 
-/** The three forge wire tokens, pinned to the shared command vocabulary. */
+/** The forge wire tokens, pinned to the shared command vocabulary. */
 export const RIFT_FORGE_WIRE_COMMANDS = [
   'rift_upgrade_item',
-  'rift_enchant_item',
   'rift_socket_gem',
 ] as const satisfies readonly CommandName[];
 

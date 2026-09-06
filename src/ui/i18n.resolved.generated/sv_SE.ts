@@ -3031,6 +3031,7 @@ export const sv_SE: EnTranslations = {
       "riftTier": "Revföremål av grad {tier}",
       "riftUpgrade": "Revuppgradering {level}/{max}",
       "riftSockets": "Revstenar {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Förtrollad)",
       "enchantedFallback": "Förtrollad",
       "partyTradeWindow": "Du kan överlåta det här föremålet till spelare som delade bytet i {time} till. Att ta på det avslutar handelsfönstret."
@@ -3978,6 +3979,7 @@ export const sv_SE: EnTranslations = {
       "yieldLineRange": "{min} till {max} {item}",
       "alreadyEnchanted": "Det föremålet är redan förtrollat.",
       "sameEnchant": "Det föremålet har redan den förtrollningen.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Ersätter {enchant}",
       "sameEnchantTag": "Redan applicerad",
       "plainTag": "Inte förtrollad",
@@ -7963,6 +7965,7 @@ export const sv_SE: EnTranslations = {
       "forgeUpgraded": "Revuppgradering slutförd för {name}.",
       "forgeEnchanted": "Revförtrollning slutförd för {name}.",
       "forgeSocketed": "Revsten monterad för {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Glaciärgraven detonerar!",
       "detonateAbsoluteZero": "Absoluta nollpunkten bryter ut!",
       "detonateMagmaWell": "Magmakällan bryter ut!",

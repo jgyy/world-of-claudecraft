@@ -3031,6 +3031,7 @@ export const pt_BR: EnTranslations = {
       "riftTier": "Item da Fenda de nível {tier}",
       "riftUpgrade": "Aprimoramento da fenda {level}/{max}",
       "riftSockets": "Gemas da fenda {used}/{total}",
+      "riftGemSocket": "Socket bonus for a Riftbound band",
       "statEnchanted": "+{value} {stat} (Encantado)",
       "enchantedFallback": "Encantado",
       "partyTradeWindow": "Você pode negociar este item com jogadores que compartilharam esse saque pelos próximos {time}. Equipá-lo encerra a janela de troca."
@@ -3978,6 +3979,7 @@ export const pt_BR: EnTranslations = {
       "yieldLineRange": "{min} a {max} {item}",
       "alreadyEnchanted": "Esse item já está encantado.",
       "sameEnchant": "Esse item já tem esse encantamento.",
+      "riftGear": "Riftbound bands take Rift gems, not enchants.",
       "replaceTag": "Substitui {enchant}",
       "sameEnchantTag": "Já aplicado",
       "plainTag": "Sem encantamento",
@@ -7963,6 +7965,7 @@ export const pt_BR: EnTranslations = {
       "forgeUpgraded": "Aprimoramento da fenda concluído para {name}.",
       "forgeEnchanted": "Encantamento da fenda concluído para {name}.",
       "forgeSocketed": "Gema da fenda encaixada para {name}.",
+      "forgeGemReplaced": "Rift gem replaced for {name}: {gem} destroyed.",
       "detonateGlacialGrave": "Sepultura Glacial detona!",
       "detonateAbsoluteZero": "Zero Absoluto explode!",
       "detonateMagmaWell": "O Poço de Magma explode!",

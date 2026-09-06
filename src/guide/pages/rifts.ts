@@ -5,7 +5,7 @@
 // the game broadcasts to the whole realm in chat. NO rank multipliers, mob levels, drop
 // rates, loot tables, coin amounts, or boss scripts. Modeled on delves.ts.
 //
-// Deliberately absent: the "Rift Forge". The upgrade/enchant/socket seam exists in the
+// Deliberately absent: the "Rift Forge". The upgrade/socket seam exists in the
 // sim and on the wire but has no client caller, and the server refuses the wire
 // commands behind RIFT_FORGE_ENABLED (server/rift_forge_gate.ts). "No client caller"
 // alone never made it unreachable (a crafted frame reaches the wire fine); the server

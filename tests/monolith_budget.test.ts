@@ -286,7 +286,11 @@ const MONOLITHS: MonolithRow[] = [
     // Lowered 18885 -> 18858 by the guild roster expansion (PR #3874), which
     // extracted 27 lines from this file into the roster page modules. Exact
     // merged count, zero slack; maintainer-review item.
-    ceiling: 18858,
+    // Lowered 18858 -> 18851 by the Riftbound band item-level ladder: the
+    // rift tooltip lines moved into src/ui/rift_band_tooltip.ts (with the
+    // per-copy item-level readout), the compare block only threaded the
+    // hovered and worn instances through. Exact merged count, zero slack.
+    ceiling: 18851,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -611,7 +615,9 @@ const MONOLITHS: MonolithRow[] = [
     // path and the roster coordinator), which more than paid for the
     // coordinator's wiring and the quarantine hook's audit surface. Exact
     // count, zero slack.
-    ceiling: 10614,
+    // Lowered 10614 -> 10613 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
+    // Exact count, zero slack.
+    ceiling: 10613,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -675,7 +681,9 @@ const MONOLITHS: MonolithRow[] = [
     // the composite is the honest size. Exact count, zero slack.
     // wrapAngle and copyPos moved to src/net/interp_math.ts: the ratchet
     // lowers with them.
-    ceiling: 5896,
+    // Lowered 5896 -> 5892 by the Riftbound band item-level ladder (the retired forge enchant sender).
+    // Exact count, zero slack.
+    ceiling: 5892,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

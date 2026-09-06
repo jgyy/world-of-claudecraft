@@ -3031,6 +3031,7 @@ export const zh_CN: EnTranslations = {
       "riftTier": "{tier}级裂隙物品",
       "riftUpgrade": "裂隙强化 {level}/{max}",
       "riftSockets": "裂隙宝石 {used}/{total}",
+      "riftGemSocket": "裂隙之戒的镶嵌加成",
       "statEnchanted": "+{value} {stat}（附魔）",
       "enchantedFallback": "已附魔",
       "partyTradeWindow": "在接下来的{time}内，你可以将此物品交易给共同获得该掉落的玩家。装备后交易期限即告结束。"
@@ -3978,6 +3979,7 @@ export const zh_CN: EnTranslations = {
       "yieldLineRange": "{item} {min} 至 {max} 个",
       "alreadyEnchanted": "那件物品已经附魔。",
       "sameEnchant": "那件物品已经拥有该附魔。",
+      "riftGear": "裂隙之戒只能镶嵌裂隙宝石，无法附魔。",
       "replaceTag": "替换{enchant}",
       "sameEnchantTag": "已施加",
       "plainTag": "未附魔",
@@ -7963,6 +7965,7 @@ export const zh_CN: EnTranslations = {
       "forgeUpgraded": "{name} 的裂隙强化已完成。",
       "forgeEnchanted": "{name} 的裂隙附魔已完成。",
       "forgeSocketed": "已为 {name} 镶嵌裂隙宝石。",
+      "forgeGemReplaced": "已为 {name} 更换裂隙宝石：{gem} 已被摧毁。",
       "detonateGlacialGrave": "冰川之墓引爆！",
       "detonateAbsoluteZero": "绝对零度爆发！",
       "detonateMagmaWell": "岩浆泉喷涌！",

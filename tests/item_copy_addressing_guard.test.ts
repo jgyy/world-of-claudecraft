@@ -57,7 +57,8 @@ const ADDRESSED_COMMANDS: ReadonlyArray<{
   // the delegated dispatch module, not game.ts's label group.
   { cmd: 'bank_socket_bag', field: 'slot', dispatchIn: 'server/bank_wire.ts' },
   { cmd: 'rift_upgrade_item', field: 'slot' },
-  { cmd: 'rift_enchant_item', field: 'slot' },
+  // rift_enchant_item is absent on purpose: retired with the band item-level
+  // ladder, it has no ClientWorld sender (a dispatch-only tombstone).
   { cmd: 'rift_socket_gem', field: 'slot' },
   { cmd: 'equip', field: 'bagSlot', why: 'slot is the equip slot on this token' },
 ];

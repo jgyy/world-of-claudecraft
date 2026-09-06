@@ -3031,6 +3031,7 @@ export const ja_JP: EnTranslations = {
       "riftTier": "{tier}ランク・リフト装備",
       "riftUpgrade": "リフト強化 {level}/{max}",
       "riftSockets": "リフト宝石 {used}/{total}",
+      "riftGemSocket": "リフトバウンドリングのソケット効果",
       "statEnchanted": "+{value} {stat}（エンチャント）",
       "enchantedFallback": "エンチャント済み",
       "partyTradeWindow": "このアイテムはあと{time}の間、同じドロップを分かち合ったプレイヤーと取引できます。装備すると取引期間は終了します。"
@@ -3978,6 +3979,7 @@ export const ja_JP: EnTranslations = {
       "yieldLineRange": "{item} {min}から{max}個",
       "alreadyEnchanted": "そのアイテムにはすでにエンチャントが付与されています。",
       "sameEnchant": "そのアイテムにはすでに同じエンチャントが付与されています。",
+      "riftGear": "リフトバウンドリングはリフト宝石を嵌めるもので、エンチャントはできません。",
       "replaceTag": "{enchant}を置き換え",
       "sameEnchantTag": "付与済み",
       "plainTag": "エンチャントなし",
@@ -7963,6 +7965,7 @@ export const ja_JP: EnTranslations = {
       "forgeUpgraded": "{name} のリフト強化が完了しました。",
       "forgeEnchanted": "{name} のリフト付与が完了しました。",
       "forgeSocketed": "{name} にリフトの宝石をはめ込みました。",
+      "forgeGemReplaced": "{name} のリフトの宝石を交換しました。{gem} は破壊されました。",
       "detonateGlacialGrave": "氷河の墓が炸裂する！",
       "detonateAbsoluteZero": "絶対零度が爆発する！",
       "detonateMagmaWell": "マグマの泉が噴出する！",
