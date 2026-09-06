@@ -4039,9 +4039,10 @@ export class Hud {
     // this same feature, so it splits back apart too, routed through the
     // settings seam so the checkbox, persistence and body class stay in sync.
     // Settings that merely SHOW or HIDE content (the optional bars, the pet
-    // frame, buffs on the player frame) keep the player's choice: they have
-    // their own checkboxes and are not frame layout.
+    // frame, buffs on the player frame) keep the player's choice; the buff
+    // row's reset can seat it in the aura column, so its anchor re-applies.
     this.interfaceUnlock.resetAll();
+    this.applyAuraAnchor();
     this.doomMeter.resetPosition();
     this.chatGeometry.reset();
     this.meters.resetFrames();
@@ -4163,7 +4164,7 @@ export class Hud {
     if (on) {
       if (this.buffBarEl.parentElement !== frame) frame.appendChild(this.buffBarEl);
     } else if (this.buffBarEl.parentElement === frame) {
-      restoreFrameHome(document, 'buffBar', this.buffBarEl);
+      restoreFrameHome(document, 'buffBar');
     }
   }
 

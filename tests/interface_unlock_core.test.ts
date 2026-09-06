@@ -83,8 +83,9 @@ describe('HUD_FRAME_SPECS', () => {
   it('marks exactly the frames that can sit under a transformed ancestor for re-homing', () => {
     // The action bars, pet frame and XP bar live inside #bottom-bar, whose
     // centering transform becomes the containing block for absolute positioning;
-    // the buff/debuff rows can be re-parented into the player frame at runtime
-    // (auras-on-frame). The cast bar, menu rail and minimap are already #ui
+    // the buff/debuff rows live in the #aura-stack flex column, and the buff row
+    // can also be re-parented into the player frame at runtime (the Buffs on the
+    // Player Frame option). The cast bar, menu rail and minimap are already #ui
     // children, and the detacher is a no-op for a frame already homed there.
     const detaching = HUD_FRAME_SPECS.filter((s) => s.detachToUiRoot).map((s) => s.id);
     expect(detaching).toEqual([

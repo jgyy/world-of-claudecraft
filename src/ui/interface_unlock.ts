@@ -458,7 +458,7 @@ export class InterfaceUnlock {
 /** The class a frame wears while a custom position applies (hud.css re-asserts
  *  `position: absolute` on it, so a row lifted out of a flex column keeps its
  *  saved left/top). */
-export const HUD_FRAME_DETACHED_CLASS = 'hud-frame-detached';
+const HUD_FRAME_DETACHED_CLASS = 'hud-frame-detached';
 
 /**
  * The slot a frame returns to when its custom position stops applying: the
@@ -524,11 +524,15 @@ export function makeUiRootDetacher(
  * custom position, else in its declared stock slot. The class is the truth here,
  * not a remembered parent: a remembered parent is whatever the frame sat on when
  * the host first looked, which was #ui whenever a saved position applied at boot.
- * `frameId` names the HUD_FRAME_SPECS row; an unknown id is a no-op.
+ * `frameId` names the HUD_FRAME_SPECS row, and the element comes from that row
+ * so the two cannot disagree. An unknown id, a row that declares no stock home,
+ * or an element missing from the document is a no-op: there is nothing to
+ * restore to (tests/interface_unlock_core.test.ts pins the ids hud.ts uses).
  */
-export function restoreFrameHome(doc: Document, frameId: string, frame: HTMLElement): void {
+export function restoreFrameHome(doc: Document, frameId: string): void {
   const spec = HUD_FRAME_SPECS.find((s) => s.id === frameId);
-  if (!spec) return;
+  const frame = spec && doc.getElementById(spec.elementId);
+  if (!spec || !frame) return;
   if (frame.classList.contains(HUD_FRAME_DETACHED_CLASS)) {
     const uiRoot = doc.getElementById('ui');
     if (uiRoot && frame.parentNode !== uiRoot) uiRoot.appendChild(frame);

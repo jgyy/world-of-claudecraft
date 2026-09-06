@@ -648,7 +648,12 @@ function auraScene() {
   stack.appendChild(debuffBar);
   uiRoot.appendChild(stack);
   uiRoot.appendChild(playerFrame);
-  const byId: Record<string, FakeNode> = { ui: uiRoot, 'aura-stack': stack };
+  const byId: Record<string, FakeNode> = {
+    ui: uiRoot,
+    'aura-stack': stack,
+    'buff-bar': buffBar,
+    'debuff-bar': debuffBar,
+  };
   const doc = { getElementById: (id: string) => byId[id] ?? null } as unknown as Document;
   const asEl = (n: FakeNode) => n as unknown as HTMLElement;
   return { uiRoot, stack, buffBar, debuffBar, playerFrame, doc, asEl };
@@ -736,14 +741,14 @@ describe('restoreFrameHome', () => {
     detach(true);
     playerFrame.appendChild(buffBar);
 
-    expect(() => restoreFrameHome(doc, 'buffBar', asEl(buffBar))).not.toThrow();
+    expect(() => restoreFrameHome(doc, 'buffBar')).not.toThrow();
     expect(buffBar.parentNode).toBe(uiRoot);
     expect(stack.children).toEqual([debuffBar]);
 
     // Idempotent: a second call must not re-append the row to the end of #ui,
     // which would reorder it among its absolutely positioned siblings.
     const order = [...uiRoot.children];
-    restoreFrameHome(doc, 'buffBar', asEl(buffBar));
+    restoreFrameHome(doc, 'buffBar');
     expect(uiRoot.children).toEqual(order);
   });
 
@@ -755,29 +760,29 @@ describe('restoreFrameHome', () => {
     const { uiRoot, stack, buffBar, debuffBar, playerFrame, doc, asEl } = auraScene();
     const detach = makeUiRootDetacher(doc, rowSpec('buffBar', 'first'), asEl(buffBar));
     playerFrame.appendChild(buffBar);
-    restoreFrameHome(doc, 'buffBar', asEl(buffBar));
+    restoreFrameHome(doc, 'buffBar');
     expect(stack.children).toEqual([buffBar, debuffBar]);
 
     detach(true);
     playerFrame.appendChild(buffBar);
-    restoreFrameHome(doc, 'buffBar', asEl(buffBar));
+    restoreFrameHome(doc, 'buffBar');
     expect(buffBar.parentNode).toBe(uiRoot);
     expect(stack.children).toEqual([debuffBar]);
   });
 
   it('seats a row with no custom position at the head of the column, ahead of the debuff row', () => {
-    const { stack, buffBar, debuffBar, playerFrame, doc, asEl } = auraScene();
+    const { stack, buffBar, debuffBar, playerFrame, doc } = auraScene();
     playerFrame.appendChild(buffBar);
-    restoreFrameHome(doc, 'buffBar', asEl(buffBar));
+    restoreFrameHome(doc, 'buffBar');
     expect(stack.children).toEqual([buffBar, debuffBar]);
     expect(buffBar.nextSibling).toBe(debuffBar);
   });
 
   it('is a no-op for a row already home, and for an id the table does not know', () => {
-    const { stack, buffBar, debuffBar, doc, asEl } = auraScene();
-    restoreFrameHome(doc, 'buffBar', asEl(buffBar));
+    const { stack, buffBar, debuffBar, doc } = auraScene();
+    restoreFrameHome(doc, 'buffBar');
     expect(stack.children).toEqual([buffBar, debuffBar]);
-    restoreFrameHome(doc, 'noSuchFrame', asEl(buffBar));
+    restoreFrameHome(doc, 'noSuchFrame');
     expect(stack.children).toEqual([buffBar, debuffBar]);
   });
 });
