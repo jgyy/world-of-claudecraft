@@ -2411,6 +2411,13 @@ export const TARGETS = [
     ],
     async capture(page) {
       await page.evaluate(() => {
+        // The Proving Shore greeting note would overlap the panel.
+        const greeting = document.getElementById('tutorial-greeting');
+        if (greeting) {
+          greeting.querySelector('[data-close], [data-skip], button')?.click();
+          greeting.hidden = true;
+          greeting.style.display = 'none';
+        }
         const el = document.querySelector('#options-menu');
         if (el) el.style.display = 'none';
         window.__game?.hud?.toggleOptionsMenu?.();
