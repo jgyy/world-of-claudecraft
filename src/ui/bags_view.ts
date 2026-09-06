@@ -128,7 +128,7 @@ export type BagAction =
 
 /** The tooltip hint sub-line i18n key for a bag item (or '' for no hint). */
 export type BagTooltipHintKey =
-  | 'hudChrome.itemSoulbound'
+  | 'hudChrome.itemAccountBound'
   | 'itemUi.tooltip.clickTradeOffer'
   | 'itemUi.tooltip.cannotMarket'
   | 'itemUi.tooltip.clickMarketList'
@@ -153,6 +153,7 @@ export type BagTooltipHintKey =
   // "Click to use" for a click that only errors.
   | 'hudChrome.professions.toolEffectTooltip.openProfessions'
   | 'hudChrome.mailbox.clickAttach'
+  | 'hudChrome.mailbox.clickAttachAccountBound'
   | 'hudChrome.mailbox.cannotMail'
   | '';
 
@@ -174,7 +175,12 @@ export function bagItemAction(
    *  deposits instead). The vault preserves it, so it never blocks there. */
   craftedRecipeId?: string,
 ): BagAction {
-  if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
+  // Account bound (def soulbound) gear refuses every anonymous pipe in place,
+  // EXCEPT mail attach: a bound piece rides the Ravenpost to the sender's own
+  // characters (src/sim/mail/account_bound.ts), and only the server can tell
+  // whether the typed recipient is one, so the attach stages and the send
+  // refuses with the account-bound mail line when it is not.
+  if (item.soulbound && (mode.tradeOpen || mode.marketSell || mode.vendorOpen))
     return 'transferBlockedSoulbound';
   if (mode.tradeOpen) return 'trade';
   if (mode.mailAttach) {
@@ -436,12 +442,16 @@ export function bagTooltipHintKey(
    *  by the vaultDeposit arm. */
   craftedRecipeId?: string,
 ): BagTooltipHintKey {
-  if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
-    return 'hudChrome.itemSoulbound';
+  if (item.soulbound && (mode.tradeOpen || mode.marketSell || mode.vendorOpen))
+    return 'hudChrome.itemAccountBound';
   if (mode.tradeOpen) return 'itemUi.tooltip.clickTradeOffer';
   if (mode.mailAttach) {
-    return item.kind === 'quest' || item.noMarketList || isTransferLockedInstance(instance)
-      ? 'hudChrome.mailbox.cannotMail'
+    // The bagItemAction twin: an account bound piece attaches (own characters
+    // only), so it reads the own-characters hint instead of the plain one.
+    if (item.kind === 'quest' || item.noMarketList || isTransferLockedInstance(instance))
+      return 'hudChrome.mailbox.cannotMail';
+    return item.soulbound
+      ? 'hudChrome.mailbox.clickAttachAccountBound'
       : 'hudChrome.mailbox.clickAttach';
   }
   if (mode.marketSell) {
