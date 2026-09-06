@@ -46,6 +46,29 @@ async function awaitWorldPainted(page) {
   );
 }
 
+// The loading veil can rise more than once after a teleport (asset streaming
+// re-arms it), and a clip taken under it shoots the curtain art. Wait until
+// it has stayed hidden for a full streak, both before and after staging.
+async function awaitVeilSettled(page, streakMs = 3000) {
+  const deadline = Date.now() + 120000;
+  let hiddenSince = null;
+  while (Date.now() < deadline) {
+    const hidden = await page.evaluate(() => {
+      const veil = document.getElementById('loading-screen');
+      if (!veil) return true;
+      const style = getComputedStyle(veil);
+      return (
+        style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0
+      );
+    });
+    if (!hidden) hiddenSince = null;
+    else if (hiddenSince === null) hiddenSince = Date.now();
+    else if (Date.now() - hiddenSince >= streakMs) return;
+    await wait(250);
+  }
+  throw new Error('loading veil never settled');
+}
+
 // Seed the theme preset BEFORE the document loads (variant.beforeLoad), in string
 // form because this script runs under tsx (keepNames breaks nested functions inside
 // evaluate callbacks). Every themed variant seeds explicitly, never relies on a
@@ -12069,6 +12092,94 @@ export const TARGETS = [
       }
       await wait(800);
       return { clip: '#ui' };
+    },
+  },
+  {
+    key: 'rift-forge',
+    label: 'Rift Forge: the Riftwright in Gullhaven and the forge window',
+    when: ['ui/hud/rift_forge/', 'sim/rift/forge_gate', 'content/farshore.ts'],
+    variants: [
+      // The meadow spot itself: on the base branch the NPC is absent (the
+      // BEFORE frame), on the feature branch the Riftwright stands there.
+      { key: 'meadow', scene: 'meadow' },
+      { key: 'window', scene: 'window' },
+      { key: 'window-mobile', scene: 'window', mobile: true },
+    ],
+    async capture(page, variant) {
+      const scene = variant?.scene ?? 'window';
+      await awaitVeilSettled(page);
+      const staged = await page.evaluate((wantWindow) => {
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!sim?.player) return { ok: false, reason: 'offline world is unavailable' };
+        const p = sim.player;
+        let forge = null;
+        for (const e of sim.entities.values()) {
+          if (e.kind === 'npc' && e.templateId === 'riftwright_maelis') forge = e;
+        }
+        // The authored Watch Meadow spot (content/farshore.ts): the base branch
+        // has no NPC to read it from, so the coordinates are restated here.
+        const at = forge ? { x: forge.pos.x, z: forge.pos.z } : { x: 377, z: 7 };
+        p.pos = { x: at.x - 2.5, y: p.pos.y, z: at.z + 2.5 };
+        p.prevPos = { ...p.pos };
+        p.facing = Math.PI * 0.25;
+        sim.rebucket(p);
+        game.input.camYaw = p.facing;
+        game.input.camDist = 9;
+        game.input.camPitch = 0.45;
+        if (!wantWindow) return { ok: true, npc: !!forge };
+        if (typeof game.hud?.openRiftForge !== 'function') {
+          return { ok: false, reason: 'no forge window on this branch' };
+        }
+        try {
+          // One S-rank band one step up the ladder, a bag of essence and one
+          // gem: every row control renders enabled.
+          sim.addItemInstance('riftbound_band_of_might', {
+            rift: {
+              sourceEventId: 'pr-shot',
+              tier: 'S',
+              power: 4,
+              upgradeLevel: 1,
+              maxUpgradeLevel: 5,
+              baseStats: { str: 6, sta: 4 },
+              gemSlots: 2,
+              gems: [],
+            },
+          });
+          sim.addItem('rift_essence', 9);
+          sim.addItem('rift_gem_verdant', 1);
+        } catch {}
+        game.hud.openRiftForge();
+        return { ok: true, npc: !!forge };
+      }, scene === 'window');
+      if (!staged.ok) return { skip: staged.reason };
+      await awaitVeilSettled(page);
+      await dismissEntryOverlays(page);
+      const dismissed = await page.evaluate(() => {
+        let any = false;
+        const greeting = document.getElementById('tutorial-greeting');
+        if (greeting instanceof HTMLElement && getComputedStyle(greeting).display !== 'none') {
+          [...greeting.querySelectorAll('button')].at(-1)?.click();
+          any = true;
+        }
+        const skip = document.querySelector('.tut-skip');
+        if (skip instanceof HTMLElement && skip.offsetParent !== null) {
+          skip.click();
+          any = true;
+        }
+        return any;
+      });
+      if (dismissed) await wait(400);
+      // Staging teleported and opened a window: the veil may rise again.
+      await awaitVeilSettled(page);
+      if (scene !== 'window') {
+        await wait(2500); // let the meadow and the NPC body settle under swiftshader
+        return {};
+      }
+      if (!(await pollForSize(page, '#rift-forge-window .rf-ring'))) {
+        throw new Error('rift forge window did not render a band row');
+      }
+      return { clip: '#rift-forge-window' };
     },
   },
 ];

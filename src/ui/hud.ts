@@ -509,6 +509,7 @@ import { QuestTrackerController } from './hud/quest/quest_tracker_controller';
 import { QuestLogWindow } from './hud/quest/questlog_window';
 import { RiftMapPainter } from './hud/rift';
 import { RiftFloorTrackerController } from './hud/rift/rift_floor_tracker_controller';
+import { RiftForgeWindow, riftForgeInReach } from './hud/rift_forge';
 import { StanceBarController } from './hud/stance';
 import { closeOpenTouchMenu } from './hud/tap_menu';
 import { createTargetDotsView, type TargetDotsInput, TargetDotsPainter } from './hud/target_dots';
@@ -557,7 +558,11 @@ import {
 } from './interface_unlock_menu_core';
 import { InterfaceUnlockPreview } from './interface_unlock_preview';
 import { InteriorMapController } from './interior_map_controller';
-import { compareStatLabelKey, itemAffixTooltipLines } from './item_affix_tooltip';
+import {
+  compareStatLabelKey,
+  itemAffixTooltipLines,
+  itemRatingTooltipLines,
+} from './item_affix_tooltip';
 import { itemArmorTypeLabelKey } from './item_armor_type';
 import { requiredClassesForTooltip } from './item_class_restriction';
 import { itemStatDeltas, shouldCompareCopies } from './item_compare';
@@ -776,12 +781,7 @@ import {
   type StatTooltipModel,
   weaponDps,
 } from './stat_tooltip';
-import {
-  type StatTooltipI18n,
-  statCellHtml,
-  statNameKey,
-  statTooltipHtml,
-} from './stat_tooltip_view';
+import { type StatTooltipI18n, statCellHtml, statTooltipHtml } from './stat_tooltip_view';
 import { clearOpenStoreResult } from './store_decision_prompt';
 import { mountStorePromoCard, type StorePromoCardController } from './store_promo_card';
 import { recordStoreStackSample } from './store_stack_diag';
@@ -3660,6 +3660,9 @@ export class Hud {
       case 'guild-board-window':
         this.guildBoardWindow.close();
         break;
+      case 'rift-forge-window':
+        this.riftForgeWindow.close();
+        break;
       case 'daily-rewards-window':
         this.dailyRewardsWindow.close();
         break;
@@ -5619,6 +5622,17 @@ export class Hud {
     onVisibilityChange: () => this.syncAnyWindowOpenState(),
     maskPlayerText: (text) => this.maskChat(text),
   });
+  // The Rift Forge (src/ui/hud/rift_forge/): opened by the Riftwright's
+  // interaction event, never a menu button; the forge lives in the world.
+  private readonly riftForgeWindow = new RiftForgeWindow({
+    root: () => $('#rift-forge-window'),
+    world: () => this.sim,
+    closeOthers: () => this.closeOtherWindows('#rift-forge-window'),
+    ...this.windowFocus('#rift-forge-window'),
+    onVisibilityChange: () => this.syncAnyWindowOpenState(),
+    itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
+    attachTooltip: (el, html) => this.attachTooltip(el, html),
+  });
   // The $WOC Exchange is online-only, browser web + website desktop. Its
   // launcher stays hidden until main.ts attaches hooks; a denied non-native
   // desktop shell can instead reveal the SAME launcher wired to a browser
@@ -6499,28 +6513,7 @@ export class Hud {
     html += riftBandTooltipLines(instance);
     html += itemAffixTooltipLines(item);
     html += riftGemTooltipLines(item);
-    const warfareRating = Math.min(item.pvpOffenseRating ?? 0, item.pvpDefenseRating ?? 0);
-    if (warfareRating > 0) {
-      html += `<div class="tt-green">${esc(
-        t('itemUi.tooltip.stat', {
-          value: itemNumber(warfareRating),
-          stat: t(statNameKey('warfare') as TranslationKey),
-        }),
-      )}</div>`;
-    }
-    // Combat ratings (hit / crit / haste): shown as classic "+N Rating" affix lines,
-    // sharing the character-sheet HUD-chrome labels. Hit answers the higher-level
-    // miss/resist penalty; crit and haste add throughput.
-    for (const ratingStat of ['hitRating', 'critRating', 'hasteRating'] as const) {
-      const value = item[ratingStat] ?? 0;
-      if (value <= 0) continue;
-      html += `<div class="tt-green">${esc(
-        t('itemUi.tooltip.stat', {
-          value: itemNumber(value),
-          stat: t(statNameKey(ratingStat) as TranslationKey),
-        }),
-      )}</div>`;
-    }
+    html += itemRatingTooltipLines(item);
     if (item.foodHp)
       html += `<div class="tt-desc">${esc(t('itemUi.tooltip.useFood', { amount: itemNumber(item.foodHp), seconds: itemNumber(CONSUME_DURATION) }))}</div>`;
     if (item.drinkMana)
@@ -6993,6 +6986,7 @@ export class Hud {
     this.noticeboardPopup.relocalize();
     this.realmBuilderPopup.relocalize();
     this.guildBoardWindow.relocalize();
+    this.riftForgeWindow.relocalize();
     // The ring latches its page indicator on the page/count pair; dropping the
     // latch relabels it on the next paint (mobile layouts only build the ring).
     this.mobileActionRingPainter?.relocalize();
@@ -9733,6 +9727,13 @@ export class Hud {
     if (slowHud && this.marketWindow.isOpen) {
       if (!this.nearbyMarketNpc()) this.marketWindow.close();
       else this.marketWindow.refreshIfChanged();
+    }
+    // The forge window follows the player out of the Riftwright's reach (the
+    // market rule); the sim's own place gate refuses the commands regardless.
+    if (slowHud && this.riftForgeWindow.isOpen) {
+      const p = this.sim.player;
+      if (!riftForgeInReach(p, this.sim.entities.values(), NPC_WINDOW_CLOSE_RANGE))
+        this.riftForgeWindow.close();
     }
     // The mailbox closes itself when the mail mirror goes null (walked away).
     if (slowHud && this.mailboxWindow.isOpen) this.mailboxWindow.refreshIfChanged();
@@ -12556,6 +12557,12 @@ export class Hud {
           // Keyboard/sim interact at a banker NPC: open the bank window.
           this.openBank();
           break;
+        case 'riftForge':
+          // Interact at the Riftwright: open the Rift Forge window (which
+          // quotes her greeting) and speak the greeting cue.
+          voice.play('greeting__riftwright_maelis');
+          this.openRiftForge();
+          break;
         case 'noticeboard':
           // The structured private event keeps this feedback localized and
           // identical offline and online. A board carrying authored listings
@@ -13620,8 +13627,10 @@ export class Hud {
           }
           break;
         case 'riftRaceWorld':
+          break; // its localized log line carries the non-modal detail
         case 'riftForgeResult':
-          break; // their localized log line carries the non-modal detail
+          this.riftForgeWindow.onResult(ev); // the window owns the reason line
+          break;
         case 'companionBark': {
           // Acolyte Tessa's voice line: overhead bubble over her (when on-screen),
           // plus an attributed combat-log line so it is never missed off-screen.
@@ -16550,6 +16559,7 @@ export class Hud {
       this.renderTrain();
     if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
       this.renderUnbind();
+    if (this.riftForgeWindow.isOpen) this.riftForgeWindow.render();
   }
 
   onCosmeticsChanged(): void {
@@ -17406,6 +17416,11 @@ export class Hud {
    *  (and the E2E capture rigs); there is no menu launcher on purpose. */
   openGuildBoard(): void {
     this.guildBoardWindow.open();
+  }
+
+  /** The Rift Forge: opened by the Riftwright interaction (and the capture rigs). */
+  openRiftForge(): void {
+    this.riftForgeWindow.open();
   }
 
   toggleDailyRewards(): void {

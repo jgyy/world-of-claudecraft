@@ -142,20 +142,33 @@ ranked portal spawn cadence, never a re-grantable faucet, so closing its market
 and mail routes (the way a re-grantable faucet or a store SKU is closed
 elsewhere in the item catalog) has no exploit to guard against.
 
-The forge (upgrade, socket) has no shipped client UI yet, so the
-authoritative server refuses its two wire commands unless the realm opts in
-with RIFT_FORGE_ENABLED=1 (server/rift_forge_gate.ts, pinned by
-tests/rift_forge_gate.test.ts). Absent UI is not a gate: a crafted frame
-reaches the wire regardless, and players used exactly that path for premature
-progression before the gate landed. The sim methods stay live offline and in
-tests; only the online dispatch arms are closed. Each refused attempt books
-the woc_rift_forge_refused_total counter, the ops signal that probing
-continues (or that a realm forgot the flag once the UI ships). The retired
-third token, rift_enchant_item, is outside the gate on purpose: its arm is a
-no-op that can spend nothing, so a crafted frame carrying it books no
-refusal and is a deliberate blind spot, not a leak.
+The forge (upgrade, socket) is an NPC service: Riftwright Maelis
+(`riftForge: true` in `content/farshore.ts`, Gullhaven's Watch Meadow) opens the
+Rift Forge window (`src/ui/hud/rift_forge/`, a pure view-core plus a thin
+window on the guild-board shape) through the structured `riftForge` interact
+event, the bank precedent. The place rule lives in the sim
+(`rift/forge_gate.ts`, `nearRiftForge`): both forge operations refuse away
+from a riftForge NPC with the shared "too far from the Rift Forge" error line
+(returned as reason `too_far`, never emitted as a `riftForgeResult`, the `dead`
+contract), so the offline world, the headless env, and the authoritative server
+enforce it identically. Only bagged bands are forgeable (the sim resolves the
+target through the inventory); the window lists a worn band with an unequip
+hint. The forge currency ladder is the sim's own (`riftUpgradeCost`, 2 essence
+at the first step rising by 2 per step to the fifth; one gem per socket, a
+full band replacing its oldest gem), quoted by the window from those exports
+rather than re-derived. The window also quotes the item level each essence
+step buys (`rift/band_ladder.ts` `riftBandItemLevel`).
 
-Note for whoever ships the forge UI: send the two commands through
-ClientWorld's cmdWithOutcome (not the fire-and-forget cmd sender), because a
-realm with the flag still off refuses with only a commandOutcome ok:false
-ack, and a rid-less sender would surface that as pure silence to the player.
+The server's `RIFT_FORGE_ENABLED` gate (`server/rift_forge_gate.ts`, pinned by
+`tests/rift_forge_gate.test.ts`) is an ops kill switch rather than an
+opt-in: `0` (or `false`, `off`, `no`) closes the two wire commands, unset
+and anything else keeps them open. The dispatch arms (`server/rift_forge_dispatch.ts`)
+answer the `commandOutcome` ack with the sim verdict, and the client sends
+them through `cmdWithOutcome`, so a closed realm or a sim refusal always
+surfaces as a visible status line in the window, never as silence. Each
+refused-while-closed attempt still books the `woc_rift_forge_refused_total`
+counter. The retired third token, rift_enchant_item, is outside the switch on
+purpose: its arm is a no-op that can spend nothing, so a crafted frame
+carrying it books no refusal and is a deliberate blind spot, not a leak. The
+switch only works where the server sees the variable: `docker-compose.yml`
+forwards it, and a deploy template that renders its own compose must too.

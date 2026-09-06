@@ -393,7 +393,9 @@ describe('cost model parity with src/sim/rift/progression.ts', () => {
   const progressionSource = readFileSync('src/sim/rift/progression.ts', 'utf8');
 
   test('upgrade step cost in the sim is 2 + 2 * level', () => {
-    expect(progressionSource).toContain('const cost = 2 + gear.upgradeLevel * 2;');
+    // The ladder lives in riftUpgradeCost (the forge window quotes it too).
+    expect(progressionSource).toContain('return 2 + upgradeLevel * 2;');
+    expect(progressionSource).toContain('const cost = riftUpgradeCost(gear.upgradeLevel);');
   });
 
   test('the forge enchant the rollback refunded no longer exists in the sim', () => {

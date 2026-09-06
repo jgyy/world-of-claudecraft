@@ -28,6 +28,7 @@ import {
   runDisenchant,
   runSalvage,
 } from './helpers/enchant_family_cast';
+import { moveToRiftForge } from './helpers/rift_forge';
 
 type AnyEntity = Entity & Record<string, any>;
 type AnySim = Sim & Record<string, any>;
@@ -304,6 +305,7 @@ for (const mode of ['unreleased', 'ghost'] as const) {
       sim.setPlayerLevel(20);
       const gear = createRiftGearInstance('rift-dead-gate', 'S', 'warrior', sim.player.id);
       sim.addItemInstance(gear.itemId, gear.instance);
+      moveToRiftForge(sim);
       sim.addItem(RIFT_ESSENCE_ITEM_ID, 20);
       sim.addItem(RIFT_GEM_IDS[0], 1);
       // Alive baseline: the first upgrade lands and spends essence.

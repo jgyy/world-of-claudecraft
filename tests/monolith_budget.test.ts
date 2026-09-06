@@ -290,7 +290,10 @@ const MONOLITHS: MonolithRow[] = [
     // rift tooltip lines moved into src/ui/rift_band_tooltip.ts (with the
     // per-copy item-level readout), the compare block only threaded the
     // hovered and worn instances through. Exact merged count, zero slack.
-    ceiling: 18851,
+    // Re-pinned to the exact merged count (the Rift Forge window wiring on top of the ladder: the repaint-family line and the walk-away close, over the base retune).
+    // Exact merged count, zero slack.
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 18851 plus this branch's +15.
+    ceiling: 18866,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -617,7 +620,10 @@ const MONOLITHS: MonolithRow[] = [
     // count, zero slack.
     // Lowered 10614 -> 10613 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
     // Exact count, zero slack.
-    ceiling: 10613,
+    // Re-pinned to the exact merged count (the forge dispatch extraction plus the retired enchant tombstone arm).
+    // Exact merged count, zero slack.
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 10613 plus this branch's -9.
+    ceiling: 10604,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -683,7 +689,10 @@ const MONOLITHS: MonolithRow[] = [
     // lowers with them.
     // Lowered 5896 -> 5892 by the Riftbound band item-level ladder (the retired forge enchant sender).
     // Exact count, zero slack.
-    ceiling: 5892,
+    // Re-pinned to the exact merged count (the forge pair senders awaiting their ack, over the retired enchant sender).
+    // Exact merged count, zero slack.
+    // Re-measured at the release/v0.42.0 sync that brought in the guild roster pages (PR #3874): the ladder's 5892 plus this branch's +6.
+    ceiling: 5898,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

@@ -21,12 +21,19 @@ import {
   type RiftBandShell,
   riftBandRolledStats,
 } from './band_ladder';
+import { nearRiftForge, RIFT_FORGE_TOO_FAR_TEXT } from './forge_gate';
 import { riftHeroicClearPool, riftNormalClearPool } from './loot_pools';
 import { riftRankForBaseLevel } from './ranks';
 
 const TIER_POWER: Record<RiftTier, number> = { C: 1, B: 2, A: 3, S: 4 };
 const MELEE_CLASSES = new Set<PlayerClass>(['warrior', 'paladin', 'shaman']);
 const AGILITY_CLASSES = new Set<PlayerClass>(['rogue', 'hunter', 'druid']);
+
+/** Essence an upgrade from `upgradeLevel` costs: 2, 4, 6, 8, 10 across the
+ *  five steps. Exported so the forge window quotes the same ladder. */
+export function riftUpgradeCost(upgradeLevel: number): number {
+  return 2 + upgradeLevel * 2;
+}
 
 export type RiftForgeAction = 'upgrade' | 'socket';
 export interface RiftForgeResult {
@@ -43,7 +50,11 @@ export interface RiftForgeResult {
     // the offline probes) but NEVER emitted as a riftForgeResult event; the
     // shared "You can't do that while dead." error line is its only
     // player-facing surface, like the unresolvable-player arm above it.
-    | 'dead';
+    | 'dead'
+    // The place refusal (forge_gate.ts): the player is not standing at a
+    // riftForge NPC. Same single-surface contract as 'dead': returned, never
+    // emitted; the "too far from the Rift Forge" error line is its surface.
+    | 'too_far';
   upgradeLevel?: number;
   essenceSpent?: number;
   /** The gem a socket action destroyed to make room (sockets are replaceable:
@@ -373,6 +384,14 @@ function riftInventorySlot(meta: PlayerMeta, itemId: string, slotIndex?: number)
   return null;
 }
 
+/** The shared place gate for the forge pair: true (and the error line
+ *  emitted) when the resolved player is out of reach of the Riftwright. */
+function refusedAwayFromForge(ctx: SimContext, r: { e: Entity; meta: PlayerMeta }): boolean {
+  if (nearRiftForge(ctx, r.e)) return false;
+  ctx.error(r.meta.entityId, RIFT_FORGE_TOO_FAR_TEXT);
+  return true;
+}
+
 function emitResult(ctx: SimContext, pid: number, result: RiftForgeResult): RiftForgeResult {
   ctx.emit({ type: 'riftForgeResult', pid, ...result });
   if (result.ok) {
@@ -410,6 +429,8 @@ export function upgradeRiftItem(
   if (refusedWhileDead(ctx, pid)) return { ok: false, action: 'upgrade', itemId, reason: 'dead' };
   const r = ctx.resolve(pid);
   if (!r) return { ok: false, action: 'upgrade', itemId, reason: 'not_found' };
+  if (refusedAwayFromForge(ctx, r))
+    return { ok: false, action: 'upgrade', itemId, reason: 'too_far' };
   const slot = riftInventorySlot(r.meta, itemId, slotIndex);
   if (!slot?.instance?.rift) {
     return emitResult(ctx, r.meta.entityId, {
@@ -428,7 +449,7 @@ export function upgradeRiftItem(
       reason: 'max_upgrade',
     });
   }
-  const cost = 2 + gear.upgradeLevel * 2;
+  const cost = riftUpgradeCost(gear.upgradeLevel);
   if (ctx.countItem(RIFT_ESSENCE_ITEM_ID, r.meta.entityId) < cost) {
     return emitResult(ctx, r.meta.entityId, {
       ok: false,
@@ -466,6 +487,8 @@ export function socketRiftGem(
   if (refusedWhileDead(ctx, pid)) return { ok: false, action: 'socket', itemId, reason: 'dead' };
   const r = ctx.resolve(pid);
   if (!r) return { ok: false, action: 'socket', itemId, reason: 'not_found' };
+  if (refusedAwayFromForge(ctx, r))
+    return { ok: false, action: 'socket', itemId, reason: 'too_far' };
   const slot = riftInventorySlot(r.meta, itemId, slotIndex);
   if (!slot?.instance?.rift) {
     return emitResult(ctx, r.meta.entityId, {

@@ -21,6 +21,7 @@ import {
 import { Sim } from '../src/sim/sim';
 import type { ItemInstancePayload } from '../src/sim/types';
 import { runSalvage } from './helpers/enchant_family_cast';
+import { moveToRiftForge } from './helpers/rift_forge';
 
 const MIGHT = { primary: 'str', secondary: 'sta' } as const;
 const CRIMSON = RIFT_GEM_IDS[0]; // crit
@@ -50,6 +51,7 @@ describe('Rift band progression: the forge pair', () => {
 
   it('each essence upgrade raises the item level by one and re-prices the whole line', () => {
     const sim = new Sim({ seed: 731, playerClass: 'warrior', autoEquip: false });
+    moveToRiftForge(sim);
     sim.setPlayerLevel(20);
     const gear = createRiftGearInstance('rift-test', 'S', 'warrior', sim.player.id);
     sim.addItemInstance(gear.itemId, gear.instance);
@@ -84,6 +86,7 @@ describe('Rift band progression: the forge pair', () => {
 
   it('a gem adds its colour rating, never a primary stat or an item level', () => {
     const sim = new Sim({ seed: 735, playerClass: 'mage', autoEquip: false });
+    moveToRiftForge(sim);
     sim.setPlayerLevel(20);
     const gear = createRiftGearInstance('rift-gem', 'B', 'mage', sim.player.id);
     sim.addItemInstance(gear.itemId, gear.instance);
@@ -100,6 +103,7 @@ describe('Rift band progression: the forge pair', () => {
 
   it('a full band takes a new gem in place of its oldest one, and the old gem is destroyed', () => {
     const sim = new Sim({ seed: 736, playerClass: 'warrior', autoEquip: false });
+    moveToRiftForge(sim);
     sim.setPlayerLevel(20);
     const gear = createRiftGearInstance('rift-replace', 'S', 'warrior', sim.player.id);
     sim.addItemInstance(gear.itemId, gear.instance);
@@ -133,6 +137,7 @@ describe('Rift band progression: the forge pair', () => {
 
   it('refuses a gem the player does not hold and an id that is not a gem', () => {
     const sim = new Sim({ seed: 737, playerClass: 'rogue', autoEquip: false });
+    moveToRiftForge(sim);
     const gear = createRiftGearInstance('rift-refuse', 'C', 'rogue', sim.player.id);
     sim.addItemInstance(gear.itemId, gear.instance);
     expect(sim.socketRiftGem(gear.itemId, CRIMSON)).toEqual(
@@ -149,6 +154,7 @@ describe('Rift band progression: the forge pair', () => {
 describe('Rift band progression: worn', () => {
   it('a worn band grants its rolled line and every gem rating, and survives save/load', () => {
     const sim = new Sim({ seed: 738, playerClass: 'warrior', autoEquip: false });
+    moveToRiftForge(sim);
     sim.setPlayerLevel(20);
     const gear = createRiftGearInstance('rift-worn', 'S', 'warrior', sim.player.id);
     sim.addItemInstance(gear.itemId, gear.instance);
@@ -277,6 +283,7 @@ describe('Rift band progression: the load-time rebuild', () => {
 
   it('the forge refuses a rift record riding a non-band id, spending nothing', () => {
     const sim = new Sim({ seed: 739, playerClass: 'warrior', autoEquip: false });
+    moveToRiftForge(sim);
     const band = createRiftGearInstance('rift-odd', 'S', 'warrior', sim.player.id);
     sim.addItemInstance('rimefang', band.instance);
     sim.addItem(RIFT_ESSENCE_ITEM_ID, 10);
@@ -309,6 +316,7 @@ describe('Rift band progression: the load-time rebuild', () => {
 
   it('rebuilds persisted Rift stats instead of trusting a tampered item payload', () => {
     const sim = new Sim({ seed: 733, playerClass: 'warrior', autoEquip: false });
+    moveToRiftForge(sim);
     sim.setPlayerLevel(20);
     const gear = createRiftGearInstance('rift-safe-load', 'S', 'warrior', sim.player.id);
     sim.addItemInstance(gear.itemId, gear.instance);
@@ -344,6 +352,7 @@ describe('Rift band progression: the load-time rebuild', () => {
 describe('Rift band progression: salvage', () => {
   it('salvages Rift gear back into tier-and-upgrade-scaled Rift Essence', () => {
     const sim = new Sim({ seed: 732, playerClass: 'mage', autoEquip: false });
+    moveToRiftForge(sim);
     const gear = createRiftGearInstance('rift-test', 'A', 'mage', sim.player.id, 2);
     expect(gear.instance.rift?.upgradeLevel).toBe(2);
     const expected = riftSalvageYield(gear.instance);
@@ -362,6 +371,7 @@ describe('Rift band progression: salvage', () => {
 
   it('salvages the exact same-id copy that inventory removal consumes', () => {
     const sim = new Sim({ seed: 734, playerClass: 'warrior', autoEquip: false });
+    moveToRiftForge(sim);
     const gear = createRiftGearInstance('rift-exact-copy', 'S', 'warrior', sim.player.id, 5);
     sim.addItemInstance(gear.itemId, gear.instance);
     // Most-recent copy is a harmless plain shell. Salvaging by item id must not

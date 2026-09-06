@@ -356,6 +356,7 @@ import { eventLeadDayKey, resetDayKey } from './raid_reset';
 import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
 import { createRealmReadoutMemo, realmReadoutJson, realmReadoutObject } from './realm_readout_memo';
 import { RiftAssetCoordinator, riftAssetConfigFromEnv } from './rift_assets';
+import { dispatchRiftCommand } from './rift_forge_dispatch';
 import { refusedRiftForgeCommand } from './rift_forge_gate';
 import { RiftUpgradeCoordinator, riftUpgraderConfigFromEnv } from './rift_upgrader';
 import {
@@ -6642,15 +6643,13 @@ export class GameServer {
       this.sendCommandOutcome(session, msg, false);
       return;
     }
-    // The Rift forge trio shipped sim+wire complete with no client UI, so the
-    // arms stay closed until the realm explicitly opts in (RIFT_FORGE_ENABLED=1;
-    // rationale in server/rift_forge_gate.ts): a crafted frame must not buy
-    // progression the stock client cannot reach. Refused ABOVE the heavy-self
-    // dirty flag below, so a blocked command cannot force a re-diff either.
+    // The Rift forge pair is open by default now that the forge window ships;
+    // RIFT_FORGE_ENABLED=0 is the ops kill switch (server/rift_forge_gate.ts).
+    // Refused ABOVE the heavy-self dirty flag below, so a closed command
+    // cannot force a re-diff either.
     if (refusedRiftForgeCommand(msg.cmd)) {
-      // Label-free by contract (game_signals.ts): the stock client never sends
-      // these, so the counter is the ops signal that a modified client probes
-      // the closed forge (and that a realm forgot the flag once the UI ships).
+      // Label-free by contract (game_signals.ts): the counter is the ops
+      // signal that forge attempts keep arriving at a realm that closed it.
       gameMetricsCounters().riftForgeRefused();
       this.sendCommandOutcome(session, msg, false);
       return;
@@ -7050,29 +7049,21 @@ export class GameServer {
       case 'deliver_commission_order':
         if (typeof msg.order === 'number') sim.deliverCommissionOrder(msg.order, pid);
         break;
-      case 'rift_upgrade_item':
-        if (typeof msg.item === 'string') {
-          const slot = Number.isInteger(msg.slot) ? Number(msg.slot) : undefined;
-          sim.upgradeRiftItem(msg.item, pid, slot);
-        }
-        break;
       case 'rift_enchant_item':
         // Retired tombstone: the forge enchant went away with the Riftbound
         // band item-level ladder (rift/band_ladder.ts), but wire tokens are
         // append-only (COMMAND_NAMES), so the arm stays and does nothing.
-        // No stock client has ever sent it (no forge UI had shipped when it was
-        // retired); a crafted frame gets the same silence as any other no-op.
+        // Never routed to the forge dispatch: a crafted frame gets the same
+        // silence as any other no-op.
         break;
-      case 'rift_socket_gem':
-        if (typeof msg.item === 'string' && typeof msg.gem === 'string') {
-          sim.socketRiftGem(
-            msg.item,
-            msg.gem,
-            pid,
-            Number.isInteger(msg.slot) ? Number(msg.slot) : undefined,
-          );
-        }
+      case 'rift_upgrade_item':
+      case 'rift_socket_gem': {
+        // The forge pair answers the commandOutcome ack with the sim verdict
+        // (server/rift_forge_dispatch.ts): the forge window awaits it.
+        const forged = dispatchRiftCommand(sim, msg, pid);
+        if (forged) this.sendCommandOutcome(session, msg, forged.ok);
         break;
+      }
       case 'place_mobile_station':
         if (typeof msg.craft === 'string') sim.placeMobileStation(msg.craft, pid);
         break;
