@@ -525,7 +525,9 @@ describe('InterfaceUnlock frames menu', () => {
 // that the reference node must be a CURRENT child (a real browser throws
 // NotFoundError otherwise): the two-rows-detached regression below is decisive
 // only because a remembered sibling that has since left the parent throws here
-// exactly as it does in play, instead of quietly appending.
+// exactly as it does in play, instead of quietly appending. It carries no text
+// nodes, so `firstChild` is always an element here; in the shipped markup it is
+// the indentation text node, which the `first` slot inserts before just as well.
 class FakeNode {
   children: FakeNode[] = [];
   parentNode: FakeNode | null = null;
@@ -704,6 +706,22 @@ describe('makeUiRootDetacher with a declared stock home', () => {
     detach(false);
     expect(stack.children).toEqual([buffBar, debuffBar]);
   });
+
+  it('a declared parent missing from the tree leaves the row on #ui rather than guessing', () => {
+    // No captured-slot fallback here: the captured slot is exactly the stale
+    // answer the declaration exists to replace, so the row stays where the
+    // detacher can still find it.
+    const { uiRoot, buffBar, asEl } = auraScene();
+    const doc = { getElementById: (id: string) => (id === 'ui' ? uiRoot : null) };
+    const detach = makeUiRootDetacher(
+      doc as unknown as Document,
+      rowSpec('buffBar', 'first'),
+      asEl(buffBar),
+    );
+    detach(true);
+    detach(false);
+    expect(buffBar.parentNode).toBe(uiRoot);
+  });
 });
 
 describe('restoreFrameHome', () => {
@@ -721,6 +739,12 @@ describe('restoreFrameHome', () => {
     expect(() => restoreFrameHome(doc, 'buffBar', asEl(buffBar))).not.toThrow();
     expect(buffBar.parentNode).toBe(uiRoot);
     expect(stack.children).toEqual([debuffBar]);
+
+    // Idempotent: a second call must not re-append the row to the end of #ui,
+    // which would reorder it among its absolutely positioned siblings.
+    const order = [...uiRoot.children];
+    restoreFrameHome(doc, 'buffBar', asEl(buffBar));
+    expect(uiRoot.children).toEqual(order);
   });
 
   // The other order: no saved position at boot, the row is dragged later (onto

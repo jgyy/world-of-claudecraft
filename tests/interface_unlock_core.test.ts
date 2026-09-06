@@ -2,6 +2,8 @@
 // (src/ui/interface_unlock_core.ts): the frame table, the option row's label
 // swap, and the eligibility rule that decides which frames a flip may loosen.
 // DOM-free by construction, so this drives the real module directly.
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   framesToLock,
@@ -121,6 +123,39 @@ describe('HUD_FRAME_SPECS', () => {
     for (const spec of HUD_FRAME_SPECS) {
       if (spec.stockHome) expect(spec.detachToUiRoot, `${spec.id} declares a home`).toBe(true);
     }
+  });
+
+  it('declares stock slots that resolve in both game entries, in column order', () => {
+    // A declared parent that the markup does not carry is a SILENT no-op at
+    // runtime (resolveStockHome returns null and the row never comes home), so
+    // the id is tied to the shipped entries here rather than trusted. The
+    // 'first' row must also precede the 'last' row inside that parent.
+    for (const entry of ['index.html', 'play.html']) {
+      const html = readFileSync(join(import.meta.dirname, '..', entry), 'utf8');
+      const declared = HUD_FRAME_SPECS.filter((s) => s.stockHome);
+      for (const spec of declared) {
+        const parentAt = html.indexOf(`id="${spec.stockHome?.parentId}"`);
+        expect(parentAt, `${entry}: ${spec.id} stock parent`).toBeGreaterThan(-1);
+        const rowAt = html.indexOf(`id="${spec.elementId}"`, parentAt);
+        expect(rowAt, `${entry}: ${spec.id} row inside its stock parent`).toBeGreaterThan(parentAt);
+      }
+      const first = declared.find((s) => s.stockHome?.slot === 'first');
+      const last = declared.find((s) => s.stockHome?.slot === 'last');
+      expect(html.indexOf(`id="${first?.elementId}"`)).toBeLessThan(
+        html.indexOf(`id="${last?.elementId}"`),
+      );
+    }
+  });
+
+  it('every frame id hud.ts hands to restoreFrameHome is a row of the table', () => {
+    // restoreFrameHome treats an unknown id as a no-op by design, so a drift
+    // between the literal at the call site and the table would be swallowed
+    // silently; the source text is pinned here instead.
+    const hud = readFileSync(join(import.meta.dirname, '..', 'src', 'ui', 'hud.ts'), 'utf8');
+    const calls = [...hud.matchAll(/restoreFrameHome\(document, '([^']+)'/g)].map((m) => m[1]);
+    expect(calls).toEqual(['buffBar']);
+    const ids = new Set(HUD_FRAME_SPECS.map((s) => s.id));
+    for (const id of calls) expect(ids.has(id), `hud.ts restores unknown frame ${id}`).toBe(true);
   });
 
   it('names every frame with a label key so no placeholder is anonymous', () => {
