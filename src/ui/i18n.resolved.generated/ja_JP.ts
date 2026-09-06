@@ -18391,7 +18391,7 @@ export const ja_JP: EnTranslations = {
             "label": "墓ワームの聖所"
           },
           "10": {
-            "label": "Wyrmgate Waystone"
+            "label": "ワームゲートの道標石"
           }
         }
       },
@@ -18451,7 +18451,7 @@ export const ja_JP: EnTranslations = {
             "label": "ドレイクモウ火口"
           },
           "7": {
-            "label": "Wyrmgate Waystone"
+            "label": "ワームゲートの道標石"
           }
         }
       },

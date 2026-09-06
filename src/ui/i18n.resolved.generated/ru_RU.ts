@@ -18391,7 +18391,7 @@ export const ru_RU: EnTranslations = {
             "label": "Святилище Могильного Вирма"
           },
           "10": {
-            "label": "Wyrmgate Waystone"
+            "label": "Путевой камень Змеиных врат"
           }
         }
       },
@@ -18451,7 +18451,7 @@ export const ru_RU: EnTranslations = {
             "label": "Кальдера Дрейкмо"
           },
           "7": {
-            "label": "Wyrmgate Waystone"
+            "label": "Путевой камень Змеиных врат"
           }
         }
       },

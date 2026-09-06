@@ -443,29 +443,21 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "zh_CN": [
-    "entities.zones.drakelands.pois.7.label",
-    "entities.zones.thornpeak_heights.pois.10.label",
     "hudChrome.riftForge.currency",
     "hudChrome.riftForge.gemOption",
     "hudChrome.targetDots.row"
   ],
   "zh_TW": [
-    "entities.zones.drakelands.pois.7.label",
-    "entities.zones.thornpeak_heights.pois.10.label",
     "hudChrome.riftForge.currency",
     "hudChrome.riftForge.gemOption",
     "hudChrome.targetDots.row"
   ],
   "ko_KR": [
-    "entities.zones.drakelands.pois.7.label",
-    "entities.zones.thornpeak_heights.pois.10.label",
     "hudChrome.riftForge.currency",
     "hudChrome.riftForge.gemOption",
     "hudChrome.targetDots.row"
   ],
   "ja_JP": [
-    "entities.zones.drakelands.pois.7.label",
-    "entities.zones.thornpeak_heights.pois.10.label",
     "hudChrome.riftForge.currency",
     "hudChrome.riftForge.gemOption",
     "hudChrome.targetDots.row"
@@ -543,8 +535,6 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "ru_RU": [
-    "entities.zones.drakelands.pois.7.label",
-    "entities.zones.thornpeak_heights.pois.10.label",
     "hudChrome.riftForge.currency",
     "hudChrome.riftForge.gemOption",
     "hudChrome.targetDots.row"
