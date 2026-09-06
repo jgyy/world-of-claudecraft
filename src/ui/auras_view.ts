@@ -7,13 +7,15 @@
 // a typed keyed per-aura node pool (Top risk 3: the pool's tooltip closure reads a
 // LIVE mutable slot, never a captured aura).
 //
-// Component contract: the core is INSTANCE-PARAMETERIZED by the aura
-// MODE ('all' for the buff bar, 'debuffs' for the target frame). createAurasView(mode,
-// deps) preallocates a per-aura slot pool ONCE and returns a tick(entity) that mutates
-// it IN PLACE and returns the SAME { slots, count } container every call, so a correct
-// frame allocates no new array/object garbage (the reused-reference allocation proxy,
-// tests/util/alloc_probe.ts). Two modes yield two independent views (the buff bar and
-// the target debuffs are two instances, not a code fork).
+// Component contract: the core is INSTANCE-PARAMETERIZED by the aura MODE ('buffs'
+// and 'debuffs' for the player's own two rows, 'all' for the target strip and the
+// party mini-strips; the mode semantics comment on createAurasView is the one the
+// ordering design leans on). createAurasView(mode, deps) preallocates a per-aura slot
+// pool ONCE and returns a tick(entity) that mutates it IN PLACE and returns the SAME
+// { slots, count } container every call, so a correct frame allocates no new
+// array/object garbage (the reused-reference allocation proxy,
+// tests/util/alloc_probe.ts). Each mode yields an independent view (the player rows
+// and the target strip are separate instances, not a code fork).
 //
 // The DEBUFF display allowlist lives in the host-agnostic sim/aura_classify leaf.
 // This core stays DOM-free and i18n-MECHANISM-free (no i18n runtime import): the

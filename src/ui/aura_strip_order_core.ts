@@ -20,11 +20,14 @@
 // when it crosses a band boundary, so a steady-state frame moves no nodes and the
 // painter's reconcileOrder stays a no-op.
 //
-// This is display order ONLY. It deliberately does not touch which auras the low
-// graphics tier sheds when its cap bites: that selection has its own rules and its
-// own module (aura_overflow_priority.ts), keyed on authored duration rather than
-// remaining time, and the two must stay independent so a display-order change can
-// never quietly widen or narrow what a tier hides.
+// This is display order, and the low graphics tier's shed COUNT is untouched by it:
+// how many buffs the cap sheds has its own rules and its own module
+// (aura_overflow_priority.ts), keyed on authored duration rather than remaining
+// time, so a display-order change can never widen or narrow what a tier hides.
+// The shed PICK does follow this order, on purpose: selectShedSlots breaks ties by
+// slot index, and slot index on the player strips is now band order, so among the
+// long buffs that lose their budget the ones nearest expiry survive over
+// earlier-applied ones, which is the one a player would rather keep in view.
 
 /**
  * Upper bounds, in seconds of REMAINING time, for each urgency band below the
