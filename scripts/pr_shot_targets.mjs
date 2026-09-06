@@ -115,7 +115,8 @@ const lowGraphicsSeed = async (page) => {
 };
 
 // A stored Advanced mix that a Low player lands on by flipping one dial (Character
-// Detail to High): every other dial at its floor. graphicsPreset 5 is PRESET_ADVANCED
+// Detail to High): the Low seed (every ladder dial at its floor, Dynamic Lights and
+// Particle Effects at High as Low seeds them) plus that one flip. graphicsPreset 5 is PRESET_ADVANCED
 // and the dials are the GRAPHICS_REBUILD_KEYS ladders (src/game/graphics_rebuild_core.ts).
 // The panel must display the STORED floors after a reload, never the High/Full/On
 // defaults a partial boot-time capture leaked in.
@@ -2426,7 +2427,9 @@ export const TARGETS = [
       await page.evaluate(() => {
         document.querySelectorAll('#options-menu .opt-btn')[2]?.click();
       });
-      await pollForSize(page, '#options-menu');
+      // Poll the rendered dial rows, not the shell, so the shot never lands on
+      // the main menu before the Graphics sub-panel paints.
+      await pollForSize(page, '#options-menu .set-rows');
       return { clip: '#options-menu' };
     },
   },
