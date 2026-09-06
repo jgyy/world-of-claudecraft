@@ -283,11 +283,14 @@ const MONOLITHS: MonolithRow[] = [
     // relocalize() call, and the three-line event arm (the card itself is
     // src/ui/realm_builder_popup.ts). Re-measured on the merged tree: 18879
     // plus those six (18885). Exact merged count, zero slack; maintainer-review item.
-    // Lowered 18885 -> 18878 by the Riftbound band item-level ladder: the
+    // Lowered 18885 -> 18858 by the guild roster expansion (PR #3874), which
+    // extracted 27 lines from this file into the roster page modules. Exact
+    // merged count, zero slack; maintainer-review item.
+    // Lowered 18858 -> 18851 by the Riftbound band item-level ladder: the
     // rift tooltip lines moved into src/ui/rift_band_tooltip.ts (with the
     // per-copy item-level readout), the compare block only threaded the
     // hovered and worn instances through. Exact merged count, zero slack.
-    ceiling: 18878,
+    ceiling: 18851,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -603,9 +606,18 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Lowered 10641 -> 10640 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
+    // chatChannelHint and chatSenderFlair moved to their own server/ modules
+    // (the roster-expansion dispatch and transport spread landed in their
+    // place): the ratchet lowers with them.
+    // Lowered 10635 -> 10614 by the guild roster purchase rework: the
+    // post-COMMIT save acknowledgement moved to
+    // server/character_save_acknowledge.ts (shared by the market custody
+    // path and the roster coordinator), which more than paid for the
+    // coordinator's wiring and the quarantine hook's audit surface. Exact
+    // count, zero slack.
+    // Lowered 10614 -> 10613 by the Riftbound band item-level ladder (the retired forge enchant arm collapsing to a tombstone).
     // Exact count, zero slack.
-    ceiling: 10640,
+    ceiling: 10613,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -667,9 +679,11 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned to the exact merged count of the OSSBrain v0.41.0 base
     // merge: both parents had already ratcheted for their own work, so
     // the composite is the honest size. Exact count, zero slack.
-    // Lowered 5908 -> 5904 by the Riftbound band item-level ladder (the retired forge enchant sender).
+    // wrapAngle and copyPos moved to src/net/interp_math.ts: the ratchet
+    // lowers with them.
+    // Lowered 5896 -> 5892 by the Riftbound band item-level ladder (the retired forge enchant sender).
     // Exact count, zero slack.
-    ceiling: 5904,
+    ceiling: 5892,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

@@ -1066,6 +1066,17 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'hudChrome.social.billboard.result.set': '길드 게시판이 업데이트되었습니다.',
   'hudChrome.social.billboard.result.notOfficer':
     '게시판은 임원과 길드 마스터만 수정할 수 있습니다.',
+  'hudChrome.social.roster.seats': '{count} / {cap} 자리',
+  'hudChrome.social.roster.expand': '명단 확장 (+{seats}자리, {price})',
+  'hudChrome.social.roster.maxed': '명단이 이미 최대 규모입니다',
+  'hudChrome.social.roster.confirm':
+    '{price}(으)로 길드 명단을 {seats}자리 확장하시겠습니까? 골드는 본인의 소지금에서 차감되며 환불되지 않습니다.',
+  'hudChrome.social.roster.confirmAction': '확장',
+  'hudChrome.social.roster.expandedLine': '{name}님이 길드 명단을 {cap}명으로 확장했습니다.',
+  'hudChrome.social.roster.result.notLeader': '길드 명단은 길드 마스터만 확장할 수 있습니다.',
+  'hudChrome.social.roster.result.maxed': '길드 명단은 더 이상 확장할 수 없습니다.',
+  'hudChrome.social.roster.result.cannotAfford': '길드 명단을 확장하려면 {price}이(가) 필요합니다.',
+  'hudChrome.social.roster.result.retry': '구매 중에 길드 명단이 변경되었습니다. 다시 시도하세요.',
   'hudChrome.party.promoteLeader': '파티장으로 지정',
   'hudChrome.party.inviteUsage': '누구를 초대하시겠습니까? 사용법: /invite <이름>.',
   'hudChrome.masterLoot.thresholdLabel': '품질 기준',

@@ -269,6 +269,7 @@ export const IWORLD_MEMBERS = [
   { name: 'guildEventCreate', kind: 'method' },
   { name: 'guildEventRemove', kind: 'method' },
   { name: 'guildSetMotd', kind: 'method' },
+  { name: 'guildBuyRosterPage', kind: 'method' },
   { name: 'searchCharacters', kind: 'method' }, // async (1/2)
   { name: 'characterProfile', kind: 'method' }, // async
   // Operator-set account flair, by name. A pure LOCAL read (the flair rides the entity
@@ -660,9 +661,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // even when the total agrees. Only running the suite says what these
     // numbers really are; never reconcile them by arithmetic in the diff (the
     // numbers below were set from a suite run, not from this narrative).
-    expect(IWORLD_MEMBERS.length).toBe(342);
+    expect(IWORLD_MEMBERS.length).toBe(343);
     expect(DATA_MEMBERS.length).toBe(95);
-    expect(METHOD_MEMBERS.length).toBe(247);
+    expect(METHOD_MEMBERS.length).toBe(248);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -812,6 +813,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'guildBankLog',
       'guildBankWithdraw',
       'guildBankWithdrawGold',
+      'guildBuyRosterPage',
       'guildCreate',
       'guildDecline',
       'guildDemote',
@@ -1214,6 +1216,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'guildBankLog',
       'guildBankWithdraw',
       'guildBankWithdrawGold',
+      'guildBuyRosterPage',
       'guildCreate',
       'guildDecline',
       'guildDemote',
@@ -1731,6 +1734,7 @@ const FACET_SOCIAL_GRAPH = [
   'guildEventCreate',
   'guildEventRemove',
   'guildSetMotd',
+  'guildBuyRosterPage',
   'searchCharacters',
   'characterProfile',
   'accountFlair',
@@ -2015,8 +2019,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
 
   it('the facet union equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(342);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(342);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(343);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(343);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

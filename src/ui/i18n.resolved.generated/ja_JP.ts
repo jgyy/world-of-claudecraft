@@ -3548,6 +3548,20 @@ export const ja_JP: EnTranslations = {
           "set": "ギルド掲示板を更新しました。",
           "notOfficer": "掲示板を編集できるのは幹部とギルドマスターだけです。"
         }
+      },
+      "roster": {
+        "seats": "{count} / {cap} 席",
+        "expand": "名簿を拡張（+{seats}席、{price}）",
+        "maxed": "名簿はすでに最大です",
+        "confirm": "{price}でギルド名簿を{seats}席拡張しますか？ゴールドはあなた自身の所持金から支払われ、返金されません。",
+        "confirmAction": "拡張",
+        "expandedLine": "{name}がギルド名簿を{cap}人に拡張しました。",
+        "result": {
+          "notLeader": "ギルド名簿を拡張できるのはギルドマスターだけです。",
+          "maxed": "ギルド名簿はこれ以上拡張できません。",
+          "cannotAfford": "ギルド名簿の拡張には{price}が必要です。",
+          "retry": "購入中にギルド名簿が変更されました。もう一度お試しください。"
+        }
       }
     },
     "gathering": {

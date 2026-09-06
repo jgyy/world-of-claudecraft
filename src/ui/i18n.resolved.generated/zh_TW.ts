@@ -3548,6 +3548,20 @@ export const zh_TW: EnTranslations = {
           "set": "公會公告板已更新。",
           "notOfficer": "只有幹部和會長可以編輯公告板。"
         }
+      },
+      "roster": {
+        "seats": "{count} / {cap} 席位",
+        "expand": "擴充名冊（+{seats} 席位，{price}）",
+        "maxed": "名冊已達最大規模",
+        "confirm": "花費 {price} 為公會名冊擴充 {seats} 個席位？金幣將從你自己的錢包扣除，不予退還。",
+        "confirmAction": "擴充",
+        "expandedLine": "{name} 已將公會名冊擴充至 {cap} 名成員。",
+        "result": {
+          "notLeader": "只有會長可以擴充公會名冊。",
+          "maxed": "公會名冊無法再擴充。",
+          "cannotAfford": "擴充公會名冊需要 {price}。",
+          "retry": "購買期間公會名冊已發生變化，請重試。"
+        }
       }
     },
     "gathering": {
