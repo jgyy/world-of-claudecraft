@@ -114,6 +114,17 @@ const lowGraphicsSeed = async (page) => {
   );
 };
 
+// A stored Advanced mix that a Low player lands on by flipping one dial (Character
+// Detail to High): every other dial at its floor. graphicsPreset 5 is PRESET_ADVANCED
+// and the dials are the GRAPHICS_REBUILD_KEYS ladders (src/game/graphics_rebuild_core.ts).
+// The panel must display the STORED floors after a reload, never the High/Full/On
+// defaults a partial boot-time capture leaked in.
+const advancedLowMixSeed = async (page) => {
+  await page.evaluateOnNewDocument(
+    `try { const k = 'woc_settings'; const s = JSON.parse(localStorage.getItem(k) || '{}'); Object.assign(s, { graphicsPreset: 5, graphicsDefaultApplied: true, terrainDetail: 0, foliageDensity: 0, surfaceDetail: 0, effectsQuality: 0, shadowQuality: 0, antiAliasing: 0, bloomQuality: 0, ambientOcclusion: 0, viewDistance: 0, waterQuality: 0, characterDetail: 1, dynamicLights: 1, particleEffects: 1 }); localStorage.setItem(k, JSON.stringify(s)); } catch {}`,
+  );
+};
+
 // Controller layout evidence needs the cross hotbar enabled, PlayStation glyphs,
 // and the reported remap already staged: Cross jumps while Triangle is unbound.
 // Seed before boot so both the manager and the options painter read one state.
@@ -2388,6 +2399,28 @@ export const TARGETS = [
         clip: { x, y, width, height },
       });
       return {};
+    },
+  },
+  {
+    key: 'graphics-advanced-low-mix',
+    label: 'Graphics options after a reload on a stored Advanced mix with every dial at Low',
+    when: ['game/graphics_rebuild_core', 'ui/options_window'],
+    variants: [
+      { key: 'desktop', beforeLoad: advancedLowMixSeed },
+      { key: 'mobile', mobile: true, beforeLoad: advancedLowMixSeed },
+    ],
+    async capture(page) {
+      await page.evaluate(() => {
+        const el = document.querySelector('#options-menu');
+        if (el) el.style.display = 'none';
+        window.__game?.hud?.toggleOptionsMenu?.();
+      });
+      await wait(400);
+      await page.evaluate(() => {
+        document.querySelectorAll('#options-menu .opt-btn')[2]?.click();
+      });
+      await pollForSize(page, '#options-menu');
+      return { clip: '#options-menu' };
     },
   },
   {
