@@ -18389,6 +18389,9 @@ export const ru_RU: EnTranslations = {
           },
           "9": {
             "label": "Святилище Могильного Вирма"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18446,6 +18449,9 @@ export const ru_RU: EnTranslations = {
           },
           "6": {
             "label": "Кальдера Дрейкмо"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

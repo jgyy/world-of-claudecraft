@@ -2124,7 +2124,8 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "The Glimmermere",
       "Wyrmcult Tents",
       "Revenant Fields",
-      "Gravewyrm Sanctum"
+      "Gravewyrm Sanctum",
+      "Wyrmgate Waystone"
     ],
     "welcome": "Captain Thessaly holds the wall at Highwatch - barely.",
     "families": [
@@ -2176,7 +2177,8 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "Trollmoot",
       "The Last Keep",
       "Bloodglass Fields",
-      "Drakemaw Caldera"
+      "Drakemaw Caldera",
+      "Wyrmgate Waystone"
     ],
     "welcome": "Hot wind rolls off the wastes ahead. Dragons wheel over the Drakemaw, and troll fires burn in the dunes.",
     "families": [

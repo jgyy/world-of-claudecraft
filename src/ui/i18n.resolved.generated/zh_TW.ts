@@ -18389,6 +18389,9 @@ export const zh_TW: EnTranslations = {
           },
           "9": {
             "label": "墓龍聖所"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18446,6 +18449,9 @@ export const zh_TW: EnTranslations = {
           },
           "6": {
             "label": "龍喉火山口"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

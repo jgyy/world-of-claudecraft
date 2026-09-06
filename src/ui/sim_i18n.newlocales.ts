@@ -66,6 +66,11 @@ export const BASE_NEW = {
     'groundPickup.castawayCrateDeny': 'Vilejši drží bednu pevně zavřenou.',
     'groundPickup.ferryBellDeny': 'Převoznický zvon visí mlčky.',
     'groundPickup.ferryBellEnough': 'Převoznický zvon nemá co dát.',
+    'log.wyrmgateEnter':
+      'Poutní kámen pohltí zlatou minci a Wyrmgate vzplane: horký popelnatý vítr a před tebou věže Dračí hlídky.',
+    'log.wyrmgateLeave':
+      'Poutní kámen pohltí zlatou minci a Wyrmgate vzplane: řídký horský vzduch a před tebou hradby Highwatch.',
+    'error.wyrmgateToll': 'Poutní kámen zůstává temný. Průchod branou Wyrmgate stojí 1 zlatý.',
     'groundPickup.castawayCrateEnough': 'Už máš dost vyplavených beden.',
     'groundPickup.supplyCrateEnough': 'Už máš dost zásobovacích beden.',
     'groundPickup.gravecallerSigilEnough': 'Už neseš pečeť Hrobovolajícího.',
@@ -394,6 +399,11 @@ export const BASE_NEW = {
     'log.seaFatigue': 'Det åbne hav tærer på dine kræfter. Svøm tilbage til kysten!',
     'log.veilEnter': 'Et slør af tusmørke deler sig foran dig, og Lavningen åbner sig forude.',
     'log.veilLeave': 'Sløret lukker sig bag dig, og bjergluften bider igen.',
+    'log.wyrmgateEnter':
+      'Vejstenen sluger en guldmønt, og Ormeporten blusser op: varm askevind, og Ormevagts tårne forude.',
+    'log.wyrmgateLeave':
+      'Vejstenen sluger en guldmønt, og Ormeporten blusser op: tynd bjergluft, og Højvagtens mure forude.',
+    'error.wyrmgateToll': 'Vejstenen forbliver mørk. Overgangen gennem Ormeporten koster 1 guld.',
     'aura.acidSpit': 'Syrespyt',
     'aura.blindingPowder': 'Blændende Pulver',
     'aura.bogRot': 'Sumpråd',
@@ -698,6 +708,11 @@ export const BASE_NEW = {
     'log.veilEnter':
       'Tabir senja terbuka di hadapanmu, dan Lembah Tersembunyi terbentang di depan.',
     'log.veilLeave': 'Tabir menutup di belakangmu, dan udara pegunungan kembali menggigit.',
+    'log.wyrmgateEnter':
+      'Batu jalan menelan sekeping koin emas dan Wyrmgate menyala: angin abu yang panas, dan menara-menara Wyrmwatch di depan.',
+    'log.wyrmgateLeave':
+      'Batu jalan menelan sekeping koin emas dan Wyrmgate menyala: udara gunung yang tipis, dan tembok Menara Pengawas di depan.',
+    'error.wyrmgateToll': 'Batu jalan tetap gelap. Melintasi Wyrmgate membutuhkan 1 emas.',
     'aura.acidSpit': 'Ludah Asam',
     'aura.blindingPowder': 'Serbuk Pembutaan',
     'aura.bogRot': 'Busuk Rawa',
@@ -1001,6 +1016,11 @@ export const BASE_NEW = {
     'log.seaFatigue': 'De open zee put je krachten uit. Zwem terug naar de kust!',
     'log.veilEnter': 'Een sluier van schemering wijkt voor je, en de Kom opent zich verderop.',
     'log.veilLeave': 'De sluier sluit zich achter je, en de berglucht bijt weer.',
+    'log.wyrmgateEnter':
+      'De wegsteen slikt een goudstuk en de Wurmpoort laait op: hete aswind, en de torens van Wurmwacht in het verschiet.',
+    'log.wyrmgateLeave':
+      'De wegsteen slikt een goudstuk en de Wurmpoort laait op: ijle berglucht, en de muren van Hoogwacht in het verschiet.',
+    'error.wyrmgateToll': 'De wegsteen blijft donker. De oversteek door de Wurmpoort kost 1 goud.',
     'aura.acidSpit': 'Zuurspuug',
     'aura.blindingPowder': 'Verblindend Poeder',
     'aura.bogRot': 'Moerasrot',
@@ -1303,6 +1323,12 @@ export const BASE_NEW = {
     'log.seaFatigue': 'Otwarte morze wysysa twoje siły. Płyń z powrotem do brzegu!',
     'log.veilEnter': 'Zasłona zmierzchu rozstępuje się, a przed tobą otwiera się Kotlina.',
     'log.veilLeave': 'Zasłona zamyka się za tobą, a górskie powietrze znów szczypie.',
+    'log.wyrmgateEnter':
+      'Kamień drogi połyka złotą monetę i Smocza Brama rozbłyska: gorący wiatr niosący popiół, a przed tobą wieże Wyrmwatch.',
+    'log.wyrmgateLeave':
+      'Kamień drogi połyka złotą monetę i Smocza Brama rozbłyska: rzadkie górskie powietrze, a przed tobą mury Wysokiej Strażnicy.',
+    'error.wyrmgateToll':
+      'Kamień drogi pozostaje ciemny. Przejście przez Smoczą Bramę kosztuje 1 sztukę złota.',
     'aura.acidSpit': 'Plwocina kwasu',
     'aura.blindingPowder': 'Oślepiający proszek',
     'aura.bogRot': 'Bagienna zgnilizna',
@@ -1603,6 +1629,11 @@ export const BASE_NEW = {
     'log.seaFatigue': 'Öppna havet tär på dina krafter. Simma tillbaka till stranden!',
     'log.veilEnter': 'En skymningsslöja delar sig framför dig, och Dälden öppnar sig där framme.',
     'log.veilLeave': 'Slöjan sluter sig bakom dig, och bergsluften biter igen.',
+    'log.wyrmgateEnter':
+      'Vägstenen slukar ett guldmynt och Drakporten flammar upp: het askvind, och Drakvaktens torn där framme.',
+    'log.wyrmgateLeave':
+      'Vägstenen slukar ett guldmynt och Drakporten flammar upp: tunn bergsluft, och Högvaktens murar där framme.',
+    'error.wyrmgateToll': 'Vägstenen förblir mörk. Att korsa Drakporten kostar 1 guld.',
     'aura.acidSpit': 'Syraspott',
     'aura.blindingPowder': 'Förblindande pulver',
     'aura.bogRot': 'Myrröta',
@@ -1898,6 +1929,11 @@ export const BASE_NEW = {
     'log.seaFatigue': 'Açık deniz gücünü tüketiyor. Kıyıya geri yüz!',
     'log.veilEnter': 'Alacakaranlık perdesi önünde aralanır ve Kuytu Vadi ileride açılır.',
     'log.veilLeave': 'Perde ardında kapanır ve dağ havası yeniden ısırır.',
+    'log.wyrmgateEnter':
+      "Yol taşı bir altın sikke yutar ve Wyrmgate alevlenir: sıcak kül rüzgarı ve ileride Wyrmwatch'ın kuleleri.",
+    'log.wyrmgateLeave':
+      "Yol taşı bir altın sikke yutar ve Wyrmgate alevlenir: ince dağ havası ve ileride Yüksek Gözcü'nün surları.",
+    'error.wyrmgateToll': 'Yol taşı karanlık kalır. Wyrmgate geçişi 1 altına mal olur.',
     'aura.acidSpit': 'Asit Tükürüğü',
     'aura.blindingPowder': 'Kör Edici Toz',
     'aura.bogRot': 'Bataklık Çürümesi',
@@ -2197,6 +2233,11 @@ export const BASE_NEW = {
     'log.seaFatigue': 'Biển khơi đang rút cạn sức lực của bạn. Hãy bơi trở lại bờ!',
     'log.veilEnter': 'Bức màn hoàng hôn hé mở trước mặt bạn, và Thung Lũng Ẩn hiện ra phía trước.',
     'log.veilLeave': 'Bức màn khép lại sau lưng bạn, và khí núi lại buốt giá.',
+    'log.wyrmgateEnter':
+      'Thạch lộ nuốt một đồng vàng và Wyrmgate bùng sáng: gió tro nóng rát, và những ngọn tháp Wyrmwatch ở phía trước.',
+    'log.wyrmgateLeave':
+      'Thạch lộ nuốt một đồng vàng và Wyrmgate bùng sáng: không khí núi loãng, và tường thành Vọng Đài Cao ở phía trước.',
+    'error.wyrmgateToll': 'Thạch lộ vẫn tối. Băng qua Wyrmgate tốn 1 vàng.',
     'aura.acidSpit': 'Phun Axit',
     'aura.blindingPowder': 'Bột Làm Mù',
     'aura.bogRot': 'Thối Rữa Đầm Lầy',

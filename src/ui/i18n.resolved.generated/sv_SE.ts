@@ -18389,6 +18389,9 @@ export const sv_SE: EnTranslations = {
           },
           "9": {
             "label": "Gravlindormens helgedom"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18446,6 +18449,9 @@ export const sv_SE: EnTranslations = {
           },
           "6": {
             "label": "Drakgapets kaldera"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

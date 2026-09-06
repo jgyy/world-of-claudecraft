@@ -14,6 +14,7 @@ import type {
   ItemDef,
   MobTemplate,
   NpcDef,
+  PortalDef,
   QuestDef,
   ZoneDef,
   ZonePropsDef,
@@ -49,6 +50,8 @@ export const DRAKELANDS_ZONE: ZoneDef = {
     { x: 406, z: 2032, label: 'The Last Keep', id: 'the_last_keep' },
     { x: 270, z: 2270, label: 'Bloodglass Fields', id: 'bloodglass_fields' },
     { x: 390, z: 2320, label: 'Drakemaw Caldera', id: 'drakemaw_caldera' },
+    // Appended LAST: poi i18n keys are index-keyed (entities.zones.<zone>.pois.N).
+    { x: 428, z: 1922, label: 'Wyrmgate Waystone', id: 'wyrmgate_waystone' },
   ],
   welcome:
     'Hot wind rolls off the wastes ahead. Dragons wheel over the Drakemaw, and troll fires burn in the dunes.',
@@ -132,6 +135,37 @@ export const DRAKELANDS_ROADS: { x: number; z: number }[][] = [
     { x: 230, z: 1964 },
     { x: 186, z: 1892 },
   ], // the Cinder Dunes -> west to the Snowline crossing (fire meets ice)
+];
+
+// The Wyrmgate Waystone: a paired arch that carries a traveler between the
+// Highwatch green (Thornpeak Heights) and Wyrmwatch's southeast yard in one
+// step, for a toll. The run up the Pale Causeway is a mounted rider's
+// minute and a walker's slog, so the toll is the classic trade: gold now,
+// or Riding (80 gold, mounts_training.ts) forever. One gold a crossing at a
+// 16-20 zone keeps the waystone a convenience, never the way mounts lose
+// their point. src/sim/portals.ts runs the walk-in trigger, portal_toll.ts
+// settles the coin, and both sides stand in open ground (`gate: 'waystone'`),
+// clear of the town's buildings and the hub's road lines.
+export const WYRMGATE_WAYSTONE_TOLL_COPPER = 10_000; // 1 gold in copper
+
+export const DRAKELANDS_PORTALS: PortalDef[] = [
+  {
+    id: 'wyrmgate_waystone',
+    gate: 'waystone',
+    // Highwatch: the east green past the auction house, facing back west
+    // into town; Wyrmwatch: the flat southeast yard outside the last house,
+    // facing northwest at the well and the campfire. Each landing sits 5 yd
+    // out of its own trigger (the Duskfall rule) so an arrival never bounces.
+    a: { x: 30, z: 668, landing: { x: 25, z: 667, facing: Math.PI / 2 } },
+    b: { x: 428, z: 1922, landing: { x: 423.5, z: 1918.5, facing: (3 * Math.PI) / 4 } },
+    radius: 2.0,
+    tollCopper: WYRMGATE_WAYSTONE_TOLL_COPPER,
+    enterText:
+      'The waystone drinks a gold coin and the Wyrmgate flares: hot ash wind, and the towers of Wyrmwatch ahead.',
+    leaveText:
+      'The waystone drinks a gold coin and the Wyrmgate flares: thin mountain air, and the walls of Highwatch ahead.',
+    tollText: 'The waystone stays dark. The Wyrmgate crossing costs 1 gold.',
+  },
 ];
 
 // The wastes' first inhabitants: the dragonkin brood nests across the

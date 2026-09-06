@@ -18389,6 +18389,9 @@ export const pl_PL: EnTranslations = {
           },
           "9": {
             "label": "Sanktuarium Grobowego Żmija"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18446,6 +18449,9 @@ export const pl_PL: EnTranslations = {
           },
           "6": {
             "label": "Kaldera Smoczej Paszczy"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
