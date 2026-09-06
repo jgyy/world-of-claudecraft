@@ -18368,6 +18368,9 @@ export const de_DE: EnTranslations = {
           },
           "9": {
             "label": "Gravewyrm-Heiligtum"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const de_DE: EnTranslations = {
           },
           "6": {
             "label": "Drakenrachen-Caldera"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

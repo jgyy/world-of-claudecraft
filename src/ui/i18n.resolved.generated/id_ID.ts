@@ -18368,6 +18368,9 @@ export const id_ID: EnTranslations = {
           },
           "9": {
             "label": "Sanktum Gravewyrm"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const id_ID: EnTranslations = {
           },
           "6": {
             "label": "Kaldera Drakemaw"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

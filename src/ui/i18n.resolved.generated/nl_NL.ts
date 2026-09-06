@@ -18368,6 +18368,9 @@ export const nl_NL: EnTranslations = {
           },
           "9": {
             "label": "Grafwurm-Heiligdom"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const nl_NL: EnTranslations = {
           },
           "6": {
             "label": "Drakenmuil-Caldera"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

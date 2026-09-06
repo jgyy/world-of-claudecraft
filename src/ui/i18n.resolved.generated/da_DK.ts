@@ -18368,6 +18368,9 @@ export const da_DK: EnTranslations = {
           },
           "9": {
             "label": "Gravormens Helligdom"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const da_DK: EnTranslations = {
           },
           "6": {
             "label": "Dragegabets Caldera"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

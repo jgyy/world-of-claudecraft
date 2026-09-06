@@ -18368,6 +18368,9 @@ export const ko_KR: EnTranslations = {
           },
           "9": {
             "label": "무덤고룡 성소"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const ko_KR: EnTranslations = {
           },
           "6": {
             "label": "드레이크모 화산구"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

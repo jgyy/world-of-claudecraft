@@ -18368,6 +18368,9 @@ export const it_IT: EnTranslations = {
           },
           "9": {
             "label": "Santuario del Gravewyrm"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const it_IT: EnTranslations = {
           },
           "6": {
             "label": "Caldera di Drakemaw"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

@@ -18368,6 +18368,9 @@ export const tr_TR: EnTranslations = {
           },
           "9": {
             "label": "Mezarejderi Mabedi"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const tr_TR: EnTranslations = {
           },
           "6": {
             "label": "Ejder Ağzı Kalderası"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

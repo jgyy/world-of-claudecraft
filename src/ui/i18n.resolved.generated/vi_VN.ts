@@ -18368,6 +18368,9 @@ export const vi_VN: EnTranslations = {
           },
           "9": {
             "label": "Thánh Đường Mộ Long"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const vi_VN: EnTranslations = {
           },
           "6": {
             "label": "Miệng Núi Lửa Drakemaw"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

@@ -18368,6 +18368,9 @@ export const cs_CZ: EnTranslations = {
           },
           "9": {
             "label": "Svatyně Hrobodraka"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const cs_CZ: EnTranslations = {
           },
           "6": {
             "label": "Kaldera Dračí tlamy"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },

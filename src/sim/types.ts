@@ -3748,6 +3748,16 @@ export interface PortalDef {
   radius: number;
   enterText: string; // flavor line for a -> b
   leaveText: string; // flavor line for b -> a
+  // A crossing toll in copper (src/sim/portal_toll.ts settles it): a traveler
+  // who cannot pay is refused ONCE per approach with `tollText` (the
+  // Entity.portalHoldId latch re-arms when they step out of the trigger) and
+  // never moved. Absent or 0: a free passage, the Duskfall cave.
+  tollCopper?: number;
+  tollText?: string;
+  // 'waystone': a free-standing arch in open ground (render/waystone_portals.ts
+  // draws it; colliders.ts adds NO rock flanks). Absent: the modeled cave
+  // mouth (render/hollow_gates.ts, flanked by colliders.ts).
+  gate?: 'waystone';
 }
 
 export interface BuildingDef {
@@ -4372,6 +4382,10 @@ export interface Entity extends ClientMirroredEntityFields {
   // Lets a jump clear fences for the whole arc, independent of slope.
   jumping: boolean;
   fallStartY: number;
+  // The tolled portal (PortalDef.id) that last refused this player while they
+  // stood in its trigger: the refusal toast fires once per approach, not
+  // every tick. Cleared by src/sim/portals.ts once they leave the radius.
+  portalHoldId?: string;
   // Seconds of held underwater travel. Ramps the dive speed from its slow
   // opening pace to the cruise across one stroke (see player_motion.ts
   // swimSpeedMult); zero whenever the body is not submerged.

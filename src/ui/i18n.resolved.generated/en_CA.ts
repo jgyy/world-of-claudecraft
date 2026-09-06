@@ -18368,6 +18368,9 @@ export const en_CA: EnTranslations = {
           },
           "9": {
             "label": "Gravewyrm Sanctum"
+          },
+          "10": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
@@ -18425,6 +18428,9 @@ export const en_CA: EnTranslations = {
           },
           "6": {
             "label": "Drakemaw Caldera"
+          },
+          "7": {
+            "label": "Wyrmgate Waystone"
           }
         }
       },
