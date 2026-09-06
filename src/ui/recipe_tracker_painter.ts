@@ -73,10 +73,13 @@ export class RecipeTrackerPainter {
     const blockHtml =
       `<div class="rt-recipe" style="display:none"><div class="rt-name"></div>` +
       `${reagentHtml.repeat(RECIPE_TRACKER_MAX_REAGENTS)}</div>`;
+    // The list id derives from the root's own id, so a second instance never
+    // mints a duplicate id or cross-wires the disclosure.
+    const listId = `${this.root.id || 'recipe-tracker'}-pin-list`;
     this.root.innerHTML =
-      `<button type="button" class="dt-header" aria-controls="recipe-pin-list">` +
+      `<button type="button" class="dt-header" aria-controls="${listId}">` +
       `<span class="dt-chevron" aria-hidden="true"></span><span class="dt-label"></span><span class="dt-tally"></span></button>` +
-      `<div class="dt-list" id="recipe-pin-list">${blockHtml.repeat(RECIPE_TRACK_CAP)}</div>`;
+      `<div class="dt-list" id="${listId}">${blockHtml.repeat(RECIPE_TRACK_CAP)}</div>`;
     this.header = this.root.querySelector('.dt-header') as HTMLElement;
     this.chevron = this.root.querySelector('.dt-chevron') as HTMLElement;
     this.label = this.root.querySelector('.dt-label') as HTMLElement;

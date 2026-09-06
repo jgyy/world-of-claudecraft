@@ -25,7 +25,7 @@ import { countUnlockedInSlots } from '../sim/item_lock';
 import { holdsSelfSignedInstance, requiredReagentCountFor } from '../sim/professions/crafting';
 import { countAcrossGrades, materialGradeIds } from '../sim/professions/material_grades';
 import type { ProfessionReagent, ProfessionRecipeRecord } from '../sim/professions/types';
-import type { IWorld } from '../world_api';
+import type { InvSlot } from '../sim/types';
 
 /** Pinned recipes, and therefore tracker blocks, per character. */
 export const RECIPE_TRACK_CAP = 5;
@@ -77,10 +77,14 @@ export interface RecipeTrackerInput {
 }
 
 /** The world reads the live input needs: static recipe content plus the
- *  three per-character surfaces the Craft gate itself folds. */
-export type RecipeTrackerWorld = Pick<IWorld, 'inventory' | 'craftSkills' | 'recipeList'> & {
+ *  three per-character surfaces the Craft gate itself folds. Read-only
+ *  shapes, so both IWorld hosts and a frozen mirror snapshot satisfy it. */
+export interface RecipeTrackerWorld {
+  inventory: readonly InvSlot[];
+  craftSkills: Readonly<Record<string, number>>;
+  recipeList: readonly ProfessionRecipeRecord[];
   player: { name: string };
-};
+}
 
 /**
  * Build the tracker view from the pinned set. Collapsed renders the header

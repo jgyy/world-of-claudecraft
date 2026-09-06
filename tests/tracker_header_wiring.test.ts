@@ -74,10 +74,22 @@ describe('wireTrackerHeader', () => {
     expect(toggle).not.toHaveBeenCalled();
   });
 
+  it('leaves a row the callback declines (no quest id) to the game binds', () => {
+    // The quest tracker's row callback answers false for a .qt-title with no
+    // data-quest, and the wiring must then NOT swallow the key (the old hud.ts
+    // arm's exact fall-through, preserved across the extraction).
+    const s = strip();
+    const toggle = vi.fn();
+    const activate = vi.fn(() => false);
+    wireTrackerHeader(s.root, { toggle, rows: { selector: '.row', activate } });
+    expect(key(s.row, 'Enter')).toEqual({ prevented: false, stopped: false });
+    expect(activate).toHaveBeenCalledTimes(1);
+  });
+
   it('honors a custom header selector and activates row controls by click and key', () => {
     const s = strip('qt-header');
     const toggle = vi.fn();
-    const activate = vi.fn();
+    const activate = vi.fn(() => true);
     wireTrackerHeader(s.root, {
       header: '.qt-header',
       toggle,

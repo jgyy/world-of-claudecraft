@@ -215,6 +215,28 @@ describe('makeRecipeTrackerInput over a Sim-shaped world', () => {
     expect(live.have('spider_leg')).toBe(4);
   });
 
+  it('gives the same view over a ClientWorld-shaped mirror (plain snapshot objects)', () => {
+    // The online mirror hands the same four surfaces as frozen snapshot data
+    // (an inventory array copied off the wire, a craftSkills record, the static
+    // recipe table, the mirrored player name), so the core must read them
+    // identically: same input, same output across the two hosts.
+    const inv: InvSlot[] = [
+      { itemId: 'silverleaf_herb', count: 2 },
+      { itemId: 'spider_leg', count: 1 },
+    ];
+    const simShaped = makeRecipeTrackerInput(() => world(inv));
+    const mirror = Object.freeze({
+      inventory: Object.freeze(inv.map((s) => ({ ...s }))) as readonly InvSlot[],
+      craftSkills: Object.freeze({ alchemy: 0 }) as Readonly<Record<string, number>>,
+      recipeList: ALL_RECIPES,
+      player: { name: 'Tester' },
+    });
+    const mirrorShaped = makeRecipeTrackerInput(() => mirror);
+    simShaped.pinned = new Set([POTION]);
+    mirrorShaped.pinned = new Set([POTION]);
+    expect(recipeTrackerView(mirrorShaped)).toEqual(recipeTrackerView(simShaped));
+  });
+
   it('charges the listed count with no perks (the sim formula, base skills)', () => {
     const live = makeRecipeTrackerInput(() => world([]));
     for (const reagent of potion.reagents) {
@@ -274,7 +296,8 @@ describe('the chrome around the strip', () => {
     );
   });
 
-  it('is hidden on the touch HUD (the Reliquary tracker rationale)', () => {
+  it('is hidden on the touch HUD with its pin chip (the Reliquary tracker rationale)', () => {
     expect(hudMobile).toMatch(/body\.mobile-touch #recipe-tracker \{\s*display: none;/);
+    expect(hudMobile).toMatch(/body\.mobile-touch \.crafting-pin-chip \{\s*display: none;/);
   });
 });

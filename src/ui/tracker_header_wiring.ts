@@ -26,8 +26,11 @@ export interface TrackerHeaderWiring {
   header?: string;
   /** Flip the tracker's persisted collapse (the desktop header action). */
   toggle(): void;
-  /** Optional row controls inside the strip and what activating one does. */
-  rows?: { selector: string; activate(row: HTMLElement): void };
+  /** Optional row controls inside the strip and what activating one does.
+   *  Returns whether the row really acted: a row the callback declines (the
+   *  quest tracker's title with no quest id) leaves the key to the game binds,
+   *  the hud.ts arm's exact fall-through. */
+  rows?: { selector: string; activate(row: HTMLElement): boolean };
   /** True when the body carries the compact-touch chip classes. */
   isCompact?(): boolean;
   /** Open the owning window (the compact-touch chip action). */
@@ -43,9 +46,8 @@ function activate(target: HTMLElement, wiring: TrackerHeaderWiring): boolean {
     return true;
   }
   const row = wiring.rows ? target.closest<HTMLElement>(wiring.rows.selector) : null;
-  if (!row) return false;
-  wiring.rows?.activate(row);
-  return true;
+  if (!row || !wiring.rows) return false;
+  return wiring.rows.activate(row);
 }
 
 /** Bind the click and Enter/Space arms on a tracker's container. */

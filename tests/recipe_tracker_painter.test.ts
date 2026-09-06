@@ -85,8 +85,16 @@ describe('RecipeTrackerPainter: skeleton and header', () => {
     new RecipeTrackerPainter({ root: () => root, writers: liveWriters() });
     const header = root.querySelector('.dt-header') as HTMLElement;
     expect(header.tagName).toBe('BUTTON');
-    expect(header.getAttribute('aria-controls')).toBe('recipe-pin-list');
-    expect((root.querySelector('.dt-list') as HTMLElement).id).toBe('recipe-pin-list');
+    // The list id derives from the root's own id, so a second instance can
+    // never mint a duplicate id or cross-wire the disclosure.
+    expect(header.getAttribute('aria-controls')).toBe('recipe-tracker-pin-list');
+    expect((root.querySelector('.dt-list') as HTMLElement).id).toBe('recipe-tracker-pin-list');
+    const named = document.createElement('div');
+    named.id = 'other-tracker';
+    new RecipeTrackerPainter({ root: () => named, writers: liveWriters() });
+    expect(named.querySelector('.dt-header')?.getAttribute('aria-controls')).toBe(
+      'other-tracker-pin-list',
+    );
     expect(root.querySelectorAll('.rt-recipe')).toHaveLength(RECIPE_TRACK_CAP);
     expect(root.querySelectorAll('.rt-mat')).toHaveLength(
       RECIPE_TRACK_CAP * RECIPE_TRACKER_MAX_REAGENTS,

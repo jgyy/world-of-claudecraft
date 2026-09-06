@@ -2778,7 +2778,9 @@ export class Hud {
       rows: {
         selector: '.qt-title',
         activate: (row) => {
-          if (row.dataset.quest) this.questlogWindow.openWithQuest(row.dataset.quest);
+          if (!row.dataset.quest) return false;
+          this.questlogWindow.openWithQuest(row.dataset.quest);
+          return true;
         },
       },
     });
