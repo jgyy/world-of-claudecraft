@@ -6,7 +6,10 @@
 // on the shared tinted-material cache (which disposes a clone only once no
 // visual mounts it).
 import * as THREE from 'three';
-import { offhandMirrorsWeaponSkin } from '../../sim/content/weapon_skin_rules';
+import {
+  mainhandShowsWeaponSkin,
+  offhandMirrorsWeaponSkin,
+} from '../../sim/content/weapon_skin_rules';
 import { WEAPON_SKINS } from '../../sim/content/weapon_skins';
 import type { OverheadEmoteId } from '../../world_api';
 import { recordBuildSpan, timeBuildSpan } from '../build_spans';
@@ -2665,16 +2668,20 @@ export class CharacterVisual {
       this.weaponSkinId,
       this.stow.attached,
     );
-    if (offhandMirrorsWeaponSkin(this.weaponSkinId, this.offhandItemId)) {
-      payloads.push(...offPayloads);
-      this.finishWeaponAttach(payloads);
-      return payloads;
-    }
-    // The non-mirrored offhand stays OUT of the skin material/VFX set
-    // (pixel-untouched), but its freshly attached nodes must still reach the
-    // caller's compile gate: dropped from the return, a re-attached shield's
-    // first draw linked its programs synchronously.
-    this.finishWeaponAttach(payloads);
+    // The skin material/VFX set is exactly the hands that SHOW the skin: the
+    // mainhand while it holds the skin's type (or always with no skin, so a
+    // bare rig keeps its authored pass), the offhand while the skin mirrors
+    // onto it. A hand left out is pixel-untouched, but its freshly attached
+    // nodes must still reach the caller's compile gate: dropped from the
+    // return, a re-attached shield's first draw linked its programs
+    // synchronously.
+    const mainhandSkinned =
+      !this.weaponSkinId || mainhandShowsWeaponSkin(this.weaponSkinId, this.weaponItemId);
+    const skinned = [
+      ...(mainhandSkinned ? payloads : []),
+      ...(offhandMirrorsWeaponSkin(this.weaponSkinId, this.offhandItemId) ? offPayloads : []),
+    ];
+    this.finishWeaponAttach(skinned);
     return [...payloads, ...offPayloads];
   }
 

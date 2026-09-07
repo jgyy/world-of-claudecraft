@@ -61,6 +61,9 @@ export interface ArmoryContext {
   cosmetics: Pick<AccountCosmetics, 'weaponSkinIds' | 'weaponSkinLoadout'>;
   cls: string;
   mainhandItemId: string | null;
+  /** The equipped offhand weapon, when any: a dual-wielder's offhand-held type
+   *  counts for apply too (weapon_skin_rules). Absent means no offhand. */
+  offhandItemId?: string | null;
   /** The body being worn: the Combat Mech shows the equipped mainhand, so it
    *  decides which skin types a hunter can apply (weapon_skin_rules). */
   skinCatalog: SkinCatalog;
@@ -88,7 +91,12 @@ export function buildArmorySections(
 ): ArmorySection[] {
   const serviceRows = new Map(items.filter((i) => i.kind === 'skin').map((i) => [i.itemId, i]));
   const applicableTypes = new Set<WeaponSkinType>(
-    skinnableWeaponTypesFor(ctx.cls, ctx.mainhandItemId, ctx.skinCatalog),
+    skinnableWeaponTypesFor(
+      ctx.cls,
+      ctx.mainhandItemId,
+      ctx.skinCatalog,
+      ctx.offhandItemId ?? null,
+    ),
   );
   const sections = new Map<string, ArmorySection>();
   for (const skin of WEAPON_SKIN_LIST) {
