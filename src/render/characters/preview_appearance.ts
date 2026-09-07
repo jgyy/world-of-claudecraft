@@ -1,10 +1,9 @@
 import {
   mainhandShowsWeaponSkin,
   offhandMirrorsWeaponSkin,
-  WEAPON_TYPE_BY_ITEM,
 } from '../../sim/content/weapon_skin_rules';
 import { WEAPON_SKINS } from '../../sim/content/weapon_skins';
-import type { PlayerClass } from '../../sim/types';
+import type { PlayerClass, WeaponSkinType } from '../../sim/types';
 import type { WeaponLayoutOverride } from './manifest';
 import { mechHeldWeaponOverride } from './manifest';
 
@@ -61,11 +60,21 @@ export function previewTryOnMainhand(
   if (!def) return mainhand;
   if (mainhandShowsWeaponSkin(skinId, mainhand) || offhandMirrorsWeaponSkin(skinId, offhandItemId))
     return mainhand;
-  return (
-    Object.keys(WEAPON_TYPE_BY_ITEM).find((id) => WEAPON_TYPE_BY_ITEM[id] === def.weaponType) ??
-    mainhand
-  );
+  return TRY_ON_STAND_IN[def.weaponType] ?? mainhand;
 }
+
+/** The named stand-in item per melee skin type (each a starter weapon that
+ *  classifies to that type in WEAPON_TYPE_BY_ITEM, pinned by test), so the
+ *  try-on never depends on the data table's declaration order. Ranged skins
+ *  never need one (they dress the mainhand attach whatever it holds). */
+export const TRY_ON_STAND_IN: Partial<Record<WeaponSkinType, string>> = {
+  sword: 'worn_sword',
+  axe: 'rusty_hatchet',
+  mace: 'training_mace',
+  dagger: 'rusty_dagger',
+  staff: 'gnarled_staff',
+  wand: 'palecoil_rod',
+};
 
 /** Stable identity of an appearance, so an async mech re-apply can bail out if a
  *  newer selection superseded it. */

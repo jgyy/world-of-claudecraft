@@ -7,6 +7,7 @@ import {
   type PreviewAppearance,
   previewAppearanceVisual,
   previewTryOnMainhand,
+  TRY_ON_STAND_IN,
 } from '../src/render/characters/preview_appearance';
 import { createPreviewOpenGate } from '../src/render/characters/preview_open_gate_core';
 import { WEAPON_TYPE_BY_ITEM } from '../src/sim/content/weapon_skin_rules';
@@ -359,10 +360,10 @@ describe('previewTryOnMainhand (Armory inspect try-on)', () => {
   });
 
   it('substitutes a stand-in of the skin type when neither hand can show it', () => {
-    const standIn = previewTryOnMainhand('starfall_mace', 'rusty_dagger', null);
-    expect(standIn).not.toBe('rusty_dagger');
-    expect(WEAPON_TYPE_BY_ITEM[standIn ?? '']).toBe('mace');
-    // Stable: the same stand-in every call.
-    expect(previewTryOnMainhand('starfall_mace', 'rusty_dagger', null)).toBe(standIn);
+    expect(previewTryOnMainhand('starfall_mace', 'rusty_dagger', null)).toBe('training_mace');
+    // Every named stand-in really classifies to its type.
+    for (const [type, id] of Object.entries(TRY_ON_STAND_IN)) {
+      expect(WEAPON_TYPE_BY_ITEM[id], `${type} stand-in ${id}`).toBe(type);
+    }
   });
 });
