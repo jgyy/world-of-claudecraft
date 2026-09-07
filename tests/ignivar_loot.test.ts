@@ -719,34 +719,59 @@ describe('the 2026-09-07 Heroic redistribution (docs/prd/ignivar-raid-loot.md)',
   // caster weapon, held offhand, shield and the Robe sigil now drop on Heroic
   // only. Normal keeps exactly the two melee hit weapons, because the melee
   // hit cap is the one cap a waist plus two rings cannot reach on their own.
+  // Every item row of the Normal table, shared partitions included, so an item
+  // re-seated on the sigil group (which drops on BOTH difficulties) is caught.
   const normalIds = (bossId: string) =>
-    (MOBS[bossId].loot ?? []).flatMap((e) => (e.itemId && e.normalOnly ? [e.itemId] : []));
+    (MOBS[bossId].loot ?? []).flatMap((e) => (e.itemId ? [e.itemId] : []));
   const heroicIds = (bossId: string) =>
     (HEROIC_BOSS_LOOT[bossId] ?? []).flatMap((e) => (e.itemId ? [e.itemId] : []));
   const crucible = Object.values(IGNIVAR_LOOT_ITEMS);
-
-  it('every held offhand, shield and caster weapon of the tier is Heroic-only', () => {
-    const heroic = new Set([...heroicIds(IGNIVAR_BOSS_ID), ...heroicIds(VARKHUL_BOSS_ID)]);
-    const normal = new Set([...normalIds(IGNIVAR_BOSS_ID), ...normalIds(VARKHUL_BOSS_ID)]);
-    const heroicOnlyKinds = crucible.filter(
-      (i) =>
-        i.kind === 'held_offhand' ||
-        ('shield' in i && i.shield === true) ||
-        (i.kind === 'weapon' && (i.spellPower ?? 0) > 0),
-    );
-    expect(heroicOnlyKinds.length).toBeGreaterThanOrEqual(6);
-    for (const item of heroicOnlyKinds) {
-      expect(heroic.has(item.id), item.id).toBe(true);
-      expect(normal.has(item.id), item.id).toBe(false);
+  const heroic = new Set([...heroicIds(IGNIVAR_BOSS_ID), ...heroicIds(VARKHUL_BOSS_ID)]);
+  const normal = new Set([...normalIds(IGNIVAR_BOSS_ID), ...normalIds(VARKHUL_BOSS_ID)]);
+  const heroicOnly = (ids: readonly string[]) => {
+    for (const id of ids) {
+      expect(ITEMS[id], id).toBeTruthy();
+      expect(heroic.has(id), `${id} on a Heroic table`).toBe(true);
+      expect(normal.has(id), `${id} absent from every Normal table`).toBe(false);
     }
-    // The three redistributed ids by name, so a re-cut that quietly re-seats
-    // one of them on Normal re-decides this suite.
-    for (const id of [
+  };
+
+  it('every held offhand of the tier is Heroic-only', () => {
+    const held = crucible.filter((i) => i.kind === 'held_offhand').map((i) => i.id);
+    expect(held.sort()).toEqual(['cinder_of_the_first_design', 'orb_of_the_last_spring']);
+    heroicOnly(held);
+  });
+
+  it('every shield of the tier, Emberward included, is Heroic-only', () => {
+    // Shields are read off the Heroic tables themselves so the legendary in
+    // ignivar_drops.ts (not part of IGNIVAR_LOOT_ITEMS) is covered too.
+    const shields = [...heroic].filter((id) => {
+      const def = ITEMS[id];
+      return 'shield' in def && def.shield === true;
+    });
+    expect(shields.sort()).toEqual([
+      'bulwark_of_the_inner_crucible',
+      'ember_wardens_barrier',
+      'varkhul_emberward',
+    ]);
+    heroicOnly(shields);
+  });
+
+  it('every caster weapon of the tier is Heroic-only', () => {
+    // Named, not predicated: the crozier and the staff carry their caster
+    // identity through class locks and Healing Power rather than spellPower,
+    // so a field predicate would silently skip them.
+    const casterWeapons = [
       'wand_of_quenched_sparks',
-      'orb_of_the_last_spring',
-      'cinder_of_the_first_design',
-    ])
-      expect(normal.has(id), id).toBe(false);
+      'springtouched_crozier',
+      'staff_of_the_last_spring',
+      'forgefire_spire',
+    ];
+    for (const id of casterWeapons) expect(ITEMS[id].kind, id).toBe('weapon');
+    heroicOnly(casterWeapons);
+    // The three redistributed ids, by name, so a re-cut that quietly re-seats
+    // one of them on Normal re-decides this suite.
+    heroicOnly(['wand_of_quenched_sparks', 'orb_of_the_last_spring', 'cinder_of_the_first_design']);
   });
 
   it('Normal keeps exactly the two melee hit weapons, and only because the melee cap needs one', () => {

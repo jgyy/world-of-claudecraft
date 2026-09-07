@@ -189,6 +189,6 @@ export const table: ReliquaryLocaleTable = {
   },
   conquerors_varkhul_heroic: {
     name: '英雄：内环熔炉',
-    desc: '末焰锻父瓦尔库尔身上仅限英雄难度掉落的盾牌与武器。',
+    desc: '末焰锻父瓦尔库尔身上仅限英雄难度掉落的盾牌、副手圣物与武器。',
   },
 };

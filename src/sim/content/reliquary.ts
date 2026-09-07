@@ -1666,7 +1666,7 @@ export const RELIQUARY_PAGES: readonly ReliquaryPageDef[] = freezePageTable([
     id: 'conquerors_varkhul_heroic',
     shelf: 'conquerors',
     name: 'Heroic Inner Crucible',
-    desc: 'Heroic-only shields and weapons from Varkhul, Forgefather of the Last Flame.',
+    desc: 'Heroic-only shields, held offhands and weapons from Varkhul, Forgefather of the Last Flame.',
     clearSource: { kind: 'dungeon', dungeonId: 'ignivar_inner_crucible', difficulty: 'heroic' },
     sourceDefault: fromBoss('varkhul_forgefather_of_the_last_flame'),
     relics: items(...RELIQUARY_HEROIC_GEAR.varkhul_forgefather_of_the_last_flame),
