@@ -89,9 +89,8 @@ describe('role catalog coverage', () => {
   it('every role id has an English nameplate label and the tag wrapper exists', () => {
     setLanguage('en');
     for (const role of NPC_ROLES) {
-      const key = `hudChrome.nameplate.npcRole.${role}`;
-      const label = t(key);
-      expect(label, `${role} has no catalog label`).not.toBe(key);
+      const label = t(`hudChrome.nameplate.npcRole.${role}`);
+      expect(label, `${role} has no catalog label`).not.toBe(`hudChrome.nameplate.npcRole.${role}`);
       expect(label).not.toBe('');
     }
     expect(t('hudChrome.nameplate.npcRoleTag', { role: 'Banker' })).toBe('<Banker>');

@@ -132,6 +132,16 @@ describe('nameplate NPC role line', () => {
     expect(unknown.guildLabel).toBe('');
   });
 
+  it('re-resolving the same state for a non-role entity clears the line', async () => {
+    const { resolve } = await harness();
+    expect(resolve(entity({ id: 11 })).guildLabel).toBe('<Arms Dealer>');
+    // Same NameplateCanvasState, now an unguilded player: the reset at the top
+    // of resolveContent must not leave the NPC tag behind.
+    const state = resolve(entity({ id: 12, kind: 'player', templateId: 'warrior', name: 'Bo' }));
+    expect(state.guild).toBe('');
+    expect(state.guildLabel).toBe('');
+  });
+
   it('resolves a localized role in every non-Latin locale (M16)', async () => {
     for (const lang of NON_LATIN) {
       const { resolve, i18n } = await harness(lang);
