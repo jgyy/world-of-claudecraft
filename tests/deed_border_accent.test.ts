@@ -1136,10 +1136,12 @@ describe('border accent graphics fairness (cosmetic identity, preset-identical)'
         }
       }
     }
+    // 30 -> 31: the target frame's raid-marker badge (.uf-raid-marker) scales its
+    // drop-shadow bloom by the tier token; the symbol itself renders at every tier.
     expect(
       allTierShadowDeclarations,
-      'the style graph owns 30 reviewed tier-shadow uses',
-    ).toHaveLength(30);
+      'the style graph owns 31 reviewed tier-shadow uses',
+    ).toHaveLength(31);
 
     for (const [name, body] of [
       [
