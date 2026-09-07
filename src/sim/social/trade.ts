@@ -17,6 +17,7 @@ import type { TradeInfo } from '../../world_api';
 import { addStacked, bagPools, countFit } from '../bags';
 import { RIFT_GEAR_ITEM_ID_SET } from '../content/rift/items';
 import { ITEMS } from '../data';
+import { isUnboundCopy } from '../item_binding';
 import { itemCopyPin } from '../item_copy_ref';
 import { itemInstancePayloadsEqual } from '../item_instance_merge';
 import {
@@ -58,15 +59,18 @@ function tradeCounterparty(ctx: SimContext, pid: number): TradeCounterparty | nu
 // The per-copy exclusion for a SOULBOUND def traded to `counterparty` at
 // `nowMs`: the bound lock above, plus the bind-on-pickup party trade window
 // (bop_trade_window.ts). Only a copy whose window is unexpired AND covers
-// the counterparty may cross; a plain soulbound stack (instance undefined)
-// never qualifies, which keeps the historical everything-soulbound-is-refused
-// behavior for every copy that never carried a window.
+// the counterparty may cross, or one released with a Soul Key
+// (item_binding.ts isUnboundCopy: no bond left to qualify, any counterparty);
+// a plain soulbound stack (instance undefined) never qualifies, which keeps
+// the historical everything-soulbound-is-refused behavior for every copy
+// that never carried a window.
 function soulboundOfferSkip(
   counterparty: TradeCounterparty,
   nowMs: number,
 ): (instance: ItemInstancePayload | undefined) => boolean {
   return (instance) =>
-    isTradeLocked(instance) || !partyTradeWindowAllows(instance, counterparty, nowMs);
+    isTradeLocked(instance) ||
+    (!isUnboundCopy(instance) && !partyTradeWindowAllows(instance, counterparty, nowMs));
 }
 
 // How many held copies of a soulbound itemId pass the window skip above. A
@@ -86,13 +90,18 @@ function windowedOfferableCount(
 }
 
 // Whether the player holds ANY copy of itemId carrying a party trade window at
-// all (valid or not). This is the cheap pre-gate the soulbound offer arm runs
-// BEFORE resolving the counterparty or the clock, so a decoupled test ctx with
-// no inventory (and no players map or lockout clock) takes the historical
-// silent-drop path without ever touching those members.
+// all (valid or not), or a Soul Key release. This is the cheap pre-gate the
+// soulbound offer arm runs BEFORE resolving the counterparty or the clock, so
+// a decoupled test ctx with no inventory (and no players map or lockout
+// clock) takes the historical silent-drop path without ever touching those
+// members.
 function hasAnyWindowedCopy(meta: PlayerMeta, itemId: string): boolean {
   for (const s of meta.inventory ?? []) {
-    if (s.itemId === itemId && s.instance?.partyTrade !== undefined && !isTradeLocked(s.instance))
+    if (
+      s.itemId === itemId &&
+      (s.instance?.partyTrade !== undefined || isUnboundCopy(s.instance)) &&
+      !isTradeLocked(s.instance)
+    )
       return true;
   }
   return false;

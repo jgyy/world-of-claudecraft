@@ -385,6 +385,8 @@ export const IWORLD_MEMBERS = [
   { name: 'lastSalvageResult', kind: 'data' },
   // Maker's Bond unbind service (Professions 2.0).
   { name: 'unbindItem', kind: 'method' },
+  // Soul Key release (src/sim/soul_key.ts).
+  { name: 'useSoulKey', kind: 'method' },
   // Commission order board (issue #1298).
   { name: 'commissionOrders', kind: 'data' },
   { name: 'openCommissionOrder', kind: 'method' },
@@ -405,6 +407,8 @@ export const IWORLD_MEMBERS = [
   { name: 'dungeonDifficulty', kind: 'method' }, // read-returning
   { name: 'setDungeonDifficulty', kind: 'method' },
   { name: 'buyHeroicVendorItem', kind: 'method' },
+  // Heroic Mark tier upgrade (src/sim/instances/heroic_upgrade.ts).
+  { name: 'heroicUpgradeItem', kind: 'method' },
   { name: 'buyCrucibleVendorItem', kind: 'method' },
   { name: 'leaderboard', kind: 'method' }, // async
   { name: 'guildLeaderboard', kind: 'method' }, // async
@@ -672,10 +676,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // (activeNythraxisGraveEruptions/GraveFlames/Gravefires/BindingSigils, all
     // IWorldCombat) merge against the release's guild-bank history mirror,
     // which adds one method (guildBankLogOlder, IWorldGuildBank): 343 base +
-    // 4 data + 1 method = 348 total, 99 data, 249 method.
-    expect(IWORLD_MEMBERS.length).toBe(348);
+    // 4 data + 1 method = 348; the Soul Key release (useSoulKey,
+    // IWorldProfessions) and the Heroic Mark upgrade (heroicUpgradeItem,
+    // IWorldDungeons) add two methods: 350 total, 99 data, 251 method.
+    expect(IWORLD_MEMBERS.length).toBe(350);
     expect(DATA_MEMBERS.length).toBe(99);
-    expect(METHOD_MEMBERS.length).toBe(249);
+    expect(METHOD_MEMBERS.length).toBe(251);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -851,6 +857,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'harvestCorpse',
       'harvestNode',
       'healPet',
+      'heroicUpgradeItem',
       'hobbyCraft',
       'honor',
       'ignoreAdd',
@@ -1027,6 +1034,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'unstuck',
       'upgradeRiftItem',
       'useItem',
+      'useSoulKey',
       'vaultBuyUpgrade',
       'vaultDeposit',
       'vaultDepositAll',
@@ -1259,6 +1267,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'harvestCorpse',
       'harvestNode',
       'healPet',
+      'heroicUpgradeItem',
       'ignoreAdd',
       'ignoreRemove',
       'interact',
@@ -1388,6 +1397,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'unstuck',
       'upgradeRiftItem',
       'useItem',
+      'useSoulKey',
       'vaultBuyUpgrade',
       'vaultDeposit',
       'vaultDepositAll',
@@ -1835,6 +1845,7 @@ const FACET_DUNGEONS = [
   'dungeonDifficulty',
   'setDungeonDifficulty',
   'buyHeroicVendorItem',
+  'heroicUpgradeItem',
   'buyCrucibleVendorItem',
 ] as const satisfies readonly (keyof IWorldDungeons)[];
 type _ExhaustDungeons = AssertNever<Exclude<keyof IWorldDungeons, (typeof FACET_DUNGEONS)[number]>>;
@@ -1935,6 +1946,7 @@ const FACET_PROFESSIONS = [
   'toolEffectSlots',
   'slotToolEffect',
   'rechargeToolEffect',
+  'useSoulKey',
 ] as const satisfies readonly (keyof IWorldProfessions)[];
 type _ExhaustProfessions = AssertNever<
   Exclude<keyof IWorldProfessions, (typeof FACET_PROFESSIONS)[number]>
@@ -2046,8 +2058,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
 
   it('the facet union equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(348);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(348);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(350);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(350);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

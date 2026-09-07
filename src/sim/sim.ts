@@ -422,6 +422,8 @@ import {
   WORK_ORDER_CADENCE_TICKS,
 } from './professions/cadence';
 import { unbindItem as unbindItemImpl } from './professions/commission';
+import { type SoulKeyWeek, useSoulKey as useSoulKeyImpl } from './soul_key';
+import { heroicUpgradeItem as heroicUpgradeItemImpl } from './instances/heroic_upgrade';
 import {
   acceptCommissionOrder as acceptCommissionOrderImpl,
   type CommissionOrder,
@@ -1657,6 +1659,9 @@ export interface PlayerMeta {
   // is gated only by raidLockouts; this persisted field records which distinct
   // heroic clears contributed to one authoritative reset window without gating rewards.
   heroicDaily: { date: string; marked: Set<string> };
+  // Soul Key weekly allowance window (src/sim/soul_key.ts): absent until the
+  // first release, then the reset boundary it closes on plus the uses spent.
+  soulKeyWeek?: SoulKeyWeek;
   // Set synchronously when authoritative leave teardown begins, before its
   // first persistence await. Session-only: reward and lockout snapshots ignore
   // the departing player so no post-save mutation is discarded on removal.
@@ -3257,6 +3262,13 @@ export class Sim {
       if (s.heroicDaily) {
         meta.heroicDaily = { date: s.heroicDaily.date, marked: new Set(s.heroicDaily.marked) };
       }
+      if (
+        s.soulKeyWeek &&
+        Number.isFinite(s.soulKeyWeek.resetAt) &&
+        Number.isFinite(s.soulKeyWeek.used)
+      ) {
+        meta.soulKeyWeek = { resetAt: s.soulKeyWeek.resetAt, used: s.soulKeyWeek.used };
+      }
       // The Book of Deeds. Earned days load verbatim; the legacy milestone set
       // unions into the earned map (milestone unification); renown is
       // RECOMPUTED from the earned set below (the sim is authoritative, the
@@ -4033,6 +4045,7 @@ export class Sim {
         markClears: meta.delveDaily.markClears,
       },
       heroicDaily: { date: meta.heroicDaily.date, marked: [...meta.heroicDaily.marked] },
+      ...(meta.soulKeyWeek && { soulKeyWeek: { ...meta.soulKeyWeek } }),
       mailWelcomed: meta.mailWelcomed,
       guildLetterSent: meta.guildLetterSent,
       // All three written only when non-empty/true (zero-default
@@ -9202,6 +9215,33 @@ export class Sim {
       fee: result.fee,
       pid: meta?.entityId,
     });
+  }
+
+  // Soul Key release (src/sim/soul_key.ts): the same single-surface shape as
+  // unbindItem (text-free soulKeyResult, payload converges via the self
+  // inventory mirror). `pidOrTarget` folds the IWorld `{ slotIndex }` target
+  // and the host pid arity like the other item commands (foldNamedSlotTarget).
+  useSoulKey(itemId: string, pidOrTarget?: number | { slotIndex: number }, slotIndex?: number): void {
+    const { pid, named: slot } = foldNamedSlotTarget(pidOrTarget, slotIndex);
+    if (refusedWhileDead(this.ctx, pid)) return;
+    const result = useSoulKeyImpl(this.ctx, itemId, slot, pid);
+    if (!result) return;
+    const meta = this.players.get(pid ?? this.primaryId);
+    this.emit({ type: 'soulKeyResult', ...result, pid: meta?.entityId });
+  }
+
+  // Heroic Mark tier upgrade (src/sim/instances/heroic_upgrade.ts): same shape.
+  heroicUpgradeItem(
+    itemId: string,
+    pidOrTarget?: number | { slotIndex: number },
+    slotIndex?: number,
+  ): void {
+    const { pid, named: slot } = foldNamedSlotTarget(pidOrTarget, slotIndex);
+    if (refusedWhileDead(this.ctx, pid)) return;
+    const result = heroicUpgradeItemImpl(this.ctx, itemId, slot, pid);
+    if (!result) return;
+    const meta = this.players.get(pid ?? this.primaryId);
+    this.emit({ type: 'heroicUpgradeResult', ...result, pid: meta?.entityId });
   }
 
   // Commission order board (Professions 2.0, issue #1298): four thin

@@ -25,6 +25,10 @@ import {
   NYTHRAXIS_RAID_BOSS_ID,
   NYTHRAXIS_RAID_LOOT_SOURCE_LEVEL,
 } from './content/heroic_loot';
+import {
+  HEROIC_TIER_VARIANT_IDS,
+  IGNIVAR_HEROIC_TIER_SOURCE_LEVEL,
+} from './content/heroic_variants';
 import { HEROIC_VENDOR_STOCK } from './content/heroic_vendor';
 import { IGNIVAR_LOOT_ITEM_IDS, IGNIVAR_RAID_LOOT_SOURCE_LEVEL } from './content/ignivar_loot';
 import { FURY_STOCK, WARFARE_SOURCE_LEVEL } from './content/pvp_honor';
@@ -238,6 +242,12 @@ function buildSourceIndex(): Map<string, ItemSource> {
   // boss mobs (bump() is highest-level-wins, so this overrides that). Sigils
   // are kind 'tool' with no slot and stay item-level ineligible.
   for (const id of IGNIVAR_LOOT_ITEM_IDS) bump(id, IGNIVAR_RAID_LOOT_SOURCE_LEVEL, true);
+  // Heroic TIER variants (content/heroic_variants.ts buildHeroicTierVariants,
+  // minted by the Heroic Mark upgrade): the heroic two-level step above the
+  // Crucible table with the raid flag, item level 37. Registered AFTER the generic
+  // heroicOf loop above (which would file them at source 22): bump is
+  // highest-level-wins, so this is the level that sticks.
+  for (const id of HEROIC_TIER_VARIANT_IDS) bump(id, IGNIVAR_HEROIC_TIER_SOURCE_LEVEL, true);
   // Rift-only clear-time epics and legendaries: gated behind B+/A/S final-boss
   // kills (addRiftClearGearLoot), they never appear on static mob loot tables, so
   // the mob-loot block above never registers them. The epics register at

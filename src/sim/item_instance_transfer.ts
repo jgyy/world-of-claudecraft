@@ -47,6 +47,9 @@ export function publicInstanceView(instance: ItemInstancePayload): ItemInstanceP
   const pub: ItemInstancePayload = {};
   if (instance.signer !== undefined) pub.signer = instance.signer;
   if (instance.enchant !== undefined) pub.enchant = instance.enchant;
+  // The Soul Key release travels with the copy: it is what lets a released
+  // soulbound piece list, mail, and be bought at all (item_binding.ts).
+  if (instance.unbound === true) pub.unbound = true;
   if (instance.rolled !== undefined) {
     pub.rolled = {
       ...instance.rolled,

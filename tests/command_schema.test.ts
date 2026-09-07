@@ -50,7 +50,10 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // persists per character like weaponStowed), inv_sort as a send + dispatch
 // pair (the one-shot bag clean-up; no payload, the sim re-derives the whole
 // arrangement deterministically), and bg_respond as a send + dispatch pair
-// (the release's battleground queue-pop confirmation).
+// (the release's battleground queue-pop confirmation), and the Soul Key
+// release plus the Heroic Mark tier upgrade (soul_key_unbind and
+// heroic_upgrade, both send + dispatch pairs beside unbind_item and
+// heroic_buy, dispatched through server/counter_service_wire.ts).
 // The Reliquary packet's nameplate border adds deed_set_border as a send +
 // dispatch pair, the exact sibling of deed_set_title, and the release adds
 // tabPrev as a send + dispatch pair (the backward half of the Tab target
@@ -76,8 +79,8 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // six vcup_* send + dispatch pairs (docs/design/eastbrook-revamp/master-plan.md);
 // the Proving Shore tutorial adds its one start_tutorial pair back on top, and
 // the v0.40.0 sync merge brings the release side's one new pair with it.
-const EXPECTED_SEND_COUNT = 207;
-const EXPECTED_DISPATCH_COUNT = 221;
+const EXPECTED_SEND_COUNT = 209;
+const EXPECTED_DISPATCH_COUNT = 223;
 const EXPECTED_DISPATCH_ONLY_COUNT = 14;
 
 // The chat sub-channel routing switch (server/game.ts `switch

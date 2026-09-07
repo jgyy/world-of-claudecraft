@@ -6025,6 +6025,27 @@ export const hudChromeStrings = {
     // unbound copy it peels off.
     noSpace: 'You do not have room for the unbound copy.',
   },
+  // Soul Key release (src/sim/soul_key.ts): the bag-menu row, its confirm
+  // dialog, the tooltip lines, and the soulKeyResult chat lines. Item NAMES
+  // resolve through entity i18n; counts format via formatNumber.
+  soulKey: {
+    unboundLine: 'Bond broken by a Soul Key',
+    menuAction: 'Break bond with Soul Key',
+    confirmTitle: 'Break Soulbind',
+    confirmBody:
+      'Spend a Soul Key on {name}? The bond breaks for good, and this character has {left} of {cap} releases left before the weekly reset.',
+    confirmOk: 'Break bond',
+    confirmCancel: 'Cancel',
+    // The tooltip line on the key itself: what it does and the allowance.
+    keyUse:
+      'Right-click a soulbound piece of gear to break its bond for good. {cap} releases per character each weekly reset.',
+    // soulKeyResult chat lines: released is the ONE success surface.
+    released: 'The bond on {name} is broken. {left} Soul Key releases left this week.',
+    notEligible: 'A Soul Key cannot release that item.',
+    notBound: 'That item is not soulbound.',
+    noneHeld: 'You have no Soul Key.',
+    weeklyCap: 'This character has used every Soul Key release for this week.',
+  },
   // Commission order board (issue #1298): a lightweight job board layered
   // on the Maker's Bond above. Opened from a button in the crafting
   // window's header; no location gate, since opening/cancelling an order

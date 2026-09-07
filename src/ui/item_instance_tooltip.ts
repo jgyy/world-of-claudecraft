@@ -10,6 +10,7 @@
 // lines it actually caused (instanceBonusStatLines), which is the fact a player
 // is reading the tooltip for.
 import { ENCHANTS } from '../sim/content/enchants';
+import { isSoulboundCopy, isUnboundCopy } from '../sim/item_binding';
 import { isCommissionEligibleKind } from '../sim/professions/commission';
 import { isEnchantedInstance } from '../sim/professions/enchanting';
 import type { ItemDef, ItemInstancePayload, Stats } from '../sim/types';
@@ -88,7 +89,39 @@ export function wornTooltipInstance(
   if (instance.enchant !== undefined) worn.enchant = instance.enchant;
   if (instance.rolled !== undefined) worn.rolled = instance.rolled;
   if (instance.rift !== undefined) worn.rift = instance.rift;
+  // The Soul Key release is a public fact of the copy (it decides whether the
+  // Soulbound line renders at all), so the paperdoll keeps it.
+  if (instance.unbound === true) worn.unbound = true;
   return worn;
+}
+
+/** The def-level binding line: the classic gold "Soulbound" for a bind-on-
+ *  pickup copy, or the Soul Key release line when this copy's bond was
+ *  broken (src/sim/soul_key.ts); nothing for an unbound def. The one
+ *  predicate both hosts share is item_binding.ts isSoulboundCopy, so the
+ *  tooltip can never claim a bond a pipe would not enforce. */
+export function soulboundTooltipLine(
+  item: Pick<ItemDef, 'soulbound'>,
+  instance: ItemInstancePayload | undefined,
+): string {
+  if (isSoulboundCopy(item, instance)) {
+    return `<div class="tt-sub" style="color:var(--gold)">${esc(t('hudChrome.itemSoulbound'))}</div>`;
+  }
+  if (item.soulbound && isUnboundCopy(instance)) {
+    return `<div class="tt-sub" style="color:var(--gold)">${esc(t('hudChrome.soulKey.unboundLine'))}</div>`;
+  }
+  return '';
+}
+
+/** Whether a vendor would pay for this copy: the SAME triple the sell path
+ *  refuses on (src/sim/items.ts sellItem: sellValue, noVendorSell, and the
+ *  per-copy soulbound rule), so the tooltip never advertises a price the
+ *  server is about to deny. */
+export function vendorBuysCopy(
+  item: Pick<ItemDef, 'sellValue' | 'noVendorSell' | 'soulbound'>,
+  instance: ItemInstancePayload | undefined,
+): boolean {
+  return item.sellValue > 0 && !item.noVendorSell && !isSoulboundCopy(item, instance);
 }
 
 /** The Maker's Bond lines (Professions 2.0), rendered in the def

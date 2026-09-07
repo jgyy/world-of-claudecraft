@@ -575,6 +575,8 @@ import {
   instancePartyTradeLine,
   itemNumber,
   itemStatName,
+  soulboundTooltipLine,
+  vendorBuysCopy,
   wornTooltipInstance,
 } from './item_instance_tooltip';
 import { itemKindLabel, itemQualityLabel } from './item_kind_label';
@@ -6445,11 +6447,9 @@ export class Hud {
         )}</div>`;
       }
     }
-    // Bound-to-owner marker (marks and other soulbound tokens): shown like the
-    // classic "Soulbound" line so a player can see it cannot be traded or destroyed.
-    if (item.soulbound) {
-      html += `<div class="tt-sub" style="color:var(--gold)">${esc(t('hudChrome.itemSoulbound'))}</div>`;
-    }
+    // Bound-to-owner marker (marks and other soulbound tokens): the classic
+    // "Soulbound" line, or the Soul Key release line for a broken bond.
+    html += soulboundTooltipLine(item, instance);
     // BoP party trade window: qualifies the Soulbound line above while this
     // copy can still be traded to the players who shared its drop
     // (item_instance_tooltip.ts owns the copy rules; the world owns the clock).
@@ -6594,7 +6594,7 @@ export class Hud {
     // lie the player only discovers from an error toast. The tier-1 gathering
     // tools are the case that made this matter, being common staples a new
     // player actively tries to sell back.
-    if (item.sellValue > 0 && !item.noVendorSell && !item.soulbound)
+    if (vendorBuysCopy(item, instance))
       html += `<div class="tt-sub">${esc(t('itemUi.tooltip.sellPrice', { money: formatLocalizedMoney(item.sellValue) }))}</div>`;
     if (compare) html += this.itemCompareBlock(item, instance);
     return html;

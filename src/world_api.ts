@@ -569,6 +569,7 @@ export const COMMAND_NAMES = [
   'set_town_focus',
   'set_dungeon_difficulty',
   'heroic_buy',
+  'heroic_upgrade',
   'crucible_buy',
   'mount_toggle',
   'mount_train_begin',
@@ -631,6 +632,9 @@ export const COMMAND_NAMES = [
   // tier-scaled gold fee (Sim.unbindItem via src/sim/professions/
   // commission.ts).
   'unbind_item',
+  // Soul Key release on one bagged soulbound gear copy (Sim.useSoulKey via
+  // src/sim/soul_key.ts).
+  'soul_key_unbind',
   // Guild billboard: set (or clear, with '') the officer-editable message
   // pinned atop the social window's Guild tab (SocialService.guildSetMotd).
   'guild_set_motd',

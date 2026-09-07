@@ -25,6 +25,7 @@ import {
   WELCOME_LETTER,
 } from '../content/letters';
 import { ITEMS } from '../data';
+import { isSoulboundCopy } from '../item_binding';
 import { boundCraftedRecipeIdOnLoad, warnDroppedInstanceKeys } from '../item_instance_load';
 import { itemInstancePayloadsEqual } from '../item_instance_merge';
 import {
@@ -466,7 +467,10 @@ export class PostOffice {
       const def = ITEMS[s.itemId];
       const count = Math.floor(s.count);
       if (!def || !Number.isFinite(count) || count < 1) return;
-      if (def.soulbound) {
+      // Per-copy (item_binding.ts): a Soul Key release rides a raven like
+      // any other instanced parcel; a plain stack of a soulbound def never
+      // can (only an instanced copy carries the release).
+      if (isSoulboundCopy(def, s.instance && typeof s.instance === 'object' ? s.instance : undefined)) {
         this.result(meta.entityId, 'noMailSoulbound');
         return;
       }
@@ -1205,7 +1209,8 @@ export class PostOffice {
       const retainedItems: InvSlot[] = [];
       const returnedItems: InvSlot[] = [];
       for (const item of items) {
-        if (kind === 'player' && ITEMS[item.itemId]?.soulbound) returnedItems.push(item);
+        if (kind === 'player' && isSoulboundCopy(ITEMS[item.itemId], item.instance))
+          returnedItems.push(item);
         else retainedItems.push(item);
       }
       // Migration for player parcels sent before an item became soulbound.

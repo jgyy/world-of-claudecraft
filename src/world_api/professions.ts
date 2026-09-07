@@ -375,6 +375,15 @@ export interface IWorldProfessions {
   // `unbindResult` event; the cleared payload converges via the self
   // inventory mirror.
   unbindItem(itemId: string): void;
+  // Soul Key release (src/sim/soul_key.ts): spend one held Soul Key on the
+  // bagged bind-on-pickup gear copy at `target.slotIndex` (id-only picks the
+  // first bound copy), breaking its bond for good, two per character per
+  // weekly reset. Server-authoritative: the sim resolver re-validates
+  // eligibility, the copy, the key, and the allowance; ClientWorld sends the
+  // soul_key_unbind command and never decides. The outcome surfaces through
+  // the personal text-free `soulKeyResult` event; the stamped payload
+  // converges via the self inventory mirror.
+  useSoulKey(itemId: string, target?: { slotIndex: number }): void;
   // Commission order board (Professions 2.0, issue #1298): a lightweight
   // job board layered on the Maker's Bond bind-on-trade primitive above.
   // Opening/cancelling carries NO escrow (see src/sim/professions/

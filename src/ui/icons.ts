@@ -14,6 +14,7 @@ import {
   BRAMBLEHIDE_ART_PENDING_ITEM_IDS,
   NYTHRAXIS_GAP_ART_PENDING_ITEM_IDS,
 } from '../sim/content/zone3';
+import { isHeroicTierVariantId } from '../sim/content/heroic_variants';
 import { ABILITIES, ITEMS } from '../sim/data';
 import { crestIconUrl } from './crest_icon_art';
 import { currencyImageUrl } from './currency_art';
@@ -5401,8 +5402,13 @@ export const ITEM_IMAGE_IDS = new Set<string>([
 // The grouped literals above preserve the curated catalog's provenance history. Derive the
 // complete runtime set from live content so a newly added non-weapon item immediately enters the
 // filesystem and provenance gates instead of silently regressing to a procedural placeholder.
+// Heroic TIER variants (sim/content/heroic_variants.ts buildHeroicTierVariants)
+// are the one generated family that borrows its base's painting instead of
+// owning one: a heroic tier piece is the same item one tier up, and the
+// "[HEROIC]" tooltip tag is the distinction (the weapon path already inherits
+// this way through heroicOf). itemImageUrl resolves them to the base art.
 for (const item of Object.values(ITEMS)) {
-  if (item.kind !== 'weapon') ITEM_IMAGE_IDS.add(item.id);
+  if (item.kind !== 'weapon' && !isHeroicTierVariantId(item.id)) ITEM_IMAGE_IDS.add(item.id);
 }
 
 // UI-only icon ids that ship painted art under /ui/items/<id>.webp but are NOT ITEMS
@@ -5445,7 +5451,11 @@ export const ITEM_ART_PENDING = new Set<string>([
 /** Static URL of an item's (or a UI pseudo-item's) image icon, or null if it uses a recipe. */
 export function itemImageUrl(id: string): string | null {
   if (ITEM_ART_PENDING.has(id)) return null;
-  return ITEM_IMAGE_IDS.has(id) || UI_ITEM_IMAGE_IDS.has(id) ? `${ITEM_ICON_DIR}/${id}.webp` : null;
+  if (ITEM_IMAGE_IDS.has(id) || UI_ITEM_IMAGE_IDS.has(id)) return `${ITEM_ICON_DIR}/${id}.webp`;
+  // A heroic tier variant serves its base item's painting (see the derive
+  // loop above); the own-property gate keeps stale ids from becoming paths.
+  const baseId = isHeroicTierVariantId(id) && Object.hasOwn(ITEMS, id) ? ITEMS[id].heroicOf : undefined;
+  return baseId !== undefined && ITEM_IMAGE_IDS.has(baseId) ? `${ITEM_ICON_DIR}/${baseId}.webp` : null;
 }
 
 // Book of Deeds crest ids are shaped `deed_<deedId>` (deeds_view.ts deedCrestId). Those whose

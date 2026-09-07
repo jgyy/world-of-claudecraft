@@ -93,6 +93,12 @@ export interface IWorldDungeons {
   // Buy one Heroic Quartermaster offer (src/sim/content/heroic_vendor.ts),
   // paying its Heroic Marks price from the buyer's bags. Server-validated.
   buyHeroicVendorItem(itemId: string): void;
+  // Heroic Mark tier upgrade (src/sim/instances/heroic_upgrade.ts): at the
+  // Heroic Quartermaster, turn the bagged Crucible tier piece at
+  // `target.slotIndex` (id-only picks the first copy) into its heroic variant
+  // for HEROIC_UPGRADE_MARKS marks. Server-validated; the outcome rides the
+  // personal text-free `heroicUpgradeResult` event.
+  heroicUpgradeItem(itemId: string, target?: { slotIndex: number }): void;
   // Redeem one Crucible Quartermaster set piece (src/sim/content/ignivar_loot.ts),
   // paying its matching-slot sigil from the buyer's bags. Server-validated,
   // class-gated sim-side.

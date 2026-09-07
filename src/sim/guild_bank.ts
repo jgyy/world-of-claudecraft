@@ -27,6 +27,7 @@ import { generalOnlyPools } from './bag_pools';
 import { addStacked, bagPools, bagsFullError, instancedCountCap } from './bags';
 import { moveBetweenContainers, nearBanker } from './bank';
 import { ITEMS } from './data';
+import { isSoulboundCopy } from './item_binding';
 import { formatMoney } from './format_money';
 import {
   boundCraftedRecipeIdOnLoad,
@@ -864,12 +865,15 @@ export function guildBankPipeRefusal(
 ): string | null {
   const def = ITEMS[slot.itemId];
   const quest = def?.kind === 'quest';
+  // Per-copy soulbound (item_binding.ts): a Soul Key release stores like any
+  // other copy.
+  const soulbound = isSoulboundCopy(def, slot.instance);
   const refused =
-    quest || !!def?.soulbound || !!def?.noMarketList || isTransferLockedInstance(slot.instance);
+    quest || soulbound || !!def?.noMarketList || isTransferLockedInstance(slot.instance);
   if (!refused) return null;
   if (dir === 'withdraw') return 'That item cannot be withdrawn from the guild bank.';
   if (quest) return 'You cannot store quest items in the guild bank.';
-  if (def?.soulbound) return 'You cannot store soulbound items in the guild bank.';
+  if (soulbound) return 'You cannot store soulbound items in the guild bank.';
   return 'That item cannot be stored in the guild bank.';
 }
 

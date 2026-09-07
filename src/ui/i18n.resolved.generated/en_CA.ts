@@ -4206,6 +4206,20 @@ export const en_CA: EnTranslations = {
       "outOfRange": "You must be at a crafting station to unbind.",
       "noSpace": "You do not have room for the unbound copy."
     },
+    "soulKey": {
+      "unboundLine": "Bond broken by a Soul Key",
+      "menuAction": "Break bond with Soul Key",
+      "confirmTitle": "Break Soulbind",
+      "confirmBody": "Spend a Soul Key on {name}? The bond breaks for good, and this character has {left} of {cap} releases left before the weekly reset.",
+      "confirmOk": "Break bond",
+      "confirmCancel": "Cancel",
+      "keyUse": "Right-click a soulbound piece of gear to break its bond for good. {cap} releases per character each weekly reset.",
+      "released": "The bond on {name} is broken. {left} Soul Key releases left this week.",
+      "notEligible": "A Soul Key cannot release that item.",
+      "notBound": "That item is not soulbound.",
+      "noneHeld": "You have no Soul Key.",
+      "weeklyCap": "This character has used every Soul Key release for this week."
+    },
     "commissionBoard": {
       "title": "Commission Orders",
       "close": "Close commission orders",
@@ -8322,7 +8336,18 @@ export const en_CA: EnTranslations = {
     "buyConfirmTitle": "Confirm Purchase",
     "buyConfirmBody": "Buy {item} for {marks} Heroic Marks? Marks purchases cannot be refunded.",
     "buyConfirmAccept": "Buy",
-    "buyConfirmCancel": "Cancel"
+    "buyConfirmCancel": "Cancel",
+    "upgradeTitle": "Heroic upgrade",
+    "upgradeIntro": "Forge a Crucible tier piece into its Heroic form for {marks} Heroic Marks: one step in power, and it no longer binds.",
+    "upgradeEmpty": "You carry no Crucible tier piece to upgrade.",
+    "upgradeAria": "Upgrade {item} to Heroic for {marks} Heroic Marks",
+    "upgradeConfirmTitle": "Confirm Heroic Upgrade",
+    "upgradeConfirmBody": "Upgrade {item} to its Heroic form for {marks} Heroic Marks? Marks spent on an upgrade cannot be refunded.",
+    "upgradeConfirmAccept": "Upgrade",
+    "upgraded": "{item} has been forged into its Heroic form.",
+    "upgradeNotEligible": "That item cannot be upgraded.",
+    "upgradeOutOfRange": "You must be at the Heroic Quartermaster to upgrade.",
+    "upgradeNotEnoughMarks": "You need {marks} Heroic Marks to upgrade."
   },
   "crucibleShop": {
     "browse": "Redeem Sigils",
@@ -14649,6 +14674,9 @@ export const en_CA: EnTranslations = {
       },
       "heroic_mark": {
         "name": "Heroic Mark"
+      },
+      "soul_key": {
+        "name": "Soul Key"
       },
       "eastbrook_buckler": {
         "name": "Eastbrook Buckler"

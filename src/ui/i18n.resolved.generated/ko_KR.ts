@@ -4206,6 +4206,20 @@ export const ko_KR: EnTranslations = {
       "outOfRange": "귀속을 해제하려면 작업대 옆에 있어야 합니다.",
       "noSpace": "가방에 귀속 해제한 아이템을 넣을 공간이 없습니다."
     },
+    "soulKey": {
+      "unboundLine": "Bond broken by a Soul Key",
+      "menuAction": "Break bond with Soul Key",
+      "confirmTitle": "Break Soulbind",
+      "confirmBody": "Spend a Soul Key on {name}? The bond breaks for good, and this character has {left} of {cap} releases left before the weekly reset.",
+      "confirmOk": "Break bond",
+      "confirmCancel": "Cancel",
+      "keyUse": "Right-click a soulbound piece of gear to break its bond for good. {cap} releases per character each weekly reset.",
+      "released": "The bond on {name} is broken. {left} Soul Key releases left this week.",
+      "notEligible": "A Soul Key cannot release that item.",
+      "notBound": "That item is not soulbound.",
+      "noneHeld": "You have no Soul Key.",
+      "weeklyCap": "This character has used every Soul Key release for this week."
+    },
     "commissionBoard": {
       "title": "의뢰 게시판",
       "close": "의뢰 게시판 닫기",
@@ -8322,7 +8336,18 @@ export const ko_KR: EnTranslations = {
     "buyConfirmTitle": "구매 확인",
     "buyConfirmBody": "영웅의 징표 {marks}개로 {item}을(를) 구매하시겠습니까? 징표 구매는 환불되지 않습니다.",
     "buyConfirmAccept": "구매",
-    "buyConfirmCancel": "취소"
+    "buyConfirmCancel": "취소",
+    "upgradeTitle": "Heroic upgrade",
+    "upgradeIntro": "Forge a Crucible tier piece into its Heroic form for {marks} Heroic Marks: one step in power, and it no longer binds.",
+    "upgradeEmpty": "You carry no Crucible tier piece to upgrade.",
+    "upgradeAria": "Upgrade {item} to Heroic for {marks} Heroic Marks",
+    "upgradeConfirmTitle": "Confirm Heroic Upgrade",
+    "upgradeConfirmBody": "Upgrade {item} to its Heroic form for {marks} Heroic Marks? Marks spent on an upgrade cannot be refunded.",
+    "upgradeConfirmAccept": "Upgrade",
+    "upgraded": "{item} has been forged into its Heroic form.",
+    "upgradeNotEligible": "That item cannot be upgraded.",
+    "upgradeOutOfRange": "You must be at the Heroic Quartermaster to upgrade.",
+    "upgradeNotEnoughMarks": "You need {marks} Heroic Marks to upgrade."
   },
   "crucibleShop": {
     "browse": "인장 교환",
@@ -14649,6 +14674,9 @@ export const ko_KR: EnTranslations = {
       },
       "heroic_mark": {
         "name": "영웅의 징표"
+      },
+      "soul_key": {
+        "name": "Soul Key"
       },
       "eastbrook_buckler": {
         "name": "이스트브룩 버클러"

@@ -1126,6 +1126,21 @@ export const en = {
     buyConfirmBody: 'Buy {item} for {marks} Heroic Marks? Marks purchases cannot be refunded.',
     buyConfirmAccept: 'Buy',
     buyConfirmCancel: 'Cancel',
+    // The Heroic Mark tier upgrade section (src/sim/instances/heroic_upgrade.ts)
+    // and its heroicUpgradeResult chat lines.
+    upgradeTitle: 'Heroic upgrade',
+    upgradeIntro:
+      'Forge a Crucible tier piece into its Heroic form for {marks} Heroic Marks: one step in power, and it no longer binds.',
+    upgradeEmpty: 'You carry no Crucible tier piece to upgrade.',
+    upgradeAria: 'Upgrade {item} to Heroic for {marks} Heroic Marks',
+    upgradeConfirmTitle: 'Confirm Heroic Upgrade',
+    upgradeConfirmBody:
+      'Upgrade {item} to its Heroic form for {marks} Heroic Marks? Marks spent on an upgrade cannot be refunded.',
+    upgradeConfirmAccept: 'Upgrade',
+    upgraded: '{item} has been forged into its Heroic form.',
+    upgradeNotEligible: 'That item cannot be upgraded.',
+    upgradeOutOfRange: 'You must be at the Heroic Quartermaster to upgrade.',
+    upgradeNotEnoughMarks: 'You need {marks} Heroic Marks to upgrade.',
   },
   crucibleShop: {
     // The Crucible Quartermaster window (Ignivar raid sigil redemption):
@@ -1625,6 +1640,7 @@ export const en = {
       kings_signet: { name: "King's Signet" },
       event_skin_token: { name: 'Mysterious Cosmetic Cache' },
       heroic_mark: { name: 'Heroic Mark' },
+      soul_key: { name: 'Soul Key' },
       eastbrook_buckler: { name: 'Eastbrook Buckler' },
       eastbrook_greatsword: { name: 'Eastbrook Greatsword' },
       highwatch_greatsword: { name: 'Highwatch Greatsword' },

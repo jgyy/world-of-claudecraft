@@ -19,6 +19,7 @@
 // both a Sim-shaped and a ClientWorld-mirror-shaped snapshot.
 
 import { ITEMS } from '../sim/data';
+import { isSoulboundCopy } from '../sim/item_binding';
 import { isTransferLockedInstance } from '../sim/item_instance_transfer';
 import type { ItemDef, ItemInstancePayload } from '../sim/types';
 import type { MarketInfo, MarketListingView } from '../world_api';
@@ -224,7 +225,8 @@ export function buildMarketSell(
 ): MarketSellBody {
   const item = sellItemId ? ITEMS[sellItemId] : null;
   if (!sellItemId || !item || sellHave <= 0) return { state: 'pick-empty' };
-  if (item.kind === 'quest' || item.noMarketList || item.soulbound)
+  // Per-copy soulbound (item_binding.ts): a Soul Key release can market.
+  if (item.kind === 'quest' || item.noMarketList || isSoulboundCopy(item, sellInstance ?? undefined))
     return { state: 'cannot-market' };
   if (sellInstance && isTransferLockedInstance(sellInstance)) return { state: 'cannot-market' };
   // Only trust the echo when it names THIS item: a stale echo across an item

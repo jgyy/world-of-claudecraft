@@ -44,6 +44,7 @@
 
 import { weaponTypeForItem } from './content/weapon_skin_rules';
 import { isItemLocked } from './item_lock_flag';
+import { isSoulboundCopy } from './item_binding';
 import { isTransferLockedInstance } from './transfer_lock';
 import type { ItemDef, ItemInstancePayload } from './types';
 
@@ -166,7 +167,8 @@ export function exchangeHardLock(
   if (isTransferLockedInstance(instance)) {
     return instance?.boundTo !== undefined ? 'bound_copy' : 'bind_armed';
   }
-  if (def.soulbound && category !== 'mount') return 'soulbound';
+  // Per-copy (item_binding.ts): a Soul Key release clears the soulbound arm.
+  if (isSoulboundCopy(def, instance) && category !== 'mount') return 'soulbound';
   if (def.noMarketList && category !== 'mech_chroma') return 'no_market_list';
   // The player's own item lock (issue 3042, R10): a copy its owner locked
   // against salvage, crafting, and vendor sale refuses the $WOC exchange the

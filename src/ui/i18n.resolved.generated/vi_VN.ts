@@ -4206,6 +4206,20 @@ export const vi_VN: EnTranslations = {
       "outOfRange": "Bạn phải ở tại bàn chế tác để gỡ ràng buộc.",
       "noSpace": "Túi của bạn không còn chỗ cho bản đã gỡ ràng buộc."
     },
+    "soulKey": {
+      "unboundLine": "Bond broken by a Soul Key",
+      "menuAction": "Break bond with Soul Key",
+      "confirmTitle": "Break Soulbind",
+      "confirmBody": "Spend a Soul Key on {name}? The bond breaks for good, and this character has {left} of {cap} releases left before the weekly reset.",
+      "confirmOk": "Break bond",
+      "confirmCancel": "Cancel",
+      "keyUse": "Right-click a soulbound piece of gear to break its bond for good. {cap} releases per character each weekly reset.",
+      "released": "The bond on {name} is broken. {left} Soul Key releases left this week.",
+      "notEligible": "A Soul Key cannot release that item.",
+      "notBound": "That item is not soulbound.",
+      "noneHeld": "You have no Soul Key.",
+      "weeklyCap": "This character has used every Soul Key release for this week."
+    },
     "commissionBoard": {
       "title": "Đơn Ủy Thác",
       "close": "Đóng bảng đơn ủy thác",
@@ -8322,7 +8336,18 @@ export const vi_VN: EnTranslations = {
     "buyConfirmTitle": "Xác nhận mua hàng",
     "buyConfirmBody": "Mua {item} để lấy Dấu ấn Anh hùng {marks}? Việc mua điểm không thể được hoàn lại.",
     "buyConfirmAccept": "Mua",
-    "buyConfirmCancel": "Hủy bỏ"
+    "buyConfirmCancel": "Hủy bỏ",
+    "upgradeTitle": "Heroic upgrade",
+    "upgradeIntro": "Forge a Crucible tier piece into its Heroic form for {marks} Heroic Marks: one step in power, and it no longer binds.",
+    "upgradeEmpty": "You carry no Crucible tier piece to upgrade.",
+    "upgradeAria": "Upgrade {item} to Heroic for {marks} Heroic Marks",
+    "upgradeConfirmTitle": "Confirm Heroic Upgrade",
+    "upgradeConfirmBody": "Upgrade {item} to its Heroic form for {marks} Heroic Marks? Marks spent on an upgrade cannot be refunded.",
+    "upgradeConfirmAccept": "Upgrade",
+    "upgraded": "{item} has been forged into its Heroic form.",
+    "upgradeNotEligible": "That item cannot be upgraded.",
+    "upgradeOutOfRange": "You must be at the Heroic Quartermaster to upgrade.",
+    "upgradeNotEnoughMarks": "You need {marks} Heroic Marks to upgrade."
   },
   "crucibleShop": {
     "browse": "Đổi Ấn hiệu",
@@ -14649,6 +14674,9 @@ export const vi_VN: EnTranslations = {
       },
       "heroic_mark": {
         "name": "Dấu Ấn Anh Hùng"
+      },
+      "soul_key": {
+        "name": "Soul Key"
       },
       "eastbrook_buckler": {
         "name": "Khiên Nhỏ Đông Khê"

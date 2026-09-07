@@ -1239,6 +1239,19 @@ export type ItemDef =
 // stack of the same itemId. Inert in the World Market for now (blocked at list
 // time, see market.ts marketList); #1146 wires real market handling for
 // instanced items later.
+/** Soul Key deny reasons, in resolveSoulKeyUse's deny order. */
+export type SoulKeyDenyReason =
+  | 'soul_key_none_held'
+  | 'soul_key_not_eligible'
+  | 'soul_key_not_bound'
+  | 'soul_key_weekly_cap';
+
+/** Heroic Mark tier upgrade deny reasons, in resolveHeroicUpgrade's deny order. */
+export type HeroicUpgradeDenyReason =
+  | 'heroic_upgrade_not_eligible'
+  | 'heroic_upgrade_out_of_range'
+  | 'heroic_upgrade_not_enough_marks';
+
 export interface ItemInstancePayload {
   /** Player name that signed/crafted this specific copy, if any. */
   signer?: string;
@@ -1293,6 +1306,14 @@ export interface ItemInstancePayload {
    *  good. Additive and JSONB-safe: an absent or expired window is an
    *  ordinary soulbound copy. */
   partyTrade?: { untilMs: number; eligible: string[]; eligibleIds?: number[] };
+  /** Soul Key release (src/sim/soul_key.ts): this specific copy of a
+   *  bind-on-pickup (def `soulbound`) piece had its bond broken with a Soul
+   *  Key, so every soulbound gate (trade, mail, market, guild bank, vendor,
+   *  the $WOC exchange) reads it as an ordinary tradeable copy. The one
+   *  predicate that decides is item_binding.ts isSoulboundCopy; no gate reads
+   *  the def flag alone. Presence-checked against `true`. Additive and
+   *  JSONB-safe: an absent marker is an ordinary soulbound copy. */
+  unbound?: true;
   /** Long-term Rift gear progression. `rolled.stats` is the authoritative
    * aggregate consumed by recalcPlayerStats (the band's whole stat line plus
    * its gem ratings); this record is the bounded input it is rebuilt from
@@ -6739,6 +6760,26 @@ export type SimEvent = { pid?: number } & (
         | 'unbind_no_space'
         | 'unbind_cannot_afford';
       fee: number;
+    }
+  // Soul Key outcome (src/sim/soul_key.ts): personal and text-free like
+  // unbindResult; the client renders localized copy off ok/reason. `usesLeft`
+  // is the weekly allowance remaining AFTER this attempt.
+  | {
+      type: 'soulKeyResult';
+      ok: boolean;
+      itemId: string;
+      reason?: SoulKeyDenyReason;
+      usesLeft: number;
+    }
+  // Heroic Mark tier upgrade outcome (src/sim/instances/heroic_upgrade.ts):
+  // same shape family. `heroicItemId` is the minted variant id on ok.
+  | {
+      type: 'heroicUpgradeResult';
+      ok: boolean;
+      itemId: string;
+      heroicItemId?: string;
+      reason?: HeroicUpgradeDenyReason;
+      marks: number;
     }
   // Commission order board outcome (issue #1298): mirrors one of
   // professions/commission_order.ts's four result shapes (OpenOrderResult/

@@ -312,7 +312,7 @@ export {
 import { CRUCIBLE_PROFESSION_ITEMS } from './content/crucible_professions';
 import { DELVE_ITEMS } from './content/delves/items';
 import { HEROIC_ITEMS, RETIRED_HEROIC_ITEMS } from './content/heroic_loot';
-import { buildHeroicVariants } from './content/heroic_variants';
+import { buildHeroicTierVariants, buildHeroicVariants } from './content/heroic_variants';
 import { HEROIC_VENDOR_ITEMS } from './content/heroic_vendor';
 import { IGNIVAR_DROP_ITEMS } from './content/ignivar_drops';
 import { IGNIVAR_LOOT_ITEMS, IGNIVAR_VENDOR_NPCS } from './content/ignivar_loot';
@@ -420,6 +420,9 @@ export const MOBS: Record<string, MobTemplate> = {
 // merged into ITEMS in place, so a "Heroic X" copy is a first-class item everywhere.
 // Must run after both ITEMS and MOBS are assembled (it reads their loot tables).
 Object.assign(ITEMS, buildHeroicVariants(ITEMS, MOBS));
+// Heroic TIER variants (the Heroic Mark upgrade target of every Crucible set
+// piece): generated from the set table alone, merged the same way.
+Object.assign(ITEMS, buildHeroicTierVariants());
 
 // Realm NPCs are appended after brother_halven: NPCs spawn in insertion order
 // before camps, so existing entity ids stay stable (determinism).

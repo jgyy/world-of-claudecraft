@@ -5,13 +5,14 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
 import { validateAcceptedArtManifest } from '../scripts/lib/icon_asset_audit.mjs';
+import { isHeroicTierVariantId } from '../src/sim/content/heroic_variants';
 import { IGNIVAR_LOOT_ITEM_IDS } from '../src/sim/content/ignivar_loot';
 import { ITEMS } from '../src/sim/data';
 import {
-  ITEM_ART_PENDING,
-  ITEM_IMAGE_IDS,
   iconDataUrl,
   isUnknownIconRecipe,
+  ITEM_ART_PENDING,
+  ITEM_IMAGE_IDS,
   itemIconRecipe,
   itemImageUrl,
   UI_ITEM_IMAGE_IDS,
@@ -874,8 +875,10 @@ describe('item webp icons', () => {
   });
 
   it('H) every non-weapon item resolves to committed painted art', () => {
+    // Heroic TIER variants (the Heroic Mark upgrade targets) borrow their
+    // base painting by design (icons.ts), pinned by H2 below.
     const expected = Object.values(ITEMS)
-      .filter((item) => item.kind !== 'weapon')
+      .filter((item) => item.kind !== 'weapon' && !isHeroicTierVariantId(item.id))
       .map((item) => item.id)
       .sort();
     expect(
@@ -889,6 +892,16 @@ describe('item webp icons', () => {
       expect(iconDataUrl('item', id), `${id} must serve its committed WebP`).toBe(
         `/ui/items/${id}.webp`,
       );
+    }
+  });
+
+  it('H2) every heroic tier variant serves its base item painting, never a procedural icon', () => {
+    const variants = Object.values(ITEMS).filter((item) => isHeroicTierVariantId(item.id));
+    expect(variants.length).toBeGreaterThan(100);
+    for (const variant of variants) {
+      expect(variant.heroicOf, variant.id).toBeTruthy();
+      expect(ITEM_IMAGE_IDS.has(variant.id), `${variant.id} must not own art`).toBe(false);
+      expect(itemImageUrl(variant.id), variant.id).toBe(`/ui/items/${variant.heroicOf}.webp`);
     }
   });
 

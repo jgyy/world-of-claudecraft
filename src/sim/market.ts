@@ -12,6 +12,7 @@
 import { bagPools, canGrantCopies, instancedCountCap } from './bags';
 import { rekeySigner } from './character_rename';
 import { ITEMS } from './data';
+import { isSoulboundCopy } from './item_binding';
 import { formatMoney } from './format_money';
 import {
   boundCraftedRecipeIdOnLoad,
@@ -693,7 +694,10 @@ export class Market {
       this.ctx.error(meta.entityId, 'The Merchant will not broker quest items.');
       return;
     }
-    if (def.noMarketList || def.soulbound) {
+    // Per-copy (item_binding.ts): a Soul Key release lists like any other
+    // instanced copy; the fungible arm above keeps the def gate because a
+    // plain stack of a soulbound def can never be released.
+    if (def.noMarketList || isSoulboundCopy(def, instance)) {
       this.ctx.error(meta.entityId, 'That item cannot be listed on the World Market.');
       return;
     }
@@ -1279,7 +1283,7 @@ export class Market {
   private reclaimSoulboundListings(): void {
     for (let i = this.marketListings.length - 1; i >= 0; i--) {
       const l = this.marketListings[i];
-      if (l.house || !ITEMS[l.itemId]?.soulbound) continue;
+      if (l.house || !isSoulboundCopy(ITEMS[l.itemId], l.instance)) continue;
       this.marketListings.splice(i, 1);
       this.collectionFor(l.sellerKey).items.push({
         itemId: l.itemId,

@@ -1243,6 +1243,10 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
       'glacier_melt',
       'healing_potion',
       'mana_potion',
+      // The Soul Key (src/sim/soul_key.ts): the level-20 hub's counter is
+      // where the players who hold bound raid tier already stand, a few paces
+      // from Quartermaster Vex's heroic upgrade.
+      'soul_key',
       'highwatch_breastplate',
       'peakwool_robe',
       'stalkerhide_jerkin',

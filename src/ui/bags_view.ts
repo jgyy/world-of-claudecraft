@@ -12,6 +12,7 @@
 import { poolCapacityOf, poolOccupancyOf } from '../sim/bag_pools';
 import { BACKPACK_SLOTS } from '../sim/bags';
 import { type BagCells, layoutBagCells } from '../sim/inventory_order';
+import { isSoulboundCopy } from '../sim/item_binding';
 import { isTransferLockedInstance } from '../sim/item_instance_transfer';
 import type { Quality } from '../sim/loot_master';
 import { isMaterialItemId } from '../sim/material_ids';
@@ -174,7 +175,9 @@ export function bagItemAction(
    *  deposits instead). The vault preserves it, so it never blocks there. */
   craftedRecipeId?: string,
 ): BagAction {
-  if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
+  // Per-copy (item_binding.ts): a Soul Key release opens every pipe again.
+  const soulbound = isSoulboundCopy(item, instance);
+  if (soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
     return 'transferBlockedSoulbound';
   if (mode.tradeOpen) return 'trade';
   if (mode.mailAttach) {
@@ -205,7 +208,7 @@ export function bagItemAction(
   // its own soulbound deny with the guild-worded sim line.
   if (mode.guildBankDeposit) {
     if (item.kind === 'quest') return 'guildBankDepositBlockedQuest';
-    if (item.soulbound) return 'guildBankDepositBlockedSoulbound';
+    if (soulbound) return 'guildBankDepositBlockedSoulbound';
     if (item.noMarketList || isTransferLockedInstance(instance))
       return 'guildBankDepositBlockedNoTransfer';
     return 'guildBankDeposit';
@@ -436,7 +439,8 @@ export function bagTooltipHintKey(
    *  by the vaultDeposit arm. */
   craftedRecipeId?: string,
 ): BagTooltipHintKey {
-  if (item.soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
+  const soulbound = isSoulboundCopy(item, instance);
+  if (soulbound && (mode.tradeOpen || mode.mailAttach || mode.marketSell || mode.vendorOpen))
     return 'hudChrome.itemSoulbound';
   if (mode.tradeOpen) return 'itemUi.tooltip.clickTradeOffer';
   if (mode.mailAttach) {
@@ -460,7 +464,7 @@ export function bagTooltipHintKey(
     // are DISTINCT from the personal pair: the consequences differ (a shared
     // pool any officer can take from; a refused copy would strand dormant).
     return item.kind === 'quest' ||
-      item.soulbound ||
+      soulbound ||
       item.noMarketList ||
       isTransferLockedInstance(instance)
       ? 'hudChrome.bank.guildCannotDeposit'

@@ -393,6 +393,7 @@ import { hrtimeToMs, TickRateMeter } from './tick_rate_meter';
 import { maybeTrackDay7Retained, trackLevelMilestoneCapi } from './ua_capi';
 import { recordUnstuckEvent } from './unstuck_records';
 import { buildVarkhulPortalReplayBatch, varkhulPortalReplayFrame } from './varkhul_portal_replay';
+import { dispatchCounterServiceCommand } from './counter_service_wire';
 import { dispatchVaultCommand, emitVaultSelfKeys } from './vault_wire';
 import { holderInfoForPubkey } from './woc_balance';
 import type { CharacterSaveArgs } from './woc_market';
@@ -977,6 +978,11 @@ const HEAVY_SELF_EVENTS = new Set<string>([
   // inv mirror goes stale until the staggered refresh. The requester's side
   // already gets a loot event from the ordinary addItemInstance grant.
   'commissionOrderResult',
+  // Soul Key release and the Heroic Mark upgrade: both stamp or swap a copy
+  // without a loot event on the single-copy arm, and debit a key or marks, so
+  // the result re-diffs the self inv mirror like unbindResult.
+  'soulKeyResult',
+  'heroicUpgradeResult',
 ]);
 
 // How often to re-broadcast online players' $WOC holder-tier flair. Each wallet
@@ -6998,13 +7004,14 @@ export class GameServer {
         }
         break;
       case 'unbind_item':
-        // Maker's Bond unbind service (Professions 2.0): the sim
-        // resolver re-validates eligibility/bound-ness/station range/fee
-        // (nothing trusted from the client); the outcome reaches this client
-        // as the pid-scoped text-free unbindResult event, a HEAVY_SELF_EVENTS
-        // member so the cleared payload and the fee debit re-diff the self
-        // inv/purse mirrors on the next snapshot.
-        if (typeof msg.item === 'string') sim.unbindItem(msg.item, pid);
+      case 'soul_key_unbind':
+      case 'heroic_buy':
+      case 'heroic_upgrade':
+      case 'crucible_buy':
+        // The counter services (server/counter_service_wire.ts): every arm
+        // re-validates in its sim resolver and answers with a pid-scoped
+        // text-free result event or the vendor event; nothing is trusted.
+        dispatchCounterServiceCommand(sim, command, msg, pid);
         break;
       // Commission order board (Professions 2.0, issue #1298): the sim
       // resolvers re-validate every field (recipe/eligibility/scope/state/
@@ -8224,19 +8231,6 @@ export class GameServer {
       }
       case 'set_dungeon_difficulty': {
         if (isDungeonDifficulty(msg.difficulty)) sim.setDungeonDifficulty(msg.difficulty, pid);
-        break;
-      }
-      case 'heroic_buy': {
-        // Range, stock, balance, and bag space all re-validate in the sim
-        // handler (instances/heroic_vendor.ts); the client only sends intent.
-        if (typeof msg.itemId === 'string') sim.buyHeroicVendorItem(msg.itemId, pid);
-        break;
-      }
-      case 'crucible_buy': {
-        // Range, stock, class, sigil balance, and bag space all re-validate in
-        // the sim handler (instances/crucible_vendor.ts); the client only
-        // sends intent.
-        if (typeof msg.itemId === 'string') sim.buyCrucibleVendorItem(msg.itemId, pid);
         break;
       }
       case 'enter_delve': {

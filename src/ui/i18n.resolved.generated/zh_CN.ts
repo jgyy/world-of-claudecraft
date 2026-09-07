@@ -4206,6 +4206,20 @@ export const zh_CN: EnTranslations = {
       "outOfRange": "你必须站在工作台旁才能解绑。",
       "noSpace": "背包空间不足，无法存放解绑后的物品。"
     },
+    "soulKey": {
+      "unboundLine": "Bond broken by a Soul Key",
+      "menuAction": "Break bond with Soul Key",
+      "confirmTitle": "Break Soulbind",
+      "confirmBody": "Spend a Soul Key on {name}? The bond breaks for good, and this character has {left} of {cap} releases left before the weekly reset.",
+      "confirmOk": "Break bond",
+      "confirmCancel": "Cancel",
+      "keyUse": "Right-click a soulbound piece of gear to break its bond for good. {cap} releases per character each weekly reset.",
+      "released": "The bond on {name} is broken. {left} Soul Key releases left this week.",
+      "notEligible": "A Soul Key cannot release that item.",
+      "notBound": "That item is not soulbound.",
+      "noneHeld": "You have no Soul Key.",
+      "weeklyCap": "This character has used every Soul Key release for this week."
+    },
     "commissionBoard": {
       "title": "委托订单",
       "close": "关闭委托订单",
@@ -8322,7 +8336,18 @@ export const zh_CN: EnTranslations = {
     "buyConfirmTitle": "确认购买",
     "buyConfirmBody": "用{marks}枚英雄徽记购买{item}？徽记购买后无法退款。",
     "buyConfirmAccept": "购买",
-    "buyConfirmCancel": "取消"
+    "buyConfirmCancel": "取消",
+    "upgradeTitle": "Heroic upgrade",
+    "upgradeIntro": "Forge a Crucible tier piece into its Heroic form for {marks} Heroic Marks: one step in power, and it no longer binds.",
+    "upgradeEmpty": "You carry no Crucible tier piece to upgrade.",
+    "upgradeAria": "Upgrade {item} to Heroic for {marks} Heroic Marks",
+    "upgradeConfirmTitle": "Confirm Heroic Upgrade",
+    "upgradeConfirmBody": "Upgrade {item} to its Heroic form for {marks} Heroic Marks? Marks spent on an upgrade cannot be refunded.",
+    "upgradeConfirmAccept": "Upgrade",
+    "upgraded": "{item} has been forged into its Heroic form.",
+    "upgradeNotEligible": "That item cannot be upgraded.",
+    "upgradeOutOfRange": "You must be at the Heroic Quartermaster to upgrade.",
+    "upgradeNotEnoughMarks": "You need {marks} Heroic Marks to upgrade."
   },
   "crucibleShop": {
     "browse": "兑换印记",
@@ -14649,6 +14674,9 @@ export const zh_CN: EnTranslations = {
       },
       "heroic_mark": {
         "name": "英雄徽记"
+      },
+      "soul_key": {
+        "name": "Soul Key"
       },
       "eastbrook_buckler": {
         "name": "东溪小圆盾"

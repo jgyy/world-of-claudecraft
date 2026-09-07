@@ -38,6 +38,7 @@ import {
   GUILD_BANK_TREASURY_CAP,
   guildBankRungsBought,
 } from '../sim/guild_bank';
+import { isSoulboundCopy } from '../sim/item_binding';
 import { isTransferLockedInstance } from '../sim/item_instance_transfer';
 import type { InvSlot, ItemInstancePayload } from '../sim/types';
 import type { GuildBankInfo } from '../world_api';
@@ -66,7 +67,8 @@ export function guildBankSlotDormant(
 ): boolean {
   if (item) {
     if (item.kind === 'quest') return true;
-    if (item.soulbound) return true;
+    // Per-copy (item_binding.ts): a Soul Key release is not dormant.
+    if (isSoulboundCopy(item, slot.instance)) return true;
     if (item.noMarketList) return true;
   }
   return isTransferLockedInstance(slot.instance);

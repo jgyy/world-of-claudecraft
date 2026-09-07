@@ -104,6 +104,8 @@ const SOURCE_BY_COMMAND: ReadonlyMap<string, CopperFlowSource> = new Map(
     disenchant_item: 'craft',
     salvage_item: 'craft',
     unbind_item: 'craft',
+    soul_key_unbind: 'craft',
+    heroic_upgrade: 'craft',
     place_mobile_station: 'craft',
     respec: 'craft',
     trade_accept: 'trade',

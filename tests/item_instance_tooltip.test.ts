@@ -416,7 +416,9 @@ describe('hud.itemTooltip composition order (source pins)', () => {
   // The mark line takes the def's kind too: the gathered-vs-crafted
   // wording split resolves from item.kind at the one composition site.
   const mark = hud.indexOf('instanceMakersMarkLine(instance, item.kind)');
-  const soulbound = hud.indexOf("t('hudChrome.itemSoulbound')");
+  // The def binding line is composed through soulboundTooltipLine (the
+  // Soulbound line, or the Soul Key release line) at one site.
+  const soulbound = hud.indexOf('soulboundTooltipLine(item, instance)');
   const setBlock = hud.indexOf('this.itemSetBlock(item)');
 
   it('composes all three instance line sets exactly once each', () => {

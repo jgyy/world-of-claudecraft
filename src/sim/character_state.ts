@@ -197,6 +197,9 @@ export interface CharacterState {
   delveLoreUnlocked?: string[];
   delveDaily?: { date: string; firstClearXp: string[]; markClears: number };
   heroicDaily?: { date: string; marked: string[] };
+  // Soul Key weekly allowance (src/sim/soul_key.ts SoulKeyWeek): written only
+  // once a release has happened; absent reads as a fresh window.
+  soulKeyWeek?: { resetAt: number; used: number };
   // Ravenpost welcome letter already sent (optional so pre-mail saves load
   // cleanly and receive the announcement letter once on their next login).
   mailWelcomed?: boolean;

@@ -1129,6 +1129,21 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     soulbound: true,
     noDiscard: true,
   },
+  // Soul Key (src/sim/soul_key.ts): breaks the bind-on-pickup bond of ONE
+  // bagged gear copy for good, two per character per weekly reset. Gold-
+  // priced at the Highwatch quartermaster (the sink: the coin leaves the
+  // economy at the counter), and the key itself trades, mails, and lists like
+  // any other good. Consumed through the soul_key_unbind command, never the
+  // generic use arm (the target is another bag slot).
+  soul_key: {
+    id: 'soul_key',
+    name: 'Soul Key',
+    kind: 'tool',
+    quality: 'epic',
+    stackSize: 5,
+    sellValue: 0,
+    buyValue: 300000,
+  },
   raw_mirror_trout: {
     id: 'raw_mirror_trout',
     name: 'Raw Mirror Trout',

@@ -26,6 +26,7 @@ import {
 } from '../item_budget';
 import type { ItemDef, MobTemplate } from '../types';
 import { DUNGEON_DEFS } from './dungeons';
+import { IGNIVAR_SET_ITEMS } from './ignivar_loot';
 import {
   ARMOR_RATING as FIVE_MAN_ARMOR_RATING,
   FIVE_MAN_WEAPON_RATING,
@@ -112,9 +113,13 @@ function applyFiveManBossVariantRating(variant: ItemDef, base: ItemDef): void {
   variant[key] = base.weapon ? FIVE_MAN_WEAPON_RATING : FIVE_MAN_ARMOR_RATING;
 }
 
-function makeHeroicVariant(base: ItemDef, sourceLevel = HEROIC_VARIANT_SOURCE_LEVEL): ItemDef {
+function makeHeroicVariant(
+  base: ItemDef,
+  sourceLevel = HEROIC_VARIANT_SOURCE_LEVEL,
+  levelBonus = 0,
+): ItemDef {
   const quality = base.quality ?? 'common';
-  const targetLevel = sourceLevel + (QUALITY_ILVL_BONUS[quality] ?? 0);
+  const targetLevel = sourceLevel + (QUALITY_ILVL_BONUS[quality] ?? 0) + levelBonus;
   const isTwoHand = base.kind === 'weapon' && base.hand === 'twohand';
   const handMultiplier = isTwoHand ? TWOHAND_STAT_MULT : 1;
   // Rounded like expectedStatBudget so variant budgets stay integral under the
@@ -246,6 +251,49 @@ export function buildHeroicVariants(
         ? HEROIC_LOOT_SOURCE_LEVEL
         : HEROIC_VARIANT_SOURCE_LEVEL;
     out[heroicVariantId(id)] = makeHeroicVariant(items[id], sourceLevel);
+  }
+  return out;
+}
+
+// Heroic TIER variants: the Heroic Mark upgrade (src/sim/instances/
+// heroic_upgrade.ts) mints one of these from a Crucible tier set piece
+// (ignivar_loot.ts IGNIVAR_SET_ITEMS). The same two-source-level heroic step
+// every other variant family takes (five-man 20 -> 22, the Nythraxis raid
+// 25 -> 27): 26 -> 28, still with the raid bonus, so the piece reads item
+// level 37 = 28 + epic 6 + raid 3 against the base's 35. The "minor stat
+// boost" is that two-level primary-stat budget step (one point on the small
+// slots, two on a chest), with armor, the dual ratings, the class lock, and
+// the `set` tag carried through the spread (set bonuses keep counting). The
+// ONE deliberate divergence from the base: the variant is NOT soulbound. That
+// is the upgrade's whole point (a heroic piece can change hands), while
+// requiredClass still keeps it inside its own class.
+//
+// The raid bonus is the literal 3 here rather than an import of
+// item_level.ts RAID_ILVL_BONUS: item_level.ts reads ../data, which merges
+// this module's output, so the import would be a cycle. tests/heroic_upgrade
+// .test.ts pins the two equal.
+export const IGNIVAR_HEROIC_TIER_SOURCE_LEVEL = 28;
+const HEROIC_TIER_RAID_BONUS = 3;
+
+/** Every heroic tier variant id, derived statically from the set table so the
+ *  icon and item-level indexes can key on it without reading ITEMS. */
+export const HEROIC_TIER_VARIANT_IDS: ReadonlySet<string> = new Set(
+  Object.keys(IGNIVAR_SET_ITEMS).map(heroicVariantId),
+);
+
+export function isHeroicTierVariantId(id: string): boolean {
+  return HEROIC_TIER_VARIANT_IDS.has(id);
+}
+
+export function buildHeroicTierVariants(
+  setItems: Record<string, ItemDef> = IGNIVAR_SET_ITEMS,
+): Record<string, ItemDef> {
+  const out: Record<string, ItemDef> = {};
+  for (const base of Object.values(setItems)) {
+    if (base.heroicOf) continue;
+    const variant = makeHeroicVariant(base, IGNIVAR_HEROIC_TIER_SOURCE_LEVEL, HEROIC_TIER_RAID_BONUS);
+    delete variant.soulbound;
+    out[variant.id] = variant;
   }
   return out;
 }

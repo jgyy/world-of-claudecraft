@@ -268,13 +268,29 @@ describe('combat-rating tier ladder', () => {
       'deathless_greatblade',
       'stormcallers_focus',
     ]);
+    // The heroic TIER variants (content/heroic_variants.ts buildHeroicTierVariants,
+    // the Heroic Mark upgrade targets) also read ilvl 37 with heroicOf set, but
+    // they are Crucible pieces and keep the Crucible dual rating; pinned on their
+    // own below, so the Nythraxis arm here excludes them by id.
+    const { isHeroicTierVariantId, HEROIC_TIER_VARIANT_IDS } = await import(
+      '../src/sim/content/heroic_variants'
+    );
     const heroicRaidGear = allGear.filter((item) => {
       const ilvl = itemLevel(item);
+      if (isHeroicTierVariantId(item.id)) return false;
       return (
         (ilvl === 33 && (item.heroicOf !== undefined || directHeroicRaidWeapons.has(item.id))) ||
         (ilvl === 37 && item.heroicOf !== undefined)
       );
     });
+    const heroicTier = allGear.filter((item) => isHeroicTierVariantId(item.id));
+    expect(heroicTier).toHaveLength(HEROIC_TIER_VARIANT_IDS.size);
+    for (const item of heroicTier) {
+      expect(itemLevel(item), item.id).toBe(37);
+      // The Crucible armor ladder step (60 primary + 25 secondary) rides the
+      // variant unchanged: the upgrade is a primary-stat step, never a rating one.
+      expect(ratingValues(item).sort((a, b) => b - a), item.id).toEqual([60, 25]);
+    }
     // 13 pre-existing pieces plus the 6 generated heroic raid variants of the
     // normal-raid epics (greatsword, greatblade, bulwark, orb, the hunter's
     // direfang_quiver, and the feral ladder capstone maul_of_the_scourged_wilds)

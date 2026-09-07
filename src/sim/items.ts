@@ -27,6 +27,7 @@ import {
 } from './bags';
 import { isRawCookingCatch } from './content/items';
 import { ITEMS, NPCS } from './data';
+import { isSoulboundCopy, isUnboundCopy } from './item_binding';
 import { markItemDiscovered } from './deeds';
 import { recalcPlayerStats } from './entity';
 import {
@@ -1230,7 +1231,13 @@ export function sellItem(
     ctx.error(meta.entityId, 'There is no merchant nearby.');
     return;
   }
-  if (def.noVendorSell || def.soulbound) {
+  // Per-copy soulbound (item_binding.ts): a Soul Key release sells like any
+  // other copy, so the def gate only closes when NO held copy is released;
+  // the bound tally below then keeps every still-bound copy out of the sale.
+  const holdsReleased = (meta.inventory ?? []).some(
+    (s) => s.itemId === itemId && isUnboundCopy(s.instance),
+  );
+  if (def.noVendorSell || (def.soulbound && !holdsReleased)) {
     ctx.error(meta.entityId, 'That item is not for sale.');
     return;
   }
@@ -1253,11 +1260,13 @@ export function sellItem(
   // exactly like a bound copy is never sellable at all. Classified mutually
   // exclusive (bound wins when a copy is somehow both) so the exclusion tally
   // below never double-subtracts one slot's units.
+  const boundCopy = (instance: ItemInstancePayload | undefined): boolean =>
+    instance?.boundTo !== undefined || isSoulboundCopy(def, instance);
   let boundHeld = 0;
   let lockedHeld = 0;
   for (const s of meta.inventory ?? []) {
     if (s.itemId !== itemId) continue;
-    if (s.instance?.boundTo !== undefined) boundHeld += s.count;
+    if (boundCopy(s.instance)) boundHeld += s.count;
     else if (isItemLocked(s.instance)) lockedHeld += s.count;
   }
   const sellableCount = Math.min(sellCount, available - boundHeld - lockedHeld);
@@ -1296,7 +1305,7 @@ export function sellItem(
     // a slot that holds a different, bound item reported "bound" rather than
     // "don't have that item", which is a misleading refusal.
     const named = meta.inventory[slotIndex];
-    if (named?.itemId === itemId && named.instance?.boundTo !== undefined) {
+    if (named?.itemId === itemId && boundCopy(named.instance)) {
       ctx.error(meta.entityId, 'That item is bound and cannot be sold.');
       return;
     }
@@ -1320,7 +1329,7 @@ export function sellItem(
       itemId,
       sellableCount,
       meta.entityId,
-      (instance) => instance.boundTo !== undefined || isItemLocked(instance),
+      (instance) => boundCopy(instance) || isItemLocked(instance),
       // The copy-choice rule on the vendor arm too (the phase 18 whole-branch
       // review): the seller's own self-signed charm copies go last, so selling
       // one of two charms never silently retires the recharge discount.
@@ -1371,7 +1380,7 @@ export function junkSellableSlot(
     def.quality === 'poor' &&
     def.kind !== 'quest' &&
     !def.noVendorSell &&
-    !def.soulbound &&
+    !isSoulboundCopy(def, slot.instance) &&
     slot.instance?.boundTo === undefined &&
     !isItemLocked(slot.instance) &&
     slot.count > 0

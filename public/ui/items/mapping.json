@@ -6420,6 +6420,18 @@
         "stormhymn_chain_treads",
         "heroic_stormhymn_chain_treads"
       ]
+    },
+    {
+      "batchId": "soul-key-icon-2026-09-07",
+      "source": "project-authored vector painting rendered with sharp (scripts/render_soul_key_icon.mjs)",
+      "owner": "World of ClaudeCraft",
+      "license": "World of ClaudeCraft project-generated art, project asset, rights reserved",
+      "styleReference": "existing painted WebP catalog in public/ui/items/",
+      "provenanceRecord": "docs/achievements/soul-key-icon-2026-09-07/",
+      "commonPrompt": "Classic dark-fantasy MMORPG inventory painting of one centered iron skeleton key with a bone filigree bow cradling a soul-blue gem, on an opaque dark atmospheric vignette, warm top-left key light and cool bottom-right shadow, safe margins, no writing, frame, or transparency.",
+      "itemIds": [
+        "soul_key"
+      ]
     }
   ]
 }
