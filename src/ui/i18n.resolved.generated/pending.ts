@@ -10,6 +10,7 @@
 
 export const pending: Record<string, readonly string[]> = {
   "es": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -33,6 +34,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -41,6 +43,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -284,6 +287,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "es_ES": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -307,6 +311,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -315,6 +320,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -558,6 +564,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "fr_FR": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -581,6 +588,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -589,6 +597,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -832,6 +841,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "fr_CA": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -855,6 +865,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -863,6 +874,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -1107,6 +1119,7 @@ export const pending: Record<string, readonly string[]> = {
   ],
   "en_CA": [],
   "it_IT": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -1130,6 +1143,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -1138,6 +1152,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -1381,6 +1396,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "de_DE": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -1404,6 +1420,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -1412,6 +1429,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -1735,6 +1753,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.targetDots.row"
   ],
   "pt_BR": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -1758,6 +1777,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -1766,6 +1786,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -2029,6 +2050,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.targetDots.row"
   ],
   "cs_CZ": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -2052,6 +2074,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -2060,6 +2083,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -2303,6 +2327,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "nl_NL": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -2326,6 +2351,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -2334,6 +2360,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -2577,6 +2604,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "pl_PL": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -2600,6 +2628,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -2608,6 +2637,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -2851,6 +2881,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "id_ID": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -2874,6 +2905,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -2882,6 +2914,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -3125,6 +3158,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "tr_TR": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -3148,6 +3182,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -3156,6 +3191,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -3399,6 +3435,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "sv_SE": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -3422,6 +3459,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -3430,6 +3468,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -3673,6 +3712,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "vi_VN": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -3696,6 +3736,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -3704,6 +3745,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
@@ -3947,6 +3989,7 @@ export const pending: Record<string, readonly string[]> = {
     "worldContent.realmBuilderMonumentName"
   ],
   "da_DK": [
+    "entities.abilities.arcane_shot.specNote_marksmanship",
     "entities.items.bramblehide_cinch.name",
     "entities.items.bramblehide_crown.name",
     "entities.items.bramblehide_grips.name",
@@ -3970,6 +4013,7 @@ export const pending: Record<string, readonly string[]> = {
     "gpuNotice.bodyRequestedBackend",
     "guide.riftsPage.forgeBody",
     "guide.riftsPage.forgeHeading",
+    "hudChrome.auraEffect.coldsightRead",
     "hudChrome.auraEffect.nythraxisAscension",
     "hudChrome.auraEffect.nythraxisBoneStorm",
     "hudChrome.auraEffect.nythraxisBound",
@@ -3978,6 +4022,7 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.auraEffect.nythraxisImpaled",
     "hudChrome.auraEffect.nythraxisKingsWrath",
     "hudChrome.auraEffect.nythraxisUnbound",
+    "hudChrome.auraEffect.veiledEdgeStrike",
     "hudChrome.bank.guildHistoryTab",
     "hudChrome.bank.logActionAdminPurge",
     "hudChrome.bank.logActionBuySlots",
