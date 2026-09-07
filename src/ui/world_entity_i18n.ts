@@ -310,6 +310,9 @@ const NPC_IDS = [
   'provisioner_dunmore',
   'sergeant_varga',
   'chaplain_ondrey',
+  'paymaster_edda_thorne',
+  'auctioneer_bram_kestrel',
+  'armorer_tam_rusk',
   // Lanternmere, the Amberfall
   'reeve_ottoline',
   'waywatcher_sorrel',

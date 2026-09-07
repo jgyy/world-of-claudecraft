@@ -40,6 +40,8 @@ describe('banker chest classification', () => {
       'bursar_fernando',
       'bursar_petra_vell',
       'bursar_aldous_crane',
+      // the Last Keep's garrison strongroom (src/sim/last_keep_garrison.ts)
+      'paymaster_edda_thorne',
       // the Proving Shore tutorial island's strongbox desk
       'bursar_wick',
     ]);

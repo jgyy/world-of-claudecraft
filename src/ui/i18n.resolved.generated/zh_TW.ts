@@ -15791,6 +15791,21 @@ export const zh_TW: EnTranslations = {
         "title": "寂靜廳堂之聲",
         "greeting": "最後之泉仍在這些牆邊流淌，無論鍛造之父從中偷走了什麼。坐一會兒吧。廳堂寂靜，卻並不空蕩。"
       },
+      "paymaster_edda_thorne": {
+        "name": "軍需官艾達·索恩",
+        "title": "金庫守護者",
+        "greeting": "守備隊的軍餉箱熬過了巨龍，你的錢也會平安無事。存入、支取，或再買一層貨架；金庫已開放。"
+      },
+      "auctioneer_bram_kestrel": {
+        "name": "拍賣師布拉姆·凱斯特雷爾",
+        "title": "世界市場之聲",
+        "greeting": "世界市場的觸角連這裡都構得著，{className}。競標全境的貨物，或者把你從沙丘帶回的戰利品掛上去。"
+      },
+      "armorer_tam_rusk": {
+        "name": "軍械師塔姆·拉斯克",
+        "title": "要塞軍械師",
+        "greeting": "巨龍能砸裂盾牌，巨魔能磨鈍刀刃。不管沙丘奪走了你什麼，鍛爐都有替換的。"
+      },
       "reeve_ottoline": {
         "name": "鎮長奧托琳",
         "title": "燈湖鎮鎮長",

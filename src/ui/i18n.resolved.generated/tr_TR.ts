@@ -15791,6 +15791,21 @@ export const tr_TR: EnTranslations = {
         "title": "Voice of the Quiet Halls",
         "greeting": "The Last Spring still runs beside these walls, whatever the Forgefather stole from it. Sit a while. The halls are quiet, not empty."
       },
+      "paymaster_edda_thorne": {
+        "name": "Paymaster Edda Thorne",
+        "title": "Keeper of the Strongroom",
+        "greeting": "The garrison's pay chest outlasted the drakes, and so will your coin. Deposit it, draw on it, or buy another shelf; the strongroom is open."
+      },
+      "auctioneer_bram_kestrel": {
+        "name": "Auctioneer Bram Kestrel",
+        "title": "Voice of the World Market",
+        "greeting": "The World Market reaches even this far, {className}. Bid on what the realm sells, or list your own plunder from the dunes."
+      },
+      "armorer_tam_rusk": {
+        "name": "Armorer Tam Rusk",
+        "title": "Keep Armorer",
+        "greeting": "Drakes crack shields and trolls dull blades. Whatever the dunes took off you, the forge has a replacement."
+      },
       "reeve_ottoline": {
         "name": "Vali Ottoline",
         "title": "Lanternmere Valisi",

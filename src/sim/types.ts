@@ -7199,6 +7199,14 @@ export interface MailboxDef {
    *  object by its facing). Omitted means the default 0 the pillars have
    *  always had; content sets it only where a slot faces the wrong way. */
   facing?: number;
+  /** A reserved static-service entity id (STATIC_WORLD_SERVICE_ENTITY_ID_MIN
+   *  band). Present: the generic Sim ctor mailbox loop SKIPS this record and
+   *  its owning module stands the pillar up on exactly this id (the `dynamic`
+   *  NPC precedent), so a mailbox added to a shipped town never shifts the
+   *  sequential id of the dungeon doors and slots allocated after the loop.
+   *  Colliders, calm anchors, and the civic map markers still read the table,
+   *  so the pillar is solid and mapped either way. Absent: sequential id. */
+  entityId?: number;
 }
 
 // The Eastbrook Vale Realm Builder monument. One singleton static service, so

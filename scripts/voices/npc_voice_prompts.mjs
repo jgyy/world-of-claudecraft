@@ -1088,6 +1088,9 @@ export const VOICE_ALIAS = {
   provisioner_dunmore: 'gatecaptain_brannoc',
   sergeant_varga: 'scout_yerrin',
   chaplain_ondrey: 'brother_aldric',
+  paymaster_edda_thorne: 'bursar_aldous_crane',
+  auctioneer_bram_kestrel: 'auctioneer_voss',
+  armorer_tam_rusk: 'armorer_hode',
   scout_maren_highwatch: 'scout_maren',
   brother_halven_marsh: 'brother_halven',
   // Maelin is a development-only raid archivist and reuses the established

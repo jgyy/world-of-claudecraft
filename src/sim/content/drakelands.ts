@@ -517,13 +517,16 @@ export const DRAKELANDS_MOBS: Record<string, MobTemplate> = {
 // Orkadia wargate. The scout stands far from the hub on purpose: the war
 // chain sends players out to find her.
 //
-// The Last Keep garrison (the four `dynamic: true` records at the end): the
-// rebuilt castle's bailey had a well and two market stalls and nobody at
-// them. src/sim/last_keep_garrison.ts stands these four up on RESERVED
+// The Last Keep garrison and town services (the `dynamic: true` records at
+// the end): the rebuilt castle's bailey had a well and two market stalls and
+// nobody at them. src/sim/last_keep_garrison.ts stands these up on RESERVED
 // entity ids after the rng-driven roster (the FURY precedent), so adding a
 // keep NPC never shifts a camp mob's id and the parity goldens hold. Spots
 // come from the bailey clearance sweep (tests/last_keep_garrison.test.ts pins
-// them inside the curtain walls and 4 yd apart).
+// them inside the curtain walls and 4 yd apart). The services are the ones a
+// classic-era hub town carries: a banker, a World Market auctioneer, and an
+// armorer, so a traveler who crosses the Wyrmgate need not cross back to
+// Highwatch to bank, deal, or re-arm (the mailbox is content/mailboxes.ts).
 export const DRAKELANDS_NPCS: Record<string, NpcDef> = {
   gatecaptain_brannoc: {
     id: 'gatecaptain_brannoc',
@@ -622,6 +625,60 @@ export const DRAKELANDS_NPCS: Record<string, NpcDef> = {
     questIds: [],
     greeting:
       'The Last Spring still runs beside these walls, whatever the Forgefather stole from it. Sit a while. The halls are quiet, not empty.',
+    dynamic: true,
+  },
+  // The paymaster keeps the garrison's pay chest, and now the travelers'
+  // coffers too: a banker, so the bank (and the guild bank) opens at the keep.
+  // Not a Gilded Strongbox branch (deeds.ts hid_gilded_tour counts those three
+  // by name), a garrison strongroom of its own.
+  paymaster_edda_thorne: {
+    id: 'paymaster_edda_thorne',
+    name: 'Paymaster Edda Thorne',
+    title: 'Keeper of the Strongroom',
+    pos: { x: 410, z: 2040 }, // the court between the well and the tavern, facing the market row
+    facing: -Math.PI / 2,
+    color: 0xb8862e,
+    questIds: [],
+    banker: true,
+    greeting:
+      "The garrison's pay chest outlasted the drakes, and so will your coin. Deposit it, draw on it, or buy another shelf; the strongroom is open.",
+    dynamic: true,
+  },
+  // The World Market's fourth desk (Eastbrook, Highwatch, Dawnrest Camp):
+  // one shared book, so the keep deals in the same listings as every hub.
+  auctioneer_bram_kestrel: {
+    id: 'auctioneer_bram_kestrel',
+    name: 'Auctioneer Bram Kestrel',
+    title: 'Voice of the World Market',
+    pos: { x: 396, z: 2046 }, // the market hall's east front, facing the bailey court
+    facing: Math.PI / 2,
+    color: 0x7a52c8,
+    questIds: [],
+    market: true,
+    greeting:
+      'The World Market reaches even this far, $C. Bid on what the realm sells, or list your own plunder from the dunes.',
+    dynamic: true,
+  },
+  // The keep armorer sells the Highwatch armory rows (content/zone3.ts, the
+  // same band the Drakelands opens on), so a walker who crossed the waystone
+  // finds the same steel on both ends: the sutler's larder rule for arms.
+  armorer_tam_rusk: {
+    id: 'armorer_tam_rusk',
+    name: 'Armorer Tam Rusk',
+    title: 'Keep Armorer',
+    pos: { x: 378, z: 2019 }, // the forge's east door, facing the gate road
+    facing: Math.PI / 2,
+    color: 0x6f7b7c,
+    questIds: [],
+    vendorItems: [
+      'highwatch_warblade',
+      'highwatch_greatsword',
+      'highwatch_wallshield',
+      'craghorn_staff',
+      'icevein_dirk',
+    ],
+    greeting:
+      'Drakes crack shields and trolls dull blades. Whatever the dunes took off you, the forge has a replacement.',
     dynamic: true,
   },
 };

@@ -1728,6 +1728,62 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     worn: kit('druid'),
     props: 'tome',
   },
+  // Paymaster Edda Thorne: the strongroom's keeper, grey-streaked bun, ledger
+  // squint, a soldier's shoulders under a clerk's coat.
+  paymaster_edda_thorne: {
+    app: {
+      gender: 'female',
+      hair: 'lowbun',
+      ...hair(28, 0.12, 0.45),
+      brows: 'thin',
+      eyeShape: 'narrow',
+      ...eyes(36, 0.3, 0.35),
+      ...skin(25, 0.4, 0.5),
+      mouth: 'neutral',
+      face: face({ cheeks: -0.3, chin: 0.1, nose: 0.1 }),
+      body: body({ shoulders: 0.15, chest: -0.1 }),
+      outfit: 'gilded',
+    },
+    worn: kit('rogue'),
+    props: 'none',
+  },
+  // Auctioneer Bram Kestrel: the market desk's voice, dark curls, a quick grin.
+  auctioneer_bram_kestrel: {
+    app: {
+      gender: 'male',
+      hair: 'curlycap',
+      ...hair(268, 0.35, 0.2),
+      beard: 'stubble',
+      brows: 'arched',
+      eyeShape: 'round',
+      ...eyes(200, 0.35, 0.4),
+      ...skin(24, 0.45, 0.5),
+      mouth: 'smile',
+      face: face({ jaw: 0.15, cheeks: 0.1 }),
+      body: body({ shoulders: 0.05, chest: 0.1 }),
+    },
+    worn: kit('mage'),
+    props: 'none',
+  },
+  // Armorer Tam Rusk: the forge's east door, soot-dark cropped hair, a hammer
+  // that never cools.
+  armorer_tam_rusk: {
+    app: {
+      gender: 'male',
+      hair: 'crew',
+      ...hair(22, 0.1, 0.18),
+      beard: 'full',
+      brows: 'bushy',
+      eyeShape: 'narrow',
+      ...eyes(32, 0.3, 0.3),
+      ...skin(23, 0.55, 0.42),
+      mouth: 'frown',
+      face: face({ jaw: 0.4, brow: 0.25, nose: 0.3 }),
+      body: body({ shoulders: 0.4, chest: 0.45 }),
+    },
+    worn: kit('knight'),
+    props: 'hammer',
+  },
   // Scout Yerrin, Far-Dune Watcher: keep low; glass carries sound.
   scout_yerrin: {
     app: {

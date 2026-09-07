@@ -318,6 +318,7 @@ import {
   setPartyLootMaster as setPartyLootMasterImpl,
   submitLootRoll as submitLootRollImpl,
 } from './loot/loot_roll';
+import { createMailboxEntity } from './mail/mailbox_entity';
 import { type MailSave, PostOffice } from './mail/post_office';
 import { Market, type MarketListing, type MarketSave } from './market';
 import { defaultMarketQuery, type MarketQuery } from './market_query';
@@ -2239,17 +2240,11 @@ export class Sim {
     // civic furniture with a static collider at this position, so the spawn
     // must never relocate away from it (findSafePos would, since the collider
     // sits exactly here). Draws no rng.
+    // A record carrying a reserved entityId is its owning module's to spawn
+    // (spawnLastKeepGarrison below), so the sequential allocator never moves.
     for (const boxDef of worldContent.services?.mailboxes ?? []) {
-      const box = createGroundObject(
-        this.nextId++,
-        '',
-        'Mailbox',
-        this.groundPos(boxDef.x, boxDef.z),
-      );
-      box.templateId = 'mailbox';
-      box.objectItemId = null;
-      box.lootable = true; // interactable
-      if (boxDef.facing !== undefined) box.facing = boxDef.facing;
+      if (boxDef.entityId !== undefined) continue;
+      const box = createMailboxEntity(this.nextId++, boxDef, this.groundPos(boxDef.x, boxDef.z));
       this.addEntity(box);
       this.postOffice.mailboxIds.push(box.id);
     }
@@ -2418,7 +2413,16 @@ export class Sim {
     }
 
     spawnRealmBuilderMonument(this.ctx, this.worldContent.props);
-    spawnLastKeepGarrison(this.ctx, this.worldContent.npcs);
+    spawnLastKeepGarrison(
+      this.ctx,
+      this.worldContent.npcs,
+      {
+        bankerIds: this.bankerIds,
+        merchantIds: this.market.merchantIds,
+        mailboxIds: this.postOffice.mailboxIds,
+      },
+      this.worldContent.services?.mailboxes ?? [],
+    );
     if (cfg.noPlayer && this.devCommands) this.spawnHealerPracticeDummy();
 
     if (!cfg.noPlayer) {
