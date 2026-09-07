@@ -552,7 +552,10 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned 12272 -> 12284 at the Nythraxis redo sync (PR #3848 landed ahead in
     // the queue; its arms sat under release's slack, so its pin never moved).
     // Measured with wc -l on the merged tree. Exact merged count, zero headroom.
-    ceiling: 12284,
+    // Lowered from 12284 by the account-bound Reliquary: the four IWorldReliquary
+    // completion reads moved to src/sim/reliquary_reads.ts (one implementation
+    // both hosts delegate to), which paid for the PlayerMeta.accountRelics stamp.
+    ceiling: 12280,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -704,7 +707,10 @@ const MONOLITHS: MonolithRow[] = [
     // Down 10604 -> 10587 for the per-surface action-bar profiles: the
     // join read, the per-profile merge and the FIFO write moved to
     // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
-    ceiling: 10587,
+    // Lowered from 10587 by the account-bound Reliquary: the Curator standing
+    // resolution moved to server/account_reliquary.ts (curatorStandingFor) beside
+    // the account-ledger fold, which paid for the three fold call sites.
+    ceiling: 10585,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -788,7 +794,9 @@ const MONOLITHS: MonolithRow[] = [
     // that put its requests on the wire), so the merged file sits below
     // both single-arm counts (5860 and 5856). Measured on the merged tree,
     // never reconciled by arithmetic. Exact merged count, zero slack.
-    ceiling: 5843,
+    // Lowered from 5843 by the account-bound Reliquary: the completion reads now
+    // delegate to src/sim/reliquary_reads.ts, shared with the offline Sim.
+    ceiling: 5840,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
@@ -868,7 +876,9 @@ const MONOLITHS: MonolithRow[] = [
     // log statement (loadGuildBankLogRows, its row shape and its lowered
     // statement timeout) moved to server/guild_bank_log_db.ts when it grew a
     // page cursor and a `more` probe. Exact count.
-    ceiling: 5003,
+    // Lowered from 5003 by the account-bound Reliquary: AccountCosmetics is the
+    // seam type re-exported (src/world_api/cosmetics.ts), no second interface.
+    ceiling: 4998,
     seam: 'a domain <domain>_db.ts module with its own *_SCHEMA (server/CLAUDE.md)',
   },
   {
