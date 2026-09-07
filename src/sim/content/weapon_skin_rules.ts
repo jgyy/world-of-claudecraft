@@ -204,8 +204,10 @@ export function skinnableWeaponTypesFor(
 ): WeaponSkinType[] {
   // Empty hands apply nothing. A bare mainhand beside an offhand WEAPON still
   // counts (a rogue who unequipped the dagger keeps the mace); a shield or held
-  // offhand alone does not, so the hunter arm below keeps its old answer.
-  if (!mainhandItemId && !weaponTypeForItem(offhandItemId)) return [];
+  // offhand alone does not. The hunter arm keeps its exact old answer: it
+  // needs a mainhand (hunters never dual-wield, so the offhand is never a
+  // weapon there anyway).
+  if (!mainhandItemId && (cls === 'hunter' || !weaponTypeForItem(offhandItemId))) return [];
   const item = heldWeaponSkinTypes(mainhandItemId, offhandItemId);
   // Crossbow before bow: they share the one ranged display slot, so with both
   // in the loadout the crossbow skin wins resolution deterministically.

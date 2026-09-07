@@ -262,6 +262,11 @@ describe('offhand-held weapon type (reported: legendary mace skin never loaded)'
     expect(skinnableWeaponTypesFor('warrior', null, 'class', 'eastbrook_buckler')).toEqual([]);
     expect(skinnableWeaponTypesFor('hunter', null, 'class', 'eastbrook_buckler')).toEqual([]);
     expect(skinnableWeaponTypesFor('hunter', null, 'mech', 'eastbrook_buckler')).toEqual([]);
+    // The hunter arm still needs a mainhand, whatever the offhand holds.
+    expect(skinnableWeaponTypesFor('hunter', null, 'class', 'forgefathers_warhammer')).toEqual([]);
+    expect(skinnableWeaponTypesFor('hunter', null, 'mech', 'forgefathers_warhammer')).toEqual([]);
+    // An offhand polearm is a weapon no skin targets: nothing to apply.
+    expect(skinnableWeaponTypesFor('warrior', null, 'class', 'tidereaver_gaff')).toEqual([]);
   });
 
   it('resolves the offhand-held type when only that skin is applied, mainhand type first', () => {
@@ -533,6 +538,10 @@ describe('bow skin attack animation (hunter draw instead of crossbow aim)', () =
     // The skin material/VFX set is the hands that SHOW the skin (a melee skin
     // held in the offhand alone leaves the mainhand's own model out of it).
     expect(fn).toContain('this.finishWeaponAttach(skinned)');
+    // A hand outside the skin set still gets its bone-texture pass (the lean
+    // setOffhand path already gave a plain offhand one; the full re-attach now
+    // matches it).
+    expect(fn).toContain('if (!skinned.includes(payload)) configureTightBoneTextures(payload)');
     expect(fn).toContain('mainhandShowsWeaponSkin(this.weaponSkinId, this.weaponItemId)');
     expect(fn).toContain('return [...payloads, ...offPayloads]');
   });
