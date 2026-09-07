@@ -6114,12 +6114,6 @@ export const TARGETS = [
       },
       { key: 'ignivar-normal', pageId: 'conquerors_ignivar', beforeLoad: seedLowGraphicsPreset },
       { key: 'varkhul-normal', pageId: 'conquerors_varkhul', beforeLoad: seedLowGraphicsPreset },
-      {
-        key: 'varkhul-heroic-mobile',
-        pageId: 'conquerors_varkhul_heroic',
-        mobile: true,
-        beforeLoad: seedLowGraphicsPreset,
-      },
     ],
     async capture(page, variant) {
       await page.evaluate(() => {
@@ -6128,6 +6122,10 @@ export const TARGETS = [
       });
       await clearReliquaryPins(page);
       await openReliquaryConquerorsShelf(page);
+      // The Proving Shore greeting note would otherwise sit over the grid.
+      await page.evaluate(() => {
+        document.getElementById('tutorial-greeting')?.remove();
+      });
       // Enter the page once to learn its relic ids, mark every one discovered
       // (the live itemsDiscovered set, exactly what a find does minus the
       // event) so the grid paints art instead of silhouettes, then re-enter so
@@ -6150,11 +6148,7 @@ export const TARGETS = [
         }
       }
       const entered = await page.evaluate(
-        (id) =>
-          !!document.querySelector(
-            `#reliquary-window [data-page-open="${id}"], #reliquary-window .reliquary-page-grid`,
-          ),
-        variant.pageId,
+        () => document.querySelectorAll('#reliquary-window .reliquary-cell').length > 0,
       );
       if (!entered) throw new Error(`reliquary page ${variant.pageId} did not open`);
       await wait(400);
