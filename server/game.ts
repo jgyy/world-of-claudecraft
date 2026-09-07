@@ -355,6 +355,7 @@ import type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types'
 
 export type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types';
 
+import { dispatchCounterServiceCommand } from './counter_service_wire';
 import { recordFtueDeath, recordFtueQuest, recordLevelUp } from './progress_events';
 import { eventLeadDayKey, resetDayKey } from './raid_reset';
 import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
@@ -393,7 +394,6 @@ import { hrtimeToMs, TickRateMeter } from './tick_rate_meter';
 import { maybeTrackDay7Retained, trackLevelMilestoneCapi } from './ua_capi';
 import { recordUnstuckEvent } from './unstuck_records';
 import { buildVarkhulPortalReplayBatch, varkhulPortalReplayFrame } from './varkhul_portal_replay';
-import { dispatchCounterServiceCommand } from './counter_service_wire';
 import { dispatchVaultCommand, emitVaultSelfKeys } from './vault_wire';
 import { holderInfoForPubkey } from './woc_balance';
 import type { CharacterSaveArgs } from './woc_market';
@@ -1415,9 +1415,11 @@ function identityFields(e: Entity): Record<string, unknown> {
     // gems, which the band tooltip's item level and rank lines read) leave the
     // server; boundTo, charges, and the bindOnTrade arm are gameplay state no
     // inspecting client needs and never ride this key. The pub allowlist below
-    // (signer/enchant/rolled/rift ONLY) is what enforces this, so a new
-    // non-cosmetic ItemInstancePayload field is excluded by construction; the
-    // owner still sees their own payload in full via the self `inv` mirror.
+    // (signer/enchant/rolled/rift, plus the Soul Key `unbound` release, which
+    // is a public fact of the copy: it decides whether the paperdoll tooltip
+    // reads Soulbound at all) is what enforces this, so a new non-cosmetic
+    // ItemInstancePayload field is excluded by construction; the owner still
+    // sees their own payload in full via the self `inv` mirror.
     let eqi: Record<string, unknown> | undefined;
     for (const [slot, inst] of Object.entries(e.equippedInstances)) {
       if (!inst) continue;
@@ -1426,6 +1428,7 @@ function identityFields(e: Entity): Record<string, unknown> {
       if (inst.enchant !== undefined) pub.enchant = inst.enchant;
       if (inst.rolled !== undefined) pub.rolled = inst.rolled;
       if (inst.rift !== undefined) pub.rift = inst.rift;
+      if (inst.unbound === true) pub.unbound = true;
       for (const _ in pub) {
         if (eqi === undefined) eqi = {};
         eqi[slot] = pub;

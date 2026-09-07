@@ -14556,7 +14556,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.soulKey.confirmBody': '对{name}使用一把灵魂之钥？绑定将永久解除。每个角色每次周重置最多可解除{cap}次绑定。',
   'hudChrome.soulKey.confirmOk': '解除绑定',
   'hudChrome.soulKey.confirmCancel': '取消',
-  'hudChrome.soulKey.keyUse': '右键点击一件灵魂绑定的装备，永久解除其绑定。每个角色每次周重置可解除{cap}次。',
+  'hudChrome.soulKey.keyUse': '右键点击背包中一件灵魂绑定的装备，永久解除其绑定。每个角色每次周重置可解除{cap}次。',
   'hudChrome.soulKey.released': '{name}的绑定已解除。本周还剩{left}次灵魂之钥解除机会。',
   'hudChrome.soulKey.notEligible': '灵魂之钥无法解除该物品的绑定。',
   'hudChrome.soulKey.notBound': '该物品未灵魂绑定。',

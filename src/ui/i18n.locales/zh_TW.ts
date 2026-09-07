@@ -14563,7 +14563,7 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.soulKey.confirmBody': '對{name}使用一把靈魂之鑰？綁定將永久解除。每個角色每次週重置最多可解除{cap}次綁定。',
   'hudChrome.soulKey.confirmOk': '解除綁定',
   'hudChrome.soulKey.confirmCancel': '取消',
-  'hudChrome.soulKey.keyUse': '右鍵點擊一件靈魂綁定的裝備，永久解除其綁定。每個角色每次週重置可解除{cap}次。',
+  'hudChrome.soulKey.keyUse': '右鍵點擊背包中一件靈魂綁定的裝備，永久解除其綁定。每個角色每次週重置可解除{cap}次。',
   'hudChrome.soulKey.released': '{name}的綁定已解除。本週還剩{left}次靈魂之鑰解除機會。',
   'hudChrome.soulKey.notEligible': '靈魂之鑰無法解除該物品的綁定。',
   'hudChrome.soulKey.notBound': '該物品未靈魂綁定。',

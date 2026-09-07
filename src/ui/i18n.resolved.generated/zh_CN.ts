@@ -4213,7 +4213,7 @@ export const zh_CN: EnTranslations = {
       "confirmBody": "对{name}使用一把灵魂之钥？绑定将永久解除。每个角色每次周重置最多可解除{cap}次绑定。",
       "confirmOk": "解除绑定",
       "confirmCancel": "取消",
-      "keyUse": "右键点击一件灵魂绑定的装备，永久解除其绑定。每个角色每次周重置可解除{cap}次。",
+      "keyUse": "右键点击背包中一件灵魂绑定的装备，永久解除其绑定。每个角色每次周重置可解除{cap}次。",
       "released": "{name}的绑定已解除。本周还剩{left}次灵魂之钥解除机会。",
       "notEligible": "灵魂之钥无法解除该物品的绑定。",
       "notBound": "该物品未灵魂绑定。",

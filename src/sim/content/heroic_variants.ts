@@ -26,7 +26,6 @@ import {
 } from '../item_budget';
 import type { ItemDef, MobTemplate } from '../types';
 import { DUNGEON_DEFS } from './dungeons';
-import { IGNIVAR_SET_ITEMS } from './ignivar_loot';
 import {
   ARMOR_RATING as FIVE_MAN_ARMOR_RATING,
   FIVE_MAN_WEAPON_RATING,
@@ -35,6 +34,7 @@ import {
   NYTHRAXIS_RAID_BOSS_ID,
   NYTHRAXIS_RAID_LOOT_SOURCE_LEVEL,
 } from './heroic_loot';
+import { IGNIVAR_SET_ITEMS } from './ignivar_loot';
 import { TEMPLE_DUNGEON_DEFS } from './temple';
 import { WILDHEART_DUNGEON_DEFS } from './wildheart';
 
@@ -261,8 +261,8 @@ export function buildHeroicVariants(
 // every other variant family takes (five-man 20 -> 22, the Nythraxis raid
 // 25 -> 27): 26 -> 28, still with the raid bonus, so the piece reads item
 // level 37 = 28 + epic 6 + raid 3 against the base's 35. The "minor stat
-// boost" is that two-level primary-stat budget step (one point on the small
-// slots, two on a chest), with armor, the dual ratings, the class lock, and
+// boost" is that two-level primary-stat budget step (about one point of the
+// main stat per piece), with armor, the dual ratings, the class lock, and
 // the `set` tag carried through the spread (set bonuses keep counting). The
 // ONE deliberate divergence from the base: the variant is NOT soulbound. That
 // is the upgrade's whole point (a heroic piece can change hands), while
@@ -291,7 +291,11 @@ export function buildHeroicTierVariants(
   const out: Record<string, ItemDef> = {};
   for (const base of Object.values(setItems)) {
     if (base.heroicOf) continue;
-    const variant = makeHeroicVariant(base, IGNIVAR_HEROIC_TIER_SOURCE_LEVEL, HEROIC_TIER_RAID_BONUS);
+    const variant = makeHeroicVariant(
+      base,
+      IGNIVAR_HEROIC_TIER_SOURCE_LEVEL,
+      HEROIC_TIER_RAID_BONUS,
+    );
     delete variant.soulbound;
     out[variant.id] = variant;
   }

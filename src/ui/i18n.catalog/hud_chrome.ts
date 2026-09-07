@@ -6038,7 +6038,7 @@ export const hudChromeStrings = {
     confirmCancel: 'Cancel',
     // The tooltip line on the key itself: what it does and the allowance.
     keyUse:
-      'Right-click a soulbound piece of gear to break its bond for good. {cap} releases per character each weekly reset.',
+      'Right-click a soulbound piece of gear in your bags to break its bond for good. {cap} releases per character each weekly reset.',
     // soulKeyResult chat lines: released is the ONE success surface.
     released: 'The bond on {name} is broken. {left} Soul Key releases left this week.',
     notEligible: 'A Soul Key cannot release that item.',

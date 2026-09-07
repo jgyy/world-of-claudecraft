@@ -250,8 +250,6 @@ describe('the classifier map is complete and its keys are real commands', () => 
       trade_confirm: 'trade',
       turnin: 'quest',
       unbind_item: 'craft',
-      soul_key_unbind: 'craft',
-      heroic_upgrade: 'craft',
       vault_buy_upgrade: 'bank',
     });
   });

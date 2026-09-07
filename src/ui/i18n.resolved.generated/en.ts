@@ -4213,7 +4213,7 @@ export const en: EnTranslations = {
       "confirmBody": "Spend a Soul Key on {name}? The bond breaks for good. Each character may break {cap} bonds per weekly reset.",
       "confirmOk": "Break bond",
       "confirmCancel": "Cancel",
-      "keyUse": "Right-click a soulbound piece of gear to break its bond for good. {cap} releases per character each weekly reset.",
+      "keyUse": "Right-click a soulbound piece of gear in your bags to break its bond for good. {cap} releases per character each weekly reset.",
       "released": "The bond on {name} is broken. {left} Soul Key releases left this week.",
       "notEligible": "A Soul Key cannot release that item.",
       "notBound": "That item is not soulbound.",

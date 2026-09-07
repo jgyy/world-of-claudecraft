@@ -13,7 +13,7 @@
 // persisted with the character (character_state.ts). The window is keyed to
 // the realm's weekly reset clock (SimContext.weeklyRaidResetMs, the same
 // boundary the raid lockouts use) so every character on a realm rolls over
-// together and the tooltip can promise a date.
+// together with the raid week.
 //
 // Server-authoritative like the Maker's Bond unbind (professions/
 // commission.ts): the client only names a target slot, everything re-validates
@@ -22,9 +22,9 @@
 //
 // `src/sim`-pure (no DOM/Three, no wall-clock: the clock is ctx.lockoutNowMs).
 
+import { ITEMS } from './data';
 import { isSoulboundCopy, isSoulKeyEligible, releasedPayload } from './item_binding';
 import { selectedInventorySlot } from './item_copy_ref';
-import { ITEMS } from './data';
 import type { PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
 import type { InvSlot, SoulKeyDenyReason } from './types';
@@ -87,7 +87,7 @@ export function resolveSoulKeyUse(
   if (!isSoulKeyEligible(def)) return { ok: false, reason: 'soul_key_not_eligible' };
   const inventory = meta.inventory ?? [];
   // Without a named slot, the first bound copy of the id is the target (the
-  // id-only arity the RL host and scripts use).
+  // id-only arity the shared entry point keeps for scripts and the dev kit).
   let index = slotIndex;
   if (index === undefined) {
     index = inventory.findIndex((s) => s.itemId === itemId && isSoulboundCopy(def, s.instance));

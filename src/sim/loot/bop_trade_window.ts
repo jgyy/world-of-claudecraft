@@ -14,8 +14,9 @@
 // The window RIDES the copy: trading it hands the same payload over
 // (social/trade.ts removeOffer/grantOffer preserve instances), so a recipient
 // can pass it on to another drop-moment member within the same deadline.
-// Mail, market, vendor, and guild-bank stay hard-blocked by def.soulbound at
-// their existing gates; the trade offer path is the ONE channel this opens.
+// Mail, market, vendor, and guild-bank stay hard-blocked for a bound copy at
+// their existing gates (item_binding.ts isSoulboundCopy, which only a Soul Key
+// release opens); the trade offer path is the ONE channel this window opens.
 
 import type { ItemInstancePayload } from '../types';
 

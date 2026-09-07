@@ -997,6 +997,7 @@ export const COMMAND_FACETS = {
   leave_dungeon: 'IWorldDungeons',
   set_dungeon_difficulty: 'IWorldDungeons',
   heroic_buy: 'IWorldDungeons',
+  heroic_upgrade: 'IWorldDungeons',
   // IWorldDelves: delve enter/leave + interact + companion upgrade + Marks-vendor buy
   // + lockpick lifecycle + chest collect. Note the wire-name skew: delveBuyShopItem
   // sends `delve_buy`, so the tag is keyed on the WIRE string `delve_buy`. The reads

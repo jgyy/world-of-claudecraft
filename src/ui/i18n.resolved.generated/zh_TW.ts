@@ -4213,7 +4213,7 @@ export const zh_TW: EnTranslations = {
       "confirmBody": "對{name}使用一把靈魂之鑰？綁定將永久解除。每個角色每次週重置最多可解除{cap}次綁定。",
       "confirmOk": "解除綁定",
       "confirmCancel": "取消",
-      "keyUse": "右鍵點擊一件靈魂綁定的裝備，永久解除其綁定。每個角色每次週重置可解除{cap}次。",
+      "keyUse": "右鍵點擊背包中一件靈魂綁定的裝備，永久解除其綁定。每個角色每次週重置可解除{cap}次。",
       "released": "{name}的綁定已解除。本週還剩{left}次靈魂之鑰解除機會。",
       "notEligible": "靈魂之鑰無法解除該物品的綁定。",
       "notBound": "該物品未靈魂綁定。",

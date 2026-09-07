@@ -85,6 +85,12 @@ describe('heroic tier variants: one generated def per Crucible set piece', () =>
     expect(isHeroicTierVariantId('heroic_boneguard_breastplate')).toBe(false);
   });
 
+  it('derives the id set from the same walk the generator takes', async () => {
+    const { buildHeroicTierVariants } = await import('../src/sim/content/heroic_variants');
+    const built = Object.keys(buildHeroicTierVariants());
+    expect(new Set(built)).toEqual(new Set(HEROIC_TIER_VARIANT_IDS));
+  });
+
   it('pins the source level and the raid bonus the generator mirrors by literal', () => {
     expect(IGNIVAR_HEROIC_TIER_SOURCE_LEVEL).toBe(IGNIVAR_RAID_LOOT_SOURCE_LEVEL + 2);
     expect(RAID_ILVL_BONUS).toBe(3);

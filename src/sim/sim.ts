@@ -273,6 +273,7 @@ import * as groundAoeReadouts from './ground_aoe_readouts';
 import type { GuildBankState, GuildMembership } from './guild_bank';
 import * as guildBankMod from './guild_bank';
 import * as raidReadouts from './ignivar_raid_readouts';
+import { heroicUpgradeItem as heroicUpgradeItemImpl } from './instances/heroic_upgrade';
 import * as interaction from './interaction';
 import type { ExtractOutcome, ExtractRef } from './inventory_extract';
 import { foldNamedSlotTarget } from './item_copy_ref';
@@ -422,8 +423,6 @@ import {
   WORK_ORDER_CADENCE_TICKS,
 } from './professions/cadence';
 import { unbindItem as unbindItemImpl } from './professions/commission';
-import { type SoulKeyWeek, useSoulKey as useSoulKeyImpl } from './soul_key';
-import { heroicUpgradeItem as heroicUpgradeItemImpl } from './instances/heroic_upgrade';
 import {
   acceptCommissionOrder as acceptCommissionOrderImpl,
   type CommissionOrder,
@@ -572,6 +571,7 @@ import {
 } from './sim_context';
 import * as chatMod from './social/chat';
 import * as tradeMod from './social/trade';
+import { type SoulKeyWeek, useSoulKey as useSoulKeyImpl } from './soul_key';
 import {
   applyResurrectionSickness,
   applyUnstuckSickness,
@@ -3267,7 +3267,14 @@ export class Sim {
         Number.isFinite(s.soulKeyWeek.resetAt) &&
         Number.isFinite(s.soulKeyWeek.used)
       ) {
-        meta.soulKeyWeek = { resetAt: s.soulKeyWeek.resetAt, used: s.soulKeyWeek.used };
+        // A window can never close later than the NEXT weekly reset: clamp a
+        // corrupt or hand-edited resetAt so a stale row cannot freeze the
+        // allowance forever (the same drop-or-bound doctrine as the load
+        // sanitizer).
+        meta.soulKeyWeek = {
+          resetAt: Math.min(s.soulKeyWeek.resetAt, this.cfg.weeklyRaidResetMs(this.lockoutNowMs())),
+          used: Math.max(0, Math.floor(s.soulKeyWeek.used)),
+        };
       }
       // The Book of Deeds. Earned days load verbatim; the legacy milestone set
       // unions into the earned map (milestone unification); renown is
@@ -9221,7 +9228,11 @@ export class Sim {
   // unbindItem (text-free soulKeyResult, payload converges via the self
   // inventory mirror). `pidOrTarget` folds the IWorld `{ slotIndex }` target
   // and the host pid arity like the other item commands (foldNamedSlotTarget).
-  useSoulKey(itemId: string, pidOrTarget?: number | { slotIndex: number }, slotIndex?: number): void {
+  useSoulKey(
+    itemId: string,
+    pidOrTarget?: number | { slotIndex: number },
+    slotIndex?: number,
+  ): void {
     const { pid, named: slot } = foldNamedSlotTarget(pidOrTarget, slotIndex);
     if (refusedWhileDead(this.ctx, pid)) return;
     const result = useSoulKeyImpl(this.ctx, itemId, slot, pid);

@@ -104,9 +104,7 @@ describe('the weekly allowance window', () => {
       used: 1,
     });
     expect(currentSoulKeyWeek({ resetAt: 900, used: -3 }, 500, nextReset).used).toBe(0);
-    expect(currentSoulKeyWeek({ resetAt: Number.NaN, used: 1 }, 500, nextReset).resetAt).toBe(
-      1500,
-    );
+    expect(currentSoulKeyWeek({ resetAt: Number.NaN, used: 1 }, 500, nextReset).resetAt).toBe(1500);
   });
 
   it('counts down from the per-week cap and never below zero', () => {
@@ -309,7 +307,12 @@ describe('the released copy crosses every pipe the bond used to close', () => {
   });
 
   it('vendor-sells a released copy and refuses the still-bound twin', () => {
-    const sim = new Sim({ seed: 3, playerClass: 'warrior', noPlayer: true, world: VENDOR_TEST_WORLD });
+    const sim = new Sim({
+      seed: 3,
+      playerClass: 'warrior',
+      noPlayer: true,
+      world: VENDOR_TEST_WORLD,
+    });
     const pid = sim.addPlayer('warrior', 'Seller');
     const vendor = NPCS.trader_wilkes.pos;
     const e = expectDefined(sim.entities.get(pid));
@@ -326,6 +329,62 @@ describe('the released copy crosses every pipe the bond used to close', () => {
     sim.sellItem(HELM, 1, pid);
     expect(sim.countItem(HELM, pid)).toBe(0);
     expect(meta(sim, pid).copper).toBe(before + ITEMS[HELM].sellValue);
+  });
+
+  it('mails a released copy and the raven refuses the still-bound twin', () => {
+    const sim = new Sim({ seed: 9, playerClass: 'warrior', noPlayer: true });
+    const alice = sim.addPlayer('warrior', 'Alice');
+    const bob = sim.addPlayer('warrior', 'Bob');
+    // Mail is sent from a pillar: stand Alice on the first mailbox.
+    const box = expectDefined(sim.entities.get(sim.postOffice.mailboxIds[0]));
+    const a = expectDefined(sim.entities.get(alice));
+    a.pos = { ...box.pos };
+    a.prevPos = { ...a.pos };
+    sim.rebucket(a);
+    sim.addItem(HELM, 1, alice);
+    meta(sim, alice).copper = 1000; // postage
+    sim.drainEvents();
+    const send = () => sim.mailSend('Bob', 'helm', '', 0, [{ ...slotOf(sim, alice, HELM) }], alice);
+    send();
+    expect(sim.countItem(HELM, alice)).toBe(1);
+    sim.addItem(SOUL_KEY_ITEM_ID, 1, alice);
+    sim.useSoulKey(HELM, alice);
+    send();
+    expect(sim.countItem(HELM, alice)).toBe(0);
+    const letter = sim.postOffice.mail.find(
+      (m) => m.subject === 'helm' && m.items.some((i) => i.itemId === HELM),
+    );
+    expect(letter?.items[0]?.instance?.unbound).toBe(true);
+    // A restart's return sweep keeps the released parcel in the letter.
+    expect(bob).toBeGreaterThan(0);
+  });
+
+  it('lists a released copy on the World Market, never the still-bound twin', () => {
+    const { sim, pid } = keySim();
+    // Listing needs the Merchant in reach.
+    const m = expectDefined(
+      [...sim.entities.values()].find((e) => e.templateId === 'the_merchant'),
+    );
+    const p = expectDefined(sim.entities.get(pid));
+    p.pos = { x: m.pos.x + 1, y: m.pos.y, z: m.pos.z };
+    p.prevPos = { ...p.pos };
+    sim.rebucket(p);
+    sim.addItem(HELM, 1, pid);
+    sim.drainEvents();
+    sim.marketListInstance(HELM, 1000, { ...(slotOf(sim, pid, HELM).instance ?? {}) }, pid);
+    expect(sim.marketListings.filter((l) => l.itemId === HELM)).toHaveLength(0);
+    sim.addItem(SOUL_KEY_ITEM_ID, 1, pid);
+    sim.useSoulKey(HELM, pid);
+    sim.marketListInstance(HELM, 1000, { unbound: true }, pid);
+    const listed = sim.marketListings.filter((l) => l.itemId === HELM);
+    expect(listed).toHaveLength(1);
+    expect(listed[0].instance?.unbound).toBe(true);
+    expect(sim.countItem(HELM, pid)).toBe(0);
+    // A forged needle cannot list a bound copy: the escrow matches payloads.
+    sim.addItem(HELM, 1, pid);
+    sim.marketListInstance(HELM, 1000, { unbound: true }, pid);
+    expect(sim.marketListings.filter((l) => l.itemId === HELM)).toHaveLength(1);
+    expect(sim.countItem(HELM, pid)).toBe(1);
   });
 
   it('a Soul Key itself is an ordinary tradeable vendor good', () => {

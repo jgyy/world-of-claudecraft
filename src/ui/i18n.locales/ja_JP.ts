@@ -14866,7 +14866,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.soulKey.confirmBody': '{name}にソウルキーを使いますか？束縛は永久に解かれます。各キャラクターは週次リセットごとに{cap}回まで束縛を解けます。',
   'hudChrome.soulKey.confirmOk': '束縛を解く',
   'hudChrome.soulKey.confirmCancel': 'キャンセル',
-  'hudChrome.soulKey.keyUse': '魂に縛られた装備を右クリックすると、その束縛を永久に解きます。各キャラクターは週次リセットごとに{cap}回まで。',
+  'hudChrome.soulKey.keyUse': 'バッグの中の魂に縛られた装備を右クリックすると、その束縛を永久に解きます。各キャラクターは週次リセットごとに{cap}回まで。',
   'hudChrome.soulKey.released': '{name}の束縛が解かれました。今週はあとソウルキーによる解除が{left}回できます。',
   'hudChrome.soulKey.notEligible': 'ソウルキーではそのアイテムの束縛を解けません。',
   'hudChrome.soulKey.notBound': 'そのアイテムは魂に縛られていません。',

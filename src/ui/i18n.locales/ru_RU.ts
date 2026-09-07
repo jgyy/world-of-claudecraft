@@ -15076,7 +15076,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.soulKey.confirmBody': 'Потратить Ключ душ на {name}? Узы будут разорваны навсегда. Каждый персонаж может разорвать до {cap} уз за недельный сброс.',
   'hudChrome.soulKey.confirmOk': 'Разорвать узы',
   'hudChrome.soulKey.confirmCancel': 'Отмена',
-  'hudChrome.soulKey.keyUse': 'Щёлкните правой кнопкой по привязанному предмету экипировки, чтобы навсегда разорвать его узы. {cap} разрыва на персонажа за каждый недельный сброс.',
+  'hudChrome.soulKey.keyUse': 'Щёлкните правой кнопкой по привязанному предмету экипировки в сумках, чтобы навсегда разорвать его узы. {cap} разрыва на персонажа за каждый недельный сброс.',
   'hudChrome.soulKey.released': 'Узы на {name} разорваны. На этой неделе осталось разрывов Ключом душ: {left}.',
   'hudChrome.soulKey.notEligible': 'Ключ душ не может освободить этот предмет.',
   'hudChrome.soulKey.notBound': 'Этот предмет не привязан к душе.',
