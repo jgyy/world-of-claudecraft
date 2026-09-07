@@ -710,7 +710,7 @@ const MONOLITHS: MonolithRow[] = [
     // Lowered from 10587 by the account-bound Reliquary: the Curator standing
     // resolution moved to server/account_reliquary.ts (curatorStandingFor) beside
     // the account-ledger fold, which paid for the three fold call sites.
-    ceiling: 10585,
+    ceiling: 10584,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {

@@ -49,11 +49,15 @@ function cataloguedItemIds(): string[] {
   ];
 }
 
-/** The offline Sim's facet reads answer for the PRIMARY player; the server
- *  stamps the ledger onto that meta (stampAccountRelics), which this mirrors. */
+/** Stamp a ledger the way the server does: onto the primary meta (the grant
+ *  paths) AND onto the cosmetics facet (the IWorld reads, same carrier the
+ *  online mirror decodes from the `cosmetics` self key). */
 function stampPrimary(sim: Sim, ledger: Parameters<typeof withAccountRelics>[1]) {
   const meta = sim.players.get(sim.playerId)!;
-  if (ledger) meta.accountRelics = ledger;
+  if (ledger) {
+    meta.accountRelics = ledger;
+    sim.accountCosmetics = { ...sim.accountCosmetics, reliquary: ledger };
+  }
   return meta;
 }
 

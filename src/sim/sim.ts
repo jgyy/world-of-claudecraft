@@ -4660,7 +4660,7 @@ export class Sim {
       ownedMounts: this.ownedMounts(),
       weaponSkinIds: this.accountCosmetics.weaponSkinIds,
       deedsEarned: this.primary.deedsEarned,
-      accountRelics: this.primary.accountRelics,
+      accountRelics: this.accountCosmetics.reliquary,
     });
   }
   reliquaryPageCompletion(pageId: string): import('../world_api').ReliquaryPageCompletion | null {

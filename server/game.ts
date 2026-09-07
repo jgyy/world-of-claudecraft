@@ -108,7 +108,7 @@ import {
   type StableTimerWireVersion,
 } from '../src/world_api';
 import { sameAppearance } from '../src/world_api/appearance';
-import { AccountReliquaryFold, curatorStandingFor, stampAccountRelics } from './account_reliquary';
+import { AccountReliquaryFold, stampAccountRelics } from './account_reliquary';
 import { recordOnlineSample } from './admin_db';
 import { type AdminGuildBankView, adminGuildBankView } from './admin_guild_bank_view';
 import { offensiveName } from './auth';
@@ -3286,7 +3286,7 @@ export class GameServer {
     const meta = this.sim.meta(session.pid);
     if (!e || !meta) return;
     // Fold into the ACCOUNT ledger first; growth reaches every live session.
-    const grown = this.accountReliquary.fold(session.accountId, meta);
+    const { grown, standing } = this.accountReliquary.refresh(session.accountId, meta);
     if (grown) {
       this.updateLiveAccountCosmetics(session.accountId, {
         ...session.accountCosmetics,
@@ -3299,7 +3299,6 @@ export class GameServer {
     e.curatorRank = undefined;
     e.relicsOwned = undefined;
     e.relicsTotal = undefined;
-    const standing = curatorStandingFor(meta);
     if (standing) {
       e.curatorRank = standing.rank;
       e.relicsOwned = standing.owned;

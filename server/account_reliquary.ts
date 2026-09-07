@@ -11,10 +11,13 @@
 // non-retro relic fill, and on the 60 second standing sweep as a catch-all
 // for surfaces with no fill event (a mount reins bought, a title deed).
 
+import { ownedMounts } from '../src/sim/mounts';
 import {
   catalogCharacterCompletion,
   characterReliquaryOwnership,
   curatorRankFromOwned,
+  type ReliquaryOwnershipSurfaces,
+  withAccountRelics,
 } from '../src/sim/reliquary';
 import {
   accountReliquaryLedgerFromOwnership,
@@ -88,18 +91,42 @@ export class AccountReliquaryFold {
    * it and will fold again).
    */
   fold(accountId: number, meta: PlayerMeta): AccountReliquaryLedger | null {
-    const own = accountReliquaryLedgerFromOwnership({
+    return this.refresh(accountId, meta).grown;
+  }
+
+  /**
+   * The standing-sweep step: fold, stamp the (possibly grown) ledger onto the
+   * meta, and resolve the identity-wire standing from ONE ownership walk (the
+   * bags-plus-bank mount scan is the costly part; it runs once here, not once
+   * for the fold and again for the standing).
+   */
+  refresh(
+    accountId: number,
+    meta: PlayerMeta,
+  ): { grown: AccountReliquaryLedger | null; standing: CuratorStanding | null } {
+    const own: ReliquaryOwnershipSurfaces = {
       itemsDiscovered: meta.deedStats.itemsDiscovered,
       marks: meta.reliquary.marks,
-      ownedMounts: characterReliquaryOwnership(meta).ownedMounts,
+      ownedMounts: new Set(ownedMounts(meta)),
       deedsEarned: meta.deedsEarned,
-    });
-    const { ledger, grew, added } = mergeAccountReliquaryLedger(this.ledgerFor(accountId), own);
-    if (!grew) return null;
-    this.ledgers.set(accountId, ledger);
-    void this.saves
-      .enqueue(accountId, () => this.persist(accountId, added))
-      .catch((err) => console.error('failed to save account relics:', err));
-    return ledger;
+    };
+    const merged = mergeAccountReliquaryLedger(
+      this.ledgerFor(accountId),
+      accountReliquaryLedgerFromOwnership(own),
+    );
+    let grown: AccountReliquaryLedger | null = null;
+    if (merged.grew) {
+      this.ledgers.set(accountId, merged.ledger);
+      void this.saves
+        .enqueue(accountId, () => this.persist(accountId, merged.added))
+        .catch((err) => console.error('failed to save account relics:', err));
+      grown = merged.ledger;
+    }
+    // Stamp unconditionally: a session that joined before a sibling's fold
+    // widened the live ledger reads the current one from here on.
+    meta.accountRelics = merged.ledger;
+    const { owned, total } = catalogCharacterCompletion(withAccountRelics(own, merged.ledger));
+    const rank = curatorRankFromOwned(owned);
+    return { grown, standing: rank > 0 ? { rank, owned, total } : null };
   }
 }

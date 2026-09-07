@@ -228,7 +228,7 @@ describe('painter hygiene', () => {
       expect(src, name).toMatch(/deedsEarned: this\.(primary\.)?deedsEarned/);
       // Account-bound: the ledger rides the same opts (PlayerMeta stamp offline,
       // the cosmetics mirror online), so every read unions it in one place.
-      expect(src, name).toMatch(/accountRelics: this\.(primary\.accountRelics|accountCosmetics\.reliquary)/);
+      expect(src, name).toContain('accountRelics: this.accountCosmetics.reliquary');
       // Rank delegates to the shared host reads, which exclude skins via
       // catalogRankOwned (aligned with grant path).
       expect(src, name).toContain('reliquaryCuratorRankFor');

@@ -6194,10 +6194,20 @@ export const TARGETS = [
           .filter(Boolean);
         const sim = window.__game?.sim;
         const meta = sim?.players?.get?.(sim.playerId);
-        if (meta) meta.accountRelics = { items: ids, marks: [], mounts: [], titles: [] };
+        const ledger = { items: ids, marks: [], mounts: [], titles: [] };
+        if (meta) meta.accountRelics = ledger;
+        if (sim) sim.accountCosmetics = { ...sim.accountCosmetics, reliquary: ledger };
       });
-      // The window repaints on its slow band once the signature moves.
-      await wait(1200);
+      // Re-enter the page through the real navigation so the shot is the
+      // rebuilt detail, not a slow-band race.
+      await page.evaluate(() => {
+        document.querySelector('#reliquary-window [data-back]')?.click();
+      });
+      await wait(250);
+      await page.evaluate((id) => {
+        document.querySelector(`#reliquary-window [data-page="${id}"]`)?.click();
+      }, pick);
+      await wait(400);
       return { clip: '#reliquary-window' };
     },
   },
