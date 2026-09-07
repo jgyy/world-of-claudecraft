@@ -419,7 +419,11 @@ const MONOLITHS: MonolithRow[] = [
     // branch: the release arm's Realm Builder monument lines (PR #3695) land
     // beside this branch's extractions, so the merged file sits below both
     // parent pins. Measured on the merged tree. Exact merged count, zero headroom.
-    ceiling: 13085,
+    // Lowered 13085 -> 13077 after the world-spanning static dressing list
+    // (Duskfall gates, water flora, Farshore strand, waystone arches) moved
+    // to src/render/static_world_dressing.ts; the renderer keeps one build
+    // call and the attach loop.
+    ceiling: 13077,
     seam: 'a new src/render/<thing>.ts module the renderer calls (src/render/CLAUDE.md)',
   },
   {
@@ -671,9 +675,10 @@ const MONOLITHS: MonolithRow[] = [
     // Down 10604 -> 10587 for the per-surface action-bar profiles: the
     // join read, the per-profile merge and the FIFO write moved to
     // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
-    // Lowered 10587 -> 10577 after the tick's per-event bookings (unstuck
+    // Lowered 10587 -> 10579 after the tick's per-event bookings (unstuck
     // records, tick-driven copper flows) moved to server/tick_event_bookings.ts.
-    ceiling: 10577,
+    // Exact count on the release/v0.42.0 sync, zero headroom.
+    ceiling: 10579,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
