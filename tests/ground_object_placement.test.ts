@@ -194,24 +194,43 @@ describe('authored ground pickups stand on reachable natural ground', () => {
 // arm is deliberately "not swim-deep", not "dry" (the stricter freeboard rule
 // belongs to props seated on the heightfield: tests/gather_node_placement).
 describe('authored ground pickups lie within wading depth of any declared water', () => {
+  // The swim gate is a policy line, so it gets the same literal pin the seed
+  // does: raising it must be a decision that reddens this guard, not a silent
+  // loosening of every arm that reads it.
+  it('the swim gate is pinned to its literal', () => {
+    expect(PLAYER_SWIM_DEPTH).toBe(0.8);
+  });
+
   it('places no pickup at swim depth under the local water surface', () => {
     const sim = makeSim();
     const seed = sim.cfg.seed;
-    const sunk: string[] = [];
+    const stranded: string[] = [];
+    let swept = 0;
     for (const def of GROUND_OBJECTS) {
       for (const p of def.positions) {
+        swept++;
         const depth = waterLevelAt(p.x, p.z, seed) - groundHeight(p.x, p.z, seed);
-        if (depth <= PLAYER_SWIM_DEPTH) continue;
-        sunk.push(`${def.itemId} at ${p.x},${p.z} lies ${depth.toFixed(1)}yd under water`);
+        if (depth > PLAYER_SWIM_DEPTH) {
+          stranded.push(`${def.itemId} at ${p.x},${p.z} lies ${depth.toFixed(1)}yd under water`);
+        }
       }
     }
-    expect(sunk, sunk.join('; ')).toEqual([]);
+    // The sweep must have a population, or an emptied table passes vacuously;
+    // the two moved non-chest families are pinned to their authored counts too.
+    expect(swept).toBeGreaterThan(0);
+    expect(GROUND_OBJECTS.find((g) => g.itemId === 'fenway_mooring_line')?.positions.length).toBe(
+      4,
+    );
+    expect(GROUND_OBJECTS.find((g) => g.itemId === 'sprung_trap')?.positions.length).toBe(4);
+    expect(stranded, stranded.join('; ')).toEqual([]);
   });
 
   // The objective needs all three, so every chest must be one a player can
-  // walk up to: this proves the quest finishes from the three authored spots
-  // (the geometry arm above is what fails when one of them sinks again).
-  it('credits all three toll-chests and readies Toll and Tangle for turn-in', () => {
+  // walk up to: this proves the interact objective finishes from the three
+  // authored spots (the geometry arm above is what fails when one of them
+  // sinks again). The sprite cull is left owed on purpose, so the quest is
+  // not driven to 'ready' here.
+  it('credits all three toll-chests of Toll and Tangle', () => {
     const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior' });
     const player = sim.player;
     const meta = sim.ctx.resolve(undefined)?.meta;
@@ -245,6 +264,12 @@ describe('authored ground pickups lie within wading depth of any declared water'
         waterLevelAt(chest.pos.x, chest.pos.z, sim.cfg.seed) - chest.pos.y,
         `the chest at ${chest.pos.x},${chest.pos.z} is reachable on foot`,
       ).toBeLessThanOrEqual(PLAYER_SWIM_DEPTH);
+      // A chest nudged ashore can land in a prop or scatter collider just as
+      // silently as it sank: the walk-up premise needs the spot open too.
+      expect(
+        isBlocked(sim.cfg.seed, chest.pos.x, chest.pos.z, PLAYER_BODY_RADIUS),
+        `the chest at ${chest.pos.x},${chest.pos.z} is inside a collider`,
+      ).toBe(false);
       place(chest.pos.x, chest.pos.z);
       expect(
         sim.pickUpObject(chest.id),
