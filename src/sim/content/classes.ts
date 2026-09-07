@@ -1,5 +1,3 @@
-import { GRAND_TELEPORT_ABILITIES, GRAND_TELEPORT_ABILITY_IDS } from './grand_teleports';
-import { HELLGATE_ABILITY } from './hellgate';
 import { resolveTalentHitMult } from '../talent_hit_mult';
 import {
   type AbilityDef,
@@ -18,6 +16,8 @@ import {
   TEMPORAL_HOURGLASS_SELF_RADIUS,
   type WeaponInfo,
 } from '../types';
+import { GRAND_TELEPORT_ABILITIES, GRAND_TELEPORT_ABILITY_IDS } from './grand_teleports';
+import { HELLGATE_ABILITY } from './hellgate';
 import {
   GROVESPRING_2PC_SWIFTMEND_HEAL_MULT,
   GROVESPRING_4PC_OVERBLOOM_HARVEST_PCT,

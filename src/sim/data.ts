@@ -4,10 +4,10 @@
 // merges those records into the flat tables the rest of the engine consumes,
 // and owns the world-layout constants.
 
-import { BASE_ITEMS } from './content/items';
 import { FLIGHTMASTER_NPCS } from './content/flight_paths';
 import { GRAND_TELEPORT_ITEMS } from './content/grand_teleports';
 import { HELLGATE_QUEST_ORDER, HELLGATE_QUESTS } from './content/hellgate';
+import { BASE_ITEMS } from './content/items';
 import type {
   CampDef,
   DelveDef,

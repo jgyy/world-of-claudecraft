@@ -57,7 +57,12 @@ export const HELLGATE_QUESTS: Record<string, QuestDef> = {
     completionText:
       'The bones lie still, and you are still standing. Good. The next words of the pact were carried north into the marsh by a scout who keeps her own counsel. Find Scout Maren in Fenbridge.',
     objectives: [
-      { type: 'kill', targetMobId: 'restless_bones', count: 8, label: 'Restless Bones laid to rest' },
+      {
+        type: 'kill',
+        targetMobId: 'restless_bones',
+        count: 8,
+        label: 'Restless Bones laid to rest',
+      },
     ],
     xpReward: 700,
     copperReward: 300,

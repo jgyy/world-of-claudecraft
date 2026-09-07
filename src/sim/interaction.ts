@@ -36,6 +36,7 @@ import {
   tryStartNythraxisWardChannel,
 } from './encounters/nythraxis';
 import { tryStartEscort } from './escort';
+import { discoverFlightmaster, isFlightmasterNpc } from './flight_paths';
 import { interactIgnivarRaidLore } from './ignivar_raid_lore';
 import { isInRaidInstance } from './instances/dungeons';
 import { FERRY_BELL_OBJECT_ID, tryRingFerryBell } from './interactions/ferry_bell';
@@ -51,6 +52,7 @@ import {
   lootSlotVisibleTo,
   pruneCorpseLoot,
 } from './loot/loot_roll';
+import { interactPartyGate } from './party_gate';
 import { applyFocusBonus, applyFocusTierBonus, type FocusAllocation } from './professions/focus';
 import {
   forfeitsEveryMappedYield,
@@ -77,8 +79,6 @@ import { corpseHasDecayed } from './respawn_policy';
 import { isRiftForgeNpc } from './rift/forge_gate';
 import type { SimContext } from './sim_context';
 import { interactSoulwell } from './soulwell';
-import { discoverFlightmaster, isFlightmasterNpc } from './flight_paths';
-import { interactPartyGate } from './party_gate';
 import { creditSignpostRead } from './tutorial/signpost_read';
 import {
   cloneItemInstancePayload,

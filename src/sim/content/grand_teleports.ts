@@ -21,10 +21,30 @@ export interface GrandTeleportDestination {
 }
 
 export const GRAND_TELEPORT_DESTINATIONS: readonly GrandTeleportDestination[] = [
-  { id: 'eastbrook', zoneId: 'eastbrook_vale', town: 'Eastbrook', landing: { x: -6, z: -92, facing: 3.1 } },
-  { id: 'fenbridge', zoneId: 'mirefen_marsh', town: 'Fenbridge', landing: { x: 8, z: 292, facing: 3.1 } },
-  { id: 'highwatch', zoneId: 'thornpeak_heights', town: 'Highwatch', landing: { x: 6, z: 652, facing: 3.1 } },
-  { id: 'eldergleam', zoneId: 'veiled_hollow', town: 'Eldergleam', landing: { x: -30, z: 1022, facing: 3.1 } },
+  {
+    id: 'eastbrook',
+    zoneId: 'eastbrook_vale',
+    town: 'Eastbrook',
+    landing: { x: -6, z: -92, facing: 3.1 },
+  },
+  {
+    id: 'fenbridge',
+    zoneId: 'mirefen_marsh',
+    town: 'Fenbridge',
+    landing: { x: 8, z: 292, facing: 3.1 },
+  },
+  {
+    id: 'highwatch',
+    zoneId: 'thornpeak_heights',
+    town: 'Highwatch',
+    landing: { x: 6, z: 652, facing: 3.1 },
+  },
+  {
+    id: 'eldergleam',
+    zoneId: 'veiled_hollow',
+    town: 'Eldergleam',
+    landing: { x: -30, z: 1022, facing: 3.1 },
+  },
 ];
 
 export const GRAND_TELEPORT_LEARN_PREFIX = 'learned:';

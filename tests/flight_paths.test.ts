@@ -248,7 +248,12 @@ describe('flight aggro immunity', () => {
       (e) => e.kind === 'mob' && MOBS[e.templateId]?.aggroRadius > 0 && !e.dead,
     )!;
     p.pos = { x: wolf.pos.x + 2, y: wolf.pos.y, z: wolf.pos.z + 2 };
-    p.flight = { path: [{ x: wolf.pos.x + 200, z: wolf.pos.z }], index: 0, destination: 'fenbridge', speed: 0 };
+    p.flight = {
+      path: [{ x: wolf.pos.x + 200, z: wolf.pos.z }],
+      index: 0,
+      destination: 'fenbridge',
+      speed: 0,
+    };
     for (let i = 0; i < 40; i++) sim.tick();
     expect(wolf.targetId).not.toBe(pid);
   });
