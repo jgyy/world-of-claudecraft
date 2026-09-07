@@ -639,10 +639,13 @@ export const FROSTVEIL_OBJECTS: GroundObjectDef[] = [
   {
     itemId: 'sprung_trap',
     name: 'Sprung Fen Trap',
-    // Brosk's scattered trapline in the Shiverfen reeds.
+    // Brosk's scattered trapline in the Shiverfen reeds. The reeds ring a
+    // pool (-90,1760); every trap sits on its bank, never on its floor, or it
+    // is a swim-deep click target the player cannot see (the swim-depth arm of
+    // tests/ground_object_placement.test.ts).
     positions: [
       { x: -92, z: 1750 },
-      { x: -98, z: 1764 },
+      { x: -102, z: 1764 },
       { x: -80, z: 1770 },
       { x: -72, z: 1756 },
     ],
