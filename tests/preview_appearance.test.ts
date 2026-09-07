@@ -6,8 +6,10 @@ import {
   appearanceSignature,
   type PreviewAppearance,
   previewAppearanceVisual,
+  previewTryOnMainhand,
 } from '../src/render/characters/preview_appearance';
 import { createPreviewOpenGate } from '../src/render/characters/preview_open_gate_core';
+import { WEAPON_TYPE_BY_ITEM } from '../src/sim/content/weapon_skin_rules';
 
 const mechAssets = vi.hoisted(() => ({
   ready: false,
@@ -339,5 +341,28 @@ describe('CharacterPreview.setVisualKey: the weapon-skin rebuild contract', () =
     preview.setVisualKey('player_rogue', 'rusty_dagger', null, null);
     const built = visualDoubles.built.at(-1) as { setWeaponSkin: ReturnType<typeof vi.fn> };
     expect(built.setWeaponSkin).not.toHaveBeenCalled();
+  });
+});
+
+describe('previewTryOnMainhand (Armory inspect try-on)', () => {
+  it('keeps the real mainhand when either hand already shows the skin', () => {
+    expect(previewTryOnMainhand('starfall_mace', 'forgefathers_warhammer', null)).toBe(
+      'forgefathers_warhammer',
+    );
+    // The offhand mirror covers a mace held in the offhand: the dagger stays.
+    expect(previewTryOnMainhand('starfall_mace', 'rusty_dagger', 'forgefathers_warhammer')).toBe(
+      'rusty_dagger',
+    );
+    // Ranged skins always dress the mainhand attach, whatever it holds.
+    expect(previewTryOnMainhand('winterbite', 'rusty_hatchet', null)).toBe('rusty_hatchet');
+    expect(previewTryOnMainhand(null, 'rusty_dagger', null)).toBe('rusty_dagger');
+  });
+
+  it('substitutes a stand-in of the skin type when neither hand can show it', () => {
+    const standIn = previewTryOnMainhand('starfall_mace', 'rusty_dagger', null);
+    expect(standIn).not.toBe('rusty_dagger');
+    expect(WEAPON_TYPE_BY_ITEM[standIn ?? '']).toBe('mace');
+    // Stable: the same stand-in every call.
+    expect(previewTryOnMainhand('starfall_mace', 'rusty_dagger', null)).toBe(standIn);
   });
 });

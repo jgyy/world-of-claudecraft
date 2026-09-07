@@ -521,7 +521,6 @@ export class DailyRewardsWindow {
   private showStoreDecision(options: Omit<StoreDecisionPromptOptions, 'closeText'>): boolean {
     return this.storeRuntime.openDecision(options);
   }
-
   private showStoreResult(tone: 'success' | 'failure', text: string): void {
     this.storeRuntime.showResult(tone, text);
   }
@@ -732,6 +731,7 @@ export class DailyRewardsWindow {
             skin: player.skin,
             skinCatalog: player.skinCatalog,
             mainhandItemId: player.mainhandItemId,
+            offhandItemId: player.offhandItemId ?? null,
           };
         },
         requestBuy: (target) => this.storeSpend.armory.request(target),

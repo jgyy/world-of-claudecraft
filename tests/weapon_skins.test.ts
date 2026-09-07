@@ -254,6 +254,14 @@ describe('offhand-held weapon type (reported: legendary mace skin never loaded)'
     ]);
     // The mainhand-only call keeps its exact old answer.
     expect(skinnableWeaponTypesFor('rogue', 'rusty_dagger', 'class')).toEqual(['dagger']);
+    // A bare mainhand beside an offhand weapon still counts; beside a shield or
+    // nothing it applies nothing, so a hunter with empty hands keeps [] too.
+    expect(skinnableWeaponTypesFor('rogue', null, 'class', 'forgefathers_warhammer')).toEqual([
+      'mace',
+    ]);
+    expect(skinnableWeaponTypesFor('warrior', null, 'class', 'eastbrook_buckler')).toEqual([]);
+    expect(skinnableWeaponTypesFor('hunter', null, 'class', 'eastbrook_buckler')).toEqual([]);
+    expect(skinnableWeaponTypesFor('hunter', null, 'mech', 'eastbrook_buckler')).toEqual([]);
   });
 
   it('resolves the offhand-held type when only that skin is applied, mainhand type first', () => {

@@ -2681,6 +2681,11 @@ export class CharacterVisual {
       ...(mainhandSkinned ? payloads : []),
       ...(offhandMirrorsWeaponSkin(this.weaponSkinId, this.offhandItemId) ? offPayloads : []),
     ];
+    // A hand outside the skin set still needs its bone-texture pass (the skin
+    // set gets it inside finishWeaponAttach).
+    for (const payload of [...payloads, ...offPayloads]) {
+      if (!skinned.includes(payload)) configureTightBoneTextures(payload);
+    }
     this.finishWeaponAttach(skinned);
     return [...payloads, ...offPayloads];
   }
