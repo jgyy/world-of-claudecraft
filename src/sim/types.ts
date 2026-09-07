@@ -655,6 +655,10 @@ export interface Aura {
   // Encounter-authored control that must land through immunity and cannot be
   // removed by player counters. Natural expiry and encounter cleanup still own it.
   unbreakableControl?: true;
+  // Suspends the carrier's natural out-of-combat health regen while it stands
+  // (combat/auras.ts updateRegen). The Hellgate toll; mirrored on the wire so
+  // the tooltip can say so.
+  noRegen?: true;
   // Encounter-authored mechanic that ordinary dispels and broad self-cleanses
   // cannot remove. Death, natural expiry, and the encounter script still clear it.
   encounterOwned?: true;
@@ -893,7 +897,11 @@ export type ItemUse =
   // single source of the effect-to-item mapping; a guard derives the craftable
   // set from these defs against the R9 slot policy so no item can exist for an
   // effect the policy refuses everywhere.
-  | { type: 'toolEffect'; effectId: ToolEffectId };
+  | { type: 'toolEffect'; effectId: ToolEffectId }
+  // A spell tome: using it teaches `abilityId` to a character of the ability's
+  // class (the Grand Teleport tomes, content/grand_teleports.ts). Consumed on
+  // use; refused when the spell is already known (so the book can be vendored).
+  | { type: 'learnSpell'; abilityId: string };
 
 // Rarity ranks for the cosmetic skin-select event, ordered low → high. A rolled
 // rank unlocks its own tier and every tier below it (epic unlocks rare+uncommon).
@@ -3152,6 +3160,10 @@ export type AbilityEffect =
       damage: number;
     }
   | { type: 'selfHotPctMax'; pct: number; duration: number; interval: number }
+  // The mirror of selfHotPctMax: a plain self 'dot' whose per-tick value is a
+  // fraction of the caster's MAXIMUM health; `noRegen` also suspends natural
+  // health regen for the aura's life (the Hellgate toll).
+  | { type: 'selfDotPctMax'; pct: number; duration: number; interval: number; noRegen?: true }
   | { type: 'aoeAllyMaxHp'; pct: number; duration: number; radius: number }
   | {
       type: 'partyMeleeBuff';
@@ -3205,6 +3217,12 @@ export type AbilityEffect =
   | { type: 'summonPet'; templateId: string } // warlock demon summon: creates/replaces a controlled pet
   | { type: 'summonDemon'; mobId: string } // warlock: summon a demon pet (emberkin/gloomshade)
   | { type: 'summonSoulwell'; duration: number }
+  // Mage Grand Teleport: a party-gated portal object to an authored destination
+  // (content/grand_teleports.ts), open for `duration` seconds.
+  | { type: 'summonGrandPortal'; destination: string; duration: number }
+  // Warlock Hellgate: a party-gated summoning gate at the caster's feet, open
+  // for `duration` seconds, that bleeds the caster while it stands.
+  | { type: 'summonHellgate'; duration: number }
   | { type: 'destructionConflagrate' }
   | { type: 'ruinousBrand'; duration: number; charges: number }
   | { type: 'duskfireClaim'; duration: number }
@@ -3405,6 +3423,10 @@ export interface AbilityDef {
   // the quest is turned in (abilitiesKnownAt reads questsDone). Used by the paladin
   // resurrection chain (recall_the_fallen <- q_rite_of_redemption).
   requiresQuest?: string;
+  // Consumable reagent: the cast refuses without `count` of `itemId` in the bags
+  // ('You need a reagent.') and removes them when the cast or channel STARTS,
+  // beside the resource cost (classic reagent timing). Grand Teleport's rune.
+  reagent?: { itemId: string; count: number };
   effects: AbilityEffect[];
   ranks?: AbilityRank[]; // later ranks (sorted by level)
   description: string; // tooltip text, $d = damage placeholder
@@ -3474,6 +3496,11 @@ export interface NpcDef {
   // The Card Master: talking to this NPC joins/leaves the Card Duel minigame
   // queue (src/sim/social/card_duel.ts) instead of any vendor/bank flow.
   cardMaster?: boolean;
+  // A flightmaster: talking to this NPC records its flight node as known for
+  // the player (src/sim/flight_paths.ts) and the dialog offers the flight
+  // window. A flag on the warfareVendor precedent; the node id is resolved
+  // from the NPC id through FLIGHT_NODES (content/flight_paths.ts).
+  flightmaster?: boolean;
   greeting: string;
   // Registered but not surface-placed at world init. The owning system spawns
   // the entity on demand (e.g. the Nythraxis encounter walks Brother Aldric in
@@ -4185,6 +4212,17 @@ export interface LedgeClimb {
   duration: number;
 }
 
+export interface FlightPathRide {
+  /** Route waypoints (world x/z), consumed front to back. */
+  path: { x: number; z: number }[];
+  /** Index of the waypoint currently flown toward. */
+  index: number;
+  /** Flight node id the ride lands at (content/flight_paths.ts). */
+  destination: string;
+  /** Ground speed in yards per second (FLIGHT_SPEED). */
+  speed: number;
+}
+
 export interface HeroicLeapFlight {
   from: Vec3;
   to: Vec3;
@@ -4643,6 +4681,10 @@ export interface Entity extends ClientMirroredEntityFields {
   // landing area hit until touchdown. Absent until first use so unrelated entity
   // snapshots and deterministic traces do not gain inert state.
   leap?: HeroicLeapFlight | null;
+  // Authoritative flight-path ride (src/sim/flight_paths.ts). While present it
+  // owns movement along the authored route; absent until first use so unrelated
+  // entity snapshots and deterministic traces do not gain inert state.
+  flight?: FlightPathRide | null;
   // Valkyr's Calling owns movement through a visible ascent, forward flight,
   // and descent. Optional so unrelated entities and old wire payloads remain
   // byte-compatible until the ability is first used.
@@ -4934,6 +4976,17 @@ export interface Entity extends ClientMirroredEntityFields {
     eligiblePlayerIds: number[];
     wardAbsorbPctMax: number;
     wardedPlayerIds: number[];
+  };
+  // Runtime-only party gate for the two summoned travel objects (the mage
+  // Grand Portal and the warlock Hellgate): the same soulwell doctrine, the
+  // object is wired through objectItemId and this authority data stays server
+  // side. `destination` is the grand-teleport destination id for a portal and
+  // absent for a Hellgate (a gate pulls people TO itself).
+  partyGate?: {
+    ownerId: number;
+    partyId: number | null;
+    eligiblePlayerIds: number[];
+    destination?: string;
   };
   dungeonId: string | null; // set on dungeon door/exit portals
   /** Claim-local identity for authored dungeon packs. Sim authority only; the
@@ -5939,6 +5992,10 @@ export type SimEvent = { pid?: number } & (
   // Asks the client to open the Rift Forge window (the interact path at a
   // riftForge NPC). Structured only, the bank precedent above.
   | { type: 'riftForge' }
+  // Asks the client to open the flight window at a flightmaster NPC (the
+  // interact path). Structured only, the bank precedent above; the client
+  // reads the known-node set from the world facet.
+  | { type: 'flightmaster'; npcId: number; nodeId: string }
   // Interacting with a town noticeboard. Structured and personal: the client
   // owns localized feedback, and online routing sends it only to the reader.
   // 'listings' carries the board's posted notices verbatim (guild names and

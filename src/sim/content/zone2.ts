@@ -771,7 +771,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     pos: { ...FENBRIDGE_NPC_PLACEMENTS_BY_ID.scout_maren.position },
     facing: FENBRIDGE_NPC_PLACEMENTS_BY_ID.scout_maren.facing,
     color: 0x7d6608,
-    questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen'],
+    questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen', 'q_hellgate_rite'],
     greeting:
       'Quiet feet and a short blade keep you breathing out here. Speak quick — I am due back in the reeds.',
   },
