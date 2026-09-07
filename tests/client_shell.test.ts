@@ -822,6 +822,10 @@ describe('client HTML shell', () => {
     // (src/ui/target_frame_descriptor.ts) rather than a per-frame object
     // literal; the routing this test guards is unchanged.
     expect(hudTs).toContain('const targetFrame = fillTargetFrameDescriptor(');
+    // The party raid marker rides the fill as its fourth argument; the field is
+    // optional downstream (raidMarker ?? null), so a dropped argument would
+    // silently read "never marked" with every unit test green.
+    expect(hudTs).toContain('sim.markerFor(target.id),');
     expect(
       readFileSync(new URL('../src/ui/target_frame_descriptor.ts', import.meta.url), 'utf8'),
     ).toContain('d.levelText = String(target.level);');

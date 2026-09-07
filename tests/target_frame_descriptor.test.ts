@@ -95,6 +95,39 @@ describe('fillTargetFrameDescriptor', () => {
     expect(unitFrameView(d).raidMarker).toBeNull();
   });
 
+  it('maps a ClientWorld-mirror-shaped entity (absent optional fields) the same way', () => {
+    // The online mirror leaves offline-only fields undefined rather than null
+    // (no resourceType / resource / border / title on a plain mob), so the fill
+    // must read through the same branches from either host's entity shape.
+    const mirror = {
+      id: 9,
+      kind: 'mob',
+      name: 'Thornpeak Ogre',
+      templateId: 'ogre',
+      pos: { x: 0, y: 0, z: 0 },
+      level: 16,
+      hp: 150,
+      maxHp: 600,
+      dead: false,
+      hostile: true,
+      ownerId: null,
+      auras: [],
+    } as unknown as Entity;
+    const d = fillTargetFrameDescriptor(blank(), mirror, NO_TITLE, 2);
+    expect(d.present).toBe(true);
+    expect(d.hpFrac).toBeCloseTo(0.25);
+    expect(d.hpText).toBe('150 / 600');
+    expect(d.resourceKind).toBe('none');
+    expect(d.resFrac).toBe(0);
+    expect(d.resText).toBe('');
+    expect(d.cheaterTag).toBe('');
+    expect(d.borderSlug).toBe('');
+    expect(d.portraitKey).toBe('9');
+    expect(d.absorb).toBe(mirror);
+    expect(d.raidMarker).toBe(2);
+    expect(unitFrameView(d).absorbFrac).toBeCloseTo(0.25);
+  });
+
   it('renders the classic EMPTY resource rail for a resource-less target', () => {
     const d = fillTargetFrameDescriptor(blank(), entity({ id: 1 }), NO_TITLE, null);
     expect(d.resourceKind).toBe('none');

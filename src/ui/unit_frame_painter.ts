@@ -159,6 +159,11 @@ export class UnitFramePainter {
   // The portrait identity last painted; the gate repaints only on change. Starts
   // null so the first present frame paints once (target's lastPortraitTarget gate).
   private lastPortraitKey: string | null = null;
+  // The raid-marker index last composed into a `url(...)` string, and that
+  // string: the upstream resolve + composition run only when the index changes,
+  // so a repeated identical frame allocates nothing before the elided writes.
+  private lastRaidMarker: number | null = null;
+  private lastRaidMarkerUrl = '';
 
   constructor(
     private readonly writers: PainterHostWriters,
@@ -240,13 +245,17 @@ export class UnitFramePainter {
   private paintRaidMarker(view: UnitFrameView): void {
     const badge = this.el.raidMarker;
     if (!badge) return;
-    const url = view.raidMarker === null ? '' : this.opts.raidMarkerUrl?.(view.raidMarker);
-    if (!url) {
+    if (view.raidMarker !== this.lastRaidMarker) {
+      this.lastRaidMarker = view.raidMarker;
+      const url = view.raidMarker === null ? '' : this.opts.raidMarkerUrl?.(view.raidMarker);
+      this.lastRaidMarkerUrl = url ? `url(${url})` : '';
+    }
+    if (!this.lastRaidMarkerUrl) {
       this.writers.setDisplay(badge, 'none');
       this.writers.setStyleProp(badge, 'background-image', '');
       return;
     }
-    this.writers.setStyleProp(badge, 'background-image', `url(${url})`);
+    this.writers.setStyleProp(badge, 'background-image', this.lastRaidMarkerUrl);
     this.writers.setDisplay(badge, 'block');
   }
 

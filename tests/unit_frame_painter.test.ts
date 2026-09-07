@@ -348,6 +348,27 @@ describe('UnitFramePainter: the raid-marker badge (target frame)', () => {
     expect(badge.some((c) => c.m === 'setDisplay' && c.args[1] === 'none')).toBe(true);
   });
 
+  it('resolves the symbol url once per marker change, never per repeated frame', () => {
+    const { calls, writers } = recordingFacet();
+    const resolver = vi.fn(urlFor);
+    const painter = new UnitFramePainter(writers, MARKED_ELEMENTS, { raidMarkerUrl: resolver });
+    painter.paint(unitFrameView(playerDescriptor({ raidMarker: 4 })));
+    painter.paint(unitFrameView(playerDescriptor({ raidMarker: 4 })));
+    painter.paint(unitFrameView(playerDescriptor({ raidMarker: 4 })));
+    expect(resolver).toHaveBeenCalledTimes(1);
+    painter.paint(unitFrameView(playerDescriptor({ raidMarker: 1 })));
+    expect(resolver).toHaveBeenCalledTimes(2);
+    const urls = calls
+      .filter((c) => c.args[0] === BADGE && c.m === 'setStyleProp')
+      .map((c) => c.args[2]);
+    expect(urls).toEqual([
+      'url(data:marker-4)',
+      'url(data:marker-4)',
+      'url(data:marker-4)',
+      'url(data:marker-1)',
+    ]);
+  });
+
   it('an instance without the badge element pays zero marker writes (player, party)', () => {
     const calls = paint(playerDescriptor({ raidMarker: 2 }), FULL_ELEMENTS, {
       raidMarkerUrl: urlFor,
