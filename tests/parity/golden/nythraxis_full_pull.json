@@ -16,8 +16,8 @@
     "Grave Eruption hash-placed warning + impact damage + Grave Flame residue tick",
     "class:warrior"
   ],
-  "draws": 11447,
-  "drawDigest": "b232a1a7",
+  "draws": 11451,
+  "drawDigest": "a413251f",
   "frames": [
     {
       "tick": 0,
@@ -16825,11 +16825,11 @@
       "tick": 1248,
       "time": 62.4,
       "nextId": 1014,
-      "state": "3925309f",
+      "state": "e88cdbc3",
       "events": "8de4824c",
       "rng": {
-        "draws": 10916,
-        "digest": "74af4bf2"
+        "draws": 10921,
+        "digest": "e02d5231"
       },
       "label": "death",
       "players": [
@@ -17811,6 +17811,16 @@
               {
                 "count": 1,
                 "itemId": "stormhymn_chain_grips"
+              },
+              {
+                "count": 1,
+                "itemId": "rune_of_passage",
+                "personalFor": [
+                  1000,
+                  1001,
+                  1002,
+                  1003
+                ]
               }
             ]
           },
@@ -18092,62 +18102,62 @@
       "tick": 1250,
       "time": 62.5,
       "nextId": 1014,
-      "state": "b79b3215",
+      "state": "7c8ddd59",
       "events": "741638a5",
       "rng": {
-        "draws": 10935,
-        "digest": "3d3306df"
+        "draws": 10940,
+        "digest": "0e67c47d"
       }
     },
     {
       "tick": 1260,
       "time": 63,
       "nextId": 1014,
-      "state": "ea5dd4a8",
+      "state": "c7ec1d02",
       "events": "741638a5",
       "rng": {
-        "draws": 11019,
-        "digest": "bf864601"
+        "draws": 11024,
+        "digest": "b9861475"
       }
     },
     {
       "tick": 1270,
       "time": 63.5,
       "nextId": 1014,
-      "state": "3857696f",
+      "state": "e1911337",
       "events": "741638a5",
       "rng": {
-        "draws": 11099,
-        "digest": "c73052e3"
+        "draws": 11106,
+        "digest": "ce1819ad"
       }
     },
     {
       "tick": 1280,
       "time": 64,
       "nextId": 1014,
-      "state": "b86a9ce4",
+      "state": "b48ee272",
       "events": "741638a5",
       "rng": {
-        "draws": 11203,
-        "digest": "7809584f"
+        "draws": 11211,
+        "digest": "8d078796"
       }
     },
     {
       "tick": 1290,
       "time": 64.5,
       "nextId": 1014,
-      "state": "bbd9ec49",
+      "state": "d4b65c3d",
       "events": "741638a5",
       "rng": {
-        "draws": 11296,
-        "digest": "4ee573a6"
+        "draws": 11301,
+        "digest": "0603e83f"
       }
     },
     {
       "tick": 1300,
       "time": 65,
       "nextId": 1014,
-      "state": "a8f97150",
+      "state": "8deff2da",
       "events": "741638a5",
       "rng": {
         "draws": 11377,
@@ -18158,11 +18168,11 @@
       "tick": 1308,
       "time": 65.4,
       "nextId": 1014,
-      "state": "bf2e970d",
+      "state": "08c0bfb5",
       "events": "84a8fbfa",
       "rng": {
-        "draws": 11447,
-        "digest": "b232a1a7"
+        "draws": 11451,
+        "digest": "a413251f"
       },
       "label": "final",
       "players": [
@@ -19144,6 +19154,16 @@
               {
                 "count": 1,
                 "itemId": "stormhymn_chain_grips"
+              },
+              {
+                "count": 1,
+                "itemId": "rune_of_passage",
+                "personalFor": [
+                  1000,
+                  1001,
+                  1002,
+                  1003
+                ]
               }
             ]
           },
