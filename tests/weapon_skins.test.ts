@@ -542,6 +542,13 @@ describe('bow skin attack animation (hunter draw instead of crossbow aim)', () =
     // setOffhand path already gave a plain offhand one; the full re-attach now
     // matches it).
     expect(fn).toContain('if (!skinned.includes(payload)) configureTightBoneTextures(payload)');
+    // The sheathe swap feeds attachAllProps' skinned set to the same tail, so
+    // it sweeps the whole rig for the excluded hand instead.
+    const stow = src.slice(
+      src.indexOf('private applyStowSwap('),
+      src.indexOf('private rebuildCasters('),
+    );
+    expect(stow).toContain('configureTightBoneTextures(this.model)');
     expect(fn).toContain('mainhandShowsWeaponSkin(this.weaponSkinId, this.weaponItemId)');
     expect(fn).toContain('return [...payloads, ...offPayloads]');
   });

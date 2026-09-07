@@ -3155,6 +3155,10 @@ export class CharacterVisual {
       this.stow.attached,
       this.offhandItemId,
     );
+    // The returned set is the hands that SHOW the skin (attachAllProps); a
+    // hand outside it still needs its bone-texture pass, and the whole-rig
+    // sweep is idempotent (skeletons already cropped are skipped).
+    configureTightBoneTextures(this.model);
     this.finishWeaponAttach(payloads);
   }
 
