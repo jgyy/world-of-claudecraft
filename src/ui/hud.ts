@@ -57,6 +57,7 @@ import { resolveHunterSharedAbilityForTalents } from '../sim/combat/hunter_share
 import { warriorParryChance } from '../sim/combat/warrior_hit_table';
 import { DEEDS } from '../sim/content/deeds';
 import { HEROIC_MARK_ITEM_ID } from '../sim/content/dungeon_difficulty';
+import { SOUL_KEY_ITEM_ID, SOUL_KEY_USES_PER_WEEK } from '../sim/soul_key';
 import { HEROIC_VENDOR_STOCK } from '../sim/content/heroic_vendor';
 import { CRUCIBLE_VENDOR_STOCK } from '../sim/content/ignivar_loot';
 import { isOnMountRaceStartPlatform, MOUNTS } from '../sim/content/mounts';
@@ -512,7 +513,10 @@ import { dismissBuyQuantityPrompts } from './hud/vendor/buy_quantity_prompt_wind
 import { buildCrucibleVendorView } from './hud/vendor/crucible_vendor_view';
 import { renderCrucibleVendorWindow } from './hud/vendor/crucible_vendor_window';
 import { buildHeroicVendorView } from './hud/vendor/heroic_vendor_view';
-import { renderHeroicVendorWindow } from './hud/vendor/heroic_vendor_window';
+import {
+  confirmHeroicUpgrade,
+  renderHeroicVendorWindow,
+} from './hud/vendor/heroic_vendor_window';
 import { TrainLearnTracker } from './hud/vendor/train_learn_core';
 import { buildTrainView, isRecipeKnownForViewer } from './hud/vendor/train_view';
 import { renderTrainWindow } from './hud/vendor/train_window';
@@ -565,6 +569,11 @@ import {
 import { itemArmorTypeLabelKey } from './item_armor_type';
 import { requiredClassesForTooltip } from './item_class_restriction';
 import { itemStatDeltas, shouldCompareCopies } from './item_compare';
+import {
+  heroicUpgradeResultLine,
+  soulKeyResultLine,
+  unbindResultLine,
+} from './counter_service_lines';
 import { ItemDragState } from './item_drag_state';
 import {
   instanceBadgeLines,
@@ -6502,6 +6511,8 @@ export class Hud {
     html += itemRatingTooltipLines(item);
     if (item.foodHp)
       html += `<div class="tt-desc">${esc(t('itemUi.tooltip.useFood', { amount: itemNumber(item.foodHp), seconds: itemNumber(CONSUME_DURATION) }))}</div>`;
+    if (item.id === SOUL_KEY_ITEM_ID)
+      html += `<div class="tt-desc">${esc(t('hudChrome.soulKey.keyUse', { cap: itemNumber(SOUL_KEY_USES_PER_WEEK) }))}</div>`;
     if (item.drinkMana)
       html += `<div class="tt-desc">${esc(t('itemUi.tooltip.useDrink', { amount: itemNumber(item.drinkMana), seconds: itemNumber(CONSUME_DURATION) }))}</div>`;
     // Gathering implements (#2343): picks/axes/sickles/rods and the simple
@@ -11952,43 +11963,26 @@ export class Hud {
           break;
         }
         case 'unbindResult': {
-          // Maker's Bond unbind outcome (Professions 2.0). The
-          // event is text-free: the item name derives from itemId plus static
-          // content and the fee formats locally, identical in both worlds.
-          // ONE chat line either way (the trainResult single-surface rule:
-          // no toast, no extra sound cue).
-          const unboundItem = ITEMS[ev.itemId];
-          const unboundName = unboundItem ? itemDisplayName(unboundItem) : ev.itemId;
-          if (ev.ok) {
-            this.log(
-              t('hudChrome.unbind.unbound', {
-                name: unboundName,
-                fee: formatLocalizedMoney(ev.fee),
-              }),
-              '#7fdc4f',
-            );
-          } else if (ev.reason) {
-            // A reason-less deny is the malformed-item-id probe arm
-            // (resolveUnbind's silent arm): nothing legible to render.
-            this.log(
-              t(
-                ev.reason === 'unbind_not_eligible'
-                  ? 'hudChrome.unbind.notEligible'
-                  : ev.reason === 'unbind_not_bound'
-                    ? 'hudChrome.unbind.notBound'
-                    : ev.reason === 'unbind_cannot_afford'
-                      ? 'hudChrome.unbind.cannotAfford'
-                      : ev.reason === 'unbind_no_space'
-                        ? 'hudChrome.unbind.noSpace'
-                        : 'hudChrome.unbind.outOfRange',
-              ),
-              '#ff6b6b',
-            );
-          }
-          // Refresh the service rows and the bags (the single-copy unbind
+          // Maker's Bond unbind outcome: counter_service_lines.ts owns the copy;
+          // refresh the service rows and the bags (the single-copy unbind
           // clears boundTo in place, so no loot event repaints them for us).
+          const line = unbindResultLine(ev);
+          if (line) this.log(line.text, line.color);
           if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
             this.renderUnbind();
+          if ($('#bags').style.display !== 'none') this.renderBags();
+          break;
+        }
+        case 'soulKeyResult': {
+          const line = soulKeyResultLine(ev);
+          if (line) this.log(line.text, line.color);
+          if ($('#bags').style.display !== 'none') this.renderBags();
+          break;
+        }
+        case 'heroicUpgradeResult': {
+          const line = heroicUpgradeResultLine(ev);
+          if (line) this.log(line.text, line.color);
+          if (this.openHeroicVendorNpcId !== null) this.renderHeroicVendor();
           if ($('#bags').style.display !== 'none') this.renderBags();
           break;
         }
@@ -15382,11 +15376,17 @@ export class Hud {
     renderHeroicVendorWindow(
       $('#vendor-window'),
       entityDisplayName(npc),
-      buildHeroicVendorView(HEROIC_VENDOR_STOCK, ITEMS, balance),
+      buildHeroicVendorView(HEROIC_VENDOR_STOCK, ITEMS, balance, this.sim.inventory),
       {
         ...this.presentationBag,
         hideTooltip: () => this.hideTooltip(),
         onBuy: (itemId) => this.requestHeroicVendorPurchase(itemId),
+        onUpgrade: (itemId, slotIndex) =>
+          confirmHeroicUpgrade(itemId, (title, body, ok, cancel) =>
+            this.confirmDialog(title, body, ok, cancel, () =>
+              this.sim.heroicUpgradeItem(itemId, { slotIndex }),
+            ),
+          ),
         onClose: () => this.closeHeroicVendor(),
       },
     );

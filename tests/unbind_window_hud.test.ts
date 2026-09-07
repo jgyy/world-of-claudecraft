@@ -22,9 +22,10 @@ function unbindResultArm(): string {
   // The arm sits between trainResult and masterwork in drainEvents; slicing
   // to the NEXT case keeps the single-surface pins scoped to this arm alone
   // (a future arm inserted between them must update this anchor).
-  const end = hudSource.indexOf("case 'masterwork': {", start);
+  // The Soul Key arm (its sibling counter service) follows it directly.
+  const end = hudSource.indexOf("case 'soulKeyResult': {", start);
   expect(start, 'unbindResult case arm present in handleEvents').toBeGreaterThan(-1);
-  expect(end, 'unbindResult arm precedes the masterwork arm').toBeGreaterThan(start);
+  expect(end, 'unbindResult arm precedes the soulKeyResult arm').toBeGreaterThan(start);
   // Comments stripped from the slice (`://` protocol slashes preserved), the
   // repo's raw-source-pin idiom (the codeOnly helper in
   // tests/professions_silent_loot.test.ts). This arm's whole subject is what
@@ -39,89 +40,32 @@ function unbindResultArm(): string {
 }
 
 describe('hud.ts unbindResult event arm (source pins)', () => {
-  it('logs the unbound line on ok and maps the deny reasons to unbind keys', () => {
+  // The copy itself (the ok line, the reason-to-key pairing, the text-free
+  // item name and locally formatted fee, the silent reason-less deny) lives in
+  // src/ui/counter_service_lines.ts unbindResultLine and is pinned
+  // behaviorally in tests/soul_key_ui.test.ts; the arm here is glue.
+  it('logs exactly the one line the builder returns', () => {
     const arm = unbindResultArm();
-    expect(arm).toContain("t('hudChrome.unbind.unbound'");
-    for (const key of [
-      'hudChrome.unbind.notEligible',
-      'hudChrome.unbind.notBound',
-      'hudChrome.unbind.cannotAfford',
-      'hudChrome.unbind.noSpace',
-      'hudChrome.unbind.outOfRange',
-    ]) {
-      expect(arm, key).toContain(key);
-    }
-    for (const reason of [
-      'unbind_not_eligible',
-      'unbind_not_bound',
-      'unbind_cannot_afford',
-      'unbind_no_space',
-    ]) {
-      expect(arm, reason).toContain(reason);
-    }
-  });
-
-  it('pairs each deny reason with ITS OWN key (a key swap in the chain must fail here)', () => {
-    // Presence pins alone cannot catch two keys swapped inside the ternary
-    // chain, so pin each reason-to-key pairing. unbind_out_of_range is
-    // deliberately the fallback arm (its literal never appears in hud.ts), so
-    // its pairing is pinned as the else branch of the unbind_no_space arm.
-    const arm = unbindResultArm();
-    expect(arm).toMatch(/'unbind_not_eligible'\s*\?\s*'hudChrome\.unbind\.notEligible'/);
-    expect(arm).toMatch(/'unbind_not_bound'\s*\?\s*'hudChrome\.unbind\.notBound'/);
-    expect(arm).toMatch(/'unbind_cannot_afford'\s*\?\s*'hudChrome\.unbind\.cannotAfford'/);
-    expect(arm).toMatch(
-      /'unbind_no_space'\s*\?\s*'hudChrome\.unbind\.noSpace'\s*:\s*'hudChrome\.unbind\.outOfRange'/,
-    );
-  });
-
-  it('derives the item name from static content and formats the fee locally (text-free event)', () => {
-    const arm = unbindResultArm();
-    expect(arm).toContain('ITEMS[ev.itemId]');
-    expect(arm).toContain('itemDisplayName');
-    expect(arm).toContain('formatLocalizedMoney(ev.fee)');
+    expect(arm).toContain('unbindResultLine(ev)');
+    expect(arm).toContain('if (line) this.log(line.text, line.color);');
   });
 
   it('stays single-surface: chat log only, no banner, toast, or audio cue in the arm', () => {
     const arm = unbindResultArm();
-    expect(arm.match(/this\.log\(/g)?.length, 'exactly the ok + deny log call sites').toBe(2);
-    // ALLOWLIST, not a blocklist, and that is the whole point. This pin spent
-    // two rounds losing an arms race it could not win: it began as an
-    // alternation of this.audio / playSfx / playCue / showToast, all four of
-    // which occur ZERO times in hud.ts (showToast occurs nowhere in src/ at
-    // all), so it enforced only its banner clause and a real cue added here
-    // would have passed the whole repo. Naming the live idioms instead just
-    // moved the goalposts: hud.ts reaches sound through audio.<cue>(, and
-    // sfx.playUi( / playAt( / crowdRoar( / unloop( / loop( / goalHorn(, and
-    // voice.play(, and three private wrappers of its own (this.combat, a
-    // route straight onto sfx.playAt, plus playEventSfx and
-    // playAttackerSfx); its out-of-chat surfaces run to showBanner,
-    // showError (itself BOTH a toast and a cue, since it calls audio.error),
-    // showPrompt, showSelfNote, showSubzone, confirmDialog, inputDialog,
-    // combatLog and flashActionSlot. Neither list is closed, and that is the
-    // point: every enumeration of them was one idiom short of the next one
-    // somebody adds.
-    //
-    // So enumerate what the arm IS instead. Its entire method surface is
-    // three calls, and #2458 made "one chat line and nothing else" the
-    // load-bearing contract on BOTH unbind arms, so anything a contributor
-    // adds here has to show up in this list and be argued for by name.
+    expect(arm.match(/this\.log\(/g)?.length, 'exactly the one log call site').toBe(1);
+    // ALLOWLIST, not a blocklist (see the history in git: every enumeration
+    // of the out-of-chat idioms was one short of the next one added). The
+    // arm's entire method surface is the chat line and the two repaints, and
+    // #2458 made "one chat line and nothing else" the load-bearing contract
+    // on BOTH unbind arms, so anything a contributor adds here has to show
+    // up in this list and be argued for by name.
     const selfCalls = [...new Set(arm.match(/\bthis\.\w+\(/g) ?? [])].sort();
     expect(selfCalls, 'the arm calls nothing but the chat line and the two repaints').toEqual([
       'this.log(',
       'this.renderBags(',
       'this.renderUnbind(',
     ]);
-    // The allowlist cannot see a call with no `this.` receiver, which is
-    // exactly how every module-level cue is spelled, so the receiver pin
-    // stays as its complement. Between them: no bare audio/sfx/voice call,
-    // and no method of the Hud beyond the three named above.
     expect(arm).not.toMatch(/\b(audio|sfx|voice)\.\w+\(/);
-  });
-
-  it('renders nothing for a reason-less deny (the silent malformed-item-id arm)', () => {
-    const arm = unbindResultArm();
-    expect(arm).toContain('else if (ev.reason)');
   });
 
   it('repaints the open unbind window AND the open bags (no loot event repaints for us)', () => {

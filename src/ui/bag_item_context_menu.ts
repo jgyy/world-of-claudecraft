@@ -16,10 +16,12 @@
 // DOM/Three-free (registered in tests/architecture.test.ts UI_PURE_CORES).
 
 import { ENCHANTS } from '../sim/content/enchants';
+import { isSoulboundCopy, isSoulKeyEligible } from '../sim/item_binding';
 import { isItemLocked } from '../sim/item_lock';
 import { isDisenchantable, isEnchantedInstance } from '../sim/professions/enchanting';
 import { isSalvageable } from '../sim/professions/salvage';
-import type { ItemDef, ItemInstancePayload } from '../sim/types';
+import { SOUL_KEY_ITEM_ID } from '../sim/soul_key';
+import type { InvSlot, ItemDef, ItemInstancePayload } from '../sim/types';
 import type { TranslationKey } from './i18n.catalog';
 
 // Every item id that appears in ANY enchant's reagent list: the Apply Enchant
@@ -35,7 +37,13 @@ export function isEnchantReagentItem(itemId: string): boolean {
   return ENCHANT_REAGENT_IDS.has(itemId);
 }
 
-export type BagItemNewActionId = 'disenchant' | 'salvage' | 'applyEnchant' | 'lock' | 'unlock';
+export type BagItemNewActionId =
+  | 'disenchant'
+  | 'salvage'
+  | 'applyEnchant'
+  | 'soulKey'
+  | 'lock'
+  | 'unlock';
 export type BagItemContextActionId = 'default' | 'sellAll' | BagItemNewActionId;
 
 export interface BagItemContextAction {
@@ -50,6 +58,7 @@ const NEW_ACTION_LABEL_KEY: Record<BagItemNewActionId, TranslationKey> = {
   disenchant: 'hudChrome.itemMenu.disenchant',
   salvage: 'hudChrome.itemMenu.salvage',
   applyEnchant: 'hudChrome.itemMenu.applyEnchant',
+  soulKey: 'hudChrome.soulKey.menuAction',
   lock: 'hudChrome.bags.lockItem',
   unlock: 'hudChrome.bags.unlockItem',
 };
@@ -79,13 +88,22 @@ export function bagItemNewActions(
   def: ItemDef,
   itemId: string,
   instance?: ItemInstancePayload,
+  /** Whether the viewer holds a Soul Key (holdsSoulKey below): the release
+   *  row only appears when there is a key to spend, on a copy still bound. */
+  soulKeyHeld = false,
 ): BagItemNewActionId[] {
   const out: BagItemNewActionId[] = [];
   if (isDisenchantable(def)) out.push('disenchant');
   if (isSalvageable(def) && !isItemLocked(instance)) out.push('salvage');
   if (isEnchantReagentItem(itemId)) out.push('applyEnchant');
+  if (soulKeyHeld && isSoulKeyEligible(def) && isSoulboundCopy(def, instance)) out.push('soulKey');
   out.push(isItemLocked(instance) ? 'unlock' : 'lock');
   return out;
+}
+
+/** Whether the bags hold at least one Soul Key (src/sim/soul_key.ts). */
+export function holdsSoulKey(inventory: readonly Pick<InvSlot, 'itemId' | 'count'>[]): boolean {
+  return inventory.some((slot) => slot.itemId === SOUL_KEY_ITEM_ID && slot.count > 0);
 }
 
 /** Every item now carries at least the lock/unlock row (issue 3042), so this
@@ -95,8 +113,9 @@ export function bagItemHasContextActions(
   def: ItemDef,
   itemId: string,
   instance?: ItemInstancePayload,
+  soulKeyHeld = false,
 ): boolean {
-  return bagItemNewActions(def, itemId, instance).length > 0;
+  return bagItemNewActions(def, itemId, instance, soulKeyHeld).length > 0;
 }
 
 /** The full ordered menu: the classic default row first (so left-click's binding
@@ -105,9 +124,10 @@ export function bagItemContextActions(
   def: ItemDef,
   itemId: string,
   instance?: ItemInstancePayload,
+  soulKeyHeld = false,
 ): BagItemContextAction[] {
   const rows: BagItemContextAction[] = [{ id: 'default', labelKey: defaultActionLabelKey(def) }];
-  for (const id of bagItemNewActions(def, itemId, instance)) {
+  for (const id of bagItemNewActions(def, itemId, instance, soulKeyHeld)) {
     rows.push({ id, labelKey: NEW_ACTION_LABEL_KEY[id] });
   }
   return rows;

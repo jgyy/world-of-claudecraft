@@ -6,6 +6,8 @@
 // callbacks. Reuses the vendor window's CSS classes (.vendor-item, .vi-name,
 // .vi-price) so the shop reads as the same window family. It owns no state.
 
+import { ITEMS } from '../../../sim/data';
+import { HEROIC_UPGRADE_MARKS } from '../../../sim/instances/heroic_upgrade';
 import { heroicMarkIconHtml } from '../../currency_art';
 import { markDialogRoot } from '../../dialog_root';
 import { itemDisplayName } from '../../entity_i18n';
@@ -19,7 +21,29 @@ import type { HeroicShopView } from './heroic_vendor_view';
 export interface HeroicVendorWindowDeps extends PainterHostPresentation {
   hideTooltip(): void;
   onBuy(itemId: string): void;
+  /** Forge the tier copy at `slotIndex` (heroic_vendor_view.ts HeroicUpgradeRow). */
+  onUpgrade(itemId: string, slotIndex: number): void;
   onClose(): void;
+}
+
+/** The upgrade confirm copy: marks spent on an upgrade record no buyback, so
+ *  a mis-tap would be unrefundable without it (the marks-shop contract). The
+ *  HUD supplies its focus-trapped confirm dialog; this owns only the words. */
+export function confirmHeroicUpgrade(
+  itemId: string,
+  confirm: (title: string, body: string, okText: string, cancelText: string) => void,
+): void {
+  const item = ITEMS[itemId];
+  if (!item) return;
+  confirm(
+    t('heroicShop.upgradeConfirmTitle'),
+    t('heroicShop.upgradeConfirmBody', {
+      item: itemDisplayName(item),
+      marks: formatNumber(HEROIC_UPGRADE_MARKS, { maximumFractionDigits: 0 }),
+    }),
+    t('heroicShop.upgradeConfirmAccept'),
+    t('heroicShop.buyConfirmCancel'),
+  );
 }
 
 /** Paint the Heroic Quartermaster panel from a prepared view. */
@@ -85,6 +109,49 @@ export function renderHeroicVendorWindow(
   // Guard mirrors vendor_window.ts's goods/buyback grids: skip appending an
   // empty grid container rather than leaving a dead node in the DOM.
   if (view.rows.length > 0) el.appendChild(goodsGrid);
+
+  // The Heroic Mark tier upgrade (src/sim/instances/heroic_upgrade.ts): one
+  // tile per bagged Crucible tier piece, keyed by bag slot so two copies of
+  // one id stay distinct across a rebuild. The variant's tooltip is the
+  // preview: it IS the item the forge hands back.
+  const upgradeTitle = document.createElement('div');
+  upgradeTitle.className = 'vendor-section-title';
+  upgradeTitle.textContent = t('heroicShop.upgradeTitle');
+  el.appendChild(upgradeTitle);
+  const upgradeIntro = document.createElement('div');
+  upgradeIntro.className = 'unbind-intro';
+  upgradeIntro.textContent = t('heroicShop.upgradeIntro', {
+    marks: formatNumber(HEROIC_UPGRADE_MARKS, { maximumFractionDigits: 0 }),
+  });
+  el.appendChild(upgradeIntro);
+  if (view.upgrades.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'vendor-empty';
+    empty.textContent = t('heroicShop.upgradeEmpty');
+    el.appendChild(empty);
+  } else {
+    const upgradeGrid = document.createElement('div');
+    upgradeGrid.className = 'vendor-goods-grid';
+    for (const { itemId, item, heroicItemId, slotIndex, marks, affordable } of view.upgrades) {
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'vendor-item';
+      row.disabled = !affordable;
+      row.dataset.focusKey = `upgrade:${slotIndex}`;
+      const itemName = itemDisplayName(item);
+      const marksLabel = formatNumber(marks, { maximumFractionDigits: 0 });
+      row.setAttribute(
+        'aria-label',
+        t('heroicShop.upgradeAria', { item: itemName, marks: marksLabel }),
+      );
+      row.innerHTML = `${deps.itemIcon(item)}<span class="vi-name">${esc(itemName)}</span><span class="vi-price${affordable ? '' : ' unaffordable'}">${heroicMarkIconHtml()}${esc(t('delveUi.shop.price', { marks: marksLabel }))}</span>`;
+      row.addEventListener('click', () => deps.onUpgrade(itemId, slotIndex));
+      const heroic = ITEMS[heroicItemId];
+      deps.attachTooltip(row, () => deps.itemTooltip(heroic ?? item));
+      upgradeGrid.appendChild(row);
+    }
+    el.appendChild(upgradeGrid);
+  }
 
   el.querySelector('[data-close]')?.addEventListener('click', () => deps.onClose());
   el.style.display = 'block';

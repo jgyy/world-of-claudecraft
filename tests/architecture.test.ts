@@ -283,6 +283,7 @@ const UI_PURE_CORES = [
   'src/ui/bag_item_context_menu.ts',
   'src/ui/enchant_apply_view.ts',
   'src/ui/enchanting_view.ts',
+  'src/ui/counter_service_lines.ts',
   'src/ui/disenchant_yield_view.ts',
   'src/ui/material_hint_view.ts',
   'src/ui/material_profession_hint_view.ts',
@@ -795,6 +796,7 @@ const RENDER_PURE_CORES = [
 // reverse-completeness guard.
 const BARE_NAMED = [
   'src/ui/banner_queue.ts',
+  'src/ui/counter_service_lines.ts',
   'src/ui/item_instance_glyph_mark.ts',
   'src/ui/item_kind_label.ts',
   'src/ui/item_name_color.ts',
@@ -1897,6 +1899,7 @@ const EXPECTED_BARE_NAMED = [
   'src/ui/clock.ts',
   'src/ui/compass.ts',
   'src/ui/coords.ts',
+  'src/ui/counter_service_lines.ts',
   'src/ui/duration_text.ts',
   'src/ui/fct_event.ts',
   'src/ui/focus_order.ts',

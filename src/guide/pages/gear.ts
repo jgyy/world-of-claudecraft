@@ -86,7 +86,10 @@ export const gear: GuidePage = {
 
         ${section(
           'guide.gear.soulboundTitle',
-          p('guide.gear.soulboundBodyBound') + p('guide.gear.bindOnTradeBody'),
+          p('guide.gear.soulboundBodyBound') +
+            p('guide.gear.soulKeyBody') +
+            p('guide.gear.heroicUpgradeBody') +
+            p('guide.gear.bindOnTradeBody'),
         )}
 
         ${section('guide.gear.uniqueTitle', p('guide.gear.uniqueBody'))}

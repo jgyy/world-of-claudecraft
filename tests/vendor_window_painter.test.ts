@@ -83,6 +83,7 @@ function heroicDeps(overrides: Partial<Parameters<typeof renderHeroicVendorWindo
     attachTooltip: () => {},
     hideTooltip: () => {},
     onBuy: () => {},
+    onUpgrade: () => {},
     onClose: () => {},
     ...overrides,
   };
@@ -108,7 +109,7 @@ describe('renderVendorWindow / renderHeroicVendorWindow: dialog root (accessible
   });
 
   it('renderHeroicVendorWindow marks #vendor-window as a labeled dialog', () => {
-    const view: HeroicShopView = { rows: [], balance: 0 };
+    const view: HeroicShopView = { rows: [], upgrades: [], balance: 0 };
     const el = document.createElement('div');
     renderHeroicVendorWindow(el, 'Quartermaster', view, heroicDeps());
 
@@ -170,6 +171,7 @@ describe('vendor painters: painted currency identities', () => {
   it('renders Heroic Mark art independently in the quartermaster balance and item price', () => {
     const view: HeroicShopView = {
       rows: [{ itemId: 'heroic_blade', item: item('heroic_blade'), marks: 11, affordable: true }],
+      upgrades: [],
       balance: 29,
     };
     const el = document.createElement('div');
@@ -675,7 +677,7 @@ describe('renderHeroicVendorWindow: goods grid wrapping', () => {
     const rows: HeroicShopRow[] = [
       { itemId: 'trinket', item: item('trinket'), marks: 10, affordable: true },
     ];
-    const view: HeroicShopView = { rows, balance: 20 };
+    const view: HeroicShopView = { rows, upgrades: [], balance: 20 };
     const el = document.createElement('div');
     renderHeroicVendorWindow(el, 'Quartermaster', view, heroicDeps());
 
@@ -687,7 +689,7 @@ describe('renderHeroicVendorWindow: goods grid wrapping', () => {
   });
 
   it('appends no empty .vendor-goods-grid when there are no rows', () => {
-    const view: HeroicShopView = { rows: [], balance: 0 };
+    const view: HeroicShopView = { rows: [], upgrades: [], balance: 0 };
     const el = document.createElement('div');
     renderHeroicVendorWindow(el, 'Quartermaster', view, heroicDeps());
 
@@ -705,16 +707,16 @@ describe('renderHeroicVendorWindow: goods grid wrapping', () => {
     ];
     const el = document.createElement('div');
     document.body.appendChild(el);
-    renderHeroicVendorWindow(el, 'Quartermaster', { rows, balance: 20 }, heroicDeps());
+    renderHeroicVendorWindow(el, 'Quartermaster', { rows, upgrades: [], balance: 20 }, heroicDeps());
     el.querySelector<HTMLButtonElement>('[data-focus-key="buy:trinket"]')?.focus();
-    renderHeroicVendorWindow(el, 'Quartermaster', { rows, balance: 20 }, heroicDeps());
+    renderHeroicVendorWindow(el, 'Quartermaster', { rows, upgrades: [], balance: 20 }, heroicDeps());
     expect((document.activeElement as HTMLElement).dataset.focusKey).toBe('buy:trinket');
     // The focused tile going disabled falls to the grid neighbor, never to
     // <body>: the rung an uninitiated marks repaint actually exercises.
     renderHeroicVendorWindow(
       el,
       'Quartermaster',
-      { rows: [{ ...rows[0], affordable: false }, rows[1]], balance: 5 },
+      { rows: [{ ...rows[0], affordable: false }, rows[1]], upgrades: [], balance: 5 },
       heroicDeps(),
     );
     expect((document.activeElement as HTMLElement).dataset.focusKey).toBe('buy:charm');
@@ -722,7 +724,7 @@ describe('renderHeroicVendorWindow: goods grid wrapping', () => {
     renderHeroicVendorWindow(
       el,
       'Quartermaster',
-      { rows: rows.map((r) => ({ ...r, affordable: false })), balance: 0 },
+      { rows: rows.map((r) => ({ ...r, affordable: false })), upgrades: [], balance: 0 },
       heroicDeps(),
     );
     expect((document.activeElement as HTMLElement).dataset.focusKey).toBe('close');

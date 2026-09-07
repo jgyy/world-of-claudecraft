@@ -7,7 +7,11 @@
 // tests/heroic_vendor.test.ts can drive it directly.
 
 import type { HeroicVendorOffer } from '../../../sim/content/heroic_vendor';
-import type { ItemDef } from '../../../sim/types';
+import {
+  HEROIC_UPGRADE_MARKS,
+  heroicUpgradeTargetId,
+} from '../../../sim/instances/heroic_upgrade';
+import type { InvSlot, ItemDef } from '../../../sim/types';
 
 export interface HeroicShopRow {
   itemId: string;
@@ -17,8 +21,22 @@ export interface HeroicShopRow {
   affordable: boolean;
 }
 
+/** One bagged Crucible tier piece the Heroic Mark upgrade can forge
+ *  (src/sim/instances/heroic_upgrade.ts): the exact copy by bag index, its
+ *  heroic target, and the flat marks price against the balance. */
+export interface HeroicUpgradeRow {
+  itemId: string;
+  item: ItemDef;
+  heroicItemId: string;
+  slotIndex: number;
+  marks: number;
+  affordable: boolean;
+}
+
 export interface HeroicShopView {
   rows: HeroicShopRow[];
+  /** The upgradeable tier pieces in the viewer's bags, in bag order. */
+  upgrades: HeroicUpgradeRow[];
   /** The viewer's current Heroic Marks balance (bag count). */
   balance: number;
 }
@@ -30,7 +48,23 @@ export function buildHeroicVendorView(
   stock: readonly HeroicVendorOffer[],
   items: Record<string, ItemDef>,
   balance: number,
+  inventory: readonly Pick<InvSlot, 'itemId' | 'count'>[] = [],
 ): HeroicShopView {
+  const upgrades: HeroicUpgradeRow[] = [];
+  inventory.forEach((slot, slotIndex) => {
+    if (slot.count < 1) return;
+    const heroicItemId = heroicUpgradeTargetId(slot.itemId);
+    const item = items[slot.itemId];
+    if (heroicItemId === null || !item) return;
+    upgrades.push({
+      itemId: slot.itemId,
+      item,
+      heroicItemId,
+      slotIndex,
+      marks: HEROIC_UPGRADE_MARKS,
+      affordable: balance >= HEROIC_UPGRADE_MARKS,
+    });
+  });
   const rows: HeroicShopRow[] = [];
   for (const offer of stock) {
     const item = items[offer.itemId];
@@ -42,5 +76,5 @@ export function buildHeroicVendorView(
       affordable: balance >= offer.marks,
     });
   }
-  return { rows, balance };
+  return { rows, upgrades, balance };
 }

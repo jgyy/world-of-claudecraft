@@ -2476,6 +2476,12 @@ export const guideStrings = {
     // Bind on trade: the per-copy lock in src/sim/item_instance_transfer.ts. An
     // armed copy may still pass face to face (trade.ts isTradeLocked is boundTo
     // only), which is exactly what stamps it; the anonymous pipes refuse both.
+    // Soul Keys (src/sim/soul_key.ts) and the Heroic Mark tier upgrade
+    // (src/sim/instances/heroic_upgrade.ts), appended to the binding section.
+    soulKeyBody:
+      'A soulbound piece of gear is not bound forever. Quartermaster Bree in Highwatch sells Soul Keys for gold, and spending one on a bound piece from your bags breaks its bond for good: from then on it trades, mails, sells, and lists like any other item, in the hands of whoever holds it. Each character may break two bonds per weekly reset, so a key is for the drop that went to the wrong spec or the spare a guildmate needs, not a way to run gear through every character you own.',
+    heroicUpgradeBody:
+      'Quartermaster Vex, the Heroic Quartermaster, will also forge a Crucible tier piece into its Heroic form for twenty Heroic Marks. The Heroic piece keeps its set bonus and class lock, steps up in item level and primary stats, and no longer binds, so it can change hands like the rest of your loot.',
     bindOnTradeBody:
       'A softer version of the same idea also exists: some things bind on trade, meaning they can change hands exactly once and then belong to whoever received them. A crafted piece made on commission binds when the crafter hands it over. A copy under that rule never rides the market or the post, which are anonymous; it passes face to face or not at all, and once it has passed, it is bound. The tooltip says which rule a piece follows, so check before you plan to resell it.',
     // Weapon skins (src/sim/content/weapon_skins.ts): account-wide, cosmetic

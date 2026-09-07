@@ -32,12 +32,14 @@
 
 import { ENCHANTS } from '../sim/content/enchants';
 import { ITEMS } from '../sim/data';
+import { SOUL_KEY_USES_PER_WEEK } from '../sim/soul_key';
 import type { EquipSlot, ItemDef, ItemInstancePayload, ItemSlot } from '../sim/types';
 import type { IWorld } from '../world_api';
 import {
-  type BagItemContextActionId,
   bagItemContextActions,
   destroyConsumesSpecialCopy,
+  holdsSoulKey,
+  type BagItemContextActionId,
   vendorSellContextActions,
 } from './bag_item_context_menu';
 import { disenchantYieldLines } from './disenchant_yield_view';
@@ -136,7 +138,12 @@ export class BagItemActionMenu {
   ): void {
     const actions =
       vendorSellCount === undefined
-        ? bagItemContextActions(def, itemId, instance)
+        ? bagItemContextActions(
+            def,
+            itemId,
+            instance,
+            holdsSoulKey(this.deps.world().inventory),
+          )
         : vendorSellContextActions(vendorSellCount);
     const rows = actions.map((action) => ({
       act: action.id,
@@ -155,12 +162,31 @@ export class BagItemActionMenu {
       } else if (id === 'disenchant') this.confirmDestroy('disenchant', itemId, slotIndex);
       else if (id === 'salvage') this.confirmDestroy('salvage', itemId, slotIndex);
       else if (id === 'applyEnchant') this.openEnchantPicker(itemId, x, y);
+      else if (id === 'soulKey') this.confirmSoulKey(itemId, slotIndex);
       // Lock/unlock (issue 3042): a plain in-place toggle, never destructive,
       // so it skips the confirm-dialog family every disenchant/salvage row
       // routes through and applies immediately like the classic default row.
       else if (id === 'lock') this.setLocked(itemId, slotIndex, true);
       else if (id === 'unlock') this.setLocked(itemId, slotIndex, false);
     });
+  }
+
+  // Soul Key release (src/sim/soul_key.ts): irreversible, so it rides the same
+  // confirm-dialog family as the destroy rows; the exact clicked copy is named
+  // by slot and the server re-validates everything.
+  private confirmSoulKey(itemId: string, slotIndex: number): void {
+    const def = ITEMS[itemId];
+    const name = def ? itemDisplayName(def) : itemId;
+    this.deps.confirmDialog(
+      t('hudChrome.soulKey.confirmTitle'),
+      t('hudChrome.soulKey.confirmBody', { name, cap: itemNumber(SOUL_KEY_USES_PER_WEEK) }),
+      t('hudChrome.soulKey.confirmOk'),
+      t('hudChrome.soulKey.confirmCancel'),
+      () => {
+        this.deps.world().useSoulKey(itemId, { slotIndex });
+        this.deps.afterAction();
+      },
+    );
   }
 
   private setLocked(itemId: string, slotIndex: number, locked: boolean): void {

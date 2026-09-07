@@ -40,7 +40,7 @@ import {
 } from './bag_filter';
 import { bagFineMark } from './bag_fine_mark_view';
 import { bagInstanceGlyphKind } from './bag_instance_glyph_view';
-import { bagItemHasContextActions } from './bag_item_context_menu';
+import { bagItemHasContextActions, holdsSoulKey } from './bag_item_context_menu';
 import { bagQuestMarkKind, bagQuestMarkProgressFromLog } from './bag_quest_mark_view';
 import { BagQuestTrackerHighlight } from './bag_quest_tracker_highlight';
 import { bagQuestTrackerHighlightId } from './bag_quest_tracker_highlight_view';
@@ -1879,7 +1879,10 @@ export class BagsWindow {
       !mode.guildBankDeposit &&
       !mode.vaultDeposit &&
       !mode.petFeed;
-    return inDefaultMode && bagItemHasContextActions(item, itemId, instance);
+    return (
+      inDefaultMode &&
+      bagItemHasContextActions(item, itemId, instance, holdsSoulKey(this.deps.world().inventory))
+    );
   }
 
   // Open the action menu at the event's viewport point (falling back to the row
