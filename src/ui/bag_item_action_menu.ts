@@ -36,10 +36,10 @@ import { SOUL_KEY_USES_PER_WEEK } from '../sim/soul_key';
 import type { EquipSlot, ItemDef, ItemInstancePayload, ItemSlot } from '../sim/types';
 import type { IWorld } from '../world_api';
 import {
+  type BagItemContextActionId,
   bagItemContextActions,
   destroyConsumesSpecialCopy,
   holdsSoulKey,
-  type BagItemContextActionId,
   vendorSellContextActions,
 } from './bag_item_context_menu';
 import { disenchantYieldLines } from './disenchant_yield_view';
@@ -138,12 +138,7 @@ export class BagItemActionMenu {
   ): void {
     const actions =
       vendorSellCount === undefined
-        ? bagItemContextActions(
-            def,
-            itemId,
-            instance,
-            holdsSoulKey(this.deps.world().inventory),
-          )
+        ? bagItemContextActions(def, itemId, instance, holdsSoulKey(this.deps.world().inventory))
         : vendorSellContextActions(vendorSellCount);
     const rows = actions.map((action) => ({
       act: action.id,

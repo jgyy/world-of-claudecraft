@@ -27,8 +27,8 @@ import { generalOnlyPools } from './bag_pools';
 import { addStacked, bagPools, bagsFullError, instancedCountCap } from './bags';
 import { moveBetweenContainers, nearBanker } from './bank';
 import { ITEMS } from './data';
-import { isSoulboundCopy } from './item_binding';
 import { formatMoney } from './format_money';
+import { isSoulboundCopy } from './item_binding';
 import {
   boundCraftedRecipeIdOnLoad,
   sanitizeItemInstancePayloadOnLoad,

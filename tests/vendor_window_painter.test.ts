@@ -707,9 +707,19 @@ describe('renderHeroicVendorWindow: goods grid wrapping', () => {
     ];
     const el = document.createElement('div');
     document.body.appendChild(el);
-    renderHeroicVendorWindow(el, 'Quartermaster', { rows, upgrades: [], balance: 20 }, heroicDeps());
+    renderHeroicVendorWindow(
+      el,
+      'Quartermaster',
+      { rows, upgrades: [], balance: 20 },
+      heroicDeps(),
+    );
     el.querySelector<HTMLButtonElement>('[data-focus-key="buy:trinket"]')?.focus();
-    renderHeroicVendorWindow(el, 'Quartermaster', { rows, upgrades: [], balance: 20 }, heroicDeps());
+    renderHeroicVendorWindow(
+      el,
+      'Quartermaster',
+      { rows, upgrades: [], balance: 20 },
+      heroicDeps(),
+    );
     expect((document.activeElement as HTMLElement).dataset.focusKey).toBe('buy:trinket');
     // The focused tile going disabled falls to the grid neighbor, never to
     // <body>: the rung an uninitiated marks repaint actually exercises.

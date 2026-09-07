@@ -8,13 +8,13 @@
 // from the ability school / item kind + name keywords, so everything always
 // has a proper icon. Results are cached as data URLs.
 
+import { isHeroicTierVariantId } from '../sim/content/heroic_variants';
 import { IGNIVAR_ART_PENDING_ITEM_IDS } from '../sim/content/ignivar_loot';
 import { isRawCookingCatch } from '../sim/content/items';
 import {
   BRAMBLEHIDE_ART_PENDING_ITEM_IDS,
   NYTHRAXIS_GAP_ART_PENDING_ITEM_IDS,
 } from '../sim/content/zone3';
-import { isHeroicTierVariantId } from '../sim/content/heroic_variants';
 import { ABILITIES, ITEMS } from '../sim/data';
 import { crestIconUrl } from './crest_icon_art';
 import { currencyImageUrl } from './currency_art';
@@ -5454,8 +5454,11 @@ export function itemImageUrl(id: string): string | null {
   if (ITEM_IMAGE_IDS.has(id) || UI_ITEM_IMAGE_IDS.has(id)) return `${ITEM_ICON_DIR}/${id}.webp`;
   // A heroic tier variant serves its base item's painting (see the derive
   // loop above); the own-property gate keeps stale ids from becoming paths.
-  const baseId = isHeroicTierVariantId(id) && Object.hasOwn(ITEMS, id) ? ITEMS[id].heroicOf : undefined;
-  return baseId !== undefined && ITEM_IMAGE_IDS.has(baseId) ? `${ITEM_ICON_DIR}/${baseId}.webp` : null;
+  const baseId =
+    isHeroicTierVariantId(id) && Object.hasOwn(ITEMS, id) ? ITEMS[id].heroicOf : undefined;
+  return baseId !== undefined && ITEM_IMAGE_IDS.has(baseId)
+    ? `${ITEM_ICON_DIR}/${baseId}.webp`
+    : null;
 }
 
 // Book of Deeds crest ids are shaped `deed_<deedId>` (deeds_view.ts deedCrestId). Those whose

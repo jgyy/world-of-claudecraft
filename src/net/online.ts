@@ -45,7 +45,6 @@ import type { MarketQuery } from '../sim/market_query';
 import { normalizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
 import { isPersistentEngineAura } from '../sim/persistent_aura';
 import { isPrimaryOwnedPetEntity } from '../sim/pet/pet_selection';
-import { blankEntity } from './blank_entity';
 import { getArchetypeTitle, getHobbyCraft } from '../sim/professions/archetype';
 import type { RespecPaymentTier } from '../sim/professions/focus';
 import type { MaterialRarity } from '../sim/professions/gathering';
@@ -182,6 +181,7 @@ import { ActionBarLayoutUploader } from './action_bar_upload';
 import { apiErrorFromBody } from './api_error';
 import { computeBackoffDelay } from './backoff';
 import { applyBankSelfWire } from './bank_snapshot_wire';
+import { blankEntity } from './blank_entity';
 import {
   type CivicServicePlacementsReader,
   createCivicServicePlacementsReader,
@@ -1242,7 +1242,6 @@ const DESPAWN_GRACE_MIN_DIST_SQ = 70 * 70;
 // snapshot COUNT rather than wall-clock keeps the valve deterministic in tests
 // (and needs no clock at all in the decode path).
 const TARGET_ECHO_SNAPSHOT_BUDGET = 3;
-
 
 export class ClientWorld extends ReconWireState implements IWorld {
   // --- IWorldEntityRoster: roster + player reads, mirrored from snapshots. The

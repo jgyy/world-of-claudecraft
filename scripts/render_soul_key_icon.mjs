@@ -106,7 +106,8 @@ if (webp.length > MAX_BYTES) {
   quality = 75;
   webp = await encode(master, quality);
 }
-if (webp.length > MAX_BYTES) throw new Error(`soul_key.webp is ${webp.length} bytes, over the 15 KiB cap`);
+if (webp.length > MAX_BYTES)
+  throw new Error(`soul_key.webp is ${webp.length} bytes, over the 15 KiB cap`);
 writeFileSync(OUT_WEBP, webp);
 console.log(`wrote ${OUT_WEBP} (${webp.length} bytes, q${quality})`);
 

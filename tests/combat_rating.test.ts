@@ -289,7 +289,10 @@ describe('combat-rating tier ladder', () => {
       expect(itemLevel(item), item.id).toBe(37);
       // The Crucible armor ladder step (60 primary + 25 secondary) rides the
       // variant unchanged: the upgrade is a primary-stat step, never a rating one.
-      expect(ratingValues(item).sort((a, b) => b - a), item.id).toEqual([60, 25]);
+      expect(
+        ratingValues(item).sort((a, b) => b - a),
+        item.id,
+      ).toEqual([60, 25]);
     }
     // 13 pre-existing pieces plus the 6 generated heroic raid variants of the
     // normal-raid epics (greatsword, greatblade, bulwark, orb, the hunter's

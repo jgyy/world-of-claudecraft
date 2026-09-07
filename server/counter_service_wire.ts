@@ -25,7 +25,11 @@ export type CounterServiceCommandName =
 
 export type CounterServiceSim = Pick<
   Sim,
-  'unbindItem' | 'useSoulKey' | 'buyHeroicVendorItem' | 'heroicUpgradeItem' | 'buyCrucibleVendorItem'
+  | 'unbindItem'
+  | 'useSoulKey'
+  | 'buyHeroicVendorItem'
+  | 'heroicUpgradeItem'
+  | 'buyCrucibleVendorItem'
 >;
 
 /** The named bag slot a copy-targeting command carries, or undefined for the

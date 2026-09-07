@@ -226,7 +226,11 @@ export function buildMarketSell(
   const item = sellItemId ? ITEMS[sellItemId] : null;
   if (!sellItemId || !item || sellHave <= 0) return { state: 'pick-empty' };
   // Per-copy soulbound (item_binding.ts): a Soul Key release can market.
-  if (item.kind === 'quest' || item.noMarketList || isSoulboundCopy(item, sellInstance ?? undefined))
+  if (
+    item.kind === 'quest' ||
+    item.noMarketList ||
+    isSoulboundCopy(item, sellInstance ?? undefined)
+  )
     return { state: 'cannot-market' };
   if (sellInstance && isTransferLockedInstance(sellInstance)) return { state: 'cannot-market' };
   // Only trust the echo when it names THIS item: a stale echo across an item

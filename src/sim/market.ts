@@ -12,8 +12,8 @@
 import { bagPools, canGrantCopies, instancedCountCap } from './bags';
 import { rekeySigner } from './character_rename';
 import { ITEMS } from './data';
-import { isSoulboundCopy } from './item_binding';
 import { formatMoney } from './format_money';
+import { isSoulboundCopy } from './item_binding';
 import {
   boundCraftedRecipeIdOnLoad,
   sanitizeItemInstancePayloadOnLoad,

@@ -23,12 +23,14 @@ import { t } from '../src/ui/i18n';
 
 const HELM = 'slagbreaker_helmet';
 
-describe('unbindResultLine (the Maker\'s Bond copy, moved out of hud.ts)', () => {
+describe("unbindResultLine (the Maker's Bond copy, moved out of hud.ts)", () => {
   it('names the item from static content and formats the fee locally on ok', () => {
     const line = unbindResultLine({ type: 'unbindResult', ok: true, itemId: HELM, fee: 12345 });
     expect(line?.text).toContain('Slagbreaker Helm');
     expect(line?.text).toContain('1');
-    expect(line?.text).toContain(t('hudChrome.unbind.unbound', { name: 'Slagbreaker Helm', fee: '' }).slice(0, 8));
+    expect(line?.text).toContain(
+      t('hudChrome.unbind.unbound', { name: 'Slagbreaker Helm', fee: '' }).slice(0, 8),
+    );
   });
 
   it('pairs each deny reason with ITS OWN key and renders nothing for the silent arm', () => {
@@ -40,7 +42,13 @@ describe('unbindResultLine (the Maker\'s Bond copy, moved out of hud.ts)', () =>
       ['unbind_out_of_range', 'hudChrome.unbind.outOfRange'],
     ] as const;
     for (const [reason, key] of pairs) {
-      const line = unbindResultLine({ type: 'unbindResult', ok: false, itemId: HELM, reason, fee: 0 });
+      const line = unbindResultLine({
+        type: 'unbindResult',
+        ok: false,
+        itemId: HELM,
+        reason,
+        fee: 0,
+      });
       expect(line?.text, reason).toBe(t(key));
       expect(line?.color, reason).toBe('#ff6b6b');
     }
@@ -127,7 +135,11 @@ describe('the bag-menu release row', () => {
     // after the profession rows and before the lock toggle.
     const withKey = bagItemNewActions(helm, HELM, undefined, true);
     expect(withKey.slice(-2)).toEqual(['soulKey', 'lock']);
-    expect(withKey).toEqual([...bagItemNewActions(helm, HELM, undefined, false).slice(0, -1), 'soulKey', 'lock']);
+    expect(withKey).toEqual([
+      ...bagItemNewActions(helm, HELM, undefined, false).slice(0, -1),
+      'soulKey',
+      'lock',
+    ]);
     expect(bagItemNewActions(helm, HELM, { unbound: true }, true)).not.toContain('soulKey');
     expect(bagItemNewActions(ITEMS.heroic_mark, 'heroic_mark', undefined, true)).not.toContain(
       'soulKey',
@@ -144,9 +156,12 @@ describe('the bag-menu release row', () => {
   it('holdsSoulKey reads the bags', () => {
     expect(holdsSoulKey([])).toBe(false);
     expect(holdsSoulKey([{ itemId: SOUL_KEY_ITEM_ID, count: 0 }])).toBe(false);
-    expect(holdsSoulKey([{ itemId: HELM, count: 1 }, { itemId: SOUL_KEY_ITEM_ID, count: 2 }])).toBe(
-      true,
-    );
+    expect(
+      holdsSoulKey([
+        { itemId: HELM, count: 1 },
+        { itemId: SOUL_KEY_ITEM_ID, count: 2 },
+      ]),
+    ).toBe(true);
   });
 });
 
@@ -163,9 +178,7 @@ describe('the Heroic Quartermaster upgrade section view', () => {
       [HELM, 1, heroicVariantId(HELM)],
       ['slagbreaker_legs', 3, heroicVariantId('slagbreaker_legs')],
     ]);
-    expect(view.upgrades.every((u) => u.marks === HEROIC_UPGRADE_MARKS && u.affordable)).toBe(
-      true,
-    );
+    expect(view.upgrades.every((u) => u.marks === HEROIC_UPGRADE_MARKS && u.affordable)).toBe(true);
     const broke = buildHeroicVendorView(HEROIC_VENDOR_STOCK, ITEMS, HEROIC_UPGRADE_MARKS - 1, [
       { itemId: HELM, count: 1 },
     ]);

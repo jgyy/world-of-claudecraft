@@ -43,8 +43,8 @@
 // ---------------------------------------------------------------------------
 
 import { weaponTypeForItem } from './content/weapon_skin_rules';
-import { isItemLocked } from './item_lock_flag';
 import { isSoulboundCopy } from './item_binding';
+import { isItemLocked } from './item_lock_flag';
 import { isTransferLockedInstance } from './transfer_lock';
 import type { ItemDef, ItemInstancePayload } from './types';
 

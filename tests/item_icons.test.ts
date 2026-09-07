@@ -9,10 +9,10 @@ import { isHeroicTierVariantId } from '../src/sim/content/heroic_variants';
 import { IGNIVAR_LOOT_ITEM_IDS } from '../src/sim/content/ignivar_loot';
 import { ITEMS } from '../src/sim/data';
 import {
-  iconDataUrl,
-  isUnknownIconRecipe,
   ITEM_ART_PENDING,
   ITEM_IMAGE_IDS,
+  iconDataUrl,
+  isUnknownIconRecipe,
   itemIconRecipe,
   itemImageUrl,
   UI_ITEM_IMAGE_IDS,

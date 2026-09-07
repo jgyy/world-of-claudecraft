@@ -61,7 +61,9 @@ export function resolveHeroicUpgrade(
   slotIndex: number | undefined,
   inRange: boolean,
   marksHeld: number,
-): { ok: true; heroicItemId: string; slotIndex: number } | { ok: false; reason: HeroicUpgradeDenyReason } {
+):
+  | { ok: true; heroicItemId: string; slotIndex: number }
+  | { ok: false; reason: HeroicUpgradeDenyReason } {
   const heroicItemId = heroicUpgradeTargetId(itemId);
   if (heroicItemId === null) return { ok: false, reason: 'heroic_upgrade_not_eligible' };
   const inventory = meta.inventory ?? [];
@@ -112,9 +114,16 @@ export function heroicUpgradeItem(
     heroicVendorInRange(ctx, p),
     ctx.countItem(HEROIC_MARK_ITEM_ID, meta.entityId),
   );
-  if (!resolved.ok) return { ok: false, itemId, reason: resolved.reason, marks: HEROIC_UPGRADE_MARKS };
+  if (!resolved.ok)
+    return { ok: false, itemId, reason: resolved.reason, marks: HEROIC_UPGRADE_MARKS };
   const taken = consumeSelectedInventorySlot(meta.inventory, itemId, resolved.slotIndex);
-  if (!taken) return { ok: false, itemId, reason: 'heroic_upgrade_not_eligible', marks: HEROIC_UPGRADE_MARKS };
+  if (!taken)
+    return {
+      ok: false,
+      itemId,
+      reason: 'heroic_upgrade_not_eligible',
+      marks: HEROIC_UPGRADE_MARKS,
+    };
   ctx.removeItem(HEROIC_MARK_ITEM_ID, HEROIC_UPGRADE_MARKS, meta.entityId);
   const payload = heroicUpgradePayload(taken.instance);
   const opts = { silent: true, callerLogs: true, movement: true } as const;

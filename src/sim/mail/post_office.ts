@@ -470,7 +470,9 @@ export class PostOffice {
       // Per-copy (item_binding.ts): a Soul Key release rides a raven like
       // any other instanced parcel; a plain stack of a soulbound def never
       // can (only an instanced copy carries the release).
-      if (isSoulboundCopy(def, s.instance && typeof s.instance === 'object' ? s.instance : undefined)) {
+      if (
+        isSoulboundCopy(def, s.instance && typeof s.instance === 'object' ? s.instance : undefined)
+      ) {
         this.result(meta.entityId, 'noMailSoulbound');
         return;
       }

@@ -57,7 +57,6 @@ import { resolveHunterSharedAbilityForTalents } from '../sim/combat/hunter_share
 import { warriorParryChance } from '../sim/combat/warrior_hit_table';
 import { DEEDS } from '../sim/content/deeds';
 import { HEROIC_MARK_ITEM_ID } from '../sim/content/dungeon_difficulty';
-import { SOUL_KEY_ITEM_ID, SOUL_KEY_USES_PER_WEEK } from '../sim/soul_key';
 import { HEROIC_VENDOR_STOCK } from '../sim/content/heroic_vendor';
 import { CRUCIBLE_VENDOR_STOCK } from '../sim/content/ignivar_loot';
 import { isOnMountRaceStartPlatform, MOUNTS } from '../sim/content/mounts';
@@ -103,6 +102,7 @@ import { inRangeStationTypes, stationTypesSignature } from '../sim/professions/s
 import { TIER_SKILL_STEP, tierForSkill } from '../sim/professions/wheel';
 import { questObjectivesForMob } from '../sim/quest_targets';
 import type { ResolvedAbility } from '../sim/sim';
+import { SOUL_KEY_ITEM_ID, SOUL_KEY_USES_PER_WEEK } from '../sim/soul_key';
 import {
   type AuraKind,
   CONSUME_DURATION,
@@ -224,6 +224,11 @@ import { ContinentMapPainter } from './continent_map_painter';
 import { type ContinentZoneRegion, continentZoneAt } from './continent_map_view';
 import { cookingCatchHintKey } from './cooking_catch_hint_view';
 import { formatMinimapCoords } from './coords';
+import {
+  heroicUpgradeResultLine,
+  soulKeyResultLine,
+  unbindResultLine,
+} from './counter_service_lines';
 import {
   buildCraftCastSession,
   type CraftCastSessionView,
@@ -513,10 +518,7 @@ import { dismissBuyQuantityPrompts } from './hud/vendor/buy_quantity_prompt_wind
 import { buildCrucibleVendorView } from './hud/vendor/crucible_vendor_view';
 import { renderCrucibleVendorWindow } from './hud/vendor/crucible_vendor_window';
 import { buildHeroicVendorView } from './hud/vendor/heroic_vendor_view';
-import {
-  confirmHeroicUpgrade,
-  renderHeroicVendorWindow,
-} from './hud/vendor/heroic_vendor_window';
+import { confirmHeroicUpgrade, renderHeroicVendorWindow } from './hud/vendor/heroic_vendor_window';
 import { TrainLearnTracker } from './hud/vendor/train_learn_core';
 import { buildTrainView, isRecipeKnownForViewer } from './hud/vendor/train_view';
 import { renderTrainWindow } from './hud/vendor/train_window';
@@ -569,11 +571,6 @@ import {
 import { itemArmorTypeLabelKey } from './item_armor_type';
 import { requiredClassesForTooltip } from './item_class_restriction';
 import { itemStatDeltas, shouldCompareCopies } from './item_compare';
-import {
-  heroicUpgradeResultLine,
-  soulKeyResultLine,
-  unbindResultLine,
-} from './counter_service_lines';
 import { ItemDragState } from './item_drag_state';
 import {
   instanceBadgeLines,

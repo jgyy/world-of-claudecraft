@@ -7,10 +7,7 @@
 // tests/heroic_vendor.test.ts can drive it directly.
 
 import type { HeroicVendorOffer } from '../../../sim/content/heroic_vendor';
-import {
-  HEROIC_UPGRADE_MARKS,
-  heroicUpgradeTargetId,
-} from '../../../sim/instances/heroic_upgrade';
+import { HEROIC_UPGRADE_MARKS, heroicUpgradeTargetId } from '../../../sim/instances/heroic_upgrade';
 import type { InvSlot, ItemDef } from '../../../sim/types';
 
 export interface HeroicShopRow {

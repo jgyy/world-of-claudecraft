@@ -27,7 +27,6 @@ import {
 } from './bags';
 import { isRawCookingCatch } from './content/items';
 import { ITEMS, NPCS } from './data';
-import { isSoulboundCopy, isUnboundCopy } from './item_binding';
 import { markItemDiscovered } from './deeds';
 import { recalcPlayerStats } from './entity';
 import {
@@ -48,6 +47,7 @@ import { useBrinyLure } from './interactions/crab_summon';
 import { throwFirebottleAtNearestHut } from './interactions/firebottle_hut';
 import { moveStackToCell } from './inventory_order';
 import { sortInventoryStacks } from './inventory_sort';
+import { isSoulboundCopy, isUnboundCopy } from './item_binding';
 import {
   consumeNewestInventoryUnit,
   consumeSelectedInventorySlot,
