@@ -63,7 +63,7 @@ export function spawnLastKeepGarrison(
   ctx: Pick<SimContext, 'entities' | 'addEntity' | 'groundPos'>,
   npcs: Readonly<Record<string, NpcDef>>,
   sinks: LastKeepServiceSinks,
-  mailboxes: readonly MailboxDef[] = [],
+  mailboxes: readonly MailboxDef[],
 ): void {
   for (const npcId of LAST_KEEP_GARRISON_NPC_IDS) {
     const def = npcs[npcId];
@@ -75,8 +75,12 @@ export function spawnLastKeepGarrison(
     if (def.banker) sinks.bankerIds.push(npc.id);
     if (def.market) sinks.merchantIds.push(npc.id);
   }
+  // Every reserved-id pillar the ctor's sequential loop skipped is claimed
+  // HERE (the keep's today; the same contract for any town that follows), so
+  // a record with an entityId can never end up as a solid, mapped pillar
+  // with no entity behind it.
   for (const def of mailboxes) {
-    if (def.entityId !== LAST_KEEP_MAILBOX_ENTITY_ID) continue;
+    if (def.entityId === undefined) continue;
     if (ctx.entities.has(def.entityId))
       throw new Error(`Duplicate static service entity id: ${def.entityId}`);
     const box = createMailboxEntity(def.entityId, def, ctx.groundPos(def.x, def.z));

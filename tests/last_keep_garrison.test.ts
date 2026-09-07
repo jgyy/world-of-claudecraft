@@ -205,6 +205,15 @@ describe('spawnLastKeepGarrison', () => {
       );
       expect(sim.postOffice.mailboxIds).toContain(LAST_KEEP_MAILBOX_ENTITY_ID);
       expect(sim.postOffice.mailboxIds).toHaveLength(MAILBOXES.length);
+      // Every authored record has a live pillar at its spot (sequential or reserved).
+      const at = new Set(
+        sim.postOffice.mailboxIds.map((id) => {
+          const e = sim.entities.get(id)!;
+          return `${Math.round(e.pos.x * 100)},${Math.round(e.pos.z * 100)}`;
+        }),
+      );
+      for (const m of MAILBOXES)
+        expect(at.has(`${m.x * 100},${m.z * 100}`), `${m.x},${m.z}`).toBe(true);
       const pillars = [...sim.entities.values()].filter((e) => e.templateId === 'mailbox');
       expect(pillars).toHaveLength(MAILBOXES.length);
       expect(pillars.filter((e) => e.id >= STATIC_WORLD_SERVICE_ENTITY_ID_MIN)).toHaveLength(1);
@@ -238,7 +247,7 @@ describe('spawnLastKeepGarrison', () => {
     );
   });
 
-  it('leaves every sequential-id mailbox to the ctor loop (only the reserved record is its own)', () => {
+  it('claims every reserved-id mailbox and leaves the sequential ones to the ctor loop', () => {
     const added: Entity[] = [];
     const sinks = freshSinks();
     spawnLastKeepGarrison(
@@ -253,6 +262,24 @@ describe('spawnLastKeepGarrison', () => {
     );
     expect(added.map((e) => e.id)).toEqual([LAST_KEEP_MAILBOX_ENTITY_ID]);
     expect(sinks.mailboxIds).toEqual([LAST_KEEP_MAILBOX_ENTITY_ID]);
+    // A future town's reserved pillar rides the same contract, unnamed.
+    const more: Entity[] = [];
+    const s2 = freshSinks();
+    spawnLastKeepGarrison(
+      {
+        entities: new Map<number, Entity>(),
+        addEntity: (e: Entity) => more.push(e),
+        groundPos: (x: number, z: number) => ({ x, y: 0, z }),
+      },
+      {},
+      s2,
+      [
+        { x: 1, z: 2 },
+        { x: 3, z: 4, entityId: 2_000_000_111 },
+      ],
+    );
+    expect(more.map((e) => e.id)).toEqual([2_000_000_111]);
+    expect(s2.mailboxIds).toEqual([2_000_000_111]);
   });
 
   it('stands nobody up on a map without the records', () => {
@@ -265,6 +292,7 @@ describe('spawnLastKeepGarrison', () => {
       },
       {},
       freshSinks(),
+      [],
     );
     expect(added).toEqual([]);
   });

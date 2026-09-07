@@ -648,6 +648,10 @@ describe('Eastbrook authored gameplay data integration', () => {
       // at (-300, 50) offset (-6, 6)), the one authored row carrying a
       // facing (rotated to face the camp ground).
       { x: -306, z: 56, facing: Math.PI },
+      // The Last Keep's pillar (Drakelands' second town): a reserved
+      // static-service id, so the sequential mailbox loop skips it and
+      // src/sim/last_keep_garrison.ts stands it up (content/mailboxes.ts).
+      { x: 414, z: 2034, facing: -Math.PI / 2, entityId: 2_000_000_110 },
     ]);
     // Re-pinned 2026-08-18 for the harbor move (commit d19aa33f76,
     // docs/design/eastbrook-revamp/site-plan.md): the spawn moved to the
