@@ -2555,6 +2555,131 @@ export const TARGETS = [
     },
   },
   {
+    key: 'soul-keys',
+    label:
+      'Soul Keys: the bag-menu release row, the released tooltip line, and the Heroic upgrade counter',
+    when: ['sim/soul_key', 'sim/instances/heroic_upgrade', 'ui/counter_service_lines'],
+    // On a base checkout soul_key is not an item (addItem throws, caught) and
+    // sim.useSoulKey does not exist, so the same recipe shoots the honest
+    // BEFORE state: a bag menu without the release row, a tooltip that still
+    // reads Soulbound, and Quartermaster Vex's window without the upgrade
+    // section.
+    variants: [
+      { key: 'bag-menu', scene: 'menu' },
+      { key: 'released-tooltip', scene: 'tooltip' },
+      { key: 'heroic-upgrade', scene: 'vendor' },
+    ],
+    async capture(page, variant) {
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('.gpu-notice-dismiss')?.click();
+        document.querySelector('#gpu-notice')?.remove();
+        document.getElementById('tutorial-greeting')?.remove();
+      });
+      await wait(300);
+      const scene = variant?.scene ?? 'menu';
+      const setup = await page.evaluate((scene) => {
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!sim) return { ok: false, reason: 'no sim' };
+        const p = sim.player;
+        if (!p?.pos) return { ok: false, reason: 'no player' };
+        const give = (id, n) => {
+          try {
+            sim.addItem(id, n);
+          } catch {}
+        };
+        give('slagbreaker_helmet', 1);
+        if (scene === 'vendor') {
+          give('slagbreaker_legs', 1);
+          give('heroic_mark', 20);
+          const vex = [...sim.entities.values()].find(
+            (e) => e.templateId === 'heroic_quartermaster',
+          );
+          if (!vex) return { ok: false, reason: 'no quartermaster entity' };
+          p.pos.x = vex.pos.x + 2;
+          p.pos.z = vex.pos.z;
+          p.prevPos = { ...p.pos };
+          sim.rebucket?.(p);
+          return { ok: true, vexId: vex.id };
+        }
+        give('soul_key', 1);
+        if (scene === 'tooltip' && typeof sim.useSoulKey === 'function') {
+          const slotIndex = sim.inventory.findIndex((s) => s.itemId === 'slagbreaker_helmet');
+          sim.useSoulKey('slagbreaker_helmet', { slotIndex });
+        }
+        const bags = document.querySelector('#bags');
+        if (bags && getComputedStyle(bags).display === 'none') game.hud.toggleBags?.();
+        return { ok: true };
+      }, scene);
+      if (!setup.ok) throw new Error(`soul-keys setup failed: ${setup.reason}`);
+      if (scene === 'vendor') {
+        // Crossing into Highwatch raises the streaming veil (more than once);
+        // open the window only after it has stayed down, or the clip shoots
+        // the curtain art.
+        await wait(1500);
+        await awaitWorldPainted(page);
+        await awaitVeilSettled(page);
+        await sweepOverlays(page, 8);
+        await page.evaluate((vexId) => {
+          const el = document.querySelector('#vendor-window');
+          if (el) el.style.display = 'none';
+          window.__game.hud.openHeroicVendor(vexId);
+        }, setup.vexId);
+        if (!(await pollForSize(page, '#vendor-window'))) {
+          throw new Error('heroic vendor window did not open');
+        }
+        await awaitVeilSettled(page);
+        await wait(500);
+        return { clip: '#vendor-window' };
+      }
+      if (!(await pollForSize(page, '#bags'))) throw new Error('bags window did not open');
+      await wait(400);
+      const cell = await page.evaluate(() => {
+        const b = Array.from(document.querySelectorAll('#bags button')).find((el) =>
+          el.getAttribute('aria-label')?.includes('Slagbreaker Helm'),
+        );
+        if (!b) return null;
+        const r = b.getBoundingClientRect();
+        return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
+      });
+      if (!cell) throw new Error('helm cell not found in bags');
+      await page.mouse.move(cell.x, cell.y);
+      await wait(500);
+      const partner = scene === 'menu' ? '#ctx-menu' : '#tooltip';
+      if (scene === 'menu') {
+        await page.mouse.click(cell.x, cell.y, { button: 'right' });
+        await wait(500);
+      }
+      const shown = await page.evaluate((sel) => {
+        const el = document.querySelector(sel);
+        return (
+          !!el && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().width > 0
+        );
+      }, partner);
+      if (!shown) throw new Error(`${partner} did not appear through the pointer path`);
+      // The menu/tooltip floats outside #bags, so shoot the union rect here.
+      const rect = await page.evaluate((sel) => {
+        const a = document.querySelector('#bags')?.getBoundingClientRect();
+        const b = document.querySelector(sel)?.getBoundingClientRect();
+        if (!a || !b) return null;
+        const x0 = Math.max(0, Math.min(a.x, b.x) - 12);
+        const y0 = Math.max(0, Math.min(a.y, b.y) - 12);
+        const x1 = Math.min(innerWidth, Math.max(a.right, b.right) + 12);
+        const y1 = Math.min(innerHeight, Math.max(a.bottom, b.bottom) + 12);
+        return { x: x0, y: y0, width: x1 - x0, height: y1 - y0 };
+      }, partner);
+      if (rect && process.env.SHOTS_DIR) {
+        await page.screenshot({
+          path: `${process.env.SHOTS_DIR}/soul-keys-${variant?.key ?? 'desktop'}.png`,
+          clip: rect,
+        });
+      }
+      return {};
+    },
+  },
+  {
     key: 'vendor-sell-confirm',
     label:
       'Vendor: a plain click on a valuable item confirms before selling; junk still sells instantly',
