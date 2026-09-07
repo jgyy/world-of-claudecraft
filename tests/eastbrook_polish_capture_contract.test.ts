@@ -379,7 +379,7 @@ interface AttributionTargetFixture {
 // the Realm Builder monument (PR #3695) and this branch's renderer changes
 // land together on the merged tree. No capture was retaken.
 const PINNED_POLISH_COMPOSITE_FINGERPRINT =
-  '3a5b183e08a217c7421c7fecd4b61e43598b3a081fe8b07ba7fdabed559d0f7b';
+  'be840439cf3e72d839baf337432ef121327012531161c3da802074c2d70683ff';
 
 function validPolishAttributionTargets(): AttributionTargetFixture[] {
   return [
