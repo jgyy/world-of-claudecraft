@@ -540,6 +540,8 @@ import {
 } from './pvp/warfare_quartermaster';
 import { sanitizeCreditedObjects } from './quests/interact_object_credit';
 import { spawnRealmBuilderMonument } from './realm_builder_monument_spawn';
+import { advanceFlightPath, spawnFlightmasters, takeFlight as takeFlightImpl } from './flight_paths';
+import { updatePartyGates } from './party_gate';
 import {
   catalogRankOwned,
   catalogRelicCompletion,
@@ -1637,6 +1639,7 @@ export interface PlayerMeta {
   delveClears: Record<string, number>;
   companionUpgrades: Record<string, number>;
   delveLoreUnlocked: Set<string>;
+  flightNodesKnown: Set<string>;
   delveDaily: { date: string; firstClearXp: Set<string>; markClears: number };
   // Persistent town focus allocation (#1143): component type -> points spent.
   // Set only while standing in a town hub; adds a bonus to that component's
@@ -2318,6 +2321,11 @@ export class Sim {
         spawnWarfareQuartermaster(this.ctx, kole, safe);
       }
     }
+    // The flightmasters: reserved ids, rng-free, the same treatment as Kole.
+    // See src/sim/flight_paths.ts.
+    spawnFlightmasters(this.ctx, worldContent.npcs, (x, z) =>
+      this.findSafePos(x, z, waterLevel() + 0.6),
+    );
 
     for (const delve of DELVE_LIST) {
       for (let i = 0; i < DELVE_SLOT_COUNT; i++) {
@@ -2820,6 +2828,7 @@ export class Sim {
       delveClears: {},
       companionUpgrades: {},
       delveLoreUnlocked: new Set(),
+      flightNodesKnown: new Set(),
       delveDaily: { date: '', firstClearXp: new Set(), markClears: 0 },
       townFocus: {},
       heroicDaily: { date: '', marked: new Set() },
@@ -3247,6 +3256,7 @@ export class Sim {
       // boundary now rejects.
       meta.townFocus = professionsFocus.normalizeTownFocusOnLoad(s.townFocus);
       if (s.delveLoreUnlocked) for (const id of s.delveLoreUnlocked) meta.delveLoreUnlocked.add(id);
+      if (s.flightNodesKnown) for (const id of s.flightNodesKnown) meta.flightNodesKnown.add(id);
       if (s.delveDaily) {
         meta.delveDaily = {
           date: s.delveDaily.date,
@@ -4027,6 +4037,7 @@ export class Sim {
       delveClears: { ...meta.delveClears },
       companionUpgrades: { ...meta.companionUpgrades },
       delveLoreUnlocked: [...meta.delveLoreUnlocked],
+      ...(meta.flightNodesKnown.size > 0 ? { flightNodesKnown: [...meta.flightNodesKnown] } : {}),
       delveDaily: {
         date: meta.delveDaily.date,
         firstClearXp: [...meta.delveDaily.firstClearXp],
@@ -4621,6 +4632,13 @@ export class Sim {
   }
   get questsDone(): Set<string> {
     return this.primary.questsDone;
+  }
+  // --- IWorldFlightPaths (src/sim/flight_paths.ts) ---
+  get flightNodesKnown(): ReadonlySet<string> {
+    return this.primary.flightNodesKnown;
+  }
+  takeFlight(nodeId: string): void {
+    takeFlightImpl(this.ctx, this.primaryId, nodeId);
   }
   // --- IWorldDeeds: the Book of Deeds read surface + title/border selection.
   // The reads expose the live per-player state (the questLog precedent above);
@@ -5913,6 +5931,7 @@ export class Sim {
     lap?.('frozenOrbs');
 
     runDespawnDecay(this.ctx);
+    updatePartyGates(this.ctx);
     lap?.('despawnDecay');
     // Step in-flight projectiles toward their live targets before this tick's casts and
     // swings, so a homing bolt resolves on a fixed, deterministic phase boundary.
@@ -6597,6 +6616,8 @@ export class Sim {
     // Hold every forced/manual locomotion mode until the authoritative GO tick.
     if (meta.mountRace?.phase === 'countdown') return;
     if (advanceHeroicLeap(this.ctx, p)) return;
+    // A flight-path ride owns the body until it lands (src/sim/flight_paths.ts).
+    if (advanceFlightPath(this.ctx, p)) return;
     // A ledge climb owns movement while it runs, and an airborne body that
     // gets its hands on a reachable ledge starts one. Sits after the leap arc
     // (a leap has its own landing contract) and before charge/follow/fear so

@@ -77,6 +77,8 @@ import { corpseHasDecayed } from './respawn_policy';
 import { isRiftForgeNpc } from './rift/forge_gate';
 import type { SimContext } from './sim_context';
 import { interactSoulwell } from './soulwell';
+import { discoverFlightmaster, isFlightmasterNpc } from './flight_paths';
+import { interactPartyGate } from './party_gate';
 import { creditSignpostRead } from './tutorial/signpost_read';
 import {
   cloneItemInstancePayload,
@@ -832,6 +834,7 @@ export function pickUpObject(
   const objectItemId = obj.objectItemId;
   if (!objectItemId) return false;
   if (interactSoulwell(ctx, obj, meta.entityId)) return true;
+  if (interactPartyGate(ctx, obj, meta.entityId)) return true;
   const beforeCastingAbility = p.castingAbility;
   const beforeChanneling = p.channeling;
   if (tryStartNythraxisWardChannel(ctx, obj, p)) {
@@ -1002,6 +1005,11 @@ export function interact(
         ctx.emit({ type: 'riftForge', pid: p.id });
         return;
       }
+      if (target.kind === 'npc' && isFlightmasterNpc(target)) {
+        // A flightmaster is still a conversation: discovery is recorded, then
+        // the ordinary dialog opens (it carries the Fly option).
+        discoverFlightmaster(ctx, r.meta, target);
+      }
       if (ctx.isQuestInteractionEntity(target)) {
         ctx.talkToNpc(target.id, p.id);
         return;
@@ -1119,5 +1127,6 @@ export function interact(
     ctx.emit({ type: 'riftForge', pid: p.id });
     return;
   }
+  if (questEntity && isFlightmasterNpc(questEntity)) discoverFlightmaster(ctx, r.meta, questEntity);
   if (questEntity) ctx.talkToNpc(questEntity.id, p.id);
 }
