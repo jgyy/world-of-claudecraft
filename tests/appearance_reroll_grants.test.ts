@@ -109,6 +109,18 @@ describe('appearanceRerollAvailable', () => {
     ).toBe(false);
   });
 
+  it('does not bank an unspent earlier grant: spending the current one spends them all', () => {
+    // A pre-launch character that never used grant 1 holds ONE redesign under
+    // grant 2, not two: the row records the highest grant spent, so after a
+    // grant-2 spend it is refused against grant 1 as well.
+    const neverSpent = { created_at: '2026-08-01T00:00:00Z', appearance: LOOK };
+    expect(appearanceRerollAvailable(neverSpent, APPEARANCE_REROLL_GRANTS[0])).toBe(true);
+    expect(appearanceRerollAvailable(neverSpent, GRANT)).toBe(true);
+    const afterSpend = { ...neverSpent, appearance_reroll_used: true, appearance_reroll_grant: 2 };
+    expect(appearanceRerollAvailable(afterSpend, GRANT)).toBe(false);
+    expect(appearanceRerollAvailable(afterSpend, APPEARANCE_REROLL_GRANTS[0])).toBe(false);
+  });
+
   it('defaults to the current grant', () => {
     const row = {
       created_at: '2000-01-01T00:00:00Z',

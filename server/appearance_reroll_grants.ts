@@ -25,7 +25,11 @@ export interface AppearanceRerollGrant {
 }
 
 /** Every grant ever issued, oldest first. Ids are dense and ascending; the
- *  last row is the live one. Never renumber or delete a row: spent ids are
+ *  last row is the live one. Grants do not accumulate: a character records
+ *  the HIGHEST grant it spent, so one that never used its launch redesign and
+ *  now spends grant 2 has spent both. A grant is "everyone may reset their
+ *  look once from here", not a second token in the bank; that keeps the
+ *  roster button one-shot per grant and the SQL a single comparison. Never renumber or delete a row: spent ids are
  *  persisted per character (characters.appearance_reroll_grant), and the
  *  legacy boolean appearance_reroll_used reads as "spent grant 1". */
 export const APPEARANCE_REROLL_GRANTS: readonly AppearanceRerollGrant[] = [
