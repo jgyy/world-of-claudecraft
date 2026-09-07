@@ -2122,6 +2122,16 @@ export const ko_KR: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
+    "flight": {
+      "title": "비행 경로",
+      "gossipOption": "비행 타기",
+      "gossipOptionAria": "{name}의 비행 타기",
+      "rowAria": "{town}(으)로 비행, {hops} 구간, {fare}",
+      "hops": "{count} 구간",
+      "fare": "요금: {fare}",
+      "empty": "아직 아는 다른 비행 경로가 없습니다. 다른 마을의 비행 조련사에게 말을 걸어 그 경로를 익히세요.",
+      "close": "비행 경로 닫기"
+    },
     "itemProc": {
       "onMeleeHit": "적중 시 확률 ({chance}%): {effect}",
       "onSpellDamage": "피해 주문 시 확률 ({chance}%): {effect}",
@@ -11900,6 +11910,26 @@ export const ko_KR: EnTranslations = {
         "name": "구원의 성가대",
         "description": "6초 동안 정신을 집중해 30야드 안의 파티원을 2초마다 {damage}만큼 치유합니다. 치유량은 주문력에 따라 증가합니다."
       },
+      "grand_teleport_eastbrook": {
+        "name": "대규모 순간이동: 이스트브룩",
+        "description": "이스트브룩(으)로 통하는 대규모 차원문을 5분 동안 엽니다. 시전 순간에 당신의 파티에 있던 파티원만 통과할 수 있습니다. 통행의 룬 1개를 소모합니다. 시전 시간 10초. 다른 모든 대규모 순간이동과 20분의 재사용 대기시간을 공유합니다."
+      },
+      "grand_teleport_fenbridge": {
+        "name": "대규모 순간이동: 펜브리지",
+        "description": "펜브리지(으)로 통하는 대규모 차원문을 5분 동안 엽니다. 시전 순간에 당신의 파티에 있던 파티원만 통과할 수 있습니다. 통행의 룬 1개를 소모합니다. 시전 시간 10초. 다른 모든 대규모 순간이동과 20분의 재사용 대기시간을 공유합니다."
+      },
+      "grand_teleport_highwatch": {
+        "name": "대규모 순간이동: 하이워치",
+        "description": "하이워치(으)로 통하는 대규모 차원문을 5분 동안 엽니다. 시전 순간에 당신의 파티에 있던 파티원만 통과할 수 있습니다. 통행의 룬 1개를 소모합니다. 시전 시간 10초. 다른 모든 대규모 순간이동과 20분의 재사용 대기시간을 공유합니다."
+      },
+      "grand_teleport_eldergleam": {
+        "name": "대규모 순간이동: 엘더글림",
+        "description": "엘더글림(으)로 통하는 대규모 차원문을 5분 동안 엽니다. 시전 순간에 당신의 파티에 있던 파티원만 통과할 수 있습니다. 통행의 룬 1개를 소모합니다. 시전 시간 10초. 다른 모든 대규모 순간이동과 20분의 재사용 대기시간을 공유합니다."
+      },
+      "hellgate": {
+        "name": "지옥문",
+        "description": "발밑에 지옥문을 찢어 열어 99초 동안 유지합니다. 파티원을 대상으로 지정한 채 문을 클릭하면 그 파티원을 문으로 끌어옵니다. 문이 서 있는 동안 저편의 악마들이 매초 당신의 최대 생명력의 1%를 앗아 가고 생명력 재생을 막습니다. 시전 시간 10초."
+      },
       "bear_charge": {
         "name": "큰곰 돌진",
         "description": "적에게 돌진하여 분노 9를 생성하고 1초 동안 기절시킵니다. 사거리 8-25yd. 큰곰 변신 상태에서만 사용 가능."
@@ -14167,6 +14197,21 @@ export const ko_KR: EnTranslations = {
       "stormhymn_chain_treads": {
         "name": "폭풍찬가 사슬 장화"
       },
+      "rune_of_passage": {
+        "name": "통행의 룬"
+      },
+      "tome_grand_teleport_eastbrook": {
+        "name": "통행의 서: 이스트브룩"
+      },
+      "tome_grand_teleport_fenbridge": {
+        "name": "통행의 서: 펜브리지"
+      },
+      "tome_grand_teleport_highwatch": {
+        "name": "통행의 서: 하이워치"
+      },
+      "tome_grand_teleport_eldergleam": {
+        "name": "통행의 서: 엘더글림"
+      },
       "conjured_water4": {
         "name": "창조된 샘물"
       },
@@ -16192,6 +16237,76 @@ export const ko_KR: EnTranslations = {
         "name": "조수지기 넬",
         "title": "바닷가의 파수꾼",
         "greeting": "조수는 앗아 가고, 조수는 값을 치릅니다, {playerName}. 나는 그 양쪽 장부를 다 맡고 있죠. 종종게들이 난파선에서 집어 가는 것과, 정직한 손이 이 길로 날라 오는 것을요."
+      },
+      "flightmaster_eastbrook": {
+        "name": "렌 홀리스",
+        "title": "비행 조련사",
+        "greeting": "그리핀은 푹 쉬었고 하늘도 맑습니다, {className}님. 어디로 가시겠습니까?"
+      },
+      "flightmaster_fenbridge": {
+        "name": "오도 마시윅",
+        "title": "비행 조련사",
+        "greeting": "올라갈 때 갈대를 조심하세요. 마을 이름만 대면 데려다 드리지요."
+      },
+      "flightmaster_highwatch": {
+        "name": "브람 시슬크래그",
+        "title": "비행 조련사",
+        "greeting": "공기는 희박하고 시야는 멀리 트였지요. 이 새들은 이 봉우리의 고개란 고개는 다 압니다."
+      },
+      "flightmaster_eldergleam": {
+        "name": "실베인 더스크워든",
+        "title": "비행 조련사",
+        "greeting": "골짜기는 위에서 보면 훨씬 온화합니다. 착륙지를 고르세요."
+      },
+      "flightmaster_wyrmwatch": {
+        "name": "카르스크 엠버하이드",
+        "title": "비행 조련사",
+        "greeting": "와이름조차 내 새들은 멀찍이 피해 갑니다. 요새가 당신을 어디로 보내던가요?"
+      },
+      "flightmaster_icemantle": {
+        "name": "힐데 프로스트맨틀",
+        "title": "비행 조련사",
+        "greeting": "단단히 여미세요. 빙하 위 바람은 살을 에지만, 비행은 금방 끝납니다."
+      },
+      "flightmaster_lanternmere": {
+        "name": "페닉 앰버게일",
+        "title": "비행 조련사",
+        "greeting": "야간 비행을 위해 등불을 밝혔습니다. 목적지를 고르세요."
+      },
+      "flightmaster_bridgemere": {
+        "name": "탐신 리드라이트",
+        "title": "비행 조련사",
+        "greeting": "다리에서 늪이 허락하는 어디로든. 어디로 가시겠습니까, {className}님?"
+      },
+      "flightmaster_moonrest": {
+        "name": "엘로웬 나이트송",
+        "title": "비행 조련사",
+        "greeting": "나방이 밤새들을 집으로 이끕니다. 어디인지 말하면 날아가지요."
+      },
+      "flightmaster_gallowmere": {
+        "name": "코빈 그레이브젠드",
+        "title": "비행 조련사",
+        "greeting": "이곳 하늘에는 출몰하는 것이 없습니다. 아직은요. 마을 이름을 대세요."
+      },
+      "flightmaster_drifthaven": {
+        "name": "니아 솔트윈드",
+        "title": "비행 조련사",
+        "greeting": "얕은 물에서 올라오는 따뜻한 바람이 새를 잘 띄워 줍니다. 어디로 가시나요?"
+      },
+      "flightmaster_hedgewick": {
+        "name": "핍 그린바우어",
+        "title": "비행 조련사",
+        "greeting": "울타리를 넘고 과수원을 지나서. 어디로 할까요?"
+      },
+      "flightmaster_wickharbor": {
+        "name": "말로 게일슨",
+        "title": "비행 조련사",
+        "greeting": "오늘은 항구 바람이 고릅니다. 착륙지를 고르세요."
+      },
+      "flightmaster_gullhaven": {
+        "name": "사빈 걸윙",
+        "title": "비행 조련사",
+        "greeting": "갈매기들은 내 새들을 싫어합니다. 새들은 신경도 안 쓰지요. 어디로 가시겠습니까?"
       },
       "tidewatcher_ondrel": {
         "name": "온드렐 베인",
@@ -18385,6 +18500,36 @@ export const ko_KR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "난파선 감시자 처치"
+          }
+        }
+      },
+      "q_hellgate_pact": {
+        "title": "불안한 계약",
+        "text": "당신은 악마를 사슬에 매어 끌고 다니면서, {playerName}, 그것으로 자신이 주인이 되었다고 여기는군요. 옛 계약은 달리 말합니다. 문은 언제나 저편에서만 열리는 법이지요. 스스로 문을 찢어 여는 법을 배우고 싶다면, 먼저 예배당 묘지의 죽은 자들이 당신을 붙들지 못한다는 것을 증명하십시오. 불안한 뼈무더기 8구를 잠재우고, 배운 것을 가져오십시오.",
+        "completion": "뼈는 잠잠해졌고 당신은 아직 서 있군요. 좋습니다. 계약의 다음 구절은 입이 무거운 정찰병이 북쪽 늪으로 가져갔습니다. 펜브리지에서 정찰병 마렌을 찾으십시오.",
+        "objectives": {
+          "0": {
+            "label": "불안한 뼈무더기 잠재우기"
+          }
+        }
+      },
+      "q_hellgate_rite": {
+        "title": "무덤부름의 의식",
+        "text": "린이 보냈다고? 그렇다면 무덤부름 교단이 익사자들을 말동무로 삼으려 일으키는 게 아니라는 건 이미 알겠군. 그 교단원들은 장막을 얇게 만드는 의식을 읊지. 계약에 필요한 바로 그 의식이다. 무덤부름 교단원 6명을 침묵시키고, 쓰러지기 전에 뭐라 말하는지 들어 두어라.",
+        "completion": "너도 들었구나. 문은 자신을 위해 피 흘린 자에게 응답한다. 하이워치의 현자가 마지막 구절을 갖고 있는데, 묻는 걸 달가워하진 않을 거다. 현자 캐디스를 찾아가라.",
+        "objectives": {
+          "0": {
+            "label": "무덤부름 교단원 침묵시키기"
+          }
+        }
+      },
+      "q_hellgate_gate": {
+        "title": "지옥문",
+        "text": "이제 마렌이 늪을 통째로 내 문 앞에 보내는군. 좋다, {playerName}. 계약은 혈암에 새겨져 있다. 봉우리를 걷는 뼈갑옷들은 문을 열어 둔 마지막 자들이었고, 그 대가를 피로 치렀지. 뼈갑옷 망령 5구를 부수면 산이 그 말을 내어 줄 것이다.",
+        "completion": "그 말은 이제 네 것이다. 뼈갑옷들이 치른 대가를 기억해라. 지옥문이 서 있는 매 순간, 문은 그것을 연 자를 갉아먹는다. 친구들을 위해 쓰되, 문이 너를 닫아 버리기 전에 네가 먼저 닫아라.",
+        "objectives": {
+          "0": {
+            "label": "뼈갑옷 망령 부수기"
           }
         }
       },

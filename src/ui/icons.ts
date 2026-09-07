@@ -3392,6 +3392,28 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   cone_of_cold: r('frost', 'ice', ['snowflake'], ['arcs']),
   presence_of_mind: r('arcane', 'silverWhite', ['eye', { p: 'sunburst', ...BR }], ['sparkle']),
   blink: r('arcane', 'arcanePink', ['boot', { p: 'lightning', ...TR }], ['motion']),
+  // Grand Teleports: one arcane sigil per party portal, badged and tinted per town
+  // (Eastbrook's vale leaf, Fenbridge's marsh droplet, Highwatch's peak shield,
+  // Eldergleam's veiled moon) so the four read apart on a hotbar.
+  grand_teleport_eastbrook: r(
+    'arcane',
+    'arcanePink',
+    ['sigil_rune', { p: 'leaf', ...BR }],
+    ['arcs'],
+  ),
+  grand_teleport_fenbridge: r('arcane', 'sky', ['sigil_rune', { p: 'droplet', ...BR }], ['arcs']),
+  grand_teleport_highwatch: r(
+    'arcane',
+    'silverWhite',
+    ['sigil_rune', { p: 'shield', ...BR }],
+    ['arcs'],
+  ),
+  grand_teleport_eldergleam: r(
+    'arcane',
+    'shadowPurple',
+    ['sigil_rune', { p: 'moon', ...BR }],
+    ['arcs'],
+  ),
   ice_block: r('frost', 'ice', ['gem', { p: 'shield', ...BR }], ['glow']),
   deep_freeze: r('frost', 'ice', ['snowflake', { p: 'fist', ...BR }], ['glow']),
   meteor: r('fire', 'ember', ['meteor', { p: 'flame', ...BR }], ['drips']),
@@ -3401,6 +3423,8 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   // The Soul Stone well: the stored heart under glass, 25% back on a claim
   // (procedural fallback; painted art ships beside it).
   soulwell: r('shadow', 'venom', ['gem', { p: 'heart', ...BR }], ['glow']),
+  // The Hellgate: the warlock's summoning gate, a cracked fel maw with a demon watching.
+  hellgate: r('shadow', 'venom', ['tendrils', { p: 'imp_head', ...BR }], ['crack']),
   howl_of_terror: r('shadow', 'blood', ['roar', { p: 'skull', ...BR }], ['glow']),
   curse_of_exhaustion: r('shadow', 'shadowPurple', ['boot', { p: 'skull', ...TR }], ['motion']),
   death_coil: r('shadow', 'blood', ['skull', { p: 'heart', ...BR }], ['drips']),
@@ -4509,6 +4533,7 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'litany_of_guilt',
   'umbral_anchor',
   'soulwell',
+  'hellgate',
   'ruinous_brand',
   'soul_harvest',
   'raise_graveguard',

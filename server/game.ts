@@ -13,7 +13,6 @@ import { damageTakenWithin } from '../src/sim/combat/damage_history';
 import { wireParkedMana } from '../src/sim/combat/form_auto_unshift';
 import { rewindHealAmount } from '../src/sim/combat/rewind';
 import { DEEDS } from '../src/sim/content/deeds';
-import { isFinderListingTag, isFinderRole } from '../src/sim/content/dungeon_finder';
 import { RELIQUARY_PAGES_BY_ID } from '../src/sim/content/reliquary';
 import { MECH_CHROMAS, mechChromaSkinIndex } from '../src/sim/content/skins';
 import { withWeaponSkinApplied } from '../src/sim/content/weapon_skin_rules';
@@ -355,6 +354,8 @@ import type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types'
 
 export type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types';
 
+import { dispatchDungeonFinderCommand } from './dungeon_finder_dispatch';
+import { dispatchFlightCommand } from './flight_dispatch';
 import { recordFtueDeath, recordFtueQuest, recordLevelUp } from './progress_events';
 import { eventLeadDayKey, resetDayKey } from './raid_reset';
 import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
@@ -6792,6 +6793,11 @@ export class GameServer {
         // overworld) on its authoritative copy before the teleport.
         sim.startTutorial(pid);
         break;
+      // Flight paths: the sim owns reach, known-node, route and fare gates
+      // (server/flight_dispatch.ts parses the node id only).
+      case 'flight_take':
+        dispatchFlightCommand(sim, msg, pid);
+        break;
       case 'turnin':
         if (typeof msg.quest === 'string') {
           const beforeDone = sim.meta(pid)?.questsDone.has(msg.quest) ?? false;
@@ -7724,55 +7730,18 @@ export class GameServer {
       // group formation bumps the party key through the normal snapshot path.
       // Every field is validated here; the Sim re-validates eligibility, roles,
       // capacity, and party state authoritatively.
-      case 'df_roles': {
-        if (Array.isArray(msg.roles) && msg.roles.length <= 3) {
-          const roles = msg.roles.filter(isFinderRole);
-          if (roles.length === msg.roles.length) sim.dungeonFinderSetRoles(roles, pid);
-        }
-        break;
-      }
-      case 'df_queue': {
-        if (Array.isArray(msg.activities) && msg.activities.length <= 16) {
-          const activities = msg.activities.filter(
-            (a): a is string => typeof a === 'string' && a.length <= 64,
-          );
-          if (activities.length === msg.activities.length)
-            sim.dungeonFinderQueueJoin(activities, pid);
-        }
-        break;
-      }
+      // Dungeon Finder: the nine df_* arms share one parse-and-delegate module
+      // (server/dungeon_finder_dispatch.ts); the sim re-validates every rule.
+      case 'df_roles':
+      case 'df_queue':
       case 'df_queue_leave':
-        sim.dungeonFinderQueueLeave(pid);
-        break;
       case 'df_proposal':
-        sim.dungeonFinderRespond(msg.accept === true, pid);
-        break;
-      case 'df_list_create': {
-        if (
-          typeof msg.activity === 'string' &&
-          msg.activity.length <= 64 &&
-          Array.isArray(msg.tags) &&
-          msg.tags.length <= 8
-        ) {
-          const tags = msg.tags.filter(isFinderListingTag);
-          if (tags.length === msg.tags.length)
-            sim.dungeonFinderListingCreate(msg.activity, tags, pid);
-        }
-        break;
-      }
+      case 'df_list_create':
       case 'df_list_close':
-        sim.dungeonFinderListingClose(pid);
-        break;
       case 'df_apply':
-        if (typeof msg.listing === 'number' && Number.isFinite(msg.listing))
-          sim.dungeonFinderApply(msg.listing, pid);
-        break;
       case 'df_apply_cancel':
-        sim.dungeonFinderApplyCancel(pid);
-        break;
       case 'df_app_respond':
-        if (typeof msg.applicant === 'number' && Number.isFinite(msg.applicant))
-          sim.dungeonFinderApplicationRespond(msg.applicant, msg.accept === true, pid);
+        dispatchDungeonFinderCommand(sim, msg, pid);
         break;
 
       // post-cap cosmetic prestige (Max-Level XP Overflow)
@@ -9257,6 +9226,7 @@ export class GameServer {
       // src/sim/quests/opened_object_view.ts): bounded, personal, on-change.
       maybe('qlog', [...meta.questLog.values()]);
       maybe('qdone', [...meta.questsDone]);
+      maybe('fln', [...meta.flightNodesKnown]);
       maybe('milestones', [...meta.unlockedMilestones]);
       // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
       // lifetime stat block. Maps and Sets do not survive JSON.stringify, so

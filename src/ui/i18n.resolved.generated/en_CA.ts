@@ -2122,6 +2122,16 @@ export const en_CA: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
+    "flight": {
+      "title": "Flight Paths",
+      "gossipOption": "Take a flight",
+      "gossipOptionAria": "Take a flight with {name}",
+      "rowAria": "Fly to {town}, {hops} hops, {fare}",
+      "hops": "{count} hops",
+      "fare": "Fare: {fare}",
+      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
+      "close": "Close flight paths"
+    },
     "itemProc": {
       "onMeleeHit": "Chance on hit ({chance}%): {effect}",
       "onSpellDamage": "Chance on your damaging spells ({chance}%): {effect}",
@@ -6058,7 +6068,7 @@ export const en_CA: EnTranslations = {
     },
     "worldPage": {
       "heading": "The world",
-      "intro": "World of ClaudeCraft is one continuous land you cross on foot. The old road runs south to north through the starting valley, the marsh, and the peaks, and it keeps climbing past them into the hollow beyond and the snow country at the top of the map. A column of higher realms opens off that road to the west and another to the east, and an island sits off the Vale's east coast. There is no fast travel, no flight paths, and no taxis: every journey is walked or ridden, so getting there is part of the adventure.\n\nThe land also keeps time. A day and night cycle runs on a real clock shared by everyone on your world, so the sky grades from dawn through noon to dusk and dark for all of you at once, the moon comes and goes through its phases, and the light on the ground changes with it. The dial around your minimap is where you read the hour.",
+      "intro": "World of ClaudeCraft is one continuous land you cross on foot. The old road runs south to north through the starting valley, the marsh, and the peaks, and it keeps climbing past them into the hollow beyond and the snow country at the top of the map. A column of higher realms opens off that road to the west and another to the east, and an island sits off the Vale's east coast. Getting there is part of the adventure: every road is walked or ridden, and the flightmaster in each hub town can carry you between the towns you have already reached.\n\nThe land also keeps time. A day and night cycle runs on a real clock shared by everyone on your world, so the sky grades from dawn through noon to dusk and dark for all of you at once, the moon comes and goes through its phases, and the light on the ground changes with it. The dial around your minimap is where you read the hour.",
       "hub": "Home base",
       "mapHeading": "The road and the realms beyond",
       "mapSub": "The quest trail runs south to north up the middle of the map: valley, marsh, peaks, and on past them into the hollow and the snow beyond. The other realms open off that road rather than after it, through gates east and west of the marsh road, with the island of the Farshore reached from the Vale's east coast. What keeps you out of the far realms is their level bands, not the walk: five of them share the top band, so once you are ready you can take them in any order. The Farshore is the exception, low-level country you can visit early.",
@@ -6129,7 +6139,7 @@ export const en_CA: EnTranslations = {
       "provingGreeter": "Instructor Maren, Dawnrest Camp",
       "provingPlaceNotes": "Dawnrest Camp is the island's whole settlement: a few tents, a stall, and a muster fire. The Old Pier faces the vale, where the crossing circle carries graduates over the strait; the Practice Yard south of camp keeps its straw effigies standing for whoever needs them; and the Wreck Line is the salvage-strewn strand where the tide pays the island in castaway crates.",
       "travelTitle": "Getting around",
-      "travelBody": "Every road in the realm is walked or ridden. There are no flight paths, no taxis, and no teleport network: the map is one connected landmass, and every connection is something you can stand on. Ridges divide one realm from the next, and where two realms share a ridge the road climbs through a pass. Not every border works that way, though. In the north a long causeway carries the road out over the water from the Veiled Hollow into the snow country beyond, and back south a thin natural sandbar called the Ferrywalk runs east from the Vale's coast to the Landing on the island of the Farshore, which has no land border at all. And there is exactly one true doorway in the whole overworld: a veil of dusk high on Thornpeak that opens into the Veiled Hollow. The Hollow's southern ridge is sealed with no pass through it, so that veil is how you first get in, and it closes behind you on the way back.\n\nWherever you fall, the walk back is a short one. Every zone keeps at least one graveyard with a Pale Keeper hovering over the stones, and a released spirit rises at the nearest of them.\n\nThe map does not end in an invisible wall. The land runs out into beaches and headlands, and then into open water. The crossings the world means you to swim, the straits and meres between one realm and the next, are calm and safe to cross. Strike out for the open sea instead and the distance itself turns you back: you are warned, and warned again, and if you keep swimming the sea wears you down until it kills you. Diving has its own limit, since your breath runs out under the surface, so come up for air and turn around when the water tells you to.",
+      "travelBody": "Every road in the realm is walked or ridden, and the map is one connected landmass: every connection is something you can stand on. The flightmasters help you retrace it. Each hub town keeps one, and once you have spoken to a town's flightmaster on foot you can pay for a slow, hands-off flight there from any other flightmaster you know. A mage who has learned a Grand Teleport can open a portal that carries their group to one of the four old-road cities, and a warlock who has walked the Hellgate pact can tear open a gate that pulls group members to them. Ridges divide one realm from the next, and where two realms share a ridge the road climbs through a pass. Not every border works that way, though. In the north a long causeway carries the road out over the water from the Veiled Hollow into the snow country beyond, and back south a thin natural sandbar called the Ferrywalk runs east from the Vale's coast to the Landing on the island of the Farshore, which has no land border at all. And there is exactly one true doorway in the whole overworld: a veil of dusk high on Thornpeak that opens into the Veiled Hollow. The Hollow's southern ridge is sealed with no pass through it, so that veil is how you first get in, and it closes behind you on the way back.\n\nWherever you fall, the walk back is a short one. Every zone keeps at least one graveyard with a Pale Keeper hovering over the stones, and a released spirit rises at the nearest of them.\n\nThe map does not end in an invisible wall. The land runs out into beaches and headlands, and then into open water. The crossings the world means you to swim, the straits and meres between one realm and the next, are calm and safe to cross. Strike out for the open sea instead and the distance itself turns you back: you are warned, and warned again, and if you keep swimming the sea wears you down until it kills you. Diving has its own limit, since your breath runs out under the surface, so come up for air and turn around when the water tells you to.",
       "mountsTitle": "Mounts",
       "mountsBody": "Riding is the one thing that makes the world smaller, and it is a lesson before it is a horse. At level 20 the stablemaster, Marla, will take you on: you buy the riding skill from her, and the riding lesson itself is free, a jumping course you ride around her paddock on a lent steed. Pass it, turn the lesson in, and your first Valorsteed is yours, and from then on you cross the realm noticeably faster on horseback. Speed is the only thing a mount gives you: the rarer ones, which come from the hardest content, are faster still, but none of them change your power in a fight. Mount and dismount with the key bound in your controls. You cannot climb on while you are in combat, and swinging a weapon, casting a spell, wading into water, or falling in battle all put you back on your feet.",
       "mountsMore": "Everything about mounts",
@@ -11900,6 +11910,26 @@ export const en_CA: EnTranslations = {
         "name": "Choir of Deliverance",
         "description": "Channel for 6 sec, healing party members within 30 yards for {damage} every 2 sec. Healing increases with Spell Power."
       },
+      "grand_teleport_eastbrook": {
+        "name": "Grand Teleport: Eastbrook",
+        "description": "Opens a Grand Portal to Eastbrook for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "grand_teleport_fenbridge": {
+        "name": "Grand Teleport: Fenbridge",
+        "description": "Opens a Grand Portal to Fenbridge for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "grand_teleport_highwatch": {
+        "name": "Grand Teleport: Highwatch",
+        "description": "Opens a Grand Portal to Highwatch for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "grand_teleport_eldergleam": {
+        "name": "Grand Teleport: Eldergleam",
+        "description": "Opens a Grand Portal to Eldergleam for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "hellgate": {
+        "name": "Hellgate",
+        "description": "Tears open a Hellgate at your feet for 99 sec. Click the gate while targeting a group member to pull them to it. While it stands, the demons beyond it bleed you for 1% of your maximum health every second and stop your health from regenerating. 10 sec cast."
+      },
       "bear_charge": {
         "name": "Bruin Rush",
         "description": "Charge an enemy, generating 9 rage and stunning it for 1 sec. 8-25 yd range. Bruin Form only."
@@ -14167,6 +14197,21 @@ export const en_CA: EnTranslations = {
       "stormhymn_chain_treads": {
         "name": "Stormhymn Chain Treads"
       },
+      "rune_of_passage": {
+        "name": "Rune of Passage"
+      },
+      "tome_grand_teleport_eastbrook": {
+        "name": "Tome of Passage: Eastbrook"
+      },
+      "tome_grand_teleport_fenbridge": {
+        "name": "Tome of Passage: Fenbridge"
+      },
+      "tome_grand_teleport_highwatch": {
+        "name": "Tome of Passage: Highwatch"
+      },
+      "tome_grand_teleport_eldergleam": {
+        "name": "Tome of Passage: Eldergleam"
+      },
       "conjured_water4": {
         "name": "Conjured Springwater"
       },
@@ -16192,6 +16237,76 @@ export const en_CA: EnTranslations = {
         "name": "Tidewarden Nel",
         "title": "Keeper of the Strand",
         "greeting": "The tide takes and the tide pays, {playerName}. I keep the tally of both: what the scuttlers pinch off the wrecks, and what honest hands carry back up this path."
+      },
+      "flightmaster_eastbrook": {
+        "name": "Wren Hollis",
+        "title": "Flightmaster",
+        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+      },
+      "flightmaster_fenbridge": {
+        "name": "Odo Marshwick",
+        "title": "Flightmaster",
+        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+      },
+      "flightmaster_highwatch": {
+        "name": "Bram Thistlecrag",
+        "title": "Flightmaster",
+        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+      },
+      "flightmaster_eldergleam": {
+        "name": "Sylvane Duskwarden",
+        "title": "Flightmaster",
+        "greeting": "The Hollow is kinder from above. Choose your landing."
+      },
+      "flightmaster_wyrmwatch": {
+        "name": "Karsk Emberhide",
+        "title": "Flightmaster",
+        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+      },
+      "flightmaster_icemantle": {
+        "name": "Hilde Frostmantle",
+        "title": "Flightmaster",
+        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+      },
+      "flightmaster_lanternmere": {
+        "name": "Fennick Ambergale",
+        "title": "Flightmaster",
+        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+      },
+      "flightmaster_bridgemere": {
+        "name": "Tamsin Reedwright",
+        "title": "Flightmaster",
+        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+      },
+      "flightmaster_moonrest": {
+        "name": "Elowen Nightsong",
+        "title": "Flightmaster",
+        "greeting": "The moths guide the night birds home. Say where and we fly."
+      },
+      "flightmaster_gallowmere": {
+        "name": "Corvin Gravesend",
+        "title": "Flightmaster",
+        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+      },
+      "flightmaster_drifthaven": {
+        "name": "Nia Saltwind",
+        "title": "Flightmaster",
+        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+      },
+      "flightmaster_hedgewick": {
+        "name": "Pip Greenbower",
+        "title": "Flightmaster",
+        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+      },
+      "flightmaster_wickharbor": {
+        "name": "Marlo Galeson",
+        "title": "Flightmaster",
+        "greeting": "The harbor winds are steady today. Choose a landing."
+      },
+      "flightmaster_gullhaven": {
+        "name": "Sabine Gullwing",
+        "title": "Flightmaster",
+        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -18385,6 +18500,36 @@ export const en_CA: EnTranslations = {
         "objectives": {
           "0": {
             "label": "The Wreck Warden felled"
+          }
+        }
+      },
+      "q_hellgate_pact": {
+        "title": "The Unquiet Pact",
+        "text": "You carry a demon on a leash, {playerName}, and you think that makes you its master. The old pacts say otherwise: a gate is only ever opened from the far side. If you would learn to tear one open yourself, start by proving the dead of the chapel yard cannot hold you. Lay 8 Restless Bones to rest and bring me what you learn.",
+        "completion": "The bones lie still, and you are still standing. Good. The next words of the pact were carried north into the marsh by a scout who keeps her own counsel. Find Scout Maren in Fenbridge.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_hellgate_rite": {
+        "title": "Rites of the Gravecallers",
+        "text": "Lin sent you? Then you already know the Gravecallers are not raising the drowned for company. Their cultists chant a rite that thins the veil, the same rite the pact needs. Silence 6 Gravecaller Cultists and listen to what they say before they fall.",
+        "completion": "You heard it too, then: the gate answers the one who is bled for it. There is a loremaster in Highwatch who has the last of it, and he will not like being asked. Seek Loremaster Caddis.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist silenced"
+          }
+        }
+      },
+      "q_hellgate_gate": {
+        "title": "The Hellgate",
+        "text": "So Maren sends the marsh to my door now. Very well, {playerName}. The pact is written in the shale: the Boneclad that walk the peaks were the last to hold a gate open, and they paid for it in blood. Break 5 Boneclad Revenants and the mountain will give you the words.",
+        "completion": "The words are yours. Remember what they cost the Boneclad: every second a Hellgate stands, it feeds on the one who opened it. Use it for your friends, and close it before it closes you.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant broken"
           }
         }
       },

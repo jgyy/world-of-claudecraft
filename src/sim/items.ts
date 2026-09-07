@@ -43,6 +43,7 @@ import {
   weaponHand,
 } from './equipment_rules';
 import { formatMoney } from './format_money';
+import { learnSpellFromTome } from './grand_teleport_learning';
 import { useBrinyLure } from './interactions/crab_summon';
 import { throwFirebottleAtNearestHut } from './interactions/firebottle_hut';
 import { moveStackToCell } from './inventory_order';
@@ -819,6 +820,10 @@ export function useItem(
   }
   if (def.use?.type === 'passingStone') {
     usePassingStone(ctx, p, meta);
+    return;
+  }
+  if (def.use?.type === 'learnSpell') {
+    learnSpellFromTome(ctx, meta, itemId, def.use.abilityId);
     return;
   }
   if (def.kind === 'food' || def.kind === 'drink') {

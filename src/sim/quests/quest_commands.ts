@@ -26,6 +26,7 @@
 import { bagPools, bagsFullError, consumeOneScratch, countFit, countStacked } from '../bags';
 import { ITEMS, QUESTS, questRewardItemId } from '../data';
 import { formatMoney } from '../format_money';
+import { checkGrandTeleportCityUnlocks } from '../grand_teleport_learning';
 import { removePreferFungible } from '../items';
 import type { ArchetypeState } from '../professions/archetype';
 import { armCadence, cadenceBlockedKeys } from '../professions/cadence';
@@ -441,6 +442,11 @@ export function turnInQuestCore(
   const firstCompletion = !meta.questsDone.has(questId);
   meta.questsDone.add(questId);
   if (firstCompletion) meta.counters.questsCompleted++;
+  // A mage who has now cleared every quest a city hands out learns that
+  // city's Grand Teleport (grand_teleport_learning.ts); the learn key lands
+  // in questsDone BEFORE the refreshKnownAbilities below so one refresh
+  // announces both.
+  checkGrandTeleportCityUnlocks(ctx, meta);
   // Quest and chapter deed predicates read questsDone, so re-check this player.
   ctx.markDeedsDirty(meta.entityId);
   if (quest.copperReward > 0) {

@@ -125,12 +125,13 @@ describe('ability icons', () => {
   it('pins every ABILITY_RECIPES key and payload by stable content identity', () => {
     const ids = abilityRecipeIds();
     expect(ids).toEqual([...new Set(ids)].sort((left, right) => left.localeCompare(right)));
-    // 464: 450 plus the fourteen Nythraxis Raid Boss Guide mechanic recipes.
-    expect(ids).toHaveLength(464);
+    // 469: 450 plus the fourteen Nythraxis Raid Boss Guide mechanic recipes,
+    // plus the four Grand Teleport portals and the Hellgate.
+    expect(ids).toHaveLength(469);
     for (const id of ids) expect(hasExplicitAbilityIcon(id), id).toBe(true);
 
     const identity = ids.map((id) => ({ id, recipe: abilityIconRecipe(id) }));
     const hash = createHash('sha256').update(stableSerialize(identity)).digest('hex');
-    expect(hash).toBe('b990e0cce35fe3732d8409ca735692c8760a092298ece5e239202b9832c95a22');
+    expect(hash).toBe('97fd6a7a5d6bbd2e0fe43335652604f7fab932622be3a3f2362b3cf153e98655');
   });
 });

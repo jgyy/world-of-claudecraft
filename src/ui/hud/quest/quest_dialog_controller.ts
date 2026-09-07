@@ -78,6 +78,8 @@ export interface QuestDialogControllerDeps {
   openCrafting(craftId: string): void;
   openMarket(): void;
   openDelveBoard(npcId: number): void;
+  /** The flightmaster's destination list (src/ui/hud/flight). */
+  openFlight(npcId: number): void;
   openCardDuel(): void;
   onOpenChange(open: boolean): void;
   voice: {
@@ -382,6 +384,7 @@ export class QuestDialogController {
       (delve) => delve.boardNpcId === npc.templateId,
     );
     const hasCardMaster = !!definition?.cardMaster;
+    const hasFlightmaster = !!definition?.flightmaster;
     if (
       closeIfEmpty &&
       gossipMenuIsEmpty({
@@ -394,6 +397,7 @@ export class QuestDialogController {
         hasWarfareVendor,
         hasDelveBoard,
         hasCardMaster,
+        hasFlightmaster,
         hasTraining,
       })
     ) {
@@ -498,6 +502,9 @@ export class QuestDialogController {
       const label = delve ? this.deps.text.delveName(delve.id) : t('delveUi.board.openDelve');
       html += `<button type="button" class="qd-list-item" data-delve-board="1" aria-label="${esc(t('delveUi.board.openDelveAria', { name: npcName }))}"><span class="gold">${svgIcon('skull')}</span> ${esc(label)}</button>`;
     }
+    if (hasFlightmaster) {
+      html += `<button type="button" class="qd-list-item" data-flight="1" aria-label="${esc(t('hudChrome.flight.gossipOptionAria', { name: npcName }))}"><span class="gold">${svgIcon('map')}</span> ${esc(t('hudChrome.flight.gossipOption'))}</button>`;
+    }
     if (hasCardMaster) {
       html += `<button type="button" class="qd-list-item" data-card-duel="1" aria-label="${esc(t('cardDuel.title'))}"><span class="gold">&#9824;</span> ${esc(t('cardDuel.title'))}</button>`;
     }
@@ -526,6 +533,7 @@ export class QuestDialogController {
     this.bindRoute('[data-unbind]', () => this.deps.openUnbind(npc.id));
     this.bindRoute('[data-market]', this.deps.openMarket);
     this.bindRoute('[data-delve-board]', () => this.deps.openDelveBoard(npc.id));
+    this.bindRoute('[data-flight]', () => this.deps.openFlight(npc.id));
     this.bindRoute('[data-card-duel]', this.deps.openCardDuel);
     this.bindClose();
     this.showAndFocus();

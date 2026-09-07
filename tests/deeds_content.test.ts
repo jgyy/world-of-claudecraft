@@ -63,7 +63,7 @@ const PREFIX_CATEGORY: Record<string, DeedCategory> = {
 };
 
 describe('audited launch totals (literals: update deliberately with the catalog)', () => {
-  it('ships exactly 281 deeds worth 3340 total Renown', () => {
+  it('ships exactly 283 deeds worth 3350 total Renown', () => {
     // Release base (262 / 3145 after the WARFARE lifetime-honor ladder) plus
     // four Reliquary Curator rank bridges and the five Phase 18 completion
     // ladder deeds (all nine renown 0: catalog prestige never scores the
@@ -71,17 +71,19 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     // exp_dawnhold_castle, renown 5 each), the Proving Shore graduation
     // deed (prog_ready_for_an_adventure, renown 5), and the five Crucible
     // raid deeds (four clears at 25 plus the flawless 50: +150), and the
-    // Roots' Bramblehide set collection (col_set_bramblehide, renown 0).
-    expect(DEED_ORDER.length).toBe(282);
-    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(3340);
+    // Roots' Bramblehide set collection (col_set_bramblehide, renown 0), and
+    // the Hellgate pact deed (prog_hellgate_pact, renown 10).
+    expect(DEED_ORDER.length).toBe(283);
+    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(3350);
   });
 
   it('ships the audited per-category counts', () => {
     const byCategory: Record<string, number> = {};
     for (const d of ALL) byCategory[d.category] = (byCategory[d.category] ?? 0) + 1;
     expect(byCategory).toEqual({
-      // +1 the Proving Shore graduation (prog_ready_for_an_adventure).
-      progression: 58,
+      // +1 the Proving Shore graduation (prog_ready_for_an_adventure), +1 the
+      // Hellgate pact (prog_hellgate_pact).
+      progression: 59,
       combat: 10,
       // +2 Rift coverage deeds (dgn_rift, dgn_rift_s_rank), +5 Crucible raid
       // deeds (per-boss clear pairs plus the Varkhul flawless task).
@@ -244,6 +246,9 @@ describe('audited launch totals (literals: update deliberately with the catalog)
       // Roots' Bramblehide, the feral druid's Strength leather family off the
       // Nythraxis raid: its set collection deed closes the tail.
       'col_set_bramblehide',
+      // The Hellgate pact (fast travel): keyed on the warlock chain's final
+      // quest, q_hellgate_gate.
+      'prog_hellgate_pact',
     ]);
     expect(DEEDS.dgn_wildheart_basin.renown).toBe(10);
     expect(DEEDS.dgn_wildheart_basin_heroic.renown).toBe(10);
@@ -664,7 +669,10 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // Re-baselined for Roots' Bramblehide (the feral druid's Strength leather
   // family off the Nythraxis raid): one appended zero-Renown collection deed
   // (col_set_bramblehide). No shipped trigger or renown changed.
-  const FROZEN_CATALOG_SHA256 = '9068b0b39b68dba288c9501934211b0809422f09cb95a15b904ddc31a4354693';
+  // Re-baselined for the fast-travel content: one appended deed
+  // (prog_hellgate_pact, keyed on the warlock chain's final quest); no shipped
+  // trigger or renown changed.
+  const FROZEN_CATALOG_SHA256 = 'f458bcaff2e4020f1bda90d2375e51044482656209448831d3d4b86c8460e416';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
     const canonical = JSON.stringify(
@@ -862,9 +870,9 @@ describe('table shape', () => {
     // (forbidden: the order is an append-only determinism contract; new
     // deeds append). hid_codfather's index is pinned in the refresh test.
     expect(DEED_ORDER[0]).toBe('prog_first_steps');
-    // The Roots' Bramblehide set collection closes the tail (appended behind
-    // the Crucible raid block, whose flawless task was the previous final entry).
-    expect(DEED_ORDER[DEED_ORDER.length - 1]).toBe('col_set_bramblehide');
+    // The Hellgate pact deed closes the tail (appended behind the Roots'
+    // Bramblehide set collection, the previous final entry).
+    expect(DEED_ORDER[DEED_ORDER.length - 1]).toBe('prog_hellgate_pact');
   });
 
   it('every entry key matches its id and its prefix matches its category', () => {

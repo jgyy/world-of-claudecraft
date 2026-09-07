@@ -195,4 +195,8 @@ export const table: ReliquaryLocaleTable = {
     name: '鲁茨的荆棘皮甲',
     desc: '完整的荆棘皮甲系列。',
   },
+  horizons_tomes_of_passage: {
+    name: '通行之书',
+    desc: '四本通行之书，每本教会法师一种宏大传送。只有法师能在纳斯拉西斯地穴与最后之泉熔炉的团队首领身上找到它们。',
+  },
 };

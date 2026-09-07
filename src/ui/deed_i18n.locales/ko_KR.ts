@@ -993,4 +993,8 @@ export const table: DeedLocaleTable = {
     name: '루츠의 가시덤불가죽',
     desc: '루츠의 가시덤불가죽의 모든 부위를 발견하십시오.',
   },
+  prog_hellgate_pact: {
+    name: '불안한 계약',
+    desc: '무덤부름의 계약을 끝까지 걸어 지옥문을 찢어 여는 법을 배우십시오.',
+  },
 };

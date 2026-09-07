@@ -15070,4 +15070,108 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.realmBuilder.pastEmpty': 'В списке пока нет имён.',
   'hudChrome.realmBuilder.close': 'Закрыть',
   'worldContent.realmBuilderMonumentName': 'Памятник зодчим королевства',
+  // Fast travel: the flightmasters, the Hellgate pact, the Grand Teleport tomes and abilities.
+  'entities.npcs.flightmaster_eastbrook.name': 'Рен Холлис',
+  'entities.npcs.flightmaster_eastbrook.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_eastbrook.greeting':
+    'Грифоны отдохнули, небо чистое, {className}. Куда летим?',
+  'entities.npcs.flightmaster_fenbridge.name': 'Одо Маршвик',
+  'entities.npcs.flightmaster_fenbridge.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_fenbridge.greeting':
+    'Берегитесь камышей на взлёте. Назовите город, и мы вас доставим.',
+  'entities.npcs.flightmaster_highwatch.name': 'Брам Тислкраг',
+  'entities.npcs.flightmaster_highwatch.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_highwatch.greeting':
+    'Воздух разрежён, а виды далёкие. Птицы знают каждый перевал в этих горах.',
+  'entities.npcs.flightmaster_eldergleam.name': 'Сильвейн Дасквордэн',
+  'entities.npcs.flightmaster_eldergleam.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_eldergleam.greeting':
+    'Сверху Лощина куда добрее. Выберите, где приземлиться.',
+  'entities.npcs.flightmaster_wyrmwatch.name': 'Карск Эмберхайд',
+  'entities.npcs.flightmaster_wyrmwatch.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_wyrmwatch.greeting':
+    'Даже змеи обходят моих птиц стороной. Куда вас посылает крепость?',
+  'entities.npcs.flightmaster_icemantle.name': 'Хильда Фростмантл',
+  'entities.npcs.flightmaster_icemantle.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_icemantle.greeting':
+    'Укутайтесь потеплее. Ветер над ледником кусается, зато полёт быстрый.',
+  'entities.npcs.flightmaster_lanternmere.name': 'Фенник Эмбергейл',
+  'entities.npcs.flightmaster_lanternmere.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_lanternmere.greeting':
+    'Фонари зажжены для ночных полётов. Выберите, куда лететь.',
+  'entities.npcs.flightmaster_bridgemere.name': 'Тэмсин Ридрайт',
+  'entities.npcs.flightmaster_bridgemere.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_bridgemere.greeting':
+    'С моста туда, куда пустят топи. Куда летим, {className}?',
+  'entities.npcs.flightmaster_moonrest.name': 'Эловен Найтсонг',
+  'entities.npcs.flightmaster_moonrest.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_moonrest.greeting':
+    'Мотыльки ведут ночных птиц домой. Скажите куда, и мы летим.',
+  'entities.npcs.flightmaster_gallowmere.name': 'Корвин Грейвзенд',
+  'entities.npcs.flightmaster_gallowmere.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_gallowmere.greeting':
+    'В здешнем небе никто не бродит. Пока. Назовите свой город.',
+  'entities.npcs.flightmaster_drifthaven.name': 'Ния Солтвинд',
+  'entities.npcs.flightmaster_drifthaven.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_drifthaven.greeting':
+    'Тёплый ветер с отмелей отлично поднимает птицу. Куда держите путь?',
+  'entities.npcs.flightmaster_hedgewick.name': 'Пип Гринбауэр',
+  'entities.npcs.flightmaster_hedgewick.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_hedgewick.greeting': 'Над изгородями и мимо садов. Куда отправимся?',
+  'entities.npcs.flightmaster_wickharbor.name': 'Марло Гейлсон',
+  'entities.npcs.flightmaster_wickharbor.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_wickharbor.greeting':
+    'Ветер в гавани сегодня ровный. Выберите, где приземлиться.',
+  'entities.npcs.flightmaster_gullhaven.name': 'Сабина Галлвинг',
+  'entities.npcs.flightmaster_gullhaven.title': 'Распорядитель полётов',
+  'entities.npcs.flightmaster_gullhaven.greeting':
+    'Чайки ненавидят моих птиц. Птицам всё равно. Куда летим?',
+  'entities.quests.q_hellgate_pact.title': 'Беспокойный договор',
+  'entities.quests.q_hellgate_pact.text':
+    'Вы водите демона на поводке, {playerName}, и думаете, что это делает вас его хозяином. Старые договоры говорят иное: врата всегда открывают лишь с той стороны. Если хотите научиться рвать их сами, для начала докажите, что мёртвые церковного двора вас не удержат. Упокойте 8 Беспокойных костей и принесите мне то, что узнаете.',
+  'entities.quests.q_hellgate_pact.completion':
+    'Кости лежат смирно, а вы всё ещё на ногах. Хорошо. Следующие слова договора унесла на север, в топи, разведчица, которая держит их при себе. Найдите разведчицу Марен в Фенбридже.',
+  'entities.quests.q_hellgate_pact.objectives.0.label': 'Беспокойные кости: упокоено',
+  'entities.quests.q_hellgate_rite.title': 'Обряды Могильного Зова',
+  'entities.quests.q_hellgate_rite.text':
+    'Вас прислала Лин? Значит, вы уже знаете, что Могильный Зов поднимает утопленников не ради компании. Их культисты читают обряд, истончающий завесу, тот самый, что нужен договору. Заставьте замолчать 6 культистов Могильного Зова и вслушайтесь, что они говорят перед смертью.',
+  'entities.quests.q_hellgate_rite.completion':
+    'Значит, вы тоже это слышали: врата отвечают тому, кто истекает за них кровью. Последнюю часть хранит хранитель знаний в Хайвотче, и расспросы ему не понравятся. Найдите хранителя знаний Каддиса.',
+  'entities.quests.q_hellgate_rite.objectives.0.label':
+    'Культист Могильного Зова: заставлено замолчать',
+  'entities.quests.q_hellgate_gate.title': 'Адские врата',
+  'entities.quests.q_hellgate_gate.text':
+    'Так Марен теперь шлёт топи к моему порогу. Что ж, {playerName}. Договор записан в сланце: костепанцирные, что бродят по вершинам, последними держали врата открытыми и заплатили за это кровью. Сокрушите 5 Костепанцирных ревенантов, и гора отдаст вам слова.',
+  'entities.quests.q_hellgate_gate.completion':
+    'Слова ваши. Помните, чего они стоили костепанцирным: каждую секунду, пока стоят Адские врата, они питаются тем, кто их открыл. Открывайте их ради друзей и закрывайте прежде, чем они закроют вас.',
+  'entities.quests.q_hellgate_gate.objectives.0.label': 'Костепанцирный ревенант: сокрушено',
+  'entities.items.rune_of_passage.name': 'Руна перехода',
+  'entities.items.tome_grand_teleport_eastbrook.name': 'Фолиант перехода: Истврук',
+  'entities.items.tome_grand_teleport_fenbridge.name': 'Фолиант перехода: Фенбридж',
+  'entities.items.tome_grand_teleport_highwatch.name': 'Фолиант перехода: Хайвотч',
+  'entities.items.tome_grand_teleport_eldergleam.name': 'Фолиант перехода: Элдерглим',
+  'entities.abilities.grand_teleport_eastbrook.name': 'Великая телепортация: Истврук',
+  'entities.abilities.grand_teleport_eastbrook.description':
+    'Открывает Великий портал в Истврук на 5 мин. Пройти через него могут только те, кто состоял в вашей группе в момент прочтения. Расходует Руну перехода. Время прочтения 10 сек. Делит 20-минутное восстановление со всеми остальными Великими телепортациями.',
+  'entities.abilities.grand_teleport_fenbridge.name': 'Великая телепортация: Фенбридж',
+  'entities.abilities.grand_teleport_fenbridge.description':
+    'Открывает Великий портал в Фенбридж на 5 мин. Пройти через него могут только те, кто состоял в вашей группе в момент прочтения. Расходует Руну перехода. Время прочтения 10 сек. Делит 20-минутное восстановление со всеми остальными Великими телепортациями.',
+  'entities.abilities.grand_teleport_highwatch.name': 'Великая телепортация: Хайвотч',
+  'entities.abilities.grand_teleport_highwatch.description':
+    'Открывает Великий портал в Хайвотч на 5 мин. Пройти через него могут только те, кто состоял в вашей группе в момент прочтения. Расходует Руну перехода. Время прочтения 10 сек. Делит 20-минутное восстановление со всеми остальными Великими телепортациями.',
+  'entities.abilities.grand_teleport_eldergleam.name': 'Великая телепортация: Элдерглим',
+  'entities.abilities.grand_teleport_eldergleam.description':
+    'Открывает Великий портал в Элдерглим на 5 мин. Пройти через него могут только те, кто состоял в вашей группе в момент прочтения. Расходует Руну перехода. Время прочтения 10 сек. Делит 20-минутное восстановление со всеми остальными Великими телепортациями.',
+  'entities.abilities.hellgate.name': 'Адские врата',
+  'entities.abilities.hellgate.description':
+    'Разрывает у ваших ног Адские врата на 99 сек. Щёлкните по вратам, выбрав целью члена группы, чтобы притянуть его к ним. Пока врата стоят, демоны за ними каждую секунду отнимают у вас 1% максимального запаса здоровья и не дают ему восстанавливаться. Время прочтения 10 сек.',
+  'hudChrome.flight.title': 'Маршруты полётов',
+  'hudChrome.flight.gossipOption': 'Совершить полёт',
+  'hudChrome.flight.gossipOptionAria': 'Совершить полёт с {name}',
+  'hudChrome.flight.rowAria': 'Полёт в {town}, перелётов: {hops}, {fare}',
+  'hudChrome.flight.hops': 'перелётов: {count}',
+  'hudChrome.flight.fare': 'Плата: {fare}',
+  'hudChrome.flight.empty':
+    'Вы пока не знаете других маршрутов полётов. Поговорите с распорядителем полётов в другом городе, чтобы узнать его маршрут.',
+  'hudChrome.flight.close': 'Закрыть маршруты полётов',
 };

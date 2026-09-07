@@ -268,6 +268,11 @@ import { canEquipItem, resolveEquipSlot, uniqueEquipConflictSlot } from './equip
 import * as escortMod from './escort';
 import { initEscorts as initEscortsImpl, updateEscorts as updateEscortsImpl } from './escort';
 import { fleeSpeed } from './flee_speed';
+import {
+  advanceFlightPath,
+  spawnFlightmasters,
+  takeFlight as takeFlightImpl,
+} from './flight_paths';
 import { formatMoney } from './format_money';
 import * as groundAoeReadouts from './ground_aoe_readouts';
 import type { GuildBankState, GuildMembership } from './guild_bank';
@@ -381,6 +386,7 @@ import {
   resolveAscensionAbility,
   updatePaladinDevotion,
 } from './paladin_devotion';
+import { updatePartyGates } from './party_gate';
 import {
   findPlayerPath,
   PLAYER_BODY_RADIUS,
@@ -540,8 +546,6 @@ import {
 } from './pvp/warfare_quartermaster';
 import { sanitizeCreditedObjects } from './quests/interact_object_credit';
 import { spawnRealmBuilderMonument } from './realm_builder_monument_spawn';
-import { advanceFlightPath, spawnFlightmasters, takeFlight as takeFlightImpl } from './flight_paths';
-import { updatePartyGates } from './party_gate';
 import {
   catalogRankOwned,
   catalogRelicCompletion,
@@ -4639,6 +4643,10 @@ export class Sim {
   }
   takeFlight(nodeId: string): void {
     takeFlightImpl(this.ctx, this.primaryId, nodeId);
+  }
+  /** Server-side arm: the same gate for any pid (server/flight_dispatch.ts). */
+  takeFlightFor(nodeId: string, pid: number): void {
+    takeFlightImpl(this.ctx, pid, nodeId);
   }
   // --- IWorldDeeds: the Book of Deeds read surface + title/border selection.
   // The reads expose the live per-player state (the questLog precedent above);

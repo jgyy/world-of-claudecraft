@@ -139,7 +139,9 @@ export function updateRegen(ctx: SimContext, p: Entity, meta: PlayerMeta): void 
   // === 0): that shape heals nothing itself and is the sim's documented dev
   // freeze idiom (see startCascadePlaytest/startDevSandbox in sim.ts), which
   // still needs natural regen suppressed to hold a scripted hp bar in place.
-  if (!p.inCombat && p.hp < p.maxHp && p.eating?.hpPer2s !== 0) {
+  // A `noRegen` aura (the Hellgate toll) suspends natural HEALTH regen only;
+  // mana and the other bars above are untouched.
+  if (!p.inCombat && p.hp < p.maxHp && p.eating?.hpPer2s !== 0 && !p.auras.some((a) => a.noRegen)) {
     const regen = p.stats.sta * 0.3 + 2;
     p.hp = Math.min(p.maxHp, p.hp + Math.round(regen));
   }
@@ -304,6 +306,33 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
           tickSacrilegiousMarch(ctx, e, a);
         } else if (a.kind === 'affliction_eye') {
           tickMaledictGaze(ctx, e, a);
+        } else if (a.kind === 'dot' && a.sourceId === e.id && e.kind === 'player') {
+          // A SELF-sourced player dot (selfDotPctMax, the Hellgate toll) is a
+          // plain hp toll, not an attack: it never enters combat, never
+          // threatens, and never kills (floored at 1 hp), so the death path
+          // stays owned by real attackers. Emits the tick fx and a damage
+          // event for the FCT and combat log only.
+          const toll = Math.min(a.value, Math.max(0, e.hp - 1));
+          if (toll > 0) {
+            e.hp -= toll;
+            ctx.emit({
+              type: 'spellfx',
+              sourceId: e.id,
+              targetId: e.id,
+              school: a.school,
+              fx: 'tick',
+            });
+            ctx.emit({
+              type: 'damage',
+              sourceId: e.id,
+              targetId: e.id,
+              amount: toll,
+              crit: false,
+              school: a.school,
+              ability: a.name,
+              kind: 'hit',
+            });
+          }
         } else if (a.kind === 'dot') {
           const dotSource = ctx.entities.get(a.sourceId) ?? null;
           let tickDamage = a.value;

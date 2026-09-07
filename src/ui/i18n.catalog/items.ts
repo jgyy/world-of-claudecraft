@@ -2681,6 +2681,13 @@ const ITEM_ENTITY_IDS = [
   'thornpeak_moonhide_cowl',
   'stormhymn_chain_grips',
   'stormhymn_chain_treads',
+  // Fast travel (content/grand_teleports.ts): the Grand Teleport reagent and
+  // the four mage-only tomes.
+  'rune_of_passage',
+  'tome_grand_teleport_eastbrook',
+  'tome_grand_teleport_fenbridge',
+  'tome_grand_teleport_highwatch',
+  'tome_grand_teleport_eldergleam',
 ] as const;
 
 type ItemEntityId = (typeof ITEM_ENTITY_IDS)[number];
@@ -3053,6 +3060,11 @@ const APPENDED_ITEM_NAMES: Partial<Record<ItemEntityId, string>> = {
   thornpeak_moonhide_cowl: 'Thornpeak Moonhide Cowl',
   stormhymn_chain_grips: 'Stormhymn Chain Grips',
   stormhymn_chain_treads: 'Stormhymn Chain Treads',
+  rune_of_passage: 'Rune of Passage',
+  tome_grand_teleport_eastbrook: 'Tome of Passage: Eastbrook',
+  tome_grand_teleport_fenbridge: 'Tome of Passage: Fenbridge',
+  tome_grand_teleport_highwatch: 'Tome of Passage: Highwatch',
+  tome_grand_teleport_eldergleam: 'Tome of Passage: Eldergleam',
 };
 
 function itemTranslations(names: readonly string[]): ItemEntityTranslations {

@@ -196,4 +196,8 @@ export const table: ReliquaryLocaleTable = {
     name: 'ルーツのブランブルハイド',
     desc: 'ブランブルハイドのレザー一式。',
   },
+  horizons_tomes_of_passage: {
+    name: '通行の書',
+    desc: '四冊の通行の書。それぞれがメイジにグランドテレポートを一つ教える。ナイスラクシスの地下墓所と最後の泉のるつぼのレイドボスから、メイジだけが見つけられる。',
+  },
 };

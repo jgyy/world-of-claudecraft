@@ -2122,6 +2122,16 @@ export const zh_TW: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
+    "flight": {
+      "title": "飛行路線",
+      "gossipOption": "搭乘飛行",
+      "gossipOptionAria": "與{name}一起搭乘飛行",
+      "rowAria": "飛往{town}，{hops}段航程，{fare}",
+      "hops": "{count}段航程",
+      "fare": "費用：{fare}",
+      "empty": "你還不認識其他飛行路線。去別的城鎮找飛行管理員交談，以學會那裡的航線。",
+      "close": "關閉飛行路線"
+    },
     "itemProc": {
       "onMeleeHit": "命中時機率（{chance}%）：{effect}",
       "onSpellDamage": "造成傷害的法術機率（{chance}%）：{effect}",
@@ -11900,6 +11910,26 @@ export const zh_TW: EnTranslations = {
         "name": "救贖聖詠團",
         "description": "引導6秒，每2秒為30碼內的隊伍成員恢復{damage}點生命值。治療量隨法術強度提高。"
       },
+      "grand_teleport_eastbrook": {
+        "name": "宏大傳送：東溪",
+        "description": "開啟一道通往東溪的宏大傳送門，持續5分鐘。只有施法瞬間處於你隊伍中的成員才能穿過。消耗一枚通行符文。施法時間10秒。與其他所有宏大傳送共享20分鐘冷卻時間。"
+      },
+      "grand_teleport_fenbridge": {
+        "name": "宏大傳送：芬橋",
+        "description": "開啟一道通往芬橋的宏大傳送門，持續5分鐘。只有施法瞬間處於你隊伍中的成員才能穿過。消耗一枚通行符文。施法時間10秒。與其他所有宏大傳送共享20分鐘冷卻時間。"
+      },
+      "grand_teleport_highwatch": {
+        "name": "宏大傳送：高望",
+        "description": "開啟一道通往高望的宏大傳送門，持續5分鐘。只有施法瞬間處於你隊伍中的成員才能穿過。消耗一枚通行符文。施法時間10秒。與其他所有宏大傳送共享20分鐘冷卻時間。"
+      },
+      "grand_teleport_eldergleam": {
+        "name": "宏大傳送：古輝鎮",
+        "description": "開啟一道通往古輝鎮的宏大傳送門，持續5分鐘。只有施法瞬間處於你隊伍中的成員才能穿過。消耗一枚通行符文。施法時間10秒。與其他所有宏大傳送共享20分鐘冷卻時間。"
+      },
+      "hellgate": {
+        "name": "地獄之門",
+        "description": "在你腳下撕開一道地獄之門，持續99秒。選取隊伍成員後點擊門，即可將其拉到門前。門存在期間，門後的惡魔每秒使你流失最大生命值的1%，並阻止你的生命值回復。施法時間10秒。"
+      },
       "bear_charge": {
         "name": "巨熊衝鋒",
         "description": "向敵人衝鋒，產生 9 點怒氣並將其昏迷 1 秒。射程 8-25 公尺。僅限巨熊形態。"
@@ -14167,6 +14197,21 @@ export const zh_TW: EnTranslations = {
       "stormhymn_chain_treads": {
         "name": "風暴頌歌鏈甲之靴"
       },
+      "rune_of_passage": {
+        "name": "通行符文"
+      },
+      "tome_grand_teleport_eastbrook": {
+        "name": "通行之書：東溪"
+      },
+      "tome_grand_teleport_fenbridge": {
+        "name": "通行之書：芬橋"
+      },
+      "tome_grand_teleport_highwatch": {
+        "name": "通行之書：高望"
+      },
+      "tome_grand_teleport_eldergleam": {
+        "name": "通行之書：古輝鎮"
+      },
       "conjured_water4": {
         "name": "魔法泉水"
       },
@@ -16192,6 +16237,76 @@ export const zh_TW: EnTranslations = {
         "name": "守潮人奈爾",
         "title": "海灘的看守",
         "greeting": "潮水會拿走，潮水也會償還，{playerName}。這兩筆帳都由我來記：掠蟹從殘骸裡夾走的，和誠實的雙手沿這條路扛上來的。"
+      },
+      "flightmaster_eastbrook": {
+        "name": "雯·霍利斯",
+        "title": "飛行管理員",
+        "greeting": "獅鷲已經歇夠了，天也放晴了，{className}。去哪兒？"
+      },
+      "flightmaster_fenbridge": {
+        "name": "奧多·沼威克",
+        "title": "飛行管理員",
+        "greeting": "起飛時留神蘆葦。說個鎮名，我們送你過去。"
+      },
+      "flightmaster_highwatch": {
+        "name": "布拉姆·荊崖",
+        "title": "飛行管理員",
+        "greeting": "空氣稀薄，視野遼闊。這些鳥認得群峰裡的每一道山口。"
+      },
+      "flightmaster_eldergleam": {
+        "name": "席爾凡·暮守",
+        "title": "飛行管理員",
+        "greeting": "從高處看，幽谷溫柔多了。選個落腳點吧。"
+      },
+      "flightmaster_wyrmwatch": {
+        "name": "卡斯克·餘燼皮",
+        "title": "飛行管理員",
+        "greeting": "連巨龍都會繞開我的鳥。要塞派你去哪兒？"
+      },
+      "flightmaster_icemantle": {
+        "name": "希爾德·霜幔",
+        "title": "飛行管理員",
+        "greeting": "裹緊些。冰川上的風刺骨，不過飛得很快。"
+      },
+      "flightmaster_lanternmere": {
+        "name": "芬尼克·琥珀風",
+        "title": "飛行管理員",
+        "greeting": "夜航的燈籠已經點亮。選個目的地吧。"
+      },
+      "flightmaster_bridgemere": {
+        "name": "塔姆辛·葦匠",
+        "title": "飛行管理員",
+        "greeting": "從橋頭飛往沼澤允許的任何地方。去哪兒，{className}？"
+      },
+      "flightmaster_moonrest": {
+        "name": "埃洛溫·夜歌",
+        "title": "飛行管理員",
+        "greeting": "飛蛾會引夜鳥回家。說個地方，我們就飛。"
+      },
+      "flightmaster_gallowmere": {
+        "name": "科爾文·墓盡",
+        "title": "飛行管理員",
+        "greeting": "這裡的天空沒有什麼在作祟。暫時沒有。說出你的鎮子。"
+      },
+      "flightmaster_drifthaven": {
+        "name": "妮婭·鹽風",
+        "title": "飛行管理員",
+        "greeting": "淺灘上的暖風托得鳥兒很輕。你要去哪兒？"
+      },
+      "flightmaster_hedgewick": {
+        "name": "皮普·綠蔭",
+        "title": "飛行管理員",
+        "greeting": "越過樹籬，掠過果園。去哪兒好呢？"
+      },
+      "flightmaster_wickharbor": {
+        "name": "馬洛·風之子",
+        "title": "飛行管理員",
+        "greeting": "今天港口的風很穩。選個落腳點。"
+      },
+      "flightmaster_gullhaven": {
+        "name": "薩賓·鷗翼",
+        "title": "飛行管理員",
+        "greeting": "海鷗討厭我的鳥。鳥兒才不在乎。去哪兒？"
       },
       "tidewatcher_ondrel": {
         "name": "翁德瑞爾·韋恩",
@@ -18385,6 +18500,36 @@ export const zh_TW: EnTranslations = {
         "objectives": {
           "0": {
             "label": "已擊倒沉船守衛"
+          }
+        }
+      },
+      "q_hellgate_pact": {
+        "title": "不安的契約",
+        "text": "你牽著一隻惡魔的鏈子，{playerName}，就以為自己是牠的主人。古老的契約卻說，門永遠只能從另一邊打開。你若想學會親手撕開一道門，先證明禮拜堂墓地裡的亡者困不住你。讓8具不寧骸骨安息，再把你學到的東西告訴我。",
+        "completion": "骸骨已歸於平靜，而你還站著。很好。契約的下一段文字被一個守口如瓶的斥候帶去了北邊的沼澤。去芬橋找瑪倫斥候。",
+        "objectives": {
+          "0": {
+            "label": "不寧骸骨已安息"
+          }
+        }
+      },
+      "q_hellgate_rite": {
+        "title": "喚墓者的儀式",
+        "text": "是林派你來的？那你已經知道，喚墓者喚起溺亡者不是為了作伴。他們的教徒吟誦一種能撕薄帷幕的儀式，正是契約需要的那種。讓6個喚墓者教徒閉嘴，並在他們倒下前聽清他們說了什麼。",
+        "completion": "這麼說你也聽見了：門會回應為它流血的人。高望有位博學者掌握著最後的部分，他不會樂意被人問起。去找凱迪斯博學者。",
+        "objectives": {
+          "0": {
+            "label": "喚墓者教徒已被肅清"
+          }
+        }
+      },
+      "q_hellgate_gate": {
+        "title": "地獄之門",
+        "text": "這下瑪倫把沼澤都送到我門口了。好吧，{playerName}。契約寫在頁岩裡：行走於群峰的骨甲亡魂是最後一批撐開過門的人，他們為此付出了鮮血。擊碎5個骨甲亡魂，山會把咒文給你。",
+        "completion": "咒文歸你了。記住它讓骨甲亡魂付出了什麼：地獄之門每開一秒，都在吞噬開門的人。為你的朋友使用它，並在它吞掉你之前把它關上。",
+        "objectives": {
+          "0": {
+            "label": "骨甲亡魂已被擊碎"
           }
         }
       },

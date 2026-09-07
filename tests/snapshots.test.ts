@@ -109,6 +109,7 @@ const DELTA_KEYS = [
   'equip',
   'qlog',
   'qdone',
+  'fln',
   'lockouts',
   'cds',
   'stats',
@@ -4874,6 +4875,7 @@ const ALL_DELTA_KEYS = [
   'einst',
   'ench',
   'equip',
+  'fln',
   'gprof',
   'guildBank',
   'hbl',
@@ -4990,6 +4992,7 @@ const TERSE_TO_IWORLD: Record<string, string> = {
   einst: 'equipmentInstances',
   ench: 'lastEnchantResult',
   equip: 'equipment',
+  fln: 'flightNodesKnown',
   gprof: 'gatheringProficiency',
   guildBank: 'guildBankInfo',
   hirat: 'hitRating',
@@ -5953,8 +5956,10 @@ describe('delta-key contract pins (anti-drift)', () => {
     // adds offhandWeapon (delta-guarded like weapon/stats: a gear swap, not a
     // per-tick change; dualWielding rides no key of its own, it is always
     // exactly offhandWeapon !== null, so the client derives it), for 90.
-    expect(ALL_DELTA_KEYS).toHaveLength(90);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(90);
+    // Flight paths add fln (the known flight-node ids, the qdone shape),
+    // for 91.
+    expect(ALL_DELTA_KEYS).toHaveLength(91);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(91);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -6043,8 +6048,8 @@ describe('delta-key contract pins (anti-drift)', () => {
     // Storage Phase 2 then adds bpsl, vault, and cvault, for 87. The
     // maybeSerialized arm of the scrape then surfaces the two capability-gated
     // direct emits, auras and de, for 89. The off-hand bar adds offhandWeapon,
-    // for 90.
-    expect(scraped.size).toBe(90);
+    // for 90. Flight paths add fln, for 91.
+    expect(scraped.size).toBe(91);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 

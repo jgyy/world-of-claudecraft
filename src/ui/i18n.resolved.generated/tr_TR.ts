@@ -2122,6 +2122,16 @@ export const tr_TR: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
+    "flight": {
+      "title": "Flight Paths",
+      "gossipOption": "Take a flight",
+      "gossipOptionAria": "Take a flight with {name}",
+      "rowAria": "Fly to {town}, {hops} hops, {fare}",
+      "hops": "{count} hops",
+      "fare": "Fare: {fare}",
+      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
+      "close": "Close flight paths"
+    },
     "itemProc": {
       "onMeleeHit": "Vuruşta şans (%{chance}): {effect}",
       "onSpellDamage": "Hasar veren büyülerinde şans (%{chance}): {effect}",
@@ -11900,6 +11910,26 @@ export const tr_TR: EnTranslations = {
         "name": "Kurtuluş Korosu",
         "description": "6 sn kanalize eder, 30 metre içindeki grup üyelerini her 2 saniyede {damage} kadar iyileştirir. İyileştirme büyü gücüyle artar."
       },
+      "grand_teleport_eastbrook": {
+        "name": "Grand Teleport: Eastbrook",
+        "description": "Opens a Grand Portal to Eastbrook for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "grand_teleport_fenbridge": {
+        "name": "Grand Teleport: Fenbridge",
+        "description": "Opens a Grand Portal to Fenbridge for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "grand_teleport_highwatch": {
+        "name": "Grand Teleport: Highwatch",
+        "description": "Opens a Grand Portal to Highwatch for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "grand_teleport_eldergleam": {
+        "name": "Grand Teleport: Eldergleam",
+        "description": "Opens a Grand Portal to Eldergleam for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport."
+      },
+      "hellgate": {
+        "name": "Hellgate",
+        "description": "Tears open a Hellgate at your feet for 99 sec. Click the gate while targeting a group member to pull them to it. While it stands, the demons beyond it bleed you for 1% of your maximum health every second and stop your health from regenerating. 10 sec cast."
+      },
       "bear_charge": {
         "name": "Bruin Hücumu",
         "description": "Bir düşmana hücum ederek 9 öfke üretir ve onu 1 saniye sersemletir. 8-25 yarda menzil. Yalnızca Bruin Formu."
@@ -14167,6 +14197,21 @@ export const tr_TR: EnTranslations = {
       "stormhymn_chain_treads": {
         "name": "Stormhymn Chain Treads"
       },
+      "rune_of_passage": {
+        "name": "Rune of Passage"
+      },
+      "tome_grand_teleport_eastbrook": {
+        "name": "Tome of Passage: Eastbrook"
+      },
+      "tome_grand_teleport_fenbridge": {
+        "name": "Tome of Passage: Fenbridge"
+      },
+      "tome_grand_teleport_highwatch": {
+        "name": "Tome of Passage: Highwatch"
+      },
+      "tome_grand_teleport_eldergleam": {
+        "name": "Tome of Passage: Eldergleam"
+      },
       "conjured_water4": {
         "name": "Sihirle Yaratılmış Kaynak Suyu"
       },
@@ -16192,6 +16237,76 @@ export const tr_TR: EnTranslations = {
         "name": "Gelgit Bekçisi Nel",
         "title": "Kumsalın Bekçisi",
         "greeting": "Gelgit alır, gelgit öder, {playerName}. İkisinin de hesabını tutarım: yürüyücülerin enkazlardan çaldığını, ve dürüst ellerin bu yoldan yukarı taşıdığını."
+      },
+      "flightmaster_eastbrook": {
+        "name": "Wren Hollis",
+        "title": "Flightmaster",
+        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+      },
+      "flightmaster_fenbridge": {
+        "name": "Odo Marshwick",
+        "title": "Flightmaster",
+        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+      },
+      "flightmaster_highwatch": {
+        "name": "Bram Thistlecrag",
+        "title": "Flightmaster",
+        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+      },
+      "flightmaster_eldergleam": {
+        "name": "Sylvane Duskwarden",
+        "title": "Flightmaster",
+        "greeting": "The Hollow is kinder from above. Choose your landing."
+      },
+      "flightmaster_wyrmwatch": {
+        "name": "Karsk Emberhide",
+        "title": "Flightmaster",
+        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+      },
+      "flightmaster_icemantle": {
+        "name": "Hilde Frostmantle",
+        "title": "Flightmaster",
+        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+      },
+      "flightmaster_lanternmere": {
+        "name": "Fennick Ambergale",
+        "title": "Flightmaster",
+        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+      },
+      "flightmaster_bridgemere": {
+        "name": "Tamsin Reedwright",
+        "title": "Flightmaster",
+        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+      },
+      "flightmaster_moonrest": {
+        "name": "Elowen Nightsong",
+        "title": "Flightmaster",
+        "greeting": "The moths guide the night birds home. Say where and we fly."
+      },
+      "flightmaster_gallowmere": {
+        "name": "Corvin Gravesend",
+        "title": "Flightmaster",
+        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+      },
+      "flightmaster_drifthaven": {
+        "name": "Nia Saltwind",
+        "title": "Flightmaster",
+        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+      },
+      "flightmaster_hedgewick": {
+        "name": "Pip Greenbower",
+        "title": "Flightmaster",
+        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+      },
+      "flightmaster_wickharbor": {
+        "name": "Marlo Galeson",
+        "title": "Flightmaster",
+        "greeting": "The harbor winds are steady today. Choose a landing."
+      },
+      "flightmaster_gullhaven": {
+        "name": "Sabine Gullwing",
+        "title": "Flightmaster",
+        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",
@@ -18385,6 +18500,36 @@ export const tr_TR: EnTranslations = {
         "objectives": {
           "0": {
             "label": "Devrilen Enkaz Bekçisi"
+          }
+        }
+      },
+      "q_hellgate_pact": {
+        "title": "The Unquiet Pact",
+        "text": "You carry a demon on a leash, {playerName}, and you think that makes you its master. The old pacts say otherwise: a gate is only ever opened from the far side. If you would learn to tear one open yourself, start by proving the dead of the chapel yard cannot hold you. Lay 8 Restless Bones to rest and bring me what you learn.",
+        "completion": "The bones lie still, and you are still standing. Good. The next words of the pact were carried north into the marsh by a scout who keeps her own counsel. Find Scout Maren in Fenbridge.",
+        "objectives": {
+          "0": {
+            "label": "Restless Bones laid to rest"
+          }
+        }
+      },
+      "q_hellgate_rite": {
+        "title": "Rites of the Gravecallers",
+        "text": "Lin sent you? Then you already know the Gravecallers are not raising the drowned for company. Their cultists chant a rite that thins the veil, the same rite the pact needs. Silence 6 Gravecaller Cultists and listen to what they say before they fall.",
+        "completion": "You heard it too, then: the gate answers the one who is bled for it. There is a loremaster in Highwatch who has the last of it, and he will not like being asked. Seek Loremaster Caddis.",
+        "objectives": {
+          "0": {
+            "label": "Gravecaller Cultist silenced"
+          }
+        }
+      },
+      "q_hellgate_gate": {
+        "title": "The Hellgate",
+        "text": "So Maren sends the marsh to my door now. Very well, {playerName}. The pact is written in the shale: the Boneclad that walk the peaks were the last to hold a gate open, and they paid for it in blood. Break 5 Boneclad Revenants and the mountain will give you the words.",
+        "completion": "The words are yours. Remember what they cost the Boneclad: every second a Hellgate stands, it feeds on the one who opened it. Use it for your friends, and close it before it closes you.",
+        "objectives": {
+          "0": {
+            "label": "Boneclad Revenant broken"
           }
         }
       },

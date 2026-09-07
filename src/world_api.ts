@@ -50,6 +50,7 @@
 //   deeds.ts            IWorldDeeds          earned deeds, lifetime stats, renown, active title,
 //                                            rarity + the account-Renown leaderboard reads
 //   reliquary.ts        IWorldReliquary      sparse firstFind / marks / recent + pure completion
+//   flight_paths.ts     IWorldFlightPaths    flightmaster nodes known + the paid hub-to-hub flight
 //
 // THREE GATES pin this seam (run before any facet edit; the literal counts are
 // pinned THERE and re-stale here, so this prose stays count-free):
@@ -76,6 +77,7 @@ import type { IWorldDuelArena } from './world_api/duel_arena';
 import type { IWorldDungeonFinder } from './world_api/dungeon_finder';
 import type { IWorldDungeons } from './world_api/dungeons';
 import type { IWorldEntityRoster } from './world_api/entity_roster';
+import type { IWorldFlightPaths } from './world_api/flight_paths';
 import type { IWorldGuildBank } from './world_api/guild_bank';
 import type { IWorldInteraction } from './world_api/interaction';
 import type { IWorldInventory } from './world_api/inventory';
@@ -392,7 +394,8 @@ export interface IWorld
     IWorldActionBar,
     IWorldDeeds,
     IWorldReliquary,
-    IWorldMounts {}
+    IWorldMounts,
+    IWorldFlightPaths {}
 
 // ---------------------------------------------------------------------------
 // Command schema (W0b): the shared wire-token vocabulary.
@@ -735,6 +738,8 @@ export const COMMAND_NAMES = [
   // life, and band server-side). Appended because wire tokens are never
   // reordered.
   'tutorial_start',
+  // Flight paths: board a flight at the flightmaster in reach (src/sim/flight_paths.ts).
+  'flight_take',
 ] as const;
 
 // The union both the send path (`online.ts`) and the dispatch switch
@@ -821,7 +826,8 @@ export type WorldFacet =
   | 'IWorldActionBar'
   | 'IWorldDeeds'
   | 'IWorldReliquary'
-  | 'IWorldMounts';
+  | 'IWorldMounts'
+  | 'IWorldFlightPaths';
 
 export const COMMAND_FACETS = {
   // IWorldCombat: ability casts, auto-attack, spirit release.
@@ -1071,4 +1077,6 @@ export const COMMAND_FACETS = {
   // IWorldActionBar: the debounced action-bar layout upload. takeActionBarLayoutRestore
   // is a login-time read (no send, untagged).
   save_hotbar_layout: 'IWorldActionBar',
+  // IWorldFlightPaths: board a flight (flightNodesKnown is a snapshot read, `fln`).
+  flight_take: 'IWorldFlightPaths',
 } as const satisfies Partial<Record<ClientCommand, WorldFacet>>;

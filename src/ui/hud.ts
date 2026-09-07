@@ -488,6 +488,7 @@ import { DelveTrackerController } from './hud/delve/delve_tracker_controller';
 import { LockpickController } from './hud/delve/lockpick_controller';
 import { RiteController } from './hud/delve/rite_controller';
 import { FiestaController } from './hud/fiesta/fiesta_controller';
+import { FlightWindowController } from './hud/flight/flight_window_controller';
 import { GuildBoardWindow } from './hud/guild_board';
 import { LootRollController } from './hud/loot/loot_roll_controller';
 import { lootSettingsView } from './hud/loot/loot_settings_view';
@@ -579,6 +580,7 @@ import {
 } from './item_instance_tooltip';
 import { itemKindLabel, itemQualityLabel } from './item_kind_label';
 import { itemNameColor } from './item_name_color';
+import { procEffectText } from './item_proc_text';
 import {
   equippedSetTooltipPieces,
   itemSetMemberCounts,
@@ -830,7 +832,7 @@ import { visibleVendorStock } from './vendor_stock_gate_core';
 import { nextVoicedYell, type VoicedYellState, voicedYellGain } from './voice_events';
 import { onWalletUiChange, walletConnectionView } from './wallet_balance';
 import { requestWalletVerify } from './wallet_verify_request';
-import { type WeaponProcEffectDesc, weaponProcLines } from './weapon_proc_view';
+import { weaponProcLines } from './weapon_proc_view';
 import { weaponTypeLabelKey } from './weapon_type_label';
 import { promptWikiVisit } from './wiki_link';
 import {
@@ -1818,6 +1820,7 @@ export class Hud {
   // carries no escrow).
   private commissionBoardOpen = false;
   private readonly delveBoard: DelveBoardController;
+  private readonly flightWindow: FlightWindowController;
   private readonly delveTracker: DelveTrackerController;
   private readonly riftTracker: RiftFloorTrackerController;
   private readonly lockpickController: LockpickController;
@@ -2251,6 +2254,15 @@ export class Hud {
       confirmDialog: (title, body, okText, cancelText, onOk) =>
         this.confirmDialog(title, body, okText, cancelText, onOk),
     });
+    this.flightWindow = new FlightWindowController({
+      element: $('#flight-window'),
+      world: () => this.sim,
+      openFocusTrap: () => this.focusManager.open({ root: () => $('#flight-window') }),
+      closeOtherWindows: (selector) => this.closeOtherWindows(selector),
+      hideTooltip: () => this.hideTooltip(),
+      money: (copper) => this.moneyHtml(copper),
+      npcName: npcDisplayName,
+    });
     this.riteController = new RiteController({
       panel: $('#delve-rite-panel'),
       openFocusTrap: () => this.focusManager.open({ root: () => $('#delve-rite-panel') }),
@@ -2341,6 +2353,7 @@ export class Hud {
       openCrafting: (craftId) => this.openCrafting(craftId),
       openMarket: () => this.openMarket(),
       openDelveBoard: (npcId) => this.openDelveBoard(npcId),
+      openFlight: (npcId) => this.flightWindow.openAtNpc(npcId),
       openCardDuel: () => this.toggleCardDuel(),
       onOpenChange: (open) => this.onQuestDialogStateChange?.(open),
       voice: {
@@ -3631,6 +3644,9 @@ export class Hud {
         break;
       case 'delve-board':
         this.closeDelveBoard();
+        break;
+      case 'flight-window':
+        this.flightWindow.close();
         break;
       case 'lockpick-panel':
         // Withdraw from a live lock, else dismiss the ante selector. The reachability
@@ -6608,7 +6624,7 @@ export class Hud {
     if (!lines.length) return '';
     let html = '';
     for (const line of lines) {
-      const effect = line.effects.map((e) => this.procEffectText(e)).join(' ');
+      const effect = line.effects.map((e) => procEffectText(e)).join(' ');
       const triggerKey =
         // onMeleeHit is the legacy key id; its English reads the generic "Chance on
         // hit", correct for a weaponHit proc that fires on melee AND hunter ranged.
@@ -6625,38 +6641,6 @@ export class Hud {
       )}</div>`;
     }
     return html;
-  }
-
-  // One effect fragment (chain arc / attack slow / dot / hot) as localized text.
-  private procEffectText(e: WeaponProcEffectDesc): string {
-    const n = (v: number | undefined): string => formatNumber(v ?? 0, { maximumFractionDigits: 0 });
-    switch (e.kind) {
-      case 'chainArc':
-        return t('hudChrome.itemProc.chainArc', {
-          school: e.school ?? '',
-          name: e.name ?? '',
-          damage: n(e.damage),
-          jumps: n(e.jumps),
-        });
-      case 'attackSlow':
-        return t('hudChrome.itemProc.attackSlow', {
-          pct: n(e.slowPct),
-          duration: n(e.duration),
-        });
-      case 'dot':
-        return t('hudChrome.itemProc.dot', {
-          name: e.name ?? '',
-          school: e.school ?? '',
-          total: n(e.total),
-          duration: n(e.duration),
-        });
-      case 'hot':
-        return t('hudChrome.itemProc.hot', {
-          name: e.name ?? '',
-          total: n(e.total),
-          duration: n(e.duration),
-        });
-    }
   }
 
   // How many equipped pieces belong to the given set (read from IWorld.equipment
@@ -9666,6 +9650,10 @@ export class Hud {
         const npc = sim.entities.get(this.openUnbindNpcId);
         if (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE) this.closeUnbind();
       }
+      if (this.flightWindow.openNpcId !== null) {
+        const npc = sim.entities.get(this.flightWindow.openNpcId);
+        if (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE) this.flightWindow.close();
+      }
       this.questDialog.updateProximity();
     }
 
@@ -12538,6 +12526,9 @@ export class Hud {
         case 'bank':
           // Keyboard/sim interact at a banker NPC: open the bank window.
           this.openBank();
+          break;
+        case 'flightmaster':
+          this.flightWindow.open(ev.npcId, ev.nodeId);
           break;
         case 'riftForge':
           // Interact at the Riftwright: open the Rift Forge window (which
@@ -16543,6 +16534,7 @@ export class Hud {
     if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
       this.renderUnbind();
     if (this.riftForgeWindow.isOpen) this.riftForgeWindow.render();
+    if (this.flightWindow.isOpen) this.flightWindow.render();
   }
 
   onCosmeticsChanged(): void {

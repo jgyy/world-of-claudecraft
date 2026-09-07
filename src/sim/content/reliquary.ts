@@ -1714,6 +1714,37 @@ export const RELIQUARY_PAGES: readonly ReliquaryPageDef[] = freezePageTable([
     clearSource: { kind: 'none' },
     relics: items(...setMembers(RELIQUARY_SET_MEMBERS.bramblehide)),
   },
+
+  // ---- Tomes of Passage (fast travel): the mage's Grand Teleport tomes ----
+  // The four tomes are conquerable unique loot off the raid bosses
+  // (GRAND_TELEPORT_BOOK_BOSSES in content/grand_teleports.ts), but the roll
+  // is MAGE-ONLY (loot/loot_roll.ts draws it only with a mage among the
+  // eligible recipients, personal to the mages), so they are class-exclusive
+  // at their mint site and can never sit on a conquerors page (the
+  // completability floor pinned in tests/reliquary_content.test.ts). They
+  // live on Horizons instead, the Riftbound precedent, flagged 'personal'
+  // (class-personal grants: the roll is made for mages alone, so the page
+  // sits outside both completion pairs like the Riftbound bands and the
+  // shelf's item-page rule is satisfied by the flag).
+  // The slots carry NO source hint: the drop is a separate per-boss roll
+  // table, not a MobTemplate.loot row, so the boss-hint verifier (which walks
+  // live loot rows) cannot vouch for a 'boss' hint here. The four slots are
+  // recorded in SOURCE_PENDING_RULING until the verifier grows an arm for the
+  // GRAND_TELEPORT_BOSS_ROLLS table (a maintainer decision, not a guess).
+  {
+    id: 'horizons_tomes_of_passage',
+    shelf: 'horizons',
+    name: 'Tomes of Passage',
+    desc: 'The four Tomes of Passage, each teaching a mage one Grand Teleport. Found only by mages, on the raid bosses of the Crypt of Nythraxis and the Crucible of the Last Spring.',
+    clearSource: { kind: 'none' },
+    excludeFromCompletion: 'personal',
+    relics: items(
+      'tome_grand_teleport_eastbrook',
+      'tome_grand_teleport_fenbridge',
+      'tome_grand_teleport_highwatch',
+      'tome_grand_teleport_eldergleam',
+    ),
+  },
 ]);
 
 /** Append-only page order (table order). */

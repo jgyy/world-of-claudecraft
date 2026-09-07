@@ -2122,6 +2122,16 @@ export const ja_JP: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
+    "flight": {
+      "title": "飛行経路",
+      "gossipOption": "飛行を利用する",
+      "gossipOptionAria": "{name}の飛行を利用する",
+      "rowAria": "{town}へ飛ぶ、{hops}区間、{fare}",
+      "hops": "{count}区間",
+      "fare": "運賃：{fare}",
+      "empty": "他の飛行経路をまだ知りません。別の町の飛行管理人に話しかけて、その経路を覚えましょう。",
+      "close": "飛行経路を閉じる"
+    },
     "itemProc": {
       "onMeleeHit": "命中時に確率（{chance}%）：{effect}",
       "onSpellDamage": "ダメージ呪文で確率（{chance}%）：{effect}",
@@ -11900,6 +11910,26 @@ export const ja_JP: EnTranslations = {
         "name": "救済の聖歌隊",
         "description": "6秒間チャネルし、30ヤード以内のパーティメンバーを2秒ごとに{damage}回復します。回復量はスペルパワーで増加します。"
       },
+      "grand_teleport_eastbrook": {
+        "name": "グランドテレポート：イーストブルック",
+        "description": "イーストブルックへのグランドポータルを5分間開きます。詠唱した瞬間にあなたのグループにいたメンバーだけが通れます。通行のルーンを1つ消費します。詠唱10秒。他のすべてのグランドテレポートと20分のクールダウンを共有します。"
+      },
+      "grand_teleport_fenbridge": {
+        "name": "グランドテレポート：フェンブリッジ",
+        "description": "フェンブリッジへのグランドポータルを5分間開きます。詠唱した瞬間にあなたのグループにいたメンバーだけが通れます。通行のルーンを1つ消費します。詠唱10秒。他のすべてのグランドテレポートと20分のクールダウンを共有します。"
+      },
+      "grand_teleport_highwatch": {
+        "name": "グランドテレポート：ハイウォッチ",
+        "description": "ハイウォッチへのグランドポータルを5分間開きます。詠唱した瞬間にあなたのグループにいたメンバーだけが通れます。通行のルーンを1つ消費します。詠唱10秒。他のすべてのグランドテレポートと20分のクールダウンを共有します。"
+      },
+      "grand_teleport_eldergleam": {
+        "name": "グランドテレポート：エルダーグリーム",
+        "description": "エルダーグリームへのグランドポータルを5分間開きます。詠唱した瞬間にあなたのグループにいたメンバーだけが通れます。通行のルーンを1つ消費します。詠唱10秒。他のすべてのグランドテレポートと20分のクールダウンを共有します。"
+      },
+      "hellgate": {
+        "name": "地獄門",
+        "description": "足元に地獄門を99秒間裂き開きます。グループメンバーを対象にした状態で門をクリックすると、その相手を門へ引き寄せます。門が立っている間、向こう側の悪魔が毎秒あなたの最大体力の1%を吸い取り、体力の自然回復を止めます。詠唱10秒。"
+      },
       "bear_charge": {
         "name": "ブルーインラッシュ",
         "description": "敵に突進して激怒を9獲得し、1秒間スタンさせる。射程7～23メートル。ブルーインフォーム時のみ使用可能。"
@@ -14167,6 +14197,21 @@ export const ja_JP: EnTranslations = {
       "stormhymn_chain_treads": {
         "name": "嵐の賛歌の鎖の靴"
       },
+      "rune_of_passage": {
+        "name": "通行のルーン"
+      },
+      "tome_grand_teleport_eastbrook": {
+        "name": "通行の書：イーストブルック"
+      },
+      "tome_grand_teleport_fenbridge": {
+        "name": "通行の書：フェンブリッジ"
+      },
+      "tome_grand_teleport_highwatch": {
+        "name": "通行の書：ハイウォッチ"
+      },
+      "tome_grand_teleport_eldergleam": {
+        "name": "通行の書：エルダーグリーム"
+      },
       "conjured_water4": {
         "name": "魔法の湧き水"
       },
@@ -16192,6 +16237,76 @@ export const ja_JP: EnTranslations = {
         "name": "潮守ネル",
         "title": "浜辺の番人",
         "greeting": "潮は奪い、潮は払う、{playerName}。私はその両方の帳簿をつけている。蟹どもが難破船から掠め取るものと、正直な手がこの道を運び上げてくるものとをね。"
+      },
+      "flightmaster_eastbrook": {
+        "name": "レン・ホリス",
+        "title": "飛行管理人",
+        "greeting": "グリフォンは休養十分、空も晴れています、{className}殿。どちらへ？"
+      },
+      "flightmaster_fenbridge": {
+        "name": "オド・マーシュウィック",
+        "title": "飛行管理人",
+        "greeting": "上がるときは葦に気をつけて。町の名を言えば、お連れしますよ。"
+      },
+      "flightmaster_highwatch": {
+        "name": "ブラム・シスルクラッグ",
+        "title": "飛行管理人",
+        "greeting": "薄い空気に、遠くまで見渡せる景色。この鳥たちは峰々の峠を残らず知っています。"
+      },
+      "flightmaster_eldergleam": {
+        "name": "シルヴェイン・ダスクウォーデン",
+        "title": "飛行管理人",
+        "greeting": "ホロウは上から見るほうが優しい。着地先をお選びください。"
+      },
+      "flightmaster_wyrmwatch": {
+        "name": "カースク・エンバーハイド",
+        "title": "飛行管理人",
+        "greeting": "ワームでさえ私の鳥を避けて通る。砦はあなたをどこへ送るのです？"
+      },
+      "flightmaster_icemantle": {
+        "name": "ヒルデ・フロストマントル",
+        "title": "飛行管理人",
+        "greeting": "厚着をなさい。氷河の上の風は刺すように冷たいが、飛行はすぐ終わります。"
+      },
+      "flightmaster_lanternmere": {
+        "name": "フェニック・アンバーゲイル",
+        "title": "飛行管理人",
+        "greeting": "夜間飛行のためにランタンを灯しました。行き先をお選びください。"
+      },
+      "flightmaster_bridgemere": {
+        "name": "タムシン・リードライト",
+        "title": "飛行管理人",
+        "greeting": "橋から、沼地が許すどこへでも。どちらへ、{className}殿？"
+      },
+      "flightmaster_moonrest": {
+        "name": "エロウェン・ナイトソング",
+        "title": "飛行管理人",
+        "greeting": "蛾が夜の鳥を家へ導きます。行き先を言えば飛びましょう。"
+      },
+      "flightmaster_gallowmere": {
+        "name": "コーヴィン・グレイヴズエンド",
+        "title": "飛行管理人",
+        "greeting": "ここの空に化けて出るものはいない。今のところは。町の名をどうぞ。"
+      },
+      "flightmaster_drifthaven": {
+        "name": "ニア・ソルトウィンド",
+        "title": "飛行管理人",
+        "greeting": "浅瀬から吹く暖かい風が鳥をよく持ち上げる。どちらへ向かいます？"
+      },
+      "flightmaster_hedgewick": {
+        "name": "ピップ・グリーンバウアー",
+        "title": "飛行管理人",
+        "greeting": "生け垣を越え、果樹園を過ぎて。どちらにしましょう？"
+      },
+      "flightmaster_wickharbor": {
+        "name": "マーロ・ゲイルソン",
+        "title": "飛行管理人",
+        "greeting": "今日は港の風が安定しています。着地先をお選びください。"
+      },
+      "flightmaster_gullhaven": {
+        "name": "サビーヌ・ガルウィング",
+        "title": "飛行管理人",
+        "greeting": "カモメは私の鳥を嫌う。鳥は気にもしない。どちらへ？"
       },
       "tidewatcher_ondrel": {
         "name": "オンドレル・ヴェイン",
@@ -18385,6 +18500,36 @@ export const ja_JP: EnTranslations = {
         "objectives": {
           "0": {
             "label": "レックウォーデンを打ち倒した"
+          }
+        }
+      },
+      "q_hellgate_pact": {
+        "title": "安らがぬ契約",
+        "text": "あなたは悪魔を鎖につないで、{playerName}、それで自分が主人だと思っている。古い契約は違うと言う。門は常に向こう側からしか開かれない。自らの手で門を裂く術を学びたいなら、まず礼拝堂の墓地の死者があなたを止められないことを証明しなさい。安らがぬ骨を8体眠らせ、学んだことを持ち帰りなさい。",
+        "completion": "骨は静まり、あなたはまだ立っている。よろしい。契約の続きの言葉は、口の堅い斥候が北の湿地へ運んでいった。フェンブリッジの斥候マレンを訪ねなさい。",
+        "objectives": {
+          "0": {
+            "label": "安らがぬ骨を眠らせた"
+          }
+        }
+      },
+      "q_hellgate_rite": {
+        "title": "グレイブコーラーの儀式",
+        "text": "リンの使いか。ならグレイブコーラーが溺れ人を起こすのが慰めのためではないと、もう知っているな。あの信徒どもは帳を薄くする儀式を唱える。契約が求めるのと同じ儀式だ。グレイブコーラーの信徒を6人黙らせ、倒れる前に何を言うか聞き取れ。",
+        "completion": "お前も聞いたのだな。門は、そのために血を流す者に応える。ハイウォッチの博識者が最後の一節を持っている。訊かれるのを嫌がるだろうがな。博識者キャディスを訪ねろ。",
+        "objectives": {
+          "0": {
+            "label": "グレイブコーラーの信徒を黙らせた"
+          }
+        }
+      },
+      "q_hellgate_gate": {
+        "title": "地獄門",
+        "text": "マレンは湿地までわしの戸口へ送り込むようになったか。よかろう、{playerName}。契約は頁岩に刻まれている。峰々を歩く骨まといどもが門を開いて保った最後の者であり、その代償を血で払った。骨まといの亡霊を5体砕けば、山が言葉を授けるだろう。",
+        "completion": "言葉はお前のものだ。骨まといが払った代償を忘れるな。地獄門が立つ一瞬ごとに、門は開いた者を喰らう。友のために使い、門に喰われる前に閉じろ。",
+        "objectives": {
+          "0": {
+            "label": "骨まといの亡霊を砕いた"
           }
         }
       },

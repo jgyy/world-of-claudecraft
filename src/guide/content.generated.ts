@@ -1588,6 +1588,22 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "fireball_form",
         "name": "Ember Form"
+      },
+      {
+        "id": "grand_teleport_eastbrook",
+        "name": "Grand Teleport: Eastbrook"
+      },
+      {
+        "id": "grand_teleport_fenbridge",
+        "name": "Grand Teleport: Fenbridge"
+      },
+      {
+        "id": "grand_teleport_highwatch",
+        "name": "Grand Teleport: Highwatch"
+      },
+      {
+        "id": "grand_teleport_eldergleam",
+        "name": "Grand Teleport: Eldergleam"
       }
     ],
     "model": "player_mage",
@@ -1830,6 +1846,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "army_of_the_dead",
         "name": "Army of the Dead"
+      },
+      {
+        "id": "hellgate",
+        "name": "Hellgate"
       }
     ],
     "model": "player_warlock",
@@ -5647,6 +5667,13 @@ export const GUIDE_DEEDS: GuideDeed[] = [
     "renown": 0,
     "feat": false,
     "crest": "/ui/deeds/col_set_bramblehide.webp"
+  },
+  {
+    "id": "prog_hellgate_pact",
+    "name": "The Unquiet Pact",
+    "category": "progression",
+    "renown": 10,
+    "feat": false
   }
 ];
 
@@ -7514,6 +7541,30 @@ export const GUIDE_RELIQUARY: GuideReliquaryPage[] = [
       {
         "kind": "item",
         "name": "Roots' Bramblehide Treads"
+      }
+    ]
+  },
+  {
+    "id": "horizons_tomes_of_passage",
+    "shelf": "horizons",
+    "name": "Tomes of Passage",
+    "excludeFromCompletion": "personal",
+    "relics": [
+      {
+        "kind": "item",
+        "name": "Tome of Passage: Eastbrook"
+      },
+      {
+        "kind": "item",
+        "name": "Tome of Passage: Fenbridge"
+      },
+      {
+        "kind": "item",
+        "name": "Tome of Passage: Highwatch"
+      },
+      {
+        "kind": "item",
+        "name": "Tome of Passage: Eldergleam"
       }
     ]
   }

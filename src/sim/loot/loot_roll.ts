@@ -31,6 +31,7 @@
 // `src/sim`-pure: no DOM/Three/render/ui/game/net imports, no Math.random/Date.now
 // (enforced by tests/architecture.test.ts).
 
+import { GRAND_TELEPORT_BOOK_BOSSES, GRAND_TELEPORT_BOSS_ROLLS } from '../content/grand_teleports';
 import { HEROIC_BOSS_LOOT } from '../content/heroic_loot';
 import { heroicVariantId } from '../content/heroic_variants';
 import { ITEMS, MOBS, QUESTS } from '../data';
@@ -351,6 +352,27 @@ export function rollLoot(
         }
         if (!ctx.rng.chance(entry.chance)) continue;
         if (entry.itemId) items.push({ itemId: entry.itemId, count: 1 });
+      }
+    }
+  }
+  // Mage-only raid rolls (the Grand Teleport tomes and the Rune of Passage):
+  // drawn ONLY when at least one MAGE is among the eligible recipients (the
+  // tap/party set unioned with the contributor roster, as the quest arm
+  // does). With no mage present ZERO rng is drawn, so every existing loot
+  // trace and parity golden stays byte-identical. The drops are personal to
+  // the mages so a need/greed window never hands a tome to a warrior.
+  if (GRAND_TELEPORT_BOOK_BOSSES.includes(mob.templateId)) {
+    const pool =
+      contributors && contributors.length > 0 ? [...eligible, ...contributors] : eligible;
+    const mageIds = [
+      ...new Set(
+        pool.filter((m) => ctx.players.get(m.entityId)?.cls === 'mage').map((m) => m.entityId),
+      ),
+    ].sort((a, b) => a - b);
+    if (mageIds.length > 0) {
+      for (const entry of GRAND_TELEPORT_BOSS_ROLLS) {
+        if (!entry.itemId || !ctx.rng.chance(entry.chance)) continue;
+        items.push({ itemId: entry.itemId, count: 1, personalFor: mageIds });
       }
     }
   }

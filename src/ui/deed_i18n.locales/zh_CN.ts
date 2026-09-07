@@ -750,4 +750,8 @@ export const table: DeedLocaleTable = {
     name: '鲁茨的荆棘皮甲',
     desc: '发现鲁茨的荆棘皮甲的每一个部件。',
   },
+  prog_hellgate_pact: {
+    name: '不安的契约',
+    desc: '走完唤墓者的契约，学会撕开一道地狱之门。',
+  },
 };

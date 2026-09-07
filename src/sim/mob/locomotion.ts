@@ -544,6 +544,7 @@ export function updateMob(ctx: SimContext, mob: Entity): void {
         ctx.playerGrid.forEachInRadius(mob.pos.x, mob.pos.z, MAX_AGGRO_RADIUS, (e, d2) => {
           counters.aggroScanPlayerVisits++;
           if (e.dead) return;
+          if (e.flight) return;
           const radius = Math.max(
             4,
             Math.min(MAX_AGGRO_RADIUS, template.aggroRadius + (mob.level - e.level) * 1.5),
@@ -565,6 +566,9 @@ export function updateMob(ctx: SimContext, mob: Entity): void {
       ctx.playerGrid.forEachInRadius(mob.pos.x, mob.pos.z, MAX_AGGRO_RADIUS, (e, d2) => {
         counters.aggroScanPlayerVisits++;
         if (e.dead) return;
+        // A flight-path rider is carried above the world (src/sim/flight_paths.ts):
+        // classic flight is aggro-immune, and the scan is x/z only.
+        if (e.flight) return;
         if (isTrivialTo(mob, e)) return;
         let radius = Math.max(
           4,

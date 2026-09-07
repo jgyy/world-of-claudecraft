@@ -301,7 +301,12 @@ const MONOLITHS: MonolithRow[] = [
     // captured home and the dead body class left applyAuraAnchor for
     // restoreFrameHome (src/ui/interface_unlock.ts), and Reset Frame Positions
     // re-applies the anchor in one line. Exact merged count.
-    ceiling: 18851,
+    // Down 18851 -> 18841 at the flight window: the weapon-proc effect fragment
+    // text (procEffectText) moved byte-for-byte to src/ui/item_proc_text.ts,
+    // paying for the FlightWindowController's thin wiring (construction, the
+    // 'flightmaster' event arm, the managed close, the walk-away close and the
+    // purse repaint). Exact count, zero headroom.
+    ceiling: 18841,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -674,7 +679,11 @@ const MONOLITHS: MonolithRow[] = [
     // Down 10604 -> 10587 for the per-surface action-bar profiles: the
     // join read, the per-profile merge and the FIFO write moved to
     // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
-    ceiling: 10587,
+    // Lowered 10587 -> 10557 by the flight-paths change: the nine Dungeon
+    // Finder df_* arm bodies moved to server/dungeon_finder_dispatch.ts
+    // (dispatchDungeonFinderCommand), paying for the flight_take arm
+    // (server/flight_dispatch.ts) and the `fln` self key. Exact count.
+    ceiling: 10557,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -758,7 +767,11 @@ const MONOLITHS: MonolithRow[] = [
     // that put its requests on the wire), so the merged file sits below
     // both single-arm counts (5860 and 5856). Measured on the merged tree,
     // never reconciled by arithmetic. Exact merged count, zero slack.
-    ceiling: 5843,
+    // Lowered 5843 -> 5628 by the flight-paths change: the blankEntity
+    // placeholder literal moved to src/net/blank_entity.ts, paying for the
+    // IWorldFlightPaths mirror (flightNodesKnown + `fln` decode + takeFlight).
+    // Exact count, zero slack.
+    ceiling: 5628,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

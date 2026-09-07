@@ -344,9 +344,9 @@ describe('Reliquary Conqueror catalog structure', () => {
     // set page (the eighth epic armor family).
     expect(CONQUEROR_PAGES.length).toBe(32);
     expect(PROFESSION_PAGES.length).toBe(3);
-    expect(HORIZON_PAGES.length).toBe(5);
+    expect(HORIZON_PAGES.length).toBe(6);
     // Literal: update when product adds a page.
-    expect(RELIQUARY_PAGES.length).toBe(40);
+    expect(RELIQUARY_PAGES.length).toBe(41);
     expect(
       RELIQUARY_PAGES.every(
         (p) => p.shelf === 'conquerors' || p.shelf === 'professions' || p.shelf === 'horizons',
@@ -358,6 +358,7 @@ describe('Reliquary Conqueror catalog structure', () => {
       'horizons_titles',
       'horizons_vault_of_ages',
       'horizons_riftbound',
+      'horizons_tomes_of_passage',
     ]);
   });
 
@@ -403,6 +404,9 @@ describe('Reliquary Conqueror catalog structure', () => {
     // Roots' Bramblehide adds its seven FERAL-locked raid pieces (each on the
     // Nythraxis page and its own set page, one relic apiece) and the seven
     // Nythraxis gap-fill drops one relic apiece: 403.
+    // The four mage-only Tomes of Passage (horizons_tomes_of_passage) are
+    // flagged 'personal', so like the vault and the bands they add slots and
+    // 0 to both pairs.
     expect(full).toEqual({ owned: 403, total: 403 });
     const character = catalogCharacterCompletion({
       itemsDiscovered: allOwned,
@@ -446,11 +450,11 @@ describe('Reliquary Conqueror catalog structure', () => {
     // The release/v0.42.0 waves after that measured 424. Roots' Bramblehide
     // adds 14 slots (seven on the Nythraxis page, seven on its own set page):
     // 438. The seven Nythraxis gap-fill drops add seven slots on the Nythraxis
-    // page: 445.
+    // page: 445. The Tomes of Passage page adds four: 449.
     expect(
       slots,
       `slot total moved; per page: ${RELIQUARY_PAGES.map((p) => `${p.id}=${p.relics.length}`).join(', ')}`,
-    ).toBe(445);
+    ).toBe(449);
     // Distinct mark ids: the 10 shipped before Phase 21 plus the 19
     // rare-slain proofs of conquerors_rares_of_the_realm.
     expect(
@@ -670,7 +674,8 @@ describe('Reliquary relic item ids resolve in ITEMS', () => {
     // slot/mark literals nearby).
     // Plus the seven Roots' Bramblehide pieces: 291, plus the seven Nythraxis
     // gap-fill drops: 298.
-    expect(RELIQUARY_ITEM_TO_PAGES.size).toBe(298);
+    // Plus the four Tomes of Passage: 302.
+    expect(RELIQUARY_ITEM_TO_PAGES.size).toBe(302);
     for (const [id, pages] of RELIQUARY_ITEM_TO_PAGES) {
       expect(pages.length, `catalogued id ${id} maps to an empty page list`).toBeGreaterThan(0);
     }
@@ -1113,7 +1118,7 @@ describe('Reliquary Riftbound page (class-personal, outside completion)', () => 
 });
 
 describe('Reliquary outside-completion pages (the flagged set)', () => {
-  it('flags exactly the two pages, in catalog order, each with its reason', () => {
+  it('flags exactly the three pages, in catalog order, each with its reason', () => {
     // Catalog-wide companion to the per-page pins: the flag is the one lever
     // that removes a page from every completion pair, so its whole membership
     // is pinned in one place. A third flagged page is a product decision and
@@ -1126,6 +1131,7 @@ describe('Reliquary outside-completion pages (the flagged set)', () => {
     ).toEqual([
       ['horizons_vault_of_ages', 'retired'],
       ['horizons_riftbound', 'personal'],
+      ['horizons_tomes_of_passage', 'personal'],
     ]);
     // Both reasons are live, so neither arm of the reason-driven chrome
     // (window chip, styles) is pinned against an empty set. Sorting keeps
@@ -2032,7 +2038,8 @@ describe('Reliquary Horizons shelf (Phase 8)', () => {
         expect(['mount', 'weapon_skin', 'title']).toContain(relic.kind);
       }
     }
-    // The exemption stays snug: exactly the two flagged Horizons pages today,
+    // The exemption stays snug: exactly the three flagged Horizons pages today
+    // (the mage-only Tomes of Passage joined the bands under 'personal'),
     // each named with the reason that exempts it.
     expect(
       HORIZON_PAGES.filter((p) => p.excludeFromCompletion !== undefined).map((p) => [
@@ -2042,6 +2049,7 @@ describe('Reliquary Horizons shelf (Phase 8)', () => {
     ).toEqual([
       ['horizons_vault_of_ages', 'retired'],
       ['horizons_riftbound', 'personal'],
+      ['horizons_tomes_of_passage', 'personal'],
     ]);
   });
 
@@ -2560,6 +2568,19 @@ const SOURCE_PENDING_RULING: Readonly<Record<string, readonly string[]>> = {
   // gear-capability pin below derives the eligible set from the live recipes
   // and reds if either side moves.
   professions_masterwork: ['masterwork:engineering'],
+  // The four mage-only Grand Teleport tomes DO have a live route (the raid
+  // bosses in GRAND_TELEPORT_BOOK_BOSSES), but it is a separate per-boss
+  // roll table (GRAND_TELEPORT_BOSS_ROLLS, drawn in loot/loot_roll.ts only
+  // with a mage among the recipients), not a MobTemplate.loot row, so the
+  // boss-hint walk above cannot vouch for a 'boss' hint. Pended until the
+  // verifier grows an arm for that table (maintainer ruling), rather than
+  // author a hint the test would call a lie.
+  horizons_tomes_of_passage: [
+    'tome_grand_teleport_eastbrook',
+    'tome_grand_teleport_fenbridge',
+    'tome_grand_teleport_highwatch',
+    'tome_grand_teleport_eldergleam',
+  ],
 };
 
 /**
@@ -2687,6 +2708,7 @@ const EXPECTED_DISTINCT_SOURCES: Record<string, number> = {
   // The retired vault is deliberately sourceless (excludeFromCompletion:
   // retired relics have no door to name), so it resolves to zero sources.
   horizons_vault_of_ages: 0,
+  horizons_tomes_of_passage: 0,
 };
 
 /** Pages whose relics provably come from more than one source, so a page-level
@@ -3533,6 +3555,7 @@ describe('Reliquary source hint coverage', () => {
     expect(Object.keys(SOURCE_PENDING_RULING)).toEqual([
       'horizons_mounts',
       'professions_masterwork',
+      'horizons_tomes_of_passage',
     ]);
     expect(SOURCE_PENDING_RULING.horizons_mounts).toEqual([
       'chimeglass_tortoise',

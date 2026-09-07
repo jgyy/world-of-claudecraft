@@ -365,6 +365,21 @@ const NPC_IDS = [
   'overseer_pell',
   'drillmaster_rook',
   'tidewarden_nel',
+  // the flightmasters (content/flight_paths.ts, reserved-id dynamic spawn), one per hub
+  'flightmaster_eastbrook',
+  'flightmaster_fenbridge',
+  'flightmaster_highwatch',
+  'flightmaster_eldergleam',
+  'flightmaster_wyrmwatch',
+  'flightmaster_icemantle',
+  'flightmaster_lanternmere',
+  'flightmaster_bridgemere',
+  'flightmaster_moonrest',
+  'flightmaster_gallowmere',
+  'flightmaster_drifthaven',
+  'flightmaster_hedgewick',
+  'flightmaster_wickharbor',
+  'flightmaster_gullhaven',
 ] as const;
 
 const QUEST_IDS = [
@@ -591,6 +606,10 @@ const QUEST_IDS = [
   'q_gc_the_far_shore',
   'q_gc_dead_mens_cargo',
   'q_gc_the_wreck_warden',
+  // the Hellgate pact (content/hellgate.ts), the warlock-only chain
+  'q_hellgate_pact',
+  'q_hellgate_rite',
+  'q_hellgate_gate',
 ] as const;
 
 const ZONE_IDS = [

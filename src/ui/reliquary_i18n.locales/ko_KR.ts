@@ -196,4 +196,8 @@ export const table: ReliquaryLocaleTable = {
     name: '루츠의 가시덤불가죽',
     desc: '브램블하이드 가죽 세트 전체.',
   },
+  horizons_tomes_of_passage: {
+    name: '통행의 서',
+    desc: '네 권의 통행의 서. 각 권은 마법사에게 대규모 순간이동 하나를 가르칩니다. 니스락시스의 지하묘지와 마지막 샘의 도가니의 공격대 우두머리에게서 마법사만 찾을 수 있습니다.',
+  },
 };

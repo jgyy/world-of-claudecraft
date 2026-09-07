@@ -99,6 +99,7 @@ function harness(
   const openWarfareVendor = vi.fn();
   const openMarket = vi.fn();
   const openDelveBoard = vi.fn();
+  const openFlight = vi.fn();
   const openCardDuel = vi.fn();
   const openTrain = vi.fn();
   const openUnbind = vi.fn();
@@ -136,6 +137,7 @@ function harness(
     openWarfareVendor,
     openMarket,
     openDelveBoard,
+    openFlight,
     openCardDuel,
     openTrain,
     openUnbind,

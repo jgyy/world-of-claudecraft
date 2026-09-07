@@ -942,4 +942,8 @@ export const table: DeedLocaleTable = {
     name: 'ルーツのブランブルハイド',
     desc: 'ルーツのブランブルハイドの全部位を発見する。',
   },
+  prog_hellgate_pact: {
+    name: '安らがぬ契約',
+    desc: 'グレイブコーラーの契約を最後まで歩み、地獄門を裂き開く術を学ぶ。',
+  },
 };

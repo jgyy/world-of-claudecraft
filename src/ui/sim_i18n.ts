@@ -62,6 +62,29 @@ const baseEnTable = {
   // The Rift Forge place gate (src/sim/rift/forge_gate.ts): both forge
   // operations refuse away from the Riftwright.
   'error.riftForgeTooFar': 'You are too far from the Rift Forge.',
+  // Flight paths (src/sim/flight_paths.ts) and the fast-travel portals: the
+  // refusals register in EXACT; the {town} / {money} / {ability} lines are
+  // RULES entries below. Town names are content text (FLIGHT_NODES.town) and
+  // splice verbatim; the money fragment is sim-formatted ("5s") and the HUD's
+  // localizeSimMoney re-renders it; ability names re-localize via locAbility.
+  'error.flightAlreadyFlying': 'You are already on a flight.',
+  'error.flightTooFar': 'You are too far from the flightmaster.',
+  'error.flightUnknownNode': 'You have not learned that flight path.',
+  'error.flightNoRoute': 'No flight path leads there.',
+  'log.flightPathDiscovered': 'Flight path discovered: {town}.',
+  'log.flightFare': 'Flight to {town}: {money}.',
+  'log.flightArrived': 'You have arrived in {town}.',
+  'log.portalStep': 'You step through the portal to {town}.',
+  'log.hellgatePulled': 'You are pulled through the Hellgate.',
+  'log.learnAbility': 'You learn {ability}.',
+  'log.learnAbilityTownService': 'Having served {town} faithfully, you learn {ability}.',
+  'error.portalCannotStepFrom': 'You cannot step through from here.',
+  'error.hellgateOwnerOnly': 'Only the warlock who opened the gate can use it.',
+  'error.summonTargetGroupMember': 'Target a group member to summon them.',
+  'error.summonAllyUnreachable': 'That ally cannot be summoned from where they are.',
+  'error.missingReagent': 'You do not have the required reagent.',
+  'error.tomeMageOnly': 'Only a mage can read that tome.',
+  'error.spellAlreadyKnown': 'You already know that spell.',
   // The purchase-mutex refusal ('Your bank has a purchase in progress.') is a
   // SERVER emit (server/bank_wire.ts) and lives in server_i18n.ts beside its
   // origin; the client's error chain runs that matcher first.
@@ -12647,6 +12670,30 @@ const RULES: Rule[] = [
     build: (m) => t('sim.rift.descendFloor', { name: m[1] }),
   },
   { re: /^You step back through the rift\.$/, build: () => t('sim.rift.stepBack') },
+  // Flight paths + fast-travel portals (the baseEnTable block of the same name).
+  // Anchored on the full phrase so "Flight to" can never swallow the discovery
+  // line, and the "Having served" form is tried before the bare "You learn".
+  {
+    re: /^Flight path discovered: (.+)\.$/,
+    build: (m) => tSim('log.flightPathDiscovered', { town: m[1] }),
+  },
+  {
+    re: /^Flight to (.+): (\d+g(?: \d+s)?(?: \d+c)?|\d+s(?: \d+c)?|\d+c)\.$/,
+    build: (m) => tSim('log.flightFare', { town: m[1], money: m[2] }),
+  },
+  { re: /^You have arrived in (.+)\.$/, build: (m) => tSim('log.flightArrived', { town: m[1] }) },
+  {
+    re: /^You step through the portal to (.+)\.$/,
+    build: (m) => tSim('log.portalStep', { town: m[1] }),
+  },
+  {
+    re: /^Having served (.+) faithfully, you learn (.+)\.$/,
+    build: (m) => tSim('log.learnAbilityTownService', { town: m[1], ability: locAbility(m[2]) }),
+  },
+  {
+    re: /^You learn (.+)\.$/,
+    build: (m) => tSim('log.learnAbility', { ability: locAbility(m[1]) }),
+  },
   {
     re: /^A rune pylon flares to life \(([^/)]+)\/([^)]+)\)\.$/,
     build: (m) => t('sim.rift.pylonLit', { lit: m[1], total: m[2] }),

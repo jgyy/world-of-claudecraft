@@ -2699,6 +2699,19 @@ export const hudChromeStrings = {
   // Legendary weapon "chance on action" procs, rendered in the item tooltip from
   // the ItemDef.weaponProcs data (see src/ui/weapon_proc_view.ts). One trigger
   // line wraps the joined effect fragments below it.
+  // The flight window (src/ui/hud/flight): a flightmaster's destination list.
+  // Town names are content text (FLIGHT_NODES.town) spliced verbatim.
+  flight: {
+    title: 'Flight Paths',
+    gossipOption: 'Take a flight',
+    gossipOptionAria: 'Take a flight with {name}',
+    rowAria: 'Fly to {town}, {hops} hops, {fare}',
+    hops: '{count} hops',
+    fare: 'Fare: {fare}',
+    empty:
+      'You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.',
+    close: 'Close flight paths',
+  },
   itemProc: {
     onMeleeHit: 'Chance on hit ({chance}%): {effect}',
     onSpellDamage: 'Chance on your damaging spells ({chance}%): {effect}',

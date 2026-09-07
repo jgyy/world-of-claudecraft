@@ -13,6 +13,38 @@
    practice. */
 
 @layer components {
+  /* ---------- flight window (src/ui/hud/flight) ---------- */
+  #flight-window {
+    width: 360px;
+    --window-pad: 14px;
+  }
+  #flight-window .flight-subtitle {
+    font-family: var(--title-font);
+    font-size: 14px;
+    color: var(--gold);
+    margin: 8px 0 6px;
+  }
+  #flight-window .flight-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  #flight-window .flight-row .vi-name {
+    flex: 1;
+  }
+  #flight-window .flight-row .flight-hops {
+    font-size: 11px;
+    color: #c9b27a;
+  }
+  #flight-window .flight-row.unaffordable {
+    opacity: 0.55;
+    cursor: default;
+  }
+  #flight-window .flight-empty {
+    font-size: 12px;
+    line-height: 1.35;
+    padding: 6px 0;
+  }
   /* ---------- delve board ---------- */
   #delve-board {
     width: 360px;

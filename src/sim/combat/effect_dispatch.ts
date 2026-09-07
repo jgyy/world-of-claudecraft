@@ -16,6 +16,7 @@
 // shared `ctx.rng` stream, drawn in the exact pre-move order.
 
 import { isDebuffAura, isDispellableAura, isPlayerRemovableAura } from '../aura_classify';
+import { HELLGATE_ABILITY_ID, HELLGATE_BLEED_AURA_ID } from '../content/hellgate';
 import {
   EMBERFURY_4PC_BLOODLETTING_HEAL_PCT_MAX,
   SPRINGMENDER_4PC_BONUS_JUMPS,
@@ -40,6 +41,7 @@ import {
   isDivineAscensionActive,
   syncDivineAscensionAura,
 } from '../paladin_devotion';
+import { summonGrandPortal, summonHellgate } from '../party_gate';
 import { PLAYER_BODY_RADIUS } from '../pathfind';
 import { scheduleProjectile } from '../projectile_travel';
 import type { PlayerMeta, ResolvedAbility } from '../sim';
@@ -4175,6 +4177,40 @@ export function runEffects(
         if (!summonSoulwell(ctx, p, eff.duration)) {
           ctx.error(p.id, 'Line of sight.');
         }
+        break;
+      }
+      case 'summonGrandPortal': {
+        if (!summonGrandPortal(ctx, p, eff.destination, eff.duration)) {
+          ctx.error(p.id, 'Line of sight.');
+        }
+        break;
+      }
+      case 'summonHellgate': {
+        if (!summonHellgate(ctx, p, eff.duration)) {
+          ctx.error(p.id, 'Line of sight.');
+        }
+        break;
+      }
+      case 'selfDotPctMax': {
+        // The mirror of selfHotPctMax: a self 'dot' whose per-tick value is a
+        // fraction of the caster's MAXIMUM health. combat/auras.ts ticks a
+        // self-sourced dot as a plain hp toll floored at 1 (never lethal, no
+        // combat entry); `noRegen` also suspends natural health regen there.
+        // The Hellgate keys its aura by HELLGATE_BLEED_AURA_ID so the gate
+        // sweep (party_gate.ts updatePartyGates) can end the toll with the gate.
+        ctx.applyAura(p, {
+          id: ability.id === HELLGATE_ABILITY_ID ? HELLGATE_BLEED_AURA_ID : ability.id,
+          name: ability.name,
+          kind: 'dot',
+          remaining: eff.duration,
+          duration: eff.duration,
+          value: Math.max(1, Math.round(p.maxHp * eff.pct)),
+          tickInterval: eff.interval,
+          tickTimer: eff.interval,
+          sourceId: p.id,
+          school: ability.school,
+          ...(eff.noRegen ? { noRegen: true as const } : {}),
+        });
         break;
       }
     }

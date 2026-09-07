@@ -899,7 +899,7 @@ describe('Guide Reliquary spoiler-safe catalog', () => {
     }
   });
 
-  it('labels exactly the two outside-completion pages, and renders tag plus note for each', () => {
+  it('labels exactly the three outside-completion pages, and renders tag plus note for each', () => {
     // The generated blob carries the flag for exactly the live flagged set
     // (a third flagged page must surface here the moment it is authored)...
     expect(
@@ -910,13 +910,14 @@ describe('Guide Reliquary spoiler-safe catalog', () => {
     ).toEqual([
       ['horizons_vault_of_ages', 'retired'],
       ['horizons_riftbound', 'personal'],
+      ['horizons_tomes_of_passage', 'personal'],
     ]);
     // ...and the rendered catalog SHOWS the label: the tag beside the page
     // heading and the explanatory note, one pair per flagged page, resolved
     // through t() (never hardcoded English), with none on ordinary pages.
     const html = reliquaryCatalogSections(GUIDE_RELIQUARY);
-    expect(html.match(/guide-reliquary-flag/g)?.length).toBe(2);
-    expect(html.match(/guide-reliquary-note/g)?.length).toBe(2);
+    expect(html.match(/guide-reliquary-flag/g)?.length).toBe(3);
+    expect(html.match(/guide-reliquary-note/g)?.length).toBe(3);
     expect(html).toContain(`(${t('guide.reliquaryPage.retiredTag')})`);
     expect(html).toContain(`(${t('guide.reliquaryPage.personalTag')})`);
     expect(html).toContain(t('guide.reliquaryPage.retiredNote'));

@@ -2608,6 +2608,34 @@ const classAbilityNamesEn = {
         'Choir of Deliverance',
         'Channel for 6 sec, healing party members within 30 yards for {damage} every 2 sec. Healing increases with Spell Power.',
       ],
+      // Fast travel (content/grand_teleports.ts, content/hellgate.ts): the
+      // mage's four Grand Teleports and the warlock's Hellgate. Descriptions
+      // are byte-identical to the AbilityDef source.
+      [
+        'grand_teleport_eastbrook',
+        'Grand Teleport: Eastbrook',
+        'Opens a Grand Portal to Eastbrook for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport.',
+      ],
+      [
+        'grand_teleport_fenbridge',
+        'Grand Teleport: Fenbridge',
+        'Opens a Grand Portal to Fenbridge for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport.',
+      ],
+      [
+        'grand_teleport_highwatch',
+        'Grand Teleport: Highwatch',
+        'Opens a Grand Portal to Highwatch for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport.',
+      ],
+      [
+        'grand_teleport_eldergleam',
+        'Grand Teleport: Eldergleam',
+        'Opens a Grand Portal to Eldergleam for 5 min. Only members of your group at the moment of casting can step through. Consumes a Rune of Passage. 10 sec cast. Shares a 20 min cooldown with every other Grand Teleport.',
+      ],
+      [
+        'hellgate',
+        'Hellgate',
+        'Tears open a Hellgate at your feet for 99 sec. Click the gate while targeting a group member to pull them to it. While it stands, the demons beyond it bleed you for 1% of your maximum health every second and stop your health from regenerating. 10 sec cast.',
+      ],
     ]),
   },
 };

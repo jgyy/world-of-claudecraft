@@ -57,6 +57,7 @@ import type { IWorldDuelArena } from '../src/world_api/duel_arena';
 import type { IWorldDungeonFinder } from '../src/world_api/dungeon_finder';
 import type { IWorldDungeons } from '../src/world_api/dungeons';
 import type { IWorldEntityRoster } from '../src/world_api/entity_roster';
+import type { IWorldFlightPaths } from '../src/world_api/flight_paths';
 import type { IWorldGuildBank } from '../src/world_api/guild_bank';
 import type { IWorldInteraction } from '../src/world_api/interaction';
 import type { IWorldInventory } from '../src/world_api/inventory';
@@ -478,6 +479,9 @@ export const IWORLD_MEMBERS = [
   { name: 'reliquaryCuratorRank', kind: 'method' },
   { name: 'reliquaryPageClearCount', kind: 'method' },
   { name: 'reliquaryRarity', kind: 'method' },
+  // --- Flight paths (IWorldFlightPaths): nodes known + the paid flight ---
+  { name: 'flightNodesKnown', kind: 'data' },
+  { name: 'takeFlight', kind: 'method' },
   // IWorldActionBar: per-character action-bar layout persistence + login restore.
   { name: 'saveActionBarLayout', kind: 'method' },
   { name: 'takeActionBarLayoutRestore', kind: 'method' },
@@ -673,9 +677,11 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // IWorldCombat) merge against the release's guild-bank history mirror,
     // which adds one method (guildBankLogOlder, IWorldGuildBank): 343 base +
     // 4 data + 1 method = 348 total, 99 data, 249 method.
-    expect(IWORLD_MEMBERS.length).toBe(348);
-    expect(DATA_MEMBERS.length).toBe(99);
-    expect(METHOD_MEMBERS.length).toBe(249);
+    // Flight paths add one data member (flightNodesKnown) and one method
+    // (takeFlight), both IWorldFlightPaths: 350 total, 100 data, 250 method.
+    expect(IWORLD_MEMBERS.length).toBe(350);
+    expect(DATA_MEMBERS.length).toBe(100);
+    expect(METHOD_MEMBERS.length).toBe(250);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -815,6 +821,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'equipment',
       'equipmentInstances',
       'feedPet',
+      'flightNodesKnown',
       'forfeitCardDuel',
       'friendAdd',
       'friendRemove',
@@ -1000,6 +1007,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tabTarget',
       'tabTargetPrev',
       'takeActionBarLayoutRestore',
+      'takeFlight',
       'talentPoints',
       'talentRole',
       'talentSpec',
@@ -1086,6 +1094,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'entities',
       'equipment',
       'equipmentInstances',
+      'flightNodesKnown',
       'gatheringProficiency',
       'guildBankInfo',
       'hobbyCraft',
@@ -1368,6 +1377,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tabTarget',
       'tabTargetPrev',
       'takeActionBarLayoutRestore',
+      'takeFlight',
       'talentPoints',
       'targetEntity',
       'targetNearestFriendly',
@@ -1969,6 +1979,14 @@ type _ExhaustReliquary = AssertNever<
   Exclude<keyof IWorldReliquary, (typeof FACET_RELIQUARY)[number]>
 >;
 
+const FACET_FLIGHT_PATHS = [
+  'flightNodesKnown',
+  'takeFlight',
+] as const satisfies readonly (keyof IWorldFlightPaths)[];
+type _ExhaustFlightPaths = AssertNever<
+  Exclude<keyof IWorldFlightPaths, (typeof FACET_FLIGHT_PATHS)[number]>
+>;
+
 const FACET_ACTION_BAR = [
   'saveActionBarLayout',
   'takeActionBarLayoutRestore',
@@ -2011,14 +2029,15 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   deeds: FACET_DEEDS,
   reliquary: FACET_RELIQUARY,
   actionBar: FACET_ACTION_BAR,
+  flightPaths: FACET_FLIGHT_PATHS,
 };
 
 describe('W1: aggregate IWorld member set equals the disjoint union of the facets', () => {
   it('pins the facet count', () => {
     // +1 battleground facet (Thornhollow Fields) on the release line; +1
     // Reliquary facet on this branch: 33 total; -1 for the New Eastbrook
-    // program's Vale Cup retirement: 32 total.
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(32);
+    // program's Vale Cup retirement: 32 total; +1 flight paths: 33.
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(33);
   });
 
   it('each facet array is non-empty and internally duplicate-free', () => {
@@ -2046,8 +2065,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
 
   it('the facet union equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(348);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(348);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(350);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(350);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);
