@@ -253,7 +253,7 @@ const UI_PURE_CORES = [
   'src/ui/quest_marker_tags.ts',
   'src/ui/hud/delve/delve_map.ts',
   'src/ui/hud/rift/rift_map_core.ts',
-  'src/ui/hud/flight/flight_view.ts',
+  'src/ui/hud/waystone/waystone_view.ts',
   'src/ui/hud/battleground/battleground_map_view.ts',
   'src/ui/hud/battleground/battleground_kill_feed_view.ts',
   'src/ui/hud/battleground/battleground_proposal_view.ts',

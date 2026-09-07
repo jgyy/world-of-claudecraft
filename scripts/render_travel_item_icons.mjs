@@ -150,6 +150,49 @@ function hellgateSvg() {
   );
 }
 
+// The Waystone Ticket: a small parchment ticket stamped with a glowing
+// rune-ring sigil (src/sim/content/waystones.ts, the Dungeon Finder reward).
+function waystoneTicketSvg() {
+  return svgDoc(
+    `${vignette('#132a34')}
+<defs>
+  <linearGradient id="parchment" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f1e2b8"/><stop offset="100%" stop-color="#c7ab72"/></linearGradient>
+  <radialGradient id="ring" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c8fff2"/><stop offset="45%" stop-color="#33d8c0"/><stop offset="100%" stop-color="#0e5a52"/></radialGradient>
+  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+  <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<g transform="translate(256 262) rotate(-8)">
+  <ellipse cx="0" cy="126" rx="150" ry="26" fill="#000" opacity="0.5" filter="url(#blur)"/>
+  <rect x="-158" y="-90" width="316" height="180" rx="14" fill="#241a0e"/>
+  <rect x="-150" y="-82" width="300" height="164" rx="12" fill="url(#parchment)" stroke="#6b5326" stroke-width="4"/>
+  <g stroke="#8a6f3a" stroke-width="3" stroke-dasharray="10 8" opacity="0.7">
+    <line x1="-108" y1="-82" x2="-108" y2="82"/>
+  </g>
+  <circle cx="18" cy="0" r="66" fill="#0a2b28" opacity="0.5" filter="url(#blur)"/>
+  <circle cx="18" cy="0" r="52" fill="url(#ring)" opacity="0.9"/>
+  <circle cx="18" cy="0" r="52" fill="none" stroke="#eafffa" stroke-width="4"/>
+  <circle cx="18" cy="0" r="34" fill="none" stroke="#eafffa" stroke-width="3" opacity="0.85"/>
+  <g fill="#eafffa" filter="url(#soft)">
+    <circle cx="18" cy="-52" r="4"/><circle cx="55" cy="-15" r="4"/><circle cx="42" cy="30" r="4"/>
+    <circle cx="-6" cy="30" r="4"/><circle cx="-19" cy="-15" r="4"/>
+  </g>
+  <g transform="translate(18 0)" fill="none" stroke="#0e5a52" stroke-width="4" stroke-linecap="round">
+    <path d="M0 -30 L 0 30 M -26 -15 L 26 15 M -26 15 L 26 -15"/>
+  </g>
+  <g fill="#5a4420" opacity="0.85">
+    <rect x="-134" y="-58" width="60" height="8" rx="4"/>
+    <rect x="-134" y="-38" width="44" height="8" rx="4"/>
+    <rect x="-134" y="34" width="52" height="8" rx="4"/>
+    <rect x="-134" y="54" width="36" height="8" rx="4"/>
+  </g>
+  <path d="M-158 -90 L -184 -66 L -158 -42 Z" fill="#241a0e"/>
+  <path d="M-158 42 L -184 66 L -158 90 Z" fill="#241a0e"/>
+  <path d="M158 -90 L 184 -66 L 158 -42 Z" fill="#241a0e"/>
+  <path d="M158 42 L 184 66 L 158 90 Z" fill="#241a0e"/>
+</g>`,
+  );
+}
+
 const JOBS = [
   { itemId: 'rune_of_passage', dir: itemsDir, svg: runeSvg() },
   ...Object.keys(TOMES).map((destination) => ({
@@ -158,6 +201,7 @@ const JOBS = [
     svg: tomeSvg(destination),
   })),
   { itemId: 'hellgate', dir: warlockSkillsDir, svg: hellgateSvg() },
+  { itemId: 'waystone_ticket', dir: itemsDir, svg: waystoneTicketSvg() },
 ];
 
 for (const job of JOBS) {

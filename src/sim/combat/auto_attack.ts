@@ -243,7 +243,7 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   // Melee normally skips line of sight (it's always point-blank), but the
   // arena's thin enclosing walls sit inside MELEE_RANGE: without this a
   // combatant pressed against a wall could swing through it. See sibling
-  // logic in Sim.abilityNeedsLineOfSight.
+  // logic in line_of_sight_gate.ts abilityNeedsLineOfSight.
   if (isArenaPos(p.pos.x) && !ctx.hasLineOfSight(p, t)) return;
   ctx.breakGhostWolf(p);
   const dualWieldWhiteMissPenalty = hasDualWieldWhiteMissPenalty(ctx, p, meta);

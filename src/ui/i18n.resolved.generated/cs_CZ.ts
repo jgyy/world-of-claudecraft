@@ -2122,15 +2122,18 @@ export const cs_CZ: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Šance při zásahu ({chance} %): {effect}",
@@ -6112,7 +6115,7 @@ export const cs_CZ: EnTranslations = {
     },
     "worldPage": {
       "heading": "Svět",
-      "intro": "World of ClaudeCraft je jedna souvislá země, kterou přecházíš pěšky. Stará cesta vede z jihu na sever startovním údolím, bažinou a štíty a stoupá dál za ně do prohlubně a do sněžné krajiny na horním okraji mapy. Od té cesty se na západ otevírá sloupec vyšších říší a další na východ, a při východním pobřeží Údolí leží ostrov. Není tu rychlé cestování, žádné letecké trasy ani povozy: každá cesta se ujde nebo projede, takže dorazit je součástí dobrodružství.\n\nZemě také měří čas. Cyklus dne a noci běží na skutečných hodinách sdílených všemi na tvém světě, takže obloha přechází od úsvitu přes poledne k soumraku a tmě pro vás všechny naráz, měsíc přichází a odchází svými fázemi a světlo na zemi se s ním mění. Ciferník kolem tvé minimapy je místo, kde odečteš hodinu.",
+      "intro": "World of ClaudeCraft je jedna souvislá země, kterou přecházíš pěšky. Stará cesta vede z jihu na sever startovním údolím, bažinou a štíty a stoupá dál za ně do prohlubně a do sněžné krajiny na horním okraji mapy. Od té cesty se na západ otevírá sloupec vyšších říší a další na východ, a při východním pobřeží Údolí leží ostrov. Dorazit tam je součástí dobrodružství: každá cesta se ujde nebo projede, a cestovní kámen v každém centrálním městě tě může v okamžiku přenést ke kterémukoli jinému kameni, kterého ses již dotkl.\n\nZemě také měří čas. Cyklus dne a noci běží na skutečných hodinách sdílených všemi na tvém světě, takže obloha přechází od úsvitu přes poledne k soumraku a tmě pro vás všechny naráz, měsíc přichází a odchází svými fázemi a světlo na zemi se s ním mění. Ciferník kolem tvé minimapy je místo, kde odečteš hodinu.",
       "hub": "Domovská základna",
       "mapHeading": "Cesta a říše za ní",
       "mapSub": "Stopa úkolů vede z jihu na sever středem mapy: údolí, bažina, štíty a dál za ně do prohlubně a sněhu. Ostatní říše se otevírají podél té cesty, ne až za ní, branami na východ a na západ od bažinné cesty, přičemž ostrov Farshore se dosahuje z východního pobřeží Údolí. Ze vzdálených říší tě drží jejich úrovňová pásma, ne ta chůze: pět z nich sdílí nejvyšší pásmo, takže jakmile jsi připraven, můžeš je brát v libovolném pořadí. Farshore je výjimka, nízkoúrovňová krajina, kterou můžeš navštívit brzy.",
@@ -6183,7 +6186,7 @@ export const cs_CZ: EnTranslations = {
       "provingGreeter": "Instruktorka Maren, Tábor Svítání",
       "provingPlaceNotes": "Tábor Svítání je celá osada ostrova: pár stanů, stánek a shromažďovací oheň. Staré molo hledí směrem k údolí, kde přívozní kruh přenáší absolventy přes úžinu; Cvičiště jižně od tábora drží své slaměné podobizny vztyčené pro kohokoli, kdo je potřebuje; a Řada vraků je troskami posetá pláž, kde příliv platí ostrovu vyplavenými bednami.",
       "travelTitle": "Cestování",
-      "travelBody": "Každou cestou v říši se buď jde pěšky, nebo jede na koni. Nejsou tu žádné letecké trasy, žádná taxi a žádná teleportační síť: mapa je jedna souvislá pevnina a každé spojení je něco, na čem můžeš stát. Hřebeny oddělují jednu říši od druhé, a tam, kde si dvě říše dělí hřeben, stoupá cesta průsmykem. Ne každá hranice ale funguje takhle. Na severu vede dlouhá hráz cestu přes vodu ze Zahalené kotliny do zasněžené krajiny za ní, a zpátky na jihu vede tenká přírodní písečná kosa zvaná Přívozní stezka na východ od pobřeží Údolí k Přístavišti na ostrově Vzdáleného pobřeží, který nemá žádnou pozemní hranici vůbec. A v celém nadzemním světě existují přesně jedny opravdové dveře: závoj soumraku vysoko na Thornpeaku, který se otevírá do Zahalené kotliny. Jižní hřeben Kotliny je zapečetěný bez průsmyku skrz něj, takže tenhle závoj je způsob, jak se tam poprvé dostaneš, a za tebou se zavírá na cestě zpátky.\n\nAť padneš kdekoli, cesta zpátky je krátká. Každá zóna má aspoň jeden hřbitov, nad jehož náhrobky se vznáší Bledý strážce, a propuštěný duch povstane u toho nejbližšího z nich.\n\nMapa nekončí neviditelnou zdí. Země přechází v pláže a mysy, a pak v otevřenou vodu. Přechody, které svět zamýšlí, abys přeplaval, úžiny a jezera mezi jednou říší a druhou, jsou klidné a bezpečné k přeplavání. Vyraz místo toho na otevřené moře a sama vzdálenost tě obrátí zpátky: budeš varován, a pak znovu, a pokud budeš plavat dál, moře tě vyčerpá, dokud tě nezabije. Potápění má svůj vlastní limit, protože ti pod hladinou dojde dech, takže se vynoř na nádech a otoč se zpátky, když ti to voda řekne.",
+      "travelBody": "Každou cestou v říši se jde pěšky, nebo jede na koni, a mapa je jedna souvislá pevnina: každé spojení je něco, na čem můžeš stát. Cestovní kameny ti pomáhají najít cestu zpět. Každé centrální město má jeden, se strážcem po boku, a jakmile se pěšky dotkneš kamene ve městě, můžeš zaplatit a v okamžiku se přenést k němu z kteréhokoli jiného kamene, který znáš. Poplatek roste se vzdáleností, Lístek cestovního kamene získaný z denní fronty na kobky zaplatí jeden skok místo zlata, a postavení cechu ti srazí část z ceny. Mág, který se naučil Velký teleport, může otevřít portál, jenž přenese jeho skupinu do jednoho ze čtyř měst na staré cestě, a warlock, který uzavřel Pekelnou bránu, může roztrhnout bránu, která k němu přitáhne členy skupiny. Hřebeny oddělují jednu říši od druhé, a tam, kde si dvě říše dělí hřeben, stoupá cesta průsmykem. Ne každá hranice ale funguje takhle. Na severu vede dlouhá hráz cestu přes vodu ze Zahalené kotliny do zasněžené krajiny za ní, a zpátky na jihu vede tenká přírodní písečná kosa zvaná Přívozní stezka na východ od pobřeží Údolí k Přístavišti na ostrově Vzdáleného pobřeží, který nemá žádnou pozemní hranici vůbec. A v celém nadzemním světě existují přesně jedny opravdové dveře: závoj soumraku vysoko na Thornpeaku, který se otevírá do Zahalené kotliny. Jižní hřeben Kotliny je zapečetěný bez průsmyku skrz něj, takže tenhle závoj je způsob, jak se tam poprvé dostaneš, a za tebou se zavírá na cestě zpátky.\n\nAť padneš kdekoli, cesta zpátky je krátká. Každá zóna má aspoň jeden hřbitov, nad jehož náhrobky se vznáší Bledý strážce, a propuštěný duch povstane u toho nejbližšího z nich.\n\nMapa nekončí neviditelnou zdí. Země přechází v pláže a mysy, a pak v otevřenou vodu. Přechody, které svět zamýšlí, abys přeplaval, úžiny a jezera mezi jednou říší a druhou, jsou klidné a bezpečné k přeplavání. Vyraz místo toho na otevřené moře a sama vzdálenost tě obrátí zpátky: budeš varován, a pak znovu, a pokud budeš plavat dál, moře tě vyčerpá, dokud tě nezabije. Potápění má svůj vlastní limit, protože ti pod hladinou dojde dech, takže se vynoř na nádech a otoč se zpátky, když ti to voda řekne.",
       "mountsTitle": "Jízdní zvířata",
       "mountsBody": "Jízda je jediná věc, která svět zmenší, a je to nejdřív lekce, až pak kůň. Na úrovni 20 tě vezme pod svá křídla správkyně stájí Marla: koupíš si od ní Jízdu, a samotná jezdecká lekce je zdarma, skokový parkur, který projedeš na půjčeném oři kolem její ohrady. Zvládneš ho, odevzdáš úkol, a tvůj první Valorsteed je tvůj, a od té chvíle přejíždíš říši na koni citelně rychleji. Rychlost je jediné, co ti jízdní zvíře dává: vzácnější kusy, které padají z nejtěžšího obsahu, jsou ještě rychlejší, ale žádný z nich nemění tvou sílu v boji. Nasedej a sesedej klávesou přiřazenou ve svém ovládání. Nemůžeš nasednout, když jsi v boji, a máchnutí zbraní, seslání kouzla, vstup do vody nebo pád v bitvě tě vždy postaví zpátky na nohy.",
       "mountsMore": "Vše o jízdních zvířatech",
@@ -16282,75 +16285,75 @@ export const cs_CZ: EnTranslations = {
         "title": "Ochránkyně pobřeží",
         "greeting": "Příliv bere a příliv platí, {playerName}. Vedu si účet obojího: co pobíhalové ukořistí z vraků a co poctivé ruce donesou zpátky nahoru touhle cestou."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

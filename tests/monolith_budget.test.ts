@@ -310,10 +310,10 @@ const MONOLITHS: MonolithRow[] = [
     // that deps object. Exact count.
     // Re-measured at the release/v0.42.0 sync that brought in the Nythraxis redo (PR #3848):
     // 18725 less the 2 lines that PR trimmed from hud.ts. Exact merged count.
-    // Down again at the flight window: the weapon-proc effect fragment text
+    // Down again at the waystone window: the weapon-proc effect fragment text
     // (procEffectText) moved byte-for-byte to src/ui/item_proc_text.ts, paying
-    // for the FlightWindowController's thin wiring (construction, the
-    // 'flightmaster' event arm, the managed close, the walk-away close and the
+    // for the WaystoneWindowController's thin wiring (construction, the
+    // 'waystone' event arm, the managed close, the walk-away close and the
     // purse repaint). Exact merged count, zero headroom.
     ceiling: 18715,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
@@ -557,7 +557,12 @@ const MONOLITHS: MonolithRow[] = [
     // Re-pinned 12272 -> 12284 at the Nythraxis redo sync (PR #3848 landed ahead in
     // the queue; its arms sat under release's slack, so its pin never moved).
     // Measured with wc -l on the merged tree. Exact merged count, zero headroom.
-    ceiling: 12284,
+    // Lowered 12284 -> 12282 by the waystone change: the line-of-sight gate
+    // (abilityNeedsLineOfSight / hasLineOfSight / lineOfSightBlocked) moved to
+    // src/sim/line_of_sight_gate.ts and the bag counts to
+    // src/sim/inventory_count.ts, paying for the waystone wiring (the keeper
+    // spawn, the IWorldWaystones delegates and the ticket-day persistence).
+    ceiling: 12282,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -709,10 +714,10 @@ const MONOLITHS: MonolithRow[] = [
     // Down 10604 -> 10587 for the per-surface action-bar profiles: the
     // join read, the per-profile merge and the FIFO write moved to
     // server/hotbar_layout.ts (HotbarLayoutStore). Exact count.
-    // Lowered 10587 -> 10557 by the flight-paths change: the nine Dungeon
+    // Lowered 10587 -> 10557 by the fast-travel change: the nine Dungeon
     // Finder df_* arm bodies moved to server/dungeon_finder_dispatch.ts
-    // (dispatchDungeonFinderCommand), paying for the flight_take arm
-    // (server/flight_dispatch.ts) and the `fln` self key. Exact count.
+    // (dispatchDungeonFinderCommand), paying for the waystone_teleport arm
+    // (server/waystone_dispatch.ts) and the `wsa` self key. Exact count.
     ceiling: 10557,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
@@ -797,9 +802,9 @@ const MONOLITHS: MonolithRow[] = [
     // that put its requests on the wire), so the merged file sits below
     // both single-arm counts (5860 and 5856). Measured on the merged tree,
     // never reconciled by arithmetic. Exact merged count, zero slack.
-    // Lowered 5843 -> 5628 by the flight-paths change: the blankEntity
+    // Lowered 5843 -> 5628 by the fast-travel change: the blankEntity
     // placeholder literal moved to src/net/blank_entity.ts, paying for the
-    // IWorldFlightPaths mirror (flightNodesKnown + `fln` decode + takeFlight).
+    // IWorldWaystones mirror (waystonesAttuned + `wsa` decode + waystoneTeleport).
     // Exact count, zero slack.
     ceiling: 5628,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',

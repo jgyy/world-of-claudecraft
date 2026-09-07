@@ -2122,15 +2122,18 @@ export const nl_NL: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Kans bij treffer ({chance}%): {effect}",
@@ -6112,7 +6115,7 @@ export const nl_NL: EnTranslations = {
     },
     "worldPage": {
       "heading": "De wereld",
-      "intro": "World of ClaudeCraft is één aaneengesloten land dat je te voet doorkruist. De oude weg loopt van zuid naar noord door de begindal, het moeras en de pieken, en hij blijft daarna doorklimmen naar de holte erachter en het sneeuwland boven aan de kaart. Een kolom hogere rijken opent zich vanaf die weg naar het westen en een andere naar het oosten, en voor de oostkust van de Vallei ligt een eiland. Er is geen snelreizen, er zijn geen vluchtroutes en geen koetsen: elke reis wordt gelopen of gereden, dus er komen hoort bij het avontuur.\n\nHet land houdt ook de tijd bij. Een dag-en-nachtcyclus loopt op een echte klok die iedereen op jouw wereld deelt, zodat de hemel voor jullie allemaal tegelijk van dageraad via middag naar schemer en donker verloopt, de maan komt en gaat door haar fasen, en het licht op de grond met haar meeverandert. De wijzerplaat rond je minikaart is waar je het uur afleest.",
+      "intro": "World of ClaudeCraft is één aaneengesloten land dat je te voet doorkruist. De oude weg loopt van zuid naar noord door de begindal, het moeras en de pieken, en hij blijft daarna doorklimmen naar de holte erachter en het sneeuwland boven aan de kaart. Een kolom hogere rijken opent zich vanaf die weg naar het westen en een andere naar het oosten, en voor de oostkust van de Vallei ligt een eiland. Er komen is onderdeel van het avontuur: elke weg leg je te voet of te paard af, en de reissteen in elke centrale stad kan je in een oogwenk naar elke andere steen dragen die je al hebt aangeraakt.\n\nHet land houdt ook de tijd bij. Een dag-en-nachtcyclus loopt op een echte klok die iedereen op jouw wereld deelt, zodat de hemel voor jullie allemaal tegelijk van dageraad via middag naar schemer en donker verloopt, de maan komt en gaat door haar fasen, en het licht op de grond met haar meeverandert. De wijzerplaat rond je minikaart is waar je het uur afleest.",
       "hub": "Thuisbasis",
       "mapHeading": "De weg en de rijken daarachter",
       "mapSub": "Het opdrachtenspoor loopt van zuid naar noord door het midden van de kaart: dal, moeras, pieken, en daaraan voorbij de holte en de sneeuw in. De andere rijken openen zich langs die weg in plaats van erna, door poorten ten oosten en ten westen van de moerasweg, terwijl het eiland Farshore vanaf de oostkust van de Vallei bereikt wordt. Wat je uit de verre rijken houdt zijn hun niveaubanden, niet de wandeling: vijf ervan delen de hoogste band, dus zodra je klaar bent kun je ze in elke volgorde aanpakken. Farshore is de uitzondering, laagniveauland dat je vroeg kunt bezoeken.",
@@ -6183,7 +6186,7 @@ export const nl_NL: EnTranslations = {
       "provingGreeter": "Instructeur Maren, Kamp Dageraadrust",
       "provingPlaceNotes": "Kamp Dageraadrust is de hele nederzetting van het eiland: een paar tenten, een kraam, en een verzamelvuur. De Oude Pier kijkt uit op het dal, waar de oversteekcirkel afgestudeerden over de zeeëngte draagt; het Oefenterrein ten zuiden van het kamp houdt zijn stropoppen overeind voor wie ze nodig heeft; en de Wraklijn is het met berging bezaaide strand waar het getij het eiland uitbetaalt in aangespoelde kisten.",
       "travelTitle": "Je verplaatsen",
-      "travelBody": "Elke weg in het rijk leg je te voet of te paard af. Er zijn geen vliegroutes, geen taxi's en geen teleportnetwerk: de kaart is één aaneengesloten landmassa, en elke verbinding is iets waar je op kunt staan. Bergkammen scheiden het ene rijk van het volgende, en waar twee rijken een bergkam delen, klimt de weg door een pas. Niet elke grens werkt zo, overigens. In het noorden voert een lange dijk de weg over het water vanuit De Sluierholte naar het sneeuwland daarachter, en verder naar het zuiden loopt een dunne natuurlijke zandbank genaamd de Veerloop oostwaarts van de kust van het Dal naar De Aanlegplaats op het eiland van de Verrekust, dat helemaal geen landgrens heeft. En er is precies één echte doorgang in de hele bovenwereld: een sluier van schemering hoog op Doorntop die toegang geeft tot De Sluierholte. De zuidelijke bergkam van de Holte is verzegeld zonder pas erdoorheen, dus die sluier is hoe je er voor het eerst binnenkomt, en hij sluit zich achter je op de terugweg.\n\nWaar je ook valt, de terugweg is kort. Elke zone bewaart minstens één begraafplaats met een Bleke Hoeder die boven de stenen zweeft, en een losgelaten geest herrijst bij de dichtstbijzijnde daarvan.\n\nDe kaart eindigt niet in een onzichtbare muur. Het land loopt uit in stranden en landtongen, en dan in open water. De oversteekplaatsen die de wereld je laat zwemmen, de zeestraten en wateren tussen het ene rijk en het volgende, zijn kalm en veilig om over te steken. Zwem in plaats daarvan de open zee op en de afstand zelf stuurt je terug: je wordt gewaarschuwd, en nogmaals gewaarschuwd, en als je blijft zwemmen, put de zee je uit tot ze je doodt. Duiken heeft zijn eigen grens, want je adem raakt op onder het oppervlak, dus kom boven voor lucht en keer om zodra het water het je zegt.",
+      "travelBody": "Elke weg in het rijk leg je te voet of te paard af, en de kaart is één aaneengesloten landmassa: elke verbinding is iets waar je op kunt staan. De reisstenen helpen je de weg terug te vinden. Elke centrale stad bewaart er één, met een hoeder ernaast, en zodra je de steen van een stad te voet hebt aangeraakt, kun je betalen om er in een oogwenk naartoe te stappen vanaf elke andere steen die je kent. De vergoeding stijgt met de afstand, een Reissteenkaartje, verdiend in de dagelijkse kerkerwachtrij, betaalt voor een sprong in plaats van goud, en de status van een gilde haalt een deel van de prijs eraf. Een magiër die een Grote Teleportatie heeft geleerd, kan een portaal openen dat zijn groep naar een van de vier oude-wegsteden draagt, en een warlock die het Hellgate-pact is aangegaan, kan een poort openscheuren die groepsleden naar zich toe trekt. Bergkammen scheiden het ene rijk van het volgende, en waar twee rijken een bergkam delen, klimt de weg door een pas. Niet elke grens werkt zo, overigens. In het noorden voert een lange dijk de weg over het water vanuit De Sluierholte naar het sneeuwland daarachter, en verder naar het zuiden loopt een dunne natuurlijke zandbank genaamd de Veerloop oostwaarts van de kust van het Dal naar De Aanlegplaats op het eiland van de Verrekust, dat helemaal geen landgrens heeft. En er is precies één echte doorgang in de hele bovenwereld: een sluier van schemering hoog op Doorntop die toegang geeft tot De Sluierholte. De zuidelijke bergkam van de Holte is verzegeld zonder pas erdoorheen, dus die sluier is hoe je er voor het eerst binnenkomt, en hij sluit zich achter je op de terugweg.\n\nWaar je ook valt, de terugweg is kort. Elke zone bewaart minstens één begraafplaats met een Bleke Hoeder die boven de stenen zweeft, en een losgelaten geest herrijst bij de dichtstbijzijnde daarvan.\n\nDe kaart eindigt niet in een onzichtbare muur. Het land loopt uit in stranden en landtongen, en dan in open water. De oversteekplaatsen die de wereld je laat zwemmen, de zeestraten en wateren tussen het ene rijk en het volgende, zijn kalm en veilig om over te steken. Zwem in plaats daarvan de open zee op en de afstand zelf stuurt je terug: je wordt gewaarschuwd, en nogmaals gewaarschuwd, en als je blijft zwemmen, put de zee je uit tot ze je doodt. Duiken heeft zijn eigen grens, want je adem raakt op onder het oppervlak, dus kom boven voor lucht en keer om zodra het water het je zegt.",
       "mountsTitle": "Rijdieren",
       "mountsBody": "Rijden is het enige dat de wereld kleiner maakt, en het is een les voordat het een paard is. Op niveau 20 neemt de stalmeesteres, Marla, je onder haar hoede: je koopt Rijden bij haar, en de rijles zelf is gratis, een springparcours dat je op een geleende Valorsteed door haar wei aflegt. Haal het, lever de les in, en je eerste Valorsteed is van jou, en vanaf dan doorkruis je het rijk merkbaar sneller te paard. Snelheid is het enige wat een rijdier je geeft: de zeldzamere exemplaren, die uit de zwaarste content komen, zijn nog sneller, maar geen enkele verandert je kracht in een gevecht. Stijg op en af met de toets die je in je besturing hebt gebonden. Je kunt niet opstijgen tijdens een gevecht, en een wapen zwaaien, een spreuk werpen, het water in waden, of vallen in de strijd zetten je allemaal weer op je voeten.",
       "mountsMore": "Alles over rijdieren",
@@ -16282,75 +16285,75 @@ export const nl_NL: EnTranslations = {
         "title": "Hoeder van het Strand",
         "greeting": "Het getij neemt en het getij betaalt, {playerName}. Ik houd van beide de tel bij: wat de scharrelaars van de wrakken pikken, en wat eerlijke handen dit pad weer op dragen."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

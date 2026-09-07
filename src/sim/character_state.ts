@@ -195,10 +195,13 @@ export interface CharacterState {
   delveClears?: Record<string, number>;
   companionUpgrades?: Record<string, number>;
   delveLoreUnlocked?: string[];
-  // Flight nodes whose flightmaster this character has spoken to
-  // (src/sim/flight_paths.ts). Optional and omitted while empty so untouched
-  // saves stay byte-equal; the delveLoreUnlocked shape.
-  flightNodesKnown?: string[];
+  // Waystones this character has attuned (src/sim/waystones.ts). Optional and
+  // omitted while empty so untouched saves stay byte-equal; the
+  // delveLoreUnlocked shape.
+  waystonesAttuned?: string[];
+  // Realm day the daily Dungeon Finder ticket grant last paid
+  // (src/sim/waystone_tickets.ts); omitted until it first pays.
+  waystoneTicketDay?: string;
   delveDaily?: { date: string; firstClearXp: string[]; markClears: number };
   heroicDaily?: { date: string; marked: string[] };
   // Ravenpost welcome letter already sent (optional so pre-mail saves load

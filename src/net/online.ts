@@ -1298,8 +1298,8 @@ export class ClientWorld extends ReconWireState implements IWorld {
   activeLoadout = -1;
   questLog = new Map<string, QuestProgress>();
   questsDone = new Set<string>();
-  // --- IWorldFlightPaths: flight nodes known, mirrored from the snapshot self (`fln`). ---
-  flightNodesKnown = new Set<string>();
+  // --- IWorldWaystones: attuned stones, mirrored from the snapshot self (`wsa`). ---
+  waystonesAttuned = new Set<string>();
   // --- IWorldParty: party/raid roster, mirrored from the snapshot self (`party`).
   // The raid-target markers ride the `markers` map below; IWorldPet keeps no mirror
   // field (pet state lives on the owned-mob entity wire). ---
@@ -3333,7 +3333,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
       if (s.qlog !== undefined)
         this.questLog = new Map((s.qlog as QuestProgress[]).map((q) => [q.questId, q]));
       if (s.qdone !== undefined) this.questsDone = new Set(s.qdone);
-      if (s.fln !== undefined) this.flightNodesKnown = new Set(s.fln as string[]);
+      if (s.wsa !== undefined) this.waystonesAttuned = new Set(s.wsa as string[]);
       if (s.lockouts !== undefined) this.selfLockouts = s.lockouts as Record<string, number>;
       // IWorldMounts self-decode: mntOwn is delta-guarded (omitted keeps the prior
       // mirror). The owned collection is mirrored VERBATIM (no horse prepend): the
@@ -3898,11 +3898,11 @@ export class ClientWorld extends ReconWireState implements IWorld {
     this.pendingQuestCommands.delete(questId);
     this.cmd({ cmd: 'abandon', quest: questId });
   }
-  // --- IWorldFlightPaths: command only; the ride and the landing arrive as
-  // ordinary entity snapshots, flightNodesKnown as the `fln` self delta. ---
-  takeFlight(nodeId: string): void {
+  // --- IWorldWaystones: command only; the landing arrives as an ordinary
+  // entity snapshot, waystonesAttuned as the `wsa` self delta. ---
+  waystoneTeleport(stoneId: string): void {
     if (!this.canSendCommand()) return;
-    this.cmd({ cmd: 'flight_take', node: nodeId });
+    this.cmd({ cmd: 'waystone_teleport', stone: stoneId });
   }
   startTutorial(): void {
     if (!this.canSendCommand()) return;

@@ -2122,15 +2122,18 @@ export const pl_PL: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Szansa przy trafieniu ({chance}%): {effect}",
@@ -6112,7 +6115,7 @@ export const pl_PL: EnTranslations = {
     },
     "worldPage": {
       "heading": "Świat",
-      "intro": "World of ClaudeCraft to jedna ciągła kraina, którą przemierzasz pieszo. Stary trakt biegnie z południa na północ przez startową dolinę, bagno i szczyty, i wspina się dalej za nie, w kotlinę i śnieżny kraj u góry mapy. Kolumna wyższych królestw otwiera się od tego traktu na zachód, a druga na wschód, u wschodniego wybrzeża Doliny zaś leży wyspa. Nie ma szybkiej podróży, tras lotniczych ani dyliżansów: każdą drogę pokonuje się pieszo albo wierzchem, więc dotarcie na miejsce jest częścią przygody.\n\nKraina odmierza też czas. Cykl dnia i nocy biegnie na prawdziwym zegarze dzielonym przez wszystkich w twoim świecie, więc niebo przechodzi od świtu przez południe ku zmierzchowi i ciemności dla was wszystkich naraz, księżyc przychodzi i odchodzi przez swoje fazy, a światło na ziemi zmienia się razem z nim. Tarcza wokół twojej minimapy to miejsce, w którym odczytujesz godzinę.",
+      "intro": "World of ClaudeCraft to jedna ciągła kraina, którą przemierzasz pieszo. Stary trakt biegnie z południa na północ przez startową dolinę, bagno i szczyty, i wspina się dalej za nie, w kotlinę i śnieżny kraj u góry mapy. Kolumna wyższych królestw otwiera się od tego traktu na zachód, a druga na wschód, u wschodniego wybrzeża Doliny zaś leży wyspa. Dotarcie na miejsce jest częścią przygody: każdą drogą idzie się pieszo albo jedzie wierzchem, a kamień drogi w każdym centralnym mieście może przenieść cię natychmiast do dowolnego innego kamienia, którego już dotknąłeś.\n\nKraina odmierza też czas. Cykl dnia i nocy biegnie na prawdziwym zegarze dzielonym przez wszystkich w twoim świecie, więc niebo przechodzi od świtu przez południe ku zmierzchowi i ciemności dla was wszystkich naraz, księżyc przychodzi i odchodzi przez swoje fazy, a światło na ziemi zmienia się razem z nim. Tarcza wokół twojej minimapy to miejsce, w którym odczytujesz godzinę.",
       "hub": "Baza wypadowa",
       "mapHeading": "Trakt i królestwa za nim",
       "mapSub": "Szlak zadań biegnie z południa na północ środkiem mapy: dolina, bagno, szczyty i dalej za nie, w kotlinę i śnieg. Pozostałe królestwa otwierają się wzdłuż tego traktu, a nie za nim, przez bramy na wschód i na zachód od bagiennej drogi, natomiast wyspę Farshore osiąga się od wschodniego wybrzeża Doliny. Tym, co trzyma cię z dala od dalekich królestw, są ich pasma poziomów, nie marsz: pięć z nich dzieli najwyższe pasmo, więc gdy będziesz gotów, możesz brać je w dowolnej kolejności. Farshore jest wyjątkiem, to kraina niskiego poziomu, którą możesz odwiedzić wcześnie.",
@@ -6183,7 +6186,7 @@ export const pl_PL: EnTranslations = {
       "provingGreeter": "Instruktorka Maren, Obóz Dawnrest",
       "provingPlaceNotes": "Obóz Dawnrest to cała osada na wyspie: kilka namiotów, kramik i ognisko zbiórki. Stary Pomost patrzy w stronę doliny, gdzie krąg przeprawy niesie absolwentów przez cieśninę; Plac Ćwiczeń na południe od obozu utrzymuje swoje słomiane kukły w gotowości dla każdego, kto ich potrzebuje; a Linia Wraków to usiana złomem plaża, gdzie przypływ płaci wyspie skrzyniami rozbitków.",
       "travelTitle": "Podróżowanie",
-      "travelBody": "Każdą drogą w królestwie idzie się pieszo albo jedzie wierzchem. Nie ma szlaków lotu, taksówek ani sieci teleportów: mapa to jeden spójny ląd, a każde połączenie to coś, na czym możesz stanąć. Grzbiety dzielą jedną krainę od drugiej, a tam, gdzie dwie krainy dzielą wspólny grzbiet, droga wspina się przez przełęcz. Nie każda granica działa jednak w ten sposób. Na północy długa grobla wyprowadza drogę ponad wodą z Zasłoniętej Kotliny w krainę śniegu za nią, a z powrotem na południu cienka naturalna mielizna zwana Promowym Szlakiem biegnie na wschód od wybrzeża Vale do Przystani na wyspie Dalekiego Wybrzeża, która nie ma żadnej granicy lądowej. I jest dokładnie jedno prawdziwe wejście w całym otwartym świecie: zasłona zmierzchu wysoko na Thornpeak, która otwiera przejście do Zasłoniętej Kotliny. Południowy grzbiet Kotliny jest zapieczętowany, bez żadnej przełęczy, więc ta zasłona jest jedynym sposobem, by dostać się tam po raz pierwszy, i zamyka się za tobą w drodze powrotnej.\n\nGdziekolwiek polegniesz, droga powrotna jest krótka. Każda strefa ma co najmniej jeden cmentarz z Bladym Strażnikiem unoszącym się nad kamieniami, a uwolniony duch powstaje przy najbliższym z nich.\n\nMapa nie kończy się niewidzialną ścianą. Ląd wybiega w plaże i cyple, a potem w otwartą wodę. Przeprawy, które świat chce, byś przepłynął, cieśniny i rozlewiska między jedną krainą a drugą, są spokojne i bezpieczne do przekroczenia. Wypłyń zamiast tego na pełne morze, a sam dystans cię zawróci: zostaniesz ostrzeżony, i ostrzeżony ponownie, a jeśli będziesz płynąć dalej, morze będzie cię wyczerpywać, aż cię zabije. Nurkowanie ma swój własny limit, ponieważ pod powierzchnią kończy ci się oddech, więc wynurz się, by zaczerpnąć powietrza, i zawróć, gdy każe ci to woda.",
+      "travelBody": "Każdą drogą w królestwie idzie się pieszo albo jedzie wierzchem, a mapa to jeden spójny ląd: każde połączenie to coś, na czym możesz stanąć. Kamienie drogi pomagają ci odnaleźć drogę powrotną. Każde centralne miasto ma jeden, ze strażnikiem u boku, a gdy raz dotkniesz kamienia miasta pieszo, możesz zapłacić, by natychmiast przenieść się tam z dowolnego innego znanego ci kamienia. Opłata rośnie wraz z odległością, Bilet Kamienia Drogi zdobyty z codziennej kolejki do lochów opłaca jeden skok zamiast złota, a pozycja gildii odejmuje część ceny. Mag, który nauczył się Wielkiej Teleportacji, może otworzyć portal przenoszący jego drużynę do jednego z czterech miast starego traktu, a czarnoksiężnik, który zawarł pakt Piekielnej Bramy, może rozerwać bramę ściągającą do niego członków drużyny. Grzbiety dzielą jedną krainę od drugiej, a tam, gdzie dwie krainy dzielą wspólny grzbiet, droga wspina się przez przełęcz. Nie każda granica działa jednak w ten sposób. Na północy długa grobla wyprowadza drogę ponad wodą z Zasłoniętej Kotliny w krainę śniegu za nią, a z powrotem na południu cienka naturalna mielizna zwana Promowym Szlakiem biegnie na wschód od wybrzeża Vale do Przystani na wyspie Dalekiego Wybrzeża, która nie ma żadnej granicy lądowej. I jest dokładnie jedno prawdziwe wejście w całym otwartym świecie: zasłona zmierzchu wysoko na Thornpeak, która otwiera przejście do Zasłoniętej Kotliny. Południowy grzbiet Kotliny jest zapieczętowany, bez żadnej przełęczy, więc ta zasłona jest jedynym sposobem, by dostać się tam po raz pierwszy, i zamyka się za tobą w drodze powrotnej.\n\nGdziekolwiek polegniesz, droga powrotna jest krótka. Każda strefa ma co najmniej jeden cmentarz z Bladym Strażnikiem unoszącym się nad kamieniami, a uwolniony duch powstaje przy najbliższym z nich.\n\nMapa nie kończy się niewidzialną ścianą. Ląd wybiega w plaże i cyple, a potem w otwartą wodę. Przeprawy, które świat chce, byś przepłynął, cieśniny i rozlewiska między jedną krainą a drugą, są spokojne i bezpieczne do przekroczenia. Wypłyń zamiast tego na pełne morze, a sam dystans cię zawróci: zostaniesz ostrzeżony, i ostrzeżony ponownie, a jeśli będziesz płynąć dalej, morze będzie cię wyczerpywać, aż cię zabije. Nurkowanie ma swój własny limit, ponieważ pod powierzchnią kończy ci się oddech, więc wynurz się, by zaczerpnąć powietrza, i zawróć, gdy każe ci to woda.",
       "mountsTitle": "Wierzchowce",
       "mountsBody": "Jazda wierzchem to jedyna rzecz, która sprawia, że świat robi się mniejszy, i jest lekcją, zanim stanie się koniem. Na 20 poziomie Zarządczyni stajni, Marla, weźmie cię pod swoje skrzydła: kupujesz od niej Jeździectwo, a sama lekcja jazdy jest darmowa, parkur, który przejeżdżasz wokół jej zagrody na pożyczonym wierzchowcu. Zalicz go, oddaj lekcję, a twój pierwszy Valorsteed jest twój, i od tej chwili przemierzasz królestwo zauważalnie szybciej konno. Prędkość to jedyne, co daje ci wierzchowiec: rzadsze okazy, pochodzące z najtrudniejszej zawartości, są jeszcze szybsze, ale żaden z nich nie zmienia twojej siły w walce. Dosiadaj i zsiadaj klawiszem przypisanym w twoim sterowaniu. Nie możesz wsiąść na wierzchowca podczas walki, a zamach bronią, rzucenie zaklęcia, wejście do wody lub upadek w boju od razu stawiają cię z powrotem na nogi.",
       "mountsMore": "Wszystko o wierzchowcach",
@@ -16282,75 +16285,75 @@ export const pl_PL: EnTranslations = {
         "title": "Strażniczka Wybrzeża",
         "greeting": "Przypływ zabiera i przypływ płaci, {playerName}. Prowadzę rachunek obu tych rzeczy: tego, co czołgacze wyrywają z wraków, i tego, co uczciwe ręce znoszą z powrotem tą ścieżką."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

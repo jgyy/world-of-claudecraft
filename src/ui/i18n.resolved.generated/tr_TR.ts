@@ -2122,15 +2122,18 @@ export const tr_TR: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Vuruşta şans (%{chance}): {effect}",
@@ -6112,7 +6115,7 @@ export const tr_TR: EnTranslations = {
     },
     "worldPage": {
       "heading": "Dünya",
-      "intro": "World of ClaudeCraft, yaya olarak geçtiğin tek parça bir ülkedir. Eski yol güneyden kuzeye, başlangıç vadisi, bataklık ve zirveler boyunca uzanır ve onların ötesine, arkadaki çukura ve haritanın tepesindeki kar ülkesine tırmanmayı sürdürür. Bu yoldan batıya bir üst diyarlar dizisi, doğuya da bir başkası açılır ve Vadi'nin doğu kıyısı açıklarında bir ada bulunur. Hızlı yolculuk yok, uçuş hatları yok, arabalar yok: her yolculuk yürünür ya da at sırtında yapılır, dolayısıyla varmak macerasının bir parçasıdır.\n\nÜlke zamanı da tutar. Bir gündüz gece döngüsü, dünyandaki herkesin paylaştığı gerçek bir saat üzerinde işler; böylece gökyüzü hepiniz için aynı anda şafaktan öğleye, oradan alacakaranlığa ve karanlığa geçer, ay evrelerinden geçerek gelir gider ve yerdeki ışık onunla değişir. Küçük haritanın çevresindeki kadran, saati okuduğun yerdir.",
+      "intro": "World of ClaudeCraft, yaya olarak geçtiğin tek parça bir ülkedir. Eski yol güneyden kuzeye, başlangıç vadisi, bataklık ve zirveler boyunca uzanır ve onların ötesine, arkadaki çukura ve haritanın tepesindeki kar ülkesine tırmanmayı sürdürür. Bu yoldan batıya bir üst diyarlar dizisi, doğuya da bir başkası açılır ve Vadi'nin doğu kıyısı açıklarında bir ada bulunur. Varmak macerasının bir parçasıdır: her yol yürünerek ya da atla kat edilir ve her merkez kasabadaki yol taşı, sizi daha önce dokunduğunuz herhangi bir başka taşa anında taşıyabilir.\n\nÜlke zamanı da tutar. Bir gündüz gece döngüsü, dünyandaki herkesin paylaştığı gerçek bir saat üzerinde işler; böylece gökyüzü hepiniz için aynı anda şafaktan öğleye, oradan alacakaranlığa ve karanlığa geçer, ay evrelerinden geçerek gelir gider ve yerdeki ışık onunla değişir. Küçük haritanın çevresindeki kadran, saati okuduğun yerdir.",
       "hub": "Ana üs",
       "mapHeading": "Yol ve ötesindeki diyarlar",
       "mapSub": "Görev izi haritanın ortasından güneyden kuzeye uzanır: vadi, bataklık, zirveler ve onların ötesinde çukur ile kar. Diğer diyarlar bu yolun ardından değil, boyunca açılır; bataklık yolunun doğusundaki ve batısındaki kapılardan, Farshore adasına ise Vadi'nin doğu kıyısından ulaşılır. Seni uzak diyarlardan uzak tutan şey yürüyüş değil, onların seviye kuşaklarıdır: beşi en üst kuşağı paylaşır, dolayısıyla hazır olduğunda onları istediğin sırayla ele alabilirsin. Farshore istisnadır, erken ziyaret edebileceğin düşük seviyeli bir ülke.",
@@ -6183,7 +6186,7 @@ export const tr_TR: EnTranslations = {
       "provingGreeter": "Eğitmen Maren, Dawnrest Kampı",
       "provingPlaceNotes": "Dawnrest Kampı, adanın tüm yerleşimidir: birkaç çadır, bir tezgah, ve bir toplanma ateşi. Eski İskele Vadi'ye bakar, geçiş çemberinin mezunları boğazın üzerinden taşıdığı yerdir; kampın güneyindeki Talim Alanı, ihtiyacı olan herkes için saman kuklalarını ayakta tutar; ve Enkaz Hattı, gelgidin adaya enkaz sandıklarıyla ödeme yaptığı, ganimetle dolu kumsaldır.",
       "travelTitle": "Etrafta gezinme",
-      "travelBody": "Diyardaki her yol, yürünerek ya da atla kat edilir. Uçuş rotası, taksi ya da ışınlanma ağı yoktur: harita tek parça, bağlantılı bir kara parçasıdır ve her bağlantı üzerinde durabileceğiniz bir şeydir. Sırtlar bir bölgeyi bir sonrakinden ayırır ve iki bölgenin bir sırtı paylaştığı yerde yol bir geçitten tırmanır. Ancak her sınır böyle işlemez. Kuzeyde uzun bir geçit yolu, Örtülü Vadi'den suyun üzerinden ötesindeki karlı ülkeye kadar yolu taşır; güneyde ise Feribot Yolu adında ince, doğal bir kum seti, Doğudere Vadisi'nin kıyısından doğuya, hiç kara sınırı olmayan Uzak Kıyı adasındaki İskele'ye kadar uzanır. Ve bütün açık dünyada tam olarak bir gerçek kapı vardır: Dikenzirve'nin yükseklerinde, Örtülü Vadi'ye açılan bir alacakaranlık örtüsü. Örtülü Vadi'nin güney sırtı mühürlüdür ve içinden geçit yoktur, bu yüzden içeri ilk kez o örtüden girersiniz ve dönüş yolunda arkanızdan kapanır.\n\nNerede düşerseniz düşün, geri dönüş kısa bir yürüyüştür. Her bölge, mezar taşlarının üzerinde süzülen bir Solgun Bekçi'nin beklediği en az bir mezarlık barındırır ve serbest bırakılan ruh, en yakınındakinde yükselir.\n\nHarita görünmez bir duvarda bitmez. Kara, plajlara ve burunlara, ardından açık suya çıkar. Dünyanın yüzmenizi istediği geçişler, bir bölgeyle bir sonraki arasındaki boğazlar ve göller, sakin ve geçmesi güvenlidir. Bunun yerine açık denize doğru yol alırsanız mesafenin kendisi sizi geri çevirir: uyarılırsınız, tekrar uyarılırsınız ve yüzmeye devam ederseniz deniz sizi öldürene dek yıpratır. Dalışın kendi sınırı vardır, çünkü nefesiniz yüzeyin altında tükenir, bu yüzden su size söylediğinde hava almak için yüzeye çıkın ve geri dönün.",
+      "travelBody": "Diyardaki her yol yürünerek ya da atla kat edilir ve harita tek parça, bağlantılı bir kara parçasıdır: her bağlantı üzerinde durabileceğiniz bir şeydir. Yol taşları geri dönüş yolunu bulmanıza yardımcı olur. Her merkez kasaba, yanında bir bekçisi olan bir yol taşı barındırır ve bir kasabanın taşına yaya olarak dokunduktan sonra, bildiğiniz herhangi bir başka taştan oraya anında adım atmak için ödeme yapabilirsiniz. Ücret mesafeyle artar, günlük zindan kuyruğundan kazanılan bir Yol Taşı Bileti altın yerine bir sıçramayı öder ve bir loncanın statüsü fiyattan bir pay düşürür. Büyük Işınlanma öğrenmiş bir büyücü, grubunu eski yolun dört şehrinden birine taşıyan bir geçit açabilir; Cehennem Kapısı antlaşmasını yapmış bir warlock ise grup üyelerini kendine çeken bir kapı yırtabilir. Sırtlar bir bölgeyi bir sonrakinden ayırır ve iki bölgenin bir sırtı paylaştığı yerde yol bir geçitten tırmanır. Ancak her sınır böyle işlemez. Kuzeyde uzun bir geçit yolu, Örtülü Vadi'den suyun üzerinden ötesindeki karlı ülkeye kadar yolu taşır; güneyde ise Feribot Yolu adında ince, doğal bir kum seti, Doğudere Vadisi'nin kıyısından doğuya, hiç kara sınırı olmayan Uzak Kıyı adasındaki İskele'ye kadar uzanır. Ve bütün açık dünyada tam olarak bir gerçek kapı vardır: Dikenzirve'nin yükseklerinde, Örtülü Vadi'ye açılan bir alacakaranlık örtüsü. Örtülü Vadi'nin güney sırtı mühürlüdür ve içinden geçit yoktur, bu yüzden içeri ilk kez o örtüden girersiniz ve dönüş yolunda arkanızdan kapanır.\n\nNerede düşerseniz düşün, geri dönüş kısa bir yürüyüştür. Her bölge, mezar taşlarının üzerinde süzülen bir Solgun Bekçi'nin beklediği en az bir mezarlık barındırır ve serbest bırakılan ruh, en yakınındakinde yükselir.\n\nHarita görünmez bir duvarda bitmez. Kara, plajlara ve burunlara, ardından açık suya çıkar. Dünyanın yüzmenizi istediği geçişler, bir bölgeyle bir sonraki arasındaki boğazlar ve göller, sakin ve geçmesi güvenlidir. Bunun yerine açık denize doğru yol alırsanız mesafenin kendisi sizi geri çevirir: uyarılırsınız, tekrar uyarılırsınız ve yüzmeye devam ederseniz deniz sizi öldürene dek yıpratır. Dalışın kendi sınırı vardır, çünkü nefesiniz yüzeyin altında tükenir, bu yüzden su size söylediğinde hava almak için yüzeye çıkın ve geri dönün.",
       "mountsTitle": "Binekler",
       "mountsBody": "Binicilik, dünyayı küçülten tek şeydir ve bir at olmadan önce bir derstir. 20. seviyede ahır ustası Marla sizi yanına alır: ondan binicilik becerisini satın alırsınız, dersin kendisi ise ücretsizdir, ödünç bir binek üzerinde onun padokunun etrafında koştuğunuz bir atlama parkuru. Bunu geçin, dersi teslim edin ve ilk Valorsteed'iniz sizindir; o andan sonra diyarı at sırtında belirgin şekilde daha hızlı geçersiniz. Hız, bir bineğin size verdiği tek şeydir: en zorlu içerikten gelen daha nadir binekler daha da hızlıdır, ama hiçbiri dövüşteki gücünüzü değiştirmez. Kontrollerinizde atanmış tuşla binin ve inin. Savaştayken bineğinize binemezsiniz ve bir silah sallamak, bir büyü yapmak, suya girmek ya da savaşta düşmek sizi yeniden ayaklarınızın üzerine koyar.",
       "mountsMore": "Binekler hakkında her şey",
@@ -16282,75 +16285,75 @@ export const tr_TR: EnTranslations = {
         "title": "Kumsalın Bekçisi",
         "greeting": "Gelgit alır, gelgit öder, {playerName}. İkisinin de hesabını tutarım: yürüyücülerin enkazlardan çaldığını, ve dürüst ellerin bu yoldan yukarı taşıdığını."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

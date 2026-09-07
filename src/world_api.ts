@@ -50,7 +50,7 @@
 //   deeds.ts            IWorldDeeds          earned deeds, lifetime stats, renown, active title,
 //                                            rarity + the account-Renown leaderboard reads
 //   reliquary.ts        IWorldReliquary      sparse firstFind / marks / recent + pure completion
-//   flight_paths.ts     IWorldFlightPaths    flightmaster nodes known + the paid hub-to-hub flight
+//   waystones.ts        IWorldWaystones      attuned waystones + the paid instant hop between them
 //
 // THREE GATES pin this seam (run before any facet edit; the literal counts are
 // pinned THERE and re-stale here, so this prose stays count-free):
@@ -77,7 +77,6 @@ import type { IWorldDuelArena } from './world_api/duel_arena';
 import type { IWorldDungeonFinder } from './world_api/dungeon_finder';
 import type { IWorldDungeons } from './world_api/dungeons';
 import type { IWorldEntityRoster } from './world_api/entity_roster';
-import type { IWorldFlightPaths } from './world_api/flight_paths';
 import type { IWorldGuildBank } from './world_api/guild_bank';
 import type { IWorldInteraction } from './world_api/interaction';
 import type { IWorldInventory } from './world_api/inventory';
@@ -96,6 +95,7 @@ import type { IWorldTalents } from './world_api/talents';
 import type { IWorldTargeting } from './world_api/targeting';
 import type { IWorldTelemetry } from './world_api/telemetry';
 import type { IWorldTrade } from './world_api/trade';
+import type { IWorldWaystones } from './world_api/waystones';
 
 // --- pass-through sim re-exports: downstream imports these FROM world_api ---
 // Account flair is defined in the host-agnostic sim core (src/sim/account_flair.ts)
@@ -401,7 +401,7 @@ export interface IWorld
     IWorldDeeds,
     IWorldReliquary,
     IWorldMounts,
-    IWorldFlightPaths {}
+    IWorldWaystones {}
 
 // ---------------------------------------------------------------------------
 // Command schema (W0b): the shared wire-token vocabulary.
@@ -744,8 +744,8 @@ export const COMMAND_NAMES = [
   // life, and band server-side). Appended because wire tokens are never
   // reordered.
   'tutorial_start',
-  // Flight paths: board a flight at the flightmaster in reach (src/sim/flight_paths.ts).
-  'flight_take',
+  // Waystones: teleport from the keeper in reach to an attuned stone (src/sim/waystones.ts).
+  'waystone_teleport',
 ] as const;
 
 // The union both the send path (`online.ts`) and the dispatch switch
@@ -833,7 +833,7 @@ export type WorldFacet =
   | 'IWorldDeeds'
   | 'IWorldReliquary'
   | 'IWorldMounts'
-  | 'IWorldFlightPaths';
+  | 'IWorldWaystones';
 
 export const COMMAND_FACETS = {
   // IWorldCombat: ability casts, auto-attack, spirit release.
@@ -1083,6 +1083,6 @@ export const COMMAND_FACETS = {
   // IWorldActionBar: the debounced action-bar layout upload. takeActionBarLayoutRestore
   // is a login-time read (no send, untagged).
   save_hotbar_layout: 'IWorldActionBar',
-  // IWorldFlightPaths: board a flight (flightNodesKnown is a snapshot read, `fln`).
-  flight_take: 'IWorldFlightPaths',
+  // IWorldWaystones: the hop (waystonesAttuned is a snapshot read, `wsa`).
+  waystone_teleport: 'IWorldWaystones',
 } as const satisfies Partial<Record<ClientCommand, WorldFacet>>;

@@ -5,7 +5,10 @@
 // Absolute thresholds in a pure leaf: every host derives the same tier from
 // the same total, and the presentation (nameplate colour classes) keys off
 // the tier index alone. Cosmetic only, never power (the graphics-neutral
-// rule); tier 0 is the base look every fresh guild starts with.
+// rule); tier 0 is the base look every fresh guild starts with. The one
+// non-cosmetic consumer is the waystone hop fee discount
+// (WAYSTONE_GUILD_DISCOUNT_PCT in src/sim/waystone_fee.ts): a convenience
+// discount on a gold sink, never combat power.
 
 /** Lifetime-XP floors per tier, ascending; index IS the tier. Tuned so a few
  *  active members clear tier 1 in their first weeks, and the top tier stays

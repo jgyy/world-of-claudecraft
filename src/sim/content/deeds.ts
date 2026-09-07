@@ -2965,9 +2965,9 @@ export const DEEDS: Record<string, DeedDef> = {
   // The Hellgate pact (content/hellgate.ts): the warlock-only three-zone
   // quest chain that teaches the Hellgate. Standard renown, keyed on the
   // chain's final quest so the whole pact must be walked; the class gate is
-  // the quest's own (requiredClass), never the deed's. Flight paths and the
-  // Grand Teleport learn keys have no trigger in the closed vocabulary (a
-  // flight writes no counter or mark, and the learn key is a synthetic
+  // the quest's own (requiredClass), never the deed's. Waystones and the
+  // Grand Teleport learn keys have no trigger in the closed vocabulary (an
+  // attunement writes no counter or mark, and the learn key is a synthetic
   // questsDone entry, not a QUESTS id), so they author no deed here.
   prog_hellgate_pact: {
     id: 'prog_hellgate_pact',

@@ -355,7 +355,6 @@ import type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types'
 export type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types';
 
 import { dispatchDungeonFinderCommand } from './dungeon_finder_dispatch';
-import { dispatchFlightCommand } from './flight_dispatch';
 import { recordFtueDeath, recordFtueQuest, recordLevelUp } from './progress_events';
 import { eventLeadDayKey, resetDayKey } from './raid_reset';
 import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
@@ -395,6 +394,7 @@ import { maybeTrackDay7Retained, trackLevelMilestoneCapi } from './ua_capi';
 import { recordUnstuckEvent } from './unstuck_records';
 import { buildVarkhulPortalReplayBatch, varkhulPortalReplayFrame } from './varkhul_portal_replay';
 import { dispatchVaultCommand, emitVaultSelfKeys } from './vault_wire';
+import { dispatchWaystoneCommand } from './waystone_dispatch';
 import { holderInfoForPubkey } from './woc_balance';
 import type { CharacterSaveArgs } from './woc_market';
 import { isBackpressureExceeded } from './ws_backpressure';
@@ -6793,10 +6793,10 @@ export class GameServer {
         // overworld) on its authoritative copy before the teleport.
         sim.startTutorial(pid);
         break;
-      // Flight paths: the sim owns reach, known-node, route and fare gates
-      // (server/flight_dispatch.ts parses the node id only).
-      case 'flight_take':
-        dispatchFlightCommand(sim, msg, pid);
+      // Waystones: the sim owns the reach, attunement, ticket and fee gates
+      // (server/waystone_dispatch.ts parses the stone id only).
+      case 'waystone_teleport':
+        dispatchWaystoneCommand(sim, msg, pid);
         break;
       case 'turnin':
         if (typeof msg.quest === 'string') {
@@ -9226,7 +9226,7 @@ export class GameServer {
       // src/sim/quests/opened_object_view.ts): bounded, personal, on-change.
       maybe('qlog', [...meta.questLog.values()]);
       maybe('qdone', [...meta.questsDone]);
-      maybe('fln', [...meta.flightNodesKnown]);
+      maybe('wsa', [...meta.waystonesAttuned]);
       maybe('milestones', [...meta.unlockedMilestones]);
       // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
       // lifetime stat block. Maps and Sets do not survive JSON.stringify, so

@@ -4,10 +4,10 @@
 // merges those records into the flat tables the rest of the engine consumes,
 // and owns the world-layout constants.
 
-import { FLIGHTMASTER_NPCS } from './content/flight_paths';
 import { GRAND_TELEPORT_ITEMS } from './content/grand_teleports';
 import { HELLGATE_QUEST_ORDER, HELLGATE_QUESTS } from './content/hellgate';
 import { BASE_ITEMS } from './content/items';
+import { WAYSTONE_ITEMS, WAYSTONE_KEEPER_NPCS } from './content/waystones';
 import type {
   CampDef,
   DelveDef,
@@ -385,6 +385,7 @@ export const ITEMS: Record<string, ItemDef> = mergeItems(
   DUNGEON_KEEPSAKE_ITEMS,
   IGNIVAR_DROP_ITEMS,
   CRUCIBLE_PROFESSION_ITEMS,
+  WAYSTONE_ITEMS,
 );
 
 export type { AggregatedSetEffect } from './content/item_sets';
@@ -456,9 +457,9 @@ export const NPCS: Record<string, NpcDef> = {
   // loop skips it). Kept in NPCS so the online client and world_entity_i18n can
   // resolve its name; spirit.ts spawns a copy at every graveyard.
   [SPIRIT_HEALER_NPC_ID]: SPIRIT_HEALER,
-  // The flightmasters (dynamic: true, reserved-id spawn from
-  // src/sim/flight_paths.ts), appended last for insertion-order stability.
-  ...FLIGHTMASTER_NPCS,
+  // The waystone keepers (dynamic: true, reserved-id spawn from
+  // src/sim/waystones.ts), appended last for insertion-order stability.
+  ...WAYSTONE_KEEPER_NPCS,
 };
 
 // Graveyards + the Spirit Healer: re-exported so the Sim and spirit.ts import the

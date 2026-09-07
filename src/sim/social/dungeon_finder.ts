@@ -35,6 +35,7 @@ import {
 import { FIRST_TALENT_LEVEL, type Role } from '../content/talents';
 import type { SimContext } from '../sim_context';
 import type { PlayerClass } from '../types';
+import { markFinderRun } from '../waystone_tickets';
 
 // Availability window before a proposal expires (whole seconds).
 export const FINDER_PROPOSAL_SECONDS = 30;
@@ -541,6 +542,10 @@ export class DungeonFinderMachine {
         memberPid,
         'Your Dungeon Finder group has assembled. Travel to the entrance together.',
       );
+      // The daily Waystone Ticket grant pays this dungeon's clear
+      // (src/sim/waystone_tickets.ts).
+      const member = this.ctx.players.get(memberPid);
+      if (member) markFinderRun(member, activity.dungeonId);
     }
     this.matchDirty = true;
   }

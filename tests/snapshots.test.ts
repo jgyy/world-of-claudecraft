@@ -109,11 +109,11 @@ const DELTA_KEYS = [
   'equip',
   'qlog',
   'qdone',
-  'fln',
   'lockouts',
   'cds',
   'stats',
   'weapon',
+  'wsa',
   'offhandWeapon',
   'party',
   'trade',
@@ -4875,7 +4875,6 @@ const ALL_DELTA_KEYS = [
   'einst',
   'ench',
   'equip',
-  'fln',
   'gprof',
   'guildBank',
   'hbl',
@@ -4922,6 +4921,7 @@ const ALL_DELTA_KEYS = [
   'tslot',
   'vault',
   'weapon',
+  'wsa',
   'xp',
 ] as const;
 
@@ -4992,7 +4992,6 @@ const TERSE_TO_IWORLD: Record<string, string> = {
   einst: 'equipmentInstances',
   ench: 'lastEnchantResult',
   equip: 'equipment',
-  fln: 'flightNodesKnown',
   gprof: 'gatheringProficiency',
   guildBank: 'guildBankInfo',
   hirat: 'hitRating',
@@ -5031,6 +5030,7 @@ const TERSE_TO_IWORLD: Record<string, string> = {
   tfocus: 'townFocus',
   tslot: 'toolEffectSlots',
   vault: 'vaultInfo',
+  wsa: 'waystonesAttuned',
 };
 
 // Year ~2223 in epoch ms. Beats selfWireJson's `until > Date.now()` lockout
@@ -5956,7 +5956,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     // adds offhandWeapon (delta-guarded like weapon/stats: a gear swap, not a
     // per-tick change; dualWielding rides no key of its own, it is always
     // exactly offhandWeapon !== null, so the client derives it), for 90.
-    // Flight paths add fln (the known flight-node ids, the qdone shape),
+    // Waystones add wsa (the attuned stone ids, the qdone shape),
     // for 91.
     expect(ALL_DELTA_KEYS).toHaveLength(91);
     expect(new Set(ALL_DELTA_KEYS).size).toBe(91);
@@ -6048,7 +6048,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     // Storage Phase 2 then adds bpsl, vault, and cvault, for 87. The
     // maybeSerialized arm of the scrape then surfaces the two capability-gated
     // direct emits, auras and de, for 89. The off-hand bar adds offhandWeapon,
-    // for 90. Flight paths add fln, for 91.
+    // for 90. Waystones add wsa, for 91.
     expect(scraped.size).toBe(91);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });

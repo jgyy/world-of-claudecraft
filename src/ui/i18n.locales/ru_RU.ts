@@ -6884,7 +6884,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'guide.family.reptile.desc':
     'Хладнокровные охотники со своим особым шипением и хваткой, непохожие на теплокровных зверей.',
   'guide.worldPage.heading': 'Мир',
-  'guide.worldPage.intro': 'World of ClaudeCraft — это одна сплошная земля, которую вы пересекаете пешком. Старая дорога идёт с юга на север через начальную долину, топь и пики и продолжает подниматься за ними, в лощину дальше и в снежный край наверху карты. От этой дороги на запад открывается вереница высших царств, а на восток — другая, и у восточного берега Долины лежит остров. Быстрых путешествий нет, нет ни лётных маршрутов, ни повозок: каждый путь проходят пешком или верхом, поэтому дорога до цели — часть приключения.\n\nЗемля ведёт и счёт времени. Цикл дня и ночи идёт по настоящим часам, общим для всех на вашем мире, поэтому небо переходит от рассвета через полдень к сумеркам и тьме для всех вас разом, луна приходит и уходит через свои фазы, а свет на земле меняется вместе с нею. Циферблат вокруг мини-карты — то место, где вы считываете час.',
+  'guide.worldPage.intro': 'World of ClaudeCraft — это одна сплошная земля, которую вы пересекаете пешком. Старая дорога идёт с юга на север через начальную долину, топь и пики и продолжает подниматься за ними, в лощину дальше и в снежный край наверху карты. От этой дороги на запад открывается вереница высших царств, а на восток — другая, и у восточного берега Долины лежит остров. Путь к цели тоже часть приключения: каждый путь проходят пешком или верхом, а путевой камень в каждом центральном городе может мгновенно перенести вас к любому другому камню, которого вы уже коснулись.\n\nЗемля ведёт и счёт времени. Цикл дня и ночи идёт по настоящим часам, общим для всех на вашем мире, поэтому небо переходит от рассвета через полдень к сумеркам и тьме для всех вас разом, луна приходит и уходит через свои фазы, а свет на земле меняется вместе с нею. Циферблат вокруг мини-карты — то место, где вы считываете час.',
   'guide.worldPage.hub': 'Опорная база',
   'guide.worldPage.valeBlurb':
     'Зеленая стартовая долина, где новые герои набираются опыта на волках и разбойниках вокруг города Восточный Брод.',
@@ -14127,7 +14127,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'guide.worldPage.riftBody': 'Что-то не перестаёт рвать в королевстве дыры. Порталы разломов открываются сами по себе в мире — никогда в трёх зонах начальной дороги, но во всех землях за ними и на Дальнем Берегу, — и обо всяком новом прорыве узнаёт всё королевство. У каждого портала свой ранг, и чем выше ранг, тем тяжелее и богаче спуск. Портал — общее событие: шагнуть внутрь может любая группа, и каждая получает свой поход, но первое прохождение достаётся лишь одной, так что к свежему разлому стоит поспешить. Чтобы войти, нужен 20 уровень, а если никто не откликнется вовремя, разлом обрушится сам.',
   'guide.worldPage.riftMore': 'Всё о разломах',
   'guide.worldPage.riftTitle': 'Порталы разломов',
-  'guide.worldPage.travelBody': 'Каждую дорогу в королевстве проходят пешком или верхом. Здесь нет ни воздушных путей, ни извозчиков, ни сети телепортов: карта — один связный материк, и всякая связь между местами — то, на чём можно стоять ногами. Хребты отделяют один край от другого, а там, где два края делят хребет, дорога поднимается через перевал. Впрочем, не всякая граница устроена так. На севере длинная дамба выносит дорогу над водой из Сокрытой лощины в снежные земли за ней, а южнее тонкая природная песчаная коса, зовущаяся Паромной косой, тянется на восток от берега Долины к Пристани на острове Дальний Берег, у которого сухопутной границы нет вовсе. И во всём наземном мире есть ровно одна настоящая дверь: сумеречная пелена высоко на Терновом пике, что открывается в Сокрытую лощину. Южный хребет Лощины запечатан, и перевала через него нет, так что эта пелена — то, как вы впервые попадаете внутрь, и на обратном пути она закрывается за вами.\n\nГде бы вы ни пали, путь назад короток. В каждой зоне есть хотя бы одно кладбище, над камнями которого парит Целитель душ, и отпущенный дух поднимается на ближайшем из них.\n\nКарта не упирается в невидимую стену. Земля сходит на пляжи и мысы, а затем в открытую воду. Переправы, которые мир и задумал для вас вплавь, — проливы и озёра между одним краем и другим, — спокойны, и пересекать их безопасно. А отправьтесь в открытое море, и само расстояние повернёт вас назад: вас предупредят, предупредят ещё раз, а если вы продолжите плыть, море вымотает вас, пока не убьёт. У ныряния свой предел, ведь под водой у вас кончается дыхание, так что всплывайте за воздухом и поворачивайте назад, когда вода сама вам об этом скажет.',
+  'guide.worldPage.travelBody': 'Каждую дорогу в королевстве проходят пешком или верхом, а карта представляет собой единый связный материк, где на любую связь между местами можно встать ногами. Путевые камни помогают вам найти путь назад. В каждом центральном городе хранится такой камень со стражем рядом, и стоит вам однажды коснуться камня города пешком, как вы можете заплатить и мгновенно перенестись туда с любого другого известного вам камня. Плата растёт с расстоянием, Билет путевого камня, заработанный в ежедневной очереди подземелий, оплачивает один прыжок вместо золота, а положение гильдии снимает часть цены. Маг, изучивший Великую телепортацию, может открыть портал, переносящий его группу в один из четырёх городов старой дороги, а чернокнижник, заключивший договор Адских врат, может разорвать врата, притягивающие к нему членов группы. Хребты отделяют один край от другого, а там, где два края делят хребет, дорога поднимается через перевал. Впрочем, не всякая граница устроена так. На севере длинная дамба выносит дорогу над водой из Сокрытой лощины в снежные земли за ней, а южнее тонкая природная песчаная коса, зовущаяся Паромной косой, тянется на восток от берега Долины к Пристани на острове Дальний Берег, у которого сухопутной границы нет вовсе. И во всём наземном мире есть ровно одна настоящая дверь: сумеречная пелена высоко на Терновом пике, что открывается в Сокрытую лощину. Южный хребет Лощины запечатан, и перевала через него нет, так что эта пелена — то, как вы впервые попадаете внутрь, и на обратном пути она закрывается за вами.\n\nГде бы вы ни пали, путь назад короток. В каждой зоне есть хотя бы одно кладбище, над камнями которого парит Целитель душ, и отпущенный дух поднимается на ближайшем из них.\n\nКарта не упирается в невидимую стену. Земля сходит на пляжи и мысы, а затем в открытую воду. Переправы, которые мир и задумал для вас вплавь, — проливы и озёра между одним краем и другим, — спокойны, и пересекать их безопасно. А отправьтесь в открытое море, и само расстояние повернёт вас назад: вас предупредят, предупредят ещё раз, а если вы продолжите плыть, море вымотает вас, пока не убьёт. У ныряния свой предел, ведь под водой у вас кончается дыхание, так что всплывайте за воздухом и поворачивайте назад, когда вода сама вам об этом скажет.',
   'guide.worldPage.travelTitle': 'Как передвигаться',
   'hud.errors.notEnoughDevotion': 'Недостаточно Преданности!',
   'hud.pet.abyssalChain': 'Цепь бездны',
@@ -15098,62 +15098,63 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.realmBuilder.pastEmpty': 'В списке пока нет имён.',
   'hudChrome.realmBuilder.close': 'Закрыть',
   'worldContent.realmBuilderMonumentName': 'Памятник зодчим королевства',
-  // Fast travel: the flightmasters, the Hellgate pact, the Grand Teleport tomes and abilities.
-  'entities.npcs.flightmaster_eastbrook.name': 'Рен Холлис',
-  'entities.npcs.flightmaster_eastbrook.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_eastbrook.greeting':
-    'Грифоны отдохнули, небо чистое, {className}. Куда летим?',
-  'entities.npcs.flightmaster_fenbridge.name': 'Одо Маршвик',
-  'entities.npcs.flightmaster_fenbridge.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_fenbridge.greeting':
-    'Берегитесь камышей на взлёте. Назовите город, и мы вас доставим.',
-  'entities.npcs.flightmaster_highwatch.name': 'Брам Тислкраг',
-  'entities.npcs.flightmaster_highwatch.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_highwatch.greeting':
-    'Воздух разрежён, а виды далёкие. Птицы знают каждый перевал в этих горах.',
-  'entities.npcs.flightmaster_eldergleam.name': 'Сильвейн Дасквордэн',
-  'entities.npcs.flightmaster_eldergleam.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_eldergleam.greeting':
-    'Сверху Лощина куда добрее. Выберите, где приземлиться.',
-  'entities.npcs.flightmaster_wyrmwatch.name': 'Карск Эмберхайд',
-  'entities.npcs.flightmaster_wyrmwatch.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_wyrmwatch.greeting':
-    'Даже змеи обходят моих птиц стороной. Куда вас посылает крепость?',
-  'entities.npcs.flightmaster_icemantle.name': 'Хильда Фростмантл',
-  'entities.npcs.flightmaster_icemantle.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_icemantle.greeting':
-    'Укутайтесь потеплее. Ветер над ледником кусается, зато полёт быстрый.',
-  'entities.npcs.flightmaster_lanternmere.name': 'Фенник Эмбергейл',
-  'entities.npcs.flightmaster_lanternmere.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_lanternmere.greeting':
-    'Фонари зажжены для ночных полётов. Выберите, куда лететь.',
-  'entities.npcs.flightmaster_bridgemere.name': 'Тэмсин Ридрайт',
-  'entities.npcs.flightmaster_bridgemere.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_bridgemere.greeting':
-    'С моста туда, куда пустят топи. Куда летим, {className}?',
-  'entities.npcs.flightmaster_moonrest.name': 'Эловен Найтсонг',
-  'entities.npcs.flightmaster_moonrest.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_moonrest.greeting':
-    'Мотыльки ведут ночных птиц домой. Скажите куда, и мы летим.',
-  'entities.npcs.flightmaster_gallowmere.name': 'Корвин Грейвзенд',
-  'entities.npcs.flightmaster_gallowmere.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_gallowmere.greeting':
-    'В здешнем небе никто не бродит. Пока. Назовите свой город.',
-  'entities.npcs.flightmaster_drifthaven.name': 'Ния Солтвинд',
-  'entities.npcs.flightmaster_drifthaven.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_drifthaven.greeting':
-    'Тёплый ветер с отмелей отлично поднимает птицу. Куда держите путь?',
-  'entities.npcs.flightmaster_hedgewick.name': 'Пип Гринбауэр',
-  'entities.npcs.flightmaster_hedgewick.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_hedgewick.greeting': 'Над изгородями и мимо садов. Куда отправимся?',
-  'entities.npcs.flightmaster_wickharbor.name': 'Марло Гейлсон',
-  'entities.npcs.flightmaster_wickharbor.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_wickharbor.greeting':
-    'Ветер в гавани сегодня ровный. Выберите, где приземлиться.',
-  'entities.npcs.flightmaster_gullhaven.name': 'Сабина Галлвинг',
-  'entities.npcs.flightmaster_gullhaven.title': 'Распорядитель полётов',
-  'entities.npcs.flightmaster_gullhaven.greeting':
-    'Чайки ненавидят моих птиц. Птицам всё равно. Куда летим?',
+  // Fast travel: the waystone keepers, the Hellgate pact, the Grand Teleport tomes and abilities.
+  'entities.npcs.waystone_keeper_eastbrook.name': 'Рен Холлис',
+  'entities.npcs.waystone_keeper_eastbrook.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_eastbrook.greeting':
+    'Камень гудит ради вас, {className}. Коснитесь его раз, и он навсегда запомнит ваше имя.',
+  'entities.npcs.waystone_keeper_fenbridge.name': 'Одо Маршвик',
+  'entities.npcs.waystone_keeper_fenbridge.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_fenbridge.greeting':
+    'Берегитесь мха на камне. Назовите город, и вы уже будете там стоять.',
+  'entities.npcs.waystone_keeper_highwatch.name': 'Брам Тислкраг',
+  'entities.npcs.waystone_keeper_highwatch.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_highwatch.greeting':
+    'Воздух разрежён, дороги быстры. Камень помнит каждую вершину, которой вы касались.',
+  'entities.npcs.waystone_keeper_eldergleam.name': 'Сильвейн Дасквордэн',
+  'entities.npcs.waystone_keeper_eldergleam.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_eldergleam.greeting':
+    'Лощина хранит свой камень под ветвями. Выберите, где хотите оказаться.',
+  'entities.npcs.waystone_keeper_wyrmwatch.name': 'Карск Эмберхайд',
+  'entities.npcs.waystone_keeper_wyrmwatch.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_wyrmwatch.greeting':
+    'Даже змеи не трогают этот камень. Куда вас отправляет крепость?',
+  'entities.npcs.waystone_keeper_icemantle.name': 'Хильда Фростмантл',
+  'entities.npcs.waystone_keeper_icemantle.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_icemantle.greeting':
+    'Камень тёплый на ощупь, единственное тёплое на всём леднике. Куда вам?',
+  'entities.npcs.waystone_keeper_lanternmere.name': 'Фенник Эмбергейл',
+  'entities.npcs.waystone_keeper_lanternmere.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_lanternmere.greeting':
+    'Сегодня вечером вокруг камня зажжены фонари. Выберите пункт назначения.',
+  'entities.npcs.waystone_keeper_bridgemere.name': 'Тэмсин Ридрайт',
+  'entities.npcs.waystone_keeper_bridgemere.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_bridgemere.greeting':
+    'От камня у моста до любого камня, что вы знаете. Куда, {className}?',
+  'entities.npcs.waystone_keeper_moonrest.name': 'Эловен Найтсонг',
+  'entities.npcs.waystone_keeper_moonrest.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_moonrest.greeting':
+    'На закате вокруг камня кружат мотыльки. Скажите куда, и вы уже там.',
+  'entities.npcs.waystone_keeper_gallowmere.name': 'Корвин Грейвзенд',
+  'entities.npcs.waystone_keeper_gallowmere.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_gallowmere.greeting':
+    'В этом камне пока ничто не бродит. Назовите ваш город.',
+  'entities.npcs.waystone_keeper_drifthaven.name': 'Ния Солтвинд',
+  'entities.npcs.waystone_keeper_drifthaven.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_drifthaven.greeting':
+    'Соль ничуть не притупила этот камень. Куда держите путь?',
+  'entities.npcs.waystone_keeper_hedgewick.name': 'Пип Гринбауэр',
+  'entities.npcs.waystone_keeper_hedgewick.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_hedgewick.greeting':
+    'Камень стоит между изгородями и садами. Куда же вам?',
+  'entities.npcs.waystone_keeper_wickharbor.name': 'Марло Гейлсон',
+  'entities.npcs.waystone_keeper_wickharbor.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_wickharbor.greeting':
+    'Камень гавани стоит твёрдо, что бы ни делал ветер. Выберите, где приземлиться.',
+  'entities.npcs.waystone_keeper_gullhaven.name': 'Сабина Галлвинг',
+  'entities.npcs.waystone_keeper_gullhaven.title': 'Хранитель путевого камня',
+  'entities.npcs.waystone_keeper_gullhaven.greeting':
+    'Чайки садятся на камень. Камню всё равно. Куда вам?',
   'entities.quests.q_hellgate_pact.title': 'Беспокойный договор',
   'entities.quests.q_hellgate_pact.text':
     'Вы водите демона на поводке, {playerName}, и думаете, что это делает вас его хозяином. Старые договоры говорят иное: врата всегда открывают лишь с той стороны. Если хотите научиться рвать их сами, для начала докажите, что мёртвые церковного двора вас не удержат. Упокойте 8 Беспокойных костей и принесите мне то, что узнаете.',
@@ -15193,13 +15194,16 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'entities.abilities.hellgate.name': 'Адские врата',
   'entities.abilities.hellgate.description':
     'Разрывает у ваших ног Адские врата на 99 сек. Щёлкните по вратам, выбрав целью члена группы, чтобы притянуть его к ним. Пока врата стоят, демоны за ними каждую секунду отнимают у вас 1% максимального запаса здоровья и не дают ему восстанавливаться. Время прочтения 10 сек.',
-  'hudChrome.flight.title': 'Маршруты полётов',
-  'hudChrome.flight.gossipOption': 'Совершить полёт',
-  'hudChrome.flight.gossipOptionAria': 'Совершить полёт с {name}',
-  'hudChrome.flight.rowAria': 'Полёт в {town}, перелётов: {hops}, {fare}',
-  'hudChrome.flight.hops': 'перелётов: {count}',
-  'hudChrome.flight.fare': 'Плата: {fare}',
-  'hudChrome.flight.empty':
-    'Вы пока не знаете других маршрутов полётов. Поговорите с распорядителем полётов в другом городе, чтобы узнать его маршрут.',
-  'hudChrome.flight.close': 'Закрыть маршруты полётов',
+  'hudChrome.waystone.title': 'Путевые камни',
+  'hudChrome.waystone.gossipOption': 'Использовать путевой камень',
+  'hudChrome.waystone.gossipOptionAria': 'Использовать путевой камень с {name}',
+  'hudChrome.waystone.rowAria': 'Телепорт в {town}, {distance} ярдов, {price}',
+  'hudChrome.waystone.distance': '{distance} ярд.',
+  'hudChrome.waystone.fee': 'Плата: {fee}',
+  'hudChrome.waystone.ticketPrice': '1 билет',
+  'hudChrome.waystone.tickets': 'Билеты путевого камня: {count}',
+  'hudChrome.waystone.guildDiscount': 'Скидка гильдии: {pct}%',
+  'hudChrome.waystone.empty':
+    'Вы пока не настроены ни на один другой путевой камень. Коснитесь камня в другом городе, чтобы настроиться на него.',
+  'hudChrome.waystone.close': 'Закрыть путевые камни',
 };

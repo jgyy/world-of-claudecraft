@@ -2122,15 +2122,18 @@ export const vi_VN: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Cơ hội khi đánh trúng ({chance}%): {effect}",
@@ -6112,7 +6115,7 @@ export const vi_VN: EnTranslations = {
     },
     "worldPage": {
       "heading": "Thế giới",
-      "intro": "World of ClaudeCraft là một vùng đất liền mạch mà bạn băng qua bằng đôi chân. Con đường cũ chạy từ nam lên bắc, xuyên qua thung lũng khởi đầu, đầm lầy và các đỉnh núi, rồi vẫn leo tiếp qua chúng vào lòng chảo phía sau và xứ tuyết ở đầu bản đồ. Một dãy vương quốc cao hơn mở ra từ con đường ấy về phía tây và một dãy khác về phía đông, còn một hòn đảo nằm ngoài bờ đông của Thung Lũng. Không có di chuyển nhanh, không tuyến bay và không xe ngựa: mọi hành trình đều đi bộ hoặc cưỡi thú, nên việc tới nơi là một phần của cuộc phiêu lưu.\n\nVùng đất cũng giữ thời gian. Một chu kỳ ngày đêm chạy trên chiếc đồng hồ thật mà tất cả mọi người trên thế giới của bạn cùng chia sẻ, nên bầu trời chuyển từ hừng đông qua chính ngọ tới hoàng hôn rồi bóng tối cho tất cả các bạn cùng lúc, mặt trăng đến rồi đi qua các pha của nó, và ánh sáng trên mặt đất đổi thay theo. Mặt số quanh bản đồ nhỏ là nơi bạn đọc giờ.",
+      "intro": "World of ClaudeCraft là một vùng đất liền mạch mà bạn băng qua bằng đôi chân. Con đường cũ chạy từ nam lên bắc, xuyên qua thung lũng khởi đầu, đầm lầy và các đỉnh núi, rồi vẫn leo tiếp qua chúng vào lòng chảo phía sau và xứ tuyết ở đầu bản đồ. Một dãy vương quốc cao hơn mở ra từ con đường ấy về phía tây và một dãy khác về phía đông, còn một hòn đảo nằm ngoài bờ đông của Thung Lũng. Đến nơi cũng là một phần của cuộc phiêu lưu: mọi con đường đều được đi bộ hoặc cưỡi ngựa qua, và viên đá lữ hành ở mỗi thị trấn trung tâm có thể đưa bạn tức thời đến bất kỳ viên đá nào khác mà bạn đã từng chạm vào.\n\nVùng đất cũng giữ thời gian. Một chu kỳ ngày đêm chạy trên chiếc đồng hồ thật mà tất cả mọi người trên thế giới của bạn cùng chia sẻ, nên bầu trời chuyển từ hừng đông qua chính ngọ tới hoàng hôn rồi bóng tối cho tất cả các bạn cùng lúc, mặt trăng đến rồi đi qua các pha của nó, và ánh sáng trên mặt đất đổi thay theo. Mặt số quanh bản đồ nhỏ là nơi bạn đọc giờ.",
       "hub": "Căn cứ nhà",
       "mapHeading": "Con đường và những vương quốc bên kia",
       "mapSub": "Lối mòn nhiệm vụ chạy từ nam lên bắc dọc giữa bản đồ: thung lũng, đầm lầy, đỉnh núi, rồi vượt qua chúng vào lòng chảo và vùng tuyết. Các vương quốc khác mở ra dọc con đường đó chứ không phải sau nó, qua những cánh cổng phía đông và phía tây con đường đầm lầy, còn đảo Farshore thì tới được từ bờ đông của Thung Lũng. Thứ giữ bạn khỏi các vương quốc xa là dải cấp độ của chúng, không phải quãng đường: năm trong số đó cùng chia dải cao nhất, nên khi đã sẵn sàng bạn có thể đi chúng theo bất kỳ thứ tự nào. Farshore là ngoại lệ, một xứ cấp thấp mà bạn có thể ghé thăm từ sớm.",
@@ -6183,7 +6186,7 @@ export const vi_VN: EnTranslations = {
       "provingGreeter": "Giáo Quan Maren, Trại Dawnrest",
       "provingPlaceNotes": "Trại Dawnrest là toàn bộ khu định cư của hòn đảo: vài chiếc lều, một quầy hàng, và một đống lửa tập hợp. Bến Tàu Cũ hướng về thung lũng, nơi vòng tròn vượt biển đưa những người tốt nghiệp qua eo biển; Sân Tập ở phía nam khu trại giữ những hình nộm rơm của nó luôn đứng vững cho bất cứ ai cần đến; và Tuyến Xác Tàu là bờ biển rải rác phế liệu, nơi thủy triều trả công cho hòn đảo bằng những thùng trôi dạt.",
       "travelTitle": "Di chuyển khắp thế giới",
-      "travelBody": "Mọi con đường trong vương quốc đều được đi bộ hoặc cưỡi ngựa qua. Không có lộ trình bay, không xe taxi, và không có mạng lưới dịch chuyển tức thời: bản đồ là một vùng đất liền mạch duy nhất, và mọi điểm nối đều là nơi bạn có thể đặt chân lên. Các rặng núi chia vùng đất này với vùng đất kia, và nơi hai vùng đất chung một rặng núi, con đường sẽ leo qua một đèo núi. Nhưng không phải biên giới nào cũng vận hành theo cách đó. Ở phía bắc, một con đê dài đưa con đường vượt qua mặt nước từ Thung Lũng Sương Phủ vào vùng đất tuyết giá xa hơn nữa, còn ở phía nam, một doi cát tự nhiên mỏng manh mang tên Ferrywalk chạy về phía đông từ bờ biển của Vale tới Bến Tàu trên hòn đảo Farshore, hòn đảo hoàn toàn không có biên giới đất liền nào. Và có đúng một cánh cửa thật sự duy nhất trong toàn bộ thế giới mở: một tấm màn hoàng hôn cao trên Đỉnh Gai mở vào Thung Lũng Sương Phủ. Rặng núi phía nam của Thung Lũng bị phong kín không lối nào xuyên qua, nên tấm màn ấy là cách duy nhất để bạn vào lần đầu, và nó khép lại sau lưng bạn trên đường trở về.\n\nDù bạn ngã xuống ở đâu, đường trở về cũng ngắn thôi. Mỗi vùng đất đều giữ ít nhất một nghĩa địa có một Người Canh Giữ Nhợt Nhạt lơ lửng trên những bia đá, và một linh hồn được giải thoát sẽ trỗi dậy tại nghĩa địa gần nhất trong số đó.\n\nBản đồ không kết thúc bằng một bức tường vô hình. Đất liền chạy dài ra thành bãi biển và mũi đất, rồi đến vùng biển khơi. Những đoạn nước mà thế giới muốn bạn bơi qua, các eo biển và đầm nước nằm giữa vùng đất này với vùng đất kia, đều êm ả và an toàn để vượt qua. Nhưng nếu bạn cố bơi ra biển khơi, chính khoảng cách sẽ đẩy bạn quay lại: bạn sẽ được cảnh báo, rồi cảnh báo thêm lần nữa, và nếu bạn vẫn tiếp tục bơi, biển cả sẽ bào mòn sức bạn cho đến khi giết chết bạn. Lặn xuống nước cũng có giới hạn riêng của nó, vì hơi thở của bạn sẽ cạn dần dưới mặt nước, nên hãy trồi lên lấy hơi và quay lại khi nước ra dấu cho bạn.",
+      "travelBody": "Mọi con đường trong vương quốc đều được đi bộ hoặc cưỡi ngựa qua, và bản đồ là một vùng đất liền mạch duy nhất: mọi điểm nối đều là nơi bạn có thể đặt chân lên. Những viên đá lữ hành giúp bạn tìm lại đường về. Mỗi thị trấn trung tâm đều giữ một viên, có người canh giữ bên cạnh, và một khi bạn đã chạm vào viên đá của một thị trấn bằng cách đi bộ, bạn có thể trả tiền để bước đến đó tức thời từ bất kỳ viên đá nào khác mà bạn biết. Phí tăng theo khoảng cách, một Vé Đá Lữ Hành kiếm được từ hàng đợi ngục tối hằng ngày sẽ trả cho một lần dịch chuyển thay vì vàng, và uy tín của bang hội sẽ giảm một phần giá tiền. Một pháp sư đã học được Đại Dịch Chuyển có thể mở một cổng dịch chuyển đưa cả nhóm đến một trong bốn thành phố trên con đường cũ, và một warlock đã đi theo khế ước Cổng Địa Ngục có thể xé toạc một cánh cổng kéo các thành viên trong nhóm về phía mình. Các rặng núi chia vùng đất này với vùng đất kia, và nơi hai vùng đất chung một rặng núi, con đường sẽ leo qua một đèo núi. Nhưng không phải biên giới nào cũng vận hành theo cách đó. Ở phía bắc, một con đê dài đưa con đường vượt qua mặt nước từ Thung Lũng Sương Phủ vào vùng đất tuyết giá xa hơn nữa, còn ở phía nam, một doi cát tự nhiên mỏng manh mang tên Ferrywalk chạy về phía đông từ bờ biển của Vale tới Bến Tàu trên hòn đảo Farshore, hòn đảo hoàn toàn không có biên giới đất liền nào. Và có đúng một cánh cửa thật sự duy nhất trong toàn bộ thế giới mở: một tấm màn hoàng hôn cao trên Đỉnh Gai mở vào Thung Lũng Sương Phủ. Rặng núi phía nam của Thung Lũng bị phong kín không lối nào xuyên qua, nên tấm màn ấy là cách duy nhất để bạn vào lần đầu, và nó khép lại sau lưng bạn trên đường trở về.\n\nDù bạn ngã xuống ở đâu, đường trở về cũng ngắn thôi. Mỗi vùng đất đều giữ ít nhất một nghĩa địa có một Người Canh Giữ Nhợt Nhạt lơ lửng trên những bia đá, và một linh hồn được giải thoát sẽ trỗi dậy tại nghĩa địa gần nhất trong số đó.\n\nBản đồ không kết thúc bằng một bức tường vô hình. Đất liền chạy dài ra thành bãi biển và mũi đất, rồi đến vùng biển khơi. Những đoạn nước mà thế giới muốn bạn bơi qua, các eo biển và đầm nước nằm giữa vùng đất này với vùng đất kia, đều êm ả và an toàn để vượt qua. Nhưng nếu bạn cố bơi ra biển khơi, chính khoảng cách sẽ đẩy bạn quay lại: bạn sẽ được cảnh báo, rồi cảnh báo thêm lần nữa, và nếu bạn vẫn tiếp tục bơi, biển cả sẽ bào mòn sức bạn cho đến khi giết chết bạn. Lặn xuống nước cũng có giới hạn riêng của nó, vì hơi thở của bạn sẽ cạn dần dưới mặt nước, nên hãy trồi lên lấy hơi và quay lại khi nước ra dấu cho bạn.",
       "mountsTitle": "Thú Cưỡi",
       "mountsBody": "Cưỡi thú là thứ duy nhất khiến thế giới thu nhỏ lại, và nó là một bài học trước khi là một con ngựa. Ở cấp độ 20, Quản Mã Marla sẽ nhận dạy bạn: bạn mua Huấn Luyện Cưỡi Ngựa từ bà, còn Bài Học Cưỡi Ngựa thì miễn phí, một khóa vượt chướng ngại vật mà bạn cưỡi vòng quanh bãi quây của bà trên một con Valorsteed huấn luyện được cho mượn. Vượt qua nó, nộp lại bài học, và Valorsteed đầu tiên của bạn sẽ thuộc về bạn, và từ đó trở đi bạn băng qua vương quốc nhanh hơn hẳn khi cưỡi ngựa. Tốc độ là thứ duy nhất một thú cưỡi mang lại cho bạn: những con hiếm hơn, đến từ nội dung khó nhất, còn nhanh hơn nữa, nhưng không con nào trong số đó thay đổi sức mạnh của bạn trong trận chiến. Lên và xuống thú cưỡi bằng phím đã gán trong bảng điều khiển của bạn. Bạn không thể lên thú khi đang giao chiến, và vung vũ khí, thi triển phép thuật, lội xuống nước, hay ngã trong trận chiến đều sẽ đưa bạn trở lại mặt đất.",
       "mountsMore": "Tất cả về thú cưỡi",
@@ -16282,75 +16285,75 @@ export const vi_VN: EnTranslations = {
         "title": "Người Giữ Bờ Cát",
         "greeting": "Thủy triều lấy đi và thủy triều trả lại, {playerName}. Ta ghi sổ cả hai: những gì lũ kẻ bò cắp đi từ xác tàu, và những gì đôi tay lương thiện mang trở lên theo con đường này."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

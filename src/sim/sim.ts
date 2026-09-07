@@ -269,17 +269,13 @@ import { canEquipItem, resolveEquipSlot, uniqueEquipConflictSlot } from './equip
 import * as escortMod from './escort';
 import { initEscorts as initEscortsImpl, updateEscorts as updateEscortsImpl } from './escort';
 import { fleeSpeed } from './flee_speed';
-import {
-  advanceFlightPath,
-  spawnFlightmasters,
-  takeFlight as takeFlightImpl,
-} from './flight_paths';
 import { formatMoney } from './format_money';
 import * as groundAoeReadouts from './ground_aoe_readouts';
 import type { GuildBankState, GuildMembership } from './guild_bank';
 import * as guildBankMod from './guild_bank';
 import * as raidReadouts from './ignivar_raid_readouts';
 import * as interaction from './interaction';
+import { countItemIn } from './inventory_count';
 import type { ExtractOutcome, ExtractRef } from './inventory_extract';
 import { foldNamedSlotTarget } from './item_copy_ref';
 import {
@@ -303,7 +299,10 @@ import {
   paginateGuildLeaderboard,
   paginateLeaderboard,
 } from './leaderboard_page';
-import { entityLineOfSightClear } from './line_of_sight_elevation';
+import {
+  hasLineOfSight as hasLineOfSightImpl,
+  lineOfSightBlocked as lineOfSightBlockedImpl,
+} from './line_of_sight_gate';
 import type { Ante, PickAction } from './lockpick';
 import { withoutPartyTradeMarker } from './loot/bop_trade_window';
 // L1: the loot-distribution layer (party-loot strategy, the rollLoot roller, copper
@@ -598,6 +597,7 @@ import { updateAbilityDrill } from './tutorial/ability_drill';
 import { updateGauntletRuns } from './tutorial/gauntlet_run';
 import { resolveStartTutorial, updateTutorialGreeting } from './tutorial/greeting';
 import * as unstuckMod from './unstuck';
+import { spawnWaystoneKeepers, waystoneTeleport as waystoneTeleportImpl } from './waystones';
 import {
   rollWorldBossLoot as rollWorldBossLootImpl,
   scaleWorldBossHp,
@@ -1644,7 +1644,12 @@ export interface PlayerMeta {
   delveClears: Record<string, number>;
   companionUpgrades: Record<string, number>;
   delveLoreUnlocked: Set<string>;
-  flightNodesKnown: Set<string>;
+  waystonesAttuned: Set<string>;
+  /** Realm day the finder ticket grant last paid (src/sim/waystone_tickets.ts);
+   *  null until it first pays. */
+  waystoneTicketDay: string | null;
+  /** Dungeon the Dungeon Finder last formed this player's group for; transient. */
+  finderRunDungeonId: string | null;
   delveDaily: { date: string; firstClearXp: Set<string>; markClears: number };
   // Persistent town focus allocation (#1143): component type -> points spent.
   // Set only while standing in a town hub; adds a bonus to that component's
@@ -2330,9 +2335,8 @@ export class Sim {
         spawnWarfareQuartermaster(this.ctx, kole, safe);
       }
     }
-    // The flightmasters: reserved ids, rng-free, the same treatment as Kole.
-    // See src/sim/flight_paths.ts.
-    spawnFlightmasters(this.ctx, worldContent.npcs, (x, z) =>
+    // The waystone keepers: reserved ids, rng-free, the same treatment as Kole.
+    spawnWaystoneKeepers(this.ctx, worldContent.npcs, (x, z) =>
       this.findSafePos(x, z, waterLevel() + 0.6),
     );
 
@@ -2837,7 +2841,9 @@ export class Sim {
       delveClears: {},
       companionUpgrades: {},
       delveLoreUnlocked: new Set(),
-      flightNodesKnown: new Set(),
+      waystonesAttuned: new Set(),
+      waystoneTicketDay: null,
+      finderRunDungeonId: null,
       delveDaily: { date: '', firstClearXp: new Set(), markClears: 0 },
       townFocus: {},
       heroicDaily: { date: '', marked: new Set() },
@@ -3265,7 +3271,8 @@ export class Sim {
       // boundary now rejects.
       meta.townFocus = professionsFocus.normalizeTownFocusOnLoad(s.townFocus);
       if (s.delveLoreUnlocked) for (const id of s.delveLoreUnlocked) meta.delveLoreUnlocked.add(id);
-      if (s.flightNodesKnown) for (const id of s.flightNodesKnown) meta.flightNodesKnown.add(id);
+      if (s.waystonesAttuned) for (const id of s.waystonesAttuned) meta.waystonesAttuned.add(id);
+      if (s.waystoneTicketDay !== undefined) meta.waystoneTicketDay = s.waystoneTicketDay;
       if (s.delveDaily) {
         meta.delveDaily = {
           date: s.delveDaily.date,
@@ -4031,7 +4038,8 @@ export class Sim {
       delveClears: { ...meta.delveClears },
       companionUpgrades: { ...meta.companionUpgrades },
       delveLoreUnlocked: [...meta.delveLoreUnlocked],
-      ...(meta.flightNodesKnown.size > 0 ? { flightNodesKnown: [...meta.flightNodesKnown] } : {}),
+      ...(meta.waystonesAttuned.size > 0 ? { waystonesAttuned: [...meta.waystonesAttuned] } : {}),
+      ...(meta.waystoneTicketDay !== null ? { waystoneTicketDay: meta.waystoneTicketDay } : {}),
       delveDaily: {
         date: meta.delveDaily.date,
         firstClearXp: [...meta.delveDaily.firstClearXp],
@@ -4627,16 +4635,16 @@ export class Sim {
   get questsDone(): Set<string> {
     return this.primary.questsDone;
   }
-  // --- IWorldFlightPaths (src/sim/flight_paths.ts) ---
-  get flightNodesKnown(): ReadonlySet<string> {
-    return this.primary.flightNodesKnown;
+  // --- IWorldWaystones (src/sim/waystones.ts) ---
+  get waystonesAttuned(): ReadonlySet<string> {
+    return this.primary.waystonesAttuned;
   }
-  takeFlight(nodeId: string): void {
-    takeFlightImpl(this.ctx, this.primaryId, nodeId);
+  waystoneTeleport(stoneId: string): void {
+    waystoneTeleportImpl(this.ctx, this.primaryId, stoneId);
   }
-  /** Server-side arm: the same gate for any pid (server/flight_dispatch.ts). */
-  takeFlightFor(nodeId: string, pid: number): void {
-    takeFlightImpl(this.ctx, pid, nodeId);
+  /** Server-side arm: the same gate for any pid (server/waystone_dispatch.ts). */
+  waystoneTeleportFor(stoneId: string, pid: number): void {
+    waystoneTeleportImpl(this.ctx, pid, stoneId);
   }
   // --- IWorldDeeds: the Book of Deeds read surface + title/border selection.
   // The reads expose the live per-player state (the questLog precedent above);
@@ -6621,8 +6629,6 @@ export class Sim {
     // Hold every forced/manual locomotion mode until the authoritative GO tick.
     if (meta.mountRace?.phase === 'countdown') return;
     if (advanceHeroicLeap(this.ctx, p)) return;
-    // A flight-path ride owns the body until it lands (src/sim/flight_paths.ts).
-    if (advanceFlightPath(this.ctx, p)) return;
     // A ledge climb owns movement while it runs, and an airborne body that
     // gets its hands on a reachable ledge starts one. Sits after the leap arc
     // (a leap has its own landing contract) and before charge/follow/fear so
@@ -6778,43 +6784,14 @@ export class Sim {
     cancelCastImpl(this.ctx, p);
   }
 
-  private abilityNeedsLineOfSight(ability: AbilityDef, source?: Entity): boolean {
-    if (!ability.requiresTarget) return false;
-    if (ability.school !== 'physical' || ability.range > MELEE_RANGE) return true;
-    // Melee/auto-attack skips line of sight everywhere else (it is always at
-    // point-blank range), but the arena's thin enclosing walls sit well within
-    // MELEE_RANGE: without this, a combatant pressed against a wall can swing
-    // through it at an opponent on the far side. Ranked fairness requires every
-    // attack to respect the same walls movement does inside the pit.
-    return source !== undefined && isArenaPos(source.pos.x);
-  }
-
+  // Line of sight: bodies in line_of_sight_gate.ts; thin delegates because
+  // SimContext binds them and the on-cast AoE path calls them on `this`.
   private hasLineOfSight(source: Entity, target: Entity): boolean {
-    // The delve-run lookup is O(active runs x mobs per run) and allocates a
-    // party key per call, and this method sits on every ranged auto-attack,
-    // AoE pulse, and LOS-gated cast. Only a sight line with an endpoint
-    // inside the delve band can ever consume run.modules (the collider LOS
-    // delve arm keys off from.x), so every other combat sight check skips
-    // all four lookups. Mirrors the movement path's isDelvePos guard.
-    const inDelve = isDelvePos(source.pos.x) || isDelvePos(target.pos.x);
-    const run = inDelve
-      ? (this.delveRunForMob(source.id) ??
-        this.delveRunForMob(target.id) ??
-        this.delveRunForPlayer(source.id) ??
-        this.delveRunForPlayer(target.id))
-      : undefined;
-    return entityLineOfSightClear(
-      this.cfg.seed,
-      source,
-      target,
-      0.05,
-      run?.modules,
-      this.riftCollisionToken,
-    );
+    return hasLineOfSightImpl(this.ctx, source, target);
   }
 
   private lineOfSightBlocked(source: Entity, target: Entity, ability: AbilityDef): boolean {
-    return this.abilityNeedsLineOfSight(ability, source) && !this.hasLineOfSight(source, target);
+    return lineOfSightBlockedImpl(this.ctx, source, target, ability);
   }
 
   private pushbackCast(p: Entity): void {
@@ -8550,21 +8527,13 @@ export class Sim {
 
   countItem(itemId: string, pid?: number): number {
     const r = this.resolve(pid);
-    if (!r) return 0;
-    let n = 0;
-    for (const s of r.meta.inventory) if (s.itemId === itemId) n += s.count;
-    return n;
+    return r ? countItemIn(r.meta.inventory, itemId) : 0;
   }
 
-  // Fungible-only count for `itemId` (excludes per-instance slots, #1165). The
-  // World Market lists/escrows against this, never the instanced count, so an
-  // instanced copy is never sold as if it were a plain stack member.
+  // Fungible-only count (excludes per-instance slots, #1165; inventory_count.ts).
   countFungibleItem(itemId: string, pid?: number): number {
     const r = this.resolve(pid);
-    if (!r) return 0;
-    let n = 0;
-    for (const s of r.meta.inventory) if (s.itemId === itemId && !s.instance) n += s.count;
-    return n;
+    return r ? countItemIn(r.meta.inventory, itemId, true) : 0;
   }
 
   // Grants are stack-aware (bags.ts addStacked, which never merges into an

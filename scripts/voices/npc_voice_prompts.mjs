@@ -1132,26 +1132,26 @@ export const VOICE_ALIAS = {
   // Keeper of the Strand tallying shells and salvage: the harbor captain's
   // weathered, water-wise authority.
   tidewarden_nel: 'captain_thessaly',
-  // The fourteen flightmasters (src/sim/content/flight_paths.ts), one per hub
+  // The fourteen waystone keepers (src/sim/content/waystones.ts), one per hub
   // town. ROLE matches in the Draven Kole pattern: each borrows the designed
   // voice whose register its own greeting carries (the hub's keeper, ferry,
   // harbor, watch or stable voice), gender-matched to the look in
   // src/render/characters/npc_looks.ts. Promote each to its own VOICE_PROMPTS
   // entry once an ElevenLabs key is available to design and render it.
-  flightmaster_eastbrook: 'stablemaster_marla',
-  flightmaster_fenbridge: 'trapper_brosk',
-  flightmaster_highwatch: 'gatecaptain_brannoc',
-  flightmaster_eldergleam: 'aurorist_veyla',
-  flightmaster_wyrmwatch: 'warden_coalfast',
-  flightmaster_icemantle: 'hearthkeeper_maeve',
-  flightmaster_lanternmere: 'lamplighter_sorrel',
-  flightmaster_bridgemere: 'waykeeper_pell',
-  flightmaster_moonrest: 'waywatcher_sorrel',
-  flightmaster_gallowmere: 'sexton_marrow',
-  flightmaster_drifthaven: 'netter_maris',
-  flightmaster_hedgewick: 'strandwatcher_pell',
-  flightmaster_wickharbor: 'bellkeeper_tam',
-  flightmaster_gullhaven: 'harbormaster_odile',
+  waystone_keeper_eastbrook: 'stablemaster_marla',
+  waystone_keeper_fenbridge: 'trapper_brosk',
+  waystone_keeper_highwatch: 'gatecaptain_brannoc',
+  waystone_keeper_eldergleam: 'aurorist_veyla',
+  waystone_keeper_wyrmwatch: 'warden_coalfast',
+  waystone_keeper_icemantle: 'hearthkeeper_maeve',
+  waystone_keeper_lanternmere: 'lamplighter_sorrel',
+  waystone_keeper_bridgemere: 'waykeeper_pell',
+  waystone_keeper_moonrest: 'waywatcher_sorrel',
+  waystone_keeper_gallowmere: 'sexton_marrow',
+  waystone_keeper_drifthaven: 'netter_maris',
+  waystone_keeper_hedgewick: 'strandwatcher_pell',
+  waystone_keeper_wickharbor: 'bellkeeper_tam',
+  waystone_keeper_gullhaven: 'harbormaster_odile',
 };
 
 /** Resolve any NPC content id to the id of the voice that should speak for it. */

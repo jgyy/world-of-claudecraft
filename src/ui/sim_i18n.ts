@@ -62,18 +62,16 @@ const baseEnTable = {
   // The Rift Forge place gate (src/sim/rift/forge_gate.ts): both forge
   // operations refuse away from the Riftwright.
   'error.riftForgeTooFar': 'You are too far from the Rift Forge.',
-  // Flight paths (src/sim/flight_paths.ts) and the fast-travel portals: the
+  // Waystones (src/sim/waystones.ts) and the fast-travel portals: the
   // refusals register in EXACT; the {town} / {money} / {ability} lines are
-  // RULES entries below. Town names are content text (FLIGHT_NODES.town) and
+  // RULES entries below. Town names are content text (WAYSTONES.town) and
   // splice verbatim; the money fragment is sim-formatted ("5s") and the HUD's
   // localizeSimMoney re-renders it; ability names re-localize via locAbility.
-  'error.flightAlreadyFlying': 'You are already on a flight.',
-  'error.flightTooFar': 'You are too far from the flightmaster.',
-  'error.flightUnknownNode': 'You have not learned that flight path.',
-  'error.flightNoRoute': 'No flight path leads there.',
-  'log.flightPathDiscovered': 'Flight path discovered: {town}.',
-  'log.flightFare': 'Flight to {town}: {money}.',
-  'log.flightArrived': 'You have arrived in {town}.',
+  'error.waystoneTooFar': 'You are too far from the waystone.',
+  'error.waystoneUnknown': 'You have not attuned to that waystone.',
+  'log.waystoneAttuned': 'Waystone attuned: {town}.',
+  'log.waystoneFee': 'Waystone to {town}: {money}.',
+  'log.waystoneTicket': 'Waystone to {town}: 1 ticket.',
   'log.portalStep': 'You step through the portal to {town}.',
   'log.hellgatePulled': 'You are pulled through the Hellgate.',
   'log.learnAbility': 'You learn {ability}.',
@@ -12670,18 +12668,21 @@ const RULES: Rule[] = [
     build: (m) => t('sim.rift.descendFloor', { name: m[1] }),
   },
   { re: /^You step back through the rift\.$/, build: () => t('sim.rift.stepBack') },
-  // Flight paths + fast-travel portals (the baseEnTable block of the same name).
-  // Anchored on the full phrase so "Flight to" can never swallow the discovery
+  // Waystones + fast-travel portals (the baseEnTable block of the same name).
+  // Anchored on the full phrase so "Waystone to" can never swallow the attune
   // line, and the "Having served" form is tried before the bare "You learn".
   {
-    re: /^Flight path discovered: (.+)\.$/,
-    build: (m) => tSim('log.flightPathDiscovered', { town: m[1] }),
+    re: /^Waystone attuned: (.+)\.$/,
+    build: (m) => tSim('log.waystoneAttuned', { town: m[1] }),
   },
   {
-    re: /^Flight to (.+): (\d+g(?: \d+s)?(?: \d+c)?|\d+s(?: \d+c)?|\d+c)\.$/,
-    build: (m) => tSim('log.flightFare', { town: m[1], money: m[2] }),
+    re: /^Waystone to (.+): (\d+g(?: \d+s)?(?: \d+c)?|\d+s(?: \d+c)?|\d+c)\.$/,
+    build: (m) => tSim('log.waystoneFee', { town: m[1], money: m[2] }),
   },
-  { re: /^You have arrived in (.+)\.$/, build: (m) => tSim('log.flightArrived', { town: m[1] }) },
+  {
+    re: /^Waystone to (.+): 1 ticket\.$/,
+    build: (m) => tSim('log.waystoneTicket', { town: m[1] }),
+  },
   {
     re: /^You step through the portal to (.+)\.$/,
     build: (m) => tSim('log.portalStep', { town: m[1] }),

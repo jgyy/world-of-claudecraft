@@ -62,6 +62,7 @@ import {
   virtualLevel,
   xpForLevel,
 } from '../types';
+import { awardFinderClearTickets } from '../waystone_tickets';
 import { WORLD_BOSS_CORPSE_SECONDS, worldBossLootContributors } from '../world_boss';
 import {
   afflictionOnDeath,
@@ -1766,6 +1767,7 @@ export function handleDeath(
     // only the participation snapshot above receives marks.
     lockNormalDungeonResetOnBossKill(ctx, e);
     ctx.awardHeroicMarks(e, heroicRewardRecipients);
+    awardFinderClearTickets(ctx, e, heroicRewardRecipients);
     // A bossExitPortal dungeon opens its far-end exit the moment the final
     // boss falls (both difficulties; no-op everywhere else).
     spawnBossExitPortal(ctx, e);

@@ -2030,12 +2030,12 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'oak_stave',
   },
 
-  // === The flightmasters (content/flight_paths.ts) ========================
-  // One per hub, spawned on a reserved id. Each wears the ranger kit with a
-  // leather harness read as the sky-rider's rig, coloured by its zone's
-  // palette, and every one is a different face so the hubs stay communities.
-  // Wren Hollis, Eastbrook: a bright young valley rider, warm and rustic.
-  flightmaster_eastbrook: {
+  // === The waystone keepers (content/waystones.ts) ========================
+  // One per hub, spawned on a reserved id. Each wears the ranger kit read as
+  // a stone warden's field gear, coloured by its zone's palette, and every
+  // one is a different face so the hubs stay communities.
+  // Wren Hollis, Eastbrook: a bright young stone warden, warm and rustic.
+  waystone_keeper_eastbrook: {
     app: {
       gender: 'female',
       hair: 'highpony',
@@ -2052,8 +2052,8 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     worn: kit('ranger', { back: null }),
     props: 'none',
   },
-  // Odo Marshwick, Fenbridge: a reed-cutter turned bird-keeper, drab greens.
-  flightmaster_fenbridge: {
+  // Odo Marshwick, Fenbridge: a reed-cutter turned stone warden, drab greens.
+  waystone_keeper_fenbridge: {
     app: {
       gender: 'male',
       hair: 'messy',
@@ -2072,7 +2072,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Bram Thistlecrag, Highwatch: garrison steel and azure, thin-air weathered.
-  flightmaster_highwatch: {
+  waystone_keeper_highwatch: {
     app: {
       gender: 'male',
       hair: 'crew',
@@ -2091,7 +2091,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Sylvane Duskwarden, Eldergleam: silver and violet on pointed ears.
-  flightmaster_eldergleam: {
+  waystone_keeper_eldergleam: {
     app: {
       gender: 'female',
       hair: 'longcenterpart',
@@ -2111,7 +2111,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Karsk Emberhide, Wyrmwatch: ash and ember, a keep man who fears no wyrm.
-  flightmaster_wyrmwatch: {
+  waystone_keeper_wyrmwatch: {
     app: {
       gender: 'male',
       hair: 'bald',
@@ -2130,7 +2130,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Hilde Frostmantle, Icemantle: pale furs, wind-bitten cheeks.
-  flightmaster_icemantle: {
+  waystone_keeper_icemantle: {
     app: {
       gender: 'female',
       hair: 'twinbraids',
@@ -2147,8 +2147,8 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     worn: kit('ranger', { chest: 'barbarian' }),
     props: 'none',
   },
-  // Fennick Ambergale, Lanternmere: Amberfall gold, night-flight lantern glow.
-  flightmaster_lanternmere: {
+  // Fennick Ambergale, Lanternmere: Amberfall gold, waystone lantern glow.
+  waystone_keeper_lanternmere: {
     app: {
       gender: 'male',
       hair: 'sidepart',
@@ -2167,7 +2167,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Tamsin Reedwright, Bridgemere: willow green, a fen bridge-keeper's daughter.
-  flightmaster_bridgemere: {
+  waystone_keeper_bridgemere: {
     app: {
       gender: 'female',
       hair: 'lowpony',
@@ -2185,7 +2185,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Elowen Nightsong, Moonrest: Nightbloom violet and silver, moth-quiet.
-  flightmaster_moonrest: {
+  waystone_keeper_moonrest: {
     app: {
       gender: 'female',
       hair: 'longwavy',
@@ -2205,7 +2205,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Corvin Gravesend, Gallowmere: Wraithwood mourning onyx, dry as a crypt.
-  flightmaster_gallowmere: {
+  waystone_keeper_gallowmere: {
     app: {
       gender: 'male',
       hair: 'sweptback',
@@ -2224,7 +2224,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Nia Saltwind, Drifthaven: Palmreach sun-dark skin and bone jewellery.
-  flightmaster_drifthaven: {
+  waystone_keeper_drifthaven: {
     app: {
       gender: 'female',
       hair: 'braidcrown',
@@ -2244,7 +2244,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Pip Greenbower, Hedgewick: Evergarden greens, hedge-clipped and cheerful.
-  flightmaster_hedgewick: {
+  waystone_keeper_hedgewick: {
     app: {
       gender: 'male',
       hair: 'curls',
@@ -2262,7 +2262,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Marlo Galeson, Wickharbor: Galecrest harbor blues, steady as the wind.
-  flightmaster_wickharbor: {
+  waystone_keeper_wickharbor: {
     app: {
       gender: 'male',
       hair: 'quiff',
@@ -2281,7 +2281,7 @@ export const NPC_LOOKS: Record<string, NpcLookDef> = {
     props: 'none',
   },
   // Sabine Gullwing, Gullhaven: Farshore salt and gull-grey, sharp-tongued.
-  flightmaster_gullhaven: {
+  waystone_keeper_gullhaven: {
     app: {
       gender: 'female',
       hair: 'pixie',

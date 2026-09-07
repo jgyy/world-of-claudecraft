@@ -36,7 +36,6 @@ import {
   tryStartNythraxisWardChannel,
 } from './encounters/nythraxis';
 import { tryStartEscort } from './escort';
-import { discoverFlightmaster, isFlightmasterNpc } from './flight_paths';
 import { interactIgnivarRaidLore } from './ignivar_raid_lore';
 import { isInRaidInstance } from './instances/dungeons';
 import { FERRY_BELL_OBJECT_ID, tryRingFerryBell } from './interactions/ferry_bell';
@@ -90,6 +89,7 @@ import {
   REALM_BUILDER_MONUMENT_INTERACT_RADIUS,
   REALM_BUILDER_MONUMENT_TEMPLATE_ID,
 } from './types';
+import { attuneWaystone, isWaystoneKeeperNpc } from './waystones';
 import { markWorldBossLooted } from './world_boss';
 
 const LOCKPICK_OFFER_COOLDOWN = 4; // seconds between repeated rift_locked_chest offer emits per player
@@ -1005,10 +1005,10 @@ export function interact(
         ctx.emit({ type: 'riftForge', pid: p.id });
         return;
       }
-      if (target.kind === 'npc' && isFlightmasterNpc(target)) {
-        // A flightmaster is still a conversation: discovery is recorded, then
-        // the ordinary dialog opens (it carries the Fly option).
-        discoverFlightmaster(ctx, r.meta, target);
+      if (target.kind === 'npc' && isWaystoneKeeperNpc(target)) {
+        // A keeper is still a conversation: attunement is recorded, then the
+        // ordinary dialog opens (it carries the Teleport option).
+        attuneWaystone(ctx, r.meta, target);
       }
       if (ctx.isQuestInteractionEntity(target)) {
         ctx.talkToNpc(target.id, p.id);
@@ -1127,6 +1127,6 @@ export function interact(
     ctx.emit({ type: 'riftForge', pid: p.id });
     return;
   }
-  if (questEntity && isFlightmasterNpc(questEntity)) discoverFlightmaster(ctx, r.meta, questEntity);
+  if (questEntity && isWaystoneKeeperNpc(questEntity)) attuneWaystone(ctx, r.meta, questEntity);
   if (questEntity) ctx.talkToNpc(questEntity.id, p.id);
 }

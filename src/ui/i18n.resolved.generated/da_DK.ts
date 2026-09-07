@@ -2122,15 +2122,18 @@ export const da_DK: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Chance ved træffer ({chance}%): {effect}",
@@ -6112,7 +6115,7 @@ export const da_DK: EnTranslations = {
     },
     "worldPage": {
       "heading": "Verdenen",
-      "intro": "World of ClaudeCraft er ét sammenhængende land, som du krydser til fods. Den gamle vej løber fra syd mod nord gennem startdalen, sumpen og tinderne, og den bliver ved med at stige forbi dem ind i lavningen bagved og snelandet øverst på kortet. En række højere riger åbner sig fra den vej mod vest og en anden mod øst, og en ø ligger ud for Dalens østkyst. Der er ingen hurtigrejse, ingen flyveruter og ingen vogne: hver færd går til fods eller til hest, så det at komme frem hører med til eventyret.\n\nLandet holder også tiden. En døgncyklus løber på et virkeligt ur, som alle på din verden deler, så himlen skifter fra daggry over middag til skumring og mørke for jer alle på én gang, månen kommer og går gennem sine faser, og lyset på jorden skifter med den. Skiven omkring dit minikort er dér, du aflæser timen.",
+      "intro": "World of ClaudeCraft er ét sammenhængende land, som du krydser til fods. Den gamle vej løber fra syd mod nord gennem startdalen, sumpen og tinderne, og den bliver ved med at stige forbi dem ind i lavningen bagved og snelandet øverst på kortet. En række højere riger åbner sig fra den vej mod vest og en anden mod øst, og en ø ligger ud for Dalens østkyst. At komme frem er en del af eventyret: hver vej vandres eller rides, og vejstenen i hver centrumby kan bære dig i et øjeblik til enhver anden sten, du allerede har rørt.\n\nLandet holder også tiden. En døgncyklus løber på et virkeligt ur, som alle på din verden deler, så himlen skifter fra daggry over middag til skumring og mørke for jer alle på én gang, månen kommer og går gennem sine faser, og lyset på jorden skifter med den. Skiven omkring dit minikort er dér, du aflæser timen.",
       "hub": "Hjemmebase",
       "mapHeading": "Vejen og rigerne hinsides",
       "mapSub": "Opgavesporet løber fra syd mod nord ned gennem kortets midte: dal, sump, tinder, og videre forbi dem ind i lavningen og sneen. De andre riger åbner sig langs den vej frem for efter den, gennem porte øst og vest for sumpvejen, mens øen Farshore nås fra Dalens østkyst. Det, der holder dig ude af de fjerne riger, er deres niveaubånd, ikke vandringen: fem af dem deler det øverste bånd, så når du først er klar, kan du tage dem i den rækkefølge, du vil. Farshore er undtagelsen, lavniveauland som du kan besøge tidligt.",
@@ -6183,7 +6186,7 @@ export const da_DK: EnTranslations = {
       "provingGreeter": "Instruktør Maren, Daggryhvile Lejr",
       "provingPlaceNotes": "Daggryhvile Lejr er øens hele bebyggelse: nogle få telte, en bod og et mønstringsbål. Den Gamle Mole vender mod dalen, hvor overfartscirklen bærer dimittender over strædet; Træningspladsen syd for lejren holder sine halmdukker stående for enhver, der har brug for dem; og Vraglinjen er den bjærgegods-strøede strand, hvor tidevandet betaler øen i vragkasser.",
       "travelTitle": "Sådan kommer du rundt",
-      "travelBody": "Hver vej i riget vandres eller rides. Der er ingen flyveruter, ingen taxier og intet teleportnet: kortet er én sammenhængende landmasse, og hver forbindelse er noget, du kan stå på. Højderygge skiller det ene rige fra det næste, og hvor to riger deler en højderyg, klatrer vejen gennem et pas. Ikke hver grænse fungerer sådan, dog. I nord bærer en lang dæmningsvej vejen ud over vandet fra Den Tilslørede Hule og ind i snelandet bagved, og længere sydpå løber en tynd, naturlig sandbanke kaldet Færgestien østpå fra Dalens kyst til Landgangen på øen Fjernkysten, som slet ingen landgrænse har. Og der findes præcis én sand dør i hele oververdenen: et skumringsslør højt på Tornetop, der åbner ind til Den Tilslørede Hule. Hulens sydlige højderyg er forseglet uden noget pas igennem den, så det slør er, hvordan du først kommer ind, og det lukker sig bag dig på vejen tilbage.\n\nUanset hvor du falder, er turen tilbage kort. Hver zone holder mindst én kirkegård med Den Blege Vogter svævende over stenene, og en frigivet ånd rejser sig ved den nærmeste af dem.\n\nKortet ender ikke i en usynlig mur. Landet løber ud i strande og næs og derefter i åbent vand. De overgange, verden mener, du skal svømme, sundene og fjordene mellem det ene rige og det næste, er rolige og sikre at krydse. Styr i stedet ud mod det åbne hav, og selve afstanden vender dig om: du bliver advaret, og advaret igen, og bliver du ved med at svømme, slider havet dig ned, indtil det dræber dig. Dykning har sin egen grænse, siden din vejrtrækning slipper op under overfladen, så kom op efter luft, og vend om, når vandet siger til.",
+      "travelBody": "Hver vej i riget vandres eller rides, og kortet er én sammenhængende landmasse: hver forbindelse er noget, du kan stå på. Vejstenene hjælper dig med at finde tilbage. Hver centrumby har en med en vogter ved siden af, og når du først har rørt en bys sten til fods, kan du betale for at træde derhen i et øjeblik fra enhver anden sten, du kender. Gebyret stiger med afstanden, en Vejstensbillet optjent fra den daglige dungeonkø betaler for et spring i stedet for guld, og en gilde-status trækker en del fra prisen. En troldmand, der har lært en Stor Teleportering, kan åbne en portal, der bærer sin gruppe til en af de fire gamle-vej-byer, og en warlock, der har indgået Helvedsportens pagt, kan flænge en port op, der trækker gruppemedlemmer til sig. Højderygge skiller det ene rige fra det næste, og hvor to riger deler en højderyg, klatrer vejen gennem et pas. Ikke hver grænse fungerer sådan, dog. I nord bærer en lang dæmningsvej vejen ud over vandet fra Den Tilslørede Hule og ind i snelandet bagved, og længere sydpå løber en tynd, naturlig sandbanke kaldet Færgestien østpå fra Dalens kyst til Landgangen på øen Fjernkysten, som slet ingen landgrænse har. Og der findes præcis én sand dør i hele oververdenen: et skumringsslør højt på Tornetop, der åbner ind til Den Tilslørede Hule. Hulens sydlige højderyg er forseglet uden noget pas igennem den, så det slør er, hvordan du først kommer ind, og det lukker sig bag dig på vejen tilbage.\n\nUanset hvor du falder, er turen tilbage kort. Hver zone holder mindst én kirkegård med Den Blege Vogter svævende over stenene, og en frigivet ånd rejser sig ved den nærmeste af dem.\n\nKortet ender ikke i en usynlig mur. Landet løber ud i strande og næs og derefter i åbent vand. De overgange, verden mener, du skal svømme, sundene og fjordene mellem det ene rige og det næste, er rolige og sikre at krydse. Styr i stedet ud mod det åbne hav, og selve afstanden vender dig om: du bliver advaret, og advaret igen, og bliver du ved med at svømme, slider havet dig ned, indtil det dræber dig. Dykning har sin egen grænse, siden din vejrtrækning slipper op under overfladen, så kom op efter luft, og vend om, når vandet siger til.",
       "mountsTitle": "Ridedyr",
       "mountsBody": "At ride er det ene, der gør verden mindre, og det er en lektion, før det er en hest. Ved niveau 20 tager staldmester Marla imod dig: du køber rideevnen af hende, og selve rideundervisningen er gratis, en spring-bane, du rider rundt om hendes fold på en lånt ganger. Bestå den, aflevér lektionen, og din første Modganger er din, og derefter krydser du riget mærkbart hurtigere til hest. Fart er det eneste, et ridedyr giver dig: de sjældnere, som kommer fra det hårdeste indhold, er endnu hurtigere, men ingen af dem ændrer din styrke i kamp. Stig op og af med den tast, der er bundet i dine indstillinger. Du kan ikke stige op, mens du er i kamp, og at svinge et våben, kaste en besværgelse, vade ud i vand eller falde i kamp sætter dig alle sammen tilbage på benene.",
       "mountsMore": "Alt om ridedyr",
@@ -16282,75 +16285,75 @@ export const da_DK: EnTranslations = {
         "title": "Vogter af Stranden",
         "greeting": "Tidevandet tager, og tidevandet betaler, {playerName}. Jeg holder regnskab med begge dele: hvad skrablerne napper fra vragene, og hvad ærlige hænder bærer med op ad denne sti."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

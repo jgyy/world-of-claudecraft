@@ -482,7 +482,6 @@ import { DelveTrackerController } from './hud/delve/delve_tracker_controller';
 import { LockpickController } from './hud/delve/lockpick_controller';
 import { RiteController } from './hud/delve/rite_controller';
 import { FiestaController } from './hud/fiesta/fiesta_controller';
-import { FlightWindowController } from './hud/flight/flight_window_controller';
 import { GuildBoardWindow } from './hud/guild_board';
 import { LootRollController } from './hud/loot/loot_roll_controller';
 import { lootSettingsView } from './hud/loot/loot_settings_view';
@@ -522,6 +521,7 @@ import { renderVendorWindow } from './hud/vendor/vendor_window';
 import { buildWarfareVendorView, warfareShopViewer } from './hud/vendor/warfare_vendor_view';
 import { renderWarfareVendorWindow } from './hud/vendor/warfare_vendor_window';
 import { afflictionFateThreadCount, createDoomMeter, destructionRuinPips } from './hud/warlock';
+import { WaystoneWindowController } from './hud/waystone/waystone_window_controller';
 import { WocTradeController } from './hud/woc_trade';
 import { unitFrameCurrentMaxText } from './hud_frames';
 import { availableMobVoiceCue, sfxHasCue, yellVoiceKey } from './hud_voice_cues';
@@ -1823,7 +1823,7 @@ export class Hud {
   // carries no escrow).
   private commissionBoardOpen = false;
   private readonly delveBoard: DelveBoardController;
-  private readonly flightWindow: FlightWindowController;
+  private readonly waystoneWindow: WaystoneWindowController;
   private readonly delveTracker: DelveTrackerController;
   private readonly riftTracker: RiftFloorTrackerController;
   private readonly lockpickController: LockpickController;
@@ -2257,10 +2257,10 @@ export class Hud {
       confirmDialog: (title, body, okText, cancelText, onOk) =>
         this.confirmDialog(title, body, okText, cancelText, onOk),
     });
-    this.flightWindow = new FlightWindowController({
-      element: $('#flight-window'),
+    this.waystoneWindow = new WaystoneWindowController({
+      element: $('#waystone-window'),
       world: () => this.sim,
-      openFocusTrap: () => this.focusManager.open({ root: () => $('#flight-window') }),
+      openFocusTrap: () => this.focusManager.open({ root: () => $('#waystone-window') }),
       closeOtherWindows: (selector) => this.closeOtherWindows(selector),
       hideTooltip: () => this.hideTooltip(),
       money: (copper) => this.moneyHtml(copper),
@@ -2356,7 +2356,7 @@ export class Hud {
       openCrafting: (craftId) => this.openCrafting(craftId),
       openMarket: () => this.openMarket(),
       openDelveBoard: (npcId) => this.openDelveBoard(npcId),
-      openFlight: (npcId) => this.flightWindow.openAtNpc(npcId),
+      openWaystone: (npcId) => this.waystoneWindow.openAtNpc(npcId),
       openCardDuel: () => this.toggleCardDuel(),
       onOpenChange: (open) => this.onQuestDialogStateChange?.(open),
       voice: {
@@ -3651,8 +3651,8 @@ export class Hud {
       case 'delve-board':
         this.closeDelveBoard();
         break;
-      case 'flight-window':
-        this.flightWindow.close();
+      case 'waystone-window':
+        this.waystoneWindow.close();
         break;
       case 'lockpick-panel':
         // Withdraw from a live lock, else dismiss the ante selector. The reachability
@@ -9524,9 +9524,9 @@ export class Hud {
         const npc = sim.entities.get(this.openUnbindNpcId);
         if (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE) this.closeUnbind();
       }
-      if (this.flightWindow.openNpcId !== null) {
-        const npc = sim.entities.get(this.flightWindow.openNpcId);
-        if (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE) this.flightWindow.close();
+      if (this.waystoneWindow.openNpcId !== null) {
+        const npc = sim.entities.get(this.waystoneWindow.openNpcId);
+        if (!npc || dist2d(p.pos, npc.pos) > NPC_WINDOW_CLOSE_RANGE) this.waystoneWindow.close();
       }
       this.questDialog.updateProximity();
     }
@@ -12401,8 +12401,8 @@ export class Hud {
           // Keyboard/sim interact at a banker NPC: open the bank window.
           this.openBank();
           break;
-        case 'flightmaster':
-          this.flightWindow.open(ev.npcId, ev.nodeId);
+        case 'waystone':
+          this.waystoneWindow.open(ev.npcId, ev.stoneId);
           break;
         case 'riftForge':
           // Interact at the Riftwright: open the Rift Forge window (which
@@ -16408,7 +16408,7 @@ export class Hud {
     if (this.openUnbindNpcId !== null && $('#unbind-window').style.display === 'block')
       this.renderUnbind();
     if (this.riftForgeWindow.isOpen) this.riftForgeWindow.render();
-    if (this.flightWindow.isOpen) this.flightWindow.render();
+    if (this.waystoneWindow.isOpen) this.waystoneWindow.render();
   }
 
   onCosmeticsChanged(): void {

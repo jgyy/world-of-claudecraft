@@ -12716,6 +12716,153 @@ export const TARGETS = [
       return { clip: '#rift-forge-window' };
     },
   },
+  {
+    key: 'waystones',
+    label: 'Waystones: the Eastbrook keeper and the teleport window',
+    when: ['ui/hud/waystone/', 'sim/waystones', 'sim/waystone_fee', 'content/waystones'],
+    variants: [
+      // Attuned to four stones, paying gold at full price.
+      { key: 'window', scene: 'gold' },
+      // Two Waystone Tickets in the bags and a tier-2 guild: ticket rows + discount line.
+      { key: 'window-tickets', scene: 'tickets' },
+      { key: 'window-mobile', scene: 'gold', mobile: true },
+    ],
+    async capture(page, variant) {
+      const scene = variant?.scene ?? 'gold';
+      await awaitVeilSettled(page);
+      const staged = await page.evaluate((wantTickets) => {
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!sim?.player) return { ok: false, reason: 'offline world is unavailable' };
+        const p = sim.player;
+        let keeper = null;
+        for (const e of sim.entities.values()) {
+          if (e.kind === 'npc' && e.templateId === 'waystone_keeper_eastbrook') keeper = e;
+        }
+        if (!keeper) return { ok: false, reason: 'no waystone keeper on this branch' };
+        p.pos = { x: keeper.pos.x - 1.5, y: p.pos.y, z: keeper.pos.z + 1.5 };
+        p.prevPos = { ...p.pos };
+        p.facing = Math.PI * 0.75;
+        sim.rebucket(p);
+        game.input.camYaw = p.facing;
+        game.input.camDist = 9;
+        game.input.camPitch = 0.45;
+        const meta = sim.meta(sim.playerId);
+        for (const id of ['eastbrook', 'fenbridge', 'highwatch', 'gullhaven']) {
+          meta.waystonesAttuned.add(id);
+        }
+        meta.copper = 250_000;
+        if (wantTickets) {
+          try {
+            sim.addItem('waystone_ticket', 2);
+          } catch {}
+          p.guildTier = 2;
+        }
+        // The real interact path: attune (already known) and open the window.
+        sim.targetEntity(keeper.id);
+        sim.interact();
+        return { ok: true };
+      }, scene === 'tickets');
+      if (!staged.ok) return { skip: staged.reason };
+      await awaitVeilSettled(page);
+      await dismissEntryOverlays(page);
+      await page.evaluate(() => {
+        const greeting = document.getElementById('tutorial-greeting');
+        if (greeting instanceof HTMLElement && getComputedStyle(greeting).display !== 'none') {
+          [...greeting.querySelectorAll('button')].at(-1)?.click();
+        }
+        const skip = document.querySelector('.tut-skip');
+        if (skip instanceof HTMLElement && skip.offsetParent !== null) skip.click();
+      });
+      await wait(400);
+      await awaitVeilSettled(page);
+      // The dialog opens first; its Teleport option routes to the window.
+      const opened = await page.evaluate(() => {
+        const win = document.getElementById('waystone-window');
+        if (win instanceof HTMLElement && win.style.display === 'block') return true;
+        const option = document.querySelector('[data-waystone="1"]');
+        if (option instanceof HTMLElement) {
+          option.click();
+          return true;
+        }
+        return false;
+      });
+      if (!opened) return { skip: 'neither the waystone window nor the dialog option rendered' };
+      if (!(await pollForSize(page, '#waystone-window .waystone-row'))) {
+        throw new Error('waystone window did not render a destination row');
+      }
+      return { clip: '#waystone-window' };
+    },
+  },
+  {
+    key: 'party-gates',
+    label: 'Grand Portal and Hellgate: the two summoned travel objects',
+    when: ['render/grand_portal', 'render/hellgate', 'render/summoned_objects', 'sim/party_gate'],
+    variants: [
+      { key: 'grand-portal', scene: 'portal' },
+      { key: 'hellgate', scene: 'hellgate' },
+    ],
+    async capture(page, variant) {
+      const scene = variant?.scene ?? 'portal';
+      await awaitVeilSettled(page);
+      const staged = await page.evaluate((wantHellgate) => {
+        const game = window.__game;
+        const sim = game?.sim;
+        if (!sim?.player || typeof sim.addPlayer !== 'function') {
+          return { ok: false, reason: 'offline world is unavailable' };
+        }
+        const p = sim.player;
+        // Open meadow east of the Eastbrook square, away from the road props.
+        const at = { x: 12, z: -70 };
+        p.pos = { x: at.x - 3, y: p.pos.y, z: at.z + 4 };
+        p.prevPos = { ...p.pos };
+        p.facing = Math.PI * 0.85;
+        sim.rebucket(p);
+        game.input.camYaw = p.facing;
+        game.input.camDist = 11;
+        game.input.camPitch = 0.4;
+        const cls = wantHellgate ? 'warlock' : 'mage';
+        const pid = sim.addPlayer(cls, wantHellgate ? 'Gatewarden' : 'Portalist');
+        const caster = sim.entities.get(pid);
+        const meta = sim.meta(pid);
+        if (!caster || !meta) return { ok: false, reason: 'could not seat the caster' };
+        caster.pos = { x: at.x, y: caster.pos.y, z: at.z };
+        caster.prevPos = { ...caster.pos };
+        caster.facing = 0;
+        sim.rebucket(caster);
+        sim.setPlayerLevel(30, pid);
+        if (wantHellgate) {
+          meta.questsDone.add('q_hellgate_gate');
+          sim.castAbility('hellgate', pid);
+        } else {
+          meta.questsDone.add('learned:grand_teleport_highwatch');
+          sim.addItem('rune_of_passage', 1, pid);
+          sim.castAbility('grand_teleport_highwatch', pid);
+        }
+        return { ok: true, casting: !!caster.castingAbility };
+      }, scene === 'hellgate');
+      if (!staged.ok) return { skip: staged.reason };
+      if (!staged.casting) return { skip: 'the caster did not start the 10 s cast' };
+      await awaitVeilSettled(page);
+      await dismissEntryOverlays(page);
+      // The 10 s timed cast resolves on the live offline clock.
+      await wait(11_500);
+      const summoned = await page.evaluate(
+        (itemId) => {
+          const sim = window.__game?.sim;
+          if (!sim) return false;
+          for (const e of sim.entities.values()) {
+            if (e.kind === 'object' && e.objectItemId === itemId) return true;
+          }
+          return false;
+        },
+        scene === 'hellgate' ? 'hellgate' : 'grand_portal',
+      );
+      if (!summoned) throw new Error(`the ${scene} object never appeared after the cast`);
+      await wait(2500); // let the object's material and swirl settle under swiftshader
+      return {};
+    },
+  },
 ];
 
 // Grant one staged stack (a plain count, or a specific ItemInstancePayload) and

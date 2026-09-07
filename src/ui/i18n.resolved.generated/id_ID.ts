@@ -2122,15 +2122,18 @@ export const id_ID: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Peluang saat memukul ({chance}%): {effect}",
@@ -6112,7 +6115,7 @@ export const id_ID: EnTranslations = {
     },
     "worldPage": {
       "heading": "Dunia",
-      "intro": "World of ClaudeCraft adalah satu daratan bersambung yang kamu seberangi dengan berjalan kaki. Jalan tua membentang dari selatan ke utara melewati lembah awal, rawa, dan puncak, dan terus mendaki melampauinya ke cekungan di baliknya serta negeri salju di puncak peta. Sederet alam yang lebih tinggi terbuka dari jalan itu ke barat dan sederet lagi ke timur, dan sebuah pulau terletak di lepas pantai timur Lembah. Tidak ada perjalanan cepat, tidak ada jalur terbang, dan tidak ada kereta: setiap perjalanan ditempuh dengan berjalan atau berkuda, jadi tibanya adalah bagian dari petualangan.\n\nDaratan itu juga menghitung waktu. Siklus siang dan malam berjalan di atas jam sungguhan yang dibagi semua orang di duniamu, sehingga langit beranjak dari fajar ke tengah hari lalu ke senja dan gelap untuk kalian semua sekaligus, bulan datang dan pergi melalui fase-fasenya, dan cahaya di tanah berubah bersamanya. Piringan di sekeliling peta kecilmu adalah tempat kamu membaca jam.",
+      "intro": "World of ClaudeCraft adalah satu daratan bersambung yang kamu seberangi dengan berjalan kaki. Jalan tua membentang dari selatan ke utara melewati lembah awal, rawa, dan puncak, dan terus mendaki melampauinya ke cekungan di baliknya serta negeri salju di puncak peta. Sederet alam yang lebih tinggi terbuka dari jalan itu ke barat dan sederet lagi ke timur, dan sebuah pulau terletak di lepas pantai timur Lembah. Sampai di tujuan adalah bagian dari petualangan: setiap jalan ditempuh dengan berjalan atau berkuda, dan batu jalan di setiap kota pusat bisa membawamu secara instan ke batu lain mana pun yang sudah pernah kamu sentuh.\n\nDaratan itu juga menghitung waktu. Siklus siang dan malam berjalan di atas jam sungguhan yang dibagi semua orang di duniamu, sehingga langit beranjak dari fajar ke tengah hari lalu ke senja dan gelap untuk kalian semua sekaligus, bulan datang dan pergi melalui fase-fasenya, dan cahaya di tanah berubah bersamanya. Piringan di sekeliling peta kecilmu adalah tempat kamu membaca jam.",
       "hub": "Markas utama",
       "mapHeading": "Jalan dan alam-alam di baliknya",
       "mapSub": "Jejak misi membentang dari selatan ke utara di tengah peta: lembah, rawa, puncak, dan terus melampauinya ke cekungan serta salju. Alam-alam lain terbuka di sepanjang jalan itu, bukan sesudahnya, lewat gerbang di timur dan barat jalan rawa, sementara pulau Farshore dicapai dari pantai timur Lembah. Yang menahanmu dari alam-alam jauh adalah pita levelnya, bukan perjalanannya: lima di antaranya berbagi pita tertinggi, jadi begitu kamu siap kamu bisa mengambilnya dalam urutan apa pun. Farshore adalah pengecualian, negeri berlevel rendah yang bisa kamu kunjungi sejak awal.",
@@ -6183,7 +6186,7 @@ export const id_ID: EnTranslations = {
       "provingGreeter": "Instruktur Maren, Perkemahan Dawnrest",
       "provingPlaceNotes": "Perkemahan Dawnrest adalah seluruh permukiman di pulau ini: beberapa tenda, sebuah kios, dan sebuah api unggun kumpul. Dermaga Tua menghadap ke lembah, tempat lingkaran penyeberangan membawa para lulusan melintasi selat; Pekarangan Latihan di selatan perkemahan menjaga patung-patung jeraminya tetap berdiri bagi siapa pun yang membutuhkannya; dan Deretan Bangkai Kapal adalah pesisir penuh barang rongsokan tempat pasang membayar pulau ini dengan peti-peti terdampar.",
       "travelTitle": "Berkeliling",
-      "travelBody": "Setiap jalan di realm ini ditempuh dengan berjalan kaki atau berkuda. Tidak ada jalur terbang, tidak ada taksi, dan tidak ada jaringan teleportasi: peta ini adalah satu daratan menyambung, dan setiap sambungannya adalah sesuatu yang bisa kamu injak. Punggung bukit memisahkan satu realm dari yang berikutnya, dan di tempat dua realm berbagi sebuah punggung bukit, jalan itu mendaki lewat sebuah celah gunung. Namun tidak setiap perbatasan bekerja seperti itu. Di utara, sebuah jalan layang panjang membawa jalan itu keluar melintasi air dari Ceruk Terselubung menuju negeri bersalju di seberangnya, dan di selatan sana sebuah gosong pasir alami yang tipis bernama Ferrywalk membentang ke timur dari pesisir Lembah menuju Dermaga di pulau Pesisir Jauh, yang sama sekali tak memiliki perbatasan darat. Dan hanya ada satu pintu sejati di seluruh dunia luar: sebuah selubung senja tinggi di Thornpeak yang terbuka menuju Ceruk Terselubung. Punggung bukit selatan sang Ceruk tertutup rapat tanpa celah yang menembusnya, sehingga selubung itulah caramu pertama kali masuk, dan ia menutup di belakangmu dalam perjalanan kembali.\n\nKe mana pun kamu tumbang, perjalanan kembali selalu singkat. Setiap zona menyimpan setidaknya satu kuburan dengan Sang Penjaga Pucat melayang di atas bebatuannya, dan roh yang dilepaskan bangkit di kuburan terdekat.\n\nPeta ini tidak berakhir pada dinding tak kasatmata. Daratan berakhir menjadi pantai dan tanjung, lalu menjadi laut lepas. Penyeberangan yang memang dimaksudkan dunia ini untuk kamu renangi, selat dan rawa di antara satu realm dengan yang berikutnya, tenang dan aman untuk diseberangi. Namun berenanglah menuju laut lepas dan jarak itu sendiri akan mendorongmu kembali: kamu diperingatkan, dan diperingatkan lagi, dan jika kamu terus berenang, laut akan menguras tenagamu hingga membunuhmu. Menyelam memiliki batasnya sendiri, karena napasmu habis di bawah permukaan, jadi naiklah untuk bernapas dan berbaliklah saat air itu menyuruhmu.",
+      "travelBody": "Setiap jalan di realm ini ditempuh dengan berjalan kaki atau berkuda, dan peta ini adalah satu daratan menyambung: setiap sambungan adalah sesuatu yang bisa kamu injak. Batu jalan membantumu menelusuri kembali jalanmu. Setiap kota pusat menyimpan satu batu dengan seorang penjaga di sampingnya, dan begitu kamu menyentuh batu sebuah kota dengan berjalan kaki, kamu bisa membayar untuk berpindah ke sana secara instan dari batu lain mana pun yang kamu ketahui. Biayanya bertambah seiring jarak, sebuah Tiket Batu Jalan yang didapat dari antrean dungeon harian membayar satu lompatan alih-alih emas, dan peringkat guild memotong sebagian dari harganya. Seorang mage yang telah mempelajari Grand Teleport dapat membuka portal yang membawa grupnya ke salah satu dari empat kota jalan lama, dan seorang warlock yang telah menempuh pakta Hellgate dapat merobek gerbang yang menarik anggota grup kepadanya. Punggung bukit memisahkan satu realm dari yang berikutnya, dan di tempat dua realm berbagi sebuah punggung bukit, jalan itu mendaki lewat sebuah celah gunung. Namun tidak setiap perbatasan bekerja seperti itu. Di utara, sebuah jalan layang panjang membawa jalan itu keluar melintasi air dari Ceruk Terselubung menuju negeri bersalju di seberangnya, dan di selatan sana sebuah gosong pasir alami yang tipis bernama Ferrywalk membentang ke timur dari pesisir Lembah menuju Dermaga di pulau Pesisir Jauh, yang sama sekali tak memiliki perbatasan darat. Dan hanya ada satu pintu sejati di seluruh dunia luar: sebuah selubung senja tinggi di Thornpeak yang terbuka menuju Ceruk Terselubung. Punggung bukit selatan sang Ceruk tertutup rapat tanpa celah yang menembusnya, sehingga selubung itulah caramu pertama kali masuk, dan ia menutup di belakangmu dalam perjalanan kembali.\n\nKe mana pun kamu tumbang, perjalanan kembali selalu singkat. Setiap zona menyimpan setidaknya satu kuburan dengan Sang Penjaga Pucat melayang di atas bebatuannya, dan roh yang dilepaskan bangkit di kuburan terdekat.\n\nPeta ini tidak berakhir pada dinding tak kasatmata. Daratan berakhir menjadi pantai dan tanjung, lalu menjadi laut lepas. Penyeberangan yang memang dimaksudkan dunia ini untuk kamu renangi, selat dan rawa di antara satu realm dengan yang berikutnya, tenang dan aman untuk diseberangi. Namun berenanglah menuju laut lepas dan jarak itu sendiri akan mendorongmu kembali: kamu diperingatkan, dan diperingatkan lagi, dan jika kamu terus berenang, laut akan menguras tenagamu hingga membunuhmu. Menyelam memiliki batasnya sendiri, karena napasmu habis di bawah permukaan, jadi naiklah untuk bernapas dan berbaliklah saat air itu menyuruhmu.",
       "mountsTitle": "Tunggangan",
       "mountsBody": "Menunggang adalah satu hal yang membuat dunia terasa lebih kecil, dan itu adalah sebuah pelajaran sebelum menjadi seekor kuda. Pada level 20, Kepala Kandang Marla akan menerimamu: kamu membeli keahlian menunggang darinya, dan pelajaran menunggangnya sendiri gratis, sebuah lintasan lompat yang kamu tempuh mengelilingi padoknya di atas seekor kuda pinjaman. Lulusi lintasan itu, serahkan hasilnya, dan Valorsteed pertamamu menjadi milikmu, dan sejak saat itu kamu melintasi realm dengan jelas lebih cepat di atas kuda. Kecepatan adalah satu-satunya hal yang diberikan sebuah tunggangan: yang lebih langka, yang datang dari konten tersulit, malah lebih cepat lagi, tetapi tak satu pun dari mereka mengubah kekuatanmu dalam pertarungan. Naiki dan turunlah dengan tombol yang terikat dalam kontrolmu. Kamu tidak bisa menaikinya selama berada dalam pertempuran, dan mengayunkan senjata, merapal mantra, mengarungi air, atau tumbang dalam pertarungan semuanya akan membuatmu kembali berdiri di atas kakimu sendiri.",
       "mountsMore": "Selengkapnya tentang tunggangan",
@@ -16282,75 +16285,75 @@ export const id_ID: EnTranslations = {
         "title": "Penjaga Pesisir",
         "greeting": "Pasang mengambil dan pasang membayar, {playerName}. Aku menyimpan catatan keduanya: apa yang dicubit para perayap dari bangkai-bangkai kapal, dan apa yang dibawa naik oleh tangan-tangan jujur di jalan setapak ini."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

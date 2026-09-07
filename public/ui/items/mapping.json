@@ -442,6 +442,14 @@
       "sourceFile": "leather-bound tome with the Eldergleam sigil and cover tint, hand-authored SVG scene rasterized by scripts/render_travel_item_icons.mjs (sharp: 512px master over the item-icon vignette, downscaled to the 128px opaque woc-item-icon-v1 shipping format)",
       "confidence": "high",
       "license": "World of ClaudeCraft original art (project-owned, created for this game)"
+    },
+    {
+      "itemId": "waystone_ticket",
+      "name": "Waystone Ticket",
+      "sourcePack": "project-authored",
+      "sourceFile": "parchment ticket stamped with a glowing rune-ring sigil, hand-authored SVG scene rasterized by scripts/render_travel_item_icons.mjs (sharp: 512px master over the item-icon vignette, downscaled to the 128px opaque woc-item-icon-v1 shipping format)",
+      "confidence": "high",
+      "license": "World of ClaudeCraft original art (project-owned, created for this game)"
     }
   ],
   "generatedBatches": [

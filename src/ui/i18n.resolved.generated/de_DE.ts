@@ -2122,15 +2122,18 @@ export const de_DE: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Chance bei Treffer ({chance}%): {effect}",
@@ -6112,7 +6115,7 @@ export const de_DE: EnTranslations = {
     },
     "worldPage": {
       "heading": "Die Welt",
-      "intro": "World of ClaudeCraft ist ein zusammenhängendes Land, das du zu Fuß durchquerst. Die alte Straße führt von Süden nach Norden durch das Starttal, den Sumpf und die Gipfel, und sie steigt darüber hinaus weiter in die Senke dahinter und in das Schneeland am oberen Rand der Karte. Eine Reihe höherer Reiche öffnet sich westlich und eine weitere östlich dieser Straße, und vor der Ostküste des Tals liegt eine Insel. Es gibt keine Schnellreise, keine Flugrouten und keine Kutschen: Jede Reise wird gelaufen oder geritten, das Ankommen ist also Teil des Abenteuers.\n\nDas Land hält auch die Zeit. Ein Tag-und-Nacht-Zyklus läuft auf einer echten Uhr, die alle auf deiner Welt teilen, sodass der Himmel für euch alle gleichzeitig von der Morgendämmerung über den Mittag bis zur Abenddämmerung und Dunkelheit übergeht, der Mond durch seine Phasen kommt und geht und sich das Licht am Boden mit ihm wandelt. Am Ring um deine Minikarte liest du die Stunde ab.",
+      "intro": "World of ClaudeCraft ist ein zusammenhängendes Land, das du zu Fuß durchquerst. Die alte Straße führt von Süden nach Norden durch das Starttal, den Sumpf und die Gipfel, und sie steigt darüber hinaus weiter in die Senke dahinter und in das Schneeland am oberen Rand der Karte. Eine Reihe höherer Reiche öffnet sich westlich und eine weitere östlich dieser Straße, und vor der Ostküste des Tals liegt eine Insel. Das Ankommen ist Teil des Abenteuers: Jede Straße wird gelaufen oder geritten, und der Wegstein in jeder Kernstadt kann dich augenblicklich zu jedem anderen Stein tragen, den du bereits berührt hast.\n\nDas Land hält auch die Zeit. Ein Tag-und-Nacht-Zyklus läuft auf einer echten Uhr, die alle auf deiner Welt teilen, sodass der Himmel für euch alle gleichzeitig von der Morgendämmerung über den Mittag bis zur Abenddämmerung und Dunkelheit übergeht, der Mond durch seine Phasen kommt und geht und sich das Licht am Boden mit ihm wandelt. Am Ring um deine Minikarte liest du die Stunde ab.",
       "hub": "Heimatbasis",
       "mapHeading": "Die Straße und die Reiche dahinter",
       "mapSub": "Die Questspur führt von Süden nach Norden mitten über die Karte: Tal, Sumpf, Gipfel und weiter darüber hinaus in die Senke und den Schnee dahinter. Die anderen Reiche öffnen sich neben dieser Straße statt hinter ihr, durch Tore östlich und westlich der Sumpfstraße, während die Insel Farshore von der Ostküste des Tals aus erreicht wird. Was dich von den fernen Reichen fernhält, sind ihre Stufenbereiche, nicht der Weg: Fünf von ihnen teilen sich den obersten Bereich, sobald du bereit bist, kannst du sie also in beliebiger Reihenfolge angehen. Farshore ist die Ausnahme, ein Land niedriger Stufen, das du früh besuchen kannst.",
@@ -6183,7 +6186,7 @@ export const de_DE: EnTranslations = {
       "provingGreeter": "Ausbilderin Maren, Morgenrast-Lager",
       "provingPlaceNotes": "Morgenrast-Lager ist die gesamte Siedlung der Insel: ein paar Zelte, ein Stand und ein Sammelfeuer. Der Alte Steg blickt zum Tal, wo der Überfahrtskreis die Absolventen über die Meerenge trägt; der Übungsplatz südlich des Lagers hält seine Strohpuppen für jeden bereit, der sie braucht; und die Wracklinie ist der von Bergegut übersäte Strand, auf dem die Flut der Insel in Strandkisten zahlt.",
       "travelTitle": "Unterwegs",
-      "travelBody": "Jede Straße im Reich wird zu Fuß oder zu Pferd zurückgelegt. Es gibt keine Flugrouten, keine Droschken und kein Teleportnetz: Die Karte ist eine einzige zusammenhängende Landmasse, und jede Verbindung ist etwas, worauf du stehen kannst. Grate trennen ein Reich vom nächsten, und wo zwei Reiche sich einen Grat teilen, steigt die Straße durch einen Pass. Nicht jede Grenze funktioniert jedoch so. Im Norden trägt ein langer Damm die Straße über das Wasser hinaus, von der Schleiersenke ins Schneeland dahinter, und im Süden verläuft eine schmale natürliche Sandbank namens Fährweg von der Küste des Tals ostwärts zur Anlegestelle auf der Insel der Fernküste, die überhaupt keine Landgrenze hat. Und es gibt genau eine echte Tür in der ganzen Oberwelt: einen Dämmerschleier hoch auf dem Thornpeak, der sich zur Schleiersenke hin öffnet. Der südliche Grat der Senke ist versiegelt und hat keinen Pass hindurch, sodass dieser Schleier dein erster Weg hinein ist, und er schließt sich hinter dir auf dem Rückweg.\n\nWo auch immer du fällst, der Weg zurück ist kurz. Jede Zone unterhält mindestens einen Friedhof mit einem Bleichen Hüter, der über den Steinen schwebt, und ein befreiter Geist erhebt sich am nächstgelegenen von ihnen.\n\nDie Karte endet nicht an einer unsichtbaren Wand. Das Land läuft in Strände und Landzungen aus, und dann in offenes Wasser. Die Überquerungen, die die Welt für dich zum Schwimmen vorsieht, die Meerengen und Seen zwischen einem Reich und dem nächsten, sind ruhig und sicher zu überqueren. Hältst du stattdessen auf die offene See zu, dreht dich die Entfernung selbst wieder um: Du wirst gewarnt, und noch einmal gewarnt, und schwimmst du weiter, zehrt dich die See aus, bis sie dich tötet. Tauchen hat sein eigenes Limit, da dir unter der Oberfläche der Atem ausgeht, komm also nach Luft, wenn das Wasser es dir sagt, und kehre um.",
+      "travelBody": "Jede Straße im Reich wird zu Fuß oder zu Pferd zurückgelegt, und die Karte ist eine einzige zusammenhängende Landmasse: jede Verbindung ist etwas, worauf du stehen kannst. Die Wegsteine helfen dir, den Weg zurückzufinden. Jede Kernstadt hat einen mit einem Wächter daneben, und sobald du den Stein einer Stadt zu Fuß berührt hast, kannst du bezahlen, um von jedem anderen Stein, den du kennst, augenblicklich dorthin zu gelangen. Die Gebühr steigt mit der Entfernung, eine Wegstein-Marke, die aus der täglichen Dungeon-Warteschlange verdient wird, bezahlt einen Sprung statt Gold, und das Ansehen einer Gilde nimmt einen Anteil vom Preis. Ein Magier, der ein Großes Teleportieren erlernt hat, kann ein Portal öffnen, das seine Gruppe in eine der vier Altstraßenstädte trägt, und ein Hexenmeister, der den Höllentorpakt geschlossen hat, kann ein Tor aufreißen, das Gruppenmitglieder zu sich zieht. Grate trennen ein Reich vom nächsten, und wo zwei Reiche sich einen Grat teilen, steigt die Straße durch einen Pass. Nicht jede Grenze funktioniert jedoch so. Im Norden trägt ein langer Damm die Straße über das Wasser hinaus, von der Schleiersenke ins Schneeland dahinter, und im Süden verläuft eine schmale natürliche Sandbank namens Fährweg von der Küste des Tals ostwärts zur Anlegestelle auf der Insel der Fernküste, die überhaupt keine Landgrenze hat. Und es gibt genau eine echte Tür in der ganzen Oberwelt: einen Dämmerschleier hoch auf dem Thornpeak, der sich zur Schleiersenke hin öffnet. Der südliche Grat der Senke ist versiegelt und hat keinen Pass hindurch, sodass dieser Schleier dein erster Weg hinein ist, und er schließt sich hinter dir auf dem Rückweg.\n\nWo auch immer du fällst, der Weg zurück ist kurz. Jede Zone unterhält mindestens einen Friedhof mit einem Bleichen Hüter, der über den Steinen schwebt, und ein befreiter Geist erhebt sich am nächstgelegenen von ihnen.\n\nDie Karte endet nicht an einer unsichtbaren Wand. Das Land läuft in Strände und Landzungen aus, und dann in offenes Wasser. Die Überquerungen, die die Welt für dich zum Schwimmen vorsieht, die Meerengen und Seen zwischen einem Reich und dem nächsten, sind ruhig und sicher zu überqueren. Hältst du stattdessen auf die offene See zu, dreht dich die Entfernung selbst wieder um: Du wirst gewarnt, und noch einmal gewarnt, und schwimmst du weiter, zehrt dich die See aus, bis sie dich tötet. Tauchen hat sein eigenes Limit, da dir unter der Oberfläche der Atem ausgeht, komm also nach Luft, wenn das Wasser es dir sagt, und kehre um.",
       "mountsTitle": "Reittiere",
       "mountsBody": "Reiten ist das Einzige, was die Welt kleiner macht, und es ist zuerst eine Lehrstunde und erst danach ein Pferd. Auf Stufe 20 nimmt sich Stallmeisterin Marla deiner an: Du kaufst ihr die Reitausbildung ab, und die Reitstunde selbst ist kostenlos, ein Parcours, den du auf einem geliehenen Ross durch ihre Koppel reitest. Bestehst du ihn und meldest die Stunde ab, gehört dir dein erster Valorross, und von da an durchquerst du das Reich zu Pferd merklich schneller. Geschwindigkeit ist alles, was ein Reittier dir gibt: Die selteneren, die aus den schwersten Inhalten stammen, sind noch schneller, doch keines von ihnen ändert deine Stärke im Kampf. Steig mit der in deinen Einstellungen belegten Taste auf und ab. Du kannst nicht aufsteigen, während du im Kampf bist, und eine Waffe zu schwingen, einen Zauber zu wirken, ins Wasser zu waten oder im Kampf zu Fall zu kommen, setzt dich jeweils wieder auf die Füße.",
       "mountsMore": "Alles über Reittiere",
@@ -16282,75 +16285,75 @@ export const de_DE: EnTranslations = {
         "title": "Hüterin des Strands",
         "greeting": "Die Flut nimmt, und die Flut zahlt, {playerName}. Ich führe die Rechnung über beides: was die Krabbler von den Wracks zwicken, und was ehrliche Hände diesen Pfad wieder heraufbringen."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

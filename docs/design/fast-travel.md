@@ -1,36 +1,56 @@
-# Fast travel: flight paths, Grand Teleports, and the Hellgate
+# Fast travel: Waystones, Grand Teleports, and the Hellgate
 
 Three ways to shorten a journey, each with a different owner and a different
 price, all resolved by the one deterministic sim. None of them replaces the
-road: a mount stays the fast option, the flight is the hands-off one, and the
-two class gates carry a group rather than a single traveller.
+road: a mount stays the free option, the Waystone hop is the paid instant one,
+and the two class gates carry a group rather than a single traveller.
 
 Companion documents: the Book of Deeds at `docs/design/deeds.md` and the
 Reliquary at `docs/design/reliquary.md` own the cosmetic obligations this
 content authored.
 
-## Flight paths (everyone)
+## Waystones (everyone)
 
-- **Data:** `src/sim/content/flight_paths.ts` (`FLIGHT_NODES`, `FLIGHT_LINKS`,
-  `FLIGHTMASTER_NPCS`, the fare, speed and height constants). One flightmaster
-  per hub town, one persisted node id per town.
-- **Ride:** `src/sim/flight_paths.ts`. A flight is a slow, hands-off ride along
-  the hub graph at `FLIGHT_SPEED` (a fixed fraction of the base riding speed),
-  carried `FLIGHT_HEIGHT` yards over the sampled ground. A mount is always
-  faster; the flight is the AFK option.
-- **Fare:** `FLIGHT_FARE_COPPER` per town hop along the shortest known route,
-  charged on boarding. No cooldown.
-- **Learning:** speaking to a town's flightmaster on foot records its node in
-  `CharacterState.flightNodesKnown`. A flightmaster only offers flights to
-  nodes the character already knows, so every path is walked once first.
-- **Reserved-id spawn:** every flightmaster is a `dynamic` NpcDef spawned at
-  world init on `FLIGHTMASTER_ENTITY_ID_BASE + <FLIGHT_NODES index>` (the
-  Warfare Quartermaster precedent, `STATIC_WORLD_SERVICE_ENTITY_ID_MIN` in
-  `src/sim/types.ts`). Adding a node therefore never shifts a sequential
-  entity id or a parity golden. Append new nodes at the END of `FLIGHT_NODES`:
-  the index is the id, and node ids follow the never-rename rule.
-- **Client:** the flight window under `src/ui/hud/flight/`, reached from the
-  flightmaster's gossip menu.
+FF14-style instant teleport between attuned stones, paid by a distance-scaled
+gold fee or, for free, by a Waystone Ticket earned from the daily Dungeon
+Finder queue. There is no ride: the hop resolves immediately.
+
+- **Data:** `src/sim/content/waystones.ts` (`WAYSTONES`, one `WaystoneDef` per
+  zone hub with its keeper's `npcId`, plus the fee and ticket constants and
+  the `waystone_ticket` `ItemDef`). One Waystone Keeper NPC per hub town
+  (title "Waystone Keeper"), one persisted stone id per town.
+- **Attune:** talking to a stone's keeper (`attuneWaystone` in
+  `src/sim/waystones.ts`) records the stone in `CharacterState.waystonesAttuned`
+  the first time and always opens the client waystone window. A keeper only
+  offers hops to stones the character has already attuned.
+- **Hop:** `waystoneTeleport` in `src/sim/waystones.ts` is the server-authoritative
+  verb: from the keeper currently in reach (`WAYSTONE_KEEPER_RANGE`, the bank
+  and Rift Forge's `INTERACT_RANGE + 2`) to any attuned stone, instantly. It
+  refuses in combat, refuses an unattuned or same-stone destination, and lands
+  through `displacePlayer` so the arrival is settled like every other
+  teleport (no carried fall damage).
+- **Fee:** `waystoneFee` in `src/sim/waystone_fee.ts` prices a hop by
+  straight-line distance between the two stones: `WAYSTONE_FEE_PER_100YD_COPPER`
+  per started 100 yards, floored at `WAYSTONE_FEE_MIN_COPPER`, then discounted
+  by the traveller's guild tier (`WAYSTONE_GUILD_DISCOUNT_PCT`, indexed by
+  `src/sim/guild_tier.ts` tier). Rounding happens once, at the end, so the fee
+  the HUD quotes never drifts from what is charged.
+- **Waystone Tickets:** `src/sim/waystone_tickets.ts`. A group the Dungeon
+  Finder assembled that then clears that dungeon's final boss pays every
+  credited participant `WAYSTONE_TICKETS_PER_FINDER_CLEAR` tickets, once per
+  realm day (`ctx.resetDay`, tracked in `CharacterState.waystoneTicketDay`); a
+  premade that walks in through the door earns none. A ticket in the bags
+  pays the next hop instead of gold. `grantWaystoneTickets` is the one seam
+  every ticket source goes through, so a future event can grant tickets
+  without a new payment path.
+- **Reserved-id spawn:** every keeper is a `dynamic` NpcDef spawned at world
+  init on `WAYSTONE_KEEPER_ENTITY_ID_BASE + <WAYSTONES index>` (the Warfare
+  Quartermaster precedent, `STATIC_WORLD_SERVICE_ENTITY_ID_MIN` in
+  `src/sim/types.ts`). Adding a stone therefore never shifts a sequential
+  entity id or a parity golden. Append new stones at the END of `WAYSTONES`:
+  the index is the id, and stone ids follow the never-rename rule.
+- **Client:** the waystone window under `src/ui/hud/waystone/`, reached from
+  a keeper's gossip menu.
 
 ## Grand Teleports (mage)
 
@@ -70,17 +90,23 @@ content authored.
 ## Content obligations carried by this feature
 
 - **i18n:** ability rows in `src/ui/i18n.catalog/abilities.ts`, item rows in
-  `src/ui/i18n.catalog/items.ts`, the flightmaster and quest ids in
-  `src/ui/world_entity_i18n.ts`, and the non-Latin fills (M16) in the
-  `src/ui/i18n.locales/` overlays.
-- **Looks and voices:** one authored look per flightmaster in
+  `src/ui/i18n.catalog/items.ts` (including the Waystone Ticket), the
+  Waystone Keeper and quest ids in `src/ui/world_entity_i18n.ts`, and the
+  non-Latin fills (M16) in the `src/ui/i18n.locales/` overlays.
+- **Looks and voices:** one authored look per Waystone Keeper in
   `src/render/characters/npc_looks.ts`; each borrows a designed hub voice via
   `VOICE_ALIAS` in `scripts/voices/npc_voice_prompts.mjs` until its own voice
   is rendered.
+- **Item art:** the `waystone_ticket` icon is a hand-authored SVG scene
+  rendered by `scripts/render_travel_item_icons.mjs` (a parchment ticket
+  stamped with a glowing rune-ring sigil), committed under
+  `public/ui/items/waystone_ticket.webp` with its provenance row in
+  `public/ui/items/mapping.json`.
 - **Deeds:** `prog_hellgate_pact` (renown 10, keyed on the pact's final quest).
-  Flights and Grand Teleport learning author no deed: a flight writes no
-  counter or visited mark, and the learn key is a synthetic questsDone entry
-  rather than a `QUESTS` id, so neither fits the closed trigger vocabulary.
+  Waystone attunement and Grand Teleport learning author no deed: attuning a
+  stone writes no counter or visited mark, and the Grand Teleport learn key is
+  a synthetic questsDone entry rather than a `QUESTS` id, so neither fits the
+  closed trigger vocabulary.
 - **Reliquary:** `horizons_tomes_of_passage`, the four tomes on the Horizons
   shelf flagged `personal` (the roll is mage-only, so the page sits outside
   completion like the Riftbound bands). Its slots carry no source hint and
@@ -93,10 +119,11 @@ content authored.
 
 ## Pinned tests
 
-`tests/flight_paths.test.ts`, `tests/flight_view.test.ts`,
-`tests/flight_window_hud.test.ts`, `tests/grand_teleport_learning.test.ts`,
+`tests/waystones.test.ts`, `tests/waystone_fee.test.ts`,
+`tests/waystone_tickets.test.ts`, `tests/waystone_view.test.ts`,
+`tests/waystone_window_hud.test.ts`, `tests/grand_teleport_learning.test.ts`,
 `tests/party_gate.test.ts`, `tests/ability_tooltip_consistency.test.ts`,
 `tests/deeds_content.test.ts`, `tests/reliquary_content.test.ts`,
 `tests/npc_looks.test.ts`, `tests/npc_voice_coverage.test.ts`,
-`tests/localization_coverage.test.ts`, `tests/i18n_completeness.test.ts`,
-`tests/guide.test.ts`.
+`tests/item_icons.test.ts`, `tests/localization_coverage.test.ts`,
+`tests/i18n_completeness.test.ts`, `tests/guide.test.ts`.

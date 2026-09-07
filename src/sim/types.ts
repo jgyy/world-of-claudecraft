@@ -3496,11 +3496,11 @@ export interface NpcDef {
   // The Card Master: talking to this NPC joins/leaves the Card Duel minigame
   // queue (src/sim/social/card_duel.ts) instead of any vendor/bank flow.
   cardMaster?: boolean;
-  // A flightmaster: talking to this NPC records its flight node as known for
-  // the player (src/sim/flight_paths.ts) and the dialog offers the flight
-  // window. A flag on the warfareVendor precedent; the node id is resolved
-  // from the NPC id through FLIGHT_NODES (content/flight_paths.ts).
-  flightmaster?: boolean;
+  // A waystone keeper: talking to this NPC attunes its stone for the player
+  // (src/sim/waystones.ts) and the dialog offers the waystone window. A flag
+  // on the warfareVendor precedent; the stone is resolved from the NPC id
+  // through WAYSTONES (content/waystones.ts).
+  waystoneKeeper?: boolean;
   greeting: string;
   // Registered but not surface-placed at world init. The owning system spawns
   // the entity on demand (e.g. the Nythraxis encounter walks Brother Aldric in
@@ -4212,17 +4212,6 @@ export interface LedgeClimb {
   duration: number;
 }
 
-export interface FlightPathRide {
-  /** Route waypoints (world x/z), consumed front to back. */
-  path: { x: number; z: number }[];
-  /** Index of the waypoint currently flown toward. */
-  index: number;
-  /** Flight node id the ride lands at (content/flight_paths.ts). */
-  destination: string;
-  /** Ground speed in yards per second (FLIGHT_SPEED). */
-  speed: number;
-}
-
 export interface HeroicLeapFlight {
   from: Vec3;
   to: Vec3;
@@ -4681,10 +4670,6 @@ export interface Entity extends ClientMirroredEntityFields {
   // landing area hit until touchdown. Absent until first use so unrelated entity
   // snapshots and deterministic traces do not gain inert state.
   leap?: HeroicLeapFlight | null;
-  // Authoritative flight-path ride (src/sim/flight_paths.ts). While present it
-  // owns movement along the authored route; absent until first use so unrelated
-  // entity snapshots and deterministic traces do not gain inert state.
-  flight?: FlightPathRide | null;
   // Valkyr's Calling owns movement through a visible ascent, forward flight,
   // and descent. Optional so unrelated entities and old wire payloads remain
   // byte-compatible until the ability is first used.
@@ -5992,10 +5977,10 @@ export type SimEvent = { pid?: number } & (
   // Asks the client to open the Rift Forge window (the interact path at a
   // riftForge NPC). Structured only, the bank precedent above.
   | { type: 'riftForge' }
-  // Asks the client to open the flight window at a flightmaster NPC (the
-  // interact path). Structured only, the bank precedent above; the client
-  // reads the known-node set from the world facet.
-  | { type: 'flightmaster'; npcId: number; nodeId: string }
+  // Asks the client to open the waystone window at a keeper NPC (the interact
+  // path). Structured only, the bank precedent above; the client reads the
+  // attuned-stone set from the world facet.
+  | { type: 'waystone'; npcId: number; stoneId: string }
   // Interacting with a town noticeboard. Structured and personal: the client
   // owns localized feedback, and online routing sends it only to the reader.
   // 'listings' carries the board's posted notices verbatim (guild names and

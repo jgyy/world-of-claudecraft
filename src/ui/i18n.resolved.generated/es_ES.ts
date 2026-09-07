@@ -2122,15 +2122,18 @@ export const es_ES: EnTranslations = {
       "header": "{name} ({have}/{total})",
       "bonusLine": "({pieces}) {bonus}"
     },
-    "flight": {
-      "title": "Flight Paths",
-      "gossipOption": "Take a flight",
-      "gossipOptionAria": "Take a flight with {name}",
-      "rowAria": "Fly to {town}, {hops} hops, {fare}",
-      "hops": "{count} hops",
-      "fare": "Fare: {fare}",
-      "empty": "You know no other flight paths yet. Speak to a flightmaster in another town to learn its path.",
-      "close": "Close flight paths"
+    "waystone": {
+      "title": "Waystones",
+      "gossipOption": "Use the waystone",
+      "gossipOptionAria": "Use the waystone with {name}",
+      "rowAria": "Teleport to {town}, {distance} yards, {price}",
+      "distance": "{distance} yd",
+      "fee": "Fee: {fee}",
+      "ticketPrice": "1 ticket",
+      "tickets": "Waystone Tickets: {count}",
+      "guildDiscount": "Guild discount: {pct}%",
+      "empty": "You are attuned to no other waystone yet. Touch the stone in another town to attune to it.",
+      "close": "Close waystones"
     },
     "itemProc": {
       "onMeleeHit": "Probabilidad al golpear ({chance}%): {effect}",
@@ -6112,7 +6115,7 @@ export const es_ES: EnTranslations = {
     },
     "worldPage": {
       "heading": "El mundo",
-      "intro": "World of ClaudeCraft es una tierra continua que cruzas a pie. El viejo camino va de sur a norte a través del valle inicial, la marisma y los picos, y sigue subiendo más allá de ellos hasta la hondonada siguiente y las nieves en lo alto del mapa. Una columna de reinos superiores se abre a partir de ese camino hacia el oeste y otra hacia el este, y una isla se encuentra frente a la costa este del Valle. No hay viaje rápido, ni rutas de vuelo, ni diligencias: cada trayecto se camina o se cabalga, así que llegar forma parte de la aventura.\n\nLa tierra también lleva la cuenta del tiempo. Un ciclo de día y noche corre sobre un reloj real compartido por todos los de tu mundo, así que el cielo pasa del alba al mediodía y de ahí al ocaso y a la oscuridad para todos vosotros a la vez, la luna va y viene por sus fases, y la luz sobre el suelo cambia con ella. La esfera que rodea tu minimapa es donde lees la hora.",
+      "intro": "World of ClaudeCraft es una tierra continua que cruzas a pie. El viejo camino va de sur a norte a través del valle inicial, la marisma y los picos, y sigue subiendo más allá de ellos hasta la hondonada siguiente y las nieves en lo alto del mapa. Una columna de reinos superiores se abre a partir de ese camino hacia el oeste y otra hacia el este, y una isla se encuentra frente a la costa este del Valle. Llegar es parte de la aventura: cada camino se recorre a pie o a caballo, y la piedra de camino de cada pueblo central puede llevarte al instante a cualquier otra piedra que ya hayas tocado.\n\nLa tierra también lleva la cuenta del tiempo. Un ciclo de día y noche corre sobre un reloj real compartido por todos los de tu mundo, así que el cielo pasa del alba al mediodía y de ahí al ocaso y a la oscuridad para todos vosotros a la vez, la luna va y viene por sus fases, y la luz sobre el suelo cambia con ella. La esfera que rodea tu minimapa es donde lees la hora.",
       "hub": "Base de operaciones",
       "mapHeading": "El camino y los reinos más allá",
       "mapSub": "El rastro de misiones va de sur a norte por el centro del mapa: valle, marisma, picos, y más allá hasta la hondonada y las nieves. Los otros reinos se abren junto a ese camino en lugar de después de él, por puertas al este y al oeste del camino de la marisma, y a la isla de Farshore se llega desde la costa este del Valle. Lo que te mantiene fuera de los reinos lejanos son sus franjas de nivel, no la caminata: cinco de ellos comparten la franja más alta, así que en cuanto estés listo puedes afrontarlos en el orden que quieras. Farshore es la excepción: tierra de nivel bajo que puedes visitar pronto.",
@@ -6183,7 +6186,7 @@ export const es_ES: EnTranslations = {
       "provingGreeter": "Instructora Maren, Campamento Dawnrest",
       "provingPlaceNotes": "El Campamento Dawnrest es el asentamiento entero de la isla: unas cuantas tiendas, un puesto y una hoguera de reunión. El Viejo Muelle mira hacia el valle, donde el círculo de travesía lleva a los graduados al otro lado del estrecho; el Patio de Prácticas, al sur del campamento, mantiene sus efigies de paja en pie para quien las necesite; y la Línea de Naufragios es la orilla sembrada de restos donde la marea paga a la isla en cajas de naufragio.",
       "travelTitle": "Cómo moverse",
-      "travelBody": "Cada camino del reino se recorre a pie o a caballo. No hay rutas de vuelo, ni taxis, ni red de teletransporte: el mapa es una única masa de tierra conectada, y cada conexión es algo que puedes pisar. Las crestas separan un reino del siguiente, y donde dos reinos comparten una cresta, el camino sube por un paso. Sin embargo, no todas las fronteras funcionan así. Al norte, una larga calzada lleva el camino sobre el agua desde la Hondonada Velada hasta el país nevado más allá, y más al sur, un delgado banco de arena natural llamado el Ferrywalk corre hacia el este desde la costa del Valle hasta El Embarcadero, en la isla del Farshore, que no tiene frontera terrestre alguna. Y hay exactamente una puerta verdadera en la totalidad del mundo exterior: un velo de ocaso en lo alto de Thornpeak que se abre a la Hondonada Velada. La cresta sur de la Hondonada está sellada, sin ningún paso que la atraviese, así que ese velo es tu primera entrada, y se cierra tras de ti a la vuelta.\n\nCaigas donde caigas, el camino de vuelta es corto. Cada zona guarda al menos un cementerio con un Guardián Pálido velando sobre las lápidas, y un espíritu liberado se alza en el más cercano de ellos.\n\nEl mapa no termina en un muro invisible. La tierra se deshace en playas y cabos, y luego en mar abierto. Los cruces que el mundo espera que nades, los estrechos y lagunas entre un reino y el siguiente, son tranquilos y seguros de cruzar. Adéntrate en cambio mar adentro y la distancia misma te hace retroceder: te avisan, y te avisan de nuevo, y si sigues nadando, el mar te agota hasta matarte. Bucear tiene su propio límite, ya que el aliento se te acaba bajo la superficie, así que sube a respirar y da media vuelta cuando el agua te lo indique.",
+      "travelBody": "Cada camino del reino se recorre a pie o a caballo, y el mapa es una única masa de tierra conectada: cada conexión es algo que puedes pisar. Las piedras de camino te ayudan a volver sobre tus pasos. Cada pueblo central guarda una con un guardián al lado, y una vez que has tocado la piedra de un pueblo a pie, puedes pagar para transportarte allí al instante desde cualquier otra piedra que conozcas. La tarifa aumenta con la distancia, un Boleto de Piedra de Camino ganado en la cola diaria de mazmorras paga un salto en lugar de oro, y el prestigio de un gremio te quita una parte del precio. Un mago que haya aprendido un Gran Teletransporte puede abrir un portal que lleve a su grupo a una de las cuatro ciudades del viejo camino, y un brujo que haya recorrido el pacto de la Puerta Infernal puede rasgar una puerta que atraiga hacia sí a los miembros del grupo. Las crestas separan un reino del siguiente, y donde dos reinos comparten una cresta, el camino sube por un paso. Sin embargo, no todas las fronteras funcionan así. Al norte, una larga calzada lleva el camino sobre el agua desde la Hondonada Velada hasta el país nevado más allá, y más al sur, un delgado banco de arena natural llamado el Ferrywalk corre hacia el este desde la costa del Valle hasta El Embarcadero, en la isla del Farshore, que no tiene frontera terrestre alguna. Y hay exactamente una puerta verdadera en la totalidad del mundo exterior: un velo de ocaso en lo alto de Thornpeak que se abre a la Hondonada Velada. La cresta sur de la Hondonada está sellada, sin ningún paso que la atraviese, así que ese velo es tu primera entrada, y se cierra tras de ti a la vuelta.\n\nCaigas donde caigas, el camino de vuelta es corto. Cada zona guarda al menos un cementerio con un Guardián Pálido velando sobre las lápidas, y un espíritu liberado se alza en el más cercano de ellos.\n\nEl mapa no termina en un muro invisible. La tierra se deshace en playas y cabos, y luego en mar abierto. Los cruces que el mundo espera que nades, los estrechos y lagunas entre un reino y el siguiente, son tranquilos y seguros de cruzar. Adéntrate en cambio mar adentro y la distancia misma te hace retroceder: te avisan, y te avisan de nuevo, y si sigues nadando, el mar te agota hasta matarte. Bucear tiene su propio límite, ya que el aliento se te acaba bajo la superficie, así que sube a respirar y da media vuelta cuando el agua te lo indique.",
       "mountsTitle": "Monturas",
       "mountsBody": "Montar es lo único que hace el mundo más pequeño, y es una lección antes que un caballo. En el nivel 20, la caballeriza mayor, Marla, se hará cargo de ti: le compras la habilidad de montar, y la lección de monta en sí es gratis, un recorrido de saltos que haces por su corral sobre un corcel prestado. Apruébalo, entrega la lección, y tu primer Corcel del Valor será tuyo; a partir de entonces recorres el reino notablemente más rápido a caballo. La velocidad es lo único que te da una montura: las más raras, que vienen del contenido más difícil, son aún más rápidas, pero ninguna cambia tu poder en un combate. Monta y desmonta con la tecla que tengas asignada en tus controles. No puedes subirte mientras estás en combate, y blandir un arma, lanzar un hechizo, adentrarte en el agua o caer en batalla te ponen de vuelta en pie.",
       "mountsMore": "Todos los detalles sobre las monturas",
@@ -16282,75 +16285,75 @@ export const es_ES: EnTranslations = {
         "title": "Guardiana de la Playa",
         "greeting": "La marea quita y la marea paga, {playerName}. Yo llevo la cuenta de las dos cosas: lo que los correteadores rapiñan de los naufragios, y lo que las manos honestas traen de vuelta por este sendero."
       },
-      "flightmaster_eastbrook": {
+      "waystone_keeper_eastbrook": {
         "name": "Wren Hollis",
-        "title": "Flightmaster",
-        "greeting": "The gryphons are rested and the sky is clear, {className}. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone hums for you, {className}. Touch it once and it will always know your name."
       },
-      "flightmaster_fenbridge": {
+      "waystone_keeper_fenbridge": {
         "name": "Odo Marshwick",
-        "title": "Flightmaster",
-        "greeting": "Mind the reeds on the way up. Name a town and we will get you there."
+        "title": "Waystone Keeper",
+        "greeting": "Mind the moss on the stone. Name a town and you will be standing in it."
       },
-      "flightmaster_highwatch": {
+      "waystone_keeper_highwatch": {
         "name": "Bram Thistlecrag",
-        "title": "Flightmaster",
-        "greeting": "Thin air, long views. The birds know every pass in these peaks."
+        "title": "Waystone Keeper",
+        "greeting": "Thin air, quick roads. The stone remembers every peak you have touched."
       },
-      "flightmaster_eldergleam": {
+      "waystone_keeper_eldergleam": {
         "name": "Sylvane Duskwarden",
-        "title": "Flightmaster",
-        "greeting": "The Hollow is kinder from above. Choose your landing."
+        "title": "Waystone Keeper",
+        "greeting": "The Hollow keeps its stone under the boughs. Choose where you would rather be."
       },
-      "flightmaster_wyrmwatch": {
+      "waystone_keeper_wyrmwatch": {
         "name": "Karsk Emberhide",
-        "title": "Flightmaster",
-        "greeting": "Even the wyrms give my birds a wide berth. Where does the keep send you?"
+        "title": "Waystone Keeper",
+        "greeting": "Even the wyrms leave the stone alone. Where does the keep send you?"
       },
-      "flightmaster_icemantle": {
+      "waystone_keeper_icemantle": {
         "name": "Hilde Frostmantle",
-        "title": "Flightmaster",
-        "greeting": "Bundle up. The wind over the glacier bites, but the ride is quick."
+        "title": "Waystone Keeper",
+        "greeting": "The stone is warm to the touch, the only warm thing on the glacier. Where to?"
       },
-      "flightmaster_lanternmere": {
+      "waystone_keeper_lanternmere": {
         "name": "Fennick Ambergale",
-        "title": "Flightmaster",
-        "greeting": "The lanterns are lit for the night flights. Pick a destination."
+        "title": "Waystone Keeper",
+        "greeting": "The lanterns are lit around the stone tonight. Pick a destination."
       },
-      "flightmaster_bridgemere": {
+      "waystone_keeper_bridgemere": {
         "name": "Tamsin Reedwright",
-        "title": "Flightmaster",
-        "greeting": "From the bridge to anywhere the fens allow. Where to, {className}?"
+        "title": "Waystone Keeper",
+        "greeting": "From the bridge stone to any stone you know. Where to, {className}?"
       },
-      "flightmaster_moonrest": {
+      "waystone_keeper_moonrest": {
         "name": "Elowen Nightsong",
-        "title": "Flightmaster",
-        "greeting": "The moths guide the night birds home. Say where and we fly."
+        "title": "Waystone Keeper",
+        "greeting": "The moths circle the stone at dusk. Say where and you are there."
       },
-      "flightmaster_gallowmere": {
+      "waystone_keeper_gallowmere": {
         "name": "Corvin Gravesend",
-        "title": "Flightmaster",
-        "greeting": "Nothing haunts the sky here. Yet. Name your town."
+        "title": "Waystone Keeper",
+        "greeting": "Nothing haunts this stone. Yet. Name your town."
       },
-      "flightmaster_drifthaven": {
+      "waystone_keeper_drifthaven": {
         "name": "Nia Saltwind",
-        "title": "Flightmaster",
-        "greeting": "Warm air off the shallows lifts a bird nicely. Where are you bound?"
+        "title": "Waystone Keeper",
+        "greeting": "Salt has not dulled the stone one bit. Where are you bound?"
       },
-      "flightmaster_hedgewick": {
+      "waystone_keeper_hedgewick": {
         "name": "Pip Greenbower",
-        "title": "Flightmaster",
-        "greeting": "Over the hedges and past the orchards. Where shall it be?"
+        "title": "Waystone Keeper",
+        "greeting": "The stone sits between the hedges and the orchards. Where shall it be?"
       },
-      "flightmaster_wickharbor": {
+      "waystone_keeper_wickharbor": {
         "name": "Marlo Galeson",
-        "title": "Flightmaster",
-        "greeting": "The harbor winds are steady today. Choose a landing."
+        "title": "Waystone Keeper",
+        "greeting": "The harbor stone is steady whatever the wind does. Choose a landing."
       },
-      "flightmaster_gullhaven": {
+      "waystone_keeper_gullhaven": {
         "name": "Sabine Gullwing",
-        "title": "Flightmaster",
-        "greeting": "The gulls hate my birds. The birds do not care. Where to?"
+        "title": "Waystone Keeper",
+        "greeting": "The gulls roost on the stone. The stone does not mind. Where to?"
       },
       "tidewatcher_ondrel": {
         "name": "Ondrel Vane",

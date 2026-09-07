@@ -27,7 +27,7 @@ export interface GossipMenuContent {
   hasCrucibleVendor: boolean;
   hasDelveBoard: boolean;
   hasCardMaster: boolean;
-  hasFlightmaster?: boolean;
+  hasWaystoneKeeper?: boolean;
   hasTraining: boolean;
 }
 
@@ -42,7 +42,7 @@ export function gossipMenuIsEmpty(content: GossipMenuContent): boolean {
     !content.hasCrucibleVendor &&
     !content.hasDelveBoard &&
     !content.hasCardMaster &&
-    !content.hasFlightmaster &&
+    !content.hasWaystoneKeeper &&
     !content.hasTraining
   );
 }

@@ -16,8 +16,8 @@
     "Grave Eruption hash-placed warning + impact damage + Grave Flame residue tick",
     "class:warrior"
   ],
-  "draws": 11462,
-  "drawDigest": "d694d26a",
+  "draws": 11477,
+  "drawDigest": "e787325a",
   "frames": [
     {
       "tick": 0,
@@ -16812,8 +16812,8 @@
       "state": "58af263a",
       "events": "0e75778c",
       "rng": {
-        "draws": 10935,
-        "digest": "3d3306df"
+        "draws": 10940,
+        "digest": "0e67c47d"
       },
       "label": "death",
       "players": [
@@ -18083,8 +18083,8 @@
       "state": "555d21ac",
       "events": "741638a5",
       "rng": {
-        "draws": 10956,
-        "digest": "29a6e190"
+        "draws": 10961,
+        "digest": "5866ad2f"
       }
     },
     {
@@ -18094,8 +18094,8 @@
       "state": "e113f3a1",
       "events": "741638a5",
       "rng": {
-        "draws": 11052,
-        "digest": "e53cfa95"
+        "draws": 11058,
+        "digest": "7d040ed8"
       }
     },
     {
@@ -18105,8 +18105,8 @@
       "state": "05d7dcea",
       "events": "741638a5",
       "rng": {
-        "draws": 11148,
-        "digest": "0b66025e"
+        "draws": 11154,
+        "digest": "2163ea7e"
       }
     },
     {
@@ -18116,8 +18116,8 @@
       "state": "aa426845",
       "events": "741638a5",
       "rng": {
-        "draws": 11237,
-        "digest": "0f94149d"
+        "draws": 11246,
+        "digest": "65ffd090"
       }
     },
     {
@@ -18127,8 +18127,8 @@
       "state": "af1fb5bc",
       "events": "741638a5",
       "rng": {
-        "draws": 11323,
-        "digest": "ee658aee"
+        "draws": 11336,
+        "digest": "d8af376f"
       }
     },
     {
@@ -18138,8 +18138,8 @@
       "state": "93f327f5",
       "events": "741638a5",
       "rng": {
-        "draws": 11406,
-        "digest": "a882df14"
+        "draws": 11419,
+        "digest": "3527b23e"
       }
     },
     {
@@ -18149,8 +18149,8 @@
       "state": "7bee09c8",
       "events": "84a8fbfa",
       "rng": {
-        "draws": 11462,
-        "digest": "d694d26a"
+        "draws": 11477,
+        "digest": "e787325a"
       },
       "label": "final",
       "players": [
