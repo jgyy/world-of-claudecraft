@@ -53,6 +53,20 @@ Lore beats: the ledger reveals Sexton Marrow was the chapel's living caretaker �
 
 Elite multipliers (2.3× hp, 1.5× dmg, 2× XP) applied by the sim — values below are pre-elite bases.
 
+Non-elite ("random"/trash) mobs additionally ramp health from 1x to 2.5x between level 16
+and `MAX_LEVEL` (`mobHealthLevelRamp` in `src/sim/entity.ts`), so a level-cap trash pull
+stays a meaningful fight instead of a one-ability clear. The ramp reads the mob's own
+spawn level, so it applies to any non-elite spawn in that range regardless of source
+(open world, tamed/summoned pets); it stops applying once level exceeds `MAX_LEVEL`.
+Elite/rare/boss templates keep only their existing 2.3x multiplier. Content that already
+owns its own health scaling opts out via `MobTemplate.noHealthRamp`: every dungeon
+difficulty transform (`instances/difficulty.ts` `mobTemplateForDungeonDifficulty`) and
+every rift rank transform (`rift/ranks.ts` `riftRankTemplate`) stamps it on the
+templates they return, and a handful of summoned/mechanic mobs with a hard
+always-one-hit-killable requirement (the dragonkin brood egg and whelp) stamp it
+directly, so the ramp never compounds with another scaling system or a scripted
+puzzle mob's fixed HP.
+
 | id | name | family | lvl | flags | hpBase/perLvl | dmgBase/perLvl | atkSpd | notes / loot highlights |
 |---|---|---|---|---|---|---|---|---|
 | mire_prowler | Mire Prowler | beast | 7–8 | — | 46/19 | 7/2.1 | 2.0 | copper 30; mire_prowler_pelt 0.6 (q_prowler_pelts); soggy_moccasin 0.3 |

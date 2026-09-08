@@ -19,7 +19,7 @@ import {
   petOwnerScaling,
 } from '../src/sim/pet/pet_scaling';
 import { Sim } from '../src/sim/sim';
-import { DT, type Entity, type ItemDef, RUN_SPEED, type Vec3 } from '../src/sim/types';
+import { DT, type Entity, type ItemDef, MAX_LEVEL, RUN_SPEED, type Vec3 } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
 // A hunter pet used to be frozen at tame time: its health and damage came only
@@ -51,10 +51,21 @@ function spawnWolf(sim: AnySim, near: AnyEntity, level = 2): AnyEntity {
   return wolf;
 }
 
-/** The pet pool a template alone would give, i.e. the old behavior. */
+/**
+ * The pet pool a template alone would give, i.e. the old behavior, plus the
+ * level 16 -> MAX_LEVEL non-elite health ramp (entity.ts mobHealthLevelRamp):
+ * both forest_wolf and gloomshade are non-elite, so their pets ramp the same
+ * way a wild spawn of the same template would.
+ */
 function templateHp(templateId: string, level: number): number {
   const t = MOBS[templateId];
-  return Math.round(t.hpBase + t.hpPerLevel * (level - 1));
+  const rampStart = 16;
+  const rampMult = 2.5;
+  const ramp =
+    t.elite || level <= rampStart || level > MAX_LEVEL
+      ? 1
+      : 1 + ((level - rampStart) / (MAX_LEVEL - rampStart)) * (rampMult - 1);
+  return Math.round((t.hpBase + t.hpPerLevel * (level - 1)) * ramp);
 }
 
 /** One item per equip slot for a set, mirroring tests/haste_set_bonus.test.ts. */

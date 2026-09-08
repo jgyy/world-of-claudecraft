@@ -331,5 +331,9 @@ export function riftRankTemplate(
     dmgPerLevel: template.dmgPerLevel * dmg,
     armorPerLevel: template.armorPerLevel * tuning.armorMultiplier,
     moveSpeed: Math.max(template.moveSpeed, tuning.minMoveSpeed),
+    // Every rift rank already owns health scaling for this mob; the
+    // world-content level ramp (entity.ts mobHealthLevelRamp) must not
+    // compound on top of it.
+    noHealthRamp: true,
   };
 }

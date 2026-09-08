@@ -61,6 +61,10 @@ export function mobTemplateForDungeonDifficulty(
       hpPerLevel: template.hpPerLevel * hpMult,
       dmgBase: template.dmgBase * dmgMult,
       dmgPerLevel: template.dmgPerLevel * dmgMult,
+      // This dungeon retune already owns health scaling for this mob; the
+      // world-content level ramp (entity.ts mobHealthLevelRamp) must not
+      // compound on top of it.
+      noHealthRamp: true,
     };
   }
   const tuning = heroicMobTuningFor(dungeonId);
@@ -79,6 +83,9 @@ export function mobTemplateForDungeonDifficulty(
     dmgPerLevel: template.dmgPerLevel * dmgMult,
     armorPerLevel: template.armorPerLevel * tuning.armorMultiplier,
     moveSpeed: Math.max(template.moveSpeed, HEROIC_MIN_MOVE_SPEED),
+    // Heroic already owns health scaling for this mob; see the normal-tier
+    // return above.
+    noHealthRamp: true,
   };
 }
 

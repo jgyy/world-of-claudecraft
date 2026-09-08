@@ -199,6 +199,7 @@ export const DRAKELANDS_MOBS: Record<string, MobTemplate> = {
     color: 0x69a06a,
     // Dies to any single hit; the hatched whelp is the real fight.
     xpMult: 0,
+    noHealthRamp: true,
     // Chain 5.5 (under the ring spacing) so shooting one egg ripples its
     // neighbors without a single roadside egg unzipping a whole scatter
     // field; proximity 3 means a boot practically ON the shell.
@@ -238,6 +239,7 @@ export const DRAKELANDS_MOBS: Record<string, MobTemplate> = {
     // Swarm chaff: a sliver of kill XP each so a cracked clutch is a hazard,
     // not an XP farm.
     xpMult: 0.3,
+    noHealthRamp: true,
     // Restless hatchlings: the wander pause divides by 3, so loose whelps
     // skitter around their patch instead of standing statuesque.
     wanderHaste: 3,

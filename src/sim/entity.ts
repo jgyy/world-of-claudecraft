@@ -26,6 +26,7 @@ import {
   ENRAGE_HASTE_PCT,
   hasteFractionFromRating,
   hitFractionFromRating,
+  MAX_LEVEL,
   SHIELD_BLOCK_BASE,
   SPELL_POWER_PER_INT,
 } from './types';
@@ -293,6 +294,30 @@ function manaFromIntellect(int: number): number {
   // the mana pool below its level-based base into negative territory.
   const i = Math.max(0, int);
   return Math.min(i, 20) + Math.max(0, i - 20) * 15;
+}
+
+// Trash mobs used to be nearly flat across the top of the level range (hpPerLevel is
+// small relative to hpBase), so a level-cap player could one-shot or one-ability a
+// non-elite mob. Ramp non-elite HP up to 2.5x by MAX_LEVEL so the level-16-to-cap
+// climb stays a meaningful fight; elite/rare/boss templates already carry their own
+// hand-tuned 2.3x multiplier and are left alone. Bounded to (START_LEVEL, MAX_LEVEL]:
+// heroic dungeon adds are deliberately spawned above MAX_LEVEL (e.g. level 22) and
+// already carry their own separate healthMultiplier (dungeon_difficulty.ts), so this
+// world-content ramp must not also apply there. `template.noHealthRamp` is the
+// explicit per-template opt-out for summoned/mechanic mobs with a hard
+// always-one-hit-killable requirement (the dragonkin brood egg and whelp).
+const MOB_HEALTH_RAMP_START_LEVEL = 16;
+const MOB_HEALTH_RAMP_MULTIPLIER = 2.5;
+function mobHealthLevelRamp(level: number, template: MobTemplate): number {
+  if (
+    template.elite ||
+    template.noHealthRamp ||
+    level <= MOB_HEALTH_RAMP_START_LEVEL ||
+    level > MAX_LEVEL
+  )
+    return 1;
+  const t = (level - MOB_HEALTH_RAMP_START_LEVEL) / (MAX_LEVEL - MOB_HEALTH_RAMP_START_LEVEL);
+  return 1 + t * (MOB_HEALTH_RAMP_MULTIPLIER - 1);
 }
 
 export function pctValue(value: number): number {
@@ -788,7 +813,8 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   // Elite scaling, classic-style: ~2.3x health, ~1.5x damage.
   const hpMult = template.elite ? 2.3 : 1;
   const dmgMult = template.elite ? 1.5 : 1;
-  e.maxHp = Math.round((template.hpBase + template.hpPerLevel * (level - 1)) * hpMult);
+  const rampMult = mobHealthLevelRamp(level, template);
+  e.maxHp = Math.round((template.hpBase + template.hpPerLevel * (level - 1)) * hpMult * rampMult);
   e.hp = e.maxHp;
   if (template.damageFloorPct !== undefined) {
     e.damageFloorHp = Math.ceil(e.maxHp * template.damageFloorPct);

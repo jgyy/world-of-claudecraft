@@ -1983,6 +1983,12 @@ export interface MobTemplate {
   // Kill-XP multiplier (default 1). 0 marks a puzzle-object mob (e.g. the 1 HP
   // spider egg-sac) that must not pay full kill XP for a single hit.
   xpMult?: number;
+  // Opts out of the level 16 -> MAX_LEVEL non-elite health ramp (entity.ts
+  // mobHealthLevelRamp). For summoned/mechanic mobs with a hard "always
+  // one-hit-killable at the target's level" requirement (the dragonkin brood
+  // egg and whelp): their authored hpBase/hpPerLevel is the real balance
+  // number, not a floor the general trash-tankiness ramp may raise further.
+  noHealthRamp?: boolean;
   // Quest-gated destructible: when set, the mob is only damageable by a player who
   // has this quest active (state 'active' or 'ready'). Used for quest-exclusive
   // objects like Broodmother eggs so non-questers cannot grief the clutch.
