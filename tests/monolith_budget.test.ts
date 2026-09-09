@@ -1013,7 +1013,12 @@ const MONOLITHS: MonolithRow[] = [
     // measures 11923, below both arms, so the ceiling follows it down. Exact
     // merged count, zero slack: any further growth reds again.
     // Main hotfix integration: combined extractions, exact merged count.
-    ceiling: 11879,
+    // Down 11879 -> 11874 at the Crucible binding restore (PRs #3788/#3789/#3791
+    // re-applied for v0.42.1): the two per-slot payload-bound blocks in the
+    // character load loops (bags, buyback) moved to item_instance_load.ts's
+    // sanitizeSlotInstanceOnLoad, paying for the party-trade retire hooks that
+    // now live in src/sim/loot/bop_trade_persistence.ts. Exact count, zero slack.
+    ceiling: 11874,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {

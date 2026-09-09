@@ -757,15 +757,22 @@ describe('instancePartyTradeLine (the BoP party trade window line)', () => {
     ).toBe('');
   });
 
-  it('composes in hud.itemTooltip right after the Soulbound line, before the bond lines', () => {
+  it('composes in hud.itemTooltip inside the Soulbound block, before the bond lines', () => {
     const hud = readFileSync(new URL('../src/ui/hud.ts', import.meta.url), 'utf8');
     const soulbound = hud.indexOf("t('hudChrome.itemSoulbound')");
     const partyTrade = hud.indexOf('instancePartyTradeLine(instance,');
     const binding = hud.indexOf('instanceBindingLines(instance, item.kind)');
+    // The window line rides INSIDE the def-level `if (item.soulbound)` block
+    // (no block close between the Soulbound line and the call, and the call
+    // sits at the block's indent), so a legacy marker on a drop that has since
+    // become freely tradable (the Crucible boss drops, PR #3789) renders nothing.
+    expect(hud.slice(soulbound, partyTrade)).not.toContain('\n    }\n');
+    const callLineStart = hud.lastIndexOf('\n', partyTrade) + 1;
+    expect(hud.slice(callLineStart, partyTrade)).toBe('      html += ');
     expect(partyTrade).toBeGreaterThan(soulbound);
     expect(binding).toBeGreaterThan(partyTrade);
     expect(hud.indexOf('instancePartyTradeLine(', partyTrade + 1)).toBe(-1);
     // The remaining span resolves through the IWorld clock, never Date.now().
-    expect(hud).toContain('this.sim.partyTradeMsRemaining(untilMs)');
+    expect(hud).toContain('this.sim.partyTradeMsRemaining(ms)');
   });
 });
