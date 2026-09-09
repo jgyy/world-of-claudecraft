@@ -760,6 +760,14 @@ describe('the garden-bed arm (Phase 9b)', () => {
     expect(r.calls).toEqual(['plantSheet:bed_test_1']);
   });
 
+  // The node arm sits above the bed arm (restored with the node arm itself;
+  // the pin c67072a13f dropped): a node in reach wins over the bed underfoot.
+  it('lets a gather node in range keep winning the press over a bed', () => {
+    const r = bedRig('ready');
+    expect(interact(r, gatherOpts([ORE_NODE]))).toBe(true);
+    expect(r.calls).toEqual(['harvest:ore_1']);
+  });
+
   it('lets a corpse in range keep winning the press over a bed', () => {
     const corpse = entity({
       id: 2,
@@ -839,6 +847,14 @@ describe('the feast arm (Phase 12)', () => {
     r.world.entities = new Map();
     expect(interact(r)).toBe(true);
     expect(r.calls).toEqual(['plantSheet:bed_test_1']);
+  });
+
+  // The node arm sits above the feast arm (restored with the node arm itself;
+  // the pin c67072a13f dropped): a node in reach wins over the placed feast.
+  it('a gather node in reach keeps winning the press over a feast', () => {
+    const r = rig([feast(12)]);
+    expect(interact(r, gatherOpts([ORE_NODE]))).toBe(true);
+    expect(r.calls).toEqual(['harvest:ore_1']);
   });
 
   it('falls through to the nothing-to-interact line when the feast is out of range', () => {

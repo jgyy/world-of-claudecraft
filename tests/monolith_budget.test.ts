@@ -1208,7 +1208,10 @@ const MONOLITHS: MonolithRow[] = [
     // Measured after formatting; lower the ratchet with the extraction.
     // Compose the mount cosmetics and practice lesson extractions.
     // Measured combined size; retain zero headroom after the release merge.
-    ceiling: 11332,
+    // RE-PINNED 11332 -> 11327 at the interact-key gather extraction
+    // (src/game/interact_key_gather.ts took the R40 confirm gate and the
+    // node bundle out of interactKey). Exact count, zero slack.
+    ceiling: 11327,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {
