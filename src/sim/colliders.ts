@@ -2479,10 +2479,7 @@ function sightBlockedAt(
     // Cell read per 0.5 yd sight sample: r is lineOfSightClear's 0.05, an
     // order of magnitude inside the MAX_BODY_RADIUS registration pad, so the
     // single cell is complete (the battleground arm above documents the same
-    // R-BOUND ASSUMPTION). skipLow true: a generated floor's clutter circles
-    // carry a real cameraTopY (dungeon_layout.ts) and must clear the same way
-    // a low open-world prop does; every wall/pillar/ledge collider here still
-    // has no cameraTopY at all, so they keep blocking regardless.
+    // R-BOUND ASSUMPTION). skipLow true: only clutter carries cameraTopY.
     const list = colliderCellAt(region.cells, x - region.ox, z - region.oz);
     return list ? overlapsAny(list, x - region.ox, z - region.oz, true) : false;
   }
