@@ -1,4 +1,4 @@
-// @vitest-environment jsdom
+// @vitest-environment happy-dom
 // Drives the real bags painter through the player click that originally
 // rejected every soulbound copy before the authoritative trade path could see
 // its temporary bind-on-pickup party-trade marker (PR #3791): a still-live

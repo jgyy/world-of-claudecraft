@@ -762,13 +762,19 @@ describe('instancePartyTradeLine (the BoP party trade window line)', () => {
     const soulbound = hud.indexOf("t('hudChrome.itemSoulbound')");
     const partyTrade = hud.indexOf('instancePartyTradeLine(instance,');
     const binding = hud.indexOf('instanceBindingLines(instance, item.kind)');
-    // The window line rides INSIDE the def-level `if (item.soulbound)` block
-    // (no block close between the Soulbound line and the call, and the call
-    // sits at the block's indent), so a legacy marker on a drop that has since
-    // become freely tradable (the Crucible boss drops, PR #3789) renders nothing.
-    expect(hud.slice(soulbound, partyTrade)).not.toContain('\n    }\n');
-    const callLineStart = hud.lastIndexOf('\n', partyTrade) + 1;
-    expect(hud.slice(callLineStart, partyTrade)).toBe('      html += ');
+    // The window line rides INSIDE the def-level `if (item.soulbound)` block,
+    // so a legacy marker on a drop that has since become freely tradable (the
+    // Crucible boss drops, PR #3789) renders nothing. Pinned by braces, not
+    // whitespace, so a reformat of the block cannot break it: no `}` between
+    // the block's open and the Soulbound line, and none between the end of the
+    // Soulbound statement and the call (the template's `${...}` sits inside
+    // that statement, which is why the second span starts after it).
+    const blockOpen = hud.lastIndexOf('if (item.soulbound)', soulbound);
+    expect(blockOpen).toBeGreaterThan(-1);
+    expect(hud.slice(blockOpen, soulbound)).not.toContain('}');
+    const soulboundEnd = hud.indexOf('`;', soulbound);
+    expect(soulboundEnd).toBeGreaterThan(soulbound);
+    expect(hud.slice(soulboundEnd, partyTrade)).not.toContain('}');
     expect(partyTrade).toBeGreaterThan(soulbound);
     expect(binding).toBeGreaterThan(partyTrade);
     expect(hud.indexOf('instancePartyTradeLine(', partyTrade + 1)).toBe(-1);
