@@ -41,6 +41,7 @@ import {
   PERFECT_MOMENT_ID,
   TEMPORAL_ECHO_ID,
 } from '../../../sim/combat/chronomancy';
+import { TEMPORAL_HOURGLASS_ID } from '../../../sim/combat/temporal_hourglass';
 import { ABILITIES } from '../../../sim/data';
 import type { AbilityDef, AuraKind } from '../../../sim/types';
 import { isToggleAuraKind } from '../../auras_view';
@@ -69,6 +70,9 @@ export interface AuraTrackEntry {
   /** The ability's cooldown in seconds, 0 for none. Separates the emergency
    *  buttons from the rotational mitigation (see DEFENSIVE_COOLDOWN_SEC). */
   cooldown: number;
+  /** One cast lands an identical copy on every group member in radius, so only
+   *  the copy on the LOCAL player is worth a row (see BespokeEffectAura). */
+  groupWide?: true;
 }
 
 /** Nothing longer than this is a maintained effect; see the header. */
@@ -153,9 +157,11 @@ const UTILITY_KINDS: ReadonlySet<string> = new Set([
 // `resource_sap`, `paladin_debt_of_light`) are out for the plainer reason that
 // this family is the helpful side; the enemy side is src/ui/hud/target_dots/.
 
-/** The aura a bespoke effect type leaves. `auraId: null` keeps the ordinary id
- *  rule (the effect's own `auraId`, else the ability id); a named one is a FIXED
- *  id its sim module applies whichever ability cast it. */
+/** The aura a bespoke effect type leaves. Always names the KIND. It names the
+ *  ID too whenever the sim module applies a FIXED one whichever ability cast the
+ *  effect, which is the only way the catalog can avoid minting a key no live
+ *  aura carries; `auraId: null` is for the effects that genuinely take the
+ *  ordinary rule (the effect's own `auraId`, else the ability id). */
 interface BespokeEffectAura {
   auraId: string | null;
   kind: AuraKind;
@@ -163,6 +169,10 @@ interface BespokeEffectAura {
    *  sim module holds it as a constant, so the row IMPORTS that constant rather
    *  than copying its number and letting the two drift. */
   duration?: number;
+  /** One cast, one identical copy on every group member in radius. Their rows
+   *  carry no information the caster's own row does not, so the track shows the
+   *  caster's alone; see the Offensive Cooldowns descriptor. */
+  groupWide?: true;
 }
 
 // Effect types whose helpful aura NO rule below can see, because the content
@@ -171,8 +181,8 @@ interface BespokeEffectAura {
 // the ordinary rules then classify it like any other spell rather than needing a
 // second derivation of their own.
 //
-// Both misses this table fixes were Chronomancy, the mage healer, and both were
-// invisible in the same way: the spell simply appeared in no track and nothing
+// Every miss this table fixes was Chronomancy, the mage healer, and all of them
+// were invisible in the same way: the spell simply appeared in no track and nothing
 // failed, which is the exact failure mode a DERIVED catalog exists to prevent
 // and the reason a new bespoke effect type belongs here rather than in FORCED.
 //  - Temporal Echo marks an ally and converts a fraction of the mage's Arcane
@@ -185,8 +195,15 @@ interface BespokeEffectAura {
 //  - Temporal Acceleration is the Chronomancer's group haste burst, and the same
 //    `aoeAllyHaste` effect carries the shaman and rogue versions, so naming the
 //    type once covers all three (the hunter's 300s aura stays out on the ceiling,
-//    as it should). Its `_spell` companion is a second aura of the same name and
-//    duration and is deliberately left unnamed: a duplicate row per unit.
+//    as it should). It is the one row here that takes the ordinary id rule, and
+//    genuinely so: applyGroupHaste writes the aura under the CASTING ability's id
+//    (combat/haste_burst.ts), unlike the two Chronomancy modules beside it. It is
+//    also `groupWide`, for the reason that field names. Its `_spell` companion is
+//    a second aura of the same name and duration, deliberately left unnamed: it
+//    would be a duplicate row per unit. That is the one asymmetry with the
+//    kind-suffixed companions that DO get rows (Aether Surge's haste half): those
+//    differ from their primary in kind AND duration, so a reader learns something
+//    from the second row.
 //  - Perfect Moment is the Chronomancer's offensive window, and the only one here
 //    whose content record authors NO duration, so its row carries the sim's own
 //    constant. Its `arcane_charge` companion stays out for the reason the
@@ -203,8 +220,8 @@ const BESPOKE_EFFECT_AURAS: ReadonlyMap<string, BespokeEffectAura> = new Map<
 >([
   ['temporalEcho', { auraId: TEMPORAL_ECHO_ID, kind: 'temporal_echo' }],
   ['massTemporalEcho', { auraId: TEMPORAL_ECHO_ID, kind: 'temporal_echo' }],
-  ['temporalHourglass', { auraId: null, kind: 'stasis' }],
-  ['aoeAllyHaste', { auraId: null, kind: 'buff_haste' }],
+  ['temporalHourglass', { auraId: TEMPORAL_HOURGLASS_ID, kind: 'stasis' }],
+  ['aoeAllyHaste', { auraId: null, kind: 'buff_haste', groupWide: true }],
   [
     'perfectMoment',
     { auraId: PERFECT_MOMENT_ID, kind: 'perfect_moment', duration: PERFECT_MOMENT_DURATION },
@@ -346,6 +363,7 @@ function buildCatalog(): ReadonlyMap<string, AuraTrackEntry> {
           category,
           shape: mode ? 'mode' : category === 'absorb' ? 'points' : 'timer',
           cooldown,
+          ...(BESPOKE_EFFECT_AURAS.get(type)?.groupWide === true ? { groupWide: true } : {}),
         });
       }
     }

@@ -257,7 +257,7 @@ describe('aura track catalog: what it derives', () => {
       const allyId = sim.addPlayer('warrior', 'Ally');
       const ally = sim.entities.get(allyId);
       expect(ally, 'the ally never joined the world').toBeDefined();
-      if (!ally) return;
+      if (!ally) continue;
       ally.pos = { ...player.pos };
       ally.pos.x += 2; // well inside the 30 yd friendly cast range
       ally.prevPos = { ...ally.pos };
@@ -275,7 +275,7 @@ describe('aura track catalog: what it derives', () => {
       expect(live, `${abilityId} left no ${auraId} on the ally`).toBeDefined();
       const entry = auraTrackEntry(auraId);
       expect(entry, `${auraId} is live on an ally but has no catalog row`).toBeDefined();
-      if (!entry) return;
+      if (!entry) continue;
       expect(friendly.accepts(entry, false), `${auraId} is not accepted by Friendly`).toBe(true);
 
       const view = createAuraTrackView(friendly, {
@@ -504,6 +504,90 @@ describe('aura track catalog: what it derives', () => {
         `${id}:temporal_echo`,
       );
     }
+  });
+
+  it("paints the Chronomancy output windows, and only the caster's copy of a group burst", () => {
+    // THE OTHER HALF OF THE SAME CLAIM. The tests above drive the real selection
+    // core for the ally HoT and the guard; without this the two Offensive rows
+    // would be asserted at the CATALOG level only, and a catalog row nothing
+    // paints is the same bug wearing a green test.
+    //
+    // It also pins the group-burst gate. Temporal Acceleration lands an IDENTICAL
+    // copy on every party member in 40 yd, all expiring on the same tick, so an
+    // ally row carries nothing the caster's own row does not. Ungated, one press
+    // in a raid fills the track to its cap with copies of one buff and pushes the
+    // caster's real cooldowns into the overflow line. The party here is deliberately
+    // large enough that an ungated core would paint several rows, so this fails
+    // loudly rather than by one row.
+    const power = AURA_TRACKS.find((t) => t.id === 'power');
+    expect(power).toBeDefined();
+    if (!power) return;
+    const sim = new Sim({
+      seed: 31,
+      playerClass: 'mage',
+      autoEquip: true,
+      world: EMPTY_TEST_WORLD,
+    });
+    sim.setPlayerLevel(20);
+    expect(sim.setSpec('arcane'), 'mage could not pick arcane').toBe(true);
+    sim.tick();
+    const mage = sim.player;
+    mage.resource = mage.maxResource;
+    const allyIds: number[] = [];
+    for (let i = 0; i < 4; i++) {
+      const id = sim.addPlayer('warrior', `Ally${i}`);
+      const ally = sim.entities.get(id);
+      expect(ally, 'an ally never joined the world').toBeDefined();
+      if (!ally) return;
+      ally.pos = { ...mage.pos };
+      ally.pos.x += 1 + i * 0.4;
+      ally.prevPos = { ...ally.pos };
+      sim.partyInvite(id, mage.id);
+      sim.partyAccept(id);
+      allyIds.push(id);
+    }
+    const cast = (id: string) => {
+      mage.gcdRemaining = 0;
+      mage.resource = mage.maxResource;
+      sim.castAbility(id, mage.id);
+      for (let i = 0; i < 3; i++) sim.tick();
+    };
+    cast('temporal_acceleration');
+    cast('perfect_moment');
+
+    // The auras really landed on the allies: that is what makes the absence of
+    // ally ROWS below a deliberate gate rather than a cast that never went out.
+    const marked = allyIds.filter((id) =>
+      sim.entities
+        .get(id)
+        ?.auras.some((a) => a.id === 'temporal_acceleration' && a.sourceId === mage.id),
+    );
+    expect(marked.length, 'Temporal Acceleration reached no ally at all').toBeGreaterThan(1);
+
+    const view = createAuraTrackView(power, {
+      isOwn: (a) => a.sourceId === mage.id,
+      isMode: () => false,
+      auraName: (a) => a.name,
+      unitName: (e) => e.name,
+      iconKey: (a) => a.id,
+    });
+    const state = view.tick({
+      player: mage,
+      allies: sim.entities.values(),
+      enabled: true,
+      includeModes: true,
+    });
+    const rows = state.rows.slice(0, state.count).map((r) => r.key);
+    expect(rows, 'the caster cannot see their own haste window').toContain(
+      `${mage.id}:temporal_acceleration`,
+    );
+    expect(rows, 'Perfect Moment paints no Offensive row').toContain(`${mage.id}:perfect_moment`);
+    for (const id of marked) {
+      expect(rows, `an identical group-burst copy on ${id} took a row`).not.toContain(
+        `${id}:temporal_acceleration`,
+      );
+    }
+    expect(state.overflow, 'a four-ally party should not overflow the track').toBe(0);
   });
 
   it('honours its by-id exclusions, each of which has a live ability behind it', () => {

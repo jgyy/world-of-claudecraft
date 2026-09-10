@@ -193,11 +193,14 @@ export function createAuraTrackView<TEntity extends AuraTrackEntityInput>(
       if (!deps.isOwn(aura)) continue;
       const entry = auraTrackEntry(aura.id);
       if (!entry) continue;
-      // See the header: one aura id, two polarities. After the catalog lookup so
-      // the frame path only classifies auras that are already candidates.
-      if (isDebuffDisplayAura((aura.kind ?? '') as AuraKind, aura.value ?? 1, aura.id)) continue;
       if (!descriptor.accepts(entry, onSelf)) continue;
       if (aura.remaining <= 0 && aura.permanent !== true) continue;
+      // See the header: one aura id, two polarities. LAST of the four filters on
+      // purpose. Six views each scan every unit, so an aura this track was never
+      // going to take (a self-buff reaching the Friendly track) would otherwise
+      // be polarity-classified six times a frame to be dropped by the next line
+      // anyway; here it is only asked of auras this track would actually paint.
+      if (isDebuffDisplayAura((aura.kind ?? '') as AuraKind, aura.value ?? 1, aura.id)) continue;
       scratch.push(aura);
     }
     scratch.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));

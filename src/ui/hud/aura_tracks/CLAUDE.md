@@ -31,12 +31,19 @@ classifiers rather than each keeping a list.
   halves and joins no track, silently. That is not hypothetical: it took out four
   Chronomancy spells at once (Temporal Echo and its Cascade group mark, Hourglass
   of Suspension, Temporal Acceleration, Perfect Moment), and the spec's buffs were
-  invisible with nothing red. The row names the id and the kind the aura ACTUALLY
-  lands under, so the ordinary rules then classify it like any other spell instead
-  of growing a second derivation; `duration` is there only for an effect whose
-  content record authors none, and it IMPORTS the sim's constant rather than
-  copying the number. Prefer this to `FORCED`, which skips the ceiling and the
-  mode test and reads the ability's first effect for its metadata.
+  invisible with nothing red. A row always names the KIND the aura lands under, so
+  the ordinary rules then classify it like any other spell instead of growing a
+  second derivation. It names the ID too whenever the sim module applies a FIXED
+  one whichever ability cast the effect (`temporal_echo`, `temporal_hourglass`,
+  `perfect_moment`): that is the only way to avoid minting a key no live aura can
+  carry. `auraId: null` is for the effects that genuinely take the ordinary rule,
+  which today is `aoeAllyHaste` alone (`applyGroupHaste` writes the aura under the
+  casting ability's id). `duration` is there only for an effect whose content
+  record authors none, and it IMPORTS the sim's constant rather than copying the
+  number. `groupWide` marks a cast that lands an identical copy on every group
+  member, so only the caster's copy takes a row. Prefer this table to `FORCED`,
+  which skips the ceiling and the mode test and reads the ability's first effect
+  for its metadata.
 - **Keys are the ids the SIM applies, not ability ids.** An effect can name its
   own `auraId` (Raised Guard lands as `raised_guard_dr`, Hallowed Wall's shield
   as `holy_shield_absorb`), a second self-buff is kind-suffixed, an absorb beside
