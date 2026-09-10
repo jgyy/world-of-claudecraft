@@ -5,6 +5,7 @@ import {
   buildContentSecurityPolicy,
   CSP_ORIGINS,
   deriveOrigin,
+  EMBEDDED_SUBFRAME_HOST_SUFFIXES,
   EMBEDDED_SUBFRAME_ORIGINS,
   extractInlineScriptHashes,
   isDevToolsToggleShortcut,
@@ -255,7 +256,12 @@ describe('buildContentSecurityPolicy', () => {
     // The frame allowance and the navigation guard must agree, or the CSP admits a frame
     // the guard then cancels: every exact Stripe frame origin is also an embedded subframe.
     for (const origin of CSP_ORIGINS.stripe.frame) {
-      if (origin.includes('*')) continue;
+      const wildcard = origin.match(/^https:\/\/\*\.(.+)$/);
+      if (wildcard) {
+        // A wildcard frame origin is covered by the suffix list, or the guard cancels it.
+        expect(EMBEDDED_SUBFRAME_HOST_SUFFIXES).toContain(`.${wildcard[1]}`);
+        continue;
+      }
       expect(EMBEDDED_SUBFRAME_ORIGINS.has(origin)).toBe(true);
     }
   });
