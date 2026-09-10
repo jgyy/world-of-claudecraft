@@ -51,6 +51,7 @@ import type { VaultInfo, VaultSpecialRef } from '../src/world_api';
 import { buildVaultLedgerRows, recordVaultOp } from './bank_ledger';
 import type { BankLedgerAdmission, BankLedgerAdmissionHandle } from './bank_ledger_admission';
 import { bankVaultLedgerMaxRows } from './bank_vault_ledger_guard';
+import { gameMetricsCounters } from './http/game_signals';
 import {
   VAULT_LEDGER_ROW_BOUND_MAX,
   vaultDepositAllLedgerRowBound,
@@ -230,6 +231,11 @@ function reserveLedgerRows(
   if (admission === undefined) return undefined;
   const maxRows = Math.max(bankVaultLedgerMaxRows(command), rowBound);
   if (maxRows > VAULT_LEDGER_ROW_BOUND_MAX) {
+    // Refused before the guard ever sees it, so the guard's own refusal
+    // telemetry cannot record this arm; count it here or a player whose
+    // sweep is refused every time (more distinct material/signer keys carried
+    // than the burst can hold) leaves no server-side trace at all.
+    gameMetricsCounters().vaultLedgerIncident('row_bound_exceeded');
     refuseLedgerAdmission(sim, pid);
     return null;
   }
@@ -350,6 +356,9 @@ export function dispatchVaultCommand(
           vaultWithdrawLedgerRowBound(snapshot, itemId, special),
         );
         if (reservation === null) break;
+        // readBefore is inert here (the snapshot is already taken), so a
+        // future throwing read must NOT be slipped back into it expecting the
+        // reservation-cancel guard: take it before the reservation as above.
         const before = runReservedSimCall(
           reservation,
           () => snapshot,

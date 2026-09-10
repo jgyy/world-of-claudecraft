@@ -21,6 +21,15 @@
 // whole carried inventory) can touch, read from the SAME grouping the diff
 // uses so the two cannot drift.
 //
+// THE BOUND RESTS ON LOSSLESS BUCKET MERGING. A deposit that joins an existing
+// identity row can only change the keys the arriving stack itself carries
+// because src/sim/material_sources.ts coalesces buckets by identical descriptor
+// and refuses (count-overflow) rather than collapsing distinct buckets into
+// the unattributed one. A future bucket CAP that spilled a signer bucket into
+// the null identity would add an unbudgeted row on deposit and re-open the
+// kick; tests/server/vault_ledger_row_bound.test.ts pins rows <= bound over
+// randomized stacks so such a change reds there first.
+//
 // Every function here is a pure read over boundary snapshots: nothing is
 // mutated and no rng is drawn.
 

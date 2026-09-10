@@ -112,6 +112,12 @@ async function settle(): Promise<void> {
   await new Promise<void>((resolve) => setTimeout(resolve, 0));
 }
 
+/** Order journal row tuples by their trailing count, numerically: a bare
+ *  Array.sort compares the tuples as strings, where 10 sorts before 6. */
+function byCount(a: unknown[], b: unknown[]): number {
+  return Number(a[a.length - 1]) - Number(b[b.length - 1]);
+}
+
 function carried(meta: PlayerMeta, itemId: string): number {
   return meta.inventory
     .filter((s: InvSlot) => s.itemId === itemId)
@@ -143,7 +149,7 @@ describe('materials vault ledger rows for mixed-identity stacks', () => {
     expect(carried(meta, 'copper_ore')).toBe(0);
     expect(vaultStoredCount(meta.vault, 'copper_ore')).toBe(12);
     const rows = journalRows(session);
-    expect(rows.map((row) => [row.op, row.itemId, row.count]).sort()).toEqual([
+    expect(rows.map((row) => [row.op, row.itemId, row.count]).sort(byCount)).toEqual([
       ['deposit', 'copper_ore', 3],
       ['deposit', 'copper_ore', 4],
       ['deposit', 'copper_ore', 5],
@@ -184,9 +190,9 @@ describe('materials vault ledger rows for mixed-identity stacks', () => {
     expect(vaultStoredCount(meta.vault, 'copper_ore')).toBe(0);
     expect(carried(meta, 'copper_ore')).toBe(16);
     const withdrawRows = journalRows(session).slice(rowsBefore);
-    expect(withdrawRows.map((row) => [row.op, row.itemId, row.count]).sort()).toEqual([
-      ['withdraw', 'copper_ore', 10],
+    expect(withdrawRows.map((row) => [row.op, row.itemId, row.count]).sort(byCount)).toEqual([
       ['withdraw', 'copper_ore', 6],
+      ['withdraw', 'copper_ore', 10],
     ]);
   });
 
