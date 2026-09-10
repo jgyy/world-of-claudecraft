@@ -337,6 +337,9 @@ describe('over-bound refusal happens before mutation', () => {
     const tryReserve = vi.fn(() => {
       throw new Error('the guard must never see an over-bound reservation');
     });
+    // The metric never names a character (unbounded ids are banned as labels),
+    // so the log line beside the increment must carry the identifying detail.
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const fake: VaultSim = {
       ctx: {
         resolve: () => ({ meta: { entityId: 5, inventory } }),
@@ -355,5 +358,10 @@ describe('over-bound refusal happens before mutation', () => {
     expect(tryReserve).not.toHaveBeenCalled();
     expect(incidents).toEqual(['row_bound_exceeded']);
     expect(gameMetricsCounters()).not.toBe(noopGameMetricsCounters);
+    expect(warn).toHaveBeenCalledTimes(1);
+    const line = String(warn.mock.calls[0]?.[0]);
+    expect(line).toContain('vault_deposit_all refused for character 1');
+    expect(line).toContain(`row bound ${bound} exceeds the 121-row reservation ceiling`);
+    warn.mockRestore();
   });
 });

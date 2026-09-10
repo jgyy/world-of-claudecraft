@@ -224,6 +224,7 @@ function refuseLedgerAdmission(sim: VaultSim, pid: number): void {
 function reserveLedgerRows(
   admission: BankLedgerAdmission | null | undefined,
   sim: VaultSim,
+  who: { characterId: number },
   pid: number,
   command: VaultCommandName,
   rowBound: number,
@@ -234,8 +235,15 @@ function reserveLedgerRows(
     // Refused before the guard ever sees it, so the guard's own refusal
     // telemetry cannot record this arm; count it here or a player whose
     // sweep is refused every time (more distinct material/signer keys carried
-    // than the burst can hold) leaves no server-side trace at all.
+    // than the burst can hold) leaves no server-side trace at all. The log
+    // line names the character because the metric never does (character id
+    // is unbounded, so it is banned as a label): it IS the identifying detail
+    // the counter's docblock promises an operator. Volume is bounded by the
+    // command lane, so no dedupe is needed.
     gameMetricsCounters().vaultLedgerIncident('row_bound_exceeded');
+    console.warn(
+      `bank_ledger vault ${command} refused for character ${who.characterId}: row bound ${maxRows} exceeds the ${VAULT_LEDGER_ROW_BOUND_MAX}-row reservation ceiling`,
+    );
     refuseLedgerAdmission(sim, pid);
     return null;
   }
@@ -311,6 +319,7 @@ export function dispatchVaultCommand(
         const reservation = reserveLedgerRows(
           admission,
           sim,
+          who,
           pid,
           'vault_deposit',
           vaultDepositLedgerRowBound(slotIndex < 0 ? undefined : carried?.[slotIndex]),
@@ -351,6 +360,7 @@ export function dispatchVaultCommand(
         const reservation = reserveLedgerRows(
           admission,
           sim,
+          who,
           pid,
           'vault_withdraw',
           vaultWithdrawLedgerRowBound(snapshot, itemId, special),
@@ -384,6 +394,7 @@ export function dispatchVaultCommand(
       const reservation = reserveLedgerRows(
         admission,
         sim,
+        who,
         pid,
         'vault_deposit_all',
         vaultDepositAllLedgerRowBound(sim.ctx.resolve(pid)?.meta.inventory ?? []),
@@ -403,7 +414,7 @@ export function dispatchVaultCommand(
     }
     case 'vault_buy_upgrade': {
       // A rung purchase writes exactly one copper row; the table floor is exact.
-      const reservation = reserveLedgerRows(admission, sim, pid, 'vault_buy_upgrade', 1);
+      const reservation = reserveLedgerRows(admission, sim, who, pid, 'vault_buy_upgrade', 1);
       if (reservation === null) break;
       const before = runReservedSimCall(
         reservation,
