@@ -506,10 +506,9 @@ describe('mount running audio', () => {
 
   it('ships one non-empty MP3 asset for every mount and no orphan clips', () => {
     const directory = new URL('../public/audio/sfx/', import.meta.url);
-    // A retired skin's takes stay on disk as dormant data (the GLB and the
-    // vehicle modules stay too); they are expected here, never orphans, so the
-    // asset sweep that finally deletes them moves this pin together with the
-    // RETIRED_MOUNT_SKIN_IDS entry.
+    // A retired skin's takes stay on disk as dormant data: expected here, never
+    // orphans, until the asset sweep that deletes them moves this pin together
+    // with the RETIRED_MOUNT_SKIN_IDS entry.
     const expected = [...CUSTOM_STRIDE_MOUNTS, ...RETIRED_MOUNT_SKIN_IDS]
       .flatMap((mountKey) => [
         `mount_run_${mountKey}.mp3`,

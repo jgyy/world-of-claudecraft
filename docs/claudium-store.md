@@ -100,7 +100,9 @@ it was withdrawn after player feedback: its service row went first (no further s
 rendered unavailable), then the game registry retired the id (`RETIRED_MOUNT_SKIN_IDS` in
 `src/sim/content/mount_skins.ts`). Its grant rows, the account mirror entries, the GLB, the
 vehicle render modules, the audio takes, the legacy reins item and the locale rows all stay as
-dormant data; none of them sells, grants, wears, lists, or renders it. Buyers were credited.
+dormant data; none of them sells, grants, wears, lists, or renders it. Buyers were compensated
+out of band. The id still travels in the account cosmetics payload (`mountSkinIds`) for the
+accounts that own it; every consumer iterates the live registry, so nothing shows.
 
 Ownership is a per-account entitlement in `account_mount_cosmetics` (its own rollback-safe row,
 mirrored from the service's grant ledger on purchase and on every store open, exactly like
