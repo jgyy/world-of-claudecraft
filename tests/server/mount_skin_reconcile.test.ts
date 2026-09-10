@@ -30,7 +30,8 @@ describe('wornMountSkinAllowed', () => {
     // The Rallycart RXT left the catalog (RETIRED_MOUNT_SKIN_IDS) while its
     // grant row stays as dormant data: a save still naming it comes off at
     // join, and so does any id this binary has never heard of. The row itself
-    // is untouched, so a rollback that restores the skin restores the wear.
+    // is untouched, so a rollback that restores the skin restores the GRANT;
+    // the wear is gone for good once the next save omits the cleared id.
     for (const retired of RETIRED_MOUNT_SKIN_IDS) {
       const cosmetics = { mountSkinIds: [retired, 'mech_bird'] };
       expect(wornMountSkinAllowed(cosmetics, retired)).toBe(false);
