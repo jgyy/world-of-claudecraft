@@ -7,8 +7,11 @@
 // a player, or on a deliberate pet order.
 //
 // Offline flow (no server). Needs `npm run dev`. Writes PNGs to tmp/.
-// GAME_URL, e.g.: GAME_URL=http://localhost:5279 SHOT_TAG=before node
+// GAME_URL, e.g.: GAME_URL=http://localhost:5279 SHOT_TAG=after node
 // scripts/pet_boss_body_pull_shot.mjs
+// The script is identical for both arms: the BEFORE shot is captured with
+// src/sim/pet/pet_ai.ts checked out from the base commit (restart Vite with --force
+// after the flip, its transform cache is otherwise stale), the AFTER shot on the branch.
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';

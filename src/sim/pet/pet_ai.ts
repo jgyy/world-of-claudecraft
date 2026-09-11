@@ -28,9 +28,10 @@
 // every swing interval against such a target (always voided by dealDamage's own
 // evade-immunity gate downstream) are now skipped outright, with no golden re-mint,
 // because no parity scenario exercises a pet against an evading mob. (3) pullNearbyMobs
-// skips a `boss` template: a pet never body-pulls a boss (the encounter starts on a
-// player, or on a deliberate pet order), again with no re-mint because no parity
-// scenario parks a pet inside an idle boss's pull floor. Every other
+// skips a `boss` (or `worldBoss`) template: a pet never body-pulls a boss from its
+// proximity scan (the encounter starts on a player, or on a deliberate pet order:
+// the attack command, the assist arm, or aggressive stance), again with no re-mint
+// because no parity scenario parks a pet inside an idle boss's pull floor. Every other
 // draw position is still the verbatim move. The shared movement/combat entry points (updateRangedPetAttack,
 // mobSwing, applyTaunt, moveToward), the pet-management helpers (syncPetAspect,
 // despawnPersistentPet), and the stat/predicate helpers (effectiveAttackPower,
@@ -291,14 +292,18 @@ function pullNearbyMobs(ctx: SimContext, pet: Entity): void {
     if (m.ownerId !== null || m.kind !== 'mob' || m.dead) return;
     if (m.aiState !== 'idle' || !m.hostile || m.templateId.startsWith('vision_')) return;
     if (isTrivialTo(m, pet)) return;
-    // A boss is never body-pulled by a pet. Its own idle scan only detects PLAYERS
-    // (mob/locomotion.ts queries playerGrid), so the encounter starts when a player
-    // walks in or acts, or when the owner deliberately sends the pet (pet_commands /
-    // petPickTarget's assist arm, which both still reach aggroMob). Boss aggroRadius
-    // runs 22..30 (clamped to 20 on both scans), so a heeling pet a few yards ahead
-    // of its owner sat inside its OWN pull floor first and, in defensive stance, then
-    // "defended" against the fight it had just started (field report, v0.42.1).
-    if (MOBS[m.templateId]?.boss) return;
+    // A boss is never body-pulled by this PROXIMITY scan. Its own idle scan only
+    // detects PLAYERS (mob/locomotion.ts queries playerGrid), so the encounter starts
+    // when a player walks in or acts, or when the owner deliberately sends the pet:
+    // the attack command (pet_commands), the assist arm of petPickTarget (owner
+    // targeting and swinging), and AGGRESSIVE stance (opt-in "attack anything in
+    // reach", PET_AGGRESSIVE_RANGE) all still engage a boss. Both scans share the
+    // max(4, min(20, aggroRadius + level delta)) formula, so a heeling pet a few
+    // yards ahead of its owner crossed the boss's radius first and, in defensive
+    // stance, then "defended" against the fight it had just started (field report,
+    // v0.42.1). worldBoss templates also set boss; the second read is hardening.
+    const def = MOBS[m.templateId];
+    if (def?.boss || def?.worldBoss) return;
     const radius = Math.max(
       4,
       Math.min(20, (MOBS[m.templateId]?.aggroRadius ?? 0) + (m.level - pet.level) * 1.5),
