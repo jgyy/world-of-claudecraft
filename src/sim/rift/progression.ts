@@ -80,14 +80,18 @@ function shellItemIdForClass(cls: PlayerClass): string {
 }
 
 /** The enchant a band copy may carry: a known enchant whose slot kind is the
- *  shell's own (a ring enchant), read off the copy's top-level marker, the
- *  same field every other enchanted copy carries (isEnchantedInstance). Any
- *  other marker (unknown id, an enchant for another slot) is not a band
- *  enchant and is dropped by the rebuild. */
+ *  shell's own (a ring enchant) and that the apply could have admitted on a
+ *  band (never a requiresPerfected enchant: a band is never Perfected), read
+ *  off the copy's top-level marker, the same field every other enchanted copy
+ *  carries (isEnchantedInstance). Any other marker (unknown id, an enchant for
+ *  another slot, a Perfected-only enchant) is not a band enchant and is
+ *  dropped by the rebuild. The bonus is re-priced from the live ENCHANTS table
+ *  at every rebuild, the same way the ladder line is (docs/design/rift-mode.md). */
 function riftBandEnchant(itemId: string, instance: ItemInstancePayload): EnchantDef | undefined {
   if (instance.enchant === undefined) return undefined;
   const enchant = ENCHANTS[instance.enchant];
-  return enchant && enchant.itemSlot === ITEMS[itemId]?.slot ? enchant : undefined;
+  if (!enchant || enchant.itemSlot !== ITEMS[itemId]?.slot) return undefined;
+  return enchant.requiresPerfected === true ? undefined : enchant;
 }
 
 /** Rebuild the copy's rolled aggregate from its bounded progression inputs

@@ -760,9 +760,30 @@ describe('Riftbound bands take enchants at every rung (rift/progression.ts)', ()
     expect(isEnchantedInstance(upgraded!)).toBe(true);
   });
 
-  it('the load rebuild drops an enchant marker that is unknown or not a ring enchant', () => {
+  it('the load rebuild drops an enchant marker that is unknown, off-slot, or Perfected-only', () => {
     const band = createRiftGearInstance('band', 'S', 'warrior', 1);
     const helmet = Object.values(ENCHANTS).find((e) => e.itemSlot !== 'ring')!.id;
+    // A band is never Perfected, so a Perfected-only marker (unreachable
+    // through the apply, which refuses not_perfected) can only be tampered
+    // state: dropped, and its bonus never priced. Probed through a ring-slot
+    // stand-in so the guard is pinned even while no ring Lucent tier ships.
+    const perfectedOnly = Object.values(ENCHANTS).find((e) => e.requiresPerfected)!;
+    ENCHANTS.__probe_ring_lucent = {
+      ...perfectedOnly,
+      id: '__probe_ring_lucent',
+      itemSlot: 'ring',
+    };
+    try {
+      const tampered = sanitizeRiftGearInstance(
+        BAND,
+        { ...band.instance, enchant: '__probe_ring_lucent' },
+        1,
+      );
+      expect(tampered?.enchant).toBeUndefined();
+      expect(tampered?.rolled?.stats).toEqual(band.instance.rolled?.stats);
+    } finally {
+      delete ENCHANTS.__probe_ring_lucent;
+    }
     expect(
       sanitizeRiftGearInstance(BAND, { ...band.instance, enchant: 'nope' }, 1)?.enchant,
     ).toBeUndefined();

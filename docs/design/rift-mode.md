@@ -132,7 +132,11 @@ existing band at its next load, and the pre-ladder payload fields (`baseStats`,
 `rift.enchant`) are dropped there. A band also takes an ordinary ring enchant at
 any rung (essenced or gemmed): the top-level enchant marker rides the rebuild and
 its bonus is re-added on top of the ladder line, so upgrading or socketing never
-strips it. Salvage returns rank-and-upgrade-scaled Rift Essence.
+strips it. Like the ladder line, that bonus is re-priced from the live enchant
+table at every rebuild (a retuned ring enchant resizes on existing bands at their
+next load, unlike other gear, whose enchant stats are frozen at apply); a marker
+that is unknown, not a ring enchant, or Perfected-only is dropped. Salvage
+returns rank-and-upgrade-scaled Rift Essence.
 Pinned by `tests/rift_band_ladder.test.ts` and `tests/rift_progression.test.ts`.
 
 Rift Essence and the rank-dependent gems are plain, freely tradeable forge
