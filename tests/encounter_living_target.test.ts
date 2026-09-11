@@ -8,8 +8,8 @@ import { describe, expect, it } from 'vitest';
 import { resolveLivingTarget } from '../src/sim/encounters/living_target';
 import type { Entity } from '../src/sim/types';
 
-function unit(id: number, dead = false): Entity {
-  return { id, dead, kind: 'player' } as unknown as Entity;
+function unit(id: number, dead = false, stealthed = false): Entity {
+  return { id, dead, stealthed, kind: 'player' } as unknown as Entity;
 }
 
 function boss(aggroTargetId: number | null, threat: Array<[number, number]>): Entity {
@@ -55,11 +55,23 @@ describe('resolveLivingTarget', () => {
     expect(b.aggroTargetId).toBe(4);
   });
 
-  it('breaks an exact threat tie by the callers order', () => {
+  it('breaks an exact threat tie toward the lower entity id regardless of list order', () => {
     const b = boss(null, [
       [9, 300],
       [4, 300],
     ]);
-    expect(resolveLivingTarget(b, [unit(4), unit(9)])?.id).toBe(4);
+    expect(resolveLivingTarget(b, [unit(9), unit(4)])?.id).toBe(4);
+    expect(resolveLivingTarget(boss(null, []), [unit(9), unit(4)])?.id).toBe(4);
+  });
+
+  it('skips a stealthed top-threat player unless nobody else is alive', () => {
+    // A Vanished rogue still owns the top row of the table: the generic
+    // hate-table walk refuses to see it, and so must the script fallback.
+    const b = boss(null, [
+      [3, 9000],
+      [2, 400],
+    ]);
+    expect(resolveLivingTarget(b, [unit(2), unit(3, false, true)])?.id).toBe(2);
+    expect(resolveLivingTarget(boss(null, [[3, 9000]]), [unit(3, false, true)])?.id).toBe(3);
   });
 });
