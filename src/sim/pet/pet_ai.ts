@@ -27,7 +27,10 @@
 // (isEvadingWildMob, mob/evade_immunity.ts): the mobSwing draws that used to fire
 // every swing interval against such a target (always voided by dealDamage's own
 // evade-immunity gate downstream) are now skipped outright, with no golden re-mint,
-// because no parity scenario exercises a pet against an evading mob. Every other
+// because no parity scenario exercises a pet against an evading mob. (3) pullNearbyMobs
+// skips a `boss` template: a pet never body-pulls a boss (the encounter starts on a
+// player, or on a deliberate pet order), again with no re-mint because no parity
+// scenario parks a pet inside an idle boss's pull floor. Every other
 // draw position is still the verbatim move. The shared movement/combat entry points (updateRangedPetAttack,
 // mobSwing, applyTaunt, moveToward), the pet-management helpers (syncPetAspect,
 // despawnPersistentPet), and the stat/predicate helpers (effectiveAttackPower,
@@ -288,6 +291,14 @@ function pullNearbyMobs(ctx: SimContext, pet: Entity): void {
     if (m.ownerId !== null || m.kind !== 'mob' || m.dead) return;
     if (m.aiState !== 'idle' || !m.hostile || m.templateId.startsWith('vision_')) return;
     if (isTrivialTo(m, pet)) return;
+    // A boss is never body-pulled by a pet. Its own idle scan only detects PLAYERS
+    // (mob/locomotion.ts queries playerGrid), so the encounter starts when a player
+    // walks in or acts, or when the owner deliberately sends the pet (pet_commands /
+    // petPickTarget's assist arm, which both still reach aggroMob). Boss aggroRadius
+    // runs 22..30 (clamped to 20 on both scans), so a heeling pet a few yards ahead
+    // of its owner sat inside its OWN pull floor first and, in defensive stance, then
+    // "defended" against the fight it had just started (field report, v0.42.1).
+    if (MOBS[m.templateId]?.boss) return;
     const radius = Math.max(
       4,
       Math.min(20, (MOBS[m.templateId]?.aggroRadius ?? 0) + (m.level - pet.level) * 1.5),
