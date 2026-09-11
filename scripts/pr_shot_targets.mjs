@@ -6955,8 +6955,6 @@ export const TARGETS = [
         const me = sim.primaryId;
         const p = sim.player;
         const pm = sim.party;
-        const meMeta = sim.players.get(me);
-        if (meMeta) meMeta.talentMods.role = 'tank';
         const roster = [
           ['Brightoak', 'druid', 'tank', true],
           ['Aurelius', 'paladin', 'tank', false],
