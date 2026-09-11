@@ -129,8 +129,10 @@ The rolled aggregate applies while equipped, survives save/load and wire
 round-trips, and is rebuilt from the bounded inputs at every load rather than
 trusted from JSONB (`sanitizeRiftGearInstance`): a ladder retune resizes every
 existing band at its next load, and the pre-ladder payload fields (`baseStats`,
-`enchant`) are dropped there. Bands are forge-only: the enchanting profession
-refuses them by id. Salvage returns rank-and-upgrade-scaled Rift Essence.
+`rift.enchant`) are dropped there. A band also takes an ordinary ring enchant at
+any rung (essenced or gemmed): the top-level enchant marker rides the rebuild and
+its bonus is re-added on top of the ladder line, so upgrading or socketing never
+strips it. Salvage returns rank-and-upgrade-scaled Rift Essence.
 Pinned by `tests/rift_band_ladder.test.ts` and `tests/rift_progression.test.ts`.
 
 Rift Essence and the rank-dependent gems are plain, freely tradeable forge
