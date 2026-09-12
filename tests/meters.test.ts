@@ -509,5 +509,29 @@ describe('combat meters', () => {
       expect(m.current!.label).toBe('Wolf');
       expect(m.current!.mainMobId).toBe(50);
     });
+
+    it('never credits a self-sourced DoT tick or a hit on a party member, and keeps the default label', () => {
+      const w = pvpWorld();
+      const party = new Set([1, 2]);
+      const m = new MeterData(0);
+      m.onEvent(dmg(1, 1, 3, 'Bad Air'), w, party, 1000); // delve affix ticking on myself
+      m.onEvent(dmg(1, 2, 12, 'Whirlwind'), w, party, 1200); // party member as the target
+      expect(m.current).not.toBeNull();
+      expect(m.current!.tallies.has(1)).toBe(false);
+      expect(m.current!.label).toBe('Combat');
+      m.onEvent(dmg(1, 999, 40), w, party, 1400); // target missing from the world
+      expect(m.current!.tallies.has(1)).toBe(false);
+    });
+
+    it('latches the first opponent as the label instead of flipping per hit', () => {
+      const w = pvpWorld();
+      w.entities.set(4, { id: 4, kind: 'player', name: 'Second', templateId: 'mage' } as never);
+      const party = new Set([1, 2]);
+      const m = new MeterData(0);
+      m.onEvent(dmg(1, 3, 10), w, party, 1000);
+      m.onEvent(dmg(1, 4, 50), w, party, 1100);
+      expect(m.current!.tallies.get(1)!.dmg).toBe(60);
+      expect(m.current!.label).toBe('Rival');
+    });
   });
 });
