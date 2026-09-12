@@ -2,7 +2,7 @@
 // one flag that decides whether the whole HUD is drawn, so a player can take a
 // clean screenshot or video of the world. A pure core (tests/architecture.test.ts
 // UI_PURE_CORES): it owns the state and the key routing, and reports each
-// change to one listener; the painter (interface_visibility_painter.ts) is
+// change to one listener; the painter (interface_visibility.ts) is
 // where the body class lands. Deliberately NOT persisted: a hidden interface
 // is a moment, never a setting, so every fresh session starts with it shown.
 //

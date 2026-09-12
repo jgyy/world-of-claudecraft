@@ -1,13 +1,15 @@
 // The Hide Interface toggle core (src/ui/interface_visibility_core.ts) and its
-// body-class painter (interface_visibility_painter.ts).
+// body-class painter (interface_visibility.ts).
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it, vi } from 'vitest';
+import { createInterfaceVisibility } from '../src/ui/interface_visibility';
 import {
   dispatchInterfaceVisibilityAction,
   HIDE_INTERFACE_ACTION,
   INTERFACE_HIDDEN_CLASS,
   InterfaceVisibility,
 } from '../src/ui/interface_visibility_core';
-import { createInterfaceVisibility } from '../src/ui/interface_visibility_painter';
 
 describe('InterfaceVisibility', () => {
   it('starts shown, toggles, and reports only real changes', () => {
@@ -59,5 +61,35 @@ describe('createInterfaceVisibility', () => {
     v.show();
     expect(toggle).toHaveBeenLastCalledWith('interface-hidden', false);
     expect(toggle).toHaveBeenCalledTimes(2);
+  });
+});
+
+// The CSS hide set is the other half of the feature: pin the selectors and the
+// three properties (a descendant re-declaring `visibility: visible`, which the
+// raid boss guide hint and the Minimal cross-hotbar rail do, must still vanish
+// through opacity, and no hidden frame may keep a click from the canvas).
+describe('hud.css interface-hidden hide set', () => {
+  const css = readFileSync(join(process.cwd(), 'src/styles/hud.css'), 'utf8');
+  const rule = css.slice(css.indexOf('body.interface-hidden #ui > :not(.visually-hidden)'));
+  const block = rule.slice(0, rule.indexOf('}') + 1);
+
+  it('enumerates every #ui child except the a11y live regions plus the body-level siblings', () => {
+    for (const sel of [
+      'body.interface-hidden #ui > :not(.visually-hidden)',
+      'body.interface-hidden #nameplates',
+      'body.interface-hidden #discord-window',
+      'body.interface-hidden #discord-cta-banner',
+      'body.interface-hidden #mobile-controls',
+      'body.interface-hidden #pad-mouse-cursor',
+    ]) {
+      expect(block, sel).toContain(sel);
+    }
+  });
+
+  it('hides through visibility, opacity, and pointer-events, never display', () => {
+    expect(block).toContain('visibility: hidden !important');
+    expect(block).toContain('opacity: 0 !important');
+    expect(block).toContain('pointer-events: none !important');
+    expect(block).not.toContain('display:');
   });
 });

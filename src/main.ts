@@ -1,7 +1,7 @@
 import { formatAbilityImbueDamage } from './ui/ability_imbue_text';
 import { dispatchCollectionAction } from './ui/collection_actions_core';
+import { createInterfaceVisibility } from './ui/interface_visibility';
 import { dispatchInterfaceVisibilityAction } from './ui/interface_visibility_core';
-import { createInterfaceVisibility } from './ui/interface_visibility_painter';
 // Game-client style barrel (declares the @layer order, loads tokens + base, etc.).
 // index.html and play.html both bootstrap through this module, so this one import
 // styles both game entries; admin/guide use their own entries and inline CSS.
