@@ -23,7 +23,7 @@
 import { CLASSES } from '../sim/data';
 import { GUILD_ROSTER_PAGE_SEATS } from '../sim/guild_roster';
 import type { PlayerClass } from '../sim/types';
-import type { IWorld } from '../world_api';
+import type { IWorld, WhoRosterInfo } from '../world_api';
 import { formatCount } from './count_format';
 import { deedTitleText } from './deed_i18n';
 import { markDialogRoot } from './dialog_root';
@@ -283,6 +283,13 @@ export class SocialWindow {
   // (who_tab_view.ts owns the decisions). Window-local like the tab itself.
   private who: WhoTabState = { ...DEFAULT_WHO_TAB_STATE };
   private whoRetryTicks = 0;
+  // Answer identity for the content signature: ClientWorld builds a fresh
+  // whoInfo object per `who` frame, so a reference change is exactly "a new
+  // answer landed", even when the filter, row count, and total all match the
+  // previous one (a re-submitted search after someone logged off and someone
+  // else logged on, or the same names with new levels or zones).
+  private whoSeen: WhoRosterInfo | null = null;
+  private whoAnswerSeq = 0;
 
   constructor(private readonly deps: SocialWindowDeps) {}
 
@@ -333,7 +340,7 @@ export class SocialWindow {
   // the content signature repaints the list on the next slow tick.
   private requestWho(): void {
     const w = this.deps.world();
-    if (w.socialInfo === null) return;
+    if (w.socialInfo === null || w.spectating !== null) return;
     this.whoRetryTicks = 0;
     w.whoRequest(this.who.search);
   }
@@ -343,7 +350,8 @@ export class SocialWindow {
   // reset the mirror), re-ask every few slow ticks. Bounded by the server's
   // list-read guard and by the tab being open; stops on the first answer.
   private retryWhoIfPending(): void {
-    if (this.tab !== 'who' || this.deps.world().whoInfo !== null) return;
+    const w = this.deps.world();
+    if (this.tab !== 'who' || w.whoInfo !== null || w.spectating !== null) return;
     if (++this.whoRetryTicks < WHO_RETRY_SLOW_TICKS) return;
     this.requestWho();
   }
@@ -445,13 +453,22 @@ export class SocialWindow {
     return socialStructSig(this.tab, w.socialInfo, w.partyInfo);
   }
 
+  private whoAnswerId(info: WhoRosterInfo | null): number {
+    if (info !== this.whoSeen) {
+      this.whoSeen = info;
+      this.whoAnswerSeq++;
+    }
+    return this.whoAnswerSeq;
+  }
+
   private contentSig(): string {
     const w = this.deps.world();
     return JSON.stringify({
       social: w.socialInfo,
       party: w.partyInfo,
-      // A cheap digest of the roster answer (never the 200 rows themselves).
-      who: w.whoInfo ? `${w.whoInfo.filter}|${w.whoInfo.rows.length}|${w.whoInfo.total}` : '',
+      // A cheap digest of the roster answer (never the 200 rows themselves):
+      // the answer's identity, so a same-count answer still repaints.
+      who: this.whoAnswerId(w.whoInfo),
       whoTab: whoTabSig(this.who),
     });
   }
@@ -996,6 +1013,11 @@ export class SocialWindow {
   // delivered rows (who_tab_view.ts decides the order and the chip options).
   private whoHtml(): string {
     const w = this.deps.world();
+    // Spectating drops every command but chat before the socket, so the tab
+    // can never be answered there: show the same online-only empty state the
+    // offline window shows rather than a loading line that never resolves.
+    if (w.spectating !== null)
+      return `<div class="soc-empty">${esc(t('hud.social.offlineEmpty'))}</div>`;
     const info = w.whoInfo;
     if (!info) return `<div class="soc-empty">${esc(t('hudChrome.social.who.loading'))}</div>`;
     const labels = { cls: playerClassDisplayName, zone: localizeZone };

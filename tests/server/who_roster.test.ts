@@ -4,7 +4,6 @@ import {
   canShowInWho,
   filterWhoRows,
   normalizeWhoFilter,
-  sortWhoRows,
   WHO_CHAT_LIMIT,
   WHO_FILTER_MAX,
   WHO_TAB_LIMIT,
@@ -66,14 +65,6 @@ describe('filterWhoRows', () => {
   });
   it('returns the input itself for the empty filter (callers only read)', () => {
     expect(filterWhoRows(rows, '')).toBe(rows);
-  });
-});
-
-describe('sortWhoRows', () => {
-  it('orders by name without mutating the input', () => {
-    const rows = [row('Mira'), row('Aleron')];
-    expect(sortWhoRows(rows).map((r) => r.name)).toEqual(['Aleron', 'Mira']);
-    expect(rows[0].name).toBe('Mira');
   });
 });
 

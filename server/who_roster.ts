@@ -96,11 +96,6 @@ export function filterWhoRows(
   );
 }
 
-/** Stable name order (the server's canonical roster order; the tab re-sorts locally). */
-export function sortWhoRows(rows: readonly WhoRosterRow[]): WhoRosterRow[] {
-  return [...rows].sort((a, b) => a.name.localeCompare(b.name));
-}
-
 /** One entry of the realm-wide roster memo: the row plus a LIVE handle to the
  *  candidate's session, so the per-viewer visibility rule reads the current
  *  block list (initSocial REPLACES `blockedIds`, so a copied Set would serve

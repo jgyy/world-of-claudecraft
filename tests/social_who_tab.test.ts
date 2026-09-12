@@ -168,6 +168,32 @@ describe('Who tab: request on select, paint on answer', () => {
     expect(rowNames()).toEqual(['Bryn', 'Mira', 'Aleron']);
   });
 
+  it('repaints a fresh answer whose filter, row count, and total match the last one', () => {
+    const win = makeWindow();
+    win.toggle();
+    clickTab('who');
+    world.whoInfo = { ...ROSTER, total: 2, rows: ROSTER.rows.slice(0, 2) };
+    win.refreshIfChanged();
+    expect(rowNames()).toEqual(['Aleron', 'Mira']);
+    // re-submit the same (empty) search: someone logged off, someone else logged on
+    (root.querySelector('[data-act="who-search"]') as HTMLElement).click();
+    world.whoInfo = {
+      ...ROSTER,
+      total: 2,
+      rows: [
+        ROSTER.rows[0],
+        { name: 'Zed', cls: 'rogue', level: 9, zone: 'Ashwood', status: 'online', guild: '' },
+      ],
+    };
+    win.refreshIfChanged();
+    expect(rowNames()).toEqual(['Mira', 'Zed']);
+    // the same answer object across later ticks does not repaint again
+    const list = root.querySelector('.soc-who-list');
+    win.refreshIfChanged();
+    win.refreshIfChanged();
+    expect(root.querySelector('.soc-who-list')).toBe(list);
+  });
+
   it('re-asks every few slow ticks while the roster is still pending', () => {
     const win = makeWindow();
     win.toggle();
@@ -248,6 +274,17 @@ describe('Who tab: the /who chat command', () => {
     const win = makeWindow();
     expect(win.openWhoTab('')).toBe(false);
     expect(world.whoRequest).not.toHaveBeenCalled();
+  });
+
+  it('shows the online-only empty state on the tab while spectating, and never asks', () => {
+    world.spectating = 'Bryn';
+    const win = makeWindow();
+    win.toggle();
+    clickTab('who');
+    for (let i = 0; i < 8; i++) win.refreshIfChanged();
+    expect(world.whoRequest).not.toHaveBeenCalled();
+    expect(root.querySelector('.soc-empty')).not.toBeNull();
+    expect(root.querySelector('.soc-who-list')).toBeNull();
   });
 
   it('declines offline so the line falls through to the world', () => {
