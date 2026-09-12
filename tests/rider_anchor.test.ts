@@ -53,6 +53,15 @@ describe('syncRiderAnchor', () => {
     expect(anchor.position.toArray()).toEqual([0, 0, 0]);
   });
 
+  it('is attached to every view group at build time', () => {
+    const src = readFileSync(new URL('../src/render/renderer.ts', import.meta.url), 'utf8');
+    // The one line every body-attached buff hangs on: the anchor is a child of
+    // the view group, added right where the anchor is minted (before the
+    // character/object branch), so no view carries a detached anchor.
+    expect(src).toMatch(/const riderAnchor = createRiderAnchor\(\);\s*group\.add\(riderAnchor\);/);
+    expect(src.split('group.add(riderAnchor)').length).toBe(2);
+  });
+
   it('is synced by the renderer after the mount pass places the rider', () => {
     const src = readFileSync(new URL('../src/render/renderer.ts', import.meta.url), 'utf8');
     const mountPass = src.indexOf('updateMountPresentation(v, {');
@@ -73,6 +82,8 @@ describe('syncRiderAnchor', () => {
     ]) {
       expect(src, sync).toMatch(new RegExp(`${sync}\\(\\s*v\\.\\w+,\\s*v\\.riderAnchor,`));
     }
+    // The Recklessness skull orbit sits above the head: it rides too.
+    expect(src).toMatch(/recklessSkulls\.spawn\(v\.riderAnchor,/);
     // The crown rides the saddle; its ground seal stays on the ground.
     expect(src).toMatch(
       /syncPaladinAscensionVisual\(\s*v\.paladinAscensionVisual,\s*v\.group,\s*v\.riderAnchor,/,

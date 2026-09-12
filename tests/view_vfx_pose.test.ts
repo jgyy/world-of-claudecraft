@@ -1,11 +1,8 @@
 import * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
 import { createVfxAnchor, type VfxAnchorPose } from '../src/render/vfx_anchor';
-import {
-  createViewVfxPoseFill,
-  liftPoseByLocalOffset,
-  type VfxPoseView,
-} from '../src/render/view_vfx_pose';
+import { createViewVfxPoseFill, type VfxPoseView } from '../src/render/view_vfx_pose';
+import { liftPoseByLocalOffset } from '../src/render/view_vfx_pose_core';
 
 // The renderer's anchor pose fill (src/render/view_vfx_pose.ts): the pooled
 // ability VFX (absorb shells, orbit halos) resolve the displayed body from it,

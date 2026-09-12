@@ -16,6 +16,17 @@ import * as THREE from 'three';
 // So the anchor copies the rider root's LOCAL POSITION only, once per frame
 // after the mount pass has placed the rider, and keeps the identity rotation.
 // Dismounted the root is at the origin and the anchor is a no-op.
+//
+// It follows the BASE rig root (v.visual.root), the one root the mount pass
+// places; a druid or travel form swaps the displayed body but its own root
+// stays at the group origin and cannot be mounted, so the anchor holds at the
+// origin for it too. Every view owns one (object views included, where it
+// sits at the origin and is never synced), attached in buildView.
+//
+// Ground effects stay on the view group on purpose: the Ascension seal, the
+// Frost Nova restraint, the Aegis dome, the pooled ground discs (which read
+// the terrain height themselves) and the player aura rings all belong at the
+// feet of whatever is standing there, mount included.
 
 /** Build the anchor group a view owns; the caller adds it to the view group. */
 export function createRiderAnchor(): THREE.Group {

@@ -7864,6 +7864,7 @@ export class Renderer {
     setRenderCategory(group, `entity:${e.kind}`);
     let visual: CharacterVisual | null = null;
     const riderAnchor = createRiderAnchor();
+    group.add(riderAnchor);
     let body: THREE.Group | null = null; // object views build meshes into this
     let height = 1.2;
     let sparkle: THREE.Sprite | undefined;
@@ -8119,7 +8120,6 @@ export class Renderer {
       // (Fiesta size buffs) and also scale lazily-built form visuals for free.
       group.add(visual.root);
       if (e.templateId === IGNIVAR_BOSS_ID) attachIgnivarModelVfx(visual.root);
-      group.add(riderAnchor);
       height = visual.height;
     }
 
@@ -11358,7 +11358,7 @@ export class Renderer {
         if (hasRecklessness) {
           this.vfx.recklessFlame(e.id, dt);
           if (spawnRecklessnessSkulls) {
-            this.recklessSkulls.spawn(v.group, active.height * e.scale);
+            this.recklessSkulls.spawn(v.riderAnchor, active.height * e.scale);
           }
         }
         // Shapeshift-form particle auras riding the tints above: metamorph fire,
