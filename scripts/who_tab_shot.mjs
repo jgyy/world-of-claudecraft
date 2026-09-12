@@ -24,9 +24,11 @@ import { suppressGpuNotice } from './lib/gpu_notice_suppress.mjs';
 import { worldAuthMessage } from './lib/world_auth.mjs';
 
 const GAME_URL = process.env.GAME_URL ?? 'http://localhost:5190';
+// biome-ignore lint/suspicious/noUndeclaredEnvVars: Screenshot-only CLI input is not a Turbo task dependency.
 const SERVER_URL = process.env.SERVER_URL ?? 'http://localhost:8790';
 const WS_BASE = SERVER_URL.replace(/^http/, 'ws');
 const OUT = process.env.SHOTS_DIR ?? 'docs/screenshots/who-social-tab';
+// biome-ignore lint/suspicious/noUndeclaredEnvVars: Screenshot-only CLI input is not a Turbo task dependency.
 const MODE = process.env.MODE === 'before' ? 'before' : 'after';
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -279,9 +281,10 @@ async function wireSocial(page, mainName) {
     window.__game.world.chat('/dev gold 500');
     window.__game.world.chat('/dev level 27');
   });
-  alts.forEach((a, i) =>
-    a.cmd({ cmd: 'chat', text: `/dev level ${[3, 17, 12, 20, 9, 15, 19, 6][i]}` }),
-  );
+  const levels = [3, 17, 12, 20, 9, 15, 19, 6];
+  alts.forEach((a, i) => {
+    a.cmd({ cmd: 'chat', text: `/dev level ${levels[i]}` });
+  });
   await sleep(800);
   await page.evaluate(
     (names) => {

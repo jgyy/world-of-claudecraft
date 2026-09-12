@@ -801,7 +801,7 @@ export class SocialWindow {
     const w = this.deps.world();
     const view = guildView(w.socialInfo, w.player.name);
     if (!view.guild)
-      return `<div class="soc-empty">${esc(t('hud.social.noGuild'))}</div>` + this.myPledgeHtml();
+      return `<div class="soc-empty">${esc(t('hud.social.noGuild'))}</div>${this.myPledgeHtml()}`;
     const g = view.guild;
     const guildCount = formatNumber(g.memberCount, { maximumFractionDigits: 0 });
     // The guild name carries its lifetime-XP colour tier (the nameplate ladder,
@@ -912,7 +912,7 @@ export class SocialWindow {
       `<button type="button" class="btn ui-btn" data-act="pledge-settings-save">${esc(t('hudChrome.pledge.save'))}</button>` +
       `</div></div>`;
     if (panel.rows.length === 0)
-      return settings + `<div class="soc-empty">${esc(t('hudChrome.pledge.empty'))}</div>`;
+      return `${settings}<div class="soc-empty">${esc(t('hudChrome.pledge.empty'))}</div>`;
     const rows = panel.rows
       .map((p) => {
         const since = formatDateTime(new Date(p.sinceMs), { dateStyle: 'medium' });

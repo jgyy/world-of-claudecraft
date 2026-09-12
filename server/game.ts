@@ -14,7 +14,6 @@ import { wireParkedMana } from '../src/sim/combat/form_auto_unshift';
 import { rewindHealAmount } from '../src/sim/combat/rewind';
 import { DEEDS } from '../src/sim/content/deeds';
 import { isFinderListingTag, isFinderRole } from '../src/sim/content/dungeon_finder';
-import { isMountSkinId } from '../src/sim/content/mount_skins';
 import { RELIQUARY_PAGES_BY_ID } from '../src/sim/content/reliquary';
 import { MECH_CHROMAS } from '../src/sim/content/skins';
 import { isWeaponSkinType, WEAPON_SKINS } from '../src/sim/content/weapon_skins';
