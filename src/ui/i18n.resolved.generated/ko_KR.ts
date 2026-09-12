@@ -4015,6 +4015,7 @@ export const ko_KR: EnTranslations = {
         "capped": "처음 {delivered}명만 표시됩니다. 나머지를 보려면 검색 범위를 좁히세요.",
         "classFilter": "직업으로 필터",
         "allClasses": "모든 직업",
+        "colStatus": "상태",
         "colName": "Name",
         "colLevel": "레벨",
         "colClass": "직업",

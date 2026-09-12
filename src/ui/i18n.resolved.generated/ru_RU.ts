@@ -4015,6 +4015,7 @@ export const ru_RU: EnTranslations = {
         "capped": "Показаны первые {delivered}. Сузьте поиск, чтобы увидеть остальных.",
         "classFilter": "Фильтр по классу",
         "allClasses": "Все классы",
+        "colStatus": "Статус",
         "colName": "Name",
         "colLevel": "Уровень",
         "colClass": "Класс",

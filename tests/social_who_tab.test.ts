@@ -8,6 +8,7 @@
 // play" empty state and /who falls through to the world.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { WHO_FILTER_MAX } from '../server/who_roster';
 import { SocialWindow, type SocialWindowDeps } from '../src/ui/social_window';
 import type { IWorld, WhoRosterInfo } from '../src/world_api';
 
@@ -15,6 +16,7 @@ interface TestWorld {
   socialInfo: { friends: []; ignores: []; blocks: []; guild: null; myPledge: null } | null;
   whoInfo: WhoRosterInfo | null;
   whoRequest: ReturnType<typeof vi.fn>;
+  spectating: string | null;
 }
 
 const ROSTER: WhoRosterInfo = {
@@ -39,6 +41,7 @@ beforeEach(() => {
     socialInfo: { friends: [], ignores: [], blocks: [], guild: null, myPledge: null },
     whoInfo: null,
     whoRequest: vi.fn(),
+    spectating: null,
   };
 });
 
@@ -62,6 +65,7 @@ function makeWindow(): SocialWindow {
         partyInfo: null,
         whoInfo: world.whoInfo,
         whoRequest: world.whoRequest,
+        spectating: world.spectating,
         searchCharacters: async () => [],
       }) as unknown as IWorld,
     closeOthers: noop,
@@ -148,7 +152,46 @@ describe('Who tab: request on select, paint on answer', () => {
     expect(root.querySelector('.soc-who-count')?.textContent).toContain('1 of 3 online');
   });
 
-  it('submits the footer search as a new server request and echoes it in the input', () => {
+  it('keeps focus on the re-rendered sort header across the next slow ticks', () => {
+    const win = makeWindow();
+    win.toggle();
+    clickTab('who');
+    world.whoInfo = ROSTER;
+    win.refreshIfChanged();
+    (root.querySelector('[data-act="who-sort"][data-key="level"]') as HTMLElement).click();
+    const focused = () => (document.activeElement as HTMLElement | null)?.dataset.key;
+    expect(focused()).toBe('level');
+    // the handler re-latched the content signature, so these ticks rebuild nothing
+    win.refreshIfChanged();
+    win.refreshIfChanged();
+    expect(focused()).toBe('level');
+    expect(rowNames()).toEqual(['Bryn', 'Mira', 'Aleron']);
+  });
+
+  it('re-asks every few slow ticks while the roster is still pending', () => {
+    const win = makeWindow();
+    win.toggle();
+    clickTab('who');
+    expect(world.whoRequest).toHaveBeenCalledTimes(1);
+    for (let i = 0; i < 3; i++) win.refreshIfChanged();
+    expect(world.whoRequest).toHaveBeenCalledTimes(1);
+    win.refreshIfChanged();
+    expect(world.whoRequest).toHaveBeenCalledTimes(2);
+    // an answer stops the retries
+    world.whoInfo = ROSTER;
+    for (let i = 0; i < 8; i++) win.refreshIfChanged();
+    expect(world.whoRequest).toHaveBeenCalledTimes(2);
+  });
+
+  it('caps the footer search at the server filter length', () => {
+    const win = makeWindow();
+    win.toggle();
+    clickTab('who');
+    const input = root.querySelector('input[data-field="who"]') as HTMLInputElement;
+    expect(Number(input.getAttribute('maxlength'))).toBe(WHO_FILTER_MAX);
+  });
+
+  it('submits the footer search as a new server request', () => {
     const win = makeWindow();
     win.toggle();
     clickTab('who');
@@ -198,6 +241,13 @@ describe('Who tab: the /who chat command', () => {
     clickTab('guild');
     expect(win.openWhoTab('')).toBe(true);
     expect(root.querySelector('.soc-tab.on')?.getAttribute('data-tab')).toBe('who');
+  });
+
+  it('declines while spectating (every command but chat is dropped there)', () => {
+    world.spectating = 'Bryn';
+    const win = makeWindow();
+    expect(win.openWhoTab('')).toBe(false);
+    expect(world.whoRequest).not.toHaveBeenCalled();
   });
 
   it('declines offline so the line falls through to the world', () => {

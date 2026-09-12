@@ -63,6 +63,15 @@ describe('whoTabRows', () => {
     };
     const rows = whoTabRows(INFO, { ...DEFAULT_WHO_TAB_STATE, sort: 'cls' }, '', labels);
     expect(rows[0].name).toBe('Aleron');
+    // zone: Thornpeak sorts first only under a label that renames it
+    const zoneLabels = {
+      cls: (c: string) => c,
+      zone: (z: string) => (z === 'Thornpeak' ? 'Aa' : z),
+    };
+    const byZone = whoTabRows(INFO, { ...DEFAULT_WHO_TAB_STATE, sort: 'zone' }, '', zoneLabels);
+    expect(byZone.map((r) => r.name)).toEqual(['Aleron', 'Bryn', 'Mira', 'Cato']);
+    const byRawZone = whoTabRows(INFO, { ...DEFAULT_WHO_TAB_STATE, sort: 'zone' }, '');
+    expect(byRawZone.map((r) => r.name)).toEqual(['Bryn', 'Mira', 'Cato', 'Aleron']);
   });
   it('narrows by the class chip and returns nothing for a null roster', () => {
     const rows = whoTabRows(INFO, { ...DEFAULT_WHO_TAB_STATE, cls: 'mage' }, '');

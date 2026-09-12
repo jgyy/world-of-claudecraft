@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  buildWhoRosterEntries,
   canShowInWho,
   filterWhoRows,
   normalizeWhoFilter,
@@ -32,7 +33,7 @@ describe('canShowInWho', () => {
     expect(canShowInWho(session(1, [2]), session(2))).toBe(false);
     expect(canShowInWho(session(1), session(2, [1]))).toBe(false);
   });
-  it('shows an unrelated player, and always the viewer themselves', () => {
+  it('shows an unrelated player, and the viewer themselves', () => {
     expect(canShowInWho(session(1), session(2))).toBe(true);
     expect(canShowInWho(session(1, [2]), session(1, [2]))).toBe(true);
   });
@@ -41,7 +42,10 @@ describe('canShowInWho', () => {
 describe('normalizeWhoFilter', () => {
   it('strips control chars and quotes, collapses whitespace, caps the length', () => {
     expect(normalizeWhoFilter('  Thornpeak   "Heights"  ')).toBe('Thornpeak Heights');
+    expect(normalizeWhoFilter('Thorn\u0007peak')).toBe('Thornpeak');
     expect(normalizeWhoFilter('x'.repeat(80))).toHaveLength(WHO_FILTER_MAX);
+    // The literal the client input's maxlength mirrors (src/ui/social_window.ts).
+    expect(WHO_FILTER_MAX).toBe(32);
   });
   it('treats a non-string (a malformed frame field) as no filter', () => {
     expect(normalizeWhoFilter(undefined)).toBe('');
@@ -60,10 +64,8 @@ describe('filterWhoRows', () => {
     expect(filterWhoRows(rows, 'peak').map((r) => r.name)).toEqual(['Aleron']);
     expect(filterWhoRows(rows, 'moonw').map((r) => r.name)).toEqual(['Bryn']);
   });
-  it('returns a copy of every row for the empty filter', () => {
-    const all = filterWhoRows(rows, '');
-    expect(all).toEqual(rows);
-    expect(all).not.toBe(rows);
+  it('returns the input itself for the empty filter (callers only read)', () => {
+    expect(filterWhoRows(rows, '')).toBe(rows);
   });
 });
 
@@ -86,6 +88,8 @@ describe('whoFrame (the Who tab projection)', () => {
     expect(frame.total).toBe(WHO_TAB_LIMIT + 25);
     expect(frame.limit).toBe(WHO_TAB_LIMIT);
     expect(whoFrame(rows, 'p00').filter).toBe('p00');
+    // The cap is a wire contract, pinned to its literal (the constant-self-comparison trap).
+    expect(WHO_TAB_LIMIT).toBe(200);
   });
   it('carries the guild on every row and never a position', () => {
     const frame = whoFrame([row('Bryn', { guild: 'Moonwardens' })], '');
@@ -97,7 +101,6 @@ describe('whoFrame (the Who tab projection)', () => {
       status: 'online',
       guild: 'Moonwardens',
     });
-    expect(Object.keys(frame.rows[0])).not.toContain('x');
   });
   it('raises the tab cap well past the classic chat dump', () => {
     expect(WHO_TAB_LIMIT).toBeGreaterThan(WHO_CHAT_LIMIT);
@@ -117,9 +120,31 @@ describe('whoChatLines (the legacy chat projection, byte-identical to before)', 
     expect(lines).toHaveLength(WHO_CHAT_LIMIT + 2);
     expect(lines[lines.length - 1].text).toBe('...and 3 more.');
     expect(lines.every((l) => l.type === 'log')).toBe(true);
+    // The chat palette moved out of game.ts unchanged.
+    expect(lines[0].color).toBe('#7fd4ff');
+    expect(lines[1].color).toBe('#c9b27a');
+    expect(lines[lines.length - 1].color).toBe('#998d6a');
   });
   it('quotes the filter in the singular header', () => {
     const lines = whoChatLines([row('Aleron')], 'ale', 'Ashenvale');
     expect(lines[0].text).toBe('Who: 1 player matching "ale" on Ashenvale.');
+  });
+});
+
+describe('buildWhoRosterEntries (the per-tick memo build)', () => {
+  it('describes each session once, skips the undescribable, and orders by name', () => {
+    const a = session(1);
+    const b = session(2);
+    const c = session(3);
+    const seen: number[] = [];
+    const entries = buildWhoRosterEntries([a, b, c], (s) => {
+      seen.push(s.characterId);
+      if (s.characterId === 2) return null;
+      return row(s.characterId === 1 ? 'Mira' : 'Aleron');
+    });
+    expect(seen).toEqual([1, 2, 3]);
+    expect(entries.map((e) => e.row.name)).toEqual(['Aleron', 'Mira']);
+    // the entry keeps the SAME session object (the visibility rule reads it live)
+    expect(entries[1].session).toBe(a);
   });
 });

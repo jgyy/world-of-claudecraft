@@ -1590,9 +1590,9 @@ const MONOLITHS: MonolithRow[] = [
     // OSSBrain integration: entity flair decoding moved to net/entity_flair_wire.ts.
     // Measured after formatting; lower the ratchet with the extraction.
     // Main hotfix integration: combined extractions, exact merged count.
-    // LOWERED 5540 -> 5538 with the Who tab: the social frame's version-skew
+    // LOWERED 5540 -> 5537 with the Who tab: the social frame's version-skew
     // normalization moved to net/social_frame_wire.ts, paying the who mirror.
-    ceiling: 5538,
+    ceiling: 5537,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

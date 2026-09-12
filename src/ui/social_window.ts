@@ -24,6 +24,7 @@ import { CLASSES } from '../sim/data';
 import { GUILD_ROSTER_PAGE_SEATS } from '../sim/guild_roster';
 import type { PlayerClass } from '../sim/types';
 import type { IWorld } from '../world_api';
+import { formatCount } from './count_format';
 import { deedTitleText } from './deed_i18n';
 import { markDialogRoot } from './dialog_root';
 import { classDisplayName } from './entity_i18n';
@@ -97,6 +98,8 @@ const PLEDGE_MIN_LEVEL_CEIL = 60;
 // Who tab search cap; mirrors WHO_FILTER_MAX in server/who_roster.ts (the
 // server clamps authoritatively, this is UX only).
 const WHO_SEARCH_MAX = 32;
+// Slow-HUD ticks between re-asks while the Who tab still has no answer.
+const WHO_RETRY_SLOW_TICKS = 4;
 
 /**
  * Hud-supplied glue. The social window renders no item rows (it uses CSS-classed
@@ -279,6 +282,7 @@ export class SocialWindow {
   // Who tab: the local sort / class chip plus the last server-side search
   // (who_tab_view.ts owns the decisions). Window-local like the tab itself.
   private who: WhoTabState = { ...DEFAULT_WHO_TAB_STATE };
+  private whoRetryTicks = 0;
 
   constructor(private readonly deps: SocialWindowDeps) {}
 
@@ -307,7 +311,10 @@ export class SocialWindow {
   // so the caller falls through to the normal send path (the offline Sim
   // answers the classic "online play only" line itself).
   openWhoTab(filter: string): boolean {
-    if (this.deps.world().socialInfo === null) return false;
+    const w = this.deps.world();
+    // Spectating drops every command but chat before the socket, so the
+    // classic chat dump (which chat still delivers) is the honest answer there.
+    if (w.socialInfo === null || w.spectating !== null) return false;
     this.who = { ...this.who, search: filter.slice(0, WHO_SEARCH_MAX) };
     this.tab = 'who';
     this.notice = null;
@@ -327,13 +334,33 @@ export class SocialWindow {
   private requestWho(): void {
     const w = this.deps.world();
     if (w.socialInfo === null) return;
+    this.whoRetryTicks = 0;
     w.whoRequest(this.who.search);
+  }
+
+  // While the tab shows the pending state (no answer yet: the viewer's block
+  // list was still loading server-side, a shed request, or a transport that
+  // reset the mirror), re-ask every few slow ticks. Bounded by the server's
+  // list-read guard and by the tab being open; stops on the first answer.
+  private retryWhoIfPending(): void {
+    if (this.tab !== 'who' || this.deps.world().whoInfo !== null) return;
+    if (++this.whoRetryTicks < WHO_RETRY_SLOW_TICKS) return;
+    this.requestWho();
+  }
+
+  // A local who-state change (sort, chip, search) repaints the list itself, so
+  // the content signature is re-latched here: otherwise the next slow tick sees
+  // the moved whoTabSig and rebuilds the body a second time, dropping the focus
+  // the handler just restored (the file's "re-latch, never clear" rule).
+  private refreshWhoList(): void {
+    this.refreshList();
+    this.lastContent = this.contentSig();
   }
 
   private searchWho(filter: string): void {
     this.who = { ...this.who, search: filter.slice(0, WHO_SEARCH_MAX) };
     this.requestWho();
-    this.refreshList();
+    this.refreshWhoList();
   }
 
   // Close path (toggle close + the window-manager's closeManagedWindow case): drop
@@ -358,6 +385,7 @@ export class SocialWindow {
   // change, else an in-place list refresh on a content change.
   refreshIfChanged(): void {
     if (!this.isOpen) return;
+    this.retryWhoIfPending();
     const struct = this.structSig();
     if (struct !== this.lastStruct) {
       this.lastStruct = struct;
@@ -422,7 +450,8 @@ export class SocialWindow {
     return JSON.stringify({
       social: w.socialInfo,
       party: w.partyInfo,
-      who: w.whoInfo,
+      // A cheap digest of the roster answer (never the 200 rows themselves).
+      who: w.whoInfo ? `${w.whoInfo.filter}|${w.whoInfo.rows.length}|${w.whoInfo.total}` : '',
       whoTab: whoTabSig(this.who),
     });
   }
@@ -521,7 +550,7 @@ export class SocialWindow {
         const target = e.target as HTMLSelectElement;
         if (!target.matches?.('select[data-field="who-cls"]')) return;
         this.who = { ...this.who, cls: target.value };
-        this.refreshList();
+        this.refreshWhoList();
         (
           this.deps.root().querySelector('select[data-field="who-cls"]') as HTMLElement | null
         )?.focus();
@@ -644,7 +673,7 @@ export class SocialWindow {
       const key = node.dataset.key as WhoSortKey | undefined;
       if (!key || !WHO_SORT_KEYS.includes(key)) return;
       this.who = toggleWhoSort(this.who, key);
-      this.refreshList();
+      this.refreshWhoList();
       (
         this.deps
           .root()
@@ -972,7 +1001,7 @@ export class SocialWindow {
     const labels = { cls: playerClassDisplayName, zone: localizeZone };
     const rows = whoTabRows(info, this.who, w.player.name, labels);
     const count = whoCountView(info, rows.length);
-    const n = (v: number): string => formatNumber(v, { maximumFractionDigits: 0 });
+    const n = formatCount;
     const countText =
       count.shown === count.total
         ? t('hudChrome.social.who.count', { total: n(count.total) })
@@ -1005,9 +1034,9 @@ export class SocialWindow {
     // The class / zone / guild trio is grouped (.soc-who-meta: display contents
     // on the desktop grid, one wrapped line under the name on a touch window).
     const header =
-      `<div class="soc-who-row soc-who-header" role="row"><span class="soc-who-cell who-dot" role="columnheader"></span>` +
+      `<div class="soc-who-row soc-who-header" role="row"><span class="soc-who-cell who-dot" role="columnheader" aria-label="${esc(t('hudChrome.social.who.colStatus'))}"></span>` +
       columns.slice(0, 2).map(headerCell).join('') +
-      `<span class="soc-who-meta">${columns.slice(2).map(headerCell).join('')}</span>` +
+      `<span class="soc-who-meta" role="presentation">${columns.slice(2).map(headerCell).join('')}</span>` +
       `</div>`;
     if (rows.length === 0)
       return `${head}<div class="soc-empty">${esc(t('hudChrome.social.who.empty'))}</div>`;
@@ -1022,7 +1051,7 @@ export class SocialWindow {
           `<span class="soc-who-cell who-dot" role="cell"><span class="soc-dot ${r.dot}" title="${tip}"></span></span>` +
           `<span class="soc-who-cell who-name" role="cell">${name}</span>` +
           `<span class="soc-who-cell who-level" role="cell">${n(r.level)}</span>` +
-          `<span class="soc-who-meta">` +
+          `<span class="soc-who-meta" role="presentation">` +
           `<span class="soc-who-cell who-cls" role="cell">${esc(playerClassDisplayName(r.cls))}</span>` +
           `<span class="soc-who-cell who-zone" role="cell" title="${tip}">${esc(localizeZone(r.zone))}</span>` +
           `<span class="soc-who-cell who-guild" role="cell">${esc(r.guild)}</span>` +

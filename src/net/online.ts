@@ -2340,6 +2340,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
         this.pendingDungeonEntryFacing = null;
         this.missingSince.clear();
         this.lastSnapAt = 0;
+        this.whoInfo = null; // the old transport's roster is stale; the tab re-asks
         // any in-flight target echo died with the old transport; the resent
         // world's value must apply from the first snapshot
         this.pendingTargetEcho = null;
@@ -2473,14 +2474,12 @@ export class ClientWorld extends ReconWireState implements IWorld {
       return;
     }
     if (msg.t === 'social') {
-      // Version-skew normalization lives in social_frame_wire.ts.
       this.socialInfo = socialInfoFromFrame(msg);
       this.socialDirty = true;
       return;
     }
     if (msg.t === 'who') {
-      // The Who tab's one-shot roster answer (decoded defensively; a frame with
-      // no usable roster leaves the last good answer in place).
+      // The Who tab's roster answer; a frame with no usable roster keeps the last.
       const roster = whoRosterFromFrame(msg);
       if (roster) this.whoInfo = roster;
       return;

@@ -443,9 +443,11 @@ import { recordUnstuckEvent } from './unstuck_records';
 import { buildVarkhulPortalReplayBatch, varkhulPortalReplayFrame } from './varkhul_portal_replay';
 import { dispatchVaultCommand, emitVaultSelfKeys } from './vault_wire';
 import {
+  buildWhoRosterEntries,
   canShowInWho,
   normalizeWhoFilter,
-  sortWhoRows,
+  visibleWhoRows,
+  type WhoRosterEntry,
   type WhoRosterRow,
   whoChatLines,
   whoFrame,
@@ -1641,6 +1643,8 @@ export class GameServer {
   // rules call a defect. Built once per broadcast pass and handed to every
   // bgInfoFor call in that pass instead.
   private readonly bgLadderReadout = createRealmReadoutMemo<BgLadderEntry[]>();
+  // The /who roster (chat command and the Who tab), rebuilt at most once per tick.
+  private readonly whoRosterReadout = createRealmReadoutMemo<WhoRosterEntry<ClientSession>[]>();
   // When the realm-wide Vale Cup readout is next due, tracked realm-global (not
   // per session) so every viewer still gates together in one pass and the memo
   // above builds once. `>=` against this, never `tickCount % interval`:
@@ -7195,11 +7199,11 @@ export class GameServer {
         sim.duelDecline(pid);
         break;
       // The Social window's Who tab: the /who roster as a structured frame
-      // (server/who_roster.ts). Pays the chat lane exactly like the chat /who
-      // it mirrors, and refuses while the viewer's own block list is loading
-      // (whoRosterFor cannot apply the bidirectional rule before that).
+      // (server/who_roster.ts), metered on the list-read guard (a readout, never
+      // the chat lane). Silent while the viewer's own block list is still
+      // loading: the client re-asks on its slow tick.
       case 'who':
-        if (!this.consumeLane(session, 'chat', receivedAtMs / 1000)) break;
+        if (!this.consumeListRead(session, receivedAtMs / 1000)) break;
         if (!session.blockListLoaded) break;
         this.send(session, whoFrame(this.whoRosterFor(session), normalizeWhoFilter(msg.filter)));
         break;
@@ -9974,29 +9978,26 @@ export class GameServer {
     });
   }
 
-  // The live roster as THIS viewer may see it (server/who_roster.ts canShowInWho:
-  // bidirectional blocks, fail-closed on an unloaded block list), in name order.
+  // The realm-wide roster, built and name-sorted at most ONCE per sim tick for
+  // every viewer (the realm-readout memo seam), each entry keeping a live
+  // session handle for the per-viewer visibility rule. Zone + status only:
+  // presenceOf also carries the live x/z, which the Who tab's frame must never
+  // ship realm-wide (positions stay friend/guild-gated on the socialpos frame).
+  private whoRosterEntries(): readonly WhoRosterEntry<ClientSession>[] {
+    return realmReadoutObject(this.whoRosterReadout, this.sim.tickCount, () =>
+      buildWhoRosterEntries(this.clients.values(), (session) => {
+        const e = this.sim.entities.get(session.pid);
+        const meta = this.sim.meta(session.pid);
+        if (!e || !meta) return null;
+        const { zone, status } = this.presenceOf(session);
+        return { name: session.name, cls: meta.cls, level: e.level, guild: e.guild, zone, status };
+      }),
+    );
+  }
+
+  // The rows THIS viewer may see (canShowInWho: bidirectional blocks, fail-closed).
   private whoRosterFor(viewer: ClientSession): WhoRosterRow[] {
-    const rows: WhoRosterRow[] = [];
-    for (const session of this.clients.values()) {
-      if (!canShowInWho(viewer, session)) continue;
-      const e = this.sim.entities.get(session.pid);
-      const meta = this.sim.meta(session.pid);
-      if (!e || !meta) continue;
-      // Zone + status only: presenceOf also carries the live x/z, which the
-      // Who tab's structured frame must never ship realm-wide (positions are
-      // friend/guild-gated on the socialpos frame; the chat list never had them).
-      const { zone, status } = this.presenceOf(session);
-      rows.push({
-        name: session.name,
-        cls: meta.cls,
-        level: e.level,
-        guild: e.guild,
-        zone,
-        status,
-      });
-    }
-    return sortWhoRows(rows);
+    return visibleWhoRows(this.whoRosterEntries(), viewer);
   }
 
   private broadcastSystem(text: string): void {

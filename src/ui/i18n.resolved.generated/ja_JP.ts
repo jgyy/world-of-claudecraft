@@ -4015,6 +4015,7 @@ export const ja_JP: EnTranslations = {
         "capped": "先頭の{delivered}人のみ表示中。残りを見るには検索を絞り込んでください。",
         "classFilter": "クラスで絞り込む",
         "allClasses": "すべてのクラス",
+        "colStatus": "状態",
         "colName": "Name",
         "colLevel": "レベル",
         "colClass": "クラス",

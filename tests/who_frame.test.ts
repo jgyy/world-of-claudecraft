@@ -14,6 +14,7 @@ vi.mock('../server/db', () => ({
 }));
 
 import { GameServer } from '../server/game';
+import { LIST_READ_BURST } from '../server/list_read_guard';
 import { WHO_TAB_LIMIT } from '../server/who_roster';
 import { socialInfoFromFrame } from '../src/net/social_frame_wire';
 import { whoRosterFromFrame } from '../src/net/who_frame_wire';
@@ -33,8 +34,10 @@ describe('the `who` command (server)', () => {
   it('answers a structured frame with every visible player, their guild, and no position', () => {
     const server = new GameServer();
     const viewerWs = fakeWs();
-    const viewer = joinServer(server, viewerWs, 1, 'Aleron', 'warrior');
+    // Bryn joins FIRST so session order is not already name order: the
+    // name-sorted answer below pins the memo's sort, not insertion order.
     const other = joinServer(server, fakeWs(), 2, 'Bryn', 'mage');
+    const viewer = joinServer(server, viewerWs, 1, 'Aleron', 'warrior');
     // biome-ignore lint/suspicious/noExplicitAny: private sim handle
     (server as any).sim.setPlayerGuild(other.pid, 'Moonwardens');
 
@@ -87,6 +90,38 @@ describe('the `who` command (server)', () => {
     server.handleMessage(viewer, JSON.stringify({ t: 'cmd', cmd: 'who' }));
     // biome-ignore lint/suspicious/noExplicitAny: wire row
     expect(whoFrames(viewerWs.sent)[0].rows.map((r: any) => r.name)).toEqual(['Aleron']);
+  });
+
+  it('builds the roster once per sim tick and reads block lists live', () => {
+    const server = new GameServer();
+    const viewerWs = fakeWs();
+    const viewer = joinServer(server, viewerWs, 1, 'Aleron');
+    const other = joinServer(server, fakeWs(), 2, 'Bryn');
+    server.handleMessage(viewer, JSON.stringify({ t: 'cmd', cmd: 'who' }));
+    server.handleMessage(viewer, JSON.stringify({ t: 'cmd', cmd: 'who' }));
+    // biome-ignore lint/suspicious/noExplicitAny: private memo
+    const memo = (server as any).whoRosterReadout;
+    expect(memo.objectBuilds).toBe(1);
+    // initSocial REPLACES blockedIds; the memo must not have copied the old Set.
+    other.blockedIds = new Set([viewer.characterId]);
+    server.handleMessage(viewer, JSON.stringify({ t: 'cmd', cmd: 'who' }));
+    const frames = whoFrames(viewerWs.sent);
+    expect(frames).toHaveLength(3);
+    // biome-ignore lint/suspicious/noExplicitAny: wire row
+    expect(frames[1].rows.map((r: any) => r.name)).toEqual(['Aleron', 'Bryn']);
+    // biome-ignore lint/suspicious/noExplicitAny: wire row
+    expect(frames[2].rows.map((r: any) => r.name)).toEqual(['Aleron']);
+    expect(memo.objectBuilds).toBe(1);
+  });
+
+  it('is metered on the list-read guard: a burst past LIST_READ_BURST is shed silently', () => {
+    const server = new GameServer();
+    const viewerWs = fakeWs();
+    const viewer = joinServer(server, viewerWs, 1, 'Aleron');
+    for (let i = 0; i < LIST_READ_BURST + 5; i++) {
+      server.handleMessage(viewer, JSON.stringify({ t: 'cmd', cmd: 'who' }));
+    }
+    expect(whoFrames(viewerWs.sent)).toHaveLength(LIST_READ_BURST);
   });
 
   it('answers nothing while the viewer block list is still loading (fail closed)', () => {
@@ -171,7 +206,16 @@ describe('ClientWorld whoInfo mirror + whoRequest send', () => {
 describe('who_frame_wire decode', () => {
   it('drops malformed rows, floors a bad total to the row count, and defaults the filter', () => {
     expect(
-      whoRosterFromFrame({ rows: [null, 5, { name: 'A', cls: 'mage', level: 2 }], total: -1 }),
+      whoRosterFromFrame({
+        rows: [
+          null,
+          5,
+          { name: 'A', cls: 'mage', level: 2 },
+          { name: 'B', cls: 7, level: 2 },
+          { name: 'C', cls: 'mage', level: Number.NaN },
+        ],
+        total: -1,
+      }),
     ).toEqual({
       filter: '',
       rows: [{ name: 'A', cls: 'mage', level: 2, zone: '', status: 'online', guild: '' }],

@@ -11899,6 +11899,7 @@ export type TranslationKeyFlat =
   | 'hudChrome.social.who.colGuild'
   | 'hudChrome.social.who.colLevel'
   | 'hudChrome.social.who.colName'
+  | 'hudChrome.social.who.colStatus'
   | 'hudChrome.social.who.colZone'
   | 'hudChrome.social.who.count'
   | 'hudChrome.social.who.countFiltered'

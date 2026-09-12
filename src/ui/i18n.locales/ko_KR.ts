@@ -1228,6 +1228,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
     '처음 {delivered}명만 표시됩니다. 나머지를 보려면 검색 범위를 좁히세요.',
   'hudChrome.social.who.classFilter': '직업으로 필터',
   'hudChrome.social.who.allClasses': '모든 직업',
+  'hudChrome.social.who.colStatus': '상태',
   'hudChrome.social.who.colLevel': '레벨',
   'hudChrome.social.who.colClass': '직업',
   'hudChrome.social.who.colGuild': '길드',

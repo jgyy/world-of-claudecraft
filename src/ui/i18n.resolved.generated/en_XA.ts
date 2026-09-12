@@ -4015,6 +4015,7 @@ export const en_XA: EnTranslations = {
         "capped": "[Šĥóŵíñĝ ţĥé ƒíŕšţ {delivered}. Ñáŕŕóŵ ţĥé šéáŕçĥ ţó šéé ţĥé ŕéšţ.]",
         "classFilter": "[Ƒíļţéŕ ƀý çļášš]",
         "allClasses": "[Áļļ çļáššéš]",
+        "colStatus": "[Šţáţúš]",
         "colName": "[Ñáɱé]",
         "colLevel": "[Ļéʋéļ]",
         "colClass": "[Çļášš]",

@@ -5625,6 +5625,14 @@
     border-bottom: 0;
     font-size: 12px;
   }
+  /* The five sort buttons and the class chip are the tab's only interactive
+     controls outside the shared .btn / .soc-tab floor: hold them at the 40px
+     touch target like the rest of the social chrome. */
+  body.mobile-touch .soc-who-sort,
+  body.mobile-touch .soc-who-cls {
+    min-height: 40px;
+    box-sizing: border-box;
+  }
   body.mobile-touch .soc-who-cell.who-dot,
   body.mobile-touch .soc-who-cell.who-name,
   body.mobile-touch .soc-who-cell.who-level {

@@ -1196,6 +1196,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'hudChrome.social.who.capped': '仅显示前 {delivered} 位。缩小搜索范围以查看其余玩家。',
   'hudChrome.social.who.classFilter': '按职业筛选',
   'hudChrome.social.who.allClasses': '所有职业',
+  'hudChrome.social.who.colStatus': '状态',
   'hudChrome.social.who.colLevel': '等级',
   'hudChrome.social.who.colClass': '职业',
   'hudChrome.social.who.colGuild': '公会',

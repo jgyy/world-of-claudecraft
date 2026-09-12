@@ -4015,6 +4015,7 @@ export const zh_CN: EnTranslations = {
         "capped": "仅显示前 {delivered} 位。缩小搜索范围以查看其余玩家。",
         "classFilter": "按职业筛选",
         "allClasses": "所有职业",
+        "colStatus": "状态",
         "colName": "Name",
         "colLevel": "等级",
         "colClass": "职业",

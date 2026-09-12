@@ -1236,6 +1236,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.social.who.capped': 'Показаны первые {delivered}. Сузьте поиск, чтобы увидеть остальных.',
   'hudChrome.social.who.classFilter': 'Фильтр по классу',
   'hudChrome.social.who.allClasses': 'Все классы',
+  'hudChrome.social.who.colStatus': 'Статус',
   'hudChrome.social.who.colLevel': 'Уровень',
   'hudChrome.social.who.colClass': 'Класс',
   'hudChrome.social.who.colGuild': 'Гильдия',

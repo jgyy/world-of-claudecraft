@@ -1236,6 +1236,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '先頭の{delivered}人のみ表示中。残りを見るには検索を絞り込んでください。',
   'hudChrome.social.who.classFilter': 'クラスで絞り込む',
   'hudChrome.social.who.allClasses': 'すべてのクラス',
+  'hudChrome.social.who.colStatus': '状態',
   'hudChrome.social.who.colLevel': 'レベル',
   'hudChrome.social.who.colClass': 'クラス',
   'hudChrome.social.who.colGuild': 'ギルド',

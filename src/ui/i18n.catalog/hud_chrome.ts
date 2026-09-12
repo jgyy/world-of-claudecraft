@@ -5739,6 +5739,7 @@ export const hudChromeStrings = {
       capped: 'Showing the first {delivered}. Narrow the search to see the rest.',
       classFilter: 'Filter by class',
       allClasses: 'All classes',
+      colStatus: 'Status',
       colName: 'Name',
       colLevel: 'Level',
       colClass: 'Class',

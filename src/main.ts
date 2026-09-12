@@ -1718,7 +1718,7 @@ async function startGame(
         closeChat();
         return;
       }
-      // "/share" links the selected quest into party chat; skip the normal send path.
+      // Client-answered commands ("/share" quest link, "/who" Who tab online) skip the send.
       if (hud.devCommandsAvailable && isDevGuiCommand(raw)) {
         hud.toggleDevCommandWindow();
       } else if (!hud.maybeHandleLocalChatCommand(raw)) {

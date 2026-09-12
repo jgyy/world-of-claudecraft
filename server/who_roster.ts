@@ -70,16 +70,23 @@ export function canShowInWho(
  *  so keep single spaces), and cap the length. '' means "no filter". */
 export function normalizeWhoFilter(raw: unknown): string {
   if (typeof raw !== 'string') return '';
+  // Bound the work before the regex passes: a 16 KiB frame must not buy two
+  // full-length scans for a filter that keeps 32 characters.
   return raw
+    .slice(0, WHO_FILTER_MAX * 4)
     .replace(/[\p{Cc}"]/gu, '')
     .trim()
     .replace(/\s+/g, ' ')
     .slice(0, WHO_FILTER_MAX);
 }
 
-/** Case-insensitive substring match on name, zone, or guild. */
-export function filterWhoRows(rows: readonly WhoRosterRow[], filter: string): WhoRosterRow[] {
-  if (!filter) return [...rows];
+/** Case-insensitive substring match on name, zone, or guild (the input itself
+ *  when there is no filter: every caller only reads). */
+export function filterWhoRows(
+  rows: readonly WhoRosterRow[],
+  filter: string,
+): readonly WhoRosterRow[] {
+  if (!filter) return rows;
   const q = filter.toLowerCase();
   return rows.filter(
     (row) =>
@@ -92,6 +99,42 @@ export function filterWhoRows(rows: readonly WhoRosterRow[], filter: string): Wh
 /** Stable name order (the server's canonical roster order; the tab re-sorts locally). */
 export function sortWhoRows(rows: readonly WhoRosterRow[]): WhoRosterRow[] {
   return [...rows].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** One entry of the realm-wide roster memo: the row plus a LIVE handle to the
+ *  candidate's session, so the per-viewer visibility rule reads the current
+ *  block list (initSocial REPLACES `blockedIds`, so a copied Set would serve
+ *  pre-block visibility). Built once per sim tick for every viewer
+ *  (server/realm_readout_memo.ts), then filtered per viewer in O(N). */
+export interface WhoRosterEntry<S extends WhoVisibilitySession = WhoVisibilitySession> {
+  session: S;
+  row: WhoRosterRow;
+}
+
+/** Build the memo's entries: one per session the host can describe (a session
+ *  with no live entity yet yields null and is skipped), in name order. The host
+ *  runs this at most once per sim tick (server/realm_readout_memo.ts). */
+export function buildWhoRosterEntries<S extends WhoVisibilitySession>(
+  sessions: Iterable<S>,
+  describe: (session: S) => WhoRosterRow | null,
+): WhoRosterEntry<S>[] {
+  const entries: WhoRosterEntry<S>[] = [];
+  for (const session of sessions) {
+    const row = describe(session);
+    if (row) entries.push({ session, row });
+  }
+  entries.sort((a, b) => a.row.name.localeCompare(b.row.name));
+  return entries;
+}
+
+/** The rows `viewer` may see, in the memo's name order. */
+export function visibleWhoRows<S extends WhoVisibilitySession>(
+  entries: readonly WhoRosterEntry<S>[],
+  viewer: WhoVisibilitySession,
+): WhoRosterRow[] {
+  const rows: WhoRosterRow[] = [];
+  for (const e of entries) if (canShowInWho(viewer, e.session)) rows.push(e.row);
+  return rows;
 }
 
 /** The Who tab's frame: filtered, capped at WHO_TAB_LIMIT, with the true total. */
