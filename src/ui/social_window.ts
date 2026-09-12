@@ -997,15 +997,17 @@ export class SocialWindow {
       { key: 'zone', label: t('hudChrome.social.who.colZone') },
       { key: 'guild', label: t('hudChrome.social.who.colGuild') },
     ];
+    const headerCell = (c: { key: WhoSortKey; label: string }): string => {
+      const active = this.who.sort === c.key;
+      const ariaSort = active ? (this.who.desc ? 'descending' : 'ascending') : 'none';
+      return `<span class="soc-who-cell who-${c.key}" role="columnheader" aria-sort="${ariaSort}"><button type="button" class="soc-who-sort${active ? ' on' : ''}" data-act="who-sort" data-key="${c.key}" title="${esc(t('hudChrome.social.who.sortTitle', { column: c.label }))}">${esc(c.label)}${active ? `<span class="soc-who-dir">${this.who.desc ? svgIcon('demote') : svgIcon('promote')}</span>` : ''}</button></span>`;
+    };
+    // The class / zone / guild trio is grouped (.soc-who-meta: display contents
+    // on the desktop grid, one wrapped line under the name on a touch window).
     const header =
       `<div class="soc-who-row soc-who-header" role="row"><span class="soc-who-cell who-dot" role="columnheader"></span>` +
-      columns
-        .map((c) => {
-          const active = this.who.sort === c.key;
-          const ariaSort = active ? (this.who.desc ? 'descending' : 'ascending') : 'none';
-          return `<span class="soc-who-cell who-${c.key}" role="columnheader" aria-sort="${ariaSort}"><button type="button" class="soc-who-sort${active ? ' on' : ''}" data-act="who-sort" data-key="${c.key}" title="${esc(t('hudChrome.social.who.sortTitle', { column: c.label }))}">${esc(c.label)}${active ? `<span class="soc-who-dir">${this.who.desc ? svgIcon('demote') : svgIcon('promote')}</span>` : ''}</button></span>`;
-        })
-        .join('') +
+      columns.slice(0, 2).map(headerCell).join('') +
+      `<span class="soc-who-meta">${columns.slice(2).map(headerCell).join('')}</span>` +
       `</div>`;
     if (rows.length === 0)
       return `${head}<div class="soc-empty">${esc(t('hudChrome.social.who.empty'))}</div>`;
@@ -1020,10 +1022,11 @@ export class SocialWindow {
           `<span class="soc-who-cell who-dot" role="cell"><span class="soc-dot ${r.dot}" title="${tip}"></span></span>` +
           `<span class="soc-who-cell who-name" role="cell">${name}</span>` +
           `<span class="soc-who-cell who-level" role="cell">${n(r.level)}</span>` +
+          `<span class="soc-who-meta">` +
           `<span class="soc-who-cell who-cls" role="cell">${esc(playerClassDisplayName(r.cls))}</span>` +
           `<span class="soc-who-cell who-zone" role="cell" title="${tip}">${esc(localizeZone(r.zone))}</span>` +
           `<span class="soc-who-cell who-guild" role="cell">${esc(r.guild)}</span>` +
-          `</div>`
+          `</span></div>`
         );
       })
       .join('');

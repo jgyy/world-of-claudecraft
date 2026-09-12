@@ -12268,7 +12268,8 @@
     align-items: center;
     column-gap: 8px;
   }
-  .soc-who-row {
+  .soc-who-row,
+  .soc-who-meta {
     display: contents;
   }
   .soc-who-cell {
@@ -12291,6 +12292,12 @@
   }
   .soc-who-cell .soc-name {
     display: inline;
+  }
+  /* The dot is a flex item in the friend rows; here it sits in an inline cell,
+     so it needs an inline-block box to keep its width and height. */
+  .soc-who-cell .soc-dot {
+    display: inline-block;
+    vertical-align: middle;
   }
   .soc-who-header .soc-who-cell {
     padding: 2px 2px 4px;
