@@ -6652,10 +6652,13 @@ export const TARGETS = [
             party,
             t,
           );
-        dmg(310, 'Mortal Strike', 1000);
-        dmg(140, 'Heroic Strike', 1800);
-        dmg(95, null, 2400);
-        dmg(210, 'Whirlwind', 3100);
+        // Anchored to the live clock so the HUD's own update() sees an OPEN
+        // segment and the shot reads "Current", not a closed history entry.
+        const t0 = performance.now();
+        dmg(310, 'Mortal Strike', t0 - 2100);
+        dmg(140, 'Heroic Strike', t0 - 1300);
+        dmg(95, null, t0 - 700);
+        dmg(210, 'Whirlwind', t0);
         meters.render(true);
         const el = document.querySelector('#meters-window');
         if (el) el.style.display = 'none';
