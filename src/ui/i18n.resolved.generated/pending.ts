@@ -70,13 +70,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "es_ES": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -139,13 +135,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "fr_FR": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -208,13 +200,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "fr_CA": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -277,13 +265,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "en_CA": [],
   "it_IT": [
@@ -347,13 +331,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "de_DE": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -416,81 +396,33 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "zh_CN": [
-    "hudChrome.cosmetics.preview",
-    "hudChrome.cosmetics.previewAria",
     "hudChrome.questTracker.objectiveValue",
     "hudChrome.wocMarket.colSaleType",
     "hudChrome.wocMarket.colSoldAt",
-    "hudChrome.wocMarket.saleTypeBuyNow",
-    "hudChrome.wocStore.mountBuy",
-    "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
-    "hudChrome.wocStore.mountOnly",
-    "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocMarket.saleTypeBuyNow"
   ],
   "zh_TW": [
-    "hudChrome.cosmetics.preview",
-    "hudChrome.cosmetics.previewAria",
     "hudChrome.questTracker.objectiveValue",
     "hudChrome.wocMarket.colSaleType",
     "hudChrome.wocMarket.colSoldAt",
-    "hudChrome.wocMarket.saleTypeBuyNow",
-    "hudChrome.wocStore.mountBuy",
-    "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
-    "hudChrome.wocStore.mountOnly",
-    "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocMarket.saleTypeBuyNow"
   ],
   "ko_KR": [
-    "hudChrome.cosmetics.preview",
-    "hudChrome.cosmetics.previewAria",
     "hudChrome.questTracker.objectiveValue",
     "hudChrome.wocMarket.colSaleType",
     "hudChrome.wocMarket.colSoldAt",
-    "hudChrome.wocMarket.saleTypeBuyNow",
-    "hudChrome.wocStore.mountBuy",
-    "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
-    "hudChrome.wocStore.mountOnly",
-    "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocMarket.saleTypeBuyNow"
   ],
   "ja_JP": [
-    "hudChrome.cosmetics.preview",
-    "hudChrome.cosmetics.previewAria",
     "hudChrome.questTracker.objectiveValue",
     "hudChrome.wocMarket.colSaleType",
     "hudChrome.wocMarket.colSoldAt",
-    "hudChrome.wocMarket.saleTypeBuyNow",
-    "hudChrome.wocStore.mountBuy",
-    "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
-    "hudChrome.wocStore.mountOnly",
-    "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocMarket.saleTypeBuyNow"
   ],
   "pt_BR": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -553,30 +485,15 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "ru_RU": [
-    "hudChrome.cosmetics.preview",
-    "hudChrome.cosmetics.previewAria",
     "hudChrome.questTracker.objectiveValue",
     "hudChrome.wocMarket.colSaleType",
     "hudChrome.wocMarket.colSoldAt",
-    "hudChrome.wocMarket.saleTypeBuyNow",
-    "hudChrome.wocStore.mountBuy",
-    "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
-    "hudChrome.wocStore.mountOnly",
-    "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocMarket.saleTypeBuyNow"
   ],
   "cs_CZ": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -639,13 +556,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "nl_NL": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -708,13 +621,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "pl_PL": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -777,13 +686,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "id_ID": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -846,13 +751,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "tr_TR": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -915,13 +816,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "sv_SE": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -984,13 +881,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "vi_VN": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -1053,13 +946,9 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ],
   "da_DK": [
     "guide.interfacePage.framesGovernedTalkingHead",
@@ -1122,12 +1011,8 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.wocMarket.tabHistory",
     "hudChrome.wocStore.mountBuy",
     "hudChrome.wocStore.mountInspectAria",
-    "hudChrome.wocStore.mountNeedsMount",
     "hudChrome.wocStore.mountOnly",
     "hudChrome.wocStore.mountRideIt",
-    "hudChrome.wocStore.mountScopeLine",
-    "hudChrome.wocStore.mountTakeOff",
-    "hudChrome.wocStore.mountWear",
-    "hudChrome.wocStore.mountWorn"
+    "hudChrome.wocStore.mountScopeLine"
   ]
 };

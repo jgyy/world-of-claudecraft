@@ -157,18 +157,18 @@ export function mountInspectActionsHtml(row: MountInspectRow): string {
       return `<button type="button" class="armory-buy" ${MOUNT_INSPECT_BUY_ATTR} disabled>${esc(t('hudChrome.wocStore.unavailable'))}</button>`;
     case 'takeOff':
       return (
-        `<span class="armory-owned-pill applied">${esc(t('hudChrome.wocStore.mountWorn'))}</span>` +
-        `<button type="button" class="armory-detach" ${MOUNT_INSPECT_TAKEOFF_ATTR}>${esc(t('hudChrome.wocStore.mountTakeOff'))}</button>`
+        `<span class="armory-owned-pill applied">${esc(t('hudChrome.cosmetics.worn'))}</span>` +
+        `<button type="button" class="armory-detach" ${MOUNT_INSPECT_TAKEOFF_ATTR}>${esc(t('hudChrome.cosmetics.takeOff'))}</button>`
       );
     case 'wear':
       return (
         `<span class="armory-owned-pill">${esc(t('hudChrome.wocStore.owned'))}</span>` +
-        `<button type="button" class="armory-apply" ${MOUNT_INSPECT_WEAR_ATTR}>${esc(t('hudChrome.wocStore.mountWear'))}</button>`
+        `<button type="button" class="armory-apply" ${MOUNT_INSPECT_WEAR_ATTR}>${esc(t('hudChrome.cosmetics.wear'))}</button>`
       );
     case 'needsMount':
       return (
         `<span class="armory-owned-pill">${esc(t('hudChrome.wocStore.owned'))}</span>` +
-        `<span class="armory-equip-hint">${esc(t('hudChrome.wocStore.mountNeedsMount'))}</span>`
+        `<span class="armory-equip-hint">${esc(t('hudChrome.cosmetics.mountsNoMount'))}</span>`
       );
   }
 }
