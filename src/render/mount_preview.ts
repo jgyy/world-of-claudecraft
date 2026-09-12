@@ -9,6 +9,16 @@
 // puller and every other composed mount come out exactly as the world draws
 // them. Owns its renderer and rAF loop; dispose() releases the GL context.
 //
+// Secondary-context contract (src/render/CLAUDE.md): every rig the stage
+// draws is LINKED (compileAsync) and UPLOADED (uploadTexturesInSlices) before
+// its first draw, with the stage hidden and only the ground painted until the
+// prepare settles; a stale prepare (the card changed, the panel closed) is
+// dropped by the generation guard. The context is disposed with the panel
+// rather than parked like the Armory's: parking a second session-long context
+// moves the client toward the browser's live-context cap for a panel most
+// sessions open once, and the mount GLB stays resident in the character asset
+// cache, so a reopen pays a rig build and a link, never a fetch.
+//
 // This is the second copy of the Armory rig's shell (src/render/armory_preview.ts),
 // not a shared abstraction: the two differ in what they stage (a weapon with
 // its VFX composer versus a rider on a mount with no bloom pass) and the Armory
@@ -28,6 +38,11 @@ import { MOUNT_PREVIEW_FOV, mountPreviewFraming } from './mount_preview_framing_
 import { buildMountPrewarmVisual, type MountPrewarmKey, mountPrewarmSpec } from './mount_prewarm';
 import { type MountVisualSpec, mountBobY } from './mount_visuals';
 import { shaderDebugRequested } from './shader_debug_flag';
+import {
+  collectPrewarmTextures,
+  uploadTexturesInSlices,
+  yieldToMainThread,
+} from './texture_prewarm';
 import { SCENE_PRESETS } from './weapon_vfx';
 
 export type MountPreviewSceneKey = 'day' | 'dusk' | 'night';
@@ -69,18 +84,46 @@ const LIGHT_POSITIONS: [number, number, number][] = [
   [-1.5, 3, -3.5],
 ];
 
+/** Where the rider parks while the "mount only" mode shows the skin alone.
+ *  Parked by POSITION, never by `visible`: a rider wearing a lit Armory skin
+ *  carries a point light, and three keys `numPointLights` off VISIBLE lights
+ *  into every program's cache key, so a hide/show would relink the whole
+ *  scene inside a live frame (src/render/CLAUDE.md, program-key changes). */
+const RIDER_PARK_Y = -1000;
+
+/** Build the rig, or null when a rig throws (a lazy body or skin asset that
+ *  never landed): the context is released before the throw escapes, so a
+ *  failed open never leaks a live GL context (context_release.ts). */
 export function createMountPreview(
   container: HTMLElement,
   canvas: HTMLCanvasElement,
   appearance: PreviewAppearance,
-): MountPreviewHandle {
+): MountPreviewHandle | null {
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: true });
   renderer.debug.checkShaderErrors = shaderDebugRequested();
+  const untrack = trackWebGLContext(renderer);
+  try {
+    return buildMountPreview(renderer, untrack, container, canvas, appearance);
+  } catch (err) {
+    renderer.dispose();
+    renderer.forceContextLoss();
+    untrack();
+    console.error('mount preview unavailable:', err);
+    return null;
+  }
+}
+
+function buildMountPreview(
+  renderer: THREE.WebGLRenderer,
+  untrack: () => void,
+  container: HTMLElement,
+  canvas: HTMLCanvasElement,
+  appearance: PreviewAppearance,
+): MountPreviewHandle {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(Math.max(1, container.clientWidth), Math.max(1, container.clientHeight), false);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  const untrack = trackWebGLContext(renderer);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
@@ -111,6 +154,8 @@ export function createMountPreview(
   const stage = new THREE.Group();
   scene.add(stage);
 
+  const pixelHeight = () => Math.max(1, Math.round(canvas.clientHeight * renderer.getPixelRatio()));
+
   let currentAppearance = appearance;
   let appearanceSig = appearanceSignature(appearance);
   let rider: CharacterVisual = createRider();
@@ -120,8 +165,9 @@ export function createMountPreview(
   let mountSpec: MountVisualSpec | null = null;
   let mount: CharacterVisual | null = null;
   const seatCache: { mountSeatBone: THREE.Object3D | null } = { mountSeatBone: null };
-  // The async build is keyed by a generation so a stale arrival (the player
-  // clicked another card while the first GLB was still fetching) is dropped.
+  // The async build and the prepare that follows it are keyed by a generation
+  // so a stale arrival (the player clicked another card while the first GLB
+  // was still fetching, or closed the panel) is dropped.
   let buildGeneration = 0;
 
   let mode: MountPreviewMode = 'rider';
@@ -144,6 +190,9 @@ export function createMountPreview(
     );
     const skin = currentAppearance.weaponSkinId;
     if (skin) visual.setWeaponSkin(skin);
+    // This rig's camera matches the VFX sprite math's native fov.
+    visual.setWeaponVfxCameraFov(MOUNT_PREVIEW_FOV);
+    visual.setWeaponVfxPixelScale(pixelHeight());
     return visual;
   }
 
@@ -185,9 +234,31 @@ export function createMountPreview(
   }
 
   function applyMode(): void {
-    rider.root.visible = mode === 'rider';
     rider.setRidePose(mode === 'rider' && mountSpec ? mountSpec.ride : null);
+    if (mode !== 'rider') {
+      rider.root.position.set(0, RIDER_PARK_Y, 0);
+      rider.root.quaternion.identity();
+    }
     frameCamera();
+  }
+
+  /** Link every program and upload every texture the stage carries BEFORE the
+   *  stage is drawn, so the first visible frame pays no link inside the rAF.
+   *  The stage stays hidden meanwhile (the ground still draws under it);
+   *  compileAsync walks hidden objects too, so nothing is missed. */
+  async function prepareStage(generation: number): Promise<void> {
+    stage.visible = false;
+    const stale = () => disposed || generation !== buildGeneration;
+    const textures = new Set<THREE.Texture>();
+    collectPrewarmTextures(stage, textures);
+    await uploadTexturesInSlices(renderer, textures, {
+      yieldToMain: yieldToMainThread,
+      isCancelled: stale,
+    });
+    if (stale()) return;
+    await renderer.compileAsync(scene, camera);
+    if (stale()) return;
+    stage.visible = true;
   }
 
   function dropMount(): void {
@@ -227,10 +298,23 @@ export function createMountPreview(
     }
     const spec = mountPrewarmSpec(next);
     void buildMountPrewarmVisual(next).then((visual) => {
-      if (disposed || generation !== buildGeneration || !visual) return;
+      if (disposed || generation !== buildGeneration) {
+        // A stale arrival (re-targeted or closed mid-fetch) is a fully built
+        // rig nobody will draw: release its mixer, skeletons and puller now.
+        visual?.dispose();
+        return;
+      }
+      if (!visual) {
+        // The asset never arrived in time: unlatch the key so the next click
+        // on the same card retries, and hand the rider back its own legs.
+        mountKey = null;
+        applyMode();
+        return;
+      }
       // The prewarm builder parks its rig off-screen under the prewarm
-      // diagnostics category; this stage draws it for real.
-      visual.root.position.set(0, 0, 0);
+      // diagnostics category; this stage draws it for real, at the rest
+      // height the animate loop will hold it at.
+      visual.root.position.set(0, spec.groundLift, 0);
       delete visual.root.userData.renderCategory;
       mount = visual;
       mountSpec = spec;
@@ -239,6 +323,7 @@ export function createMountPreview(
       // before the camera measures it.
       visual.update(0, MOUNT_STATE, true);
       applyMode();
+      void prepareStage(generation);
     });
   }
 
@@ -252,6 +337,7 @@ export function createMountPreview(
     rider = createRider();
     stage.add(rider.root);
     applyMode();
+    void prepareStage(buildGeneration);
   }
 
   // THREE.Timer, not the r183-deprecated Clock (see armory_preview.ts).
@@ -272,6 +358,7 @@ export function createMountPreview(
     }
     if (mode === 'rider') {
       rider.update(dt, RIDER_STATE, true);
+      rider.updateWeaponVfx(dt);
       seatRider(lift);
     }
     renderer.render(scene, camera);
@@ -291,12 +378,14 @@ export function createMountPreview(
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    rider.setWeaponVfxPixelScale(pixelHeight());
   };
   const observer = new ResizeObserver(resize);
   observer.observe(container);
 
   applyScene();
   applyMode();
+  void prepareStage(buildGeneration);
 
   return {
     setActive(next: boolean): void {

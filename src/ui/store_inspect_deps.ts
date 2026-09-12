@@ -13,7 +13,7 @@ import { resolveActiveWeaponSkin } from '../sim/content/weapon_skin_rules';
 import type { PlayerClass, WeaponSkinType } from '../sim/types';
 import type { IWorld } from '../world_api';
 import type { ArmoryInspectDeps } from './armory_inspect';
-import type { MountInspectDeps } from './mount_inspect';
+import type { MountInspectDeps } from './mount_inspect_controller';
 import { mountInspectRow } from './mount_inspect_view';
 import type { StoreSpendControllers } from './store_spend_controllers';
 import type { ArmorySkinRow } from './woc_store_view';
@@ -79,7 +79,7 @@ export function mountInspectDeps(seams: StoreInspectSeams): MountInspectDeps {
       const world = seams.world();
       return mountInspectRow(skinId, seams.spend.mounts.rowById(skinId), {
         ownedMountSkinIds: world.accountCosmetics.mountSkinIds,
-        wornMountSkinId: world.player?.mountSkinId ?? null,
+        wornMountSkinId: world.player.mountSkinId ?? null,
         ownsAnyMount: world.ownedMounts().length > 0,
       });
     },

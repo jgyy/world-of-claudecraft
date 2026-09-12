@@ -161,6 +161,7 @@ export function createArmoryPreview(
       currentAppearance.skin,
       nextAppearance.weaponItemId,
       nextAppearance.weaponOverride,
+      nextAppearance.offhandItemId,
     );
     rig.setWeaponVfxCameraFov(35);
     if (nextSkinId) rig.setWeaponSkin(nextSkinId);

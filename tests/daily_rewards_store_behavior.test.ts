@@ -37,7 +37,7 @@ const mountSpy = vi.hoisted(() => ({
   opened: [] as string[],
   deps: null as null | { requestBuy(skinId: string): void; row(skinId: string): unknown },
 }));
-vi.mock('../src/ui/mount_inspect', () => ({
+vi.mock('../src/ui/mount_inspect_controller', () => ({
   MountInspect: class {
     constructor(deps: { requestBuy(skinId: string): void; row(skinId: string): unknown }) {
       mountSpy.deps = deps;

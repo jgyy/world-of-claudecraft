@@ -712,7 +712,7 @@ import {
 } from './mob_idle_sfx';
 import { type MobTooltipI18n, type MobTooltipModel, mobTooltipHtml } from './mob_tooltip_view';
 import { bindMobileFrameLongPress as bindMobileFrameLongPressCore } from './mobile_frame_long_press';
-import { isCompactTouchHud } from './mobile_hud_layout';
+import { isCompactTouchHud, touchBagsShown } from './mobile_hud_layout';
 import { MobileMoreDialogController } from './mobile_more_dialog';
 import { moneyHtml } from './money_html';
 import { MOUNT_DESC_KEYS, mountSpecLines } from './mount_labels';
@@ -7107,6 +7107,7 @@ export class Hud {
     this.mailboxWindow.relocalize();
     this.socialWindow.relocalize();
     this.cosmeticsWindow.relocalize();
+    this.dailyRewardsWindow.relocalize();
     this.cardDuelWindow.relocalize();
     this.spellbookWindow.relocalize();
     this.barEditorWindow.relocalize();
@@ -15080,8 +15081,7 @@ export class Hud {
     // firing hideTooltip/mobile-bags teardown) before closeHeroicVendor got a chance to
     // restore it, dropping the WCAG 2.4.3 focus return on the Esc/generic close path.
     if (this.openVendorNpcId === null) return;
-    const closeMobileBags =
-      document.body.classList.contains('mobile-touch') && $('#bags').style.display !== 'none';
+    const closeMobileBags = touchBagsShown(document.body.classList, $('#bags').style.display);
     // Force-close backstop for the custom-amount prompt (the shared modal
     // recipe's contract): a close under an open prompt must remove the prompt
     // node and clear the window inert it holds, or a hidden #vendor-window
@@ -15896,8 +15896,7 @@ export class Hud {
   }
 
   private onBankClosed(): void {
-    const closeMobileBags =
-      document.body.classList.contains('mobile-touch') && $('#bags').style.display !== 'none';
+    const closeMobileBags = touchBagsShown(document.body.classList, $('#bags').style.display);
     document.body.classList.remove('bank-open'); // bags (if still open) re-centres
     if (closeMobileBags) {
       // Mirror closeVendor's teardown backstop: a discard/sell/deposit prompt may hold

@@ -1522,7 +1522,7 @@ export const TARGETS = [
     key: 'mount-inspect',
     label: 'WOC Store mount skin preview: the player riding the skin before Buy',
     when: [
-      'ui/mount_inspect',
+      'ui/mount_inspect_controller',
       'ui/store_mount_card_view',
       'ui/store_inspect_deps',
       'render/mount_preview',

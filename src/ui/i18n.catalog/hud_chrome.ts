@@ -388,7 +388,7 @@ export const hudChromeStrings = {
     mountsTitle: 'Machine Stable',
     mountBuyAria: 'Purchase {item}',
     mountSkinType: 'Mount skin',
-    // The mount skin inspect panel (src/ui/mount_inspect.ts): a live preview of
+    // The mount skin inspect panel (src/ui/mount_inspect_controller.ts): a live preview of
     // the player's own character riding the skin, opened from a store card or
     // the Cosmetics window, so nobody buys a look they have not seen.
     mountInspectAria: 'Preview {item}',

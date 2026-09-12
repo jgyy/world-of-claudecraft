@@ -2418,7 +2418,7 @@ const UI_DOM_MODULES = [
   'src/ui/appearance_customizer.ts',
   'src/ui/arena_window.ts',
   'src/ui/armory_inspect.ts',
-  'src/ui/mount_inspect.ts',
+  'src/ui/mount_inspect_controller.ts',
   'src/ui/bag_item_action_menu.ts',
   'src/ui/bags_window.ts',
   'src/ui/bank_buy_prompt.ts',

@@ -65,12 +65,15 @@ export class MountInspect {
     return this.row?.skinId ?? null;
   }
 
-  /** Open (or re-target) the panel on a skin. An unknown id is a no-op. */
+  /** Open (or re-target) the panel on a skin. An unknown id is a no-op. A
+   *  re-target keeps the stage and its GL context and only swaps the codex
+   *  side and the staged mount (setMount), so browsing skins never mints a
+   *  context per card. */
   open(skinId: string): void {
     const row = this.deps.row(skinId);
     if (!row) return;
     const wasOpen = this.overlay !== null;
-    if (wasOpen) this.hideOverlay(false);
+    if (wasOpen) this.detachOverlay();
     this.row = row;
     if (!wasOpen) {
       this.openerFocus =
@@ -105,7 +108,17 @@ export class MountInspect {
     });
     overlay.addEventListener('mousedown', (event) => {
       if (document.getElementById('confirm-dialog')) return;
-      if (event.target === overlay) this.close();
+      if (event.target === overlay) {
+        this.close();
+        return;
+      }
+      // A press on the canvas or the codex copy would drop focus to <body>,
+      // taking Escape with it; keep the keyboard inside the dialog.
+      const target = event.target as HTMLElement | null;
+      if (target && !target.closest('button')) {
+        event.preventDefault();
+        (overlay.querySelector(`[${MOUNT_INSPECT_CLOSE_ATTR}]`) as HTMLElement | null)?.focus();
+      }
     });
     overlay.innerHTML = mountInspectHtml(row);
     document.body.appendChild(overlay);
@@ -136,6 +149,20 @@ export class MountInspect {
     this.paintActions();
   }
 
+  /** A language switch repaints the open dialog (every label is a t() key):
+   *  the codex side rebuilds, the stage and its context survive, and the
+   *  toggles are repainted from the current mode and scene. */
+  relocalize(): void {
+    const open = this.row?.skinId;
+    if (!open || !this.overlay) return;
+    const controls = this.stage?.querySelector<HTMLElement>('[data-mount-controls]');
+    if (controls) {
+      controls.innerHTML = mountInspectControlsHtml(SCENES);
+      this.wireControls(this.stage as HTMLElement);
+    }
+    this.open(open);
+  }
+
   close(): void {
     this.hideOverlay(true);
   }
@@ -147,7 +174,12 @@ export class MountInspect {
   }
 
   private ensureStage(): HTMLElement | null {
-    if (this.stage) return this.stage;
+    const slot = this.overlay?.querySelector<HTMLElement>('[data-mount-stage-slot]');
+    if (!slot) return null;
+    if (this.stage) {
+      slot.replaceWith(this.stage);
+      return this.stage;
+    }
     const stage = document.createElement('div');
     stage.className = 'armory-inspect-stage';
     stage.innerHTML =
@@ -157,11 +189,21 @@ export class MountInspect {
     if (!canvas) return null;
     // The stage is inside the dialog before the rig is built, so the renderer
     // sizes itself to the real grid track on construction.
-    const slot = this.overlay?.querySelector<HTMLElement>('[data-mount-stage-slot]');
-    slot?.replaceWith(stage);
+    slot.replaceWith(stage);
+    const preview = createMountPreview(stage, canvas, this.deps.appearance());
+    if (!preview) {
+      // No context: the codex side still opens, with the stage slot empty.
+      stage.remove();
+      return null;
+    }
     this.stage = stage;
-    this.preview = createMountPreview(stage, canvas, this.deps.appearance());
+    this.preview = preview;
     this.preview.setActive(false);
+    this.wireControls(stage);
+    return stage;
+  }
+
+  private wireControls(stage: HTMLElement): void {
     stage.querySelectorAll<HTMLButtonElement>(`[${MOUNT_INSPECT_MODE_ATTR}]`).forEach((button) => {
       button.addEventListener('click', () => {
         this.mode = button.dataset.mountMode as MountPreviewMode;
@@ -176,18 +218,23 @@ export class MountInspect {
         this.syncToggles();
       });
     });
-    return stage;
+  }
+
+  /** Drop the dialog markup but keep the stage parked for a re-target. */
+  private detachOverlay(): void {
+    this.stage?.remove();
+    this.overlay?.remove();
+    this.overlay = null;
+    this.row = null;
   }
 
   private hideOverlay(restoreFocus: boolean): void {
     const wasOpen = this.overlay !== null;
+    this.preview?.setActive(false);
     this.preview?.dispose();
     this.preview = null;
-    this.stage?.remove();
+    this.detachOverlay();
     this.stage = null;
-    this.overlay?.remove();
-    this.overlay = null;
-    this.row = null;
     if (restoreFocus && wasOpen && this.openerFocus?.isConnected) this.openerFocus.focus();
     if (restoreFocus) this.openerFocus = null;
   }

@@ -31,7 +31,7 @@ import { markDialogRoot } from './dialog_root';
 import { esc } from './esc';
 import { captureFocusKey, focusedWithin, focusKeyAttr } from './focus_restore';
 import { formatDateTime, formatNumber, t } from './i18n';
-import { MountInspect } from './mount_inspect';
+import { MountInspect } from './mount_inspect_controller';
 import { hydratePortraits } from './portrait_chip';
 import { durableIntents, type PurchaseIntentLedger } from './purchase_intent_durability';
 import { mintIntentKey } from './purchase_intent_key';
@@ -147,6 +147,7 @@ export class DailyRewardsWindow {
   private armoryInspect: ArmoryInspect | null = null;
   private mountInspect: MountInspect | null = null;
   private armoryGraphicsRestoreSkinId: string | null = null;
+  private mountGraphicsRestoreSkinId: string | null = null;
   private storeLoading = false;
   private storeReady = false;
   private storeError = false;
@@ -221,23 +222,50 @@ export class DailyRewardsWindow {
     void this.renderCurrent('open');
   }
 
-  /** Dispose the profile-bound Armory context; the next open rebuilds it lazily. */
+  /** Dispose the profile-bound preview contexts; the next open rebuilds them lazily. */
   resetArmoryPreviewForGraphicsRebuild(): void {
     this.armoryGraphicsRestoreSkinId = this.armoryInspect?.openSkinId ?? null;
     this.armoryInspect?.destroy();
     this.armoryInspect = null;
+    this.mountGraphicsRestoreSkinId = this.mountInspect?.openSkinId ?? null;
     this.mountInspect?.destroy();
     this.mountInspect = null;
   }
 
-  /** The Cosmetics window's Preview button: the mount panel without the store
-   *  (a priced skin still offers Buy off the store's last snapshot). */
-  previewMountSkin(skinId: string): void {
-    this.ensureMountInspect().open(skinId);
+  closePreviews(): void {
+    this.armoryInspect?.close();
+    this.mountInspect?.close();
   }
 
-  /** The Cosmetics window's Preview button on an owned weapon skin: rows are
-   *  re-projected first so a never-opened store still has one. */
+  /** A language switch repaints the open mount preview (every label a t() key). */
+  relocalize(): void {
+    this.mountInspect?.relocalize();
+  }
+
+  /** The Cosmetics window's Preview button: the mount panel without the store.
+   *  The snapshot is fetched on demand so a priced skin still offers Buy. */
+  previewMountSkin(skinId: string): void {
+    this.ensureMountInspect().open(skinId);
+    if (!this.storeReady && !this.storeLoading) void this.fetchStoreForPreview();
+  }
+
+  private async fetchStoreForPreview(): Promise<void> {
+    this.storeLoading = true;
+    try {
+      const snapshot = await this.deps.storeSnapshot?.();
+      if (!snapshot?.available || snapshot.balance === null || this.storeReady) return;
+      this.storeBalance = snapshot.balance;
+      this.storeItems = snapshot.items;
+      this.storeReady = true;
+      this.rebuildArmorySections();
+    } catch {
+      // The panel keeps its unpriced arm; opening the store retries.
+    } finally {
+      this.storeLoading = false;
+    }
+  }
+
+  /** The Cosmetics window's Preview on an owned weapon skin (rows re-projected first). */
   previewWeaponSkin(skinId: string): void {
     if (!this.armoryRowById(skinId)) this.rebuildArmorySections();
     const row = this.armoryRowById(skinId);
@@ -246,6 +274,11 @@ export class DailyRewardsWindow {
 
   /** Reopen an inspect overlay that was visible when its old profile context was reset. */
   restoreArmoryPreviewAfterGraphicsRebuild(): void {
+    const mountSkinId = this.mountGraphicsRestoreSkinId;
+    this.mountGraphicsRestoreSkinId = null;
+    // The mount panel opens from the Cosmetics window too, so it comes back
+    // whether or not the store is open.
+    if (mountSkinId) this.previewMountSkin(mountSkinId);
     const skinId = this.armoryGraphicsRestoreSkinId;
     this.armoryGraphicsRestoreSkinId = null;
     if (!skinId || !this.isOpen) return;

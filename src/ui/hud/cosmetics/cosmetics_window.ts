@@ -51,14 +51,16 @@ export interface CosmeticsWindowDeps {
   restoreFocus(target: HTMLElement | null): void;
   /** The WOC Store window, which owns the two live 3D preview overlays (the
    *  mount skin panel, the Armory inspect) a card's Preview opens. Lazy, since
-   *  the Hud constructs the store after this window; optional so a host
-   *  without the store (tests) paints the buttons inert. */
-  store?(): CosmeticsPreviewHost;
+   *  the Hud constructs the store after this window. Required: every card
+   *  paints a live Preview button, so a host must have somewhere to send it. */
+  store(): CosmeticsPreviewHost;
 }
 
 export interface CosmeticsPreviewHost {
   previewMountSkin(skinId: string): void;
   previewWeaponSkin(skinId: string): void;
+  /** Close whichever preview overlay is up (this window is closing). */
+  closePreviews(): void;
 }
 
 const TAB_CLASS = 'cos-tab';
@@ -98,6 +100,9 @@ export class CosmeticsWindow {
   // the '.open' class + tooltip and return focus to the opener (WCAG 2.2 AA).
   close(): void {
     const el = this.deps.root();
+    // A preview this window opened outlives no closing of it: the overlay is
+    // body-level and the store window, which owns it, may itself be shut.
+    this.deps.store().closePreviews();
     el.classList.remove('open');
     this.deps.hideTooltip();
     const target = this.returnFocus;
@@ -209,12 +214,14 @@ export class CosmeticsWindow {
   private apply(action: CosmeticsAction): void {
     const w = this.deps.world();
     switch (action.kind) {
+      // Preview mutates nothing here, so NO repaint: a repaint would destroy
+      // the very button the overlay captured as its focus opener.
       case 'preview-mount':
-        this.deps.store?.().previewMountSkin(action.id);
-        break;
+        this.deps.store().previewMountSkin(action.id);
+        return;
       case 'preview-skin':
-        this.deps.store?.().previewWeaponSkin(action.id);
-        break;
+        this.deps.store().previewWeaponSkin(action.id);
+        return;
       case 'wear-mount':
         w.changeMountSkin(action.id);
         break;

@@ -94,6 +94,16 @@ export function isCompactTouchHud(classes: { contains(cls: string): boolean }): 
   return classes.contains('mobile-touch') && classes.contains(TIER_CLASS.compact);
 }
 
+/** Touch mode with the bags sheet showing (its inline display is not none):
+ *  the vendor and bank close paths tear the mobile bags down on this. Takes
+ *  the class list and the bags element's display value, not the DOM. */
+export function touchBagsShown(
+  classes: { contains(cls: string): boolean },
+  bagsDisplay: string,
+): boolean {
+  return classes.contains('mobile-touch') && bagsDisplay !== 'none';
+}
+
 /** Resolve the responsive mobile HUD layout for the given viewport/mode inputs.
  *  Deterministic and side-effect-free: same input always yields a deeply equal
  *  output (no DOM reads, no Date/performance/random). Returns an empty classes

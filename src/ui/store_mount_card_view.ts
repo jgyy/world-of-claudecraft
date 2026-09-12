@@ -17,7 +17,7 @@
 // the same `.armory-cost` / `.armory-state` slot. The one difference is what
 // the card button DOES NOT differ any more: a weapon-skin card opens the
 // Armory inspect overlay, and a mount skin card opens the mount inspect
-// overlay (src/ui/mount_inspect.ts), where the player sees the skin on their
+// overlay (src/ui/mount_inspect_controller.ts), where the player sees the skin on their
 // own character before Buy, or wears an owned one. The button therefore stays
 // enabled whatever the row's state; the overlay decides the action.
 

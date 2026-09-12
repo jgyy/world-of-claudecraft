@@ -3,7 +3,7 @@
 // UI_PURE_CORES proves it is PURE; these arms prove it is CORRECT: the one
 // action decision per row state, the row projection that unions the store
 // snapshot with the account mirror and the acting character, and the markup
-// the DOM painter (src/ui/mount_inspect.ts) binds by attribute.
+// the DOM painter (src/ui/mount_inspect_controller.ts) binds by attribute.
 //
 // Ids come from the shipped catalog (MOUNT_SKIN_IDS) and labels from t(), so a
 // catalog or copy change reaches these arms instead of sailing past a fixture.
@@ -38,6 +38,7 @@ function row(over: Partial<MountInspectRow> = {}): MountInspectRow {
     purchasable: true,
     owned: false,
     worn: false,
+    wearable: false,
     ownsAnyMount: true,
     ...over,
   };
@@ -58,12 +59,24 @@ describe('mountInspectAction', () => {
     );
   });
 
-  it('offers Wear on an owned skin when a mount can carry it', () => {
-    expect(mountInspectAction(row({ owned: true }))).toBe('wear');
+  it('offers Wear on a wearable owned skin when a mount can carry it', () => {
+    expect(mountInspectAction(row({ owned: true, wearable: true }))).toBe('wear');
   });
 
-  it('points an owned skin at a mount when the character has none to ride', () => {
-    expect(mountInspectAction(row({ owned: true, ownsAnyMount: false }))).toBe('needsMount');
+  it('points a wearable owned skin at a mount when the character has none to ride', () => {
+    expect(mountInspectAction(row({ owned: true, wearable: true, ownsAnyMount: false }))).toBe(
+      'needsMount',
+    );
+  });
+
+  it('reads owned-but-not-wearable as syncing, whatever the mounts say', () => {
+    expect(mountInspectAction(row({ owned: true, wearable: false }))).toBe('syncing');
+    expect(mountInspectAction(row({ owned: true, wearable: false, ownsAnyMount: false }))).toBe(
+      'syncing',
+    );
+    // Wearable without owned cannot happen from the projection, but the arm
+    // reads owned first: an unowned row never wears.
+    expect(mountInspectAction(row({ owned: false, wearable: true }))).toBe('buy');
   });
 
   it('offers Buy on an unowned skin only when the store priced it and it is purchasable', () => {
@@ -89,6 +102,7 @@ describe('mountInspectRow', () => {
       owned: false,
       worn: false,
       ownsAnyMount: true,
+      wearable: false,
     });
   });
 
@@ -99,18 +113,24 @@ describe('mountInspectRow', () => {
       character(),
     );
     expect(fromStore?.owned).toBe(true);
+    // Service-owned with an empty mirror: owned, not yet wearable (syncing).
+    expect(fromStore?.wearable).toBe(false);
+    expect(mountInspectAction(fromStore as MountInspectRow)).toBe('syncing');
     const fromMirror = mountInspectRow(
       REINS,
       { costClaudium: 900, purchasable: true, owned: false },
       character({ ownedMountSkinIds: [REINS] }),
     );
     expect(fromMirror?.owned).toBe(true);
+    expect(fromMirror?.wearable).toBe(true);
+    expect(mountInspectAction(fromMirror as MountInspectRow)).toBe('wear');
     const fromNeither = mountInspectRow(
       REINS,
       { costClaudium: 900, purchasable: true, owned: false },
       character({ ownedMountSkinIds: [OTHER] }),
     );
     expect(fromNeither?.owned).toBe(false);
+    expect(fromNeither?.wearable).toBe(false);
   });
 
   it('reads a null store row as unpriced and not purchasable, never as free', () => {
@@ -225,7 +245,7 @@ describe('mountInspectControlsHtml', () => {
     expect(
       mountInspectControlsHtml([]).match(new RegExp(`${MOUNT_INSPECT_SCENE_ATTR}=`, 'g')),
     ).toBeNull();
-    const hostile = mountInspectControlsHtml(['"><i>x</i>']);
+    const hostile = mountInspectControlsHtml(['"><i>x</i>' as never]);
     expect(hostile).not.toContain('<i>x</i>');
   });
 });
@@ -256,7 +276,7 @@ describe('mountInspectActionsHtml', () => {
   });
 
   it('paints Wear with the owned pill and no price once owned', () => {
-    const html = mountInspectActionsHtml(row({ owned: true }));
+    const html = mountInspectActionsHtml(row({ owned: true, wearable: true }));
     expect(html).toContain(
       `<span class="armory-owned-pill">${t('hudChrome.wocStore.owned')}</span>`,
     );
@@ -269,7 +289,7 @@ describe('mountInspectActionsHtml', () => {
   });
 
   it('paints Take off with the worn pill on a worn skin', () => {
-    const html = mountInspectActionsHtml(row({ owned: true, worn: true }));
+    const html = mountInspectActionsHtml(row({ owned: true, wearable: true, worn: true }));
     expect(html).toContain(
       `<span class="armory-owned-pill applied">${t('hudChrome.cosmetics.worn')}</span>`,
     );
@@ -281,7 +301,7 @@ describe('mountInspectActionsHtml', () => {
   });
 
   it('paints the needs-a-mount hint with no button for an owned skin and no ride', () => {
-    const html = mountInspectActionsHtml(row({ owned: true, ownsAnyMount: false }));
+    const html = mountInspectActionsHtml(row({ owned: true, wearable: true, ownsAnyMount: false }));
     expect(html).toContain(
       `<span class="armory-owned-pill">${t('hudChrome.wocStore.owned')}</span>`,
     );
@@ -289,6 +309,14 @@ describe('mountInspectActionsHtml', () => {
       `<span class="armory-equip-hint">${t('hudChrome.cosmetics.mountsNoMount')}</span>`,
     );
     expect(html).not.toContain('<button');
+    expect(html).not.toContain('armory-price');
+  });
+
+  it('paints only the Owned pill while a service grant is still syncing to the mirror', () => {
+    const html = mountInspectActionsHtml(row({ owned: true, wearable: false }));
+    expect(html).toBe(`<span class="armory-owned-pill">${t('hudChrome.wocStore.owned')}</span>`);
+    expect(html).not.toContain('<button');
+    expect(html).not.toContain('armory-equip-hint');
     expect(html).not.toContain('armory-price');
   });
 });

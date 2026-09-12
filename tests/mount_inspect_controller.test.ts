@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 //
-// The mount-skin inspect panel's DOM lifecycle (src/ui/mount_inspect.ts)
+// The mount-skin inspect panel's DOM lifecycle (src/ui/mount_inspect_controller.ts)
 // against fake deps and a recorded fake preview handle: one overlay and one
 // preview per open, every action crossing the seam exactly once, the mode and
 // scene toggles reaching the stage, and close disposing the GL context (the
@@ -8,8 +8,9 @@
 // focus back to the opener.
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { PreviewAppearance } from '../src/render/characters/preview_appearance';
+import { createMountPreview } from '../src/render/mount_preview';
 import { MOUNT_SKIN_IDS } from '../src/sim/content/mount_skins';
-import { MountInspect } from '../src/ui/mount_inspect';
+import { MountInspect } from '../src/ui/mount_inspect_controller';
 import { type MountInspectRow, mountInspectRow } from '../src/ui/mount_inspect_view';
 
 const previews: FakePreview[] = [];
@@ -91,6 +92,7 @@ const button = (selector: string) => overlay()?.querySelector<HTMLButtonElement>
 beforeEach(() => {
   document.body.innerHTML = '';
   previews.length = 0;
+  vi.mocked(createMountPreview).mockClear();
 });
 
 describe('MountInspect', () => {
@@ -216,17 +218,82 @@ describe('MountInspect', () => {
     expect(previews[0].dispose).toHaveBeenCalledTimes(1);
   });
 
-  it('re-targets an open panel on a second skin with exactly one overlay in the DOM', () => {
+  it('re-targets an open panel on a second skin, keeping the stage and its context', () => {
     const { inspect } = makeInspect();
     inspect.open(REINS);
     inspect.open(OTHER);
     expect(overlays()).toHaveLength(1);
     expect(inspect.openSkinId).toBe(OTHER);
-    // The first stage was torn down and a fresh one built on the new skin.
-    expect(previews).toHaveLength(2);
+    // One construction across both opens: the stage is parked and re-slotted,
+    // and only the staged mount swaps.
+    expect(previews).toHaveLength(1);
+    expect(vi.mocked(createMountPreview)).toHaveBeenCalledTimes(1);
+    expect(previews[0].dispose).not.toHaveBeenCalled();
+    expect(previews[0].setMount).toHaveBeenLastCalledWith(OTHER);
+    expect(overlay()?.querySelectorAll('.armory-inspect-stage')).toHaveLength(1);
+    inspect.close();
     expect(previews[0].dispose).toHaveBeenCalledTimes(1);
-    expect(previews[1].setMount).toHaveBeenCalledWith(OTHER);
-    expect(previews[1].dispose).not.toHaveBeenCalled();
+  });
+
+  it('still opens the codex side when no GL context can be made, with no stage', () => {
+    vi.mocked(createMountPreview).mockReturnValueOnce(null);
+    const { inspect } = makeInspect();
+    inspect.open(REINS);
+    expect(inspect.isOpen).toBe(true);
+    expect(overlays()).toHaveLength(1);
+    expect(overlay()?.querySelector('.armory-inspect-stage')).toBeNull();
+    expect(overlay()?.querySelector('[data-mount-canvas]')).toBeNull();
+    expect(button('[data-mount-buy]')).toBeTruthy();
+    expect(previews).toHaveLength(0);
+    inspect.close();
+    expect(inspect.isOpen).toBe(false);
+    expect(overlays()).toHaveLength(0);
+  });
+
+  it('keeps focus on close for a press inside the dialog, and closes on a backdrop press', () => {
+    const { inspect } = makeInspect();
+    inspect.open(REINS);
+    const close = button('[data-mount-close]');
+    const heading = overlay()?.querySelector<HTMLElement>('h2') as HTMLElement;
+    heading.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+    expect(inspect.isOpen).toBe(true);
+    expect(document.activeElement).toBe(close);
+    // A press on an action button keeps the default (the button takes focus).
+    const buy = button('[data-mount-buy]') as HTMLButtonElement;
+    const onButton = new MouseEvent('mousedown', { bubbles: true, cancelable: true });
+    buy.dispatchEvent(onButton);
+    expect(onButton.defaultPrevented).toBe(false);
+    expect(inspect.isOpen).toBe(true);
+    overlay()?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
+    expect(inspect.isOpen).toBe(false);
+    expect(overlays()).toHaveLength(0);
+  });
+
+  it('relocalize repaints the open dialog over the same stage, and is inert when closed', () => {
+    const { inspect } = makeInspect();
+    inspect.relocalize();
+    expect(overlays()).toHaveLength(0);
+    expect(previews).toHaveLength(0);
+    inspect.open(REINS);
+    button('[data-mount-mode="mount"]')?.click();
+    const before = overlay();
+    inspect.relocalize();
+    expect(overlays()).toHaveLength(1);
+    expect(overlay()).not.toBe(before);
+    expect(inspect.openSkinId).toBe(REINS);
+    expect(previews).toHaveLength(1);
+    expect(vi.mocked(createMountPreview)).toHaveBeenCalledTimes(1);
+    expect(previews[0].dispose).not.toHaveBeenCalled();
+    expect(previews[0].setMount).toHaveBeenCalledTimes(2);
+    expect(previews[0].setMount).toHaveBeenLastCalledWith(REINS);
+    // The repainted toggles still reflect the live mode and drive the preview.
+    expect(button('[data-mount-mode="mount"]')?.getAttribute('aria-pressed')).toBe('true');
+    button('[data-mount-mode="rider"]')?.click();
+    expect(previews[0].setMode).toHaveBeenLastCalledWith('rider');
+    inspect.close();
+    inspect.relocalize();
+    expect(overlays()).toHaveLength(0);
+    expect(previews[0].dispose).toHaveBeenCalledTimes(1);
   });
 
   it('refresh repaints the actions when the row changes, and is inert when closed', () => {

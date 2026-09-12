@@ -76,7 +76,11 @@ function makeWindow(
     hideTooltip: vi.fn(),
     captureFocus: () => null,
     restoreFocus: vi.fn(),
-    store: store ? () => store as never : undefined,
+    store: () =>
+      ({
+        closePreviews: vi.fn(),
+        ...(store ?? { previewMountSkin: vi.fn(), previewWeaponSkin: vi.fn() }),
+      }) as never,
   });
   return { w, el };
 }
@@ -134,14 +138,6 @@ describe('CosmeticsWindow', () => {
     expect(action(el, 'preview-skin', 'ice_fang_sword')?.getAttribute('aria-label')).toContain(
       'Preview',
     );
-  });
-
-  it('paints Preview inert when no store host is wired', () => {
-    const world = fakeWorld();
-    const { w, el } = makeWindow(world);
-    w.open();
-    expect(() => action(el, 'preview-mount', 'mech_bird')?.click()).not.toThrow();
-    expect(world.changeMountSkin).not.toHaveBeenCalled();
   });
 
   it('wears and takes off a mount skin through IWorld exactly once each and repaints', () => {

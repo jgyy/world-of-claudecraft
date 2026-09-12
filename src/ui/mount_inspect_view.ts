@@ -1,5 +1,5 @@
 // Mount-skin inspect panel: the pure row model and markup (DOM-free, every
-// dynamic value escaped) behind src/ui/mount_inspect.ts, the same split the
+// dynamic value escaped) behind src/ui/mount_inspect_controller.ts, the same split the
 // Armory inspect's card views use. The store opens the panel from a Machine
 // Stable card, the Cosmetics window from a mount card; both hand it one
 // MountInspectRow so the panel never re-derives ownership or prices itself.
@@ -12,6 +12,7 @@
 
 import { mountSkinDef } from '../sim/content/mount_skins';
 import type { MountRarity } from '../sim/content/mounts';
+import { sceneLabel } from './armory_labels';
 import { esc } from './esc';
 import { formatNumber, t } from './i18n';
 import { mountSkinDescription, mountSkinDisplayName } from './mount_labels';
@@ -28,15 +29,30 @@ export interface MountInspectRow {
   worn: boolean;
   /** The character owns at least one rideable mount (a skin needs a ride). */
   ownsAnyMount: boolean;
+  /** The ACCOUNT MIRROR carries the skin (accountCosmetics.mountSkinIds).
+   *  Both worlds' changeMountSkin refuse an id the mirror lacks, so Wear is
+   *  offered only on this, never on the service's grant flag alone: a fresh
+   *  grant reads owned from the service first and wearable once the push
+   *  lands. */
+  wearable: boolean;
 }
 
-export type MountInspectAction = 'buy' | 'wear' | 'takeOff' | 'needsMount' | 'unavailable';
+export type MountInspectAction =
+  | 'buy'
+  | 'wear'
+  | 'takeOff'
+  | 'needsMount'
+  | 'syncing'
+  | 'unavailable';
 
 /** The one action the panel offers for a row, so the painter and its test
  *  read the same decision. */
 export function mountInspectAction(row: MountInspectRow): MountInspectAction {
   if (row.worn) return 'takeOff';
-  if (row.owned) return row.ownsAnyMount ? 'wear' : 'needsMount';
+  if (row.owned) {
+    if (!row.wearable) return 'syncing';
+    return row.ownsAnyMount ? 'wear' : 'needsMount';
+  }
   return row.purchasable && row.costClaudium !== null ? 'buy' : 'unavailable';
 }
 
@@ -54,7 +70,8 @@ export function mountInspectRow(
 ): MountInspectRow | null {
   const def = mountSkinDef(skinId);
   if (!def) return null;
-  const owned = (store?.owned ?? false) || character.ownedMountSkinIds.includes(skinId);
+  const wearable = character.ownedMountSkinIds.includes(skinId);
+  const owned = (store?.owned ?? false) || wearable;
   return {
     skinId,
     rarity: def.rarity,
@@ -63,8 +80,12 @@ export function mountInspectRow(
     owned,
     worn: owned && character.wornMountSkinId === skinId,
     ownsAnyMount: character.ownsAnyMount,
+    wearable,
   };
 }
+
+/** The scene presets the stage offers: the Armory's vocabulary (armory_labels). */
+export type MountInspectSceneKey = Parameters<typeof sceneLabel>[0];
 
 export const MOUNT_INSPECT_CLOSE_ATTR = 'data-mount-close';
 export const MOUNT_INSPECT_BUY_ATTR = 'data-mount-buy';
@@ -112,8 +133,9 @@ export function mountInspectHtml(row: MountInspectRow): string {
   );
 }
 
-/** The stage's mode and scene toggles (painted once per stage, then synced). */
-export function mountInspectControlsHtml(scenes: readonly string[]): string {
+/** The stage's mode and scene toggles (painted once per stage, then synced).
+ *  Scenes are the Armory's (armory_labels sceneLabel), one vocabulary. */
+export function mountInspectControlsHtml(scenes: readonly MountInspectSceneKey[]): string {
   return (
     `<div class="armory-mode-toggle" role="group" aria-label="${esc(t('hudChrome.wocStore.viewModeLabel'))}">` +
     `<button type="button" ${MOUNT_INSPECT_MODE_ATTR}="rider">${esc(t('hudChrome.wocStore.mountRideIt'))}</button>` +
@@ -127,17 +149,6 @@ export function mountInspectControlsHtml(scenes: readonly string[]): string {
       .join('') +
     `</div>`
   );
-}
-
-function sceneLabel(scene: string): string {
-  switch (scene) {
-    case 'dusk':
-      return t('hudChrome.wocStore.scene.dusk');
-    case 'night':
-      return t('hudChrome.wocStore.scene.night');
-    default:
-      return t('hudChrome.wocStore.scene.day');
-  }
 }
 
 /** The price and action row: Buy (with the price) for an unowned priced
@@ -170,5 +181,9 @@ export function mountInspectActionsHtml(row: MountInspectRow): string {
         `<span class="armory-owned-pill">${esc(t('hudChrome.wocStore.owned'))}</span>` +
         `<span class="armory-equip-hint">${esc(t('hudChrome.cosmetics.mountsNoMount'))}</span>`
       );
+    case 'syncing':
+      // Owned per the service, not yet in the account mirror: the pill alone,
+      // since a Wear here would be refused silently by both worlds.
+      return `<span class="armory-owned-pill">${esc(t('hudChrome.wocStore.owned'))}</span>`;
   }
 }
