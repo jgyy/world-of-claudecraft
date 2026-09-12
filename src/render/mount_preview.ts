@@ -11,9 +11,11 @@
 //
 // Secondary-context contract (src/render/CLAUDE.md): every rig the stage
 // draws is LINKED (compileAsync) and UPLOADED (uploadTexturesInSlices) before
-// its first draw, with the stage hidden and only the ground painted until the
-// prepare settles; a stale prepare (the card changed, the panel closed) is
-// dropped by the generation guard. The context is disposed with the panel
+// its first draw, with the stage parked below the floor (by POSITION, never
+// `visible`, so the light census the compile sees is the census the first
+// frame draws) and only the ground painted until the prepare settles; a stale
+// prepare (a newer one started, the panel closed) is dropped by its own
+// generation guard. The context is disposed with the panel
 // rather than parked like the Armory's: parking a second session-long context
 // moves the client toward the browser's live-context cap for a panel most
 // sessions open once, and the mount GLB stays resident in the character asset
@@ -37,6 +39,7 @@ import { seatRiderOnBone } from './mount_lifecycle';
 import { MOUNT_PREVIEW_FOV, mountPreviewFraming } from './mount_preview_framing_core';
 import { buildMountPrewarmVisual, type MountPrewarmKey, mountPrewarmSpec } from './mount_prewarm';
 import { type MountVisualSpec, mountBobY } from './mount_visuals';
+import { previewPixelRatio } from './preview_pixel_ratio';
 import { shaderDebugRequested } from './shader_debug_flag';
 import {
   collectPrewarmTextures,
@@ -84,12 +87,17 @@ const LIGHT_POSITIONS: [number, number, number][] = [
   [-1.5, 3, -3.5],
 ];
 
-/** Where the rider parks while the "mount only" mode shows the skin alone.
- *  Parked by POSITION, never by `visible`: a rider wearing a lit Armory skin
- *  carries a point light, and three keys `numPointLights` off VISIBLE lights
- *  into every program's cache key, so a hide/show would relink the whole
- *  scene inside a live frame (src/render/CLAUDE.md, program-key changes). */
-const RIDER_PARK_Y = -1000;
+/** Where the rider parks while the "mount only" mode shows the skin alone,
+ *  and where the whole stage parks while a prepare is in flight. Parked by
+ *  POSITION, never by `visible`: a rider wearing a lit Armory skin carries a
+ *  point light, three keys `numPointLights` off VISIBLE lights into every
+ *  program's cache key, and `compile` gathers those lights with
+ *  `traverseVisible`, so a HIDDEN stage would link at a census of zero and
+ *  the first shown frame would relink every program (the very stall the
+ *  prepare exists to avoid), and a hide/show in mount-only mode would relink
+ *  the whole scene inside a live frame (src/render/CLAUDE.md, program-key
+ *  changes). */
+const PARK_Y = -1000;
 
 /** Build the rig, or null when a rig throws (a lazy body or skin asset that
  *  never landed): the context is released before the throw escapes, so a
@@ -120,7 +128,7 @@ function buildMountPreview(
   canvas: HTMLCanvasElement,
   appearance: PreviewAppearance,
 ): MountPreviewHandle {
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(previewPixelRatio(window.devicePixelRatio));
   renderer.setSize(Math.max(1, container.clientWidth), Math.max(1, container.clientHeight), false);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -169,6 +177,11 @@ function buildMountPreview(
   // so a stale arrival (the player clicked another card while the first GLB
   // was still fetching, or closed the panel) is dropped.
   let buildGeneration = 0;
+  // Prepares carry their own generation: an appearance change landing during
+  // an in-flight mount build must not cancel that build, yet only the newest
+  // prepare may unpark the stage (each one links the whole scene, so the
+  // newest always covers what the stale one was linking).
+  let prepareGeneration = 0;
 
   let mode: MountPreviewMode = 'rider';
   let sceneKey: MountPreviewSceneKey = 'day';
@@ -236,7 +249,7 @@ function buildMountPreview(
   function applyMode(): void {
     rider.setRidePose(mode === 'rider' && mountSpec ? mountSpec.ride : null);
     if (mode !== 'rider') {
-      rider.root.position.set(0, RIDER_PARK_Y, 0);
+      rider.root.position.set(0, PARK_Y, 0);
       rider.root.quaternion.identity();
     }
     frameCamera();
@@ -244,11 +257,14 @@ function buildMountPreview(
 
   /** Link every program and upload every texture the stage carries BEFORE the
    *  stage is drawn, so the first visible frame pays no link inside the rAF.
-   *  The stage stays hidden meanwhile (the ground still draws under it);
-   *  compileAsync walks hidden objects too, so nothing is missed. */
-  async function prepareStage(generation: number): Promise<void> {
-    stage.visible = false;
-    const stale = () => disposed || generation !== buildGeneration;
+   *  The stage parks below the floor meanwhile (the ground still draws over
+   *  it): parked by position, a lit weapon skin's point light stays VISIBLE,
+   *  so the light census the compile links against is the one the first
+   *  frame draws (see PARK_Y). */
+  async function prepareStage(): Promise<void> {
+    const generation = ++prepareGeneration;
+    stage.position.y = PARK_Y;
+    const stale = () => disposed || generation !== prepareGeneration;
     const textures = new Set<THREE.Texture>();
     collectPrewarmTextures(stage, textures);
     await uploadTexturesInSlices(renderer, textures, {
@@ -258,7 +274,7 @@ function buildMountPreview(
     if (stale()) return;
     await renderer.compileAsync(scene, camera);
     if (stale()) return;
-    stage.visible = true;
+    stage.position.y = 0;
   }
 
   function dropMount(): void {
@@ -323,7 +339,7 @@ function buildMountPreview(
       // before the camera measures it.
       visual.update(0, MOUNT_STATE, true);
       applyMode();
-      void prepareStage(generation);
+      void prepareStage();
     });
   }
 
@@ -337,7 +353,7 @@ function buildMountPreview(
     rider = createRider();
     stage.add(rider.root);
     applyMode();
-    void prepareStage(buildGeneration);
+    void prepareStage();
   }
 
   // THREE.Timer, not the r183-deprecated Clock (see armory_preview.ts).
@@ -385,7 +401,7 @@ function buildMountPreview(
 
   applyScene();
   applyMode();
-  void prepareStage(buildGeneration);
+  void prepareStage();
 
   return {
     setActive(next: boolean): void {

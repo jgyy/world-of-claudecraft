@@ -24,17 +24,33 @@ function slice(source: string, from: string, to: string): string {
 }
 
 describe('mount preview lifecycle', () => {
-  it('links and uploads the stage before it is shown', () => {
+  it('links and uploads the stage before it is shown, parked by position', () => {
     const prepare = slice(preview, 'async function prepareStage(', 'function dropMount(');
-    expect(prepare).toContain('stage.visible = false;');
+    expect(prepare).toContain('stage.position.y = PARK_Y;');
     const upload = prepare.indexOf('await uploadTexturesInSlices(');
     const compile = prepare.indexOf('await renderer.compileAsync(scene, camera);');
-    const visible = prepare.indexOf('stage.visible = true;');
+    const shown = prepare.indexOf('stage.position.y = 0;');
     expect(upload).toBeGreaterThan(0);
     expect(compile).toBeGreaterThan(upload);
-    expect(visible).toBeGreaterThan(compile);
-    // The stage never becomes visible before both steps.
-    expect(prepare.slice(0, compile)).not.toContain('stage.visible = true');
+    expect(shown).toBeGreaterThan(compile);
+    // The stage never returns to the floor before both steps.
+    expect(prepare.slice(0, compile)).not.toContain('stage.position.y = 0');
+    // Never `visible`: three's compile gathers lights with traverseVisible, so
+    // a hidden stage would link at numPointLights 0 and the first shown frame
+    // (a lit weapon skin on the rider) would relink every program.
+    expect(preview).not.toContain('stage.visible');
+  });
+
+  it('keys each prepare by its own generation, never by the mount build', () => {
+    const prepare = slice(preview, 'async function prepareStage(', 'function dropMount(');
+    expect(prepare).toContain('const generation = ++prepareGeneration;');
+    expect(prepare).toContain('generation !== prepareGeneration');
+    expect(prepare).not.toContain('buildGeneration');
+    // An appearance change during an in-flight mount build starts its own
+    // prepare without touching the build generation (the build must land).
+    const appearance = slice(preview, 'function applyAppearance(', '// THREE.Timer');
+    expect(appearance).toContain('void prepareStage();');
+    expect(appearance).not.toContain('buildGeneration');
   });
 
   it('draws only after the compile step, in source order', () => {
@@ -63,8 +79,8 @@ describe('mount preview lifecycle', () => {
   });
 
   it('parks the rider by position in mount-only mode, never by visibility', () => {
-    expect(preview).toContain('const RIDER_PARK_Y = -1000;');
-    expect(preview).toContain('rider.root.position.set(0, RIDER_PARK_Y, 0);');
+    expect(preview).toContain('const PARK_Y = -1000;');
+    expect(preview).toContain('rider.root.position.set(0, PARK_Y, 0);');
     expect(preview).not.toContain('rider.root.visible');
   });
 
