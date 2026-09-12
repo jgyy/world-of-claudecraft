@@ -89,11 +89,14 @@ function mountCardHtml(card: MountSkinCard): string {
   );
 }
 
-/** The preview action: its own class beside `.cos-action` so the wear /
- *  apply expectations (one action per card) and the focus key stay distinct. */
+/** The preview action: its own class, NEVER `.cos-action`, so the wear /
+ *  apply expectations (one `.cos-action` per card, and the browser suite's
+ *  Enter target `.cos-action[data-id]`) can never land on Preview, and the
+ *  focus key stays distinct. components.css gives `.cos-preview` the same
+ *  40px touch floor as `.cos-action`. */
 function previewButton(act: 'preview-mount' | 'preview-skin', id: string, name: string): string {
   return (
-    `<button type="button" class="cos-action cos-preview" data-act="${esc(act)}" data-id="${esc(id)}"${focusKeyAttr(`cosmetic-preview:${id}`)} ` +
+    `<button type="button" class="cos-preview" data-act="${esc(act)}" data-id="${esc(id)}"${focusKeyAttr(`cosmetic-preview:${id}`)} ` +
     `aria-label="${esc(t('hudChrome.cosmetics.previewAria', { name }))}">${esc(t('hudChrome.cosmetics.preview'))}</button>`
   );
 }

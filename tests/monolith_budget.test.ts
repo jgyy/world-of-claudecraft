@@ -1995,7 +1995,7 @@ const MONOLITHS: MonolithRow[] = [
     // button wiring moved to src/ui/store_body_actions.ts, and both grant-SKU
     // controllers now build over one seam object (store_spend_controllers.ts).
     //
-    // LOWERED 1262 -> 1225 by the mount-skin preview (feature/store-mount-preview):
+    // LOWERED 1262 -> 1258 by the mount-skin preview (feature/store-mount-preview):
     // the two inspect overlays' deps moved to src/ui/store_inspect_deps.ts and
     // the eligibility text to src/ui/daily_rewards_reason_view.ts, which paid for
     // the mount inspect's own lifecycle lines with room to spare (the review

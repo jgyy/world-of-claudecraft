@@ -64,7 +64,7 @@ function makeWindow(
   store?: {
     previewMountSkin: ReturnType<typeof vi.fn>;
     previewWeaponSkin: ReturnType<typeof vi.fn>;
-  },
+  } | null,
 ): { w: CosmeticsWindow; el: HTMLElement } {
   const el = document.createElement('div');
   el.id = 'cosmetics-window';
@@ -77,10 +77,12 @@ function makeWindow(
     captureFocus: () => null,
     restoreFocus: vi.fn(),
     store: () =>
-      ({
-        closePreviews: vi.fn(),
-        ...(store ?? { previewMountSkin: vi.fn(), previewWeaponSkin: vi.fn() }),
-      }) as never,
+      store === null
+        ? null
+        : ({
+            closePreviews: vi.fn(),
+            ...(store ?? { previewMountSkin: vi.fn(), previewWeaponSkin: vi.fn() }),
+          } as never),
   });
   return { w, el };
 }
@@ -88,9 +90,7 @@ function makeWindow(
 const card = (el: HTMLElement, id: string): HTMLElement =>
   el.querySelector<HTMLElement>(`[data-card="${id}"]`) as HTMLElement;
 const action = (el: HTMLElement, act: string, id?: string): HTMLButtonElement | null =>
-  el.querySelector<HTMLButtonElement>(
-    `.cos-action[data-act="${act}"]${id ? `[data-id="${id}"]` : ''}`,
-  );
+  el.querySelector<HTMLButtonElement>(`button[data-act="${act}"]${id ? `[data-id="${id}"]` : ''}`);
 
 beforeEach(() => {
   document.body.innerHTML = '';
@@ -110,15 +110,30 @@ describe('CosmeticsWindow', () => {
     expect(action(el, 'wear-mount', 'mech_bird')).toBeTruthy();
     // Unowned: no wear action, the store state instead. The Preview button is
     // on every card (the skin can be seen before it is bought).
-    expect(
-      card(el, 'chimeglass_tortoise').querySelector('.cos-action:not(.cos-preview)'),
-    ).toBeNull();
+    expect(card(el, 'chimeglass_tortoise').querySelector('.cos-action')).toBeNull();
     expect(card(el, 'chimeglass_tortoise').querySelector('.cos-state.store')).toBeTruthy();
-    expect(card(el, 'rickshaw_mount').querySelector('.cos-action:not(.cos-preview)')).toBeNull();
+    expect(card(el, 'rickshaw_mount').querySelector('.cos-action')).toBeNull();
     expect(action(el, 'preview-mount', 'chimeglass_tortoise')).toBeTruthy();
     expect(action(el, 'preview-mount', 'mech_bird')).toBeTruthy();
+    // Preview is its own class: `.cos-action[data-id]` (the browser suite's
+    // Enter target) must resolve to the wear / take-off button, never Preview.
+    expect(action(el, 'preview-mount', 'mech_bird')?.classList.contains('cos-action')).toBe(false);
+    expect(action(el, 'preview-mount', 'mech_bird')?.classList.contains('cos-preview')).toBe(true);
+    expect(el.querySelector('.cos-action[data-id="mech_bird"]')).toBe(
+      action(el, 'wear-mount', 'mech_bird'),
+    );
     // Scope badges are on every card.
     expect(card(el, 'mech_bird').querySelector('.cos-scope-account')).toBeTruthy();
+  });
+
+  it('tolerates a host with no store window: Preview is inert and close never throws', () => {
+    const world = fakeWorld();
+    const { w, el } = makeWindow(world, null);
+    w.toggle();
+    expect(() => action(el, 'preview-mount', 'mech_bird')?.click()).not.toThrow();
+    expect(world.changeMountSkin).not.toHaveBeenCalled();
+    expect(() => w.close()).not.toThrow();
+    expect(w.isOpen).toBe(false);
   });
 
   it('routes Preview on a mount card and a weapon row to the store host, never to IWorld', () => {

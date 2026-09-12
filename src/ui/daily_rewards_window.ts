@@ -1,5 +1,4 @@
 import { STORAGE_SKU_LIST } from '../sim/content/storage_charters';
-import type { PlayerClass } from '../sim/types';
 import type { DailyRewardHistory, DailyRewardStatus, IWorld } from '../world_api';
 import { armorySectionHtml } from './armory_card_view';
 import { ArmoryInspect } from './armory_inspect';
@@ -150,6 +149,7 @@ export class DailyRewardsWindow {
   private mountGraphicsRestoreSkinId: string | null = null;
   private storeLoading = false;
   private storeReady = false;
+  private previewFetched = false;
   private storeError = false;
   private storePriceChanged = false;
   private paintedStoreBody: HTMLElement | null = null;
@@ -243,26 +243,26 @@ export class DailyRewardsWindow {
   }
 
   /** The Cosmetics window's Preview button: the mount panel without the store.
-   *  The snapshot is fetched on demand so a priced skin still offers Buy. */
+   *  The snapshot is fetched on demand so a priced skin still offers Buy, ONCE per
+   *  window: while the service is down, repeat clicks fire no further request. */
   previewMountSkin(skinId: string): void {
     this.ensureMountInspect().open(skinId);
-    if (!this.storeReady && !this.storeLoading) void this.fetchStoreForPreview();
+    void this.fetchStoreForPreview();
   }
 
   private async fetchStoreForPreview(): Promise<void> {
+    if (this.storeReady || this.storeLoading || this.previewFetched) return;
+    this.previewFetched = true;
     this.storeLoading = true;
-    try {
-      const snapshot = await this.deps.storeSnapshot?.();
-      if (!snapshot?.available || snapshot.balance === null || this.storeReady) return;
-      this.storeBalance = snapshot.balance;
-      this.storeItems = snapshot.items;
-      this.storeReady = true;
-      this.rebuildArmorySections();
-    } catch {
-      // The panel keeps its unpriced arm; opening the store retries.
-    } finally {
-      this.storeLoading = false;
-    }
+    const snap = await Promise.resolve()
+      .then(() => this.deps.storeSnapshot?.())
+      .catch(() => null);
+    this.storeLoading = false;
+    if (!snap?.available || snap.balance === null || this.storeReady) return;
+    this.storeBalance = snap.balance;
+    this.storeItems = snap.items;
+    this.storeReady = true;
+    this.rebuildArmorySections();
   }
 
   /** The Cosmetics window's Preview on an owned weapon skin (rows re-projected first). */

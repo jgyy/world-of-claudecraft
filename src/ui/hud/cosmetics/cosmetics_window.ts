@@ -51,9 +51,10 @@ export interface CosmeticsWindowDeps {
   restoreFocus(target: HTMLElement | null): void;
   /** The WOC Store window, which owns the two live 3D preview overlays (the
    *  mount skin panel, the Armory inspect) a card's Preview opens. Lazy, since
-   *  the Hud constructs the store after this window. Required: every card
-   *  paints a live Preview button, so a host must have somewhere to send it. */
-  store(): CosmeticsPreviewHost;
+   *  the Hud constructs the store after this window, and null-tolerant: a
+   *  host with no store window (a harness) gets an inert Preview and an
+   *  unguarded close path rather than a throw. The Hud always has one. */
+  store(): CosmeticsPreviewHost | null;
 }
 
 export interface CosmeticsPreviewHost {
@@ -102,7 +103,7 @@ export class CosmeticsWindow {
     const el = this.deps.root();
     // A preview this window opened outlives no closing of it: the overlay is
     // body-level and the store window, which owns it, may itself be shut.
-    this.deps.store().closePreviews();
+    this.deps.store()?.closePreviews();
     el.classList.remove('open');
     this.deps.hideTooltip();
     const target = this.returnFocus;
@@ -203,7 +204,7 @@ export class CosmeticsWindow {
         this.close();
         return;
       }
-      const button = target.closest<HTMLElement>('.cos-action');
+      const button = target.closest<HTMLElement>('.cos-action, .cos-preview');
       if (!button || button.hasAttribute('disabled')) return;
       const action = cosmeticsActionFrom(button.dataset);
       if (!action) return;
@@ -217,10 +218,10 @@ export class CosmeticsWindow {
       // Preview mutates nothing here, so NO repaint: a repaint would destroy
       // the very button the overlay captured as its focus opener.
       case 'preview-mount':
-        this.deps.store().previewMountSkin(action.id);
+        this.deps.store()?.previewMountSkin(action.id);
         return;
       case 'preview-skin':
-        this.deps.store().previewWeaponSkin(action.id);
+        this.deps.store()?.previewWeaponSkin(action.id);
         return;
       case 'wear-mount':
         w.changeMountSkin(action.id);

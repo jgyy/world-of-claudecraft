@@ -231,6 +231,58 @@ describe('DailyRewardsWindow store intent', () => {
   });
 });
 
+describe('DailyRewardsWindow preview store fetch', () => {
+  function previewWindow(storeSnapshot: () => Promise<unknown>): DailyRewardsWindow {
+    return new DailyRewardsWindow({
+      root: () => rootStub(),
+      world: worldStub,
+      closeOthers: () => undefined,
+      captureFocus: () => null,
+      restoreFocus: () => undefined,
+      storeEnabled: () => true,
+      storeSnapshot: storeSnapshot as never,
+    });
+  }
+
+  it('requests the snapshot ONCE per window while the service is unavailable', async () => {
+    const storeSnapshot = vi.fn(async () => ({ available: false, balance: null, items: [] }));
+    const window = previewWindow(storeSnapshot);
+    mountSpy.opened.length = 0;
+    window.previewMountSkin('mech_bird');
+    window.previewMountSkin('mech_bird');
+    await vi.waitFor(() => expect(storeSnapshot).toHaveBeenCalledTimes(1));
+    // Settled and still unavailable: a third click is not another request.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    window.previewMountSkin('chimeglass_tortoise');
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(storeSnapshot).toHaveBeenCalledTimes(1);
+    expect(mountSpy.opened).toEqual(['mech_bird', 'mech_bird', 'chimeglass_tortoise']);
+  });
+
+  it('swallows a rejected snapshot and never retries it from Preview', async () => {
+    const storeSnapshot = vi.fn(async () => {
+      throw new Error('store service down');
+    });
+    const window = previewWindow(storeSnapshot);
+    window.previewMountSkin('mech_bird');
+    await vi.waitFor(() => expect(storeSnapshot).toHaveBeenCalledTimes(1));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    window.previewMountSkin('mech_bird');
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(storeSnapshot).toHaveBeenCalledTimes(1);
+  });
+
+  it('lands a good snapshot so the panel can price the skin', async () => {
+    const storeSnapshot = vi.fn(async () => ({ available: true, balance: 250, items: [] }));
+    const window = previewWindow(storeSnapshot);
+    window.previewMountSkin('mech_bird');
+    await vi.waitFor(() =>
+      expect((window as unknown as { storeReady: boolean }).storeReady).toBe(true),
+    );
+    expect((window as unknown as { storeBalance: number | null }).storeBalance).toBe(250);
+  });
+});
+
 describe('StoreArmoryPurchase lifecycle guard', () => {
   it('holds the skin guard until the authoritative refresh finishes', async () => {
     let releaseRefresh!: () => void;
