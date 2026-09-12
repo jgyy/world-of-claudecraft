@@ -17,6 +17,7 @@ interface TestWorld {
   whoInfo: WhoRosterInfo | null;
   whoRequest: ReturnType<typeof vi.fn>;
   spectating: string | null;
+  partyInfo: IWorld['partyInfo'];
 }
 
 const ROSTER: WhoRosterInfo = {
@@ -42,6 +43,7 @@ beforeEach(() => {
     whoInfo: null,
     whoRequest: vi.fn(),
     spectating: null,
+    partyInfo: null,
   };
 });
 
@@ -62,7 +64,7 @@ function makeWindow(): SocialWindow {
         player: { id: 7, name: 'Aleron' },
         realm: 'Ashenvale',
         socialInfo: world.socialInfo,
-        partyInfo: null,
+        partyInfo: world.partyInfo,
         whoInfo: world.whoInfo,
         whoRequest: world.whoRequest,
         spectating: world.spectating,
@@ -166,6 +168,40 @@ describe('Who tab: request on select, paint on answer', () => {
     win.refreshIfChanged();
     expect(focused()).toBe('level');
     expect(rowNames()).toEqual(['Bryn', 'Mira', 'Aleron']);
+  });
+
+  it('ignores party hp/resource churn: no rebuild, focus stays on the header and the chip', () => {
+    const win = makeWindow();
+    win.toggle();
+    clickTab('who');
+    world.whoInfo = ROSTER;
+    world.partyInfo = {
+      raid: false,
+      leader: 7,
+      members: [{ pid: 9, name: 'Mira', cls: 'priest', level: 30, hp: 900, maxHp: 1000, group: 0 }],
+    } as unknown as IWorld['partyInfo'];
+    win.refreshIfChanged();
+    (root.querySelector('[data-act="who-sort"][data-key="level"]') as HTMLElement).click();
+    const list = root.querySelector('.soc-who-list');
+    // in combat the party mirror moves every tick; the Who tab paints none of it
+    const party = world.partyInfo as unknown as { members: { hp: number }[] };
+    party.members[0].hp = 850;
+    win.refreshIfChanged();
+    party.members[0].hp = 790;
+    win.refreshIfChanged();
+    expect((document.activeElement as HTMLElement | null)?.dataset.key).toBe('level');
+    expect(root.querySelector('.soc-who-list')).toBe(list);
+    // a repaint the tab DOES need (a fresh answer) hands focus back to the same header
+    world.whoInfo = { ...ROSTER, rows: [...ROSTER.rows] };
+    win.refreshIfChanged();
+    expect(root.querySelector('.soc-who-list')).not.toBe(list);
+    expect((document.activeElement as HTMLElement | null)?.dataset.key).toBe('level');
+    // and the class chip survives a repaint the same way
+    const select = root.querySelector('select[data-field="who-cls"]') as HTMLSelectElement;
+    select.focus();
+    world.whoInfo = { ...ROSTER, rows: [...ROSTER.rows] };
+    win.refreshIfChanged();
+    expect(document.activeElement).toBe(root.querySelector('select[data-field="who-cls"]'));
   });
 
   it('repaints a fresh answer whose filter, row count, and total match the last one', () => {

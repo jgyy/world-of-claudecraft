@@ -58,6 +58,9 @@ describe('the `who` command (server)', () => {
     expect(bryn.status).toBe('online');
     // The realm-wide roster is public presence; live coordinates stay on the
     // friend/guild-gated socialpos frame.
+    // Pin the whole key set, so any later field that leaks into the realm-wide
+    // row (not just x/z) fails here.
+    expect(Object.keys(bryn).sort()).toEqual(['cls', 'guild', 'level', 'name', 'status', 'zone']);
     expect('x' in bryn).toBe(false);
     expect('z' in bryn).toBe(false);
   });
@@ -112,6 +115,15 @@ describe('the `who` command (server)', () => {
     // biome-ignore lint/suspicious/noExplicitAny: wire row
     expect(frames[2].rows.map((r: any) => r.name)).toEqual(['Aleron']);
     expect(memo.objectBuilds).toBe(1);
+    // The memo is keyed on the sim tick: once it advances, a new session shows
+    // up in a rebuilt roster (a memo keyed on anything else stays stale here).
+    // biome-ignore lint/suspicious/noExplicitAny: private sim handle
+    (server as any).sim.tickCount += 1;
+    joinServer(server, fakeWs(), 3, 'Mira');
+    server.handleMessage(viewer, JSON.stringify({ t: 'cmd', cmd: 'who' }));
+    expect(memo.objectBuilds).toBe(2);
+    // biome-ignore lint/suspicious/noExplicitAny: wire row
+    expect(whoFrames(viewerWs.sent)[3].rows.map((r: any) => r.name)).toEqual(['Aleron', 'Mira']);
   });
 
   it('is metered on the list-read guard: a burst past LIST_READ_BURST is shed silently', () => {
@@ -200,6 +212,31 @@ describe('ClientWorld whoInfo mirror + whoRequest send', () => {
     // biome-ignore lint/suspicious/noExplicitAny: private frame entry
     (c as any).onMessage(JSON.stringify({ t: 'who' }));
     expect(c.whoInfo?.rows).toHaveLength(2);
+  });
+
+  it('a reconnect hello drops the old transport roster, so the tab re-asks', () => {
+    const c = bareClient(7);
+    // biome-ignore lint/suspicious/noExplicitAny: private frame entry + reconnect counter
+    const wire = c as any;
+    wire.onMessage(
+      JSON.stringify({
+        t: 'who',
+        filter: '',
+        total: 1,
+        limit: 200,
+        rows: [
+          { name: 'Bryn', cls: 'mage', level: 12, zone: 'Ashwood', status: 'online', guild: '' },
+        ],
+      }),
+    );
+    expect(c.whoInfo?.rows).toHaveLength(1);
+    // a first-connection hello keeps it: nothing was lost
+    wire.onMessage(JSON.stringify({ t: 'hello', pid: 7, seed: 20061 }));
+    expect(c.whoInfo?.rows).toHaveLength(1);
+    // the hello after an auto-reconnect is a fresh transport
+    wire.reconnectAttempts = 1;
+    wire.onMessage(JSON.stringify({ t: 'hello', pid: 7, seed: 20061 }));
+    expect(c.whoInfo).toBeNull();
   });
 });
 

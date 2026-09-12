@@ -465,7 +465,10 @@ export class SocialWindow {
     const w = this.deps.world();
     return JSON.stringify({
       social: w.socialInfo,
-      party: w.partyInfo,
+      // The Who tab paints nothing from the party mirror, whose members carry
+      // live hp/resource; keeping it in would rebuild the tab every slow tick
+      // while partied in combat (and drop a focused header or chip each time).
+      party: this.tab === 'who' ? null : w.partyInfo,
       // A cheap digest of the roster answer (never the 200 rows themselves):
       // the answer's identity, so a same-count answer still repaints.
       who: this.whoAnswerId(w.whoInfo),
@@ -623,6 +626,18 @@ export class SocialWindow {
         selEnd: isCheckbox ? null : prev.selectionEnd,
       });
     }
+    // The Who tab's focusable controls outside the draft inputs: a sort header
+    // (by column key) or the class chip. Both are re-emitted from `this.who`,
+    // so focus can be handed back to the freshly rendered element.
+    const active = document.activeElement as HTMLElement | null;
+    const whoFocus =
+      active && body.contains(active)
+        ? active.dataset.act === 'who-sort'
+          ? `[data-act="who-sort"][data-key="${active.dataset.key}"]`
+          : active.dataset.field === 'who-cls'
+            ? 'select[data-field="who-cls"]'
+            : null
+        : null;
     const online = this.deps.world().socialInfo !== null;
     body.innerHTML =
       this.tab === 'raid'
@@ -657,6 +672,7 @@ export class SocialWindow {
           next.setSelectionRange(draft.selStart, draft.selEnd);
       }
     }
+    if (whoFocus) (body.querySelector(whoFocus) as HTMLElement | null)?.focus();
   }
 
   // The single delegated row handler (click + whisper). Resolves the nearest
