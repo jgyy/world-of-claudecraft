@@ -12545,4 +12545,21 @@
   body.xhb-mode.pad-active:not(.mobile-touch) #side-buttons .keybind {
     display: none;
   }
+
+  /* ---------- Hide Interface (Alt+Z, interface_visibility_core.ts) ---------- */
+  /* One body class hides every HUD surface for a clean screenshot or video:
+     each #ui child except the visually-hidden a11y live regions (screen readers
+     keep their combat/target/chat announcements), the nameplate layer, the
+     Discord panel, and the touch controls. On BODY because nameplates and the
+     mobile controls are siblings of #ui. `visibility` rather than `display` so
+     no HUD measurement (minimap canvas sizing, frame layout, tooltip anchors)
+     changes underneath a hidden frame, and the game canvas keeps every pointer
+     event. The perf overlay stays: it is a developer readout, not interface. */
+  body.interface-hidden #ui > :not(.visually-hidden),
+  body.interface-hidden #nameplates,
+  body.interface-hidden #discord-window,
+  body.interface-hidden #discord-cta-banner,
+  body.interface-hidden #mobile-controls {
+    visibility: hidden !important;
+  }
 }
