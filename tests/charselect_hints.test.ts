@@ -4,7 +4,7 @@
 // active language like every other zone name in the client.
 import { describe, expect, it } from 'vitest';
 import { charselectHintsHtml, charselectZoneLabel } from '../src/ui/charselect_hints';
-import { tEntity } from '../src/ui/entity_i18n';
+import { zoneDisplayName } from '../src/ui/entity_i18n';
 import { ensureLocaleLoaded, setLanguage, t } from '../src/ui/i18n';
 
 describe('charselectZoneLabel', () => {
@@ -24,7 +24,7 @@ describe('charselectZoneLabel', () => {
     setLanguage('ja_JP');
     try {
       const label = charselectZoneLabel({ online: false, zoneId: 'eastbrook_vale' });
-      expect(label).toBe(tEntity({ kind: 'zone', id: 'eastbrook_vale', field: 'name' }));
+      expect(label).toBe(zoneDisplayName('eastbrook_vale'));
       expect(label).not.toBe('Eastbrook Vale');
     } finally {
       setLanguage('en');

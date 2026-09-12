@@ -3,17 +3,21 @@
 // without logging each one in) and the in-world notice for a character another
 // session holds. Pure string builder, no DOM: main.ts drops the markup into
 // the row it composes.
-import type { CharacterSummary } from '../net/character_summary';
-import { tEntity } from './entity_i18n';
+import { zoneDisplayName } from './entity_i18n';
 import { esc } from './esc';
 import { t } from './i18n';
 
-export type CharselectHintSource = Pick<CharacterSummary, 'online' | 'zoneId'>;
+/** Structural (the char-select `CharacterSummary` satisfies it) so this module
+ *  does not import the net layer for a type. */
+export interface CharselectHintSource {
+  online: boolean;
+  zoneId?: string | null;
+}
 
 /** The localized zone name for a roster row, or null when the server sent no
  *  zone (an older server, or a save that resumes at the world start). */
 export function charselectZoneLabel(c: CharselectHintSource): string | null {
-  return c.zoneId ? tEntity({ kind: 'zone', id: c.zoneId, field: 'name' }) : null;
+  return c.zoneId ? zoneDisplayName(c.zoneId) : null;
 }
 
 export function charselectHintsHtml(c: CharselectHintSource): string {

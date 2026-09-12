@@ -10,6 +10,8 @@ import {
   DUNGEON_X_THRESHOLD,
   delveAt,
   dungeonAt,
+  getActiveWorldContent,
+  INSTANCE_X_BASE,
   isBgPos,
   isDelvePos,
   migrateLegacyInstancePos,
@@ -45,7 +47,12 @@ export interface SavedPosExit {
  * exemption the two band branches do.
  */
 export function resolveSavedPosExit(saved: SavedPos | null | undefined): SavedPosExit {
-  let pos: SavedPos | null = saved ? { x: saved.x, z: saved.z } : null;
+  // The server feeds this untrusted JSONB (characters.state is a column that
+  // can predate every current rule): a malformed position is "no position",
+  // never a NaN that the legacy-migration arithmetic would quietly resolve to
+  // dungeon 0's door.
+  const valid = saved != null && Number.isFinite(saved.x) && Number.isFinite(saved.z);
+  let pos: SavedPos | null = valid ? { x: saved.x, z: saved.z } : null;
   let instanceExit = false;
   if (pos) {
     const migrated = migrateLegacyInstancePos(pos);
@@ -72,13 +79,18 @@ export function resolveSavedPosExit(saved: SavedPos | null | undefined): SavedPo
 }
 
 /**
- * The id of the zone a saved character stands in on login (the rejoin
- * position above, resolved through zoneAt), or null when the save resumes at
- * the world start (a mid-match battleground save) or has no position yet.
+ * The id of the zone a saved character stands in on login. A save with no
+ * usable position (a fresh character, or a mid-match battleground save that
+ * resumes at the world start) reports the world start's zone, because that is
+ * where addPlayer puts it. A position left on the instance plane by the exit
+ * rule (the strip west of dungeon 0, which no band claims) reports null: zoneAt
+ * would clamp it onto an overworld zone name the character is nowhere near.
  * Character select labels each roster row with this, so the account owner can
  * see where every character is without logging each one in.
  */
 export function savedZoneId(saved: SavedPos | null | undefined): string | null {
   const exit = resolveSavedPosExit(saved);
-  return exit.pos ? zoneAt(exit.pos.x, exit.pos.z).id : null;
+  const pos = exit.pos ?? getActiveWorldContent().playerStart;
+  if (pos.x >= INSTANCE_X_BASE) return null;
+  return zoneAt(pos.x, pos.z).id;
 }
