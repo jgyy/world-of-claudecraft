@@ -1721,7 +1721,7 @@ async function startGame(
       // "/share" links the selected quest into party chat; skip the normal send path.
       if (hud.devCommandsAvailable && isDevGuiCommand(raw)) {
         hud.toggleDevCommandWindow();
-      } else if (!hud.maybeHandleQuestShareCommand(raw)) {
+      } else if (!hud.maybeHandleLocalChatCommand(raw)) {
         const text = hud.composeChatSend(raw);
         if (text) {
           world.chat(text);

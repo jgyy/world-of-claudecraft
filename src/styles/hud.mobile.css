@@ -5598,6 +5598,30 @@
   body.mobile-touch .raid-groups {
     grid-template-columns: 1fr;
   }
+  /* Who tab on a touch-narrow window: three tracks (dot, name, level); the
+     class, zone, and guild cells wrap under the name as a second line so no
+     column is hidden and nothing scrolls sideways. The header keeps only the
+     sortable name and level buttons on its row; the other three sort buttons
+     wrap below it. */
+  body.mobile-touch .soc-who-list {
+    grid-template-columns: auto 1fr 3em;
+  }
+  body.mobile-touch .soc-who-cell.who-cls,
+  body.mobile-touch .soc-who-cell.who-zone,
+  body.mobile-touch .soc-who-cell.who-guild {
+    grid-column: 2 / -1;
+    padding-top: 0;
+    font-size: 12px;
+  }
+  body.mobile-touch .soc-who-cell.who-cls,
+  body.mobile-touch .soc-who-cell.who-zone {
+    border-bottom: 0;
+  }
+  body.mobile-touch .soc-who-row:not(.soc-who-header) .soc-who-cell.who-dot,
+  body.mobile-touch .soc-who-row:not(.soc-who-header) .soc-who-cell.who-name,
+  body.mobile-touch .soc-who-row:not(.soc-who-header) .soc-who-cell.who-level {
+    border-bottom: 0;
+  }
   body.mobile-touch .raid-group {
     border-top: 1px solid var(--color-border-showcase);
     padding-top: 6px;
