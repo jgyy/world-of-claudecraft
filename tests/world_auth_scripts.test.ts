@@ -127,6 +127,10 @@ const AUTHENTICATED_NODE_CLIENTS = [
     authSend: 'this.ws.send(JSON.stringify(worldAuthMessage(reg.body.token, char.body.id)));',
   },
   {
+    path: 'scripts/who_tab_shot.mjs',
+    authSend: 'this.ws.send(JSON.stringify(worldAuthMessage(reg.body.token, char.body.id)));',
+  },
+  {
     path: 'scripts/takeover_shot.mjs',
     authSend: 'ws.send(JSON.stringify(worldAuthMessage(token, characterId)));',
   },

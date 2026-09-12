@@ -348,6 +348,7 @@ describe('CI workflow parity', () => {
       '            /docs/screenshots/target-dots/',
       '            /docs/screenshots/touch-ui-rework/',
       '            /docs/screenshots/vault-fine-mark/',
+      '            /docs/screenshots/who-social-tab/',
       '            /docs/screenshots/wildheart/',
       '            /docs/screenshots/woc-market/',
       '          sparse-checkout-cone-mode: false',
