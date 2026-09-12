@@ -30,6 +30,26 @@ vi.mock('../src/ui/armory_inspect', () => ({
   rarityLabel: () => '',
   weaponTypeLabel: () => '',
 }));
+// The mount inspect overlay owns a WebGL rig too; a card click opens it, and
+// its Buy button is what reaches the purchase prompt. The fake records opens
+// and hands the test its deps so the arm can press Buy without a GL context.
+const mountSpy = vi.hoisted(() => ({
+  opened: [] as string[],
+  deps: null as null | { requestBuy(skinId: string): void; row(skinId: string): unknown },
+}));
+vi.mock('../src/ui/mount_inspect', () => ({
+  MountInspect: class {
+    constructor(deps: { requestBuy(skinId: string): void; row(skinId: string): unknown }) {
+      mountSpy.deps = deps;
+    }
+    close(): void {}
+    destroy(): void {}
+    refresh(): void {}
+    open(skinId: string): void {
+      mountSpy.opened.push(skinId);
+    }
+  },
+}));
 vi.mock('../src/ui/portrait_chip', () => ({
   hydratePortraits: () => undefined,
   portraitChipHtml: () => '',
@@ -2937,8 +2957,9 @@ describe('WOC Store Machine Stable', () => {
   // pin the ordering nothing else does: the mount rows are re-projected by
   // rebuildArmorySections BEFORE paintStore reads sectionHtml(), so an open
   // store shows the strip (a paint that reached the section before any rebuild
-  // would silently emit nothing), and the card button reaches the purchase
-  // prompt through the store body binding.
+  // would silently emit nothing), and the card button opens the mount inspect
+  // overlay through the store body binding, whose Buy reaches the purchase
+  // prompt.
   const MOUNT_ITEM: WocStoreItemInput = {
     itemId: 'mech_bird',
     name: 'service name',
@@ -2952,34 +2973,51 @@ describe('WOC Store Machine Stable', () => {
     await h.internals.renderStore(null);
 
     expect(h.html()).toContain('<section class="armory-section store-mounts rarity-epic">');
-    expect(h.html()).toContain('data-store-mount-buy="mech_bird"');
+    expect(h.html()).toContain('data-store-mount-inspect="mech_bird"');
     expect(h.html()).toContain('/ui/store/mount_skins/mech_bird.webp');
     // The service price, in the shared cost slot, never a computed one.
     expect(h.html()).toMatch(/<span class="armory-cost"><img [^>]*><strong>1,200<\/strong>/);
-    const button = h.root.querySelector<HTMLButtonElement>('[data-store-mount-buy]');
+    const button = h.root.querySelector<HTMLButtonElement>('[data-store-mount-inspect]');
     expect(button?.disabled).toBe(false);
   });
 
-  it('routes the card click to the purchase prompt and spends nothing until confirmed', async () => {
+  it('routes the card click to the mount preview, whose Buy reaches the purchase prompt', async () => {
+    mountSpy.opened.length = 0;
     const h = charterHarness({ items: [MOUNT_ITEM], balance: 5_000 });
     await h.internals.renderStore(null);
-    h.root.querySelector<HTMLButtonElement>('[data-store-mount-buy]')?.click();
+    h.root.querySelector<HTMLButtonElement>('[data-store-mount-inspect]')?.click();
 
+    // The click previews; nothing is prompted or spent yet.
+    expect(mountSpy.opened).toEqual(['mech_bird']);
+    expect(h.dialogs).toHaveLength(0);
+    // The overlay's row carries the service price and purchasability.
+    expect(mountSpy.deps?.row('mech_bird')).toMatchObject({
+      costClaudium: 1_200,
+      purchasable: true,
+      owned: false,
+    });
+    // Buy from the overlay reaches the same confirm prompt the card used to.
+    mountSpy.deps?.requestBuy('mech_bird');
     expect(h.dialogs).toHaveLength(1);
     expect(h.dialogs[0].title).toBe(t('hudChrome.wocStore.confirmTitle'));
     expect(h.dialogs[0].body).toContain('1,200');
     expect(h.spendCalls).toHaveLength(0);
   });
 
-  it('renders a mount the service snapshot lacks as unavailable with a disabled card', async () => {
+  it('renders a mount the service snapshot lacks as unavailable, previewable, with no buy', async () => {
+    mountSpy.opened.length = 0;
     const h = charterHarness({ items: [], balance: 5_000 });
     await h.internals.renderStore(null);
 
     expect(h.html()).toContain('armory-section store-mounts');
     expect(h.html()).toContain('<span class="armory-state unavailable">');
-    const button = h.root.querySelector<HTMLButtonElement>('[data-store-mount-buy]');
-    expect(button?.disabled).toBe(true);
+    const button = h.root.querySelector<HTMLButtonElement>('[data-store-mount-inspect]');
+    expect(button?.disabled).toBe(false);
     button?.click();
+    expect(mountSpy.opened).toEqual(['mech_bird']);
+    expect(mountSpy.deps?.row('mech_bird')).toMatchObject({ purchasable: false });
+    // An unpriced Buy is refused by the purchase controller, never prompted.
+    mountSpy.deps?.requestBuy('mech_bird');
     expect(h.dialogs).toHaveLength(0);
   });
 });

@@ -1,5 +1,5 @@
 import { STORAGE_SKU_LIST } from '../sim/content/storage_charters';
-import type { PlayerClass, WeaponSkinType } from '../sim/types';
+import type { PlayerClass } from '../sim/types';
 import type { DailyRewardHistory, DailyRewardStatus, IWorld } from '../world_api';
 import { armorySectionHtml } from './armory_card_view';
 import { ArmoryInspect } from './armory_inspect';
@@ -18,6 +18,7 @@ import {
   wocStoreTabsHtml,
 } from './daily_rewards_chrome_view';
 import { dailyRewardsHistoryHtml, dailyRewardsLeaderboardHtml } from './daily_rewards_ranks_view';
+import { dailyRewardReasonText } from './daily_rewards_reason_view';
 import { SpinOverlay } from './daily_rewards_spin_controller';
 import { spinSectionHtml } from './daily_rewards_spin_view';
 import {
@@ -30,6 +31,7 @@ import { markDialogRoot } from './dialog_root';
 import { esc } from './esc';
 import { captureFocusKey, focusedWithin, focusKeyAttr } from './focus_restore';
 import { formatDateTime, formatNumber, t } from './i18n';
+import { MountInspect } from './mount_inspect';
 import { hydratePortraits } from './portrait_chip';
 import { durableIntents, type PurchaseIntentLedger } from './purchase_intent_durability';
 import { mintIntentKey } from './purchase_intent_key';
@@ -42,6 +44,7 @@ import {
   restoreStoreFocus,
   StoreFocusStash,
 } from './store_focus_policy';
+import { armoryInspectDeps, mountInspectDeps } from './store_inspect_deps';
 import { storeSpendControllers } from './store_spend_controllers';
 import { StoreSurfaceRuntime } from './store_surface_runtime';
 import { usdDollarsText } from './usd_text';
@@ -87,62 +90,6 @@ export { mintIntentKey };
 interface CharterNotice {
   tone: 'success' | 'failure';
   text: string;
-}
-
-function remainingBanText(expiresAt: string, nowMs: number): string {
-  const totalMinutes = Math.max(0, Math.ceil((Date.parse(expiresAt) - nowMs) / 60_000));
-  const days = Math.floor(totalMinutes / 1_440);
-  const hours = Math.floor((totalMinutes % 1_440) / 60);
-  if (days > 0) {
-    return t('hudChrome.dailyRewards.remainingDaysHours', {
-      days: formatNumber(days, { maximumFractionDigits: 0 }),
-      hours: formatNumber(hours, { maximumFractionDigits: 0 }),
-    });
-  }
-  if (totalMinutes < 1) return t('hudChrome.dailyRewards.remainingLessThanMinute');
-  const minutes = totalMinutes % 60;
-  if (hours <= 0) {
-    return t('hudChrome.dailyRewards.remainingMinutes', {
-      minutes: formatNumber(minutes, { maximumFractionDigits: 0 }),
-    });
-  }
-  return t('hudChrome.dailyRewards.remainingHoursMinutes', {
-    hours: formatNumber(hours, { maximumFractionDigits: 0 }),
-    minutes: formatNumber(minutes, { maximumFractionDigits: 0 }),
-  });
-}
-
-export function dailyRewardReasonText(
-  eligibility: DailyRewardStatus['eligibility'],
-  nowMs = Date.now(),
-): string {
-  switch (eligibility.reason) {
-    case 'eligible':
-      return t('hudChrome.dailyRewards.reason.eligible');
-    case 'no_wallet':
-      return t('hudChrome.dailyRewards.reason.no_wallet');
-    case 'under_minimum':
-      return t('hudChrome.dailyRewards.reason.under_minimum');
-    case 'price_unavailable':
-      return t('hudChrome.dailyRewards.reason.price_unavailable');
-    case 'banned':
-      if (eligibility.banExpiresAt && Number.isFinite(Date.parse(eligibility.banExpiresAt))) {
-        return t('hudChrome.dailyRewards.reason.bannedUntil', {
-          reason: eligibility.banReason ?? t('hudChrome.dailyRewards.unknown'),
-          remaining: remainingBanText(eligibility.banExpiresAt, nowMs),
-          until: formatDateTime(new Date(eligibility.banExpiresAt), {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit',
-          }),
-        });
-      }
-      return t('hudChrome.dailyRewards.reason.banned', {
-        reason: eligibility.banReason ?? t('hudChrome.dailyRewards.unknown'),
-      });
-  }
 }
 
 /** The authoritative outcome of one store spend, as the service answered it.
@@ -198,6 +145,7 @@ export class DailyRewardsWindow {
   private storeItems: WocStoreItemInput[] = [];
   private armorySections: ArmorySection[] = [];
   private armoryInspect: ArmoryInspect | null = null;
+  private mountInspect: MountInspect | null = null;
   private armoryGraphicsRestoreSkinId: string | null = null;
   private storeLoading = false;
   private storeReady = false;
@@ -278,6 +226,22 @@ export class DailyRewardsWindow {
     this.armoryGraphicsRestoreSkinId = this.armoryInspect?.openSkinId ?? null;
     this.armoryInspect?.destroy();
     this.armoryInspect = null;
+    this.mountInspect?.destroy();
+    this.mountInspect = null;
+  }
+
+  /** The Cosmetics window's Preview button: the mount panel without the store
+   *  (a priced skin still offers Buy off the store's last snapshot). */
+  previewMountSkin(skinId: string): void {
+    this.ensureMountInspect().open(skinId);
+  }
+
+  /** The Cosmetics window's Preview button on an owned weapon skin: rows are
+   *  re-projected first so a never-opened store still has one. */
+  previewWeaponSkin(skinId: string): void {
+    if (!this.armoryRowById(skinId)) this.rebuildArmorySections();
+    const row = this.armoryRowById(skinId);
+    if (row) this.openArmoryInspect(row);
   }
 
   /** Reopen an inspect overlay that was visible when its old profile context was reset. */
@@ -343,6 +307,7 @@ export class DailyRewardsWindow {
     this.charterFocus.clear();
     this.spinOverlay.close();
     this.armoryInspect?.close();
+    this.mountInspect?.close();
     this.deps.restoreFocus(this.openerFocus);
     this.openerFocus = null;
     this.deps.onVisibilityChange?.();
@@ -539,6 +504,7 @@ export class DailyRewardsWindow {
       skinCatalog: player.skinCatalog,
     });
     this.storeSpend.mounts.rebuild(this.storeBalance, this.storeItems, world.accountCosmetics);
+    this.mountInspect?.refresh();
   }
 
   /** Live account-cosmetics change (another session's grant/apply, or a server
@@ -622,7 +588,7 @@ export class DailyRewardsWindow {
         const row = this.armoryRowById(skinId);
         if (row) this.openArmoryInspect(row);
       },
-      buyStoreMount: (itemId) => this.storeSpend.mounts.request(itemId),
+      inspectStoreMount: (itemId) => this.ensureMountInspect().open(itemId),
       buyCharter: (itemId) => this.requestCharterPurchase(itemId),
     });
     restoreStoreFocus(body, plan, body.querySelector<HTMLElement>('[data-buy-claudium]'));
@@ -722,29 +688,25 @@ export class DailyRewardsWindow {
     this.ensureArmoryInspect().open(row);
   }
 
+  private ensureMountInspect(): MountInspect {
+    if (!this.mountInspect) {
+      this.mountInspect = new MountInspect(
+        mountInspectDeps({ world: () => this.deps.world(), spend: this.storeSpend }),
+      );
+    }
+    return this.mountInspect;
+  }
+
   private ensureArmoryInspect(): ArmoryInspect {
     if (!this.armoryInspect) {
-      this.armoryInspect = new ArmoryInspect({
-        appearance: () => {
-          const player = this.deps.world().player;
-          return {
-            cls: player.templateId as PlayerClass,
-            skin: player.skin,
-            skinCatalog: player.skinCatalog,
-            mainhandItemId: player.mainhandItemId,
-          };
-        },
-        requestBuy: (target) => this.storeSpend.armory.request(target),
-        applySkin: (skinId) => {
-          this.deps.world().changeWeaponSkin(skinId);
-          this.afterArmoryChange(skinId);
-        },
-        detachSkin: (weaponType: WeaponSkinType) => {
-          this.deps.world().changeWeaponSkin(null, weaponType);
-          const open = this.armoryInspect?.openSkinId;
-          if (open) this.afterArmoryChange(open);
-        },
-      });
+      this.armoryInspect = new ArmoryInspect(
+        armoryInspectDeps({
+          world: () => this.deps.world(),
+          spend: this.storeSpend,
+          afterArmoryChange: (skinId) => this.afterArmoryChange(skinId),
+          openArmorySkinId: () => this.armoryInspect?.openSkinId ?? null,
+        }),
+      );
     }
     return this.armoryInspect;
   }
@@ -1116,6 +1078,7 @@ export class DailyRewardsWindow {
 
   private openClaudiumFromStore(): void {
     this.armoryInspect?.close();
+    this.mountInspect?.close();
     // The one return path out of the top-up handoff: the Claudium window fires
     // this exactly once, when it closes, and the store comes back on its Store
     // tab with a refreshed balance. No module global, and no timer guessing
@@ -1197,7 +1160,7 @@ export class DailyRewardsWindow {
         : t('hudChrome.dailyRewards.usd', {
             amount: usdDollarsText(s.eligibility.usdValue),
           });
-    const reason = dailyRewardReasonText(s.eligibility);
+    const reason = dailyRewardReasonText(s.eligibility, Date.now());
     return (
       `<p class="dr-intro">${esc(t('hudChrome.dailyRewards.intro'))}</p>` +
       `<p class="dr-disclaimer">${esc(t('hudChrome.dailyRewards.disclaimer'))}</p>` +

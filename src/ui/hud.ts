@@ -712,6 +712,7 @@ import {
 } from './mob_idle_sfx';
 import { type MobTooltipI18n, type MobTooltipModel, mobTooltipHtml } from './mob_tooltip_view';
 import { bindMobileFrameLongPress as bindMobileFrameLongPressCore } from './mobile_frame_long_press';
+import { isCompactTouchHud } from './mobile_hud_layout';
 import { MobileMoreDialogController } from './mobile_more_dialog';
 import { moneyHtml } from './money_html';
 import { MOUNT_DESC_KEYS, mountSpecLines } from './mount_labels';
@@ -5480,6 +5481,7 @@ export class Hud {
     world: () => this.sim,
     closeOthers: () => this.closeOtherWindows('#cosmetics-window'),
     hideTooltip: () => this.hideTooltip(),
+    store: () => this.dailyRewardsWindow,
     ...this.windowFocus('#cosmetics-window'),
   });
   private readonly reliquaryWindow = new ReliquaryWindow({
@@ -16028,9 +16030,7 @@ export class Hud {
     // delegation, which reroutes to openDeeds here). Tell the painter so it swaps
     // the header from a disclosure toggle to a dialog opener. Reuse the exact class
     // test the delegation uses so the announced role matches the behavior.
-    view.chip =
-      document.body.classList.contains('mobile-touch') &&
-      document.body.classList.contains('hud-mobile-compact');
+    view.chip = isCompactTouchHud(document.body.classList);
     this.deedTrackerPainter.update(view);
   }
 
@@ -16068,9 +16068,7 @@ export class Hud {
     // painter so it swaps the header from a disclosure toggle to a dialog opener.
     // Reuse the exact class test the delegation uses so the announced role
     // matches the behavior.
-    view.chip =
-      document.body.classList.contains('mobile-touch') &&
-      document.body.classList.contains('hud-mobile-compact');
+    view.chip = isCompactTouchHud(document.body.classList);
     this.reliquaryTrackerPainter.update(view);
   }
 

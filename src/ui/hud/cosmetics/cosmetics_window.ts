@@ -49,6 +49,16 @@ export interface CosmeticsWindowDeps {
   // Focus management (WCAG 2.2 AA): capture the opener on open, restore it on close.
   captureFocus(): HTMLElement | null;
   restoreFocus(target: HTMLElement | null): void;
+  /** The WOC Store window, which owns the two live 3D preview overlays (the
+   *  mount skin panel, the Armory inspect) a card's Preview opens. Lazy, since
+   *  the Hud constructs the store after this window; optional so a host
+   *  without the store (tests) paints the buttons inert. */
+  store?(): CosmeticsPreviewHost;
+}
+
+export interface CosmeticsPreviewHost {
+  previewMountSkin(skinId: string): void;
+  previewWeaponSkin(skinId: string): void;
 }
 
 const TAB_CLASS = 'cos-tab';
@@ -199,6 +209,12 @@ export class CosmeticsWindow {
   private apply(action: CosmeticsAction): void {
     const w = this.deps.world();
     switch (action.kind) {
+      case 'preview-mount':
+        this.deps.store?.().previewMountSkin(action.id);
+        break;
+      case 'preview-skin':
+        this.deps.store?.().previewWeaponSkin(action.id);
+        break;
       case 'wear-mount':
         w.changeMountSkin(action.id);
         break;

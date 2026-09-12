@@ -59,7 +59,13 @@ function fakeWorld(): FakeWorld {
   return world;
 }
 
-function makeWindow(world: FakeWorld): { w: CosmeticsWindow; el: HTMLElement } {
+function makeWindow(
+  world: FakeWorld,
+  store?: {
+    previewMountSkin: ReturnType<typeof vi.fn>;
+    previewWeaponSkin: ReturnType<typeof vi.fn>;
+  },
+): { w: CosmeticsWindow; el: HTMLElement } {
   const el = document.createElement('div');
   el.id = 'cosmetics-window';
   document.body.appendChild(el);
@@ -70,6 +76,7 @@ function makeWindow(world: FakeWorld): { w: CosmeticsWindow; el: HTMLElement } {
     hideTooltip: vi.fn(),
     captureFocus: () => null,
     restoreFocus: vi.fn(),
+    store: store ? () => store as never : undefined,
   });
   return { w, el };
 }
@@ -97,12 +104,44 @@ describe('CosmeticsWindow', () => {
     expect(card(el, 'chimeglass_tortoise')).toBeTruthy();
     expect(card(el, 'rickshaw_mount')).toBeTruthy();
     expect(action(el, 'wear-mount', 'mech_bird')).toBeTruthy();
-    // Unowned: no action button at all, the store state instead.
-    expect(card(el, 'chimeglass_tortoise').querySelector('.cos-action')).toBeNull();
+    // Unowned: no wear action, the store state instead. The Preview button is
+    // on every card (the skin can be seen before it is bought).
+    expect(
+      card(el, 'chimeglass_tortoise').querySelector('.cos-action:not(.cos-preview)'),
+    ).toBeNull();
     expect(card(el, 'chimeglass_tortoise').querySelector('.cos-state.store')).toBeTruthy();
-    expect(card(el, 'rickshaw_mount').querySelector('.cos-action')).toBeNull();
+    expect(card(el, 'rickshaw_mount').querySelector('.cos-action:not(.cos-preview)')).toBeNull();
+    expect(action(el, 'preview-mount', 'chimeglass_tortoise')).toBeTruthy();
+    expect(action(el, 'preview-mount', 'mech_bird')).toBeTruthy();
     // Scope badges are on every card.
     expect(card(el, 'mech_bird').querySelector('.cos-scope-account')).toBeTruthy();
+  });
+
+  it('routes Preview on a mount card and a weapon row to the store host, never to IWorld', () => {
+    const world = fakeWorld();
+    const store = { previewMountSkin: vi.fn(), previewWeaponSkin: vi.fn() };
+    const { w, el } = makeWindow(world, store);
+    w.open();
+    // A store-only skin previews too: seeing it is the point of the button.
+    action(el, 'preview-mount', 'chimeglass_tortoise')?.click();
+    expect(store.previewMountSkin).toHaveBeenCalledWith('chimeglass_tortoise');
+    expect(world.changeMountSkin).not.toHaveBeenCalled();
+    w.open('skins');
+    action(el, 'preview-skin', 'ice_fang_sword')?.click();
+    expect(store.previewWeaponSkin).toHaveBeenCalledWith('ice_fang_sword');
+    expect(world.changeWeaponSkin).not.toHaveBeenCalled();
+    // Every Preview carries its accessible name.
+    expect(action(el, 'preview-skin', 'ice_fang_sword')?.getAttribute('aria-label')).toContain(
+      'Preview',
+    );
+  });
+
+  it('paints Preview inert when no store host is wired', () => {
+    const world = fakeWorld();
+    const { w, el } = makeWindow(world);
+    w.open();
+    expect(() => action(el, 'preview-mount', 'mech_bird')?.click()).not.toThrow();
+    expect(world.changeMountSkin).not.toHaveBeenCalled();
   });
 
   it('wears and takes off a mount skin through IWorld exactly once each and repaints', () => {
