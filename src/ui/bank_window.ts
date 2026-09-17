@@ -20,10 +20,8 @@ import { NATIVE_APP } from '../client_origin';
 import { audio } from '../game/audio';
 import { ITEMS } from '../sim/data';
 import { guildBankRungsBought } from '../sim/guild_bank';
-import { isItemLocked } from '../sim/item_lock';
 import { vaultMaterialIds } from '../sim/materials_vault';
 import type { IWorld } from '../world_api';
-import { bagCornerMark, bagRimClasses } from './bag_corner_mark_view';
 import {
   BAG_CATEGORIES,
   BAG_SORTS,
@@ -35,13 +33,12 @@ import {
   parseBagFilter,
   serializeBagFilter,
 } from './bag_filter';
-import { bagFineMark } from './bag_fine_mark_view';
-import { bagInstanceGlyphKind } from './bag_instance_glyph_view';
 import { bankBonusSectionHtml } from './bank_bonus_view';
 import { showBuyConfirmPrompt } from './bank_buy_prompt';
 import { type BankScrollOffsets, planBankScrollRestore } from './bank_chrome_layout_core';
 import { filterBankSlots } from './bank_filter';
 import { annotateGuildFocusKeys, annotateVaultFocusKeys } from './bank_focus_keys';
+import { bankSlotDisplayName } from './bank_item_name_core';
 import { bankMeterAriaLabel, bankMeterTooltipHtml } from './bank_meter_view';
 import { showQuantityPrompt } from './bank_quantity_prompt';
 import { BankRungPurchase } from './bank_rung_purchase_core';
@@ -70,11 +67,11 @@ import {
 } from './bank_view';
 import type { ClaudiumPurchaseFacet } from './claudium_purchase_bridge';
 import { formatCount } from './count_format';
+import { depositAllStatusText } from './deposit_all_status_text';
 import { markDialogRoot } from './dialog_root';
 import { itemDisplayName } from './entity_i18n';
 import { esc } from './esc';
 import { captureFocusKey, findFocusKey, focusedWithin, restoreFirstEnabled } from './focus_restore';
-import type { GuildBankViewModel } from './guild_bank_view';
 import {
   GUILD_PANEL_ID,
   GUILD_TAB_ID,
@@ -82,15 +79,10 @@ import {
   GuildBankTab,
 } from './guild_bank_window';
 import { formatMoney, type TranslationKey, t } from './i18n';
-import { QUALITY_COLOR } from './icons';
-import {
-  cornerMarkHtml,
-  INSTANCE_GLYPH_ARIA_KEYS,
-  lockMarkHtml,
-  UNKNOWN_INSTANCE_GLYPH_ARIA_KEYS,
-} from './item_instance_glyph_mark';
 import { knownItemDef } from './known_item';
+import { closeMaterialSourcesDialogForOwner } from './material_sources_dialog';
 import type { PainterHostPresentation } from './painter_host';
+import { buildPersonalBankItemCell } from './personal_bank_item_cell';
 import {
   installPromptDialog as installModalPromptDialog,
   type PromptDialogHandle,
@@ -106,11 +98,6 @@ import { svgIcon } from './ui_icons';
 import { unknownItemIconHtml } from './unknown_item_icon';
 import { hasVaultDepositable, vaultSpecialContentKey } from './vault_view';
 import { VAULT_PANEL_ID, VAULT_TAB_ID, VaultTab } from './vault_window';
-
-// The unranked quality fallback as a CSS custom property. The shared QUALITY_COLOR
-// map carries the real per-quality hex; this token covers an item with no quality
-// field, so no raw hex lives in the painter (mirrors bags' --bag-slot-quality).
-const QUALITY_DEFAULT_COLOR = 'var(--color-quality-default)';
 
 // Grace before a null bankInfo closes the window: online the bank mirror rides the
 // proximity snapshot, so it can lag the open by about a tick (copies the mailbox's
@@ -372,10 +359,12 @@ export class BankWindow {
     this.guildPane = new GuildBankTab({
       root: () => this.deps.root(),
       world: () => this.deps.world(),
-      itemIcon: (item) => this.deps.itemIcon(item),
+      itemIcon: (item, quality) => this.deps.itemIcon(item, quality),
       moneyHtml: (copper) => this.deps.moneyHtml(copper),
-      itemTooltip: (item, instance) => this.deps.itemTooltip(item, instance),
+      itemTooltip: (item, instance, materialSources) =>
+        this.deps.itemTooltip(item, instance, materialSources),
       attachTooltip: (el, html) => this.deps.attachTooltip(el, html),
+      openMaterialSources: (options) => this.deps.openMaterialSources?.(options),
       hideTooltip: () => this.deps.hideTooltip(),
       consumePeek: () => this.deps.consumePeek(),
       onInventoryChanged: () => this.deps.onInventoryChanged(),
@@ -391,8 +380,10 @@ export class BankWindow {
       world: () => this.deps.world(),
       itemIcon: (item) => this.deps.itemIcon(item),
       moneyHtml: (copper) => this.deps.moneyHtml(copper),
-      itemTooltip: (item, instance) => this.deps.itemTooltip(item, instance),
+      itemTooltip: (item, instance, materialSources) =>
+        this.deps.itemTooltip(item, instance, materialSources),
       attachTooltip: (el, html) => this.deps.attachTooltip(el, html),
+      openMaterialSources: (options) => this.deps.openMaterialSources?.(options),
       hideTooltip: () => this.deps.hideTooltip(),
       consumePeek: () => this.deps.consumePeek(),
       onInventoryChanged: () => this.deps.onInventoryChanged(),
@@ -493,11 +484,13 @@ export class BankWindow {
 
   close(): void {
     if (!this.opened) return;
+    const el = this.deps.root();
     // A confirm / quantity prompt is a modal CHILD that sets #bank-window inert. The
     // window can be force-closed out from under it (Esc / keybind), a path that never
     // runs the prompt's dismiss(); tear any open prompt down here so it is not left an
     // orphaned aria-modal dialog, then clear the inert it set (a hidden window must
     // never stay inert or the next open shows a dead grid).
+    closeMaterialSourcesDialogForOwner(el);
     dismissBankPrompts();
     // ...and END the rung attempt that prompt belonged to. dismissBankPrompts
     // removes the NODE, so bank_buy_prompt's own dismiss hook never fires on this
@@ -525,7 +518,6 @@ export class BankWindow {
     // of storage (persistFilter never stores the search). Category/sort stay.
     this.filter.search = '';
     this.persistFilter();
-    const el = this.deps.root();
     el.style.display = 'none';
     el.inert = false;
     this.opened = false;
@@ -636,8 +628,8 @@ export class BankWindow {
     const vaultAvailable = this.deps.world().vaultInfo != null;
     if (!vaultAvailable && this.tab === 'vault') this.tab = 'personal';
     el.innerHTML =
-      `<div class="panel-title"><span>${esc(t('hudChrome.bank.title'))} <span class="panel-subtitle">${esc(t('hudChrome.bank.subtitle'))}</span></span>` +
-      `<button type="button" class="x-btn" data-close aria-label="${esc(t('hudChrome.bank.close'))}">${svgIcon('close')}</button></div>`;
+      `<div class="panel-title ui-win-head"><span class="ui-win-title">${esc(t('hudChrome.bank.title'))} <span class="panel-subtitle ui-win-sub">${esc(t('hudChrome.bank.subtitle'))}</span></span>` +
+      `<button type="button" class="x-btn ui-x-btn" data-close aria-label="${esc(t('hudChrome.bank.close'))}">${svgIcon('close')}</button></div>`;
     el.querySelector('[data-close]')?.addEventListener('click', () => this.close());
     if (guildAvailable || vaultAvailable) {
       // The shared WAI-ARIA tab strip (tab_strip_view core + wireTabStrip),
@@ -653,9 +645,9 @@ export class BankWindow {
         tabStripHtml(
           tabStripModel({
             ariaLabel: t('hudChrome.bank.tabsAria'),
-            stripClass: 'bank-tabs',
-            tabClass: 'bank-tab',
-            selectedClass: 'on',
+            stripClass: 'bank-tabs ui-tabs',
+            tabClass: 'bank-tab ui-tab',
+            selectedClass: 'on is-on',
             tabs: [
               { id: 'personal', label: t('hudChrome.bank.personalTab') },
               // The two conditional tabs carry stable button ids so their
@@ -993,7 +985,10 @@ export class BankWindow {
       slots,
       (id) => knownItemDef(ITEMS, id),
       this.filter,
-      (id) => this.itemNameOf(id),
+      // Search and the name-sort both read the name the CELL shows
+      // (bank_item_name_core), so neither can file a copy under a name the
+      // player cannot see.
+      (slot) => bankSlotDisplayName(knownItemDef(ITEMS, slot.itemId), slot),
     );
     if (visible.length === 0) {
       // A narrowing filter matched nothing: show the no-match line. With NO filter active
@@ -1004,79 +999,15 @@ export class BankWindow {
       return;
     }
     for (const slot of visible) {
-      const item = knownItemDef(ITEMS, slot.itemId);
-      const cell = document.createElement('button');
-      cell.type = 'button';
-      // Fine-grade mark (bag_fine_mark_view.ts): a banked fine_* stack keeps the
-      // .bag-fine rim/wash bags gave it, so the grade never disappears on
-      // deposit. Id-based, so no def is needed; a stale-client unknown id is
-      // never in the local grade table and simply stays unmarked.
-      const fineMark = bagFineMark(slot.itemId);
-      cell.className = `bank-item q-${slot.qualityKey}${bagRimClasses(null, fineMark)}`;
-      const qColor = QUALITY_COLOR[slot.qualityKey] ?? QUALITY_DEFAULT_COLOR;
-      cell.style.setProperty('--bank-slot-quality', qColor);
-      // Corner marks (masterwork seal, fine seal, enchanted / signed / bound
-      // glyph, or the generic wedge): same shared helpers and priority core
-      // bags use (bag_corner_mark_view.ts), so a banked masterwork or fine
-      // stack keeps its seal visible at a glance. Aria-hidden mark; the cell
-      // name carries the per-copy fact (the fine grade rides the item NAME).
-      // Quest items cannot enter the bank, so the quest arm is always null.
-      const glyphKind = bagInstanceGlyphKind(slot.instance);
-      const cornerMark = bagCornerMark(glyphKind, null, fineMark);
-      const instanceMark = cornerMarkHtml(cornerMark);
-      // Player item lock (issue 3042): its own bottom-left badge (all-surfaces
-      // family, item_instance_glyph_mark.ts), so a locked copy keeps its mark
-      // visible after deposit exactly like the masterwork/fine seals above.
-      const locked = isItemLocked(slot.instance);
-      const lockSeal = lockMarkHtml(locked);
-      // Stale-client guard (R34): an id this bundle predates still holds a
-      // real, counted bank slot, so it renders (fallback icon, raw id as the
-      // label) instead of vanishing. The withdraw click stays live because the
-      // server resolves it by slotIndex, no def needed; only the def-derived
-      // tooltip body is replaced.
-      const countLabel = this.fmt(slot.count);
-      cell.setAttribute(
-        'aria-label',
-        item
-          ? t(
-              locked
-                ? 'hudChrome.bags.itemAriaLocked'
-                : glyphKind
-                  ? INSTANCE_GLYPH_ARIA_KEYS[glyphKind]
-                  : 'itemUi.bags.itemAria',
-              {
-                item: itemDisplayName(item),
-                count: countLabel,
-              },
-            )
-          : t(
-              glyphKind
-                ? UNKNOWN_INSTANCE_GLYPH_ARIA_KEYS[glyphKind]
-                : 'itemUi.bags.unknownItemAria',
-              { id: slot.itemId, count: countLabel },
-            ),
+      grid.appendChild(
+        buildPersonalBankItemCell(
+          this.deps,
+          slot,
+          this.fmt(slot.count),
+          (slotIndex, partial) => this.onSlotClick(slotIndex, partial),
+          () => this.render(),
+        ),
       );
-      cell.innerHTML = `${item ? this.deps.itemIcon(item) : unknownItemIconHtml(slot.itemId)}${instanceMark}${lockSeal}<span class="bank-count">${slot.showCount ? esc(t('itemUi.bags.stackCount', { count: countLabel })) : ''}</span>`;
-      cell.addEventListener('click', (ev) => {
-        // On touch, the click that ends a long-press peek inspects the slot (its
-        // tooltip is already shown) instead of withdrawing: the release dismisses
-        // the tooltip and fires nothing. A plain tap / desktop click falls through.
-        if (this.deps.consumePeek()) {
-          this.deps.hideTooltip();
-          return;
-        }
-        this.onSlotClick(slot.slotIndex, ev.shiftKey);
-      });
-      this.deps.attachTooltip(cell, () => {
-        const partial = slot.showCount
-          ? `<div class="tt-sub">${esc(t('hudChrome.bank.withdrawPartialHint'))}</div>`
-          : '';
-        const body = item
-          ? this.deps.itemTooltip(item, slot.instance)
-          : `<div class="tt-title">${esc(slot.itemId)}</div><div class="tt-sub">${esc(t('itemUi.bags.unknownItem'))}</div>`;
-        return `${body}<div class="tt-sub">${esc(t('hudChrome.bank.withdrawHint'))}</div>${partial}`;
-      });
-      grid.appendChild(cell);
     }
     // Free-slot squares only in the unfiltered view: a narrowed view shows matches only,
     // never the remaining capacity (the bags precedent).
@@ -1088,18 +1019,10 @@ export class BankWindow {
   private appendEmptyCells(grid: HTMLElement, n: number): void {
     for (let i = 0; i < n; i++) {
       const cell = document.createElement('div');
-      cell.className = 'bank-item empty';
+      cell.className = 'bank-item ui-socket ui-socket--bag empty';
       cell.setAttribute('aria-hidden', 'true');
       grid.appendChild(cell);
     }
-  }
-
-  // Localized display name, used for search matching AND the name-sort so both agree
-  // with the visible cell. An unknown id falls back to the raw id: that is the label
-  // its cell renders (the stale-client guard above), so sort and search stay agreed.
-  private itemNameOf(itemId: string): string {
-    const item = knownItemDef(ITEMS, itemId);
-    return item ? itemDisplayName(item) : itemId;
   }
 
   // Repaint ONLY the grid from the live bank + current filter, preserving the search
@@ -1148,7 +1071,7 @@ export class BankWindow {
       for (const category of BAG_CATEGORIES) {
         const chip = document.createElement('button');
         chip.type = 'button';
-        chip.className = `bag-chip${this.filter.category === category ? ' active' : ''}`;
+        chip.className = `bag-chip ui-chip${this.filter.category === category ? ' active' : ''}`;
         chip.textContent = t(BANK_CATEGORY_LABEL_KEYS[category]);
         chip.setAttribute('aria-pressed', this.filter.category === category ? 'true' : 'false');
         chip.addEventListener('click', () => {
@@ -1164,7 +1087,7 @@ export class BankWindow {
 
       const search = document.createElement('input');
       search.type = 'search';
-      search.className = 'bag-search';
+      search.className = 'bag-search ui-input';
       search.placeholder = t('hudChrome.bags.searchPlaceholder');
       search.setAttribute('aria-label', t('hudChrome.bank.searchAria'));
       search.value = this.filter.search;
@@ -1176,7 +1099,7 @@ export class BankWindow {
       tools.appendChild(search);
 
       const sort = document.createElement('select');
-      sort.className = 'bag-sort';
+      sort.className = 'bag-sort ui-input';
       sort.setAttribute('aria-label', t('hudChrome.bank.sortAria'));
       for (const option of BAG_SORTS) {
         const opt = document.createElement('option');
@@ -1198,15 +1121,19 @@ export class BankWindow {
     // Disabled when the bags hold no material stack; a full bank is still actionable
     // (the click reports it), so it does not disable here.
     //
-    // The clarification (junk moves too, not just tradeskill materials, and
-    // gathering tools never do) is exposed two ways so it reaches touch and keyboard users, not
-    // only a mouse-hover title: a `title` for desktop hover, PLUS a visually-hidden
+    // The clarification (every item whose tooltip reads Material or Fine Material
+    // moves, the honest taxonomy in src/sim/material_taxonomy.ts, and everything
+    // else stays: gathering tools, quest items, consumables and gray items
+    // included; reworded at the Masterwrought 11l QA, which retired the old "junk
+    // moves too" claim) is exposed two ways so it reaches touch and keyboard
+    // users, not only a mouse-hover title: a `title` for desktop hover, PLUS a
+    // visually-hidden
     // aria-describedby span the button always carries. A screen reader announces
     // aria-describedby on both hover and keyboard focus, and reading it needs no
     // pointer at all, so it also covers touch users who tap the button directly.
     const deposit = document.createElement('button');
     deposit.type = 'button';
-    deposit.className = 'bank-deposit-all';
+    deposit.className = 'bank-deposit-all ui-btn';
     deposit.textContent = t('hudChrome.bank.depositAll');
     const depositTooltip = t('hudChrome.bank.depositAllTooltip');
     deposit.title = depositTooltip;
@@ -1274,14 +1201,11 @@ export class BankWindow {
     this.render();
   }
 
-  // Compose the transient summary from the PLAN (not post-facto state, which the online
-  // mirror has not caught up to yet) and arm the self-expire.
+  // Compose the transient summary from the PLAN (not post-facto state, which the
+  // online mirror has not caught up to yet) and arm the self-expire.
   private setDepositStatus(plan: DepositAllPlan): void {
-    // The arm choice (none fit / partially fit / all fit) lives in the pure core's
-    // depositAllSummaryKey so its selection is unit-pinned; only the None arm
-    // renders without a count token.
-    const key = depositAllSummaryKey(plan);
-    const text = plan.stacks === 0 ? t(key) : t(key, { count: this.fmt(plan.stacks) });
+    const notable = plan.notableItemId ? knownItemDef(ITEMS, plan.notableItemId) : undefined;
+    const text = depositAllStatusText(depositAllSummaryKey(plan), this.fmt(plan.stacks), notable);
     this.depositStatus = { text, at: performance.now() };
   }
 
@@ -1343,7 +1267,7 @@ export class BankWindow {
         const item = knownItemDef(ITEMS, cell.itemId);
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = `bag-socket bank-socket q-${cell.qualityKey}`;
+        btn.className = `bag-socket bank-socket ui-socket ui-socket--bank q-${cell.qualityKey}`;
         btn.dataset.focusKey = `bank:socket:${cell.socket}`;
         // Stale-client guard (the grid's R34 rule): an id this bundle predates
         // still holds a real socket, so it renders with the fallback icon and
@@ -1401,7 +1325,7 @@ export class BankWindow {
         // click that fills it.
         const empty = document.createElement('button');
         empty.type = 'button';
-        empty.className = 'bag-socket bank-socket empty';
+        empty.className = 'bag-socket bank-socket ui-socket ui-socket--bank empty';
         empty.dataset.focusKey = `bank:socket:${cell.socket}`;
         empty.setAttribute('aria-disabled', 'true');
         empty.setAttribute('aria-label', t('hudChrome.bank.socketEmpty'));
@@ -1413,7 +1337,7 @@ export class BankWindow {
       } else {
         const locked = document.createElement('button');
         locked.type = 'button';
-        locked.className = 'bag-socket bank-socket locked';
+        locked.className = 'bag-socket bank-socket ui-socket ui-socket--bank locked';
         locked.dataset.focusKey = `bank:socket:${cell.socket}`;
         locked.innerHTML = svgIcon('lock');
         if (cell.unlockCost !== null) {
@@ -1561,7 +1485,7 @@ export class BankWindow {
     }
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'bank-buy-btn';
+    btn.className = 'bank-buy-btn ui-btn ui-btn--gold';
     // The focus identity the post-purchase repaint lands back on. Stamped here
     // rather than in an annotate pass because the guild pane's own annotation
     // claims '.bank-buy-btn' for gbank:buy, and only one of the two panes is
@@ -1823,7 +1747,11 @@ export class BankWindow {
     // knownItemDef, not a raw ITEMS index: the release's stale-client sweep
     // made every bank item read tolerate an id this client does not know.
     const item = knownItemDef(ITEMS, slot.itemId);
-    const itemName = item ? itemDisplayName(item) : slot.itemId;
+    // Uniformity read: inert today, since the partial-withdraw rung offers
+    // only on !slot.instance (bank_view.ts bankSlotAction), so this always
+    // resolves the def name; kept on the shared cell rule the search and the
+    // name-sort read, so a future instanced rung cannot regress it silently.
+    const itemName = bankSlotDisplayName(item, slot);
     showQuantityPrompt(
       {
         installPromptDialog: (prompt, opener, close) =>
