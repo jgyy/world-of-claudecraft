@@ -29,6 +29,7 @@
 // `entity.ts`.
 
 import type { ItemSet, SetBonusEffect, SetBonusTier, SetProc } from '../types';
+import { CRUCIBLE_COLLECTION_SETS } from './crucible_collections';
 
 // Haste granted by a set tier after the global combat-rating conversion: what
 // SET_HASTE_3PC_RATING is worth once recalcPlayerStats converts it. Read only
@@ -364,6 +365,7 @@ function warfareBonuses(signature: SetProc, capstoneText: string): SetBonusTier[
 }
 
 export const ITEM_SETS: Record<string, ItemSet> = {
+  ...CRUCIBLE_COLLECTION_SETS,
   [SET_DEATHLORD]: {
     id: SET_DEATHLORD,
     name: 'Barrowlord Battlegear',
@@ -806,12 +808,12 @@ export const ITEM_SETS: Record<string, ItemSet> = {
         effect: {},
         // The healer 2pc carries the pushback rider (full immunity, the raid
         // tier's upgrade over the leveling lineage's 50 percent).
-        text: 'Temporal Echo converts 50 percent of your single-target Arcane damage into healing. Damage taken no longer delays your spellcasting.',
+        text: 'Temporal Echo converts 50 percent of your other single-target Arcane damage into healing. Aether Surge and Aether Darts instead convert 200 percent of their damage. Damage taken no longer delays your spellcasting.',
       },
       {
         pieces: 4,
         effect: {},
-        text: "Temporal Cascade's cooldown is reduced by 5 sec.",
+        text: "Temporal Cascade's cooldown is reduced by 5 sec and its mana cost is reduced by 30 percent.",
       },
     ],
   },
@@ -959,7 +961,10 @@ export const ITEM_SETS: Record<string, ItemSet> = {
         // consumes any HoT when the wearer has none of their own, so "only"
         // would overclaim the narrowing. Recorded as a copy deviation in the
         // wave's PR notes.
-        text: 'Swiftmend consumes your own Wildbloom or Second Bloom first and heals 25 percent more. Damage taken no longer delays your spellcasting.',
+        // "Fleetmend" is the ability's shipped display name (the Phase 03 naming
+        // audit renamed swiftmend; docs/design/naming-audit.md, pinned by
+        // tests/ip_scrub.test.ts): player copy names the ability as players see it.
+        text: 'Fleetmend consumes your own Wildbloom or Second Bloom first and heals 25 percent more. Damage taken no longer delays your spellcasting.',
       },
       {
         pieces: 4,

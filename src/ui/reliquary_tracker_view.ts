@@ -37,8 +37,6 @@
 // line own that moment instead.
 
 import { RELIQUARY_PAGE_ORDER, RELIQUARY_PAGES_BY_ID } from '../sim/content/reliquary';
-import { accountReliquaryLedgerSize } from '../sim/reliquary_account';
-import type { AccountReliquaryLedger } from '../world_api/cosmetics';
 import type { ReliquaryPageCompletion } from '../world_api/reliquary';
 import { isReliquaryNearlyComplete, rankNearlyComplete } from './reliquary_view';
 
@@ -136,7 +134,12 @@ export interface ReliquaryTrackerWorld {
   reliquaryMarks: { size: number };
   deedsEarned: { size: number };
   ownedMounts(): readonly string[];
-  accountCosmetics: { weaponSkinIds: readonly string[]; reliquary?: AccountReliquaryLedger };
+  accountCosmetics: { weaponSkinIds: readonly string[] };
+  // The account ledger halves (both worlds mirror them): an alt's find or earn
+  // changes the account-wide completion the pinned pages read, so both sizes
+  // ride the ownership signature.
+  reliquaryAccountFinds?: { size: number };
+  accountDeeds?: { size: number };
 }
 
 /**
@@ -173,7 +176,8 @@ export function makeReliquaryTrackerInput(
         deedsEarned: w.deedsEarned.size,
         mounts: w.ownedMounts().length,
         weaponSkins: w.accountCosmetics.weaponSkinIds.length,
-        accountRelics: accountReliquaryLedgerSize(w.accountCosmetics.reliquary),
+        accountFinds: w.reliquaryAccountFinds?.size ?? 0,
+        accountDeeds: w.accountDeeds?.size ?? 0,
       });
     },
     collapsed: false,
@@ -223,9 +227,11 @@ export function reliquaryTrackerOwnershipSig(parts: {
   deedsEarned: number;
   mounts: number;
   weaponSkins: number;
-  /** Ledger size: fills by other characters on the account move page
-   *  completion without moving any surface above. */
-  accountRelics?: number;
+  /** reliquaryAccountFinds.size (the account ledger's relic half). Optional so
+   *  a host with no ledger signs exactly as before. */
+  accountFinds?: number;
+  /** accountDeeds.size (the ledger's deed half, for title relics). */
+  accountDeeds?: number;
 }): number {
   // Math.imul per step keeps every intermediate in int32: one trailing |0 over
   // float products would start rounding low bits away once an intermediate
@@ -235,7 +241,8 @@ export function reliquaryTrackerOwnershipSig(parts: {
   sig = (Math.imul(sig, 1009) + parts.deedsEarned) | 0;
   sig = (Math.imul(sig, 1009) + parts.mounts) | 0;
   sig = (Math.imul(sig, 1009) + parts.weaponSkins) | 0;
-  sig = (Math.imul(sig, 1009) + (parts.accountRelics ?? 0)) | 0;
+  sig = (Math.imul(sig, 1009) + (parts.accountFinds ?? 0)) | 0;
+  sig = (Math.imul(sig, 1009) + (parts.accountDeeds ?? 0)) | 0;
   return sig;
 }
 

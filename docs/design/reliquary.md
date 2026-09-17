@@ -20,8 +20,8 @@ standard at `DESIGN.md`.
 | Relic | One unique slot on a page (item id, profession mark, mount, skin, title). |
 | Clear count | Lifetime clears / kills credited for that page's source. |
 | Illumination | Completing every relic on a page (first-time celebration). |
-| Account scope | The Reliquary counts for the ACCOUNT: a relic any character on the account has filled fills the silhouette for every character on it (the "Account scope" section below). |
-| Curator rank | Cosmetic completion tiers over account-durable catalogued fills (items, marks, mounts, titles). Account weapon skins never score rank, so grants and display stay aligned. Five ranks at 1 / 10 / 25 / 50 / 100 owned (`apprentice`, `keeper`, `master`, `grand`, `eternal`, in `src/sim/reliquary.ts`). The thresholds are deliberately NOT rescaled as the catalog grows: rank 5 stays at 100 owned. |
+| Curator rank | Cosmetic completion tiers over catalogued fills (items, marks, mounts, titles). Account weapon skins never score rank. Five ranks at 1 / 10 / 25 / 50 / 100 owned (`apprentice`, `keeper`, `master`, `grand`, `eternal`, in `src/sim/reliquary.ts`). The thresholds are deliberately NOT rescaled as the catalog grows: rank 5 stays at 100 owned. Both DISPLAY and the rank-bridge GRANTS read the account-wide union with the account ledger (below): every character on the account earns a bridge the account qualifies for, and each is recorded as an earner. |
+| Account ledger | The account-wide record behind both books (`src/sim/account_ledger.ts`): which characters on the account found each relic (`IWorldReliquary.reliquaryAccountFinds`, keys `item:<id>` / `mark:<id>` / `mount:<key>`) and earned each deed. Every ownership read the window, tracker, character sheet, and inspect card make is the union of the character's own surfaces and the ledger, and so is the grant read behind the rank bridges and the completion ladder (every character on the account earns them, each recorded); an owned cell names its finders (`hudChrome.reliquary.foundBy`). Persisted in `account_relic_finds` (the `character_deeds` sibling, minus the character FK plus a name snapshot, so a find outlives its character), loaded per join, fanned out live to the account's other sessions, written and decoded catalog-bounded, and read by the public character sheet through an ids-only TTL cache (`server/account_ledger_keys_cache.ts`). The deletion survival, catalog bounding, public-sheet read, scope tooltip, and the reworded guide sentence follow jgyy's PR #3933. Full model: `docs/design/deeds.md`, "The account ledger". |
 | First find | Optional metadata on a filled relic: clear# (and source) at first obtain. |
 | Obtain count | How many times a filled relic has been taken from the world. Information on a tooltip, never a score. |
 
@@ -54,55 +54,6 @@ window is pure `reliquary_view.ts` + cold `reliquary_window.ts` painter.
 
 The server remains observer: character blob autosave (30s) carries the
 sparse Reliquary fields; no per-relic SQL table and no per-drop save storm.
-
-## Account scope (shipped)
-
-The Reliquary is ACCOUNT-BOUND. A relic filled by any character on the account
-fills the silhouette, the page pair, the catalog pair, the Curator rank, the
-rank and completion deed bridges, Illumination, the identity-wire standing, and
-the public sheet for every character on the account. The reason is the class
-gate: the Warfare Armory and Gallery list honor gear for every class, the
-Riftbound bands are class-personal, and most dungeon sets are class-slotted, so
-a per-character log asked a mage to buy plate it can never wear. The warfare
-pages stay in the catalog because of this scope, not despite it.
-
-What is account-wide is OWNERSHIP only, one sorted list per relic kind (items,
-marks, mounts, titles), bounded by the catalog. Weapon skins were already
-account state (`weaponSkinIds`) and never enter the ledger. What stays per
-character is HISTORY: the first-find stamp (`firstFind`), the obtain tally,
-the recent ring, every clear meter, and the sticky `illuminatedPages` record.
-A cell another character filled therefore paints owned with no clear# and no
-tally line on this character, which is correct: this character did not find
-it. The window's summary band carries a scope chip
-(`hudChrome.reliquary.accountWide`) so the player is told, not left to infer.
-
-The pieces, each pinned:
-
-| Piece | Where | Pin |
-|---|---|---|
-| Pure ledger (normalize, from-ownership, merge, size) | `src/sim/reliquary_account.ts` | `tests/reliquary_account.test.ts` |
-| THE union every read and grant path applies | `withAccountRelics` in `src/sim/reliquary.ts`, reached through `reliquaryOwnershipOpts` (both hosts' facet reads) and `characterReliquaryOwnership` (every sim grant path) | same |
-| Shared host completion reads | `src/sim/reliquary_reads.ts` (one implementation the offline `Sim` and the online `ClientWorld` both delegate to) | parity case in the same file |
-| Live-only sim stamp | `PlayerMeta.accountRelics`, handed in through `Sim.addPlayer` opts; never serialized | same |
-| Wire carrier | `AccountCosmetics.reliquary`, optional, on the `cosmetics` self key; decoded catalog-bounded by `normalizeAccountCosmetics` | same |
-| Storage | `account_relics` (account_id, kind, relic_id), insert-only, `ON CONFLICT DO NOTHING`, catalog-bounded per account, no retention sweep needed | `tests/server/account_reliquary.test.ts` |
-| Server fold | `server/account_reliquary.ts` `AccountReliquaryFold`: one live ledger per online account, growth persisted through a per-account serial writer; `curatorStandingFor` is the identity-wire stamp | same |
-| Fold cadence | join (`remember` widens from the stored read), every non-retro `reliquaryUnlock` (`detectActivity`), and the 60 second standing sweep (`refreshCuratorStanding`), which is the catch-all for surfaces with no fill event (a reins purchase, a title deed) | same |
-| Public sheet | `sheetReliquaryFromState(state, accountRelics)`; every sheet route pre-fetches the ledger beside guild/rank and degrades to the character's own fills on a failed read (a cosmetic aggregate never 500s the sheet) | `tests/character_sheet.test.ts`, `tests/server/leaderboard.test.ts` |
-
-Cross-realm: the ledger is keyed on the account, not the realm, and the insert
-is a union, so two realms folding the same account never lose a side; a fill
-on realm A reaches realm B at B's next join read. The population-rarity
-aggregate is deliberately unchanged: it still counts CHARACTERS that found a
-relic (the per-character discovery set is what the walk unnests), so "found by
-N% of collectors" keeps its meaning and an account with five alts does not
-count five times for one find.
-
-The old reading, for the record: before this shipped every surface
-above was character-scoped, and the first join of each character after the
-ship folds its own fills into the account (the `remember` plus `fold` pair at
-join), so a veteran's alts inherit the main's log the first time the main logs
-in, with no migration step.
 
 ## Rules that bind every page and relic
 
@@ -220,7 +171,7 @@ repeat at every growth. It owes a release-note line whenever a growth ships.
 
 | Surface | Notes |
 |---|---|
-| Reliquary window | Primary; DESIGN.md window grammar; mobile full-bleed. |
+| Reliquary window | Primary; DESIGN.md window grammar; mobile full-bleed. The All / Catalogued / Missing chip row is ONE shared state painted on both the shelf list and the open page: on a shelf, Catalogued keeps illuminated pages and Missing hides them (`shelfPagePassesOwnedFilter` in `src/ui/reliquary_view.ts`), so a completionist can read only what remains without opening every page. The rail and shelf-card totals never move under a chip. |
 | HUD tracker | Pinned-page strip beside the deed tracker, on by default behind the `showReliquaryTracker` master switch; pins persist per character (visibility and seat: the subsection below). |
 | Live toast / combat log | Relic logged; page Illumination; rank up. All four emitters are node-built and clickable, deep-linking to the page. |
 | Book of Deeds | Optional soft links from collection deeds, plus the "Titles and Borders" shelf. Earned heraldry options show their canonical seal and material sample; hover and focus preview the world and interaction forms without equipping. |
@@ -328,7 +279,7 @@ containers.
 
 This acceptance covers BOTH audiences, not just the sheet: the entity-wire
 standing below is bank-inclusive through the same seam
-(`refreshCuratorStanding` scores `characterReliquaryOwnership`, whose mount
+(`refreshCuratorStanding` scores `accountReliquaryOwnership`, whose mount
 surface is live `ownedMounts`), so everyone within interest radius receives
 the same bank-derived aggregate the sheet publishes. Because reins trade like
 any item, borrowed reins raise the broadcast standing until the next sweep
@@ -402,6 +353,16 @@ Overview note say so at rank 5, and every LIVE border deed unlock logs a wear hi
 back-credits (the on-join catch-up) log no hint at all, by the same rule that
 keeps them free of banners and celebration audio; the pure unlock plan is what
 draws that line, and `tests/deeds_view.test.ts` pins it.
+
+The whole family is account-wide. A rank bridge, a completion-ladder deed,
+or an Illumination is decided over the account union
+(`accountReliquaryOwnership`, the one ownership read every grant path uses)
+and granted to every character on the account, each recorded as an earner
+in its own right: the finder in its fill chain, a live sibling in the same
+tick (`syncAccountRelicGrants`, driven by the server's ledger fan-out), an
+offline alt at its next join. The model, the maintainer ruling behind it, and
+the tests that pin it are recorded once in `docs/design/deeds.md`, "The
+account ledger"; this section does not restate them.
 
 First-ever page Illumination is a persisted, sticky record
 (`illuminatedPages` on the reliquary blob, once per durable record): the
@@ -511,9 +472,6 @@ evaluated over the ownership options.
     - Rule 1 still binds: counts feed no completion, rank, drop rate, deed,
       or reward. They are shown, and nothing consumes them.
 - Power rewards, pity timers, or drop-rate buffs for incomplete pages.
-- Account-wide first-find PROVENANCE (the clear# stamp, the obtain tally, the
-  recent ring). Ownership is account-wide (the "Account scope" section);
-  history stays with the character that made it.
 - Housing museum props (no housing system yet).
 - A per-character third-party API. Still deferred: no endpoint may serve one
   character's Reliquary state beyond the existing public sheet fields.
@@ -546,12 +504,30 @@ evaluated over the ownership options.
   weapon skins are `store`. The **Rift gear exclusion is permanent**: derived
   tier-mirror pools paid out as one uniform pick are not a route a player can
   aim at a single relic, so they are not listed. The reins ladder IS such a
-  route and is listed.
+  route and is listed. The **recipe-pattern exclusion is likewise permanent**
+  (Phase 11 of the Masterwrought packet): `kind: 'recipe'` pattern items are
+  repeatable, tradable, consumed-on-learn knowledge, not conquerable unique
+  loot, so no pattern takes a page; the derivation-side carve-out and its
+  exactly-matching vacuity guard live in `tests/reliquary_content.test.ts`.
 - **Obtain counts omit at zero, widened.** A movement grant at ANY clear-meter
   value must not stamp a clear count. A market buy at 12 clears must never
   print "first found on clear 12": that is the same fabricated-provenance class
   the zero case refuses. Both the tooltip and the aria line drop together when
   the stamp is absent.
+- **A player-named legendary INSTANCE takes no page and no rung.** The
+  promotion that raises a Perfected copy stamps `rolled.quality: 'legendary'`
+  and a player-chosen name on ONE copy and mints no item def, while Reliquary
+  state is def-keyed and mark-keyed by construction (rules 3 and 5, and
+  `serializeReliquaryState`), so a rung keyed on the named copy sits outside
+  the model rather than merely unbuilt. The Book of Deeds carries the whole
+  cosmetic record with two credits, `col_first_legendary` and
+  `prog_legendmaker`. A bounded instance-CLASS mark is declined on the same
+  ruling: it would say only that a promotion happened, which both deeds already
+  say. Note the ground, which is the def-keyed model and NOT a conquerability
+  claim: an earlier decline of a crafted item rested on conquerability and was
+  right for the wrong reason, since this shelf does catalogue crafted uniques.
+  Masterwrought ruling `qr-19-named-legendary-instance-reliquary-page`
+  (2026-09-01) settled this instance-versus-definition boundary.
 
 ## Migration hazards (one-way contracts)
 
@@ -602,14 +578,26 @@ intentional and pinned by a test.
   rows in those lists; the suite cannot catch an author opting itself out.
 - **Uncatalogued rare-plus items remain** repo-wide, all of them open-world or
   Rift sourced. That is a known backlog, not a drift bug.
-- **Three catalog slots are permanently unfillable today** and keep 100 percent
+- **Two catalog slots are permanently unfillable today** and keep 100 percent
   catalog completion (and therefore the whole-catalog capstone deed)
-  unreachable: the engineering masterwork mark (every engineering recipe
-  produces a slotless, statless tool, so the masterwork proc can never fire)
-  and two mount reins (one with no acquisition path, one dev-grant only). This
-  is why the capstone deed is marked as a feat and kept out of the Book
-  completion pair. See "Open owner calls" for the consequence that is still
-  undecided.
+  unreachable: two mount reins (one with no acquisition path, one dev-grant
+  only). The engineering masterwork mark was the third until masterwrought
+  Phase 11o (2026-08-25): its un-pend condition was met by copperlens_ocular,
+  a stats-bearing non-masterwrought engineering output, so craftIsGearCapable
+  flipped through the live gate rather than through the Phase 12 suppression
+  move the earlier note predicted, and the mark is earnable and hinted. R1
+  masterwork suppression still stands for the APEX def (craftBonusStatsFor in
+  crafting.ts returns null for masterwrought defs; gyrelens_array bakes
+  nothing). AMENDED 2026-08-26 (Masterwrought Phase 12): the effect-gate move
+  landed. A proc on an apex craft now grants a Perfecting head start
+  (perfectingHeadStart in resolveCraftForRecipe, stamping
+  ItemInstancePayload.perfecting) and reports CraftResult.masterwork, so the
+  masterwork mark family credits apex procs too; craftBonusStatsFor itself is
+  byte-unchanged (an apex def still bakes nothing), so the craftIsGearCapable
+  derivation and its pins do not move.
+  The two mount slots are why the capstone deed is marked as a feat and kept
+  out of the Book completion pair. See "Open owner calls" for the consequence
+  that is still undecided.
 - **Re-acquiring an already-discovered mount's reins never runs the completion
   ladder live**, because first-discovery fires once while mount ownership is
   possession-based. A player whose last missing relic is reins they once owned
@@ -629,7 +617,7 @@ intentional and pinned by a test.
   shipping binary, because the join-time retro pass grants every qualifying
   rank deed in the same session that then feeds the reconcile push.
   - **HOLD the registration of the whole-catalog capstone achievement** until
-    the three unfillable slots above land. The deed is unearnable until then,
+    the two unfillable slots above land. The deed is unearnable until then,
     and a registered impossible achievement is player-visible on both
     storefronts as a permanent 0.0 percent unlock rate.
   - Both mirrors default OFF, so nothing is live until they are enabled.

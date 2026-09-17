@@ -16,15 +16,16 @@ vi.mock('../src/render/characters/portrait', () => ({
   portraitsReady: vi.fn(() => false),
   visualPortraitDataUrl: vi.fn(),
 }));
-vi.mock('../src/ui/icons', () => ({
+// Additive, never bare (the reliquary_window_behavior lesson): the canvas
+// resolvers stay stubbed; every export the factory does not name passes
+// through, so hud.ts dereferencing a NEW icons export at module scope (the
+// createAuraIconResolver hunt this mock's history records) can never again
+// throw "No export is defined" from a file the change never touched.
+vi.mock('../src/ui/icons', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../src/ui/icons')>()),
   iconDataUrl: (kind: string, id: string) => `mock:${kind}:${id}`,
   QUALITY_COLOR: {},
   raidMarkerDataUrl: vi.fn(() => ''),
-  // hud.ts dereferences these three at MODULE scope (createAuraIconResolver's
-  // call site), not just inside a method, so a mock missing any of them throws
-  // "No export is defined" the instant hud.ts is imported, before any test
-  // body runs. The other three are only read inside methods this suite never
-  // calls, but are stubbed too so a future call path does not repeat the hunt.
   auraImageUrl: vi.fn(() => null),
   cachedProceduralIconDataUrl: vi.fn((kind: string, id: string) => `mock:${kind}:${id}`),
   hasAbilityIconIdentity: vi.fn(() => false),
@@ -155,6 +156,12 @@ describe('Hud Warlock pet signature bar', () => {
 
     const felbolt = document.querySelector<HTMLButtonElement>('[title="Felbolt"]');
     expect(felbolt).not.toBeNull();
+    // Shared socket pins keep pet state and icon structure on the common visual recipe.
+    expect(felbolt?.classList.contains('ui-socket')).toBe(true);
+    expect(felbolt?.querySelector('.ui-socket-art')).not.toBeNull();
+    const stanceMenu = document.querySelector<HTMLButtonElement>('[data-focus-key="stance-menu"]');
+    expect(stanceMenu?.classList.contains('ui-socket')).toBe(true);
+    expect(stanceMenu?.classList.contains('is-on')).toBe(true);
     expect(
       document.querySelector<HTMLElement>('[data-focus-key="pet_attack"] .icon-label')?.style
         .backgroundImage,
@@ -197,7 +204,7 @@ describe('Hud Warlock pet signature bar', () => {
     expect(hud.sim.setPetAutoSpecial).toHaveBeenCalledTimes(2);
   });
 
-  it('shows Gloomshade Chain and Taunt, including touch-hold autocast control', () => {
+  it('shows Duskmurk Chain and Taunt, including touch-hold autocast control', () => {
     vi.useFakeTimers();
     document.body.classList.add('mobile-touch');
     const hud = makeHud('gloomshade');

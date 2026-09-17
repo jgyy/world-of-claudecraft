@@ -10,6 +10,15 @@
 // tests/architecture.test.ts UI_PURE_CORES.
 
 import { isPetClass, type PlayerClass } from '../sim/types';
+// The descriptor MODULE, not the domain barrel: the barrel re-exports the
+// painter and the host, and a pure core must not reach a DOM-owning painter
+// even one hop removed (tests/architecture.test.ts forbiddenUiCoreImport).
+import {
+  AURA_TRACK_FRAME_PREFIX,
+  AURA_TRACKS,
+  type AuraTrackSettingKey,
+  auraTrackForFrameId,
+} from './hud/aura_tracks/aura_track_descriptors';
 import type { TranslationKey } from './i18n.catalog';
 
 /** One movable HUD frame under the global unlock toggle. */
@@ -71,7 +80,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar',
     storageKey: 'woc_hud_frame_actionbar',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBar1',
-    fallbackSize: { w: 612, h: 46 },
+    fallbackSize: { w: 596, h: 46 },
     detachToUiRoot: true,
   },
   {
@@ -79,7 +88,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar2',
     storageKey: 'woc_hud_frame_actionbar2',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBar2',
-    fallbackSize: { w: 612, h: 46 },
+    fallbackSize: { w: 596, h: 46 },
     detachToUiRoot: true,
   },
   {
@@ -87,7 +96,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar3',
     storageKey: 'woc_hud_frame_actionbar3',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBar3',
-    fallbackSize: { w: 612, h: 46 },
+    fallbackSize: { w: 596, h: 46 },
     detachToUiRoot: true,
   },
   // The whole action-bar block as ONE frame, live only while the "Combine
@@ -98,7 +107,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar-group',
     storageKey: 'woc_hud_frame_actionbar_group',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBarGroup',
-    fallbackSize: { w: 612, h: 150 },
+    fallbackSize: { w: 596, h: 150 },
     detachToUiRoot: true,
   },
   {
@@ -154,7 +163,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'pet-frame',
     storageKey: 'woc_hud_frame_pet',
     labelKey: 'hudChrome.unitFrame.petLabel',
-    fallbackSize: { w: 180, h: 54 },
+    fallbackSize: { w: 278, h: 60 },
     detachToUiRoot: true,
   },
   // The pet ACTION bar, the command half of #pet-cluster. Its own row rather
@@ -185,7 +194,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'xpbar',
     storageKey: 'woc_hud_frame_xpbar',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.xpBar',
-    fallbackSize: { w: 612, h: 12 },
+    fallbackSize: { w: 596, h: 14 },
     detachToUiRoot: true,
   },
   // The buff and debuff rows are independent frames (each placed on its own).
@@ -257,6 +266,14 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     fallbackSize: { w: 240, h: 120 },
     detachToUiRoot: true,
   },
+  {
+    id: 'recipeTracker',
+    elementId: 'recipe-tracker',
+    storageKey: 'woc_hud_frame_recipe_tracker',
+    labelKey: 'hudChrome.recipeTracker.trackerLabel',
+    fallbackSize: { w: 240, h: 140 },
+    detachToUiRoot: true,
+  },
   // The class resource bars, previously movable outside this option (the
   // devotion medallion's grab-drag, the doom meter's own corner button), now
   // ordinary governed frames so they hide and resize like everything else.
@@ -273,12 +290,14 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
   // The doom meter docks beside the player frame inside the transformed
   // #actionbar-stack, so it detaches like the action bars. Its storage key is
   // the one its pre-registry MovableFrame persisted under, so every saved
-  // spot survives the move into this table.
+  // spot survives the move into this table. The chip reuses the resource's
+  // own in-game name (Condemnation, hudChrome.warlock.doomLabel): mechanic
+  // frames name themselves the way the game names the mechanic.
   {
     id: 'doomMeter',
     elementId: 'warlock-doom-frame',
     storageKey: 'woc_warlock_doom_frame_pos',
-    labelKey: 'hudChrome.interfaceUnlock.frameNames.doomMeter',
+    labelKey: 'hudChrome.warlock.doomLabel',
     fallbackSize: { w: 300, h: 48 },
     detachToUiRoot: true,
   },
@@ -295,6 +314,17 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     fallbackSize: { w: 300, h: 232 },
     detachToUiRoot: false,
   },
+  // The Talking Head (an NPC line while the speaker is off screen): a #ui child
+  // with a stock seat a fifth of the way down the screen; the chip reuses the
+  // panel's own accessible name.
+  {
+    id: 'talkingHead',
+    elementId: 'talking-head',
+    storageKey: 'woc_hud_frame_talking_head',
+    labelKey: 'hudChrome.talkingHead.label',
+    fallbackSize: { w: 596, h: 72 },
+    detachToUiRoot: false,
+  },
   // The tabbed combat meter (#meters-window). Its two pop-out windows (heal,
   // threat) keep their own MeterFrame drag: they are transient windows, not
   // standing HUD chrome. Box resize: the row list genuinely reflows and the
@@ -309,9 +339,10 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     resizeMode: 'box',
   },
   // The remaining right-stack trackers (the deed watch list, the delve run
-  // tracker, the rift floor tracker), re-homed like the quest and Reliquary
-  // rows. The delve and rift controllers rebuild their paint target's HTML,
-  // so each paints an inner body element (#delve-body / #rift-body) and the
+  // tracker, the rift floor tracker, the gathering goal tracker), re-homed
+  // like the quest and Reliquary rows. The delve, rift and gathering goal
+  // controllers rebuild their paint target's HTML, so each paints an inner
+  // body element (#delve-body / #rift-body / #gathering-goal-body) and the
   // frame chrome lives beside it on the root; the deed painter builds its
   // skeleton once, so its root is safe as-is.
   {
@@ -338,6 +369,20 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     fallbackSize: { w: 240, h: 100 },
     detachToUiRoot: true,
   },
+  // The gathering goal tracker (Intentional Gathering PR4). It sits in the
+  // same #right-tracker-stack column as the three rows above and repaints on
+  // its own signature gate (gathering_goal_controller.ts); reuses the
+  // existing, previously-unwired `hudChrome.gatheringGoal.title` key
+  // ("Gathering Goal") as the mover chrome's name chip rather than minting a
+  // new frameNames.* string, since that key already names exactly this panel.
+  {
+    id: 'gatheringGoalTracker',
+    elementId: 'gathering-goal-tracker',
+    storageKey: 'woc_hud_frame_gathering_goal_tracker',
+    labelKey: 'hudChrome.gatheringGoal.title',
+    fallbackSize: { w: 240, h: 140 },
+    detachToUiRoot: true,
+  },
   // The off-hand swing timer, the main-hand row's dual-wield sibling: same
   // placeholder posture as the cast and swing bars (hidden outside combat,
   // force-shown dimmed while editing).
@@ -349,6 +394,25 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     fallbackSize: { w: 220, h: 12 },
     detachToUiRoot: false,
   },
+  // The six aura tracks (src/ui/hud/aura_tracks/). Generated from the descriptor
+  // table rather than written out six times: the table already names each
+  // track's element, storage key and label, and a seventh track should not mean
+  // a seventh row here. All REFLOW (a wider frame is a longer bar and more room
+  // for a name before it ellipses), so their side edges resize the real box, the
+  // same choice the two aura rows above make. Already #ui children, so none
+  // detaches. Their menu rows drive the track's own setting (frameRowSettingKey
+  // below), the Target dots shape.
+  ...AURA_TRACKS.map(
+    (track): HudFrameSpec => ({
+      id: `${AURA_TRACK_FRAME_PREFIX}${track.id}`,
+      elementId: track.elementId,
+      storageKey: track.storageKey,
+      labelKey: track.labelKey,
+      fallbackSize: { w: 236, h: 120 },
+      detachToUiRoot: false,
+      resizeMode: 'box',
+    }),
+  ),
 ] as const;
 
 /** Every storage key the option owns, so a reset can clear the whole set. */
@@ -396,6 +460,7 @@ export function frameRowSettingKey(
   | 'showThirdActionBar'
   | 'showReliquaryTracker'
   | 'showTargetDots'
+  | AuraTrackSettingKey
   | null {
   if (id === 'actionBar2') return 'showSecondaryActionBar';
   if (id === 'actionBar3') return 'showThirdActionBar';
@@ -405,7 +470,46 @@ export function frameRowSettingKey(
   // switch for the same reason: two checkboxes over one tracker must be one
   // state.
   if (id === 'targetDots') return 'showTargetDots';
+  // Each aura track has its own master switch as well (all six ship off), so
+  // the same rule holds: the row is generated from the descriptor table and
+  // resolves back to it here, which is why a seventh track needs no arm.
+  const auraTrack = auraTrackForFrameId(id);
+  if (auraTrack) return auraTrack.settingKey;
   return null;
+}
+
+/**
+ * The name chip a frame row wears, resolved per CHARACTER: mechanic frames
+ * name themselves the way the game names the mechanic, so the proc overlay
+ * chips the active spec's own meter (Soul Fragments for a demonology warlock,
+ * Wrack for destruction, Hot Streak / Aether Surge / Icicles for the mage
+ * specs) instead of the generic "Spell Procs", which stays the fallback for a
+ * character whose spec never lights it (an affliction warlock's placeholder).
+ * Every other row keeps its static labelKey. The keys reuse the mechanics'
+ * existing names wherever one exists (the meter aria labels, the ability
+ * names), so no second copy of an in-game term is minted.
+ */
+export function frameRowLabelKey(
+  spec: HudFrameSpec,
+  playerClass: PlayerClass,
+  talentSpec: string | null,
+): TranslationKey {
+  if (spec.id !== 'procOverlay') return spec.labelKey;
+  if (playerClass === 'warlock') {
+    if (talentSpec === 'demonology') return 'hudChrome.procOverlay.soulFragmentsMeter';
+    if (talentSpec === 'destruction') return 'hudChrome.procOverlay.ruinMeter';
+    return spec.labelKey;
+  }
+  if (playerClass === 'mage') {
+    if (talentSpec === 'arcane') return 'entities.abilities.arcane_surge.name';
+    if (talentSpec === 'frost') return 'hudChrome.interfaceUnlock.frameNames.procOverlayFrost';
+    if (talentSpec === 'fire') return 'entities.abilities.hot_streak.name';
+    // An unspecced mage falls through: Hot Streak is a fire talent, so naming
+    // the frame after it before any points are spent would name a mechanic
+    // they do not have (the same rule as the affliction fallback above); the
+    // bird they see in edit mode is only the borrowed unlit preview.
+  }
+  return spec.labelKey;
 }
 
 /** Label the Interface option row shows: it names the ACTION the press performs,

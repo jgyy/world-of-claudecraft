@@ -10,7 +10,7 @@
 // write) left an already-open sheet showing the previous wearer state until the
 // player closed and reopened it. This signature is what the HUD latches on to
 // notice the change and call charWindow.renderIfOpen(), the same shape
-// professionSurfaceRefreshSig (src/ui/profession_identity_view.ts) gives the
+// professionSurfaceRefreshSig (src/ui/hud/professions/profession_identity_view.ts) gives the
 // profession surfaces.
 //
 // It covers the DEEDS and RELIQUARY rows of the progression block, not only the
@@ -75,8 +75,28 @@
  * fixed six-element array through JSON.stringify), so a latch comparing two
  * signatures moves exactly when one of the six moves.
  */
-import { accountReliquaryLedgerSize } from '../sim/reliquary_account';
-import type { AccountReliquaryLedger } from '../world_api/cosmetics';
+/** The six-plus-one part reads off a live world, so the HUD latch is one call
+ *  (the ownedMounts() copy is the one non-O(1) read; see the header). */
+export function charSheetRefreshSigFor(world: {
+  activeTitle: string | null;
+  activeBorder: string | null;
+  deedsEarned: { size: number };
+  deedStats: { itemsDiscovered: { size: number } };
+  reliquaryMarks: { size: number };
+  ownedMounts(): readonly string[];
+  reliquaryAccountFinds: { size: number };
+  accountDeeds: { size: number };
+}): string {
+  return charSheetRefreshSig({
+    activeTitle: world.activeTitle,
+    activeBorder: world.activeBorder,
+    deedsEarned: world.deedsEarned.size,
+    itemsDiscovered: world.deedStats.itemsDiscovered.size,
+    marks: world.reliquaryMarks.size,
+    mounts: world.ownedMounts().length,
+    accountEntries: world.reliquaryAccountFinds.size + world.accountDeeds.size,
+  });
+}
 
 export function charSheetRefreshSig(parts: {
   activeTitle: string | null;
@@ -89,10 +109,10 @@ export function charSheetRefreshSig(parts: {
   marks: number;
   /** ownedMounts().length: Horizons mount relics behind the pair. */
   mounts: number;
-  /** accountCosmetics.reliquary, folded to its size here: fills other
-   *  characters on the account made, which move the pair without moving any
-   *  of the four character surfaces above. */
-  accountRelics?: AccountReliquaryLedger;
+  /** reliquaryAccountFinds.size + accountDeeds.size: the account ledger halves
+   *  behind the account-wide pair and border row. Optional so a host with no
+   *  ledger signs exactly as before. */
+  accountEntries?: number;
 }): string {
   return JSON.stringify([
     parts.activeTitle,
@@ -101,6 +121,6 @@ export function charSheetRefreshSig(parts: {
     parts.itemsDiscovered,
     parts.marks,
     parts.mounts,
-    accountReliquaryLedgerSize(parts.accountRelics),
+    parts.accountEntries ?? 0,
   ]);
 }

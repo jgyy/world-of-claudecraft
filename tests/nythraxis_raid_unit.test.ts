@@ -3,6 +3,8 @@ import { nextRaidResetMs } from '../server/raid_reset';
 import { visualKeyFor } from '../src/render/characters/manifest';
 import { dungeonDaisHasRaisedPlatform } from '../src/render/dungeon';
 import { isBlocked } from '../src/sim/colliders';
+import { FARM_CROPS } from '../src/sim/content/farm_crops';
+import { FARM_RECIPES } from '../src/sim/content/recipes';
 import { BUILTIN_WORLD, DUNGEONS, ITEMS, instanceOrigin, MOBS } from '../src/sim/data';
 import { NYTHRAXIS_LAYOUT } from '../src/sim/dungeon_layout';
 import {
@@ -23,6 +25,12 @@ import {
   type WorldContent,
 } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
+
+// The two rollGroups APPENDED to the raid base table since it shipped, in
+// append order. Named once so the sweeps below read as "the base walk, then
+// each appended block" instead of repeating string literals, and so the next
+// appended channel extends one list rather than four assertions.
+const APPENDED_GROUPS = { apex: 'nythraxis_patterns', farm: 'nythraxis_farm' } as const;
 
 // The raid assertions run inside the Nythraxis instance band (x > 3000): the
 // boss, adds, Aldric, and wardstones are all spawned by the encounter/dungeon
@@ -339,71 +347,49 @@ describe('Nythraxis raid encounter', () => {
     expect(boss.aggroTargetId).toBe(tank.id);
   });
 
-  it('defines the seven Nythraxis equipment roll groups with 3 percent legendary rolls', () => {
-    // Equipment drops only: the collectible mount reins (kind 'mount') is its
-    // own independent draw outside the equipment roll groups, pinned by tests/mounts.test.ts.
+  it('defines two Nythraxis equipment partitions with 3 percent legendary rolls', () => {
     const loot = MOBS.nythraxis_scourge_of_thornpeak.loot.filter(
-      (entry) => entry.itemId && ITEMS[entry.itemId]?.kind !== 'mount',
+      (entry) =>
+        entry.itemId && ['armor', 'weapon', 'held_offhand'].includes(ITEMS[entry.itemId].kind),
     );
     const groups = new Map<string, typeof loot>();
     for (const entry of loot) {
-      expect(entry.rollGroup).toMatch(/^nythraxis_drop_[1-7]$/);
+      expect(entry.rollGroup).toMatch(/^nythraxis_drop_[12]$/);
       const group = entry.rollGroup!;
       groups.set(group, [...(groups.get(group) ?? []), entry]);
       expect(ITEMS[entry.itemId!], entry.itemId).toBeTruthy();
     }
-
-    // Seven: four guaranteed set-piece groups, the maul's and Bramblehide's
-    // bonus draws, and the guaranteed gap-fill group (nythraxis_drop_7, seven
-    // lane fillers summing to exactly 1.00 like groups 1 to 4).
-    expect(groups.size).toBe(7);
+    expect(groups.size).toBe(2);
     for (const [name, entries] of groups) {
-      const total = entries.reduce((sum, entry) => sum + entry.chance, 0);
-      // nythraxis_drop_5 is the feral ladder's bonus draw (maul_of_the_scourged_wilds):
-      // a single independent 25% roll on top of the four guaranteed equipment
-      // groups, which keep their exact 1.00 partitions untouched.
-      if (name === 'nythraxis_drop_5') {
-        expect(entries.map((entry) => entry.itemId)).toEqual(['maul_of_the_scourged_wilds']);
-        expect(total).toBe(0.25);
-      } else if (name === 'nythraxis_drop_6') {
-        // Roots' Bramblehide, the feral druid's Strength leather family: a
-        // second independent bonus draw, seven FERAL-tagged pieces at 0.08
-        // each (56% for one piece per kill), never displacing a shared piece.
-        // The tag is a data pin, not an equip lock: canEquipItem gates armor
-        // by weight alone (equipment_rules.ts).
-        expect(entries.map((entry) => entry.itemId)).toEqual([
-          'bramblehide_crown',
-          'bramblehide_mantle',
-          'bramblehide_harness',
-          'bramblehide_cinch',
-          'bramblehide_legguards',
-          'bramblehide_grips',
-          'bramblehide_treads',
-        ]);
-        for (const entry of entries) {
-          expect(entry.chance).toBe(0.08);
-          expect(ITEMS[entry.itemId!].requiredClass).toEqual(['druid']);
-          expect(ITEMS[entry.itemId!].set).toBe('bramblehide');
-        }
-        expect(total).toBeCloseTo(0.56, 5);
-      } else if (name === 'nythraxis_drop_7') {
-        // The seven gap-fill lane fillers (zone3.ts NYTHRAXIS_GAP_ITEM_IDS): a
-        // guaranteed fifth equipment draw partitioned like groups 1 to 4, the
-        // two larger shares on the rogue dagger and the tank one-hander.
-        // Membership and chances pinned exactly, like group 6.
-        expect(entries.map((entry) => [entry.itemId, entry.chance])).toEqual([
-          ['courtiers_bonefang', 0.15],
-          ['thornpeak_wardblade', 0.15],
-          ['gravecourt_hewer', 0.14],
-          ['votive_ward_of_the_deathless_court', 0.14],
-          ['thornpeak_moonhide_cowl', 0.14],
-          ['stormhymn_chain_grips', 0.14],
-          ['stormhymn_chain_treads', 0.14],
-        ]);
-        expect(total).toBeCloseTo(1, 5);
-      } else {
-        expect(total).toBeCloseTo(1, 5);
+      expect(entries.reduce((sum, entry) => sum + entry.chance, 0)).toBe(1);
+      for (const entry of entries) {
+        expect(entry.normalOnly).toBe(name === 'nythraxis_drop_2' ? true : undefined);
       }
+    }
+    const sharedIds = groups.get('nythraxis_drop_1')!.map((entry) => entry.itemId);
+    for (const id of [
+      'maul_of_the_scourged_wilds',
+      'bramblehide_crown',
+      'bramblehide_mantle',
+      'bramblehide_harness',
+      'bramblehide_cinch',
+      'bramblehide_legguards',
+      'bramblehide_grips',
+      'bramblehide_treads',
+      'courtiers_bonefang',
+      'thornpeak_wardblade',
+      'gravecourt_hewer',
+      'votive_ward_of_the_deathless_court',
+      'thornpeak_moonhide_cowl',
+      'stormhymn_chain_grips',
+      'stormhymn_chain_treads',
+    ])
+      expect(sharedIds).toContain(id);
+    expect(sharedIds).toHaveLength(30);
+    expect(groups.get('nythraxis_drop_2')).toHaveLength(28);
+    for (const id of sharedIds.filter((id) => id!.startsWith('bramblehide_'))) {
+      expect(ITEMS[id!].requiredClass).toEqual(['druid']);
+      expect(ITEMS[id!].set).toBe('bramblehide');
     }
     expect(ITEMS.maul_of_the_scourged_wilds.requiredClass).toEqual(['druid']);
 
@@ -435,6 +421,111 @@ describe('Nythraxis raid encounter', () => {
     expect(ITEMS.soulflame_mantle.requiredClass).toEqual(['mage', 'priest', 'warlock', 'druid']);
     expect(ITEMS.stormcallers_crown.requiredClass).toEqual(['shaman']);
     expect(ITEMS.stormcallers_spaulders.requiredClass).toEqual(['shaman']);
+  });
+
+  it('appends the ten apex gear patterns as one tail rollGroup at 0.04 each (phase 11)', () => {
+    // The R8 raid channel: the ten APEX_GEAR patterns ride ONE new partitioned
+    // draw (0.40 total, at most one pattern per kill). The append position is a
+    // CONTRACT, not a style choice: loot_roll.ts consumes rng draws in array
+    // order, so the pattern group must sit at the TAIL where its one new draw
+    // lands after every pre-existing draw.
+    const loot = MOBS.nythraxis_scourge_of_thornpeak.loot;
+    const patterns = loot
+      .map((entry, index) => ({ entry, index }))
+      .filter(({ entry }) => entry.rollGroup === APPENDED_GROUPS.apex);
+    expect(patterns).toHaveLength(10);
+    for (const { entry } of patterns) {
+      expect(entry.chance, entry.itemId).toBe(0.04);
+      expect(ITEMS[entry.itemId!]?.kind, entry.itemId).toBe('recipe');
+    }
+    expect(patterns.reduce((sum, { entry }) => sum + entry.chance, 0)).toBeCloseTo(0.4, 10);
+    // Every kind 'recipe' entry on the table belongs to ONE of the two appended
+    // pattern groups, so neither can leak a pattern into a gear group. Re-cut
+    // by Phase 11f, which added pattern_harvest_feast to the farm group: the
+    // old form asserted the recipe entries were exactly the apex ten, which
+    // stops being true the moment a second pattern channel lands on this table.
+    const recipeEntries = loot.filter(
+      (entry) => entry.itemId && ITEMS[entry.itemId]?.kind === 'recipe',
+    );
+    expect(recipeEntries).toHaveLength(11);
+    for (const entry of recipeEntries) {
+      expect(
+        [APPENDED_GROUPS.apex, APPENDED_GROUPS.farm],
+        `${entry.itemId} is a pattern outside both appended groups`,
+      ).toContain(entry.rollGroup);
+    }
+    expect([...new Set(patterns.map(({ entry }) => entry.itemId))].sort()).toEqual(
+      [
+        'pattern_duskforged_bulwark',
+        'pattern_duskforged_warblade',
+        'pattern_gyrelens_array',
+        'pattern_makers_charm',
+        'pattern_masters_field_forge',
+        'pattern_prismglass_loop',
+        'pattern_ridgebreaker',
+        'pattern_voidbound_grimoire',
+        'pattern_warhewn_signet',
+        'pattern_wyrmfall_pendant',
+      ].sort(),
+    );
+    // TAIL pin, now stated as an ORDERED append history rather than one
+    // boundary: the base gear entries come first, then the phase 11 apex
+    // group, then the phase 11f farm group, each block strictly below the last.
+    // That is what proves each new draw landed at the END of the walk at the
+    // time it was added. Written as a general sweep so the NEXT appended group
+    // extends the list instead of rewriting the assertion.
+    const APPEND_ORDER: string[] = [APPENDED_GROUPS.apex, APPENDED_GROUPS.farm];
+    const indexed = loot.map((entry, index) => ({ entry, index }));
+    const blockBounds = APPEND_ORDER.map((group) => {
+      const rows = indexed.filter(({ entry }) => entry.rollGroup === group);
+      expect(rows.length, `${group} must be a non-empty appended block`).toBeGreaterThan(0);
+      return {
+        group,
+        lowest: Math.min(...rows.map(({ index }) => index)),
+        highest: Math.max(...rows.map(({ index }) => index)),
+      };
+    });
+    const baseHighest = Math.max(
+      ...indexed
+        .filter(({ entry }) => !APPEND_ORDER.includes(entry.rollGroup ?? ''))
+        .map(({ index }) => index),
+    );
+    let floor = baseHighest;
+    for (const block of blockBounds) {
+      expect(block.lowest, `${block.group} must sit entirely below index ${floor}`).toBeGreaterThan(
+        floor,
+      );
+      floor = block.highest;
+    }
+  });
+
+  it('appends the farming group last, carrying the feast pattern and every tier-4 seed', () => {
+    // Farming's raid channel (Phase 11f): the farm ladder's pinnacle recipe on
+    // the pinnacle encounter, riding one partitioned draw with the tier-4 seeds.
+    // The membership is DERIVED from FARM_CROPS and the recipe table rather than
+    // listed, so a new tier-4 crop or a re-tiered feast reds here instead of
+    // leaving the group quietly short.
+    const entries = MOBS.nythraxis_scourge_of_thornpeak.loot.filter(
+      (entry) => entry.rollGroup === APPENDED_GROUPS.farm,
+    );
+    const tierFourSeeds = Object.values(FARM_CROPS)
+      .filter((crop) => crop.tier === 4)
+      .map((crop) => crop.seedItemId);
+    const feastRecipe = FARM_RECIPES.find((r) => r.id === 'recipe_harvest_feast');
+    expect(feastRecipe?.acquisition, 'the feast must be a drop to have a pattern').toContain(
+      'drop',
+    );
+    expect([...entries.map((entry) => entry.itemId)].sort()).toEqual(
+      [`pattern_${feastRecipe?.resultItemId}`, ...tierFourSeeds].sort(),
+    );
+    expect(entries, 'one feast pattern plus the four tier-4 seeds').toHaveLength(5);
+    // The SHIPPED per-entry point reused, never a new one: same 0.04 the apex
+    // group uses, so the group totals 0.20 and sheds at most one item per kill.
+    for (const entry of entries) expect(entry.chance, entry.itemId).toBe(0.04);
+    expect(entries.reduce((sum, entry) => sum + entry.chance, 0)).toBeCloseTo(0.2, 10);
+    // Partitioned, not compounded: a group total at or below 1 is what makes
+    // "at most one per kill" true of the resolver's single draw.
+    expect(entries.reduce((sum, entry) => sum + entry.chance, 0)).toBeLessThanOrEqual(1);
   });
 
   it('drops the offhand-slot and two-hander epics at item level 29 (raid source)', () => {

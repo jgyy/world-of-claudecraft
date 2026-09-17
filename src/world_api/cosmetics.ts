@@ -8,26 +8,10 @@ export interface AccountCosmetics {
   // loadout. Both are account state: every character on the account shares them.
   weaponSkinIds: string[];
   weaponSkinLoadout: Record<string, string>;
-  // The account Reliquary ledger (src/sim/reliquary_account.ts): every
-  // catalogued relic any character on the account has ever filled, by kind.
-  // Optional on the wire and in every literal so the pre-ledger shape still
-  // type-checks; absent reads as empty. The offline Sim (one character, one
-  // account) never carries one.
-  reliquary?: AccountReliquaryLedger;
-}
-
-/**
- * Account-wide Reliquary ownership: catalogued relic ids the account has
- * filled on ANY character, one sorted, de-duped list per relic kind. Weapon
- * skins are already account state (weaponSkinIds) and never ride here. This
- * is ownership only: first-find provenance, obtain tallies, and the recent
- * ring stay per character. Bounded by the catalog on every host.
- */
-export interface AccountReliquaryLedger {
-  items: string[];
-  marks: string[];
-  mounts: string[];
-  titles: string[];
+  // Mount skins (src/sim/content/mount_skins.ts): account-wide ownership,
+  // mirrored from the economy service's grant ledger. The WORN skin is per
+  // character (Entity.mountSkinId), not account state, so it is not here.
+  mountSkinIds: string[];
 }
 
 export interface IWorldCosmetics {
@@ -42,6 +26,10 @@ export interface IWorldCosmetics {
   // server enforces account ownership and the equipped-weapon-type match; the
   // offline Sim enforces the type match only (the paid store is online-only).
   changeWeaponSkin(skinId: string | null, weaponType?: WeaponSkinType): void;
+  // Wear (skinId) or take off (null) a mount skin on THIS character. The server
+  // enforces account ownership (accountCosmetics.mountSkinIds); the offline Sim
+  // gates on its own mirror. Cosmetic only: the ridden mount keeps its stats.
+  changeMountSkin(skinId: string | null): void;
   // Z-key sheathe toggle: held weapons render stowed on the back (cosmetic; the
   // sim clears it on any deliberate combat action, WoW-style).
   toggleWeaponStow(): void;

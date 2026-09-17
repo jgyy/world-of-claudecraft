@@ -1418,7 +1418,9 @@ describe('Ignivar encounter renderer', () => {
       renderer.match(/this\.mageGroundFx\.syncWorldMeteorWarnings\(this\.sim\);/g),
     ).toHaveLength(2);
     expect(renderer).toContain('if (handleMageGroundSpellfxEvent(this.mageGroundFx, ev)) break;');
-    expect(hud).toContain('resolveCastLabel: (s) => abilityDisplayNameFromSource(s.label)');
+    // The target cast bar's resolver stays on the shared ability-display
+    // path; farming's plant cast no longer needs a front-running HUD arm.
+    expect(hud).toContain('resolveCastLabel: (s) => abilityDisplayNameFromSource(s.label),');
   });
 
   it('locks the boss render facing for every facing-anchored telegraph cast', () => {
