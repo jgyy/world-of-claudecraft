@@ -71,7 +71,6 @@ import {
   dist2d,
   ENCHANT_CAST_ID,
   FACING_HOLD_DIST,
-  FARMING_CAST_ID,
   FISHING_CAST_ID,
   GATHER_CAST_ID,
   isFormAuraKind,
@@ -98,11 +97,10 @@ import {
   completeNeedleOfFateCast,
   consumeFateThreadsForDrain,
   gainDoom,
+  hasAfflictionConsumePushbackImmunity,
 } from './affliction';
-import {
-  shouldBufferSentenceDuringGcd,
-  shouldPreserveQueuedSentence,
-} from './affliction_sentence_queue';
+import { shouldPreserveQueuedSentence } from './affliction_sentence_queue';
+import { abilityCastSurvivesMovement, heldMovementInputWouldMove } from './cast_move_gate';
 import {
   hasUnbreakableMovementLock,
   isInStasis,
@@ -119,6 +117,8 @@ import {
   aetherDartsBoltBonus,
   aetherDartsChannelStart,
   aetherSurgeCastMult,
+  PERFECT_MOMENT_DARTS_DAMAGE_MULT,
+  perfectMomentActive,
 } from './chronomancy';
 import { onCraftedCollectionHeal } from './crafted_collection_effects';
 import {
@@ -200,6 +200,7 @@ import { paladinManaCostMultiplier } from './paladin_support';
 import { isValkyrsCallingAirborne } from './paladin_valkyrs_calling_state';
 import { effectivePlayerAttackRange } from './player_attack_reach';
 import { hasTithefiendTarget } from './priest/vespers';
+import { swingReadyForQueuedCast } from './queued_cast_swing_yield';
 import { resurrectionCastRange, resurrectionReachError } from './resurrection_reach';
 import {
   detonatorFreeMultiplier,
@@ -616,7 +617,7 @@ export function updateCasting(ctx: SimContext, p: Entity, meta: PlayerMeta): voi
       p.castAim = null;
       p.castTargetId = null;
       ctx.emit({ type: 'castStop', entityId: p.id, success: true });
-      fireQueuedCast(ctx, p);
+      fireQueuedCast(ctx, p, true);
     }
     return;
   }
@@ -694,17 +695,6 @@ export function updateCasting(ctx: SimContext, p: Entity, meta: PlayerMeta): voi
       ctx.completeRechargeCast(p, meta);
       return;
     }
-    // Planting cast completion (Farming): DELIBERATELY DISPATCHES NOTHING.
-    // Every other arm above routes to the module that resolves its outcome;
-    // farming's plant resolves at COMMAND time (professions/farming.ts
-    // plantCrop writes the plot, consumes the seed and pre-rolls the growth
-    // script before the cast even starts), so the cast is pure flavor and
-    // this arm exists only to return before fireQueuedCast, exactly like its
-    // neighbours. The generic cast-field clearing above (castingAbility,
-    // castRemaining) plus the castStop already emitted is the whole
-    // completion. The consequence is the point: damage cancelling the cast
-    // leaves the plant standing, because the crop was already in the ground.
-    if (castId === FARMING_CAST_ID) return;
     // Ice Floes (mage choice row): a COMPLETED hard cast spends one protected
     // use whether or not the caster actually moved (the buff is a banked
     // window, not a refund). Fishing above never spends one. Draws no rng.
@@ -728,7 +718,7 @@ export function updateCasting(ctx: SimContext, p: Entity, meta: PlayerMeta): voi
     // non-aimed cast can't inherit a stale target point.
     p.castAim = null;
     p.castTargetId = null;
-    fireQueuedCast(ctx, p);
+    fireQueuedCast(ctx, p, true);
   }
 }
 
@@ -770,7 +760,29 @@ export function releaseEmpoweredAbility(ctx: SimContext, abilityId: string, pid?
   applyAbility(ctx, p, meta, { ...res, empowerLevel: level });
   p.castAim = null;
   p.castTargetId = null;
-  fireQueuedCast(ctx, p);
+  fireQueuedCast(ctx, p, true);
+}
+
+// An accepted on-GCD press is the player's latest intent: it discards any
+// stale GCD-held queued press still in the slot. Reachable only via the
+// one-tick gap after the GCD expires (gcdRemaining zeroes in updateTimers,
+// AFTER the updateCasting retry arm ran), where a fresh press passes the GCD
+// gate before the retry can fire the slot; without this clear the stale press
+// fires when the fresh cast completes. Off-GCD weaves never touch the slot,
+// and neither does a blink-through commit (excluded at its call site: the
+// escape weave leaves the cast in progress, and therefore the follow-up
+// queued behind it, untouched). Only the instant commit site carries that
+// exclusion: blinkThrough requires castTime 0, so the timed-cast and channel
+// commit sites are unreachable by a blink-through press today; a future
+// usableWhileCasting ability WITH a cast time or channel must extend the
+// guard to its commit site or it will eat the queued follow-up. The normal
+// queued fire is unaffected (fireQueuedCast empties the slot before calling
+// back in).
+function dropStaleHeldPressOnCommit(p: Entity, ability: AbilityDef): void {
+  if (ability.offGcd) return;
+  p.queuedCastAbility = null;
+  p.queuedCastAim = null;
+  p.queuedCastTargetId = null;
 }
 
 // Consumes the single-slot spell queue (see CAST_QUEUE_WINDOW_SEC), firing the
@@ -778,15 +790,45 @@ export function releaseEmpoweredAbility(ctx: SimContext, abilityId: string, pid?
 // flat GCD (the common hasted case) can complete before the GCD armed at its
 // start clears: hold the slot in that case and let updateCasting retry every
 // tick until the GCD is gone, instead of dropping the press.
-function fireQueuedCast(ctx: SimContext, p: Entity): void {
+//
+// `onComplete` marks the call made from a cast-completion path. The tick runs
+// updateCasting before updatePlayerAutoAttack, and that driver bails while
+// castingAbility is set, so a queued cast that starts here in the same tick
+// the previous one completed never shows the driver a gap: the swing timer
+// decays to zero and the ready wand bolt (or melee swing) starves for as long
+// as the spam lasts. When swingReadyForQueuedCast says a swing is ready, fire
+// it through the driver's own attempt (ctx.tryPlayerSwing, every gate intact)
+// while castingAbility is still null, then start the queued cast as before.
+// The retry arm (onComplete false) runs only when no cast is in progress, so
+// the driver already swings on those ticks.
+function fireQueuedCast(ctx: SimContext, p: Entity, onComplete = false): void {
   const queued = p.queuedCastAbility;
   if (!queued) return;
   const res = ctx.resolvedAbility(queued, p.id);
   if (res && !res.def.offGcd && p.gcdRemaining > 0) return;
+  const queuedStartsCast = !!res && res.castTime > 0;
+  if (onComplete && queuedStartsCast && swingReadyForQueuedCast(p)) {
+    const r = ctx.resolve(p.id);
+    if (r) {
+      // Run the driver's tick early, exactly: its decay first, so the timer
+      // gate inside the attempt sees the same post-decay value the driver
+      // would see this tick, then the attempt. Then hand the decay back, so
+      // the driver's own pass later this tick lands both timers where a
+      // driver-fired swing leaves them (a fresh weapon speed, or an untouched
+      // timer one DT lower), and the cadence stays the weapon's to the tick.
+      p.swingTimer = Math.max(0, p.swingTimer - DT);
+      p.offhandSwingTimer = Math.max(0, p.offhandSwingTimer - DT);
+      ctx.tryPlayerSwing(p, r.meta);
+      p.swingTimer += DT;
+      p.offhandSwingTimer += DT;
+    }
+  }
   const aim = p.queuedCastAim;
+  const targetOverride = p.queuedCastTargetId;
   p.queuedCastAbility = null;
   p.queuedCastAim = null;
-  castAbility(ctx, queued, p.id, aim ?? undefined);
+  p.queuedCastTargetId = null;
+  castAbility(ctx, queued, p.id, aim ?? undefined, targetOverride);
 }
 
 export function cancelCast(ctx: SimContext, p: Entity): void {
@@ -806,6 +848,7 @@ export function cancelCast(ctx: SimContext, p: Entity): void {
   // an interrupted cast never completed, so its queued follow-up is dropped too
   p.queuedCastAbility = null;
   p.queuedCastAim = null;
+  p.queuedCastTargetId = null;
   // Hidden per-cast fishing/gather/craft state: unconditional inert writes
   // (already '' / 0 / false on every non-profession cancel path), so every
   // existing cancel stays byte-identical while a cancelled profession cast
@@ -833,6 +876,7 @@ export function cancelCast(ctx: SimContext, p: Entity): void {
 
 export function pushbackCast(p: Entity): void {
   if (hasCastShield(p)) return;
+  if (p.castingAbility === 'drain_life' && hasAfflictionConsumePushbackImmunity(p)) return;
   // Item-set caster bonus scales damage-driven pushback (1 = fully immune).
   const factor = 1 - p.castPushbackReduction;
   if (factor <= 0) return;
@@ -1048,6 +1092,7 @@ export function castAbility(
       if (p.castRemaining <= CAST_QUEUE_WINDOW_SEC && !isNonSpellCast(p.castingAbility)) {
         p.queuedCastAbility = abilityId;
         p.queuedCastAim = aim ?? null;
+        p.queuedCastTargetId = castTargetId;
         return;
       }
       ctx.error(p.id, 'You are busy.');
@@ -1059,11 +1104,18 @@ export function castAbility(
   // in when the GCD is still running, so this early return only fires for a
   // same-tick player press racing the GCD, not for a queued follow-up.
   if (!ability.offGcd && p.gcdRemaining > 0 && !blinkThrough) {
-    if (shouldBufferSentenceDuringGcd(abilityId, p.gcdRemaining)) {
+    // WotLK-style GCD-tail queue: a press inside the final CAST_QUEUE_WINDOW_SEC
+    // of a bare GCD loads the same single slot the cast-tail queue uses
+    // (last-press-wins), and the updateCasting retry arm fires it the tick the
+    // GCD clears. This generalizes the Sentence-only buffer that previously
+    // lived here; the Sentence preserve guard above still keeps a queued
+    // release from being overwritten by generator spam.
+    if (p.gcdRemaining <= CAST_QUEUE_WINDOW_SEC) {
       p.queuedCastAbility = abilityId;
       p.queuedCastAim = aim ?? null;
+      p.queuedCastTargetId = castTargetId;
     }
-    return; // silent, classic spams this
+    return; // an earlier press stays silent, classic spams this
   }
   const togglingOff = isToggleBuff(ability) && p.auras.some((a) => a.id === ability.id);
   // sharedCooldownIds generalizes the release's shaman-shock special case (it
@@ -1112,7 +1164,7 @@ export function castAbility(
     return;
   }
   // Auto-unshift (see combat/form_auto_unshift.ts): a healing or damaging spell
-  // pressed in Bruin/Wolf/Fleet Form drops the form and casts. Decided HERE and
+  // pressed in Bruin/Cat/Fleet Form drops the form and casts. Decided HERE and
   // applied at the form gate below, because the two questions this answers sit
   // on either side of it: the cast is billed against the PARKED mana (the live
   // bar is rage or energy while shifted), and refusing it for cost must leave
@@ -1253,7 +1305,7 @@ export function castAbility(
   if (ability.requiresForm) {
     const need = ability.requiresForm === 'bear' ? 'form_bear' : 'form_cat';
     if (!form || form.kind !== need) {
-      ctx.error(p.id, `You must be in ${ability.requiresForm === 'bear' ? 'Bruin' : 'Wolf'} Form.`);
+      ctx.error(p.id, `You must be in ${ability.requiresForm === 'bear' ? 'Bruin' : 'Cat'} Form.`);
       return;
     }
   } else if (form && !isFormToggle(ability) && !ability.usableInForm) {
@@ -1644,6 +1696,55 @@ export function castAbility(
     }
   }
 
+  // Brain Freeze (combat/frost_mage.ts): consumed HERE, after every gate
+  // above (so a blocked cast never eats the proc) and before the cast-time /
+  // cost / cooldown reads below: the armed Flurry goes instant, skips its
+  // cooldown and carries its 30% baked into the resolved effects.
+  res = applyBrainFreezeOverride(ctx, p, res);
+  // Solar Reprisal shares one choice across the Protection Paladin's ranged
+  // strike, self-sustain strike, and ally-capable filler heal. Consume only
+  // after all cast gates succeed, then bake the chosen override into this cast.
+  res = applySolarReprisalOverride(ctx, p, res);
+  // Dawn's Wrath is a stored extra Tolling Hammer cast, not a cooldown reset:
+  // consume it only after every cast gate succeeds, then leave any existing
+  // cooldown untouched by resolving this one cast with a zero-second cooldown.
+  res = applyDawnsWrathOverride(ctx, p, res);
+
+  // Owner 2026-07-13: spell haste shortens the global cooldown (floored at MIN_GCD),
+  // so gear/Bloodlust/Temporal Acceleration haste speeds the whole rotation, not just
+  // cast bars. spellHasteMult is 1 for anyone without spell haste, so their GCD is
+  // unchanged.
+  const gcd = Math.max(MIN_GCD, ctx.playerGcdFor(meta.cls) / spellHasteMult(p));
+  // A channel keeps its duration, so it must not eat a next_cast_instant charge.
+  let consumedInstantAura: Aura | null = null;
+  if (
+    !ability.channel &&
+    res.castTime > 0 &&
+    (ability.school !== 'physical' || hasScopedNextCastInstant(p, ability.id))
+  ) {
+    consumedInstantAura = consumeNextCastInstantAura(ctx, p, ability.id);
+  }
+  const instantBaseCastTime =
+    consumedInstantAura !== null ? 0 : res.castTime * shamanCastTimeMultiplier(p, ability.id);
+  const castTime =
+    afflictionAdjustedCastTime(p, ability.id, instantBaseCastTime) *
+    destructionCastTimeMult(p, ability.id) *
+    ashenFocusCastTimeMult(ctx, p, meta, ability.id);
+  // A press that cannot survive movement (abilityCastSurvivesMovement) is denied
+  // OUTRIGHT here, before the GCD arms or any cast-commit body state is changed,
+  // when the player's held movement input would actually move this tick. A root,
+  // steep-ground control strip, or dismount lock matches player_motion's own
+  // cancellation gate: those states mean the input is held but the body is not
+  // moving, so the cast may start normally.
+  if (
+    (ability.channel || (castTime > 0 && !togglingOff)) &&
+    heldMovementInputWouldMove(p, meta.moveInput, ctx.cfg.seed) &&
+    !abilityCastSurvivesMovement(p, ability.id, res)
+  ) {
+    ctx.error(p.id, "You can't cast while moving.");
+    return;
+  }
+
   if (p.sitting) ctx.standUp(p);
   if (p.weaponStowed) drawWeapon(p);
   if (ability.id !== 'ghost_wolf' && p.auras.some((a) => a.id === 'ghost_wolf')) {
@@ -1706,41 +1807,6 @@ export function castAbility(
     return;
   }
   p.castTargetId = target?.id ?? null;
-
-  // Brain Freeze (combat/frost_mage.ts): consumed HERE, after every gate
-  // above (so a blocked cast never eats the proc) and before the cast-time /
-  // cost / cooldown reads below: the armed Flurry goes instant, skips its
-  // cooldown and carries its 30% baked into the resolved effects.
-  res = applyBrainFreezeOverride(ctx, p, res);
-  // Solar Reprisal shares one choice across the Protection Paladin's ranged
-  // strike, self-sustain strike, and ally-capable filler heal. Consume only
-  // after all cast gates succeed, then bake the chosen override into this cast.
-  res = applySolarReprisalOverride(ctx, p, res);
-  // Dawn's Wrath is a stored extra Tolling Hammer cast, not a cooldown reset:
-  // consume it only after every cast gate succeeds, then leave any existing
-  // cooldown untouched by resolving this one cast with a zero-second cooldown.
-  res = applyDawnsWrathOverride(ctx, p, res);
-
-  // Owner 2026-07-13: spell haste shortens the global cooldown (floored at MIN_GCD),
-  // so gear/Bloodlust/Temporal Acceleration haste speeds the whole rotation, not just
-  // cast bars. spellHasteMult is 1 for anyone without spell haste, so their GCD is
-  // unchanged.
-  const gcd = Math.max(MIN_GCD, ctx.playerGcdFor(meta.cls) / spellHasteMult(p));
-  // A channel keeps its duration, so it must not eat a next_cast_instant charge.
-  let consumedInstantAura: Aura | null = null;
-  if (
-    !ability.channel &&
-    res.castTime > 0 &&
-    (ability.school !== 'physical' || hasScopedNextCastInstant(p, ability.id))
-  ) {
-    consumedInstantAura = consumeNextCastInstantAura(ctx, p, ability.id);
-  }
-  const instantBaseCastTime =
-    consumedInstantAura !== null ? 0 : res.castTime * shamanCastTimeMultiplier(p, ability.id);
-  const castTime =
-    afflictionAdjustedCastTime(p, ability.id, instantBaseCastTime) *
-    destructionCastTimeMult(p, ability.id) *
-    ashenFocusCastTimeMult(ctx, p, meta, ability.id);
   // A free cast is consumed where the cost is actually billed: here for channels
   // and instants (this tick resolves them via the local `res`), but for cast-time
   // spells the bill lands in applyAbility at completion, which RE-RESOLVES the
@@ -1817,6 +1883,7 @@ export function castAbility(
       consumeFateThreadsForDrain(ctx, p, target, channelDuration);
     }
     p.gcdRemaining = Math.max(p.gcdRemaining, gcd);
+    dropStaleHeldPressOnCommit(p, ability);
     if (ability.id === 'rain_of_fire') {
       const center = ability.selfCentered ? p.pos : (p.castAim ?? p.pos);
       const radius = res.effects.find((effect) => effect.type === 'aoeDamage')?.radius;
@@ -1864,12 +1931,17 @@ export function castAbility(
     p.castTotal = stretchedCastTime;
     p.castRemaining = stretchedCastTime;
     p.gcdRemaining = Math.max(p.gcdRemaining, gcd);
+    dropStaleHeldPressOnCommit(p, ability);
     ctx.emit({ type: 'castStart', entityId: p.id, ability: ability.id, time: stretchedCastTime });
     coldsightReserveRead(ctx, p, ability.id);
     return;
   }
 
   if (!ability.offGcd) p.gcdRemaining = Math.max(p.gcdRemaining, gcd);
+  // A blink-through press is an escape weave DURING the cast in progress
+  // (Flickerstep is on-GCD but slips past the busy guard); it must not eat
+  // the follow-up queued behind that cast.
+  if (!blinkThrough) dropStaleHeldPressOnCommit(p, ability);
   const instantResolved = ability.empowerStages
     ? { ...res, empowerLevel: ability.empowerStages }
     : res;
@@ -2342,8 +2414,8 @@ function applyChannelTick(
     // Aether Darts: the FIRST landed missile consumes the caster's Arcane Charges
     // and locks a flat per-missile Arcane bonus (combat/chronomancy.ts); later
     // missiles reuse it. It is plain Arcane damage, so Temporal Echo heals from it
-    // at the normal rate. Draws no rng; a no-op (0) for any other channel and with
-    // no charges held.
+    // through the individual-mark rotation weight. Draws no rng; a no-op (0) for
+    // any other channel and with no charges held.
     const surgeBonus =
       res.def.id === 'arcane_missiles'
         ? aetherDartsBoltBonus(ctx, src, res.def.channel?.ticks ?? 1)
@@ -2353,11 +2425,28 @@ function applyChannelTick(
         const crit = ctx.rng.chance(consumeNextAttackCrit(ctx, src) ? 1 : ctx.spellCrit(src));
         let dmg = ctx.rng.range(eff.min, eff.max) + channelSp + surgeBonus;
         dmg *= spellDamageMultFromAuras(src);
+        if (res.def.id === 'arcane_missiles' && perfectMomentActive(src)) {
+          dmg *= PERFECT_MOMENT_DARTS_DAMAGE_MULT;
+        }
         // A channeled spell tick (Arcane Missiles) is a spell crit, so it takes the
         // spell crit-damage channel of the mastery (plus the generic bonus) like
         // every other spell crit.
         if (crit) dmg *= 1.5 + src.critDmgSpellBonus;
-        ctx.dealDamage(src, tgt, Math.round(dmg), crit, res.def.school, res.def.name, 'hit');
+        ctx.dealDamage(
+          src,
+          tgt,
+          Math.round(dmg),
+          crit,
+          res.def.school,
+          res.def.name,
+          'hit',
+          false,
+          undefined,
+          true,
+          false,
+          false,
+          res.def.id === 'arcane_missiles' ? res.def.id : null,
+        );
         noteSpellHit(ctx, src, crit, res.def.id);
       } else if (eff.type === 'drainTick') {
         const doom = afflictionDrainTickDoom(ctx, src, tgt, consumeThreadDoomBonus);

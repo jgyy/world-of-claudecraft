@@ -8,6 +8,11 @@
 // injector) go through abilityDisplayDescription, and the field CHOICE is a pure
 // core (abilityDescriptionField) a vitest drives directly.
 
+import {
+  TEMPORAL_ECHO_AREA_CONVERSION,
+  TEMPORAL_ECHO_ROTATION_CONVERSION_MULTIPLIER,
+  TEMPORAL_ECHO_SINGLE_CONVERSION,
+} from '../sim/content/chronomancy_tuning';
 import type { ResolvedAbility } from '../sim/sim';
 import {
   type AbilityEffect,
@@ -26,6 +31,7 @@ import {
   abilityTemporalHourglassValues,
   auraBuffDisplayValue,
 } from './ability_damage';
+import { formatAbilityImbueDamage } from './ability_imbue_text';
 import type { AuraEffectInput } from './aura_effect';
 import { type AbilitySpecNoteField, tEntity, tEntityOptional } from './entity_i18n';
 import { formatNumber, type InterpolationValues, t } from './i18n';
@@ -49,7 +55,16 @@ export function abilityEffectText(res: ResolvedAbility, scaling?: AbilityScaling
   const primary = abilityPrimaryEffect(res);
   if (primary) {
     switch (primary.type) {
-      case 'directDamage':
+      case 'directDamage': {
+        const mult = primary.damageMult ?? 1;
+        const bonus = scaling ? abilityDamageBonus(res, primary, scaling) * mult : 0;
+        return (
+          abilityAmountRange(primary.min * mult, primary.max * mult) +
+          (bonus > 0
+            ? ` ${t('hudChrome.abilityScaling.bonus', { value: formatAbilityNumber(bonus) })}`
+            : '')
+        );
+      }
       case 'aoeDamage':
       case 'aoeRoot':
       case 'chainDamage':
@@ -160,7 +175,7 @@ export function abilityEffectText(res: ResolvedAbility, scaling?: AbilityScaling
         ? formatAbilityNumber(secondary.amount) + suffix(secondary)
         : formatAbilityNumber(secondary.casterMaxHpPct * 100);
     case 'imbue':
-      return formatAbilityNumber(secondary.bonus);
+      return formatAbilityImbueDamage(secondary);
     default:
       return '';
   }
@@ -279,6 +294,7 @@ export function abilityDisplayDescription(
   // any bonusCharges rows), so Conflagrate's "Holds N charges" line reads 3
   // for Ruincaller 2pc wearers and the base 2 for everyone else.
   const charges = res.charges;
+  const echoSingle = res.echoConvertSingle ?? TEMPORAL_ECHO_SINGLE_CONVERSION;
   const values: InterpolationValues = {
     damage: damageText,
     overTime: abilityOverTimeText(res, scaling),
@@ -296,6 +312,11 @@ export function abilityDisplayDescription(
     absorbPerRage: absorbPerRage === undefined ? '' : formatAbilityNumber(absorbPerRage),
     needleDoom: needleDoom === undefined ? '' : formatAbilityNumber(needleDoom),
     charges: charges === undefined ? '' : formatAbilityNumber(charges),
+    echoSinglePct: formatAbilityNumber(echoSingle * 100),
+    echoAreaPct: formatAbilityNumber(TEMPORAL_ECHO_AREA_CONVERSION * 100),
+    echoDriverPct: formatAbilityNumber(
+      echoSingle * TEMPORAL_ECHO_ROTATION_CONVERSION_MULTIPLIER * 100,
+    ),
   };
   // Cheap Trick retires Gut Punch's stealth requirement. When the RESOLVED ability
   // has dropped it, prefer the stealth-free description variant so the prose stops

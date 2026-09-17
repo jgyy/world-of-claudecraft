@@ -67,7 +67,7 @@ function authoredMaterialsOf(file: string): string[] {
 const LEGACY_UNFLAGGED_DEFS = new Set([
   'delve_mob_acolyte',
   'form_bear',
-  'form_cat',
+  'form_ghost_wolf',
   'form_metamorph',
   'mob_boar',
   'mob_duskwisp',
@@ -119,6 +119,7 @@ const LEGACY_POLISHED_HELD_MODELS = new Set([
 
 /** The creature and mount defs whose authored atlas showed the low-tier film. */
 const AUTHORED_ATLAS_DEFS = [
+  'form_cat',
   'mob_wolf',
   'greyjaw',
   'mob_ogre',
@@ -137,6 +138,8 @@ const AUTHORED_ATLAS_DEFS = [
   'mob_dragonkin_broodlord',
   'mob_dragonkin_matriarch',
   'mob_dragon_egg',
+  'mount_goblin_rocket_sled',
+  'mount_rallycart_rxt',
 ];
 
 describe('authored surfaces', () => {

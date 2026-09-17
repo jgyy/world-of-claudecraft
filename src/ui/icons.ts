@@ -3081,6 +3081,8 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   hibernate: r('arcane', 'silverWhite', [{ p: 'moon', pal: 'silverWhite' }], ['sparkle']),
   dash: r('nature', 'leafGreen', ['paw', { p: 'claw_slash', ...TR }], ['motion']),
   pounce: r('nature', 'leafGreen', ['fang', { p: 'claw_slash', ...BR }], ['motion']),
+  lunge: r('nature', 'leafGreen', ['paw', { p: 'fang', ...TR }], ['motion', 'glow']),
+  hamstring_bite: r('blood', 'blood', ['fang', { p: 'boot', ...BR }], ['crack']),
   insect_swarm: r('nature', 'leafGreen', ['tendrils'], ['sparkle']),
   tigers_fury: r('fire', 'ember', ['fang'], ['glow']),
   rip: r('blood', 'blood', ['claw_slash'], ['drips']),
@@ -3273,6 +3275,19 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   moonkin_form: r('nature', 'sky', ['moon'], ['sparkle']),
   feral_charge: r('nature', 'earthBrown', ['paw'], ['motion']),
   swiftmend: r('nature', 'leafGreen', ['droplet'], ['glow']),
+  // Groveheart resurrections: the in-combat single rez (a heart bursting back
+  // to life) and the out-of-combat group rez (the ancestor_return shape in the
+  // druid's leaf, not the shaman's rune).
+  wildwake: r('nature', 'leafGreen', ['heart', { p: 'sunburst', ...TR }], ['glow']),
+  grove_awakening: r(
+    'nature',
+    'leafGreen',
+    [
+      { p: 'cross', s: 0.9 },
+      { p: 'leaf', ...TR },
+    ],
+    ['sparkle', 'glow'],
+  ),
   // Talents V2 and the winning Warrior overlay. These explicit recipes remain
   // the deterministic fallback contract even when authored painted art wins at
   // render time, and every recipe is deliberately distinct.
@@ -3367,6 +3382,17 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
     'arcanePink',
     ['cross', { p: 'wing', ...BR }],
     ['sparkle', 'arcs'],
+  ),
+  // Benison/Doctrine out-of-combat group rez: the holy cross with a lifted
+  // wing, distinct from prayer_of_healing's sunburst and the mass-rez twins.
+  prayer_of_returning: r(
+    'holy',
+    'holyGold',
+    [
+      { p: 'cross', s: 0.9 },
+      { p: 'wing', ...TR },
+    ],
+    ['sparkle', 'glow'],
   ),
   // shaman
   healing_stream: r('nature', 'sky', ['droplet', { p: 'heart', ...BR }], ['sparkle']),
@@ -3701,6 +3727,7 @@ const AURA_RECIPES: Record<string, IconRecipe> = {
   aura_buff_speed: r('earth', 'leather', ['boot'], ['motion']),
   aura_buff_haste: r('storm', 'sky', ['lightning']),
   aura_absorb: r('holy', 'silverWhite', ['shield'], ['glow']),
+  temporal_aegis: r('arcane', 'arcanePink', ['shield', { p: 'moon', ...TR }], ['sparkle']),
   aura_imbue: r('holy', 'holyGold', ['sword', { p: 'sunburst', ...TL }]),
   aura_buff_allstats: r('arcane', 'arcanePink', ['gem']),
   aura_thorns: r('nature', 'leafGreen', ['leaf', { p: 'claw_slash', ...BR }]),
@@ -4511,6 +4538,7 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'summon_tithefiend',
   'martyrs_aegis',
   'choir_of_deliverance',
+  'prayer_of_returning',
   // warlock (CraftPix premium "RPG Warlock skill icons" pack + "RPG Demon skill icons"
   // pack for the summons/life_tap/searing_pain that the warlock pack couldn't cover).
   'shadow_bolt',
@@ -4847,6 +4875,8 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'swiftmend',
   'tranquility',
   'typhoon',
+  'wildwake',
+  'grove_awakening',
   // hunter
   'aspect_of_the_wild',
   'bestial_wrath',
@@ -4923,8 +4953,20 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'sudden_death',
 ]);
 
+// Ability ids that ship their procedural ABILITY_RECIPES glyph while their
+// painted art is owned by a later art pass (the ITEM_ART_PENDING shape for
+// abilities). The painted-census guards (tests/missing_painted_icons_wave,
+// tests/release_v039_icon_art) treat these as parked, never as painted, and
+// reject a stale entry once art lands.
+export const ABILITY_ART_PENDING = new Set<string>([
+  // Wildfang kit pass 2: the VFX and art retune owns the final paintings.
+  'lunge',
+  'hamstring_bite',
+]);
+
 /** Static URL of an ability's image icon, or null if it uses a recipe. */
 export function abilityImageUrl(id: string): string | null {
+  if (ABILITY_ART_PENDING.has(id)) return null;
   if (!ABILITY_IMAGE_IDS.has(id)) return null;
   if (PET_ACTION_IMAGE_IDS.has(id)) return `${SKILL_ICON_DIR}/pet/${id}.webp`;
   const cls =
@@ -5434,8 +5476,6 @@ export const ITEM_IMAGE_IDS = new Set<string>([
   'reins_thunderstrut_gobbler',
   'reins_terrorspark_groundshaker',
   'reins_lanternback_troll',
-  'reins_chimeglass_tortoise',
-  'reins_rickshaw_mount',
 ]);
 
 // The grouped literals above preserve the curated catalog's provenance history. Derive the

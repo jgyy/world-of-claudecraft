@@ -60,6 +60,7 @@ import { stunDrCategory } from '../stun_dr';
 import { resolveTalentHitMult } from '../talent_hit_mult';
 import { addThreat, dropThreat } from '../threat';
 import { creditAbilityDrill } from '../tutorial/ability_drill';
+import { creditHubHealingDrill } from '../tutorial/hub_healing_drill';
 import type { AbilityDef, Aura, Entity } from '../types';
 import {
   angleTo,
@@ -94,6 +95,8 @@ import {
   hasSweepingStrikes,
   sweepStrikeDamage,
 } from './area_echo';
+import { absorbAuraId, buffTargetAuraId, selfBuffAuraId } from './aura_ids';
+import { resetSwingTimer } from './auto_attack';
 import {
   damageBreakThreshold,
   hasUnbreakableMovementLock,
@@ -109,6 +112,7 @@ import {
   placeTemporalEcho,
   selectCascadeTargets,
 } from './chronomancy';
+import { cascadeReliefMultiplier } from './chronomancy_echo_distribution';
 import {
   advanceBurningPactTick,
   applyDuskfireClaim,
@@ -866,9 +870,9 @@ export function runEffects(
         if (isSpell) dmg *= spellDamageMultFromAuras(p);
         if (!isSpell) dmg *= 1 - armorReduction(ctx.effectiveArmor(target), p.level);
         // Aether Surge (Chronomancy Phase 3): each held Arcane Charge scales the
-        // FULL post-spell-power, post-crit damage. The extra damage is what feeds
-        // more Temporal Echo healing (no hidden heal bonus). Deterministic; reads
-        // the caster's charge aura (combat/chronomancy.ts).
+        // FULL post-spell-power, post-crit damage. The extra damage feeds more
+        // Temporal Echo healing before Chronomancy applies its individual-mark
+        // rotation weight. Deterministic; reads the caster's charge aura.
         if (ability.id === ARCANE_SURGE_ID) dmg *= aetherSurgeDamageMult(p);
         dmg *= thundercallDamageMultiplier(ctx, p, ability.id);
         dmg *= druidApexPayoffMult(ctx, p, ability.id);
@@ -1207,7 +1211,8 @@ export function runEffects(
         // selectCascadeTargets resolves and ORDERS the whole list (primary first,
         // then the members nearest the primary within radius, capped at maxTargets)
         // BEFORE any heal or aura is applied. Each target then takes a small initial
-        // heal (Spell-Power-scaled, can crit) and a 13% group echo; the overlap rule
+        // heal (Spell-Power-scaled, can crit, scaled by the ally's missing health via
+        // cascadeReliefMultiplier) and a 13% group echo; the overlap rule
         // in placeGroupEcho keeps a pre-existing individual mark at 40%. The Arcane
         // conversion lives in combat/chronomancy.ts. (mage-chronomancy.md Phase 4)
         const primary = target ?? p;
@@ -1224,9 +1229,15 @@ export function runEffects(
           // by the massTemporalEcho case in classes.ts, and talentHealMult reaches
           // the SP rider here too, so Chronoweave's "all healing" bonus applies to
           // Temporal Cascade's initial heal the same way it does every other heal.
-          const healAmount =
+          // The rng draw stays FIRST and unconditional: the relief multiplier is
+          // pure health arithmetic applied after it, so the global stream is
+          // untouched and the parity goldens still line up.
+          const healRoll =
             ctx.rng.range(eff.heal.min, eff.heal.max) +
             directHealBonus(p.healPower, res.castTime, false, talentHealMult);
+          // Cast on a healthy group this is 1 and the heal is exactly what it has
+          // always been; cast into real damage it scales up to the authored ceiling.
+          const healAmount = Math.round(healRoll * cascadeReliefMultiplier(ally.hp, ally.maxHp));
           ctx.applyHeal(p, ally, healAmount, ability.name);
           if (devPlaytest) {
             const applied = ally.hp - before;
@@ -1271,7 +1282,7 @@ export function runEffects(
           type: 'spellfx',
           sourceId: p.id,
           targetId: ally.id,
-          school: 'arcane',
+          school: ability.school,
           fx: 'temporalGlyph',
           ability: ability.id,
         });
@@ -1346,6 +1357,13 @@ export function runEffects(
           true,
           true,
         );
+        // The hub's optional healing lesson (tutorial/hub_healing_drill.ts):
+        // one credit per effective heal, from THIS primary direct-heal
+        // resolution only, before the Power Echo repeat below runs. That
+        // ordering is what keeps an echoed copy of this same cast (and every
+        // other derived/chained/procced applyHeal call, none of which run
+        // through this case) from ever double-crediting a single real cast.
+        creditHubHealingDrill(ctx, p, healTarget, healed, ability.id);
         if (ability.id === 'scouring_mercy') {
           doctrineScouringMercyRescue(ctx, p, meta, healTarget, healed);
         }
@@ -1546,11 +1564,8 @@ export function runEffects(
       }
       case 'absorb': {
         const shieldTarget = target ?? p;
-        const hasStasisSelfBuff = ability.effects.some(
-          (effect) => effect.type === 'selfBuff' && effect.kind === 'stasis',
-        );
         ctx.applyAura(shieldTarget, {
-          id: eff.auraId ?? (hasStasisSelfBuff ? `${ability.id}_absorb` : ability.id),
+          id: absorbAuraId(ability, eff),
           name: ability.name,
           kind: 'absorb',
           remaining: eff.duration,
@@ -1881,8 +1896,7 @@ export function runEffects(
       case 'drainTick':
         break; // handled per channel tick
       case 'buffTarget': {
-        const auraId =
-          targetBuffIndex === 0 ? ability.id : `${ability.id}_${eff.kind}_${targetBuffIndex}`;
+        const auraId = buffTargetAuraId(ability, eff, targetBuffIndex);
         targetBuffIndex += 1;
         const applyBuff = (e: Entity) => {
           const lifetime = eff.permanent ? Number.POSITIVE_INFINITY : eff.duration;
@@ -2220,6 +2234,15 @@ export function runEffects(
           sourceId: p.id,
           school: ability.school,
         });
+        // A stun-only opener that awards a combo point (Slinkstrike: its stun is
+        // its whole effect list, so no strike arm above ever paid the point the
+        // tooltip promised). Paid once the stun has landed, the incapacitate
+        // arm's rule; the comboAwarded latch keeps a strike-plus-stun ability
+        // at one point per cast.
+        if (ability.awardsCombo && !comboAwarded) {
+          ctx.awardCombo(p, target, ability.awardsCombo);
+          comboAwarded = true;
+        }
         // Sundering Gavel (hammer_of_justice) and Gut Punch (cheap_shot)
         // sound at the target; every other stun has no dedicated recording
         // and stays silent here.
@@ -2296,6 +2319,11 @@ export function runEffects(
             ability: ability.id,
           });
         }
+        // Eye Jab (gouge) resets the caster's own swing timer (classic WoW's
+        // Gouge does the same): otherwise the auto-attack already in flight
+        // lands on the very next tick and, being a direct hit, breaks the
+        // incapacitate this same cast just applied.
+        if (ability.id === 'gouge') resetSwingTimer(ctx, p, meta);
         if (ability.awardsCombo && !comboAwarded) {
           ctx.awardCombo(p, target, ability.awardsCombo);
           comboAwarded = true;
@@ -3668,16 +3696,12 @@ export function runEffects(
         }
         // An ability can grant SEVERAL self-buffs at once (Arcane Power: spell damage AND
         // haste; Metamorphosis: damage AND haste). applyAura dedups by (id, sourceId), so
-        // every companion buff needs a distinct id or the last would evict the rest. The
-        // PRIMARY self-buff (the first kind on the DEF) keeps the bare ability id (so its
-        // icon/name resolve and the form/aspect toggle-off still finds it by id); companions
-        // get a kind-suffixed id. Compare by KIND, not object identity: applyTalentMods may
-        // have replaced the resolved effect objects, so a reference check would misfire.
-        const firstSelfBuffKind = ability.effects.find((e) => e.type === 'selfBuff')?.kind;
-        const isPrimarySelfBuff = eff.kind === firstSelfBuffKind;
+        // every companion buff needs a distinct id or the last would evict the rest; the
+        // rule (primary keeps the bare id, companions are kind-suffixed, an explicit
+        // auraId wins) lives in ./aura_ids.ts, shared with the HUD's aura-track catalog.
         const lifetime = eff.permanent ? Number.POSITIVE_INFINITY : eff.duration;
         ctx.applyAura(p, {
-          id: eff.auraId ?? (isPrimarySelfBuff ? ability.id : `${ability.id}_${eff.kind}`),
+          id: selfBuffAuraId(ability, eff),
           name: eff.auraName ?? ability.name,
           kind: eff.kind,
           remaining: lifetime,
@@ -4016,6 +4040,13 @@ export function runEffects(
       }
       case 'afflictionViolence': {
         if (target) {
+          const spBonus = dotTickBonus(
+            abilityScalingPower(p, ability),
+            ability,
+            eff.duration,
+            eff.interval ?? 2,
+            talentDmgMult * (1 + mods.global.dotDmgPct),
+          );
           applyHexOfViolence(
             ctx,
             p,
@@ -4024,6 +4055,9 @@ export function runEffects(
             eff.charges,
             eff.doomPerProc,
             eff.damage,
+            spBonus,
+            eff.interval ?? 2,
+            eff.tickDoom ?? 2,
           );
         }
         break;
@@ -4052,7 +4086,7 @@ export function runEffects(
         break;
       }
       case 'afflictionJudgment': {
-        if (target) applyHourOfJudgment(ctx, p, target, eff.duration, eff.doom, eff.refund);
+        applyHourOfJudgment(ctx, p, target, eff.duration, eff.doom, eff.refund);
         break;
       }
       case 'afflictionLitany': {

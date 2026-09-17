@@ -212,7 +212,9 @@ describe('AurasPainter: keyed pool over the elided writers', () => {
     expect(nodes()).toHaveLength(2);
     // each pooled node has the two children (dur, stacks) appended once.
     expect(nodes()[0].childNodes).toHaveLength(2);
-    expect(nodes()[0].className).toBe('buff');
+    expect(nodes()[0].className).toBe('buff ui-aura');
+    expect(nodes()[0].childNodes[0].className).toBe('dur ui-aura-time');
+    expect(nodes()[0].childNodes[1].className).toBe('stacks ui-badge ui-badge--corner');
   });
 
   it('attaches the tooltip ONCE per pooled node across frames (no duplicate listeners)', () => {
@@ -352,6 +354,13 @@ describe('AurasPainter: keyed pool over the elided writers', () => {
     ).toBe(true);
     // debuff via toggleClass (a structural class, not a color).
     expect(has('toggleClass', (c) => c.args[0] === 'debuff' && c.args[1] === true)).toBe(true);
+    expect(has('toggleClass', (c) => c.args[0] === 'ui-aura--debuff' && c.args[1] === true)).toBe(
+      true,
+    );
+    expect(
+      has('toggleClass', (c) => c.args[0] === 'ui-aura-time--debuff' && c.args[1] === true),
+    ).toBe(true);
+    expect(has('toggleClass', (c) => c.args[0] === 'ui-aura--own')).toBe(true);
     // the expiring blink via toggleClass too (the stylesheet owns the animation).
     expect(has('toggleClass', (c) => c.args[0] === 'expiring' && c.args[1] === true)).toBe(true);
     // the school border tint via setAttr(data-school), a structural attribute the
@@ -490,6 +499,26 @@ describe('AurasPainter: static-preset visible-count cap', () => {
     slots.push(slot({ key: 'moontide' }), slot({ key: 'old_blood' }), slot({ key: 'verdance' }));
     tierPainter('low').paint(state(slots));
     expect(nodes()).toHaveLength(AURA_VISIBLE_CAP_LOW + 3);
+  });
+
+  it('low keeps the Vespers priest Gloomtithe bank visible beyond the ordinary buff cap', () => {
+    // priest_gloomtithe (auras_view/priest/vespers.ts GLOOMTITHE_AURA_ID) tracks the
+    // Vespers signature's 1-5 stack bank gating Call Tithefiend, the same "actionable
+    // resource cue" shape as the Shaman/Druid engine banks above. A raid buff wall (blessings,
+    // Mark of the Wild, Arcane Intellect, Battle Shout, ...) applied ahead of it must never
+    // push it past the low-tier cap and out of the player's own read of their resource.
+    const slots = Array.from({ length: AURA_VISIBLE_CAP_LOW + 2 }, (_, i) =>
+      slot({ key: `buff${i}` }),
+    );
+    slots.push(slot({ key: 'priest_gloomtithe', name: 'Gloomtithe', stacksText: '5' }));
+    tierPainter('low').paint(state(slots));
+    expect(nodes()).toHaveLength(AURA_VISIBLE_CAP_LOW + 1);
+    expect(calls).toContainEqual(
+      expect.objectContaining({
+        m: 'setStyleProp',
+        args: ['background-image', 'url(priest_gloomtithe)'],
+      }),
+    );
   });
 
   it('FAIRNESS: low NEVER culls a debuff -- a debuff past the buff cap still renders', () => {

@@ -37,7 +37,6 @@
 // DOM/Three-free (registered in tests/architecture.test.ts UI_PURE_CORES).
 
 import { ENCHANTS, type EnchantDef } from '../../../sim/content/enchants';
-import { RIFT_GEAR_ITEM_ID_SET } from '../../../sim/content/rift/items';
 import { ITEMS } from '../../../sim/data';
 import { countRawInSlots } from '../../../sim/item_lock';
 import { isEnchantKnown } from '../../../sim/professions/enchant_formula';
@@ -556,8 +555,11 @@ export interface EnchantReplaceTargetInfo {
   /** The raw stats being destroyed on a LEGACY victim (its whole rolled.stats
    *  map, which on a pre-marker copy IS the old enchant). */
   stats?: Record<string, number>;
-  /** The picked enchant is already on the victim: the row paints DISABLED (a
-   *  confirm whose accept the sim denies same_enchant is never offered). */
+  /** The picked enchant is already on the victim: the sim now ALLOWS this as
+   *  an ordinary confirmed replace (it costs reagents and grants Enchanting
+   *  skill, netting to the same stats), so the row stays enabled; the thin
+   *  consumer uses this only to swap the destructive "replaces X" tag for the
+   *  informational "Already applied" one, since nothing is actually lost. */
   sameEnchant: boolean;
   /** What the swap does NOT destroy (#2421), in preservedReplaceTraits order.
    *  ABSENT, never an empty array, when the victim carries none of them: the
@@ -726,9 +728,6 @@ export function enchantTargets(
   inventory.forEach((slot) => {
     const def = ITEMS[slot.itemId];
     if (!def || def.slot !== enchant.itemSlot) return;
-    // Riftbound bands are forge-only (the sim refuses them by id with
-    // rift_gear); never offer a row the apply can only deny.
-    if (RIFT_GEAR_ITEM_ID_SET.has(slot.itemId)) return;
     if (!copyMeetsPerfectedGate(enchant, slot.instance)) return;
     // Both halves of the sim's bagged verdict: the copy carries the marker AND
     // the copy the sim would judge for THIS row's arm does (the plain apply's
@@ -862,7 +861,6 @@ export function wornEnchantTargets(
     if (!itemId) continue;
     const def = ITEMS[itemId];
     if (!def || def.slot !== enchant.itemSlot) continue;
-    if (RIFT_GEAR_ITEM_ID_SET.has(itemId)) continue; // forge-only, see enchantTargets
     const instance = equippedInstances[slot];
     if (!copyMeetsPerfectedGate(enchant, instance)) continue;
     if (instance && isEnchantedInstance(instance)) {

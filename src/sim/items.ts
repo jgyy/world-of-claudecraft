@@ -78,6 +78,7 @@ import { useGatherToolItem } from './professions/gathering';
 import { placeMobileStationFromItem } from './professions/mobile_station';
 import { useRecipePatternItem } from './professions/pattern_items';
 import { refreshModsForEquipmentChange } from './progression/talents';
+import { useForgebreakerEmber } from './quests/forgebreaker_ember';
 import type { ItemUseResult, PlayerMeta } from './sim';
 import type { SimContext } from './sim_context';
 import { usePassingStone } from './tutorial/death_lesson';
@@ -949,6 +950,10 @@ export function useItem(
     useBrinyLure(ctx, p, meta);
     return;
   }
+  if (def.use?.type === 'forgebreakerEmber') {
+    useForgebreakerEmber(ctx, p, meta);
+    return;
+  }
   if (def.use?.type === 'passingStone') {
     usePassingStone(ctx, p, meta);
     return;
@@ -1779,7 +1784,7 @@ export function buyBackItem(
       unitSources,
     ) >= 1;
   if (!fits) {
-    bagsFullError(ctx, meta.entityId);
+    bagsFullError(ctx, meta.entityId, itemId);
     return;
   }
   meta.copper -= def.sellValue;

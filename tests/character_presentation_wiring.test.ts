@@ -7,6 +7,13 @@ const characterVisual = readFileSync(
   'utf8',
 );
 const main = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8');
+// The mount half of the presentation split moved out of renderer.ts into its own
+// module when the vehicle work landed; the behaviour is unchanged, so the pins
+// below follow it there rather than being dropped.
+const mountPresentation = readFileSync(
+  new URL('../src/render/mount_presentation.ts', import.meta.url),
+  'utf8',
+);
 
 describe('character presentation sleep wiring', () => {
   it('routes hidden cosmetic rigs through bounded off-screen advancement', () => {
@@ -29,7 +36,15 @@ describe('character presentation sleep wiring', () => {
     expect(renderer).toContain(
       'if (runCharacterPresentation) {\n        v.visual.updateWeaponVfx(dt, weaponVfxShedScale(d2, this.appliedBudgetLevels?.vfx ?? 1));\n      }',
     );
-    expect(renderer).toContain('v.mountVisual.advanceOffscreen(dt);');
+    // The mount rig takes the same bounded-advance path as the character rig,
+    // now from inside updateMountPresentation: renderer.ts forwards presentation
+    // as `present`, and a rig that is not present advances and returns before any
+    // per-frame work. A mount that carries a second rig (the rickshaw's puller)
+    // advances that one on the same path, or it freezes while the cart rolls.
+    expect(renderer).toContain('present: runCharacterPresentation,');
+    expect(mountPresentation).toContain(
+      'if (!input.present) {\n      v.mountVisual.advanceOffscreen(dt);\n      updateRickshawPuller(v, dt, input.anim, input.animate, false);\n      return;\n    }',
+    );
   });
 
   it('ticks deferred weapon stow transitions while a rig is off screen', () => {
@@ -53,11 +68,13 @@ describe('character presentation sleep wiring', () => {
     const update = characterVisual.slice(start, end);
 
     const edgeAt = update.indexOf(
-      'shouldPlayLanding(this.wasAirborne, s.airborne, s.dead, !!this.action(landClip))',
+      'shouldPlayLanding(this.wasAirborne, s.airborne, s.dead, !!this.action(landClip), s.swimming)',
     );
     const latchAt = update.indexOf('this.currentOneShotIsLanding = true;', edgeAt);
     const stateAt = update.indexOf('const desired = this.desiredBase(s);', latchAt);
-    const cancelAt = update.indexOf('MOVING_STATES.has(desired)', stateAt);
+    // The landing yields to movement, a re-jump, a stationary swim or a moving
+    // cast through one predicate (anim_state.ts shouldInterruptLanding).
+    const cancelAt = update.indexOf('shouldInterruptLanding(s)', stateAt);
     const handoffAt = update.indexOf(
       'this.fadeTo(this.baseAction(), this.baseTransitionFade(desired), false);',
       cancelAt,
@@ -82,15 +99,19 @@ describe('character presentation sleep wiring', () => {
   });
 
   it('sleeps ability VFX semantically while mount particles remain presentation-gated', () => {
-    const mountStart = renderer.indexOf('if (v.mountVisual && mountSpec && mountShown) {');
-    const abilityStart = renderer.indexOf('// per-ability windup orb + buff-orbit bands');
+    // Mount particles stay behind the presentation gate: the off-screen branch
+    // returns FIRST, so a hidden mount can never reach the emitters below it.
+    const mountStart = mountPresentation.indexOf('if (v.mountVisual && spec && input.shown) {');
+    const offscreenReturn = mountPresentation.indexOf('v.mountVisual.advanceOffscreen(dt);');
+    const slimeAt = mountPresentation.indexOf('input.vfx.mountSlimeTrail');
+    const exhaustAt = mountPresentation.indexOf('input.vfx.mountExhaust(');
     expect(mountStart).toBeGreaterThan(-1);
-    expect(abilityStart).toBeGreaterThan(mountStart);
+    expect(offscreenReturn).toBeGreaterThan(mountStart);
+    expect(slimeAt).toBeGreaterThan(offscreenReturn);
+    expect(exhaustAt).toBeGreaterThan(offscreenReturn);
 
-    const mountBlock = renderer.slice(mountStart, abilityStart);
-    expect(mountBlock).toContain('if (runCharacterPresentation) {');
-    expect(mountBlock).toContain('this.vfx.mountSlimeTrail');
-    expect(mountBlock).toContain('this.vfx.mountExhaust');
+    const abilityStart = renderer.indexOf('// per-ability windup orb + buff-orbit bands');
+    expect(abilityStart).toBeGreaterThan(-1);
     expect(renderer.slice(abilityStart)).toContain(
       'this.abilityVfx.syncEntity(e, runCharacterPresentation);',
     );
@@ -117,21 +138,31 @@ describe('character presentation sleep wiring', () => {
       'placeRider(v, v.visual.root, mountPresented ? mountSpec : null, v.mountLift, 0);',
     );
 
-    const presentationStart = renderer.indexOf(
-      'if (v.mountVisual && mountSpec && mountShown) {',
-      mountEnd,
+    // The presentation pass itself (attitude, seat bone, ambient fx) lives in
+    // the extracted mount_presentation.ts, not inline here: renderer.ts only
+    // forwards the frame's inputs to updateMountPresentation. The extraction
+    // carries its OWN mountCompilePending gate (`presented`), since the mount
+    // root's own visibility write above does not stop the seat-bone re-seat
+    // from carrying the visible RIDER onto a mount nobody can see yet.
+    expect(renderer).toContain('updateMountPresentation(v, {');
+    expect(mountPresentation).toContain('const presented = !v.mountCompilePending;');
+    expect(mountPresentation).toContain(
+      'if (presented) {\n      if (spec.jumpTips) {\n        applyMountJumpAttitude(',
     );
-    const presentationEnd = renderer.indexOf('// per-ability windup orb', presentationStart);
-    const presentation = renderer.slice(presentationStart, presentationEnd);
-    expect(presentation).toContain('if (mountPresented) {\n            applyMountJumpAttitude(');
-    expect(presentation).toContain('seatRiderOnBone(');
-    expect(presentation).toContain('if (v.mountGlows) updateMountGlows(v.mountGlows, this.time);');
+    expect(mountPresentation).toContain(
+      'seatRiderOnBone(v.group, riderRoot, v.mountVisual.root, spec, v);',
+    );
+    expect(mountPresentation).toContain(
+      'if (v.mountGlows) updateMountGlows(v.mountGlows, input.time);',
+    );
   });
 
-  it('reuses one mount host and stows weapons only while a mount is actually presented', () => {
+  it('reuses one mount host and stows weapons only while actually mounted', () => {
     expect(renderer).toContain('private readonly mountHost: MountViewHost = {');
     expect(renderer.match(/syncMountVisual\(v, mountSpec, this\.mountHost\)/g)).toHaveLength(1);
-    expect(renderer).toContain('const stowed = e.weaponStowed || swimming || v.mountLift > 0;');
+    expect(renderer).toContain(
+      "const stowed = weaponStowedOverlay(e.weaponStowed, swimming, e.mountKey !== '');",
+    );
   });
 });
 
@@ -208,5 +239,21 @@ describe('char-select roster wiring (source pins)', () => {
     expect(swapAt).toBeGreaterThan(-1);
     expect(hydrateAt).toBeGreaterThan(swapAt);
     expect(main).toContain('trackComposedChipRow(row, chipHtml, () => hydratePortraits(row));');
+  });
+});
+
+describe('quadruped swim head and gait wiring (source pins)', () => {
+  // Both arguments default silently (CharacterVisual falls back to the humanoid
+  // head fraction and updateLocomotionInto to the global thresholds), so
+  // reverting either keeps every unit test green while a form_cat swims with
+  // its head under the waterline or breaks into a run at the biped speed.
+  it("latches the surface off the rig's own swimming head height, scaled with the body", () => {
+    expect(renderer).toContain('active.swimHeadHeight * e.scale,');
+  });
+
+  it("feeds the rig's own gait thresholds into the displayed-motion locomotion track", () => {
+    expect(renderer).toContain(
+      'updateLocomotionInto(v.locoState, v.loco, vx, vz, facing, dt, active.gait);',
+    );
   });
 });

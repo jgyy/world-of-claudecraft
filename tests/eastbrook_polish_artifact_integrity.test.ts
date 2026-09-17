@@ -1190,6 +1190,9 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // UPSTREAM'S OWN RE-MINT HISTORY over the later release/v0.41.0 span (tip
 // 3e801dc925), kept rather than dropped (the block that follows is the
 // release's record verbatim).
+// Re-minted for the weapon-stow overlay fix (renderer.ts: single-writer
+// removal + the mount sheathe clause): the renderer integration leaf moved.
+// No capture was retaken.
 // Re-minted for the Ignivar raid consolidation (the v0.41.0 base merge plus
 // the renderer extraction round moved the renderer integration leaf). No
 // capture was retaken.
@@ -1298,8 +1301,6 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // source-only historical capture reseal, run over the fully resolved merge
 // via node scripts/assets/eastbrook_grand_armoury/remint_polish_provenance.mjs.
 // No capture was retaken and no new owner acceptance is implied.
-const ACCEPTED_POLISH_V2_METADATA_SHA256 =
-  '921d47e5d29f308c0613aca4f105cc4233a61aa8e046611f619a211bc61e8b73';
 // Re-minted at the release/v0.42.0 sync of PR #3439: renderer.ts moved for the
 // mount lifecycle seam (mount_lifecycle.ts) and the rickshaw hooks it absorbed.
 // Re-minted again for the PR #3695 review fixes (the impostor fragment tail).
@@ -1312,12 +1313,85 @@ const ACCEPTED_POLISH_V2_METADATA_SHA256 =
 // into release/v0.42.0: a source-only historical capture reseal over the
 // fully merged renderer and release tree. No capture was retaken and no new
 // owner acceptance is implied.
+//
+// UPSTREAM'S (OSSBrain candidate) OWN RE-MINT HISTORY over its own
+// shader-warm and release/v0.42.0 span, kept rather than dropped (the block
+// that follows is the candidate's record verbatim).
+// Re-minted for the release/v0.42.0 merge into the weapon-sheathe-swim-mount
+// branch (the merged renderer.ts carries this branch's mount sheathe overlay
+// beside the release's forge-lift room and Drakelands entrance render
+// integrations, so the composite matches neither parent). No capture was
+// retaken.
+// Re-minted for the v0.42.0 release batch renderer merge: runtimeRender.renderer
+// moved with the shipped renderer tree. No capture was retaken.
+// Re-minted for the release/v0.42.0 reconcile with the Realm Builder and
+// store-mount renderer leaves. No capture was retaken.
+// Re-minted for the post-chain pixel budget: the renderer's coalesced
+// viewport-resize pass moves the runtimeRender.renderer leaf. No capture
+// was retaken.
+// Re-minted again for the review answers on the same branch (the viewport
+// poll now books the coalesced pass). No capture was retaken.
+// Re-minted for the coalesced-resize flush point (the frame drains the gate
+// before it draws). No capture was retaken.
+// Re-minted for the PR #3834 merge after PR #3833: runtimeRender.renderer
+// now carries pooled VFX material cleanup beside the coalesced viewport-resize
+// pass, so the composite matches neither parent. No capture was retaken.
+// Re-minted for the compositor-surfaces batch (renderer.ts only: the opaque
+// world context, the nameplate surface-ratio and cadence wiring, the spirit
+// grade hookup and the build-diag extraction). No capture was retaken.
+// Re-minted for the PR #3844 merge after PR #3841: the candidate's render-stack
+// renderer bytes and #3844's compositor surface/nameplate/spirit-grade bytes
+// combine in one tree, so the composite matches neither parent. No capture was
+// retaken.
+// Re-minted for the v0.42.0 release candidate renderer merge: the selected
+// renderer changes move the runtimeRender.renderer leaf and the metadata
+// authority follows the swept evidence bytes. No capture was retaken.
+// Re-minted for the v0.42.0 reconcile after the release branch advanced with
+// Nythraxis renderer work: the merged runtimeRender.renderer leaf matches
+// neither parent. No capture was retaken.
+// Re-minted for the second v0.42.0 reconcile after the release branch advanced
+// with Drakelands/hotkey renderer work. No capture was retaken.
+//
+// OSSBrain PR #3781: re-sealed with the canonical remint command after
+// renderer reconciliation and the lockfile compatibility fix. Shipping GLB
+// changes are fingerprint-only; no capture or visual approval was retaken.
+// PR3941: canonical source-only reseal for mount-skin renderer prewarm.
+// Historical images, performance scores and capture identity are unchanged.
+// PR3946: remint the renderer leaf after restoring school-aware resurrection VFX.
+// Existing captures, performance measurements and capture identity are unchanged.
+// v0.42.0 dependency-floor bump (sharp, js-yaml, vitest): the lockfile is a
+// fingerprint input, so every shipping GLB was size-preserving re-minted and this
+// seal follows the swept evidence. No capture was retaken.
+// Handoff experiment: canonical runtime-input reseal for the NPC layout and
+// renderer wiring. Historical pixels, performance values and capture identity stay frozen.
+// Re-minted for the CPU-hygiene lot (renderer.ts consumer edits and the
+// view-candidate scan extraction): the composite first, then this metadata
+// seal from the swept file. No capture was retaken.
+// Re-minted again for the lot's review round (the shared liveViewCandidate
+// check moved the renderer leaf once more). No capture was retaken.
+// Re-minted for reconciling the latest v0.43.0 base: the release-side
+// CPU-hygiene renderer leaf and the druid Cat Form renderer leaf compose in
+// one tree. No capture was retaken.
+const ACCEPTED_POLISH_V2_METADATA_SHA256 =
+  // Re-minted for the Eastbrook handoff merge with release/v0.43.0: the merged renderer leaf and the moved NPC layout match neither parent. No capture was retaken.
+  // Re-minted for the v0.43.0 batch base merge (ossbrain-release/v0.43.0 taking
+  // the Eastbrook handoff): the merged renderer leaf, the moved NPC layout and
+  // the ground-sample leaves compose in one tree. No capture was retaken.
+  // Re-minted for the v0.42.2 hotfix line forward merge into release/v0.43.0:
+  // the merged renderer leaf (main's flanking-platform ground lift and
+  // plateau-aware ground cues over the release's CPU-hygiene and Cat Form
+  // leaves) matches neither parent. No capture was retaken.
+  '9a08435a1a0fca561d272adace7835c51d77742e86a201b83554e78620d9d1b3';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
-  'a4907e5896c8b206841202db7a9c5ed93325e6d770592b5b096da5cfa5262722';
-// RE-MINTED for this worktree's own base merge of the professions branch
-// into release/v0.42.0: a source-only historical capture reseal over the
-// fully merged renderer and release tree. No capture was retaken and no new
-// owner acceptance is implied.
+  // Re-minted for the Eastbrook handoff merge with release/v0.43.0: the merged renderer leaf and the moved NPC layout match neither parent. No capture was retaken.
+  // Re-minted for the v0.43.0 batch base merge (ossbrain-release/v0.43.0 taking
+  // the Eastbrook handoff): the merged renderer leaf, the moved NPC layout and
+  // the ground-sample leaves compose in one tree. No capture was retaken.
+  // Re-minted for the v0.42.2 hotfix line forward merge into release/v0.43.0:
+  // the merged renderer leaf (main's flanking-platform ground lift and
+  // plateau-aware ground cues over the release's CPU-hygiene and Cat Form
+  // leaves) matches neither parent. No capture was retaken.
+  'f429f724ca7ab90873b4a86950c0046585ef66bec7c2052cda12ae578ecee3d0';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -2504,10 +2578,21 @@ describe('Eastbrook polish performance and contact evidence', () => {
     // OSSBrain v0.40 batch landed on the release arm; renderer inputs moved on
     // both sides): same order, the composite first, then this seal. No capture
     // was retaken.
+    // Re-minted for the weapon-stow overlay fix (renderer.ts): same order,
+    // the composite first, then this seal. No capture was retaken.
     // Re-minted for PR #3740's forge-lift room: the first-order composite
     // follows the lift room's renderer.ts hookup, then this second-order
     // performance seal follows the swept evidence bytes. No capture was
     // retaken.
+    // Re-minted for the Drakelands entrance merge into the raid branch: the
+    // composite first, then this seal. No capture was retaken.
+    // Re-minted for the release/v0.42.0 merge into the weapon-sheathe-swim-mount
+    // branch: same order, the composite first, then this seal. No capture was
+    // retaken.
+    // Re-minted for the v0.42.0 release batch renderer merge: same order, the
+    // composite first, then this seal. No capture was retaken.
+    // Re-minted for the v0.42.0 release candidate renderer merge: same order,
+    // the composite first, then this seal. No capture was retaken.
     expect(
       fingerprint.digest('hex'),
       `the second-order performance digest moved; if every input moved legitimately, re-mint with: ${REMINT_COMMAND} (it recomputes this literal LAST, from the swept files)`,
@@ -2609,6 +2694,9 @@ describe('Eastbrook polish performance and contact evidence', () => {
       // release's record verbatim).
       // Re-minted for the Drakelands entrance merge into the raid branch: the
       // composite first, then this seal. No capture was retaken.
+      //
+      // UPSTREAM'S (OSSBrain candidate) OWN RE-MINT HISTORY, kept rather than
+      // dropped (the block that follows is the candidate's record verbatim).
       // Re-minted for review round 3 of the shader-warm PR: the composite
       // follows the moved ward walk, then this seal. No capture was retaken.
       // Re-minted for the shader-warm PR's give-up rule and its review fixes:
@@ -2637,12 +2725,46 @@ describe('Eastbrook polish performance and contact evidence', () => {
       // playtest-tuning branch (PR #3903's Varkhul heroic add-health lands
       // beside this branch's Nythraxis hazard-color renderer change): the
       // composite first, then this seal. No capture was retaken.
+      // Re-minted for the post-chain pixel budget: the composite first, then
+      // this seal. No capture was retaken.
+      // Re-minted for the PR #3834 merge after PR #3833: the composite first,
+      // then this seal. No capture was retaken.
+      // Re-minted for the compositor-surfaces batch: the composite follows the
+      // renderer.ts edits, then this seal follows the swept evidence bytes. No
+      // capture was retaken.
+      // Re-minted for the PR #3844 merge after PR #3841: same order, the
+      // composite first, then this seal. No capture was retaken.
+      // Re-minted for the v0.42.0 reconcile after the release branch advanced
+      // with Nythraxis renderer work: same order, the composite first, then
+      // this seal. No capture was retaken.
+      // Re-minted for the second v0.42.0 reconcile after Drakelands/hotkey
+      // renderer work: same order, the composite first, then this seal. No
+      // capture was retaken.
       // RE-MINTED again for this worktree's own base merge of the
       // professions branch into release/v0.42.0 (both histories above land
       // on the same merged tree): a source-only historical capture reseal,
       // second-order over the swept evidence bytes. No capture was retaken
       // and no new owner acceptance is implied.
-    ).toBe('395bcfb2cb3c484ff8042f9e818e6e7b35a462fcc49265dbf1a7ad7c17f7c484');
+      //
+      // OSSBrain integration: this digest was recomputed LAST from the
+      // canonical re-sealed evidence files. Capture pixels and scores did not change.
+      // v0.42.0 dependency-floor bump: recomputed LAST over the swept evidence
+      // after the lockfile-driven GLB re-mint. No capture was retaken.
+      // Re-minted for the CPU-hygiene lot: the composite first, then this
+      // second-order seal over the swept evidence bytes. No capture was retaken.
+      // Review round of the same lot: recomputed LAST again over the re-swept
+      // evidence. No capture was retaken.
+      // Druid Cat Form merge with release/v0.43.0: recomputed LAST again over
+      // the re-swept evidence. No capture was retaken.
+      // Latest v0.43.0 base reconciliation: recomputed LAST again over the
+      // re-swept evidence. No capture was retaken.
+      // Re-minted for the Eastbrook handoff merge with release/v0.43.0: the merged renderer leaf and the moved NPC layout match neither parent. No capture was retaken.
+      // v0.43.0 batch base merge (ossbrain-release/v0.43.0 taking the Eastbrook
+      // handoff): recomputed LAST again over the re-swept evidence. No capture
+      // was retaken.
+      // v0.42.2 hotfix line forward merge into release/v0.43.0: recomputed LAST
+      // again over the re-swept evidence. No capture was retaken.
+    ).toBe('88176ae77a5c2ccec01ed97b5ab9d3a54a7f97e788b36bb1432bc7ee1103fca6');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {

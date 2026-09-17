@@ -6,9 +6,11 @@ import {
   actionKind,
   BIND_ACTIONS,
   BIND_CATEGORIES,
+  bindRefusalReason,
   comboCode,
   comboMods,
   isModifierCode,
+  isRefusedCodeFor,
   isReservedCode,
   Keybinds,
   keyCapLabel,
@@ -108,6 +110,22 @@ describe('registry', () => {
         defaults: [code],
       })),
     );
+    // The party target hotkeys own the F-row: F1 yourself, F2..F10 the party
+    // frame rows top to bottom (input.ts cancels the browser's F-key defaults).
+    expect(BIND_ACTIONS.find((a) => a.id === 'targetSelf')).toMatchObject({
+      label: 'Target Self',
+      category: 'Targeting',
+      kind: 'edge',
+      defaults: ['F1'],
+    });
+    for (let n = 1; n <= 9; n++) {
+      expect(BIND_ACTIONS.find((a) => a.id === `targetParty${n}`)).toMatchObject({
+        label: `Target Party Member ${n}`,
+        category: 'Targeting',
+        kind: 'edge',
+        defaults: [`F${n + 1}`],
+      });
+    }
     // Discord is a rebindable Interface window toggle (default U).
     const discord = BIND_ACTIONS.find((a) => a.id === 'discord');
     expect(discord?.category).toBe('Interface');
@@ -135,6 +153,13 @@ describe('registry', () => {
     expect(sheathe?.category).toBe('Interface');
     expect(sheathe?.kind).toBe('edge');
     expect(sheathe?.defaults).toEqual(['KeyZ']);
+    // Hide Interface is a rebindable Interface toggle on the ALT layer of the
+    // same key (the classic Alt+Z): bare Z sheathes, Shift+Z opens the deeds,
+    // Alt+Z hides the HUD, so the three never collide.
+    const hideUi = BIND_ACTIONS.find((a) => a.id === 'hideInterface');
+    expect(hideUi?.category).toBe('Interface');
+    expect(hideUi?.kind).toBe('edge');
+    expect(hideUi?.defaults).toEqual(['Alt+KeyZ']);
     // The Harvest Journal is a rebindable Interface toggle on the shifted layer
     // of KeyK (Shift+H and Shift+J, its own initials, are Damage Meters and
     // Target Buffs/Debuffs); bare KeyK stays the Leaderboard, so the two share
@@ -151,6 +176,13 @@ describe('registry', () => {
     expect(perfecting?.category).toBe('Interface');
     expect(perfecting?.kind).toBe('edge');
     expect(perfecting?.defaults).toEqual(['Shift+KeyT']);
+    // Loot Explorer is a rebindable Interface toggle on the shifted layer of
+    // KeyO (bare KeyO is free), matching the collection/catalog convention
+    // every other shifted-letter window uses.
+    const lootExplorer = BIND_ACTIONS.find((a) => a.id === 'lootExplorer');
+    expect(lootExplorer?.category).toBe('Interface');
+    expect(lootExplorer?.kind).toBe('edge');
+    expect(lootExplorer?.defaults).toEqual(['Shift+KeyO']);
   });
 
   it('gives every shipped default code to exactly one action per layer', () => {
@@ -409,7 +441,13 @@ describe('snapshot / importBindings (hotkey setup export + import)', () => {
     expect(snap.jump).toEqual([null, null]);
     expect(snap.forward).toEqual(['KeyW', 'ArrowUp']);
     expect(Object.keys(snap).length).toBe(BIND_ACTIONS.length);
-    expect(snap).toEqual(JSON.parse(localStorage.getItem('woc_keybinds') ?? '{}'));
+    const saved = JSON.parse(localStorage.getItem('woc_keybinds') ?? '{}') as Record<
+      string,
+      unknown
+    >;
+    expect(saved.__repaired).toBe(true);
+    delete saved.__repaired;
+    expect(snap).toEqual(saved);
     snap.slot0[0] = 'KeyZ';
     expect(kb.codeAt('slot0', 0)).toBe('KeyR');
   });
@@ -738,6 +776,78 @@ describe('per-character scope', () => {
     expect(fresh.actionForCode('Digit1')).toBe('slot1');
   });
 
+  it('does not revert a legitimate slot10/slot11 rebind to Q/E across relogin', () => {
+    // Reported bug: binding the "-" (slot10) and "=" (slot11) action-bar slots to
+    // Q and E reproduces the byte-identical shape the reverted Q/E strafe overhaul
+    // left behind (KeyQ/KeyE on those two slots, strafe left/right evicted to null
+    // by the ordinary uniqueness sweep in bind()), so the one-time repair signature
+    // match kept firing on every relogin and silently reverting the player's own
+    // rebind back to Minus/Equal.
+    const first = new Keybinds('char:alice');
+    first.bind('slot10', 0, 'KeyQ');
+    first.bind('slot11', 0, 'KeyE');
+    expect(first.codeAt('slot10', 0)).toBe('KeyQ');
+    expect(first.codeAt('slot11', 0)).toBe('KeyE');
+
+    const relogin = new Keybinds('char:alice');
+    expect(relogin.codeAt('slot10', 0)).toBe('KeyQ');
+    expect(relogin.codeAt('slot11', 0)).toBe('KeyE');
+
+    // Survives a second relogin too, not just the first.
+    const secondRelogin = new Keybinds('char:alice');
+    expect(secondRelogin.codeAt('slot10', 0)).toBe('KeyQ');
+    expect(secondRelogin.codeAt('slot11', 0)).toBe('KeyE');
+
+    // The persisted blob carries the repair marker and nothing else beyond the
+    // action ids, so it can never be mistaken for one of BIND_ACTIONS.
+    const stored = JSON.parse(localStorage.getItem('woc_keybinds:char:alice')!);
+    expect(stored.__repaired).toBe(true);
+    const actionIds = new Set(BIND_ACTIONS.map((a) => a.id));
+    expect(Object.keys(stored).filter((k) => !actionIds.has(k))).toEqual(['__repaired']);
+  });
+
+  it('leaves a Signature-A-shaped blob alone once it is already marked repaired', () => {
+    // A profile that is marked repaired but still holds the exact corrupted
+    // shape (e.g. because the player deliberately recreated it after the fix
+    // shipped) must not be reverted again: the marker, not the shape, decides.
+    localStorage.setItem(
+      'woc_keybinds:char:alice',
+      JSON.stringify({
+        strafeLeft: [null, null],
+        strafeRight: [null, null],
+        slot10: ['KeyQ', 'Minus'],
+        slot11: ['KeyE', 'Equal'],
+        __repaired: true,
+      }),
+    );
+    const fresh = new Keybinds('char:alice');
+    expect(fresh.codeAt('slot10', 0)).toBe('KeyQ');
+    expect(fresh.codeAt('slot11', 0)).toBe('KeyE');
+    expect(fresh.codeAt('strafeLeft', 0)).toBe(null);
+    expect(fresh.codeAt('strafeRight', 0)).toBe(null);
+  });
+
+  it('still repairs when the marker is present but not exactly true', () => {
+    // Only a strict `true` counts as already-repaired; any other stored value
+    // (a hand-edited blob, a future format change) must not suppress a real
+    // repair the shape still calls for.
+    localStorage.setItem(
+      'woc_keybinds:char:alice',
+      JSON.stringify({
+        strafeLeft: [null, null],
+        strafeRight: [null, null],
+        slot10: ['KeyQ', 'Minus'],
+        slot11: ['KeyE', 'Equal'],
+        __repaired: 1,
+      }),
+    );
+    const fresh = new Keybinds('char:alice');
+    expect(fresh.codeAt('strafeLeft', 0)).toBe('KeyQ');
+    expect(fresh.codeAt('strafeRight', 0)).toBe('KeyE');
+    expect(fresh.codeAt('slot10', 0)).toBe('Minus');
+    expect(fresh.codeAt('slot11', 0)).toBe('Equal');
+  });
+
   it('still imports a genuine legacy customization that does not collide with a current default', () => {
     // A real remap (interact moved off F onto an otherwise-unused function
     // key) must still come through on first seed.
@@ -910,6 +1020,71 @@ describe('modifiers and held (movement) actions', () => {
   });
 });
 
+// The wheel notches are bindable pseudo-keys too (src/game/wheel_binds.ts);
+// camera zoom is the zoomIn / zoomOut edge-action pair that holds them by default.
+describe('wheel notches as bindable keys', () => {
+  it('defaults camera zoom to the bare wheel, as edge actions under Movement', () => {
+    const zoomIn = BIND_ACTIONS.find((a) => a.id === 'zoomIn');
+    const zoomOut = BIND_ACTIONS.find((a) => a.id === 'zoomOut');
+    expect(zoomIn).toMatchObject({ category: 'Movement', kind: 'edge', defaults: ['WheelUp'] });
+    expect(zoomOut).toMatchObject({ category: 'Movement', kind: 'edge', defaults: ['WheelDown'] });
+    const kb = new Keybinds();
+    expect(kb.edgeActionForCombo('WheelUp')).toBe('zoomIn');
+    expect(kb.edgeActionForCombo('WheelDown')).toBe('zoomOut');
+    expect(kb.primaryLabel('zoomIn')).toBe('Wh↑');
+    expect(kb.primaryLabel('zoomOut')).toBe('Wh↓');
+  });
+
+  it('moves zoom to a Ctrl chord and hands the freed notch to a slot', () => {
+    const kb = new Keybinds();
+    expect(kb.bind('zoomOut', 0, 'Ctrl+WheelDown')).toBe(true);
+    expect(kb.bind('slot3', 0, 'WheelDown')).toBe(true);
+    expect(kb.edgeActionForCombo('Ctrl+WheelDown')).toBe('zoomOut');
+    expect(kb.edgeActionForCombo('WheelDown')).toBe('slot3');
+    expect(kb.primaryLabel('zoomOut')).toBe('Ctrl+Wh↓');
+    expect(kb.primaryLabel('slot3')).toBe('Wh↓');
+  });
+
+  it('binding a slot straight onto the bare notch evicts the zoom default, one code per action', () => {
+    const kb = new Keybinds();
+    expect(kb.findBindConflict('slot3', 0, 'WheelUp')).toEqual({
+      id: 'zoomIn',
+      index: 0,
+      code: 'WheelUp',
+    });
+    expect(kb.bind('slot3', 0, 'WheelUp')).toBe(true);
+    expect(kb.codeAt('zoomIn', 0)).toBeNull();
+    expect(kb.edgeActionForCombo('WheelUp')).toBe('slot3');
+  });
+
+  it('refuses a notch on a held (movement) action, which has no release to end it', () => {
+    const kb = new Keybinds();
+    expect(isRefusedCodeFor('forward', 'WheelUp')).toBe(true);
+    expect(isRefusedCodeFor('slot3', 'WheelUp')).toBe(false);
+    expect(isRefusedCodeFor('forward', 'Mouse4')).toBe(false); // a button does release
+    expect(bindRefusalReason('forward', 'WheelUp')).toBe('wheelHeld');
+    expect(bindRefusalReason('slot3', 'Mouse1')).toBe('reserved');
+    expect(bindRefusalReason('slot3', 'WheelUp')).toBeNull();
+    expect(kb.bind('forward', 0, 'WheelUp')).toBe(false);
+    expect(kb.bind('forward', 0, 'Shift+WheelDown')).toBe(false);
+    // The refusal is not a conflict either, so the UI never asks to steal zoom.
+    expect(kb.findBindConflict('forward', 0, 'WheelUp')).toBeNull();
+    // and it left both sides untouched
+    expect(kb.codeAt('forward', 0)).toBe('KeyW');
+    expect(kb.edgeActionForCombo('WheelUp')).toBe('zoomIn');
+  });
+
+  it('drops a hand-imported notch from a held action at load without letting it evict anything', () => {
+    localStorage.setItem(
+      'woc_keybinds',
+      JSON.stringify({ __repaired: true, forward: ['WheelUp', null] }),
+    );
+    const kb = new Keybinds();
+    expect(kb.codeAt('forward', 0)).toBeNull(); // the stored value was refused
+    expect(kb.edgeActionForCombo('WheelUp')).toBe('zoomIn'); // and did not claim the notch
+  });
+});
+
 describe('mouse buttons as bindable keys', () => {
   it('binds a mouse pseudo-code to an action-bar slot and labels it as a keycap', () => {
     const kb = new Keybinds();
@@ -1006,7 +1181,7 @@ describe('every bind action has a localized label key', () => {
 describe('Keybinds.findBindConflict', () => {
   it('reports nothing for a key no other action holds', () => {
     const kb = new Keybinds();
-    expect(kb.findBindConflict('interact', 0, 'F9')).toBeNull();
+    expect(kb.findBindConflict('interact', 0, 'F12')).toBeNull();
   });
 
   it('names the action a rebind would steal the key from, and its slot', () => {

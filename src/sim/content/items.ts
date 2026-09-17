@@ -125,7 +125,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'uncommon',
     weapon: { min: 6, max: 11, speed: 2.2 },
-    stats: { str: 2 },
+    stats: { str: 1, sta: 1 },
     sellValue: 120,
     requiredClass: WAR,
   },
@@ -147,7 +147,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'uncommon',
     weapon: { min: 4, max: 8, speed: 1.7, dagger: true },
-    stats: { agi: 2 },
+    stats: { agi: 1, sta: 1 },
     sellValue: 120,
     requiredClass: ROG,
   },
@@ -170,7 +170,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 30, int: 3, spi: 2 },
+    stats: { armor: 30, int: 3, spi: 2, sta: 1 },
     sellValue: 150,
     requiredClass: MAG,
   },
@@ -182,7 +182,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 55, agi: 3 },
+    stats: { armor: 55, agi: 2, sta: 1 },
     sellValue: 150,
     requiredClass: ROG,
   },
@@ -193,7 +193,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 25, agi: 1 },
+    stats: { armor: 25, agi: 1, sta: 1 },
     sellValue: 80,
   },
   quilted_trousers: {
@@ -245,7 +245,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 18, int: 2, spi: 1 },
+    stats: { armor: 18, int: 2, spi: 1, sta: 1 },
     sellValue: 150,
     requiredClass: MAG,
   },
@@ -311,7 +311,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'rare',
     weapon: { min: 8, max: 14, speed: 2.2 },
-    stats: { int: 4, spi: 2 },
+    stats: { int: 4, spi: 2, sta: 2 },
     sellValue: 850,
     requiredClass: MAG,
   },
@@ -399,19 +399,16 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
-  // The store mount (content/store_mounts.ts): granted by a verified Claudium
-  // spend, never sold for copper and never dropped. SOULBOUND like the dev tank:
-  // a real-money grant that could trade hands would be an economy leak, and a
-  // lost paid mount is a support ticket. No buyValue: Claudium is not copper.
+  // Legacy reins: preserve the shipped item ID for saved bags and banks.
+  // The paid look now lives in mount_skins.ts; this souvenir is discardable
+  // and cannot grant a ride, currency, or cosmetic ownership.
   reins_mech_bird: {
     id: 'reins_mech_bird',
     name: 'Ignition Key: Cluckwork Mech Bird',
-    kind: 'mount',
-    mount: 'mech_bird',
+    kind: 'junk',
     quality: 'rare',
     soulbound: true,
     noVendorSell: true,
-    noDiscard: true,
     sellValue: 0,
   },
   // Developer-only mount. It is intentionally absent from vendors, quests,
@@ -429,6 +426,16 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
+  // Legacy cosmetic reins; same inert, discardable treatment as mech_bird.
+  reins_rallycart_rxt: {
+    id: 'reins_rallycart_rxt',
+    name: 'Ignition Key: Rallycart RXT',
+    kind: 'junk',
+    quality: 'epic',
+    soulbound: true,
+    noVendorSell: true,
+    sellValue: 0,
+  },
   // Developer-only mount, on the same terms as the tank above (DEVELOPER_MOUNTS
   // in content/mounts.ts): no vendor, quest, creature, heroic, or Rift source,
   // and soulbound so a dev grant cannot be traded into the economy. Use
@@ -443,30 +450,34 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     noDiscard: true,
     sellValue: 0,
   },
-  // Developer-only on the same terms (DEVELOPER_MOUNTS in content/mounts.ts):
-  // no vendor, quest, creature, heroic or Rift source, soulbound so a dev grant
-  // cannot be traded in. Use /dev mounts or /dev give reins_chimeglass_tortoise.
+  // Legacy cosmetic reins; the spaceship is now a mount skin.
+  reins_goblin_rocket_sled: {
+    id: 'reins_goblin_rocket_sled',
+    name: 'Ignition Key: Goblin Rocket Sled',
+    kind: 'junk',
+    quality: 'epic',
+    soulbound: true,
+    noVendorSell: true,
+    sellValue: 0,
+  },
+  // Legacy cosmetic reins; retain old saves without granting paid ownership.
   reins_chimeglass_tortoise: {
     id: 'reins_chimeglass_tortoise',
     name: "Roadwarden's Bellstrap: Tolliver",
-    kind: 'mount',
-    mount: 'chimeglass_tortoise',
+    kind: 'junk',
     quality: 'epic',
     soulbound: true,
-    noDiscard: true,
+    noVendorSell: true,
     sellValue: 0,
   },
-  // Developer-only, same treatment as the tank above: no acquisition path, so
-  // it stays soulbound rather than tradable. Use /dev give reins_rickshaw_mount
-  // while the feature remains under development.
+  // Legacy cosmetic reins; the mount skin is an account entitlement.
   reins_rickshaw_mount: {
     id: 'reins_rickshaw_mount',
     name: 'Bound Reins: Bonebound Rickshaw',
-    kind: 'mount',
-    mount: 'rickshaw_mount',
+    kind: 'junk',
     quality: 'epic',
     soulbound: true,
-    noDiscard: true,
+    noVendorSell: true,
     sellValue: 0,
   },
   mistveil_cord: {
@@ -2044,8 +2055,13 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   // tests/consumables.test.ts) at BASE stats (no gear) at the TOP level of its
   // intended zone bracket (ZONE1/2/3_ZONE.levelRange[1] in content/zone{1,2,3}.ts:
   // 7/13/20), the hardest point in the bracket for the tier to still feel worth
-  // the cooldown. That lands potionHp around 72-90% and potionMana around 53-66%
-  // of the reference pool: a real, meaningful topper-upper rather than a sliver,
+  // the cooldown. That landed potionHp around 72-90% and potionMana around 53-66%
+  // of the reference pool as it stood before the 2026-09-11 class health table;
+  // the priest pool then grew by roughly six tenths (2 Stamina per level, 15 HP
+  // per level), so the hp ladder now restores about 43-56% and its re-size is
+  // owed as its own change, issue #4000 (tests/consumables.test.ts pins the
+  // measured fractions meanwhile; the mana ladder is untouched, Intellect per
+  // level and base mana did not move). The intent stands: a real, meaningful topper-upper rather than a sliver,
   // with headroom against a geared character's larger pool (gear only grows the
   // pool from here, so a geared cast of the same level sees a SMALLER fraction
   // than the pinned floor, same as any flat-value consumable; the fix is that the
@@ -2360,7 +2376,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 30, int: 2, spi: 1 },
+    stats: { armor: 30, int: 2, spi: 1, sta: 1 },
     // Economy invariant: re-priced below the
     // reworked craft input (85); this also retires the piece as the cheapest
     // disenchant fodder (the evidence review's dust-mill row). Not vendored;
@@ -2376,7 +2392,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 52, int: 2, spi: 1 },
+    stats: { armor: 52, int: 2, spi: 1, sta: 1 },
     // Economy invariant: re-priced below the
     // reworked craft input (93). Not vendored; buyValue kept, read only by
     // the market suggested ask, which clamps to 10x sellValue.
@@ -2390,7 +2406,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 50, int: 2, spi: 1 },
+    stats: { armor: 50, int: 2, spi: 1, sta: 1 },
     // Economy invariant: re-priced below the
     // reworked craft input (117). Not vendored; buyValue kept, read only by
     // the market suggested ask, which clamps to 10x sellValue.
@@ -2415,7 +2431,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'rare',
-    stats: { armor: 44, int: 7, spi: 4 },
+    stats: { armor: 44, int: 7, spi: 4, sta: 3 },
     sellValue: 440,
   },
   duskhide_wraps: {
@@ -2425,7 +2441,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'gloves',
     quality: 'rare',
-    stats: { armor: 46, int: 6, spi: 3 },
+    stats: { armor: 46, int: 6, spi: 3, sta: 2 },
     sellValue: 420,
   },
   sootscale_mantle: {
@@ -2435,7 +2451,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'shoulder',
     quality: 'rare',
-    stats: { armor: 78, int: 6, spi: 4 },
+    stats: { armor: 78, int: 6, spi: 4, sta: 3 },
     // Economy invariant, discount-aware arm: both reagents are vendor-stocked
     // at the forge, and a specialized crafter holding a self-signed ore
     // consumes as little as 4 ore + 3 flux = 300c, so the old 470 vendor-back
@@ -2480,7 +2496,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'rare',
     weapon: { min: 10, max: 17, speed: 3.0 },
-    stats: { int: 5, spi: 2 },
+    stats: { int: 5, spi: 2, sta: 2 },
     sellValue: 800,
   },
   marrowtread_boots: {
@@ -2501,7 +2517,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 20, int: 2, spi: 2 },
+    stats: { armor: 20, int: 2, spi: 2, sta: 1 },
     sellValue: 500,
     requiredClass: MAG,
   },
@@ -2512,7 +2528,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 32, agi: 3 },
+    stats: { armor: 32, agi: 3, sta: 1 },
     sellValue: 500,
     requiredClass: ROG,
   },
@@ -2534,7 +2550,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 38, int: 3, spi: 3 },
+    stats: { armor: 38, int: 3, spi: 3, sta: 2 },
     sellValue: 700,
     requiredClass: MAG,
   },
@@ -2600,7 +2616,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'rare',
     weapon: { min: 11, max: 18, speed: 3.0 },
-    stats: { int: 5, spi: 2 },
+    stats: { int: 5, spi: 2, sta: 2 },
     sellValue: 880,
     requiredClass: CASTER_WEAPON_CLASSES,
   },
@@ -2622,7 +2638,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'rare',
     weapon: { min: 11, max: 18, speed: 3.0 },
-    stats: { int: 4, spi: 3 },
+    stats: { int: 4, spi: 3, sta: 2 },
     sellValue: 850,
   },
   // --- Class/spec gap fill (uncommon/green leveling pieces) ---
@@ -2639,7 +2655,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'chest',
     quality: 'uncommon',
     // Sableweb Lurkers (level 4) -> item level 5, chest budget 2.
-    stats: { armor: 40, int: 1, spi: 1 },
+    stats: { armor: 40, int: 1, spi: 1, sta: 1 },
     sellValue: 130,
   },
   thornling_grips: {
@@ -2650,7 +2666,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'gloves',
     quality: 'uncommon',
     // Deeprock Diggers (level 6) -> item level 7, gloves budget 2.
-    stats: { armor: 24, int: 1, spi: 1 },
+    stats: { armor: 24, int: 1, spi: 1, sta: 1 },
     sellValue: 140,
   },
   acolyte_chain_grips: {
@@ -2672,7 +2688,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'waist',
     quality: 'uncommon',
     // Gorrak (level 6 boss) -> item level 7, waist budget 2.
-    stats: { armor: 28, int: 1, spi: 1 },
+    stats: { armor: 28, int: 1, spi: 1, sta: 1 },
     sellValue: 150,
   },
   briarroot_staff: {
@@ -2699,7 +2715,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     // Mogger (level 6 rare elite) -> item level 7, offhand budget 2. The first
     // low-level held offhand; equips by the literal CASTER_ALL list.
-    stats: { int: 1, spi: 1 },
+    stats: { int: 1, spi: 1, sta: 1 },
     sellValue: 160,
     requiredClass: CASTER_ALL,
   },
@@ -3232,9 +3248,11 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'neck',
     quality: 'epic',
-    // ilvl-31 neck epic budget = 14; int:8+sta:6 = 14. Two stats only (a
-    // primary plus stamina), the heroic-vendor jewelry shape law.
-    stats: { int: 8, sta: 6 },
+    // ilvl-31 neck epic line = 14: int:8+spi:5 = 13 plus one stamina bought
+    // above the free baseline of 5 (sta:6). The stamina baseline model
+    // (item_budget.ts) prices the line; the heroic-vendor jewelry keeps its
+    // primary-plus-stamina shape with the Spirit the line owed on top.
+    stats: { int: 8, sta: 6, spi: 5 },
     // Exactly one rating at the jewelry band's 25. Caster haste WITH
     // stamina complements the vendor necks: zense_meridian is the int/spi
     // CRIT neck and no vendor neck carries a caster haste line.
@@ -3261,8 +3279,9 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'epic',
-    // ilvl-31 ring epic budget = 13; int:8+sta:5 = 13.
-    stats: { int: 8, sta: 5 },
+    // ilvl-31 ring epic line = 13: int:8+spi:4 = 12 plus one stamina bought
+    // above the free baseline of 4 (sta:5); stamina baseline model.
+    stats: { int: 8, sta: 5, spi: 4 },
     // Caster int identity: haste. The vendor haste rings are spi/int splits
     // (zyzzs_deathless_signet, architects_cornerstone); an int-lead haste
     // ring with stamina is the missing line.
@@ -3280,9 +3299,10 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     // (occupiesHand defaults true: the 0.75 held budget line, kept). NO use
     // field: R14 forbids new proc/effect mechanics and the codebase ships
     // no cosmetic-only item-use family to reuse, so the gadget is pure
-    // stats. ilvl-31 offhand epic budget = 16; int:10+sta:6 = 16, the
-    // dps-caster identity.
-    stats: { int: 10, sta: 6 },
+    // stats. ilvl-31 offhand epic line = 16: int:10+spi:5 = 15 plus one
+    // stamina bought above the free baseline of 5 (sta:6), the dps-caster
+    // identity under the stamina baseline model.
+    stats: { int: 10, sta: 6, spi: 5 },
     // The held/shield family band: one rating at 20; dps-caster throughput
     // is crit, like wraithfire_orb.
     critRating: 20,
@@ -3298,10 +3318,10 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'held_offhand',
     slot: 'offhand',
     quality: 'epic',
-    // ilvl-31 offhand epic budget = 16; int:8+spi:5+sta:3 = 16, the
-    // wraithfire_orb three-stat healer-leaning distribution rescaled to the
-    // ilvl-31 budget.
-    stats: { int: 8, spi: 5, sta: 3 },
+    // ilvl-31 offhand epic line = 16: int:8+spi:8, with the free stamina
+    // baseline of 5 on top (stamina baseline model); the wraithfire_orb
+    // healer-leaning distribution rescaled to the ilvl-31 line.
+    stats: { int: 8, spi: 8, sta: 5 },
     // Healer-inclusive throughput: haste, never Hit (heals are not
     // resisted; the healer-facing rule at wraithfire_orb).
     hasteRating: 20,
@@ -3388,7 +3408,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 30, agi: 2 },
+    stats: { armor: 30, agi: 2, sta: 1 },
     sellValue: 120,
     requiredClass: ROG,
   },
@@ -3400,7 +3420,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 16, int: 2, spi: 1 },
+    stats: { armor: 16, int: 2, spi: 1, sta: 1 },
     sellValue: 120,
     requiredClass: MAG,
   },
@@ -3422,7 +3442,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'shoulder',
     quality: 'uncommon',
-    stats: { armor: 14, int: 2 },
+    stats: { armor: 14, int: 2, sta: 1 },
     sellValue: 110,
     requiredClass: MAG,
   },
@@ -3444,7 +3464,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'waist',
     quality: 'uncommon',
-    stats: { armor: 10, int: 2, spi: 1 },
+    stats: { armor: 10, int: 2, spi: 1, sta: 1 },
     sellValue: 100,
     requiredClass: MAG,
   },
@@ -3477,7 +3497,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'waist',
     quality: 'uncommon',
-    stats: { armor: 11, agi: 1, int: 2 },
+    stats: { armor: 11, agi: 1, int: 2, sta: 2 },
     sellValue: 150,
   },
   gorraks_cleaver: {
@@ -3487,7 +3507,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'uncommon',
     weapon: { min: 8, max: 14, speed: 2.5 },
-    stats: { str: 3 },
+    stats: { str: 2, sta: 1 },
     sellValue: 180,
     requiredClass: WAR,
   },
@@ -3498,7 +3518,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'gloves',
     quality: 'uncommon',
-    stats: { armor: 12, int: 1, spi: 2 },
+    stats: { armor: 12, int: 1, spi: 2, sta: 1 },
     sellValue: 140,
     requiredClass: MAG,
   },
@@ -3515,7 +3535,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'uncommon',
     weapon: { min: 8, max: 14, speed: 2.5 },
-    stats: { str: 2 },
+    stats: { str: 2, sta: 1 },
     sellValue: 170,
   },
   tradesman_hatchet: {
@@ -3535,7 +3555,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'uncommon',
     weapon: { min: 9, max: 15, speed: 3.0 },
-    stats: { int: 3, spi: 2 },
+    stats: { int: 3, spi: 2, sta: 2 },
     sellValue: 175,
     requiredClass: CASTER_WEAPON_CLASSES,
   },
@@ -3546,7 +3566,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'uncommon',
     weapon: { min: 5, max: 9, speed: 1.7, dagger: true },
-    stats: { agi: 3 },
+    stats: { agi: 3, sta: 2 },
     sellValue: 170,
     requiredClass: ROG,
   },
@@ -3608,7 +3628,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 24, int: 2, spi: 1 },
+    stats: { armor: 24, int: 2, spi: 1, sta: 1 },
     sellValue: 120,
   },
   outrider_sabatons: {

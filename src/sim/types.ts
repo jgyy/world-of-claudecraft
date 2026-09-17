@@ -185,15 +185,6 @@ export const SUNDER_CAST_ID = 'sundering';
 // activity-marker shape as craft/enchant-family. Separate id keeps cast-bar
 // labels and audio routing clean.
 export const TOOL_RECHARGE_CAST_ID = 'tool_recharge';
-// The planting cast sentinel (Farming, the growth-engine phase): same
-// activity-marker shape as the craft/gather family. UNLIKE every other
-// sentinel here, this cast decides NOTHING: plantCrop resolves the whole
-// plant at command time and the cast is pure flavor, so its completion arm in
-// combat/casting_lifecycle.ts dispatches no work (see the comment there).
-// Membership in isNonSpellCast below is what buys it the shared bundle
-// (silence exemption, no spell queue, damage cancels instead of pushing back,
-// item use blocked while it runs).
-export const FARMING_CAST_ID = 'farming';
 // The corpse-harvest cast (Intentional Gathering, PR3): same activity-marker
 // shape as gather/craft/fishing. HARVEST_CAST_SECONDS (professions/
 // harvest_admission.ts) is the frozen duration; professions/
@@ -216,7 +207,6 @@ export function isNonSpellCast(castId: string | null): boolean {
     castId === SALVAGE_CAST_ID ||
     castId === SUNDER_CAST_ID ||
     castId === TOOL_RECHARGE_CAST_ID ||
-    castId === FARMING_CAST_ID ||
     castId === CORPSE_HARVEST_CAST_ID
   );
 }
@@ -418,7 +408,7 @@ export type AuraKind =
   // (Moonseed becomes Moonsurge, Skyfall becomes Sunwake); pressing either
   // spends the bank. old_blood is Wildfang's shared bank: form strikes fill
   // it in either form and the form worn at the spend decides the payoff
-  // (Redharvest in Wolf, Marrowbreak in Bruin). verdance is Groveheart's
+  // (Redharvest in Cat, Marrowbreak in Bruin). verdance is Groveheart's
   // garden: completed HoT casts plant stages toward Overbloom.
   | 'moontide'
   | 'old_blood'
@@ -706,6 +696,8 @@ export interface Aura {
   value3?: number; // imbue: judgement max; Greater Invisibility: aftereffect duration
   tickInterval?: number;
   tickTimer?: number;
+  tickDamage?: number;
+  tickDoom?: number;
   // Sim-only periodic ramp: after each resolved DoT tick, increase `stacks`
   // and recompute `value` as per-stack damage times stacks, up to this cap.
   // The wire already mirrors the resulting value/stacks, so clients do not
@@ -966,6 +958,8 @@ export type ItemUse =
   // player meets their first death somewhere nothing is hunting them.
   // Consumed on use and refused unless the lesson is active.
   | { type: 'passingStone' }
+  // Starts the one-time hammer quest; the Ember is consumed by crafting.
+  | { type: 'forgebreakerEmber' }
   | { type: 'mechChroma'; chromaId: string }
   // Opens the client-side event skin-select overlay. The server rolls a rank on
   // use (see Sim.openSkinSelect) and the player locks one in via claimEventSkin.
@@ -1903,6 +1897,10 @@ export interface LootEntry {
   // predicate). Every entry of a group must agree, and the heroic-append
   // tables never carry it (both pinned by tests/loot_roll.test.ts).
   normalOnly?: true;
+  // A migrated base-loot acquisition in HEROIC_BOSS_LOOT keeps its original
+  // source level and stats; listing it here must not promote it to the
+  // bespoke heroic equipment tier or seed the higher-tier rift reward pool.
+  preserveSourceTier?: true;
 }
 
 export type MobFamily =
@@ -1955,6 +1953,8 @@ export interface MobTemplate {
   /** Optional mandatory encounter threshold. Damage cannot move the mob below
    * this max-HP fraction until encounter logic clears its runtime floor. */
   damageFloorPct?: number;
+  /** Optional resting HP fraction for friendly practice targets that should stay healable. */
+  restHpFraction?: number;
   loot: LootEntry[];
   scale: number; // render hint
   color: number; // render hint
@@ -2960,6 +2960,37 @@ type AoeRootEffect =
       trap: { armTime: number; lifetime: number };
     });
 
+/** A weapon-coat rider: what ONE landed melee swing inflicts on the struck
+ *  target while the coating is worn. Authored on an `imbue` effect, so a coat
+ *  is always carried by the imbue aura the coating ability applies, and the
+ *  rider borrows that aura's id and display name (combat/poison_coating.ts).
+ *  This is the player-side twin of the mob on-hit DoT seam (`stackPoison`,
+ *  `venom`, `corrode` on MobTemplate): same aura shapes, but applied by a
+ *  coating the player chose to put on rather than by a creature's innate bite. */
+export type PoisonCoat =
+  // Classic Deadly Poison: a stacking damage-over-time whose per-tick damage is
+  // perTick x stacks. Every landed swing adds a stack (up to maxStacks) and
+  // fully refreshes the timer, so the poison bites harder the longer you stay on
+  // the target. Reuses the `dot` aura kind; the shared slot carries the count.
+  | {
+      rider: 'stackDot';
+      perTick: number;
+      maxStacks: number;
+      duration: number;
+      interval: number;
+      school?: Aura['school'];
+    }
+  // A plain refreshing debuff rider (an armor shred, a healing-taken cut): every
+  // landed swing re-applies it at full duration, the same shape the mob on-hit
+  // debuffs already use.
+  | {
+      rider: 'debuff';
+      kind: AuraKind;
+      value: number;
+      duration: number;
+      school?: Aura['school'];
+    };
+
 export type AbilityEffect =
   | { type: 'weaponDamage'; bonus: number } // on-next-swing bonus (heroic strike)
   | {
@@ -3214,7 +3245,9 @@ export type AbilityEffect =
       casterMaxHpPct?: number;
       auraId?: string;
     } // power word: shield
-  | { type: 'imbue'; bonus: number; duration: number } // seals / rockbiter: extra damage per swing
+  // seals / rockbiter / rogue poisons: flat extra damage on every swing, plus the
+  // optional weapon-coat rider a landed swing inflicts on whatever it strikes.
+  | { type: 'imbue'; bonus: number; duration: number; coat?: PoisonCoat }
   | { type: 'lifeTap'; hp: number; mana: number }
   | { type: 'drainTick'; min: number; max: number; healFrac: number } // channel tick that heals the caster
   | {
@@ -3516,6 +3549,8 @@ export type AbilityEffect =
       charges: number;
       doomPerProc: number;
       damage: number;
+      interval?: number;
+      tickDoom?: number;
     }
   | {
       type: 'afflictionCruelPact';
@@ -3609,12 +3644,17 @@ export interface AbilityRank {
 }
 
 // One transform-in-place rule: while the actor wears at least minStacks of the
-// aura kind, the base action resolves as abilityId (see combat/action_replacement.ts).
+// aura kind (auraKind), and/or wears NO aura of absentAuraKind, the base action
+// resolves as abilityId (see combat/action_replacement.ts). A presence rule is
+// a payoff over the base and shares its clock; an absence-only rule is a MODE
+// of the same button (Slinkstrike stealthed, Lunge unstealthed) and keeps the
+// replacement's own cooldown key.
 export interface ActionReplacementRule {
   abilityId: string;
-  auraKind: AuraKind;
+  auraKind?: AuraKind;
   minStacks?: number;
   actorAuraKind?: AuraKind;
+  absentAuraKind?: AuraKind;
 }
 
 export interface AbilityDef {
@@ -4483,6 +4523,13 @@ export interface QuestDef {
   // quest needs; re-granted on accept if the player no longer has them, to avoid a progression block
   requiredClass?: PlayerClass[]; // class-locked quest: only these classes see/accept it
   // (e.g. the paladin-only Divine Tome chain). Availability enforced in computeQuestState.
+  // Additionally requires a resolvable ability beyond class/level alone. The ONE
+  // user today is the hub's optional healing lesson (q_hub_healing_numbers),
+  // which needs the SAME resolver its credit arm and the UI coach read
+  // (sim/tutorial/hub_healing_lesson.ts hubHealingAbilityId) so a class that is
+  // nominally eligible never sees the quest before their kit has anything to
+  // teach the lesson with. Enforced in computeQuestState.
+  requiresUsableHealAbility?: boolean;
   minLevel?: number;
   retired?: boolean; // remains finishable if already accepted, but cannot be newly accepted
   // OWNERSHIP collect objectives instead of DELIVERY ones: the collect count
@@ -4712,6 +4759,8 @@ export interface ClientMirroredEntityFields {
    *  0..1 through the pull at the snapshot cadence; the visual smooths it. */
   climbing?: boolean;
   climbProgress?: number;
+  /** Mirror of an in-flight Vaulting Charge: a bare server-owned movement bit. */
+  leaping?: boolean;
 }
 
 export interface Entity extends ClientMirroredEntityFields {
@@ -5055,11 +5104,15 @@ export interface Entity extends ClientMirroredEntityFields {
   queuedOnSwing: string | null; // heroic strike
   queuedOnSwingFree?: boolean; // next_cast_free consumed at queue time
   queuedOnSwingCostMultiplier?: number; // next_cast_cheap consumed at queue time
-  // single-slot spell queue: a press during the tail of the current cast (see
-  // CAST_QUEUE_WINDOW_SEC), fired by updateCasting on cast completion. Distinct
-  // from queuedOnSwing (a melee on-next-swing queue, not a cast queue).
+  // single-slot spell queue: a press during the tail of the current cast or of
+  // a bare GCD (see CAST_QUEUE_WINDOW_SEC), fired by updateCasting on cast
+  // completion or when the GCD clears. Distinct from queuedOnSwing (a melee
+  // on-next-swing queue, not a cast queue). queuedCastTargetId preserves the
+  // mouseover-cast target override so the fired press heals the unit the
+  // player pointed at, not their selected target.
   queuedCastAbility: string | null;
   queuedCastAim: { x: number; z: number } | null;
+  queuedCastTargetId: number | null;
   fiveSecondRule: number; // time since last mana spend
   comboPoints: number; // retail-style: character-bound, not anchored to a target
   comboUntil: number; // sim-time until which unspent combo points persist
@@ -5276,9 +5329,14 @@ export interface Entity extends ClientMirroredEntityFields {
   leashAnchor: Vec3 | null; // refreshed by hostile player/pet actions; spawnPos remains the true home
   evadeStall: number; // seconds an evading mob has failed to get closer to home; snaps it home if it can't path back (e.g. across water)
   chaseStall: number; // seconds an engaged mob has been pinned unable to close on its target; at CHASE_STALL_TIMEOUT (mob/reachability.ts) it evades home like a leash break
-  evadeEpoch: number; // bumped every full evade-home reset (resetEvadingMob); lets a stamped-at-exit snapshot (instance_exit_memory.ts) detect a pull it no longer belongs to
-  combatExitHoldUntil: number; // sim time; while in the future, resetEvadingMob defers the full evade-home reset (issue #2653): a mob a player just left mid-combat stays parked in 'evade' (immune, undamaged, hate table intact) instead of healing/clearing so a same-claim re-entry within instance_exit_memory.ts's window resumes the exact fight it left, not a fresh unengaged pull
+  evadeEpoch: number; // bumped every full evade-home reset (resetEvadingMob): a test-observable count of pulls this mob has walked home from
   chainPullInbound: boolean; // woken by a boss chain pull and still crossing to the puller; suspends the soft leash until it arrives (mob/chain_pull_transit.ts)
+  // Holding in place in an evade stance inside an instance slot: immune while
+  // stuck, aggro intact, out of reach of its target; the value is the seconds
+  // held so far (instances/instance_combat_hold.ts phases the mob to its target
+  // once the grace runs out, attackable on the way). Undefined whenever not
+  // pinned (never deleted), which the parity sampler drops like an absent key.
+  evadeInPlace?: number;
   fleeTimer: number; // seconds left in a low-HP panic flee; counts down in the 'flee' state
   fleeReturnTimer: number; // grace after a panic flee hits leash edge, letting it run back before normal leash reset resumes
   hasFled: boolean; // a cowardly mob flees only once per pull; cleared when it resets at spawn
@@ -5378,6 +5436,10 @@ export interface Entity extends ClientMirroredEntityFields {
   lootable: boolean;
   loot: CorpseLoot | null;
   lootRecipientIds?: number[];
+  /** Runtime-only stable identity for a soulbound drop's party-trade window.
+   *  Captured synchronously when loot rolls, so a later disconnect cannot
+   *  erase a kill-eligible character from the copy's transfer group. */
+  lootPartyTradeEligibility?: { names: string[]; characterIds: number[] };
   xpValue: number;
   // npc
   questIds: string[];
@@ -5541,6 +5603,12 @@ export interface Entity extends ClientMirroredEntityFields {
   // applies. Render-only: the client swaps the held weapon model and rarity VFX.
   // Recomputed in recalcPlayerStats and synced in identity fields (terse `wsk`).
   weaponSkinId: string | null;
+  // Worn mount skin id (players only; null otherwise): the account cosmetic
+  // drawn OVER whatever mount `mountKey` names (content/mount_skins.ts).
+  // Render-only: the client swaps the mount visual and audio set. The sim never
+  // reads it for gameplay (speed stays on mountKey). Set by Sim.setMountSkin and
+  // synced in identity fields (terse `msk`), like `wsk`.
+  mountSkinId: string | null;
   // Full worn equipment (players only; empty otherwise). Render-only mirror of
   // PlayerMeta.equipment, recomputed in recalcPlayerStats and synced in identity
   // fields (terse `eq`) so another player can be inspected. Like mainhandItemId,
@@ -5626,6 +5694,12 @@ export interface NythraxisBoneSpike {
   tickTimer: number;
 }
 
+/** One raider's Bone Spike cooldown: seconds until a cast may pick them again. */
+export interface NythraxisBoneSpikeCooldown {
+  playerId: number;
+  remaining: number;
+}
+
 export interface NythraxisEncounterState {
   phase: 1 | 'transition' | 2 | 3 | 'dead';
   introSpoken: boolean;
@@ -5656,9 +5730,16 @@ export interface NythraxisEncounterState {
   // Dread Curse (the tank swap, both difficulties): only the cadence lives
   // here; the stacks live on the victim's aura (nythraxis_dread_curse.ts).
   dreadCurseTimer?: number;
-  // Bone Spike cadence and the live spike/victim pairs (nythraxis_bone_spike.ts).
+  // Who Dread Curse currently treats as the settled tank, tracked separately
+  // from the live boss.aggroTargetId so a taunt back onto a still-cursed
+  // player can be told apart from a genuine swap-in and refused (see
+  // enforceNythraxisDreadCurseSwap in encounters/nythraxis.ts).
+  dreadCurseHolderId?: number | null;
+  // Bone Spike cadence, the live spike/victim pairs, and the per-raider
+  // cooldown ledger that spreads waves across the raid (nythraxis_bone_spike.ts).
   boneSpikeTimer?: number;
   boneSpikes?: NythraxisBoneSpike[];
+  boneSpikeCooldowns?: NythraxisBoneSpikeCooldown[];
   // Spikes and fire never overlap: seconds left in the settle window after an
   // eruption lands (spikes hold) and after a spike wave (eruptions hold).
   eruptionSettleTimer?: number;
@@ -5670,8 +5751,9 @@ export interface NythraxisEncounterState {
   eruptionCastKey?: number;
   eruptionImpactRemaining?: number;
   eruptionPoints?: { x: number; z: number }[];
-  // Every burning patch, Grave Flame and Soulfire alike (kind tells them
-  // apart; nythraxis_soulfire.ts pushes the Soul Rend pools into this list).
+  // Every burning patch. In play these are all Grave Flame; the 'soul' kind
+  // (the Soulfire pools Soul Rend used to leave) was retired from play in
+  // v0.42.2 and survives only so the wire and renderer keep their shape.
   graveFlames?: {
     seq: number;
     kind: 'grave' | 'soul';
@@ -5682,12 +5764,6 @@ export interface NythraxisEncounterState {
     tickTimer: number;
   }[];
   graveFlameSeq?: number;
-  // Heroic-only: the last boss-clock time (ctx.time) each player took a
-  // Soulfire tick, so standing in more than one heroic pool, or catching two
-  // staggered Soul Rend casts, never yields more than one normal-strength
-  // tick per second (nythraxis_soulfire.ts admitNythraxisSoulfireTick owns
-  // the gate; encounters/nythraxis.ts is the sole reader/writer).
-  soulfireTickAt?: { playerId: number; at: number }[];
   // Gravefire: the cadence and the live traveling lines (nythraxis_gravefire.ts).
   gravefireTimer?: number;
   gravefires?: {
@@ -5704,6 +5780,10 @@ export interface NythraxisEncounterState {
   // gap timer that keeps the body-owning majors (Deathless Rage, the sigil
   // drag) from overlapping (nythraxis_binding_sigil.ts).
   sigilTimer?: number;
+  // The side the LAST sigil landed on (+1 world +x, the raid's left facing
+  // the dais; -1 world -x, its right); null before the first cast. The next
+  // cast takes the other side.
+  sigilSide?: 1 | -1 | null;
   sigil?: {
     castKey: number;
     x: number;
@@ -5727,8 +5807,8 @@ export interface NythraxisEncounterState {
     chargeIndex: number;
     chargeTargetId: number | null;
     slammed: boolean;
+    openingSlamSpent: boolean;
     whirlTickTimer: number;
-    spikeCast: boolean;
     chargedIds: number[];
   } | null;
   wardChannels: NythraxisWardChannel[];
@@ -5996,6 +6076,21 @@ export interface ReadyCheck {
   responses: Map<number, 'ready' | 'notready' | 'pending'>; // pid -> answer
 }
 
+export interface ReadyCheckMemberResponse {
+  pid: number;
+  name: string;
+  state: 'ready' | 'notready' | 'pending';
+}
+
+// An active party/raid pull timer (/pull X).
+export interface PullTimer {
+  partyId: number;
+  initiator: number;
+  endsAt: number;
+  totalSeconds: number;
+  lastAnnounced: number;
+}
+
 // A player's active riding-lesson attempt (src/sim/mounts_training.ts), kept on
 // PlayerMeta.mountTraining. Session-only: never persisted/serialized (unlike the
 // one-time mountTrainingFeePaid flag also on PlayerMeta), so a save/load never
@@ -6211,6 +6306,14 @@ export type SimEvent = { pid?: number } & (
   // ID only, never English text; `retro` marks the on-join back-credit pass so
   // the client can batch those into one summary line instead of banner spam.
   | { type: 'deedUnlocked'; deedId: string; retro?: boolean }
+  // Account ledger relic record (always personal: emitted with pid). Fired
+  // when the acting character is appended as a finder of a catalogued relic
+  // (an item, an authored mark, or a mount) on its account ledger
+  // (src/sim/account_ledger.ts). `key` is the accountRelicKey. Never English;
+  // NOT presentation: the client ignores it (the heavy `acct` self key is the
+  // membership authority), the server persists the row and fans the entry out
+  // to the account's other live sessions. `retro` marks the on-join seed pass.
+  | { type: 'relicRecorded'; key: string; retro?: boolean }
   // Reliquary first fill (always personal: emitted with pid). Id-only: exactly
   // one of itemId / markId is set for a catalogued relic or authored mark.
   // pageIds list pages that list the relic; illuminatedPageId is set when a
@@ -6419,10 +6522,14 @@ export type SimEvent = { pid?: number } & (
       current: RealmBuilderHonour;
       past: readonly RealmBuilderHonour[];
     }
-  | { type: 'noticeboard'; noticeboardId: string; state: 'empty' }
+  // `boardId` is the authored NoticeboardDef id (every board shares one
+  // templateId), so the client can tell the Proving Shore's recruits' signpost
+  // from a town board and open the guild board on its default view.
+  | { type: 'noticeboard'; noticeboardId: string; boardId: string; state: 'empty' }
   | {
       type: 'noticeboard';
       noticeboardId: string;
+      boardId: string;
       state: 'listings';
       listings: readonly NoticeboardListing[];
     }
@@ -6487,6 +6594,8 @@ export type SimEvent = { pid?: number } & (
         // purpose: talking to the opposing side is the whole reason it exists
         // (players were falling back to General for it).
         | 'battleground'
+        // Party/raid leader alert broadcast to all party members.
+        | 'raidWarning'
         | 'guild'
         | 'officer'
         | 'world'
@@ -6510,11 +6619,24 @@ export type SimEvent = { pid?: number } & (
       // for every player-sourced chat line (mob/boss yells omit it, same as
       // fromTitle).
       classId?: PlayerClass;
+      // Optional localization identity for generated system chat. Player-authored
+      // chat stays literal `text`; generated lines carry this so clients render
+      // them through the catalog while older clients can still fall back to text.
+      textKey?: string;
+      textValues?: Record<string, string | number>;
     }
   | { type: 'partyInvite'; fromPid: number; fromName: string }
   // The party/raid leader started a ready check: the recipient's client plays a
   // sound and shows a yes/no prompt (social/ready_check.ts). Personal (pid set).
   | { type: 'readyCheckStart'; fromName: string }
+  // Live status update for the party/raid leader during a ready check. Personal (pid set to leader).
+  | {
+      type: 'readyCheckStatus';
+      initiatorPid: number;
+      partyId: number;
+      responses: ReadyCheckMemberResponse[];
+      done: boolean;
+    }
   // A player resurrection is never automatic: the dead recipient chooses whether
   // to return. Personal (pid set), with all visible copy composed client-side.
   | { type: 'resurrectionOffer'; fromName: string }
@@ -7106,18 +7228,16 @@ export type SimEvent = { pid?: number } & (
         | 'insufficient_materials'
         | 'throttled'
         | 'no_bag_space'
-        // #2415: already-enchanted target without the confirmReplace flag,
-        // and the identical-enchant-id re-apply denied on every arm.
+        // #2415: already-enchanted target without the confirmReplace flag. A
+        // confirmed identical-enchant-id re-apply is a normal replace, not a
+        // deny (professions/enchanting.ts).
         | 'already_enchanted'
-        | 'same_enchant'
         // Masterwrought phase 10: the Lucent tier's two gates. A
         // requiresPerfected enchant aimed at a copy carrying no `perfected`
         // marker, and an enchant whose skillReq is above the applier's flat
         // Enchanting skill.
         | 'not_perfected'
         | 'insufficient_skill'
-        // A Riftbound band: forge-only gear (professions/enchanting.ts).
-        | 'rift_gear'
         | 'busy';
     }
   // Outcome of applying a loadout's saved gear set. TEXT-FREE on purpose: the sim
@@ -7985,13 +8105,13 @@ export const EASTBROOK_NOTICEBOARD_NATIVE_DIMENSIONS = Object.freeze({
 } as const);
 export const EASTBROOK_NOTICEBOARD_INTERACTION_RADIUS = 4 as const;
 // Static world services use their own namespace above the sequential allocator
-// and the reserved 1_000_000_000/1_000_000_001/1_000_000_002 singleton NPC ids
-// (the Vale Cup groundskeeper, FURY in Eastbrook, and Warmarshal Draven Kole in
-// Highwatch). A singleton NPC takes a reserved id AND `dynamic: true` so the
-// generic world-init loop skips it: that loop allocates ids by iterating the
-// merged NPC table in insertion order, so a plain insertion would shift the id
-// of every NPC, camp mob and object created after it, which the parity goldens
-// pin per frame.
+// and reserved 1_000_000_x singleton ids (the Vale Cup groundskeeper, FURY in
+// Eastbrook, Warmarshal Draven Kole in Highwatch, the Crucible vendor, and
+// authored practice dummies). A singleton NPC takes a reserved id AND
+// `dynamic: true` so the generic world-init loop skips it: that loop allocates
+// ids by iterating the merged NPC table in insertion order, so a plain
+// insertion would shift the id of every NPC, camp mob and object created after
+// it, which the parity goldens pin per frame.
 export const STATIC_WORLD_SERVICE_ENTITY_ID_MIN = 2_000_000_001;
 
 /** The one static, interactable noticeboard contract supported by every host. */
@@ -8768,6 +8888,11 @@ export const SHIELD_BLOCK_BASE = 0.05;
 export const ENRAGE_DMG_DONE = 0.07;
 export const ENRAGE_HASTE_PCT = 0.25;
 export const ENRAGE_MOVE_MULT = 1.1;
+// Druid Cat Form: +15% passive move speed. The form_cat aura's VALUE is the
+// threat multiplier (0.71), so moveSpeedMult reads this constant, never
+// a.value. Sits under Loping Stride (1.6), Dash (1.5), and every mount, and
+// rides the same non-stacking Math.max path as those speed auras.
+export const CAT_FORM_MOVE_MULT = 1.15;
 // Avatar's colossus body-size multiplier while the buff_avatar aura is worn.
 export const AVATAR_SCALE = 1.15;
 export const REVENGE_FREE_CHANCE = 0.3;

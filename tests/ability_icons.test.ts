@@ -125,12 +125,13 @@ describe('ability icons', () => {
   it('pins every ABILITY_RECIPES key and payload by stable content identity', () => {
     const ids = abilityRecipeIds();
     expect(ids).toEqual([...new Set(ids)].sort((left, right) => left.localeCompare(right)));
-    // 464: 450 plus the fourteen Nythraxis Raid Boss Guide mechanic recipes.
-    expect(ids).toHaveLength(464);
+    // 464: 450 plus the fourteen Nythraxis Raid Boss Guide mechanic recipes;
+    // 469: plus the Wildfang kit pass 2 glyphs (lunge, hamstring_bite).
+    expect(ids).toHaveLength(469);
     for (const id of ids) expect(hasExplicitAbilityIcon(id), id).toBe(true);
 
     const identity = ids.map((id) => ({ id, recipe: abilityIconRecipe(id) }));
     const hash = createHash('sha256').update(stableSerialize(identity)).digest('hex');
-    expect(hash).toBe('b990e0cce35fe3732d8409ca735692c8760a092298ece5e239202b9832c95a22');
+    expect(hash).toBe('a1cfefa489b1e5490554bd7a1faa7a37aab75bc8f7b225678217851790c199ba');
   });
 });

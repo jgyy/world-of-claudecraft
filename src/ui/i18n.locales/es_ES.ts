@@ -322,7 +322,6 @@ export const es_ES: Partial<Record<TranslationKey, string>> = {
   'hudChrome.auraEffect.imbueRange': 'Arma imbuida: {min} a {max} de daño extra con Verdict',
   'hudChrome.auraEffect.stealth': 'Encubierto; velocidad de movimiento reducida un {pct}%',
   'hudChrome.auraEffect.formBear': 'Forma de Bruin: mayor salud y armadura',
-  'hudChrome.auraEffect.formCat': 'Forma felina, daño cuerpo a cuerpo y energía',
   'hudChrome.auraEffect.formTravel': 'Forma Fleet: velocidad de desplazamiento aumentada un {pct}%',
   'hudChrome.auraEffect.defensiveStance': 'Guarded Stance: menos daño recibido, más amenaza',
   'hudChrome.auraEffect.righteousFury':
@@ -525,4 +524,7 @@ export const es_ES: Partial<Record<TranslationKey, string>> = {
     'Todavía se está completando una compra para este personaje. Vuelve a intentarlo en un momento.',
   'hudChrome.wocStore.charter.outage':
     'No se pudo confirmar la compra. Vuelve a intentarlo con este botón y no se te cobrará dos veces. Si recargas el juego antes, puedes perder esa protección.',
+  'hudChrome.bags.capacityPools':
+    'Artículos {generalUsed}/{generalTotal}, materiales {materialsUsed}/{materialsTotal}',
+  'hudChrome.bags.emptyMaterialsOnly': 'Solo para materiales',
 };

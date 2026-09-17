@@ -839,13 +839,20 @@ describe('item-art audit builder', () => {
     // directly on the merged tree (see the matching restore in
     // scripts/item_art_audit.mjs's `expected` block), not invented or
     // derived from either parent.
+    // OSSBrain PR #3781 reconcile: the release's own arm (1281 / 1299) and
+    // the OSSBrain candidate's arm (1071 / 1089, its two disjoint reins items
+    // on the shared 1069 / 1087 base) are additive, so 1069 + 212 + 2 = 1283
+    // and 1087 + 212 + 2 = 1301. The sha/bytes below are measured directly
+    // from `node scripts/item_art_audit.mjs --verify-only` run on the merged
+    // tree, not invented or derived from either parent.
+    // PR3941: measured again after retiring the five premium reins.
     expect(verified).toMatchObject({
       catalogPath: 'tmp/imagegen/item-art-consistency/final-audit/catalog.json',
-      catalogSha256: 'a142b3eb8a5e2e4442987b5be3a2b773f1042a7297c241bea4eb23a3c2624e5e',
-      catalogBytes: 698071,
+      catalogSha256: '74bd65a9b0efd433b12c9bf0cdaa509eeac3e4986edb8878e8f069f4e24088f0',
+      catalogBytes: 699134,
       rendererFingerprint: '41f5404c4d6d9643c8f03b9d88a8546e44564cc03a1baabdd4a72cb9258a2da7',
-      catalogCount: 1281,
-      liveItemCount: 1299,
+      catalogCount: 1283,
+      liveItemCount: 1301,
       generatedHeroicDefinitions: 78,
       heroicDefinitionsWithOwnWebp: 59,
       heroicWeaponArtAliases: 19,
@@ -863,7 +870,7 @@ describe('item-art audit builder', () => {
         identity: 31,
       },
       sheetSetSha256: null,
-      shippingCatalogSha256: '0e2f5e7cca8ed82b6a37ccbda5a56c4aeeeb7eaf43cda590face156b3093de78',
+      shippingCatalogSha256: 'aaa08264b12c4be606ab2ffd06a573c7cf24a78c440bc2198b9f18b16e8062de',
       machineChecksPassed: true,
       verdict: null,
     });

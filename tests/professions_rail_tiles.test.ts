@@ -11,6 +11,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { BIND_ACTIONS, keyCapLabel } from '../src/game/keybinds';
 import { hasChromeIconArt } from '../src/ui/chrome_icon_art';
+import { SIDE_BUTTONS } from '../src/ui/hud/menu/side_buttons';
 import { hudChromeStrings } from '../src/ui/i18n.catalog/hud_chrome';
 import { hasUiIcon, hydrateIcons, svgIcon } from '../src/ui/ui_icons';
 
@@ -48,7 +49,7 @@ describe('the Perfecting rail tile and keybind (the seven-piece exemplar)', () =
         col.indexOf('id="mm-crafting"'),
       );
       // The static keycap matches the default binding's cap form.
-      expect(col, name).toMatch(/id="mm-perfecting"[^>]*><span class="keybind">s-t<\/span>/);
+      expect(col, name).toMatch(/id="mm-perfecting"[^>]*><span class="keybind[^"]*">s-t<\/span>/);
     }
     expect(keyCapLabel('Shift+T')).toBe('s-t');
   });
@@ -61,7 +62,11 @@ describe('the Perfecting rail tile and keybind (the seven-piece exemplar)', () =
     expect(hud).toContain(
       "$('#mm-perfecting')?.addEventListener('click', () => this.togglePerfecting());",
     );
-    expect(hud).toContain("['#mm-perfecting', 'perfecting', 'hudChrome.perfecting.title'],");
+    expect(SIDE_BUTTONS).toContainEqual([
+      '#mm-perfecting',
+      'perfecting',
+      'hudChrome.perfecting.title',
+    ]);
     // The toggle it reaches is the pre-existing public surface, unchanged.
     expect(hud).toContain('togglePerfecting(): void {');
     expect(hud).toContain('this.perfectingWindow.toggle();');
@@ -97,11 +102,11 @@ describe('the Perfecting rail tile and keybind (the seven-piece exemplar)', () =
       gamepadStart,
       mainSrc.indexOf('const gamepad =', gamepadStart),
     );
-    const route = /case 'perfecting':\s*hud\.togglePerfecting\(\);\s*break;/g;
     expect(keyboardStart).toBeGreaterThan(-1);
     expect(gamepadStart).toBeGreaterThan(-1);
-    expect(keyboardRoute.match(route)).toHaveLength(1);
-    expect(gamepadRoute.match(route)).toHaveLength(1);
+    expect(keyboardRoute).toContain('dispatchCollectionAction(key, hud)');
+    expect(gamepadRoute).toContain('dispatchCollectionAction(id, hud)');
+    // collection_actions_core.test.ts verifies the original toggle for each action.
   });
 
   it('maps the keybind action through t() in Options (never the raw English label)', () => {
@@ -138,8 +143,10 @@ describe('the Harvest Journal rail tile (the tile half over the existing Shift+K
       expect(col.indexOf('id="mm-harvest-journal"'), name).toBeGreaterThan(
         col.indexOf('id="mm-professions"'),
       );
-      expect(col.indexOf('id="mm-harvest-journal"'), name).toBeLessThan(col.indexOf('id="mm-map"'));
-      expect(col, name).toMatch(/id="mm-harvest-journal"[^>]*><span class="keybind">s-k<\/span>/);
+      expect(col.indexOf('id="mm-harvest-journal"'), name).toBeLessThan(col.indexOf('id="mm-bag"'));
+      expect(col, name).toMatch(
+        /id="mm-harvest-journal"[^>]*><span class="keybind[^"]*">s-k<\/span>/,
+      );
     }
     const action = BIND_ACTIONS.find((a) => a.id === 'harvestJournal');
     expect(action?.defaults).toEqual(['Shift+KeyK']);
@@ -150,9 +157,11 @@ describe('the Harvest Journal rail tile (the tile half over the existing Shift+K
     expect(hud).toContain(
       "$('#mm-harvest-journal')?.addEventListener('click', () => this.toggleHarvestJournal());",
     );
-    expect(hud).toContain(
-      "['#mm-harvest-journal', 'harvestJournal', 'hudChrome.harvestJournal.title'],",
-    );
+    expect(SIDE_BUTTONS).toContainEqual([
+      '#mm-harvest-journal',
+      'harvestJournal',
+      'hudChrome.harvestJournal.title',
+    ]);
     expect(hud).toContain('this.harvestJournalWindow.toggle();');
   });
 
@@ -168,8 +177,8 @@ describe('both tiles hydrate and stay under the rail height budget', () => {
   it('hydrateIcons materializes the painted launcher for each tile', () => {
     document.body.innerHTML =
       '<div id="side-buttons">' +
-      '<button type="button" class="micro-btn" id="mm-harvest-journal" data-icon="harvest-journal"><span class="keybind">s-k</span></button>' +
-      '<button type="button" class="micro-btn" id="mm-perfecting" data-icon="perfecting"><span class="keybind">s-t</span></button>' +
+      '<button type="button" class="micro-btn" id="mm-harvest-journal" data-icon="harvest-journal"><span class="keybind ui-keycap">s-k</span></button>' +
+      '<button type="button" class="micro-btn" id="mm-perfecting" data-icon="perfecting"><span class="keybind ui-keycap">s-t</span></button>' +
       '</div>';
     hydrateIcons(document.body);
     for (const [id, icon] of [
@@ -184,18 +193,57 @@ describe('both tiles hydrate and stay under the rail height budget', () => {
     }
   });
 
-  it('col-a carries at most 12 visible tiles, the count the crafting_launcher budget was re-checked at', () => {
-    // tests/crafting_launcher.test.ts derives the height budget from the live
-    // markup; this pins the assumption the two additions were sized against
-    // (12 x 34px + 74px anchor = 482px under the 660px laptop budget), so a
-    // thirteenth tile re-opens the question deliberately.
+  it('pins the professions column and fits the height budget with Town Focus visible', () => {
+    // Cosmetics sits beside the shop in col-b. Town Focus is hidden in
+    // markup but the HUD reveals it in town, so budget for that extra tile
+    // alongside the default professions column. The authored pixel ceilings
+    // remain those guarded against CSS in crafting_launcher.test.ts.
+    const UNCOMPACTED_MICRO_PLUS_GAP_PX = 34;
+    const COMPACT_MICRO_PLUS_GAP_PX = 25;
+    const BOTTOM_ANCHOR_PX = 74;
+    const UNCOMPACTED_BUDGET_PX = 660;
+    const COMPACT_BUDGET_PX = 600;
+    const EXPECTED_IDS = [
+      'mm-char',
+      'mm-spell',
+      'mm-talents',
+      'mm-quest',
+      'mm-deeds',
+      'mm-reliquary',
+      'mm-loot-explorer',
+      'mm-professions',
+      'mm-harvest-journal',
+      'mm-bag',
+      'mm-crafting',
+      'mm-perfecting',
+    ];
     for (const [name, html] of entries) {
-      const buttons = colA(html).match(/<button[^>]*class="micro-btn"[^>]*>/g) ?? [];
+      // The class ATTRIBUTE is a list on this branch (the rail tiles adopted the
+      // shared icon-button primitive beside their legacy class), so the tile is
+      // matched by carrying `micro-btn`, never by the attribute being it alone.
+      const buttons = colA(html).match(/<button[^>]*class="[^"]*\bmicro-btn\b[^"]*"[^>]*>/g) ?? [];
       const visible = buttons.filter(
         (b) => !/display:\s*none/.test(b) && !/\shidden(?=[\s>=])/.test(b),
       );
-      expect(visible.length, name).toBeLessThanOrEqual(12);
-      expect(visible.length, name).toBeGreaterThanOrEqual(12);
+      const ids = visible.map((b) => /id="([^"]+)"/.exec(b)?.[1]);
+      expect(ids, name).toEqual(EXPECTED_IDS);
+      const colB = html.slice(html.indexOf('id="side-buttons-col-b"'));
+      expect(colB.indexOf('id="mm-cosmetics"'), name).toBeGreaterThan(
+        colB.indexOf('id="daily-rewards-button"'),
+      );
+      expect(colB.indexOf('id="mm-cosmetics"'), name).toBeLessThan(colB.indexOf('id="mm-arena"'));
+      expect(html.match(/id="mm-cosmetics"/g), name).toHaveLength(1);
+      const townFocus = buttons.filter((b) => /id="mm-town-focus"/.test(b));
+      expect(townFocus, name).toHaveLength(1);
+      const townVisibleCount = visible.length + townFocus.length;
+      expect(
+        townVisibleCount * UNCOMPACTED_MICRO_PLUS_GAP_PX + BOTTOM_ANCHOR_PX,
+        name,
+      ).toBeLessThanOrEqual(UNCOMPACTED_BUDGET_PX);
+      expect(
+        townVisibleCount * COMPACT_MICRO_PLUS_GAP_PX + BOTTOM_ANCHOR_PX,
+        name,
+      ).toBeLessThanOrEqual(COMPACT_BUDGET_PX);
     }
   });
 });

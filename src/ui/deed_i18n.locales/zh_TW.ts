@@ -186,6 +186,7 @@ export const table: DeedLocaleTable = {
   prog_herbalism_100: { name: '百草宗師', desc: '草藥學熟練度達到100。' },
   prog_master_gatherer: {
     name: '採集大師',
+    desc: '任意三種採集行當的熟練度達到100。',
   },
   prog_first_craft: { name: '親手打造', desc: '完成你的第一次成功製作。' },
   prog_craft_specialist: { name: '不傳之秘', desc: '任一工藝技能達到75，並解鎖其專精特長。' },
@@ -315,7 +316,6 @@ export const table: DeedLocaleTable = {
   },
   chr_vale_chapter_ii: {
     name: '溪谷編年史，第二章',
-    desc: '完成紹爾編年史的第二章：剿平強盜、魚人與礦坑害獸，在母豬場出賽，並闖過聖物庫。',
   },
   chr_vale_chapter_iii: {
     name: '溪谷編年史全卷',
@@ -325,7 +325,10 @@ export const table: DeedLocaleTable = {
   chr_vale_gatherer: { name: '靠山吃山', desc: '在東溪谷採集一處礦脈、一處林木與一叢草藥。' },
   chr_vale_first_cast: { name: '鏡湖有物', desc: '在東溪谷的水域釣起一條魚。' },
   chr_vale_packbreaker: { name: '狼群剋星', desc: '在 10 秒內斬殺 3 隻森林狼。' },
-  chr_vale_cup_debut: { name: '銅桶新秀', desc: '在母豬場的溪谷盃比賽中上場並觸球。' },
+  chr_vale_cup_debut: {
+    name: '銅桶新秀',
+    desc: '在母豬場參加一場野豬球比賽並觸球。野豬球比賽已不再開放，因此無法再新取得此成就。',
+  },
   chr_vale_rares: {
     name: '溪谷惡煞',
     desc: '斬殺東溪谷五個有名有姓的惡煞：老灰顎、莫格、隧道之王葛瑞克斯、維爾蘭隊長與縛魂者瑪爾德雷克。',
@@ -369,7 +372,7 @@ export const table: DeedLocaleTable = {
     desc: '見證山嶽故事的始末：擊潰龍誓、讓聖所歸於沉寂、擊倒覺醒之峰，並剷除峭壁間每一個有名有姓的惡煞。',
     title: '荊峰之譽',
   },
-  chr_peaks_sparring: { name: '城牆操練', desc: '對高望上方的訓練假人造成總計 1,000 點傷害。' },
+  chr_peaks_sparring: { name: '城牆操練', desc: '對訓練假人造成總計 1,000 點傷害。' },
   chr_peaks_glimmer_cast: { name: '水寒，光更寒', desc: '在微光湖釣起一條魚。' },
   chr_peaks_moongate: { name: '穿過寒門', desc: '穿過微光湖畔的月門。' },
   chr_peaks_waking_witness: {
@@ -428,38 +431,75 @@ export const table: DeedLocaleTable = {
   pvp_arena_2v2_1900: { name: '天作之合', desc: '在 2v2 競技場組別達到 1900 積分。' },
   pvp_duel_first_win: { name: '到外頭解決', desc: '贏得一場決鬥。' },
   pvp_duel_grace: { name: '謙遜的一課', desc: '輸掉一場決鬥，尊嚴大致無損。' },
-  pvp_vcup_first_match: { name: '踏上球場', desc: '在母豬場完整打完一場溪谷盃比賽，無論勝負。' },
-  pvp_vcup_first_win: { name: '首座獎盃', desc: '贏得一場溪谷盃積分賽。' },
-  pvp_vcup_wins_10: { name: '野豬球老手', desc: '贏得 10 場溪谷盃積分賽。' },
-  pvp_vcup_wins_25: { name: '野豬球傳奇', desc: '贏得 25 場溪谷盃積分賽。', title: '野豬球傳奇' },
-  pvp_vcup_first_goal: { name: '首開紀錄', desc: '在溪谷盃積分賽中射進一球。' },
-  pvp_vcup_hat_trick: {
-    name: '帽子戲法英雄',
-    desc: '在單場溪谷盃積分賽中射進三球（限 3v3 或更大的組別）。',
+  pvp_vcup_first_match: {
+    name: '踏上球場',
+    desc: '在母豬場打完一場野豬球比賽，不論勝負。野豬球比賽已不再開放，因此無法再新取得此成就。',
   },
-  pvp_vcup_golden_goal: { name: '黃金時刻', desc: '射進決定一場溪谷盃積分賽勝負的黃金一球。' },
-  pvp_vcup_first_save: { name: '穩健雙手', desc: '在溪谷盃積分賽中以守門員身分完成一次撲救。' },
+  pvp_vcup_first_win: {
+    name: '首座獎盃',
+    desc: '贏得一場評級野豬球比賽。野豬球比賽已不再開放，因此無法再新取得此成就。',
+  },
+  pvp_vcup_wins_10: {
+    name: '野豬球老手',
+    desc: '贏得 10 場評級野豬球比賽。野豬球比賽已不再開放，因此無法再新取得此成就。',
+  },
+  pvp_vcup_wins_25: {
+    name: '野豬球傳奇',
+    title: '野豬球傳奇',
+    desc: '贏得 25 場評級野豬球比賽。野豬球比賽已不再開放，因此無法再新取得此成就。',
+  },
+  pvp_vcup_first_goal: {
+    name: '首開紀錄',
+    desc: '在評級野豬球比賽中射入一球。野豬球比賽已不再開放，因此無法再新取得此成就。',
+  },
+  pvp_vcup_hat_trick: {
+    desc: '在一場 3v3 或更高組別的評級野豬球比賽中射入三球。野豬球比賽已不再開放，因此無法再新取得此成就。',
+    name: '帽子戲法英雄',
+  },
+  pvp_vcup_golden_goal: {
+    name: '黃金時刻',
+    desc: '射入決定評級野豬球比賽勝負的金球。野豬球比賽已不再開放，因此無法再新取得此成就。',
+  },
+  pvp_vcup_first_save: {
+    name: '穩健雙手',
+    desc: '在一場 3v3 或更高組別的評級野豬球比賽中擔任守門員並完成一次撲救。只有足以考驗接球手感的快速射門才計入，輕柔接球不計入。野豬球比賽已不再開放，因此無法再新取得此成就。',
+  },
   pvp_vcup_clean_sheet: {
+    desc: '在一場 3v3 或更高組別的評級野豬球比賽中擔任守門員，零封對手並獲勝。野豬球比賽已不再開放，因此無法再新取得此成就。',
     name: '一夫當關',
-    desc: '以守門員身分贏得一場溪谷盃積分賽，且未失一球。',
   },
   pvp_vcup_guild_win: {
+    desc: '在公會旗幟下參加並贏得一場評級野豬球比賽。野豬球比賽已不再開放，因此無法再新取得此成就。',
     name: '為了旗幟',
-    desc: '以你公會的旗幟名義出賽，並贏得一場溪谷盃積分賽。',
   },
-  pvp_fiesta_first_bout: { name: '不請自來', desc: '完整打完一場 2v2 嘉年華對決，無論勝負。' },
-  pvp_fiesta_first_win: { name: '嘉年華的靈魂人物', desc: '贏得一場 2v2 嘉年華對決。' },
-  pvp_fiesta_double: { name: '雙重打擊', desc: '在四秒內完成兩次嘉年華擊倒。' },
-  pvp_fiesta_shutdown: { name: '掃興鬼', desc: '擊倒一名連續擊倒數達三次或以上的嘉年華對手。' },
+  pvp_fiesta_first_bout: {
+    name: '不請自來',
+    desc: '完成一場 Fiesta 2v2 對局，不論勝負。Fiesta 對局已不再出現在競技場佇列中，因此無法再新取得此成就。',
+  },
+  pvp_fiesta_first_win: {
+    name: '嘉年華的靈魂人物',
+    desc: '贏得一場 Fiesta 2v2 對局。Fiesta 對局已不再出現在競技場佇列中，因此無法再新取得此成就。',
+  },
+  pvp_fiesta_double: {
+    name: '雙重打擊',
+    desc: '在四秒內完成兩次 Fiesta 擊倒。Fiesta 對局已不再出現在競技場佇列中，因此無法再新取得此成就。',
+  },
+  pvp_fiesta_shutdown: {
+    name: '掃興鬼',
+    desc: '擊倒一名連勝三場或以上的 Fiesta 對手。Fiesta 對局已不再出現在競技場佇列中，因此無法再新取得此成就。',
+  },
   pvp_fiesta_full_build: {
+    desc: '在三波中都鎖定一項強化，並贏得一場 Fiesta 對局。Fiesta 對局已不再出現在競技場佇列中，因此無法再新取得此成就。',
     name: '盛裝赴會',
-    desc: '在三波強化各鎖定一項的情況下，贏得一場嘉年華對決。',
   },
   pvp_fiesta_powerups: {
+    desc: '至少各拾取一次四種圓環強化：速度惡魔、巨像、月靴和狂戰士。Fiesta 對局已不再出現在競技場佇列中，因此無法再新取得此成就。',
     name: '樣樣來一份',
-    desc: '把四種擂台強化道具各拾取至少一次：速度惡魔、巨像、月亮靴與狂戰士。',
   },
-  pvp_fiesta_five_kills: { name: '全場我來扛', desc: '在單場嘉年華對決中完成五次擊倒。' },
+  pvp_fiesta_five_kills: {
+    name: '全場我來扛',
+    desc: '在一場 Fiesta 對局中完成五次擊倒。Fiesta 對局已不再出現在競技場佇列中，因此無法再新取得此成就。',
+  },
   soc_first_party: { name: '結伴同行', desc: '與另一名玩家組成隊伍。' },
   soc_full_house: { name: '五人滿座', desc: '以五人滿編隊伍通關一座地城。' },
   soc_guild_joined: { name: '同旗之下', desc: '成為公會的一員。' },
@@ -793,5 +833,38 @@ export const table: DeedLocaleTable = {
   col_set_bramblehide: {
     name: '魯茨的荊棘皮甲',
     desc: '發現魯茨的荊棘皮甲的每一個部件。',
+  },
+  col_deepest_cast: {
+    desc: '取得Clockreel魚竿，這是唯一能釣到最深處魚獲的魚竿。',
+    name: '最深一擲',
+  },
+  prog_first_planting: { desc: '在一塊田畦裡種下你的第一株作物。', name: '播種伊始' },
+  chr_vale_first_harvest: {
+    desc: '在東溪谷的一塊田畦裡採收你的第一株茁壯作物。',
+    name: '谷地初果',
+  },
+  chr_marsh_first_harvest: {
+    desc: '在泥沼濕地的一塊田畦裡採收你的第一株茁壯作物。',
+    name: '泥炭新芽',
+  },
+  chr_peaks_first_harvest: {
+    desc: '在荊峰高地的一塊田畦裡採收你的第一株茁壯作物。',
+    name: '峭壁間的收成',
+  },
+  chr_evergarden_first_harvest: {
+    desc: '在Evergarden的一塊田畦裡採收你的第一株茁壯作物。',
+    name: '樂土方寸田',
+  },
+  col_golden_harvest: { desc: '收穫一次黃金豐收，讓整個區域都聽見這場消息。', name: '金色豐收' },
+  prog_farming_100: { desc: '耕作熟練度達到100。', name: '豐收大師', title: '豐收大師' },
+  col_farm_roster: { desc: '採收四座花園所種出的每一種作物。', name: '田壟無遺' },
+  prog_field_to_feast: {
+    desc: '烹調一桌頂級盛宴，讓整個團隊都能在桌前用餐。',
+    name: '從田間到盛宴',
+  },
+  prog_legendmaker: {
+    desc: '用造物契據將一件臻至完美的作品提升為傳說，並為它取一個獨一無二的名字。',
+
+    name: '傳奇締造者',
   },
 };

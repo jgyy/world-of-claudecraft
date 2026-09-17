@@ -137,9 +137,13 @@ or pure leaves, never a `Sim` import, randomness only via `ctx.rng` (guarded by
   already-enchanted copy is REPLACEABLE only behind the explicit
   confirmReplace flag (#2415: old enchant destroyed, no refund, surgical swap
   via `replacedEnchantPayloadFor`); without it the deny is the dedicated
-  `already_enchanted` reason on both arms. The identical-id re-apply denies
-  `same_enchant` on both arms WITH the flag; unconfirmed it reads
-  `already_enchanted`, because the flag check precedes the id compare.
+  `already_enchanted` reason on both arms. The identical-id re-apply is NOT a
+  deny WITH the flag: it falls through as an ordinary confirmed replace (old
+  bonus subtracted, the same bonus re-added, netting to byte-identical
+  stats), so a player can pay the reagent cost and gain Enchanting skill on a
+  piece already carrying the enchant they want, without hunting a second
+  target. Unconfirmed it still reads `already_enchanted`, because the flag
+  check precedes the id compare.
   Enchant REAGENTS source from bags-then-vault through the same
   `reagent_sources.ts` plan crafting uses, at all six count arms (three
   resolvers plus the three admission mirrors, which must agree or a cast is
@@ -350,12 +354,16 @@ or pure leaves, never a `Sim` import, randomness only via `ctx.rng` (guarded by
   `FARMER_TRADE_RANGE`) the husk trade gates on, resolved by the NpcDef
   `farmer` flag through the grid's early-exit `someInRadius`; draws no rng.
 - `wield_gate.ts`: the R22 land-tool USE requirements, a pure leaf like
-  `tools.ts` (items table as a parameter, no player-state import): the one
-  frozen threshold table (40/70/85/100), the wield-filtered bag scans the
-  harvest gate, grade resolution, corpse premium arm, and every client
-  mirror read, and the denial-naming helpers. The ownership scans in
-  `tools.ts` survive for the R47/R30 price family ONLY, with banners
-  saying so.
+  `tools.ts` (items table as a parameter, no player-state import): the
+  frozen land table (40/70/85/100) plus farming's own ladder derived from
+  the crop bands (`FARMING_WIELD_REQUIREMENT_BY_TIER`, 0/25/50/75/100),
+  resolved per profession by `wieldRequirementFor`; the bag scans the
+  harvest and plant gates, grade resolution, corpse premium arm, and every
+  client mirror read, where an unearned tool DEGRADES to the best tier the
+  counter allows (`effectiveWieldableTier`) rather than dropping out of the
+  scan; and the denial-naming helpers, which name the TARGET tier's
+  requirement. The ownership scans in `tools.ts` survive for the R47/R30
+  price family ONLY, with banners saying so.
 - `mastery_reset.ts`: the one-time skill reset behind `masteryResetApplied`;
   `normalizeArchetypeState` must keep running BEFORE `applyMasteryReset`
   (the single load-time reader of pre-reset values).

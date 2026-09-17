@@ -15,7 +15,7 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 1004,
+      "nextId": 1007,
       "state": "e346f7b3",
       "events": "741638a5",
       "rng": {
@@ -157,9 +157,9 @@
     {
       "tick": 20,
       "time": 1,
-      "nextId": 1005,
-      "state": "0c49fb29",
-      "events": "380dd3cb",
+      "nextId": 1008,
+      "state": "a22486da",
+      "events": "c1b96fc5",
       "rng": {
         "draws": 1,
         "digest": "cf5e57a1"
@@ -168,9 +168,9 @@
     {
       "tick": 40,
       "time": 2,
-      "nextId": 1005,
-      "state": "2f233445",
-      "events": "5ae2bf37",
+      "nextId": 1008,
+      "state": "6bb942e3",
+      "events": "7f24b18b",
       "rng": {
         "draws": 2,
         "digest": "6d172bb5"
@@ -179,9 +179,9 @@
     {
       "tick": 60,
       "time": 3,
-      "nextId": 1005,
-      "state": "33f69540",
-      "events": "2b786df9",
+      "nextId": 1008,
+      "state": "3a4b665c",
+      "events": "6c6fa3a5",
       "rng": {
         "draws": 150,
         "digest": "478ace8d"
@@ -190,9 +190,9 @@
     {
       "tick": 80,
       "time": 4,
-      "nextId": 1005,
-      "state": "112d843b",
-      "events": "72d31fa2",
+      "nextId": 1008,
+      "state": "62b3d1b4",
+      "events": "a81d41cd",
       "rng": {
         "draws": 316,
         "digest": "650546d2"
@@ -201,9 +201,9 @@
     {
       "tick": 84,
       "time": 4.2,
-      "nextId": 1005,
-      "state": "eb5f8d56",
-      "events": "eec40a16",
+      "nextId": 1008,
+      "state": "539576d3",
+      "events": "1c34679c",
       "rng": {
         "draws": 356,
         "digest": "6ca1a356"
@@ -357,13 +357,13 @@
           "fallStartY": -2,
           "fiveSecondRule": 0.25,
           "healPower": 41,
-          "hp": 418,
+          "hp": 665,
           "id": 999,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 418,
+          "maxHp": 665,
           "maxResource": 1506,
           "moveSpeed": 7,
           "onGround": true,
@@ -388,10 +388,10 @@
             "armor": 146,
             "int": 82,
             "spi": 60,
-            "sta": 33,
+            "sta": 52,
             "str": 10
           },
-          "targetId": 1004,
+          "targetId": 1007,
           "templateId": "mage",
           "weapon": {
             "max": 6,
@@ -432,7 +432,7 @@
           "fiveSecondRule": 99,
           "hostile": true,
           "hp": 499781,
-          "id": 1004,
+          "id": 1007,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {
@@ -475,8 +475,8 @@
     {
       "tick": 84,
       "time": 4.2,
-      "nextId": 1005,
-      "state": "eb5f8d56",
+      "nextId": 1008,
+      "state": "539576d3",
       "events": "741638a5",
       "rng": {
         "draws": 356,
@@ -631,13 +631,13 @@
           "fallStartY": -2,
           "fiveSecondRule": 0.25,
           "healPower": 41,
-          "hp": 418,
+          "hp": 665,
           "id": 999,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 418,
+          "maxHp": 665,
           "maxResource": 1506,
           "moveSpeed": 7,
           "onGround": true,
@@ -662,10 +662,10 @@
             "armor": 146,
             "int": 82,
             "spi": 60,
-            "sta": 33,
+            "sta": 52,
             "str": 10
           },
-          "targetId": 1004,
+          "targetId": 1007,
           "templateId": "mage",
           "weapon": {
             "max": 6,
@@ -706,7 +706,7 @@
           "fiveSecondRule": 99,
           "hostile": true,
           "hp": 499781,
-          "id": 1004,
+          "id": 1007,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {

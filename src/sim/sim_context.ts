@@ -12,6 +12,7 @@
 // game/net/DOM/Three, no `Math.random`/`Date.now`), so it runs unchanged in Node,
 // the browser, and the headless RL env (enforced by tests/architecture.test.ts).
 
+import type { AccountCosmetics } from '../world_api';
 import type { FrozenOrbState } from './combat/frozen_orb';
 import type { LetterDef } from './content/letters';
 import type { TalentModifiers } from './content/talents';
@@ -66,6 +67,7 @@ import type {
   ItemInstancePayload,
   PendingResurrection,
   PlayerClass,
+  PullTimer,
   QuestProgress,
   ReadyCheck,
   SetProc,
@@ -117,9 +119,20 @@ export interface SimContextPrimitives {
   readonly time: number;
   readonly tickCount: number;
   readonly entities: Map<number, Entity>;
+  // Read-write: entity_roster.ts bumps it on every add/drop; it is the
+  // IWorld.entityRosterVersion the offline world exposes.
+  entityRosterVersion: number;
   // Live player roster (keyed by entity id). Stays a Sim field; exposed here so the
   // moved party machine (A1) resolves member names/metas through the seam.
   readonly players: Map<number, PlayerMeta>;
+  // The session's account cosmetics view (offline: the Sim's own mirror; the
+  // server seeds the primary session's). Writable so a sibling module can
+  // grant into it (dev_commands' /dev mountskins); replaced whole, never
+  // mutated in place, so consumers can diff by identity. On the SERVER this is
+  // one realm-wide field, never per-account state: no server-side ownership
+  // decision may read it (the session's own accountCosmetics is the authority),
+  // or a dev grant on a dev-enabled realm would become a cross-account cheat.
+  accountCosmetics: AccountCosmetics;
   /** Static crafting stations owned by this Sim's authored world bundle. */
   readonly stationPlacements: readonly StationDef[];
   // The local / RL player id (single-player + renderer contexts). Reassigned on the
@@ -308,6 +321,9 @@ export interface SimContextPrimitives {
   // Active party/raid ready checks (social/ready_check.ts), keyed by party id. Swept
   // in the end-of-tick block by updateReadyChecks. Sim-internal, never wired.
   readonly readyChecks: Map<number, ReadyCheck>;
+  // Active party/raid pull timers (social/pull_timer.ts), keyed by party id. Swept
+  // in the end-of-tick block by updatePullTimers.
+  readonly pullTimers: Map<number, PullTimer>;
   // Player-cast resurrection offers, keyed by the dead recipient. The spell and
   // response paths share this live authoritative map across all three hosts.
   readonly pendingResurrections: Map<number, PendingResurrection>;
@@ -370,6 +386,12 @@ export interface SimContextPrimitives {
   // reassigned), so a read-only live view; the fields themselves stay writable so
   // the hot paths can increment them. Feeds no gameplay branch and draws no rng.
   readonly mobScanCounters: MobScanCounters;
+  // The coordinator's engaged pass output (combat/engaged_combat.ts): every
+  // entity id an engaged mob or fighting pet held in combat on the most recent
+  // tick. Sim-owned, cleared and refilled in place each tick; a read-only live
+  // view so a command-driven readout (/combat) answers from the cached pass
+  // instead of re-walking every entity and hate table on demand.
+  readonly engagedPids: ReadonlySet<number>;
   // Commission order board (Professions 2.0, issue #1298): the live order
   // list, mutated in place by professions/commission_order.ts (push on open,
   // field updates on accept/deliver, splice on the retention sweep), like
@@ -592,6 +614,7 @@ export interface SimContextCallbacks {
     breakThreshold?: number,
   ): void;
   applyKnockback(source: Entity, target: Entity, distance: number): number;
+  isIceBlocked(target: Entity): boolean;
   diminishedCrowdControlDuration(
     source: Entity,
     target: Entity,
@@ -637,6 +660,8 @@ export interface SimContextCallbacks {
   // Start a party/raid ready check as the actor (leader-gated); used by the chat
   // "/ready" command in social/chat.ts. Delegates to social/ready_check.ts.
   readyCheckStart(pid?: number): void;
+  pullTimerStart(rawCommand: string, pid?: number): void;
+  pullTimerCancel(pid?: number): void;
   removeFromParty(pid: number, verb: string): void;
   // Drop a disbanded party's whole raid-marker set (points at T1's targeting store).
   dropPartyMarkers(partyId: number): void;
@@ -915,6 +940,10 @@ export interface SimContextCallbacks {
   breakGhostWolf(e: Entity): void;
   forceDismount(e: Entity): void;
   startAutoAttack(pid?: number): void;
+  // One auto-attack swing attempt outside the per-tick driver (C5
+  // combat/auto_attack.tryPlayerSwing): the spell queue fires a ready wand
+  // bolt or melee swing between a completed cast and its queued follow-up.
+  tryPlayerSwing(p: Entity, meta: PlayerMeta): void;
   revivePet(pid?: number): void;
   completeFishing(p: Entity, meta: PlayerMeta): void;
   // Gather cast completion (Professions 2.0): updateCasting routes a
@@ -1195,8 +1224,20 @@ export function createSimContext(host: SimContextHost): SimContext {
     get entities() {
       return host.entities;
     },
+    get entityRosterVersion() {
+      return host.entityRosterVersion;
+    },
+    set entityRosterVersion(v) {
+      host.entityRosterVersion = v;
+    },
     get players() {
       return host.players;
+    },
+    get accountCosmetics() {
+      return host.accountCosmetics;
+    },
+    set accountCosmetics(value: AccountCosmetics) {
+      host.accountCosmetics = value;
     },
     get masteryResetNoticeCounter() {
       return host.masteryResetNoticeCounter;
@@ -1423,6 +1464,9 @@ export function createSimContext(host: SimContextHost): SimContext {
     get readyChecks() {
       return host.readyChecks;
     },
+    get pullTimers() {
+      return host.pullTimers;
+    },
     get pendingResurrections() {
       return host.pendingResurrections;
     },
@@ -1473,6 +1517,9 @@ export function createSimContext(host: SimContextHost): SimContext {
     },
     get mobScanCounters() {
       return host.mobScanCounters;
+    },
+    get engagedPids() {
+      return host.engagedPids;
     },
     get commissionOrderBoard() {
       return host.commissionOrderBoard;
@@ -1543,6 +1590,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     isControlAura: host.isControlAura,
     applyRootAura: host.applyRootAura,
     applyKnockback: host.applyKnockback,
+    isIceBlocked: host.isIceBlocked,
     diminishedCrowdControlDuration: host.diminishedCrowdControlDuration,
     hostilesInRadius: host.hostilesInRadius,
     friendliesInRadius: host.friendliesInRadius,
@@ -1562,6 +1610,8 @@ export function createSimContext(host: SimContextHost): SimContext {
     partyOf: host.partyOf,
     partyInvite: host.partyInvite,
     readyCheckStart: host.readyCheckStart,
+    pullTimerStart: host.pullTimerStart,
+    pullTimerCancel: host.pullTimerCancel,
     removeFromParty: host.removeFromParty,
     dropPartyMarkers: host.dropPartyMarkers,
     formDungeonFinderGroup: host.formDungeonFinderGroup,
@@ -1671,6 +1721,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     breakGhostWolf: host.breakGhostWolf,
     forceDismount: host.forceDismount,
     startAutoAttack: host.startAutoAttack,
+    tryPlayerSwing: host.tryPlayerSwing,
     revivePet: host.revivePet,
     completeFishing: host.completeFishing,
     completeGatherCast: host.completeGatherCast,

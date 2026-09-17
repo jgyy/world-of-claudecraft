@@ -11,8 +11,12 @@
 // both hosts and repeated presses agree.
 
 import { CORPSE_HARVEST_POPUP_RANGE } from '../sim/professions/corpse_harvest_inspection';
-import { dist2d, type Entity, INTERACT_RANGE } from '../sim/types';
-import { corpseLootAvailability, localPartyMemberIds } from './corpse_loot_availability';
+import { dist2d, type Entity, INTERACT_RANGE, type InvSlot } from '../sim/types';
+import {
+  carriesFieldKit,
+  corpseLootAvailability,
+  localPartyMemberIds,
+} from './corpse_loot_availability';
 
 /** The corpse popup's reach, consumed by loot_window_controller.ts as its
  *  CORPSE_POPUP_RANGE: how far the player may drift before an OPEN popup
@@ -24,8 +28,16 @@ import { corpseLootAvailability, localPartyMemberIds } from './corpse_loot_avail
  *  under its established name so no caller of this module moves. */
 export const HARVEST_BODY_RANGE = CORPSE_HARVEST_POPUP_RANGE;
 
+/** The "no pointer position" a pointer-less corpse open passes for BOTH screen
+ *  coordinates (the interact key, a pad press, the mobile interact button):
+ *  the loot popup centers itself instead of anchoring to a cursor, the same
+ *  placement the Professions "Harvest a body" entry gets. Non-finite on
+ *  purpose, so no real pointer coordinate can ever collide with it. */
+export const HARVEST_CHOICE_NO_POINTER = Number.NaN;
+
 export interface HarvestBodyPickWorld {
   player: Entity;
+  inventory: readonly Pick<InvSlot, 'itemId' | 'count'>[];
   playerId?: number;
   partyInfo?: { members: readonly { pid: number }[] } | null;
   entities: ReadonlyMap<number, Entity>;
@@ -60,7 +72,7 @@ function harvestOpenFor(
  *  surviving a step backwards), which is a different question. */
 export function pickHarvestBody(world: HarvestBodyPickWorld): number | null {
   const player = world.player;
-  if (player.dead) return null;
+  if (player.dead || !carriesFieldKit(world.inventory)) return null;
   const viewerId = world.playerId ?? player.id;
   const partyIds = localPartyMemberIds(world.partyInfo);
   if (player.targetId !== null) {

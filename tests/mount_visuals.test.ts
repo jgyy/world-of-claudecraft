@@ -11,13 +11,17 @@ import {
   MOUNT_LAMP_DISTANCE,
   MOUNT_LAMP_INTENSITY,
   MOUNT_LENS_COLOR,
+  MOUNT_SKIN_VISUAL_SPECS,
   MOUNT_VISUAL_SPECS,
   type MountRideSpec,
+  type MountVisualSpec,
   mountBobY,
   mountLampFlicker,
   mountSeatLift,
   mountVisualSpec,
+  stepRocketSledJumpPitch,
 } from '../src/render/mount_visuals';
+import { MOUNT_SKIN_IDS } from '../src/sim/content/mount_skins';
 import { MOUNT_KEYS } from '../src/sim/content/mounts';
 
 describe('mount visual specs cover the sim catalog', () => {
@@ -62,7 +66,10 @@ describe('mount visual specs cover the sim catalog', () => {
       chimeglass_tortoise: ['lens', 'saddle'],
     } as const;
     for (const [key, expectedBones] of Object.entries(expected)) {
-      const spec = MOUNT_VISUAL_SPECS[key as keyof typeof expected];
+      const spec =
+        key === 'chimeglass_tortoise'
+          ? MOUNT_SKIN_VISUAL_SPECS.chimeglass_tortoise
+          : MOUNT_VISUAL_SPECS.lanternback_troll;
       const requested = new Set([
         ...(spec.seatBone ? [spec.seatBone.bone] : []),
         ...spec.lamps.map((lamp) => lamp.bone),
@@ -97,10 +104,11 @@ describe('mount visual specs cover the sim catalog', () => {
   });
 
   it('pins the Cluckwork Mech Bird rig, gait aliases, and rider placement', () => {
-    expect(MOUNT_VISUAL_SPECS.mech_bird).toEqual({
+    expect(MOUNT_SKIN_VISUAL_SPECS.mech_bird).toEqual({
       visualKey: 'mount_mech_bird',
       seat: 2.05,
       seatFwd: 0,
+      groundLift: 0,
       rigged: true,
       bobAmp: 0,
       bobHz: 0,
@@ -203,7 +211,7 @@ function expectQuaternion(
 describe('Chimeglass rider straddle', () => {
   it('drives the literal authored pose onto both leg chains and hips', () => {
     const { visual, bones } = ridePoseHarness();
-    const ride = MOUNT_VISUAL_SPECS.chimeglass_tortoise.ride;
+    const ride = MOUNT_SKIN_VISUAL_SPECS.chimeglass_tortoise.ride;
     expect(ride).toEqual({ spread: 0.68, thigh: 0.8, knee: 0.6, ankle: -0.45, hips: -0.18 });
     if (!ride) throw new Error('the Chimeglass Tortoise has a straddle pose');
 
@@ -239,7 +247,7 @@ describe('Chimeglass rider straddle', () => {
 
   it('yields the legs while the character is actively climbing', () => {
     const { visual, bones } = ridePoseHarness();
-    const ride = MOUNT_VISUAL_SPECS.chimeglass_tortoise.ride;
+    const ride = MOUNT_SKIN_VISUAL_SPECS.chimeglass_tortoise.ride;
     if (!ride) throw new Error('the Chimeglass Tortoise has a straddle pose');
 
     visual.climbOn = true;
@@ -252,7 +260,7 @@ describe('Chimeglass rider straddle', () => {
 
   it('yields the legs while a previous climb pose is still blending out', () => {
     const { visual, bones } = ridePoseHarness();
-    const ride = MOUNT_VISUAL_SPECS.chimeglass_tortoise.ride;
+    const ride = MOUNT_SKIN_VISUAL_SPECS.chimeglass_tortoise.ride;
     if (!ride) throw new Error('the Chimeglass Tortoise has a straddle pose');
 
     visual.climbOn = false;
@@ -265,7 +273,7 @@ describe('Chimeglass rider straddle', () => {
 
   it('hands the legs back to the unposed mixer frame when the mount clears', () => {
     const { visual, bones } = ridePoseHarness();
-    const ride = MOUNT_VISUAL_SPECS.chimeglass_tortoise.ride;
+    const ride = MOUNT_SKIN_VISUAL_SPECS.chimeglass_tortoise.ride;
     if (!ride) throw new Error('the Chimeglass Tortoise has a straddle pose');
 
     visual.setRidePose(ride);
@@ -316,10 +324,11 @@ describe('the Low vertex-color path covers every mount GLB that ships COLOR_0', 
     ),
   ].sort();
 
-  it('carries authored COLOR_0 on exactly the Dreadspark Groundshaker, the Bonebound Rickshaw, and the Valorsteed', () => {
+  it('carries authored COLOR_0 on exactly the goblin rocket sled, the Bonebound Rickshaw, the Dreadspark Groundshaker, and the Valorsteed', () => {
     expect(mountUrls.length).toBeGreaterThanOrEqual(8);
     const withVertexColors = mountUrls.filter((url) => glbAttributes(url).has('COLOR_0'));
     expect(withVertexColors).toEqual([
+      'models/mounts/goblin_rocket_sled.glb',
       'models/mounts/rickshaw_mount.glb',
       'models/mounts/terrorspark_groundshaker.glb',
       'models/mounts/valorsteed.glb',
@@ -386,6 +395,33 @@ describe('procedural bob math', () => {
     expect(mountBobY(spec, 0.7, true)).toBe(0);
   });
 
+  it('parks the rocket sled still, seats its rider lower, and clears terrain while moving', () => {
+    const spec = MOUNT_SKIN_VISUAL_SPECS.goblin_rocket_sled;
+    expect(spec.seat).toBe(1.29);
+    expect(spec.bobIdle).toBe(false);
+    expect(mountBobY(spec, 0.25 / spec.bobHz, false)).toBe(0);
+    expect(mountBobY(spec, 0.25 / spec.bobHz, true)).toBeCloseTo(spec.bobAmp, 5);
+    expect(spec.groundLift).toBe(0.09);
+    expect(spec.groundLift).toBeGreaterThan(spec.bobAmp);
+    const lowPoint = spec.groundLift + mountBobY(spec, 0.75 / spec.bobHz, true);
+    expect(lowPoint).toBeGreaterThan(0);
+  });
+
+  it('tips the rocket sled through a velocity-aware jump arc and settles flat', () => {
+    let pitch = 0;
+    for (let i = 0; i < 10; i++) pitch = stepRocketSledJumpPitch(pitch, true, 7.5, 1 / 60);
+    expect((pitch * 180) / Math.PI).toBeGreaterThan(18);
+    expect((pitch * 180) / Math.PI).toBeLessThan(23);
+    for (let i = 0; i < 12; i++) pitch = stepRocketSledJumpPitch(pitch, true, 0, 1 / 60);
+    expect((pitch * 180) / Math.PI).toBeGreaterThan(11);
+    expect((pitch * 180) / Math.PI).toBeLessThan(15);
+    for (let i = 0; i < 20; i++) pitch = stepRocketSledJumpPitch(pitch, true, -7.5, 1 / 60);
+    expect((pitch * 180) / Math.PI).toBeLessThan(0);
+    expect((pitch * 180) / Math.PI).toBeGreaterThan(-5);
+    for (let i = 0; i < 24; i++) pitch = stepRocketSledJumpPitch(pitch, false, 0, 1 / 60);
+    expect(Math.abs((pitch * 180) / Math.PI)).toBeLessThan(0.01);
+  });
+
   it('the snail glides flat (no bob at all)', () => {
     const spec = MOUNT_VISUAL_SPECS.stalkglider_snail;
     expect(mountBobY(spec, 0.5, true)).toBe(0);
@@ -423,7 +459,7 @@ describe('procedural bob math', () => {
   });
 
   it('seats the Chimeglass rider on the carapace, not over the neck', () => {
-    const spec = MOUNT_VISUAL_SPECS.chimeglass_tortoise;
+    const spec = MOUNT_SKIN_VISUAL_SPECS.chimeglass_tortoise;
     const def = VISUALS.mount_chimeglass_tortoise;
     // He is low and broad: shorter than the griffin (4.1) and far under the
     // Lanternback (7.0), but tall enough to ride.
@@ -455,8 +491,14 @@ describe('procedural bob math', () => {
   });
 
   it('only the Lanternback and the Chimeglass carry lamps, on their own terms', () => {
-    for (const key of MOUNT_KEYS) {
-      const lamps = MOUNT_VISUAL_SPECS[key].lamps;
+    // Catalog mounts and mount SKINS alike: a skin is drawn by the same lamp
+    // path, so a new skin shipping stray lamps fails here too.
+    const specs: [string, MountVisualSpec][] = [
+      ...MOUNT_KEYS.map((key): [string, MountVisualSpec] => [key, MOUNT_VISUAL_SPECS[key]]),
+      ...MOUNT_SKIN_IDS.map((id): [string, MountVisualSpec] => [id, MOUNT_SKIN_VISUAL_SPECS[id]]),
+    ];
+    for (const [key, spec] of specs) {
+      const lamps = spec.lamps;
       if (key === 'lanternback_troll') {
         expect(lamps.map((l) => l.bone)).toEqual(['lantern_l', 'lantern_r']);
         // Both chains are identical, so both lamps share one measured offset

@@ -265,7 +265,6 @@ export interface GuideProfCurve {
   rareEvent: { oneIn: number; yieldMult: number; flavors: { ore: string; wood: string; herb: string } };
   specimenChancePct: number;
   farm: {
-    plantCastSec: number;
     lifeFloor: number;
     keepChancePctAtZero: number;
     keepChancePctAtCap: number;
@@ -1252,6 +1251,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "summon_tithefiend",
         "name": "Call Tithefiend"
+      },
+      {
+        "id": "prayer_of_returning",
+        "name": "Prayer of Returning"
       }
     ],
     "model": "player_priest",
@@ -2009,7 +2012,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "cat_form",
-        "name": "Wolf Form"
+        "name": "Cat Form"
       },
       {
         "id": "prowl",
@@ -2072,12 +2075,16 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
         "name": "Slinkstrike"
       },
       {
+        "id": "hamstring_bite",
+        "name": "Takedown"
+      },
+      {
         "id": "insect_swarm",
         "name": "Stinging Swarm"
       },
       {
         "id": "tigers_fury",
-        "name": "Wolfsblood"
+        "name": "Lynxblood"
       },
       {
         "id": "rip",
@@ -2094,6 +2101,14 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "primal_reflexes",
         "name": "Primal Reflexes"
+      },
+      {
+        "id": "wildwake",
+        "name": "Wildwake"
+      },
+      {
+        "id": "grove_awakening",
+        "name": "Grove Awakening"
       }
     ],
     "model": "player_druid",
@@ -2458,7 +2473,7 @@ export const GUIDE_ZONES: GuideZoneInfo[] = [
       "The Wreck Line",
       "The Gauntlet"
     ],
-    "welcome": "The Proving Shore asks nothing of you but time. Learn the camp, strike the effigies, walk the wreck line, and when you are ready, Ferryman Odo will see you across to the vale.",
+    "welcome": "The Proving Shore asks nothing of you but time. Learn the camp, strike the effigies, walk the wreck line and, when you are ready, Ferryman Odo will see you across to the vale. You can also ring the bell to go to the vale directly.",
     "families": [
       "beast"
     ]
@@ -2545,9 +2560,7 @@ export const GUIDE_DRUID_FORMS: GuideDruidForm[] = [
   {
     "id": "form_cat",
     "model": "form_cat",
-    "tint": "#d08b45",
-    "tintStrength": 0.35,
-    "still": "/guide-stills/form_cat__d08b45__s35.webp"
+    "still": "/guide-stills/form_cat.webp"
   },
   {
     "id": "form_travel",
@@ -4182,8 +4195,8 @@ export const GUIDE_DEEDS: GuideDeed[] = [
     "id": "chr_vale_cup_debut",
     "name": "Copper Pail Contender",
     "category": "chronicle",
-    "renown": 5,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/chr_vale_cup_debut.webp"
   },
   {
@@ -4596,32 +4609,32 @@ export const GUIDE_DEEDS: GuideDeed[] = [
     "id": "pvp_vcup_first_match",
     "name": "Boots on the Pitch",
     "category": "pvp",
-    "renown": 5,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_first_match.webp"
   },
   {
     "id": "pvp_vcup_first_win",
     "name": "First Silverware",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_first_win.webp"
   },
   {
     "id": "pvp_vcup_wins_10",
     "name": "Seasoned Boarballer",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_wins_10.webp"
   },
   {
     "id": "pvp_vcup_wins_25",
     "name": "Boarball Legend",
     "category": "pvp",
-    "renown": 25,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "rewardTitle": "Boarball Legend",
     "crest": "/ui/deeds/pvp_vcup_wins_25.webp"
   },
@@ -4629,104 +4642,104 @@ export const GUIDE_DEEDS: GuideDeed[] = [
     "id": "pvp_vcup_first_goal",
     "name": "Off the Mark",
     "category": "pvp",
-    "renown": 5,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_first_goal.webp"
   },
   {
     "id": "pvp_vcup_hat_trick",
     "name": "Hat Trick Hero",
     "category": "pvp",
-    "renown": 25,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_hat_trick.webp"
   },
   {
     "id": "pvp_vcup_golden_goal",
     "name": "Golden Moment",
     "category": "pvp",
-    "renown": 25,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_golden_goal.webp"
   },
   {
     "id": "pvp_vcup_first_save",
     "name": "Safe Hands",
     "category": "pvp",
-    "renown": 5,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_first_save.webp"
   },
   {
     "id": "pvp_vcup_clean_sheet",
     "name": "Nothing Gets Past Me",
     "category": "pvp",
-    "renown": 25,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_clean_sheet.webp"
   },
   {
     "id": "pvp_vcup_guild_win",
     "name": "For the Banner",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_vcup_guild_win.webp"
   },
   {
     "id": "pvp_fiesta_first_bout",
     "name": "Party Crasher",
     "category": "pvp",
-    "renown": 5,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_fiesta_first_bout.webp"
   },
   {
     "id": "pvp_fiesta_first_win",
     "name": "Life of the Fiesta",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_fiesta_first_win.webp"
   },
   {
     "id": "pvp_fiesta_double",
     "name": "Double Trouble",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_fiesta_double.webp"
   },
   {
     "id": "pvp_fiesta_shutdown",
     "name": "Party Pooper",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_fiesta_shutdown.webp"
   },
   {
     "id": "pvp_fiesta_full_build",
     "name": "Dressed for the Occasion",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_fiesta_full_build.webp"
   },
   {
     "id": "pvp_fiesta_powerups",
     "name": "One of Everything",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_fiesta_powerups.webp"
   },
   {
     "id": "pvp_fiesta_five_kills",
     "name": "Carrying the Party",
     "category": "pvp",
-    "renown": 10,
-    "feat": false,
+    "renown": 0,
+    "feat": true,
     "crest": "/ui/deeds/pvp_fiesta_five_kills.webp"
   },
   {
@@ -6822,10 +6835,6 @@ export const GUIDE_RELIQUARY: GuideReliquaryPage[] = [
       },
       {
         "kind": "mount",
-        "name": "Cluckwork Mech Bird"
-      },
-      {
-        "kind": "mount",
         "name": "Aether-Jouster Hover-Cycle"
       },
       {
@@ -6842,15 +6851,7 @@ export const GUIDE_RELIQUARY: GuideReliquaryPage[] = [
       },
       {
         "kind": "mount",
-        "name": "Tolliver the Chimeglass"
-      },
-      {
-        "kind": "mount",
         "name": "Dreadspark Groundshaker"
-      },
-      {
-        "kind": "mount",
-        "name": "Bonebound Rickshaw"
       }
     ]
   },
@@ -14257,17 +14258,17 @@ export const GUIDE_PROF_CRAFTS: GuideProfCraft[] = [
           {
             "itemId": "arcane_shard",
             "name": "Chime Shard",
-            "count": 5
+            "count": 1
           },
           {
             "itemId": "arcane_essence",
             "name": "Chime Essence",
-            "count": 4
+            "count": 14
           },
           {
             "itemId": "arcane_dust",
             "name": "Chime Dust",
-            "count": 6
+            "count": 10
           }
         ],
         "output": {
@@ -14295,17 +14296,17 @@ export const GUIDE_PROF_CRAFTS: GuideProfCraft[] = [
           {
             "itemId": "arcane_shard",
             "name": "Chime Shard",
-            "count": 5
+            "count": 1
           },
           {
             "itemId": "arcane_essence",
             "name": "Chime Essence",
-            "count": 4
+            "count": 14
           },
           {
             "itemId": "arcane_dust",
             "name": "Chime Dust",
-            "count": 6
+            "count": 10
           }
         ],
         "output": {
@@ -18263,7 +18264,7 @@ export const GUIDE_PROF_GATHERING: GuideProfGathering[] = [
         "priceCopper": null,
         "vendors": [],
         "craftedBy": "engineering",
-        "wieldProficiency": 40
+        "wieldProficiency": 25
       },
       {
         "name": "Skysilver Hoe",
@@ -18272,7 +18273,7 @@ export const GUIDE_PROF_GATHERING: GuideProfGathering[] = [
         "priceCopper": null,
         "vendors": [],
         "craftedBy": "engineering",
-        "wieldProficiency": 70
+        "wieldProficiency": 50
       },
       {
         "name": "Osmium Hoe",
@@ -18283,7 +18284,7 @@ export const GUIDE_PROF_GATHERING: GuideProfGathering[] = [
         "craftedBy": "engineering",
         "priceMarks": 24,
         "marksClears": 3,
-        "wieldProficiency": 85
+        "wieldProficiency": 75
       },
       {
         "name": "Evergarden Hoe",
@@ -18332,7 +18333,6 @@ export const GUIDE_PROF_CURVE: GuideProfCurve = {
   },
   "specimenChancePct": 16,
   "farm": {
-    "plantCastSec": 2,
     "lifeFloor": 3,
     "keepChancePctAtZero": 15,
     "keepChancePctAtCap": 50,
@@ -20256,10 +20256,9 @@ export const GUIDE_MODELS: Record<string, GuideModelSpec> = {
     "height": 2.35
   },
   "form_cat": {
-    "url": "models/creatures/wolf_basic.glb",
-    "idle": "Idle",
-    "height": 1.6,
-    "tintStrength": 0.35
+    "url": "models/creatures/druid_cat_form.glb",
+    "idle": "Idle_Look",
+    "height": 1.92
   },
   "form_travel": {
     "url": "models/creatures/chicken_cow.glb",

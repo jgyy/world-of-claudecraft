@@ -41,7 +41,12 @@ const NYTHRAXIS_ARENA = 'nythraxis_boss_arena';
 // Sim-construction overhead (same trimming as tests/training_dummy.test.ts).
 const PRACTICE_ROW_WORLD: WorldContent = {
   ...BUILTIN_WORLD,
-  camps: BUILTIN_WORLD.camps.filter((camp) => PRACTICE_ROW_ORDER.includes(camp.mobId)),
+  // Filtered by the row's own x too: the Eastbrook hub dummy is a second
+  // `training_dummy` camp (content/practice_dummies.ts HUB_PRACTICE_DUMMY_CAMPS)
+  // and must not stand in for the row's slot 1.
+  camps: BUILTIN_WORLD.camps.filter(
+    (camp) => PRACTICE_ROW_ORDER.includes(camp.mobId) && camp.center.x === PRACTICE_ROW_X,
+  ),
   npcs: {},
   groundObjects: [],
 };
@@ -226,8 +231,16 @@ describe('the Highwatch practice row', () => {
     // with crucible_tank_mail_chest and uses the canonical warrior spec 'prot'.
     // Reviewed result: 150 more HP, unchanged total armor. Other reference
     // slots and the difficulty-floor calibration are not retuned here.
-    expect(vitals.maxHp, 'the derived reference-player pool').toBe(1382);
-    expect(vitals.armor, 'and its armor').toBe(3265);
+    // The stamina baseline model (2026-09-10) moved it again, 1382 to 1822:
+    // the reference picker now scores the class line, so the tank's neck and
+    // rings are Ignivar's Ember Choker, the Band of Marked Strikes and the Seal
+    // of the Forgewall (physical jewelry with stamina) instead of the caster
+    // jewelry a raw five-stat sum tied them with, and the two stamina-free
+    // physical pieces gained their floor. Reviewed: the body is the tank's own
+    // gear now; the difficulty floors are not retuned here.
+    expect(vitals.maxHp, 'the derived reference-player pool').toBe(1822);
+    // Armor moved by six points with the same swap (Agility feeds armor).
+    expect(vitals.armor, 'and its armor').toBe(3271);
     // A player-sized pool, not the practice targets near-immortal one: heals
     // have to read as a real fraction of the bar.
     expect(d.maxHp).toBeGreaterThan(1000);

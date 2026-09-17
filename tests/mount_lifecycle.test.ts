@@ -32,7 +32,13 @@ import {
   syncMountTransitionFx,
   syncMountVisual,
 } from '../src/render/mount_lifecycle';
-import { type MountVisualSpec, mountVisualSpec } from '../src/render/mount_visuals';
+import {
+  MOUNT_SKIN_VISUAL_SPECS,
+  type MountVisualSpec,
+  mountVisualSpec,
+  mountVisualSpecFor,
+} from '../src/render/mount_visuals';
+import { MOUNT_SKIN_IDS } from '../src/sim/content/mount_skins';
 import { MOUNT_KEYS } from '../src/sim/content/mounts';
 
 // The rider seat rule of src/render/mount_lifecycle.ts, driven on bare
@@ -57,7 +63,7 @@ const bear = (): MountVisualSpec => {
   return spec;
 };
 const tortoise = (): MountVisualSpec => {
-  const spec = mountVisualSpec('chimeglass_tortoise');
+  const spec = mountVisualSpecFor('valorsteed', 'chimeglass_tortoise');
   if (!spec) throw new Error('the tortoise has a mount visual spec');
   return spec;
 };
@@ -266,16 +272,42 @@ describe('mount transition effects', () => {
       mountCastKey: '',
       mountCastRemaining: 0,
       mountKey: '',
+      mountLook: overrides.mountCastKey || overrides.mountKey || '',
       poseAllowed: true,
       present: true,
       playCallPose: vi.fn(),
       summonGlow: vi.fn(),
       summonCall: vi.fn(),
       engineReset: vi.fn(),
+      preloadSummon: vi.fn(),
       preloadEngine: vi.fn(),
       ...overrides,
     };
   }
+
+  it('preloads the worn look during summon and swaps its engine without another summon', () => {
+    const state = { lastMountKey: '', lastMountLook: '', wasMountCasting: false };
+    const cast = transitionInputs({
+      mountCasting: true,
+      mountCastKey: 'valorsteed',
+      mountLook: 'rallycart_rxt',
+    });
+    state.wasMountCasting = syncMountTransitionFx(state, cast);
+    expect(cast.preloadSummon).toHaveBeenCalledWith('rallycart_rxt');
+    expect(cast.preloadEngine).toHaveBeenCalledWith('rallycart_rxt');
+    const complete = transitionInputs({ mountKey: 'valorsteed', mountLook: 'rallycart_rxt' });
+    state.wasMountCasting = syncMountTransitionFx(state, complete);
+    expect(complete.engineReset).toHaveBeenCalledOnce();
+    expect(complete.summonCall).toHaveBeenCalledOnce();
+    const swap = transitionInputs({ mountKey: 'valorsteed', mountLook: 'rickshaw_mount' });
+    syncMountTransitionFx(state, swap);
+    expect(swap.engineReset).toHaveBeenCalledOnce();
+    expect(swap.preloadEngine).toHaveBeenCalledWith('rickshaw_mount');
+    expect(swap.summonCall).not.toHaveBeenCalled();
+    expect(swap.summonGlow).not.toHaveBeenCalled();
+    syncMountTransitionFx(state, swap);
+    expect(swap.engineReset).toHaveBeenCalledOnce();
+  });
 
   it('preloads and plays the call pose once on a summon-cast edge', () => {
     const state = { lastMountKey: '', wasMountCasting: false };
@@ -290,12 +322,15 @@ describe('mount transition effects', () => {
     expect(summon.playCallPose).toHaveBeenCalledWith(2.75);
     expect(summon.preloadEngine).toHaveBeenCalledOnce();
     expect(summon.preloadEngine).toHaveBeenCalledWith('mech_bird');
+    expect(summon.preloadSummon).toHaveBeenCalledOnce();
+    expect(summon.preloadSummon).toHaveBeenCalledWith('mech_bird');
     state.wasMountCasting = syncMountTransitionFx(state, summon);
     expect(summon.playCallPose).toHaveBeenCalledOnce();
     expect(summon.preloadEngine).toHaveBeenCalledOnce();
+    expect(summon.preloadSummon).toHaveBeenCalledOnce();
   });
 
-  it('preloads a summon when the current body cannot play the optional call pose', () => {
+  it('preloads the engine and the summon take when the current body cannot play the optional call pose', () => {
     const state = { lastMountKey: '', wasMountCasting: false };
     const summon = transitionInputs({
       mountCasting: true,
@@ -308,6 +343,8 @@ describe('mount transition effects', () => {
     expect(summon.playCallPose).not.toHaveBeenCalled();
     expect(summon.preloadEngine).toHaveBeenCalledOnce();
     expect(summon.preloadEngine).toHaveBeenCalledWith('mech_bird');
+    expect(summon.preloadSummon).toHaveBeenCalledOnce();
+    expect(summon.preloadSummon).toHaveBeenCalledWith('mech_bird');
   });
 
   it.each([
@@ -324,6 +361,7 @@ describe('mount transition effects', () => {
 
       expect(input.playCallPose).not.toHaveBeenCalled();
       expect(input.preloadEngine).not.toHaveBeenCalled();
+      expect(input.preloadSummon).not.toHaveBeenCalled();
     },
   );
 
@@ -334,6 +372,7 @@ describe('mount transition effects', () => {
     expect(syncMountTransitionFx(state, input)).toBe(false);
     expect(input.playCallPose).not.toHaveBeenCalled();
     expect(input.preloadEngine).not.toHaveBeenCalled();
+    expect(input.preloadSummon).not.toHaveBeenCalled();
   });
 
   it('fires appearance, swap, and dismount effects exactly on mount-key edges', () => {
@@ -371,9 +410,15 @@ describe('mount transition effects', () => {
 });
 
 describe('mount visual spec flags', () => {
-  it('only the rickshaw tips off a jump; every other mount keeps a level body', () => {
+  it('only the rickshaw skin tips off a jump; every catalog mount keeps a level body', () => {
     for (const key of MOUNT_KEYS) {
-      expect(mountVisualSpec(key)?.jumpTips, key).toBe(key === 'rickshaw_mount');
+      expect(mountVisualSpec(key)?.jumpTips, key).toBe(false);
     }
+    for (const id of MOUNT_SKIN_IDS) {
+      expect(MOUNT_SKIN_VISUAL_SPECS[id].jumpTips, id).toBe(id === 'rickshaw_mount');
+    }
+    // Wearing it tips whatever the rider actually rides; the ride alone never does.
+    expect(mountVisualSpecFor('valorsteed', 'rickshaw_mount')?.jumpTips).toBe(true);
+    expect(mountVisualSpecFor('valorsteed', null)?.jumpTips).toBe(false);
   });
 });

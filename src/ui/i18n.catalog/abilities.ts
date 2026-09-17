@@ -65,8 +65,8 @@ const abilityStringsEn = {
       devotion: 'Devotion',
     },
     forms: {
-      bear: 'Bear',
-      cat: 'Wolf',
+      bear: 'Bruin',
+      cat: 'Cat',
     },
   },
 };
@@ -499,7 +499,7 @@ const classAbilityNamesEn = {
       [
         'gouge',
         'Eye Jab',
-        'Strikes the target for {damage} damage, incapacitating it for 4 sec. Any damage breaks the effect. Awards 1 combo point.',
+        'Strikes the target for {damage} damage, incapacitating it for 4 sec, and resets your own weapon swing timer so your queued auto attack does not break it. Any damage breaks the effect. Awards 1 combo point.',
       ],
       ['evasion', 'Ghostfoot', 'Increases your dodge chance by 50% for 15 sec.'],
       [
@@ -564,12 +564,12 @@ const classAbilityNamesEn = {
       [
         'melting_acid',
         'Melting Acid',
-        'Splashes the target with a caustic poison, dealing {damage} Nature damage and reducing its armor by 5% for 12 sec.',
+        'Coats your weapon for 30 min. Each of your melee swings splashes the target with caustic acid, reducing its armor by 5% for 12 sec.',
       ],
       [
         'nightshade_coating',
         'Nightshade Coating',
-        'Coats the target in nightshade, dealing {damage} Nature damage and reducing the healing it receives by 25% for 12 sec.',
+        'Coats your weapon for 30 min. Each of your melee swings coats the target in nightshade, reducing the healing it receives by 25% for 12 sec.',
       ],
       [
         'expose_armor',
@@ -589,12 +589,12 @@ const classAbilityNamesEn = {
       [
         'instant_poison',
         "Adder's Bite",
-        'Coats your weapon for 30 min, causing each of your melee swings to deal 8 additional Nature damage.',
+        'Coats your weapon for 30 min, causing each of your melee swings to deal {damage} additional Nature damage.',
       ],
       [
         'deadly_poison',
         'Festering Venom',
-        'Coats your weapon for 30 min, causing each of your melee swings to deal 14 additional Nature damage.',
+        'Coats your weapon for 30 min. Each of your melee swings adds a stack of venom to the target, up to 5, and refreshes the 12 sec duration. Each stack deals {damage} Nature damage every 2 sec.',
       ],
       [
         'blind',
@@ -1087,7 +1087,7 @@ const classAbilityNamesEn = {
       [
         'hex_of_violence',
         'Hex of Violence',
-        'Hexes the enemy for 8 sec. Its next 3 damaging actions each generate 7 Condemnation and lash it for 17 Shadow damage.',
+        'Hexes the enemy for 8 sec, dealing Shadow damage and generating 2 Condemnation every 2 sec. Its next 3 damaging actions each generate 7 Condemnation and lash it for 17 Shadow damage.',
       ],
       [
         'cruel_pact',
@@ -1132,7 +1132,7 @@ const classAbilityNamesEn = {
       [
         'ruinous_brand',
         'Ruinous Brand',
-        'Brands an enemy for 15 sec. Your next 3 direct spells echo for 25% damage against the branded enemy, or copy 50% damage to it when cast against another target.',
+        'Brands an enemy for 15 sec. Your next 3 direct spells echo for 25% damage against the branded enemy, or copy 50% damage to it when cast against another target. Ruinbolt echoes also count as critical hits, without another critical damage multiplier.',
       ],
       [
         'wrath',
@@ -1178,7 +1178,7 @@ const classAbilityNamesEn = {
       [
         'bear_form',
         'Bruin Form',
-        'Shapeshift into a bear: armor +110%, maximum health +30%, greatly increased attack power, your attacks build rage and generate 30% more threat. Cast again to return to caster form.',
+        'Shapeshift into a bear: armor +110%, maximum health +30%, greatly increased attack power, your attacks build rage and generate 30% more threat. Shifting into any form grants Loping Stride, a short burst of movement speed. Cast again to return to caster form.',
       ],
       [
         'maul',
@@ -1201,19 +1201,19 @@ const classAbilityNamesEn = {
       ],
       [
         'cat_form',
-        'Wolf Form',
-        'Shapeshift into a wolf: agility rises with your level, attack power +8 plus 2 per level, your attacks use energy and combo points, and you generate 29% less threat. Cast again to return to caster form.',
+        'Cat Form',
+        'Shapeshift into a cat: agility rises with your level, attack power +8 plus 2 per level, your attacks use energy and combo points, you move 15% faster, and you generate 29% less threat. Shifting into any form grants Loping Stride, a short burst of movement speed. Cast again to return to caster form.',
       ],
       [
         'claw',
         'Rendclaw',
-        'Claw the enemy for weapon damage plus {damage}. Awards 1 combo point. Wolf Form only.',
+        'Claw the enemy for weapon damage plus {damage}. Awards 1 combo point. Cat Form only.',
         { feral: 'Each hit that lands adds 1 Old Blood (max 3).' },
       ],
       [
         'ferocious_bite',
         'Gorebite',
-        'Finishing move that causes {damage}. Wolf Form only.',
+        'Finishing move that causes {damage}. Cat Form only.',
         {
           feral:
             'Each hit that lands adds 1 Old Blood; at 3 Old Blood this button becomes Redharvest, which spends the Old Blood for a stronger strike that also instantly deals all the damage your Flense and Bloodrift would still have dealt, and restores energy.',
@@ -1255,7 +1255,7 @@ const classAbilityNamesEn = {
       [
         'travel_form',
         'Fleet Form',
-        'Instantly shift into a swift fleet form, increasing movement speed by 40%. You cannot use other abilities while shifted, but can shift in or out of combat, ideal for escaping.',
+        'Instantly shift into a swift fleet form, increasing movement speed by 40% and removing breakable roots and slows. You cannot use other abilities while shifted, but can shift in or out of combat, ideal for escaping. Shifting into any form grants Loping Stride, a short burst of movement speed.',
       ],
       ['enrage', 'Stoke', 'Generates 20 rage instantly. Bruin Form only.'],
       ['bash', 'Concuss', 'Stuns the target for 2 sec. Bruin Form only.'],
@@ -1268,12 +1268,22 @@ const classAbilityNamesEn = {
       [
         'dash',
         'Dash',
-        'Sprint forward, increasing movement speed by 50% for 15 sec. Wolf Form only.',
+        'Sprint forward, increasing movement speed by 50% for 15 sec. Cat Form only.',
       ],
       [
         'pounce',
         'Slinkstrike',
-        'A stealth opener that stuns the target for 2 sec. Awards 1 combo point. Wolf Form only.',
+        'A stealth opener that stuns the target for 2 sec. Awards 1 combo point. Cat Form only. Out of stealth this button is Lunge.',
+      ],
+      [
+        'lunge',
+        'Lunge',
+        'Lunge at an enemy up to 12 yd away. On arrival, deals 60% weapon damage and awards 1 combo point; a lunge cut short refunds its cooldown. Cat Form only.',
+      ],
+      [
+        'hamstring_bite',
+        'Takedown',
+        'Finishing move that stuns the target for 1 sec plus 1 sec per combo point (5 combo points: 6 sec). Cat Form only.',
       ],
       [
         'insect_swarm',
@@ -1282,13 +1292,13 @@ const classAbilityNamesEn = {
       ],
       [
         'tigers_fury',
-        'Wolfsblood',
-        'Surges {rage} energy and increases attack power by {buff} for {duration} sec. Wolf Form only.',
+        'Lynxblood',
+        'Surges {rage} energy and increases attack power by {buff} for {duration} sec. Cat Form only.',
       ],
       [
         'rip',
         'Bloodrift',
-        'Finishing move that makes the target bleed every 2 sec for 24 sec: 36 damage plus 24 per combo point spent (5 combo points: {damage} total). Wolf Form only.',
+        'Finishing move that makes the target bleed every 2 sec for 24 sec: 36 damage plus 24 per combo point spent (5 combo points: {damage} total). Cat Form only.',
         { feral: 'The landed hit adds 1 Old Blood (max 3).' },
       ],
       [
@@ -1534,12 +1544,12 @@ const classAbilityNamesEn = {
       [
         'moonkin_form',
         'Moonwing Form',
-        'Shapeshift into a fearsome Moonkin, increasing your spell damage by 20% and your armor by 50%. Lasts until you shift out. Cast again to return to caster form. (Balance signature)',
+        'Shapeshift into a fearsome Moonkin, increasing your spell damage by 20% and your armor by 50%. Lasts until you shift out. Shifting into any form grants Loping Stride, a short burst of movement speed. Cast again to return to caster form. (Balance signature)',
       ],
       [
         'feral_charge',
         'Primal Surge',
-        'Unleash a primal surge. In Wolf Form, Energy regeneration is increased by 100% for 10 sec. In Bruin Form, instantly generates 50 Rage. (Feral signature)',
+        'Unleash a primal surge. In Cat Form, Energy regeneration is increased by 100% for 10 sec. In Bruin Form, instantly generates 50 Rage. (Feral signature)',
       ],
       [
         'swiftmend',
@@ -1565,6 +1575,16 @@ const classAbilityNamesEn = {
         'marrowbreak',
         'Marrowbreak',
         'Spends your 3 Old Blood for a heavy, high-threat strike of {damage} damage. Below half health it instead shields you for 18% of your maximum health for 8 sec and refunds 15 rage.',
+      ],
+      [
+        'wildwake',
+        'Wildwake',
+        'Coax a fallen ally into sudden bloom, returning them to life at your side with 35% of their health and mana, even in the thick of combat. (Groveheart)',
+      ],
+      [
+        'grove_awakening',
+        'Grove Awakening',
+        'Call every fallen member of your group or raid within 40 yards and in your line of sight back to your side with 30% health and mana. Cannot be cast in combat. (Groveheart)',
       ],
       [
         'overbloom',
@@ -1796,7 +1816,7 @@ const classAbilityNamesEn = {
       [
         'chaos_bolt',
         'Ruinbolt',
-        'Spends 3 Wrack to hurl a heavy bolt of chaotic fire for {damage} Fire damage. Desolation shortens its cast by 30%.',
+        'Spends 3 Wrack to hurl a heavy bolt of chaotic fire for {damage} Fire damage before critical damage is applied. Always critically strikes when it hits. Desolation shortens its cast by 30%.',
       ],
       [
         'dark_pact',
@@ -1929,12 +1949,12 @@ const classAbilityNamesEn = {
       [
         'temporal_echo',
         'Temporal Echo',
-        'Marks an ally with an echo of a healthier moment, mending {damage} health at once. For {duration} sec, part of the Arcane damage you deal is drawn back through the echo to heal them.',
+        'Marks an ally with an echo of a healthier moment, mending {damage} health at once. For {duration} sec, {echoSinglePct}% of your other single-target Arcane damage and {echoAreaPct}% of your area Arcane damage heals them. Aether Surge and Aether Darts instead heal them for {echoDriverPct}% of the damage they deal.',
       ],
       [
         'temporal_cascade',
         'Temporal Cascade',
-        'Sends an echo cascading through your group: the target and up to four of their nearest allies are mended at once and each marked for {duration} sec, drawing part of the Arcane damage you deal back through their echoes to heal them. (Chronomancy)',
+        'Sends an echo cascading through your group: the target and up to four of their nearest allies are mended at once, healing for more on those who have lost the most health, and each marked for {duration} sec, drawing part of the Arcane damage you deal back through their echoes to heal them. Aether Surge and Aether Darts create an equal healing reserve from every group Echo, shared among marked allies below 60% health according to missing health. (Chronomancy)',
       ],
       [
         'temporal_reversal',
@@ -1969,7 +1989,7 @@ const classAbilityNamesEn = {
       [
         'perfect_moment',
         'Perfect Moment',
-        'Seize your perfect moment: instantly gain 4 Arcane Charges, and for 10 sec Aether Darts does not consume them. (Chronomancy)',
+        'Seize your perfect moment: instantly gain 4 Arcane Charges, and for 10 sec Aether Darts does not consume them and deals 20% increased damage. (Chronomancy)',
       ],
       [
         'arcane_surge',
@@ -2118,6 +2138,11 @@ const classAbilityNamesEn = {
         'Consume all Gloomtithe to summon a Tithefiend. It lasts 6, 8, 10, 12, or 15 sec at 1 to 5 stacks and attacks every 2 sec. Each attack deals 20 to 24 Shadow damage plus 8 per extra stack and increases with your Spell Power. At 5 stacks, the fiend grows larger and deals 25% more damage. It prefers your Effigy. Each hit restores 1% maximum Mana and echoes 15% of its damage to up to 3 other enemies with your Dirge of Decay. (Vespers signature)',
       ],
       ['martyrs_aegis', "Martyr's Aegis", "Reduce one ally's incoming damage by 40% for 8 sec."],
+      [
+        'prayer_of_returning',
+        'Prayer of Returning',
+        'Call every fallen member of your group or raid within 40 yards and in your line of sight back to your side with 30% health and mana. Cannot be cast in combat. (Benison and Doctrine)',
+      ],
       [
         'choir_of_deliverance',
         'Choir of Deliverance',

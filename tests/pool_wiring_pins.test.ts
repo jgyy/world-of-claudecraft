@@ -149,6 +149,10 @@ const PINS: PoolWiringPin[] = [
     path: 'src/sim/market.ts',
     sites: [
       { fn: 'marketBuy', what: 'the canGrantCopies gate on the purchased listing' },
+      // The Market Sweep (feature/ah-market-sweep): ONE summed gate on the whole
+      // plan before the first settlement (every candidate is a plain row of one
+      // item, so the sum is exact and the sweep is all-or-nothing).
+      { fn: 'marketSweep', what: 'the canGrantCopies gate on the whole sweep plan' },
       { fn: 'marketCancel', what: 'the canGrantCopies gate on the reclaimed listing' },
       { fn: 'marketCollect', what: 'the canGrantCopies gate on each collection-box row' },
     ],
@@ -197,11 +201,14 @@ const PINS: PoolWiringPin[] = [
     // harvestCorpse itself carries no local capacity gate any more: both real
     // sites moved into src/sim/professions/corpse_harvest_grant.ts's
     // grantCorpseHarvest (below) when that module was extracted from this file.
-    // Kept as a zero-site grantsOnly row rather than dropped, so a NEW local
-    // capacity read added back to harvestCorpse (or the file total drifting off
-    // zero) still reds here instead of silently reintroducing an unpinned site.
+    // lootCorpse now gates personal and shared instance-bearing drops against
+    // their real payload before removing them from the corpse, so both reads
+    // must preserve the general/materials split.
     path: 'src/sim/interaction.ts',
-    sites: [],
+    sites: [
+      { fn: 'lootCorpse', what: 'the personal instance grant capacity gate' },
+      { fn: 'lootCorpse', what: 'the shared instance grant capacity gate' },
+    ],
     grantsOnly: true,
   },
   {

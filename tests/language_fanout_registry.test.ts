@@ -93,7 +93,17 @@ const uiSources = uiTsFiles.map(({ file, full }) => ({
   source: stripComments(readFileSync(full, 'utf8')),
 }));
 const hudFieldsByClass = new Map<string, string[]>();
-for (const [, field, constructed] of strippedHudSource.matchAll(/(\w+)\s*=\s*new (\w+)\(/g)) {
+// The optional type-argument group is load-bearing: a GENERIC field
+// (`x = new Family<Entity>({...})`) has a `<` where the bare form has its `(`,
+// so without it the class never enters this map and every relocalize() it owns
+// reads as uncalled, which is the exact failure this half exists to catch.
+// Parens and newlines are excluded from the type arguments, so a match can never
+// run past the constructor call it is looking for. wrapperOwnedClasses asks the
+// same question of ONE named field and carries the same group; keep the two in
+// step (they cannot share a literal, one being a regex and one a RegExp string).
+for (const [, field, constructed] of strippedHudSource.matchAll(
+  /(\w+)\s*=\s*new (\w+)(?:<[^()\n]*>)?\s*\(/g,
+)) {
   const fields = hudFieldsByClass.get(constructed) ?? [];
   fields.push(field);
   hudFieldsByClass.set(constructed, fields);
@@ -138,6 +148,10 @@ const FANOUT_ARMS: readonly string[] = [
   // would fail as stale rather than as unclassified.
   'this.gatheringGoalController.relocalize|',
   'this.partyFramesPainter.relocalize|',
+  // The leader's ready-check window caches only its bottom status line, since
+  // the roster itself is player names plus icons and the static title/close
+  // chrome rides data-i18n on the page shell.
+  'this.readyCheckLeaderWindow.relocalize|',
   'this.raidBossGuideWindow.relocalize|',
   'this.mapPainter.relocalize|',
   'this.delvePainter.relocalize|',
@@ -156,6 +170,11 @@ const FANOUT_ARMS: readonly string[] = [
   // The Target dots frame: only its aria-label is constructor-written, so this
   // arm is what keeps that one string from sticking in the previous locale.
   'this.targetDotsPainter.relocalize|',
+  // One arm for all six aura tracks: AuraTrackFamily forwards to each track's
+  // painter, the same shape interfaceUnlock uses for the movable frames. Every
+  // track caches its accessible name, its seconds suffix, its mode chip and each
+  // row label, which is exactly the debt a language switch collects.
+  'this.auraTracks.relocalize|',
   // The chat box's geometry chrome (the tab strip's move label, the resize
   // grip's name, the arrange-mode name chip, the mobile handle) is written
   // once at init by ChatGeometryController; its relocalize() rewrites them.
@@ -175,6 +194,8 @@ const FANOUT_ARMS: readonly string[] = [
   // The journal's relocalize gates itself (isOpen inside) and additionally
   // clears the standing ready announcement, whose text was minted in the OLD
   // locale and no flip would re-mint (Phase 14).
+  // Rebuilds the open explorer toolbar and results, preserving its focused control.
+  'this.lootExplorerWindow.relocalize|',
   'this.lootWindow.relocalize|',
   'this.harvestJournalWindow.relocalize|',
   // The shared corpse-harvest preference picker's relocalize gates itself
@@ -201,6 +222,7 @@ const FANOUT_ARMS: readonly string[] = [
   // and per-row page names all resolve at paint, so one forced repaint here
   // keeps the strip from showing the previous language for up to a slow tick.
   'this.updateReliquaryTracker|',
+  'this.updateRecipeTracker|',
   'this.charWindow.renderIfOpen|',
   'this.arenaWindow.relocalize|',
   'this.dungeonFinderWindow.relocalize|',
@@ -210,6 +232,11 @@ const FANOUT_ARMS: readonly string[] = [
   'this.calendarWindow.relocalize|',
   'this.mailboxWindow.relocalize|',
   'this.socialWindow.relocalize|',
+  'this.cosmeticsWindow.relocalize|',
+  // the WOC Store's mount-skin preview overlay: its codex side (name, rarity,
+  // scope line, mode and scene toggles, the action row) is painted once per
+  // open, so the store window forwards the switch to the open panel.
+  'this.dailyRewardsWindow.relocalize|',
   'this.cardDuelWindow.relocalize|',
   'this.spellbookWindow.relocalize|',
   'this.barEditorWindow.relocalize|',
@@ -381,10 +408,16 @@ const ANSWERED: readonly AnsweredSurface[] = [
     why: 'the earned/watched deed ids and their counters',
   },
   {
+    file: 'hud/cosmetics/cosmetics_window.ts',
+    memos: ['lastSig'],
+    answer: 'this.cosmeticsWindow.relocalize',
+    why: 'tab labels, scope badges, card names and states, the empty and hint lines',
+  },
+  {
     file: 'reliquary_window.ts',
-    memos: ['lastAnnounced', 'lastSig'],
+    memos: ['lastAnnounced', 'lastAnnouncedKey', 'lastSig'],
     answer: 'this.reliquaryWindow.render',
-    why: 'catalog progress, Curator rank labels, shelf page lists, and grid chrome; lastAnnounced holds the LOCALIZED live-region line, but the fan-out render is argument-less (the player-driven arm), which recomputes and rewrites the region unconditionally, so the memo cannot pin stale-language text past a switch',
+    why: 'catalog progress, Curator rank labels, shelf page lists, and grid chrome; lastAnnounced holds the LOCALIZED live-region line, but the fan-out render is argument-less (the player-driven arm), which recomputes the line and rewrites the region whenever the text differs, and a language switch always changes the text, so the memo cannot pin stale-language text past a switch; lastAnnouncedKey is language-free (nav, page id, needle, chip id) and only elides a rewrite of BYTE-IDENTICAL text',
   },
   {
     file: 'dungeon_finder_proposal_popup.ts',
@@ -441,6 +474,12 @@ const ANSWERED: readonly AnsweredSurface[] = [
     why: 'the tab, the open letter id and the mail mirror (#2529)',
   },
   {
+    file: 'market_sweep_panel.ts',
+    memos: ['lastQuoteSig'],
+    answer: 'this.marketWindow.render',
+    why: 'the Market Sweep card is rebuilt by the Browse list repaint (MarketSweepPanel.mount, reached from the market window render via renderContent), which resets lastQuoteSig and paints the quote line with the CURRENT language; the memo only elides same-language re-paints of an unchanged quote between list repaints',
+  },
+  {
     file: 'market_window.ts',
     memos: ['lastSig', 'lastSellPriceRefSig', 'searchEcho'],
     answer: 'this.marketWindow.render',
@@ -491,7 +530,7 @@ const ANSWERED: readonly AnsweredSurface[] = [
     file: 'social_window.ts',
     memos: ['lastContent', 'lastStruct'],
     answer: 'this.socialWindow.relocalize',
-    why: 'the tab plus the friend/guild/raid rosters, split structural and content (#2529)',
+    why: 'the tab plus the friend/guild/who/raid rosters, split structural and content (#2529)',
   },
   {
     file: 'spellbook_window.ts',
@@ -616,10 +655,28 @@ const NOT_A_LANGUAGE_GATE: ReadonlyArray<{
       'lastHash retains the text-independent marker summary signature, while lastLanguage is compared against getLanguage() in the same early-return guard. A locale switch always moves lastLanguage and rebuilds every localized label on the next map paint, so the gate is explicitly locale-aware rather than a stale-language hazard.',
   },
   {
+    file: 'map_sidebar_controller.ts',
+    memos: ['lastHtml', 'lastSig'],
+    reason:
+      'lastHtml retains the last BUILT rail html, which embeds every localized string through t(), so a locale switch changes the freshly built side of the comparison and the atlas rail repaints by itself on its next update. Write-elision, not a data signature. lastSig is the same elision one step earlier (it skips the markup mint, not just the DOM write) and it is explicitly locale-aware: mapSidebarSignature folds getI18nRevision() into the compared string, so a locale switch moves it exactly like lastHtml does and the rail cannot hold stale text.',
+  },
+  {
     file: 'hud/quest/quest_tracker_controller.ts',
     memos: ['lastHtml'],
     reason:
       'lastHtml retains the last BUILT html (the repaint memo compares against it rather than the live innerHTML, so the island coach decorating painted rows in place no longer forces a rewrite-and-strobe every update). The built html embeds every localized string through t(), so a locale switch changes the freshly built side of the comparison and the tracker repaints by itself. Write-elision, not a data signature.',
+  },
+  {
+    file: 'hud/practice/practice_dps_controller.ts',
+    memos: ['lastHtml'],
+    reason:
+      'lastHtml retains the last BUILT markup of the practice DPS strip (the quest tracker idiom above): every string in it is resolved through t() and formatNumber at build time, so a locale switch changes the freshly built side of the comparison and the strip repaints on its next 250ms tick by itself. Write-elision over resolved text, not a data signature.',
+  },
+  {
+    file: 'hud/practice/hub_lesson_controller.ts',
+    memos: ['lastHtml', 'lastPromptHtml'],
+    reason:
+      "The same write-elision idiom as its sibling practice_dps_controller.ts above: lastHtml retains the tracker card markup and lastPromptHtml the world-anchored bubble markup, both freshly built by markup(step) on the coach's own 250ms poll (Meters.update) and both resolved entirely through t() at build time. A locale switch changes the freshly built side of each comparison, so the coach repaints its next tick by itself with no fan-out arm.",
   },
   {
     file: 'claudium_window.ts',
@@ -689,6 +746,18 @@ const NOT_A_LANGUAGE_GATE: ReadonlyArray<{
   // reach stood until this ruling and is now one classification among many.
   {
     file: 'hud.ts',
+    memos: ['freedAttackSlotAbilityCache'],
+    reason:
+      'Caches the authored ability definition by action id for the freed Attack slot. It contains content identity and mechanical values, not resolved locale strings; the tooltip and action-bar consumers resolve ability display text from that definition when painting.',
+  },
+  {
+    file: 'hud.ts',
+    memos: ['lastPlayerFrameHpMode'],
+    reason:
+      'The health-text setting is one arm of the same OR gate as lastPlayerFrameHp and lastPlayerFrameMaxHp. relocalizeCoordinatorMemos already clears those two values to NaN, forcing unitFrameHealthText to resolve its numbers in the new locale even when the setting is unchanged.',
+  },
+  {
+    file: 'hud.ts',
     memos: ['lastArenaStatusSig'],
     reason:
       "lastArenaStatusSig is a hybrid whose middle field is vsBlock, the RESOLVED VS markup built on the same tick: t('hud.core.you') and t('hud.arena.vsLine') on the 2v2 arm, t('hud.arena.vsLine') plus t('hud.arena.levelClass') and the tEntity class name on the 1v1 arm. A locale switch therefore changes the freshly built side of the comparison, the banner rewrites itself on the next update, and the timer label (statusCountdown / statusReturning / statusFight), which is deliberately NOT in the signature, rides the same single innerHTML write and relocalizes with it. Write elision on resolved text wearing a signature's name; the genuinely text-independent fields (format, state, the returning countdown seconds) only add motion, they are not what carries the locale. CLOSED at the 19D review round rather than argued: the timer label IS in the signature now. The exemption used to rest on vsBlock's localized bytes alone, which fails in a locale where those two keys are still English-filled while hudChrome.arena.status* are translated (the normal state under the contributors-add-English-only rule): the sig was byte-identical across a switch and the timer line stranded. Note for a future editor: pull vsBlock or the label out of this signature and the banner becomes a stale-language surface needing a fan-out arm",
@@ -697,7 +766,7 @@ const NOT_A_LANGUAGE_GATE: ReadonlyArray<{
     file: 'hud.ts',
     memos: ['lastClockText'],
     reason:
-      "lastClockText retains the RESOLVED minimap clock readout and is compared against a freshly built formatClockTime(new Date(), this.clock24), which routes through formatDateTime to Intl.DateTimeFormat(languageTag(currentLanguage)), so the hour cycle, the day-period marker and the digit system are re-resolved in the ACTIVE locale on the very next comparison. updateClock() runs unconditionally on the fastHud band of the frame loop, so it needs no data motion at all: a locale switch that changes the string moves the freshly built side within one fastHud tick and the write happens by itself. Write-elision on resolved text, not a data signature; the only other store, the `this.lastClockText = ''` in the clock click handler, is the 12h/24h toggle forcing that same self-repaint.",
+      "lastClockText retains the RESOLVED minimap clock readout and is compared against formatClockTimeMemo(Date.now(), this.clock24), whose memo is keyed on the displayed minute, the format AND the active language (clock.ts), so a locale switch re-routes through formatDateTime to Intl.DateTimeFormat(languageTag(currentLanguage)) and the hour cycle, the day-period marker and the digit system are re-resolved in the ACTIVE locale on the very next comparison. updateClock() runs unconditionally on the fastHud band of the frame loop, so it needs no data motion at all: a locale switch that changes the string moves the freshly built side within one fastHud tick and the write happens by itself. Write-elision on resolved text, not a data signature; the only other store, the `this.lastClockText = ''` in the clock click handler, is the 12h/24h toggle forcing that same self-repaint.",
   },
   {
     file: 'hud.ts',
@@ -821,12 +890,14 @@ const NOT_A_LANGUAGE_GATE: ReadonlyArray<{
     reason:
       "lastZoneId retains the committed zone id and is moved only by zoneAt flipping under the player, but everything localized behind it is a one-shot TRANSITION event, not a standing surface: the 2600ms zone banner (zoneDisplayName), the enteringZone chat line and the zone welcome line, all of which are history the moment they fire, exactly like any other chat log row. The persistent zone name is a different write entirely: MinimapPainter puts it on #zone-label through the write-elision facet (writers.setText with localizeZone), which compares the resolved string, so it repaints itself on the next minimap tick. The memo's two remaining reads only pick which ZoneDef's cached terrain raster to blit, which carries no text at all.",
   },
-  {
-    file: 'hud.ts',
-    memos: ['targetDiscordSig'],
-    reason:
-      "the target frame's flair line (the staff role tag, the Discord rank rung, the dev rung, and the [AI] mark plus its screen-reader label). Every other field in the signature is identity data a locale switch cannot move, so keyed on identity alone the line sat in the PREVIOUS locale until that player's flair happened to change; the rebuild itself was always correct, it just never ran, so the fix is the key rather than a fan-out arm. The value is built by targetFlairSignature (src/ui/target_flair_line_view.ts), with getLanguage() read into TargetFlairLineInput.language at the call site and leading the signature, and its paired suite drives the difference across two locales on byte-identical identity data.",
-  },
+  // The target frame's flair line USED to hold a row here (hud.ts's
+  // targetDiscordSig). Its decisions now live in the pure
+  // src/ui/target_flair_line_view.ts core, which targetFlairLineHtml resolves
+  // through t() and targetFlairSignature keys on the ACTIVE LOCALE, and the
+  // cold adapter (src/ui/target_discord_controller.ts) emits no text of its
+  // own. The language claim is therefore checked by that core's own paired
+  // suite, which drives two locales across byte-identical identity data,
+  // rather than by a coordinator row here.
 ];
 
 /**
@@ -860,11 +931,6 @@ const LANGUAGE_KEYED: ReadonlyArray<{
   readonly memo: string;
   readonly why: string;
 }> = [
-  {
-    file: 'hud.ts',
-    memo: 'targetDiscordSig',
-    why: "the target frame's flair line (the role tag, the Discord rank rung, the dev rung, and the [AI] mark plus its screen-reader label). Every other field in the signature is identity data a locale switch cannot move, so keyed on identity alone the line sat in the PREVIOUS locale until that player's flair happened to change; the rebuild itself was always correct, it just never ran, so the fix is the key rather than a fan-out arm. The value is built by targetFlairSignature (src/ui/target_flair_line_view.ts), whose paired suite drives the difference across two locales on byte-identical identity data",
-  },
   {
     file: 'market_window.ts',
     memo: 'searchEcho',
@@ -1556,7 +1622,17 @@ describe('language fan-out: half 2, every signature-gated src/ui surface is clas
       // hover row: movable_frame's `lastHoverCursor` elides an inline CSS
       // cursor-keyword write and can never hold text; the frame's t() labels
       // already ride the interface_unlock relocalize() arm.
-    ).toBe(33);
+      // 34 as of the practice DPS tracker's `lastHtml`: the quest tracker's
+      // built-markup idiom again (every string in it is resolved at build
+      // time, so the fresh side of the compare moves with the locale).
+      // 35 as of the hub lesson coach's `lastHtml`/`lastPromptHtml`: the
+      // same built-markup idiom, one row for both memos since both are
+      // built by the same markup(step) call and answered by the same
+      // reasoning.
+      // OSSBrain integration: authored freed-slot ability cache and the health-mode
+      // arm sharing the already-cleared HP gate add two explicit classifications.
+      // 37 on the merged tree: both pairs above are present.
+    ).toBe(37);
   });
 
   it('gives every relocalize() in src/ui a caller in the fan-out', () => {
@@ -1637,7 +1713,13 @@ function builderOwnedClasses(armCall: string): Set<string> {
 function wrapperOwnedClasses(armCall: string): Set<string> {
   const owned = new Set<string>();
   const field = armCall.slice('this.'.length, -'.relocalize'.length);
-  const constructed = new RegExp(`\\b${field}\\s*=\\s*new (\\w+)\\(`).exec(strippedHudSource);
+  // The optional `<...>` mirrors the sweep's own group above: a generic field
+  // (`this.auraTracks = new AuraTrackFamily<Entity>({...})`) has a `<` where the
+  // bare form has its `(`, and without it the wrapper is never identified, so
+  // every class it owns reads as having no caller.
+  const constructed = new RegExp(`\\b${field}\\s*=\\s*new (\\w+)(?:<[^()\\n]*>)?\\s*\\(`).exec(
+    strippedHudSource,
+  );
   if (!constructed) return owned;
   for (const { source } of uiSources) {
     if (!new RegExp(`export class ${constructed[1]}\\b`).test(source)) continue;

@@ -208,11 +208,7 @@ export function encodeObs(sim: Sim): number[] {
           aura.kind === known.def.requiresAuraKind &&
           (aura.stacks ?? 1) >= (known.def.requiresAuraStacks ?? 1),
       );
-    const requiresPrimaryEye =
-      known.def.id === 'sentence' ||
-      known.def.id === 'coven' ||
-      known.def.id === 'possess_evil_eye' ||
-      known.def.id === 'hour_of_judgment';
+    const requiresPrimaryEye = known.def.id === 'sentence' || known.def.id === 'coven';
     const afflictionEyeReady =
       !requiresPrimaryEye ||
       !!selectedTarget?.auras.some(
@@ -239,6 +235,10 @@ export function encodeObs(sim: Sim): number[] {
       requiredAuraReady &&
       afflictionEyeReady &&
       dominionReady &&
+      // Deliberately ignores the GCD-tail queue: a press inside the final
+      // CAST_QUEUE_WINDOW_SEC of the GCD reports not-ready yet still queues
+      // and fires. The queued slot is not observed; policies see it only
+      // through the next transition.
       (known.def.offGcd || p.gcdRemaining <= 0);
     obs.push(ready ? 1 : 0);
     obs.push(known.def.cooldown > 0 ? cd / known.def.cooldown : 0);

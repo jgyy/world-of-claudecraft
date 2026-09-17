@@ -71,9 +71,20 @@ describe('Rogue fight-6498 deterministic DPS bands', () => {
       // NO masterwrought piece at all (tests/dev_bis_gear.test.ts pins the
       // same displacement per class). This pin re-anchors to that merged
       // truth so the mechanism survives: the next swap reds on gear first.
+      // 2026-09-11, the stamina baseline model (item_budget.ts): the reference
+      // picker now scores the class LINE plus stamina and armor, never the raw
+      // five-stat bag, so the caster jewelry the rogue wore by accident of that
+      // bag (an Intellect amulet, an Intellect ring) gives way to Ignivar's
+      // Ember Choker and the Seal of the Forgewall; the three-seed averages
+      // stayed inside the bands below (185.8 / 207.6 / 152.6) and the sibling
+      // order held, so only the identity pins move.
       expect(Object.keys(gear).length, `${spec} fills every slot`).toBe(12);
-      expect(gear.neck, `${spec} neck is the Crucible amulet`).toBe('heartspring_amulet');
-      expect(gear.ring2, `${spec} ring2 is the Crucible ring`).toBe('circle_of_cinders');
+      expect(gear.neck, `${spec} neck is the physical Ignivar choker`).toBe(
+        'ignivars_ember_choker',
+      );
+      expect(gear.ring2, `${spec} ring2 is the physical Forgewall seal`).toBe(
+        'seal_of_the_forgewall',
+      );
       expect(
         Object.values(gear).every((itemId) => ITEMS[itemId]?.quality === 'epic'),
         `${spec} probe loadout excludes legendary gear`,
@@ -86,63 +97,25 @@ describe('Rogue fight-6498 deterministic DPS bands', () => {
     const repeat = measuredDps();
     expect(repeat).toEqual(first);
 
-    // Accepted three-seed measurements on this fixture are approximately
-    // 199.4 Combat, 170.4 Assassination, and 171.0 Subtlety on this branch
-    // before the 2026-08-30 release/v0.41.0 sync merge. OUTCOME
-    // (2026-08-16, Masterwrought phase 10 QA ruling 1, "accept the phase
-    // design and re-pin"): the apex crafted jewelry (wyrmfall_pendant,
-    // prismglass_loop) entered all three specs' derived BiS loadout on that
-    // day's tree (identity-pinned in the fixture test above until the
-    // Crucible catalog displaced it, see below). The measured
-    // MECHANISM: bestEpicGearFor's score() sums only item.stats, so
-    // hit/crit/haste ratings are invisible to it (tests/dev_bis_gear.test.ts
-    // states the same); the apex pieces win on an int-led raw stat bag
-    // (neck int 8 + sta 6 = 14 over the displaced medallion's 12) while int
-    // buys a rogue no throughput at all (rogue AP is str + agi), which is
-    // also exactly why the fight measures LOWER: the fixture wears two
-    // pieces no played rogue would equip (the score-vs-fight class the
-    // phase 10 QA sync record flagged through the research memo's
-    // Lionheart/Lariat precedent, first measured there). With the
-    // masterwrought defs removed the picker restores the release loadout
-    // and measures about 186.3 / 202.8 / 179.2 (assassination, combat,
-    // subtlety), matching the release bands of that day. That pre-apex
-    // baseline is recorded by these literal bounds, which measure fights,
-    // never scores. These bounds protect the DEV-BIS
-    // FIXTURE's throughput (the suite's actual subject), not a played
-    // rogue's.
-    //
-    // MERGED TREE (2026-08-30 sync merge): the release's Crucible raid
-    // catalog out-scores the apex crafted jewelry in the picker, so the apex
-    // pair LEAVES the fixture loadout (the identity pin above records the
-    // displacement) and the merged measurement lands exactly on the release's
-    // figures of that day: 211.8 Combat, 174.4 Assassination, 189.7
-    // Subtlety. The measurement is deterministic, so a band edge is a
-    // tripwire, never a flake.
-    //
-    // v0.42.0 CLASS REBALANCE (docs/design/class-balance-v042.md), layered
-    // on top of the same Crucible loadout: Knifework/assassination buffs
-    // (+9.89%) and Skulduggery/subtlety's sustained-output nerf (-12.50%,
-    // this fixture's "generic rogue policy" row); combat is untuned.
-    // Applied to the merged-tree baseline above (211.8 / 174.4 / 189.7), the
-    // two moves cross: assassination now measures ABOVE subtlety, so the
-    // ordering assertion re-anchors to combat > assassination > subtlety.
-    // The bands below are the release's v0.42.0 figures; they still hold
-    // against this branch's Crucible-loadout baseline since the two
-    // pre-rebalance starting points (211.8/174.4/189.7 here vs 212/175/190
-    // on the release) differ by under 1%.
-    expect(first.combat).toBeGreaterThanOrEqual(204);
-    expect(first.combat).toBeLessThanOrEqual(220);
-    expect(first.assassination).toBeGreaterThanOrEqual(183);
-    expect(first.assassination).toBeLessThanOrEqual(199);
-    expect(first.subtlety).toBeGreaterThanOrEqual(158);
-    expect(first.subtlety).toBeLessThanOrEqual(174);
-    // The ordering, restated to the v0.42.0 merged-tree truth: Combat leads
-    // both siblings, and Assassination now stays above Subtlety (the
-    // Knifework buff and Skulduggery nerf cross the pair; this branch's
-    // earlier Combat > Subtlety > Assassination order, from the 2026-08-30
-    // gear-only sync, is retired by the v0.42.0 rebalance). The strict pairs
-    // are a SENTINEL over a deterministic measurement (a flip is a real sim
-    // change worth a red).
+    // Prior anchor: ~212 Combat, 175 Assassination, 190 Subtlety (2026-08-30
+    // hit rebalance, this branch's own Crucible-loadout baseline). Two moves
+    // land on top of it in THIS merge, both from the OSSBrain candidate side:
+    // the poison-coating rework lowers this same-level fixture's sustained
+    // output, and v0.42.0 class balance (docs/design/class-balance-v042.md)
+    // buffs Knifework/assassination (+9.89%) and nerfs Skulduggery/subtlety's
+    // sustained output (-12.50%, this fixture's "generic rogue policy" row);
+    // combat is untuned by the rebalance but still moves under the coating
+    // rework. MEASURED on the merged tree (never fabricated): three-seed
+    // averages land at approximately 203.1 Combat, 181.8 Assassination, and
+    // 152.7 Subtlety, which is what the bounds below anchor to. The
+    // rebalance's two moves cross the sibling order, so the ordering
+    // assertion re-anchors to combat > assassination > subtlety.
+    expect(first.combat).toBeGreaterThanOrEqual(195);
+    expect(first.combat).toBeLessThanOrEqual(211);
+    expect(first.assassination).toBeGreaterThanOrEqual(174);
+    expect(first.assassination).toBeLessThanOrEqual(190);
+    expect(first.subtlety).toBeGreaterThanOrEqual(145);
+    expect(first.subtlety).toBeLessThanOrEqual(161);
     expect(first.combat).toBeGreaterThan(first.assassination);
     expect(first.assassination).toBeGreaterThan(first.subtlety);
   }, 30_000);

@@ -5,6 +5,7 @@
 // runtime imports beyond the module under test are the pure
 // bufferHandshakeMessages and node:fs, which reads server/game.ts as TEXT (never
 // as a module) for the one cross-module contract pinned at the bottom.
+
 import { EventEmitter } from 'node:events';
 import * as fs from 'node:fs';
 import type * as http from 'node:http';
@@ -17,6 +18,7 @@ import { GeneralChatRateLimitLiveState } from '../../server/general_chat_quota';
 import { isConnectionRefused as realIsConnectionRefused } from '../../server/ip_block';
 import { createWsAuth, type WsAuthDeps } from '../../server/ws_auth';
 import { bufferHandshakeMessages } from '../../server/ws_buffer';
+import { freshAccountLedger } from '../../src/sim/account_ledger';
 import { DUNGEON_ENTRY_FACING_WIRE_VERSION, ONLINE_WORLD_AUTH_TYPE } from '../../src/world_api';
 
 // A fake socket: real EventEmitter wiring (on/once/off/emit) so the handshake
@@ -117,11 +119,13 @@ function setup() {
     permissionsForRoles: vi.fn((roles: readonly string[]) => new Set<string>(roles)),
     metaRequestUserData: vi.fn(() => ({ fbp: null, fbc: null })),
     metaEventSourceUrl: vi.fn(() => undefined as string | undefined),
+    loadAccountLedger: async () => freshAccountLedger(),
     loadAccountCosmetics: vi.fn(async () => ({
       completedQuestIds: [],
       mechChromaIds: [],
       weaponSkinIds: [],
       weaponSkinLoadout: {},
+      mountSkinIds: [],
     })),
     // Character-lease deps: the happy path holds the lease so every existing case
     // reaches game.join unchanged; the lease branches themselves are covered by
@@ -944,6 +948,7 @@ describe('createWsAuth: authenticateWebSocket accept path', () => {
           mechChromaIds: [],
           weaponSkinIds: [],
           weaponSkinLoadout: {},
+          mountSkinIds: [],
         },
         isAdmin: false,
         // Not staff: the snapshotted permission set is EMPTY (fail closed), never
@@ -1217,6 +1222,7 @@ describe('createWsAuth: authenticateWebSocket accept path', () => {
       mechChromaIds: [],
       weaponSkinIds: [],
       weaponSkinLoadout: {},
+      mountSkinIds: [],
     });
     await authenticating;
 

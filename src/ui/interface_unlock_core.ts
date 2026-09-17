@@ -10,6 +10,15 @@
 // tests/architecture.test.ts UI_PURE_CORES.
 
 import { isPetClass, type PlayerClass } from '../sim/types';
+// The descriptor MODULE, not the domain barrel: the barrel re-exports the
+// painter and the host, and a pure core must not reach a DOM-owning painter
+// even one hop removed (tests/architecture.test.ts forbiddenUiCoreImport).
+import {
+  AURA_TRACK_FRAME_PREFIX,
+  AURA_TRACKS,
+  type AuraTrackSettingKey,
+  auraTrackForFrameId,
+} from './hud/aura_tracks/aura_track_descriptors';
 import type { TranslationKey } from './i18n.catalog';
 
 /** One movable HUD frame under the global unlock toggle. */
@@ -71,7 +80,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar',
     storageKey: 'woc_hud_frame_actionbar',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBar1',
-    fallbackSize: { w: 612, h: 46 },
+    fallbackSize: { w: 596, h: 46 },
     detachToUiRoot: true,
   },
   {
@@ -79,7 +88,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar2',
     storageKey: 'woc_hud_frame_actionbar2',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBar2',
-    fallbackSize: { w: 612, h: 46 },
+    fallbackSize: { w: 596, h: 46 },
     detachToUiRoot: true,
   },
   {
@@ -87,7 +96,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar3',
     storageKey: 'woc_hud_frame_actionbar3',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBar3',
-    fallbackSize: { w: 612, h: 46 },
+    fallbackSize: { w: 596, h: 46 },
     detachToUiRoot: true,
   },
   // The whole action-bar block as ONE frame, live only while the "Combine
@@ -98,7 +107,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'actionbar-group',
     storageKey: 'woc_hud_frame_actionbar_group',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.actionBarGroup',
-    fallbackSize: { w: 612, h: 150 },
+    fallbackSize: { w: 596, h: 150 },
     detachToUiRoot: true,
   },
   {
@@ -154,7 +163,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'pet-frame',
     storageKey: 'woc_hud_frame_pet',
     labelKey: 'hudChrome.unitFrame.petLabel',
-    fallbackSize: { w: 180, h: 54 },
+    fallbackSize: { w: 278, h: 60 },
     detachToUiRoot: true,
   },
   // The pet ACTION bar, the command half of #pet-cluster. Its own row rather
@@ -185,7 +194,7 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     elementId: 'xpbar',
     storageKey: 'woc_hud_frame_xpbar',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.xpBar',
-    fallbackSize: { w: 612, h: 12 },
+    fallbackSize: { w: 596, h: 14 },
     detachToUiRoot: true,
   },
   // The buff and debuff rows are independent frames (each placed on its own).
@@ -257,6 +266,14 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     fallbackSize: { w: 240, h: 120 },
     detachToUiRoot: true,
   },
+  {
+    id: 'recipeTracker',
+    elementId: 'recipe-tracker',
+    storageKey: 'woc_hud_frame_recipe_tracker',
+    labelKey: 'hudChrome.recipeTracker.trackerLabel',
+    fallbackSize: { w: 240, h: 140 },
+    detachToUiRoot: true,
+  },
   // The class resource bars, previously movable outside this option (the
   // devotion medallion's grab-drag, the doom meter's own corner button), now
   // ordinary governed frames so they hide and resize like everything else.
@@ -295,6 +312,17 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     storageKey: 'woc_hud_frame_proc_overlay',
     labelKey: 'hudChrome.interfaceUnlock.frameNames.procOverlay',
     fallbackSize: { w: 300, h: 232 },
+    detachToUiRoot: false,
+  },
+  // The Talking Head (an NPC line while the speaker is off screen): a #ui child
+  // with a stock seat a fifth of the way down the screen; the chip reuses the
+  // panel's own accessible name.
+  {
+    id: 'talkingHead',
+    elementId: 'talking-head',
+    storageKey: 'woc_hud_frame_talking_head',
+    labelKey: 'hudChrome.talkingHead.label',
+    fallbackSize: { w: 596, h: 72 },
     detachToUiRoot: false,
   },
   // The tabbed combat meter (#meters-window). Its two pop-out windows (heal,
@@ -366,6 +394,25 @@ export const HUD_FRAME_SPECS: readonly HudFrameSpec[] = [
     fallbackSize: { w: 220, h: 12 },
     detachToUiRoot: false,
   },
+  // The six aura tracks (src/ui/hud/aura_tracks/). Generated from the descriptor
+  // table rather than written out six times: the table already names each
+  // track's element, storage key and label, and a seventh track should not mean
+  // a seventh row here. All REFLOW (a wider frame is a longer bar and more room
+  // for a name before it ellipses), so their side edges resize the real box, the
+  // same choice the two aura rows above make. Already #ui children, so none
+  // detaches. Their menu rows drive the track's own setting (frameRowSettingKey
+  // below), the Target dots shape.
+  ...AURA_TRACKS.map(
+    (track): HudFrameSpec => ({
+      id: `${AURA_TRACK_FRAME_PREFIX}${track.id}`,
+      elementId: track.elementId,
+      storageKey: track.storageKey,
+      labelKey: track.labelKey,
+      fallbackSize: { w: 236, h: 120 },
+      detachToUiRoot: false,
+      resizeMode: 'box',
+    }),
+  ),
 ] as const;
 
 /** Every storage key the option owns, so a reset can clear the whole set. */
@@ -413,6 +460,7 @@ export function frameRowSettingKey(
   | 'showThirdActionBar'
   | 'showReliquaryTracker'
   | 'showTargetDots'
+  | AuraTrackSettingKey
   | null {
   if (id === 'actionBar2') return 'showSecondaryActionBar';
   if (id === 'actionBar3') return 'showThirdActionBar';
@@ -422,6 +470,11 @@ export function frameRowSettingKey(
   // switch for the same reason: two checkboxes over one tracker must be one
   // state.
   if (id === 'targetDots') return 'showTargetDots';
+  // Each aura track has its own master switch as well (all six ship off), so
+  // the same rule holds: the row is generated from the descriptor table and
+  // resolves back to it here, which is why a seventh track needs no arm.
+  const auraTrack = auraTrackForFrameId(id);
+  if (auraTrack) return auraTrack.settingKey;
   return null;
 }
 

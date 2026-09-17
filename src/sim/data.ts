@@ -126,11 +126,14 @@ import {
 import { GATHER_NODES as GATHER_NODES_CONTENT } from './content/gather_nodes';
 import {
   type GraveyardDef,
+  LAST_KEEP_GRAVEYARD_ID,
+  LAST_KEEP_SPIRIT_HEALER_ENTITY_ID,
   OVERWORLD_GRAVEYARDS,
   SPIRIT_HEALER,
   SPIRIT_HEALER_NPC_ID,
 } from './content/graveyards';
 import { GROUND_PICKUP_LINES } from './content/ground_pickup_lines';
+import { HEALING_TRAINING_MOBS } from './content/healing_training';
 import {
   IGNIVAR_RAID_LORE_NPCS,
   IGNIVAR_RAID_LORE_QUEST_ORDER,
@@ -168,7 +171,13 @@ import {
   PALMREACH_ROADS,
   PALMREACH_ZONE,
 } from './content/palmreach';
-import { PRACTICE_DUMMY_CAMPS, PRACTICE_DUMMY_MOBS } from './content/practice_dummies';
+import {
+  HUB_PRACTICE_NPCS,
+  HUB_PRACTICE_QUEST_ORDER,
+  HUB_PRACTICE_QUESTS,
+  PRACTICE_DUMMY_CAMPS,
+  PRACTICE_DUMMY_MOBS,
+} from './content/practice_dummies';
 import { STATIONS } from './content/professions';
 import {
   PROVING_SHORE_CAMPS,
@@ -395,6 +404,7 @@ export const MOBS: Record<string, MobTemplate> = {
   ...ZONE2_MOBS,
   ...ZONE3_MOBS,
   ...PRACTICE_DUMMY_MOBS,
+  ...HEALING_TRAINING_MOBS,
   ...DUNGEON_MOBS,
   ...WARLOCK_PET_MOBS,
   ...NECROMANCY_MOBS,
@@ -456,11 +466,22 @@ export const NPCS: Record<string, NpcDef> = {
   // loop skips it). Kept in NPCS so the online client and world_entity_i18n can
   // resolve its name; spirit.ts spawns a copy at every graveyard.
   [SPIRIT_HEALER_NPC_ID]: SPIRIT_HEALER,
+  // The Eastbrook quay's sparring master (content/practice_dummies.ts):
+  // dynamic, spawned after the player by sim/hub_practice.ts, so his
+  // presence in this record moves no id.
+  ...HUB_PRACTICE_NPCS,
 };
 
 // Graveyards + the Spirit Healer: re-exported so the Sim and spirit.ts import the
 // whole death-loop data surface from this one merge module.
-export { type GraveyardDef, OVERWORLD_GRAVEYARDS, SPIRIT_HEALER, SPIRIT_HEALER_NPC_ID };
+export {
+  type GraveyardDef,
+  LAST_KEEP_GRAVEYARD_ID,
+  LAST_KEEP_SPIRIT_HEALER_ENTITY_ID,
+  OVERWORLD_GRAVEYARDS,
+  SPIRIT_HEALER,
+  SPIRIT_HEALER_NPC_ID,
+};
 
 export const QUESTS: Record<string, QuestDef> = {
   ...ZONE1_QUESTS,
@@ -480,6 +501,7 @@ export const QUESTS: Record<string, QuestDef> = {
   ...FARSHORE_QUESTS,
   ...PROVING_SHORE_QUESTS,
   ...IGNIVAR_RAID_LORE_QUESTS,
+  ...HUB_PRACTICE_QUESTS,
 };
 
 export const QUEST_ORDER: string[] = [
@@ -500,6 +522,7 @@ export const QUEST_ORDER: string[] = [
   ...FARSHORE_QUEST_ORDER,
   ...PROVING_SHORE_QUEST_ORDER,
   ...IGNIVAR_RAID_LORE_QUEST_ORDER,
+  ...HUB_PRACTICE_QUEST_ORDER,
 ];
 
 // The Book of Deeds catalog (content/deeds.ts) is deliberately NOT re-exported
@@ -562,6 +585,8 @@ export const CAMPS: CampDef[] = [
   // private streams (mob/idle_rng.ts) move: a content append like this one
   // legitimately re-mints the parity goldens without touching a draw digest.
   ...PROVING_SHORE_CAMPS,
+  // The Eastbrook hub dummy is NOT a camp: it spawns with its sparring master
+  // after the player (sim/hub_practice.ts), so it consumes only trailing ids.
 ];
 
 // Escort quest runs (src/sim/escort.ts): defs authored per realm, merged here

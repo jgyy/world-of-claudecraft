@@ -330,8 +330,8 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     // Soul Rend marks pick (the rng.int callout) + Deathless Rage interrupt self-stun.
     expect(chats.some((e) => e.text === 'Your spirit belongs to me')).toBe(true);
     expect(auras.some((e) => e.name === 'Deathless Rage Interrupted')).toBe(true);
-    // Phase 3: The King's Wrath, a Bone Storm (its whirl, a Bone Slam, the
-    // mid-storm spike), and The Crown Endures enrage.
+    // Phase 3: The King's Wrath, a Bone Storm (its whirl and a Bone Slam; no
+    // spike lands while he storms), and The Crown Endures enrage.
     expect(auras.some((e) => e.name === "King's Wrath")).toBe(true);
     expect(auras.some((e) => e.name === 'Bone Storm')).toBe(true);
     expect(auras.some((e) => e.name === 'The Crown Endures')).toBe(true);
@@ -339,8 +339,8 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     // impaled and freed when their spikes died, and the eruption burst then burned.
     expect(n.spikeIds.length).toBe(2);
     expect(auras.some((e) => e.name === 'Dread Curse')).toBe(true);
-    // Two from the forced slice 1 cast, two more from the mid-storm spike.
-    expect(auras.filter((e) => e.name === 'Impaled').length).toBe(4);
+    // Two from the forced slice 1 cast; the storm spikes nobody.
+    expect(auras.filter((e) => e.name === 'Impaled').length).toBe(2);
     const callouts = ev.filter((e) => e.type === 'nythraxisCallout') as Array<{ call: string }>;
     expect(callouts.some((e) => e.call === 'youAreImpaled')).toBe(true);
     expect(callouts.some((e) => e.call === 'spikeBroken')).toBe(true);
@@ -348,11 +348,14 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     expect(damage.some((e) => e.ability === 'Bone Spike')).toBe(true);
     expect(damage.some((e) => e.ability === 'Grave Eruption')).toBe(true);
     expect(damage.some((e) => e.ability === 'Grave Flame')).toBe(true);
-    // Slice 2: Soulfire burned the stacked mages after the Soul Rend detonation,
-    // Gravefire ran at the mages, and the sigil flared and was bound.
-    expect(damage.some((e) => e.ability === 'Soulfire')).toBe(true);
-    expect(damage.some((e) => e.ability === 'Gravefire')).toBe(true);
-    expect(callouts.some((e) => e.call === 'gravefireTarget')).toBe(true);
+    // Slice 2: the Soul Rend detonation left no fire (Soulfire retired in
+    // v0.42.2, so no Soulfire tick may appear in the trace), and the sigil
+    // flared beside the boss and was bound.
+    expect(damage.some((e) => e.ability === 'Soulfire')).toBe(false);
+    // Gravefire retired in v0.42.2: the due timer in the scenario lights no
+    // line, so no Gravefire tick and no target callout may appear.
+    expect(damage.some((e) => e.ability === 'Gravefire')).toBe(false);
+    expect(callouts.some((e) => e.call === 'gravefireTarget')).toBe(false);
     expect(callouts.some((e) => e.call === 'sigilAppears')).toBe(true);
     expect(callouts.some((e) => e.call === 'sigilBound')).toBe(true);
     expect(callouts.some((e) => e.call === 'kingsWrath')).toBe(true);
@@ -788,12 +791,11 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     const pid = (rec.sim as any).playerId as number;
     const meta = (rec.sim as any).players.get(pid);
 
-    // All five plants landed, in drive order, and each started the flavor
-    // cast. The second one is the load-bearing half of the busy gate (it only
-    // lands because the drive waits out the first cast); the third is the
-    // knobbed plant on the freed bed; the fourth is the tier-3 barley at the
-    // Thornpeak patch; the fifth is the Phase 8 ready-notice beat back on the
-    // freed northern bed.
+    // All five plants landed, in drive order, each instantly (no cast). The
+    // second lands inside the tick window the drive still keeps between
+    // plants; the third is the knobbed plant on the freed bed; the fourth is
+    // the tier-3 barley at the Thornpeak patch; the fifth is the Phase 8
+    // ready-notice beat back on the freed northern bed.
     expect(ev.filter((e) => e.type === 'farmPlanted').map((e) => e.bedId)).toEqual([
       'bed_eastbrook_1',
       'bed_eastbrook_2',
@@ -811,14 +813,20 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
       'bed_eastbrook_2',
       'bed_thornpeak_1',
     ]);
-    // One flavor cast per plant, composed from the beats rather than a bare
-    // literal: the five scripted plants, one per padding cycle, the golden-win
-    // plant, the final padding cycle, and the paying barley.
+    // One farmPlanted per plant and NO cast at all (the farming-tools report
+    // retired the flavor cast: planting is instant), composed from the beats
+    // rather than a bare literal: the five scripted plants, one per padding
+    // cycle, the golden-win plant, the final padding cycle, and the paying
+    // barley.
     const PLANTS = 5 + FARM_GOLDEN_PADDING_CYCLES + 1 + 1 + 1;
     expect(
-      ev.filter((e) => e.type === 'castStart' && e.ability === 'farming'),
-      'every plant started the FARMING_CAST_ID flavor cast',
+      ev.filter((e) => e.type === 'farmPlanted'),
+      'every plant landed as a farmPlanted event',
     ).toHaveLength(PLANTS);
+    expect(
+      ev.filter((e) => e.type === 'castStart' && e.ability === 'farming'),
+      'no plant starts a cast any more',
+    ).toHaveLength(0);
     expect(PLANTS, 'the session plants 44 crops').toBe(44);
 
     // THE READY NOTICE (Phase 8): the fifth plant is left standing across two
@@ -1315,11 +1323,13 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     expect(refused.inventory).toHaveLength(17);
     expect(rows(refused).filter(([id]) => id === 'rusty_dagger')).toHaveLength(15);
     expect(refused.bank.inventory).toEqual([{ itemId: 'rusty_dagger', count: 1 }]);
-    // Exactly one refusal in the whole run: the step-5 withdrawal. A second one
-    // would mean an arm meant to succeed did not.
+    // Exactly one pool-honest refusal in the whole run: the step-5 withdrawal.
+    // A second one would mean an arm meant to succeed did not.
     const ev = rec.allEvents as Ev[];
-    const full = ev.filter((e) => e.type === 'error' && e.text === 'Your bags are full.');
-    expect(full).toHaveLength(1);
+    const onlyMaterials = ev.filter(
+      (e) => e.type === 'error' && e.text === 'Only materials fit in the space left in your bags.',
+    );
+    expect(onlyMaterials).toHaveLength(1);
 
     // Checkpoint 2, the allocation-order discriminator. 3 non-material slots
     // and 13 material slots is 16 carried, exactly the general budget, so a
@@ -1797,7 +1807,7 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     expect(notes.encounterReset).toBe(true);
   });
 
-  it('heroic_five_man_clear: one shared heroic claim, the variant swap and appended draws, marks and the lockout to every participant', () => {
+  it('heroic_five_man_clear: one shared claim, one equipment drop, marks and the lockout to every participant', () => {
     const rec = run('heroic_five_man_clear');
     const sim = rec.sim as any;
     const partyPids = rec.notes.partyPids as number[];
@@ -1818,33 +1828,18 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     const droppedIds = ((boss.loot?.items ?? []) as any[]).map((s) => s.itemId);
     expect(droppedIds.length).toBeGreaterThan(0);
 
-    // ARM 1, the heroicItem swap: at least one drop came back as its heroic_
-    // copy of a BASE-table id, which is the arm the raid claim cannot reach
-    // (its variants read the raid tier instead). The base id is asserted too,
-    // so the swap is proven against the table rather than against a prefix.
-    const baseTableIds = new Set(
-      ((MOBS[HEROIC_FIVE_MAN_BOSS_ID].loot ?? []) as any[])
-        .map((e) => e.itemId)
-        .filter((id): id is string => typeof id === 'string'),
+    // The combined Heroic partition replaces the base equipment rolls.
+    // Exactly one item must come from that slot; recipes/bags/mounts are extra.
+    const gear = droppedIds.filter((id) =>
+      ['armor', 'weapon', 'held_offhand'].includes(ITEMS[id]?.kind),
     );
-    const swapped = droppedIds.filter(
-      (id) => id.startsWith('heroic_') && baseTableIds.has(id.slice('heroic_'.length)),
+    expect(gear).toHaveLength(1);
+    const heroicGearIds = new Set(
+      HEROIC_BOSS_LOOT[HEROIC_FIVE_MAN_BOSS_ID]
+        .filter((entry) => entry.rollGroup === 'korzul_heroic')
+        .map((entry) => entry.itemId),
     );
-    expect(swapped.length, `no variant swap in ${droppedIds.join(',')}`).toBeGreaterThan(0);
-    for (const id of swapped) {
-      expect(ITEMS[id]?.heroicOf, id).toBe(id.slice('heroic_'.length));
-    }
-
-    // ARM 2, the APPENDED heroic-only table: at least one drop came from
-    // HEROIC_BOSS_LOOT rather than the base walk, which is the stream position
-    // a base-table tail append shifts.
-    const heroicOnlyIds = new Set(
-      (HEROIC_BOSS_LOOT[HEROIC_FIVE_MAN_BOSS_ID] ?? []).map((e) => e.itemId),
-    );
-    expect(
-      droppedIds.filter((id) => heroicOnlyIds.has(id)).length,
-      `no appended heroic drop in ${droppedIds.join(',')}`,
-    ).toBeGreaterThan(0);
+    expect(heroicGearIds.has(gear[0])).toBe(true);
 
     // ARM 3, awardHeroicMarks on a FIVE-MAN: the tuning's marksPerParticipant
     // to EVERY participant (the raid pays 3, so the number itself says which
@@ -1912,5 +1907,13 @@ describe('coverage: each scenario fires its subsystem', { timeout: 90_000 }, () 
     // ...and the stamina family it replaced is gone entirely, so the strip
     // shed the aura rather than leaving a stale second one behind.
     expect((p.auras as any[]).filter((a) => a.kind === 'buff_sta')).toEqual([]);
+  });
+
+  it('bop_party_trade_eligibility: a leaving drop-mate stays on the awarded copy', () => {
+    const rec = run('bop_party_trade_eligibility');
+    expect(rec.notes.eligibleCharacterIds).toEqual([101, 102]);
+    const alice = [...rec.sim.ctx.players.values()].find((meta) => meta.name === 'AliceParity');
+    const awarded = alice?.inventory.find((slot) => slot.itemId === 'sigil_anvil_helmet');
+    expect(awarded?.instance?.partyTrade?.eligibleIds).toEqual([101, 102]);
   });
 });

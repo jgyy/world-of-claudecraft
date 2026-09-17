@@ -89,6 +89,8 @@ export const table: DeedLocaleTable = {
   },
   chr_nightbloom_first_cast: {
     desc: 'Zlow rybe w wodach Nightbloomu.',
+
+    name: 'Fala na Księżycowym Źródle',
   },
   chr_wraithwood_gatherer: {
     name: 'Zbiory pod koronami',
@@ -186,6 +188,8 @@ export const table: DeedLocaleTable = {
   prog_herbalism_100: { name: 'Mistrz Łąk', desc: 'Osiągnij 100 biegłości w Zielarstwie.' },
   prog_master_gatherer: {
     name: 'Mistrz Zbieractwa',
+
+    desc: 'Osiągnij biegłość 100 w dowolnych trzech profesjach zbierackich.',
   },
   prog_first_craft: { name: 'Własnoręczna Robota', desc: 'Ukończ swój pierwszy udany wyrób.' },
   prog_craft_specialist: {
@@ -300,6 +304,8 @@ export const table: DeedLocaleTable = {
   },
   dgn_sanctum_speed: {
     desc: 'Pokonaj Korzula Grobowego Żmija w ciągu 15 minut od zajęcia Sanktuarium Grobowego Żmija przez twoją drużynę.',
+
+    name: 'Bieg przez Sanktuarium',
   },
   dgn_nythraxis_gravebreaker: {
     name: 'Przed Królem Nie Klękamy',
@@ -338,7 +344,7 @@ export const table: DeedLocaleTable = {
     desc: 'Oczyść Utopioną Litanię na poziomie heroicznym.',
   },
   dlv_lore_journal: {
-    name: 'Marginalia',
+    name: 'Notatki na marginesie',
     desc: 'Odblokuj wszystkie pięć wpisów w dzienniku wypraw.',
   },
   dlv_companion_max: {
@@ -377,7 +383,6 @@ export const table: DeedLocaleTable = {
   },
   chr_vale_chapter_ii: {
     name: 'Kronika Doliny, rozdział II',
-    desc: 'Ukończ drugi rozdział kroniki Saula: wytęp bandytów, murloki i kopalniane szkodniki, rozegraj mecz na Maciorowym Błoniu i staw czoła Relikwiarzowi.',
   },
   chr_vale_chapter_iii: {
     name: 'Kronika Doliny',
@@ -395,7 +400,6 @@ export const table: DeedLocaleTable = {
   chr_vale_packbreaker: { name: 'Pogromca Watahy', desc: 'Zabij 3 Leśne Wilki w ciągu 10 sekund.' },
   chr_vale_cup_debut: {
     name: 'Pretendent do Miedzianego Wiadra',
-    desc: 'Wyjdź na boisko i dotknij piłki w meczu Pucharu Doliny na Maciorowym Błoniu.',
   },
   chr_vale_rares: {
     name: 'Zgrozy Doliny',
@@ -441,10 +445,12 @@ export const table: DeedLocaleTable = {
   chr_peaks_chapter_iii: {
     name: 'Kronika Ciernistego Szczytu',
     title: 'z Ciernistego Szczytu',
+
+    desc: 'Poznaj całą historię gór: Związani z Potomstwem rozbici, Sanktuarium uciszone, Budzący się Szczyt powalony, a każdy nazwany postrach urwisk pokonany.',
   },
   chr_peaks_sparring: {
     name: 'Musztra na murach',
-    desc: 'Zadaj łącznie 1000 punktów obrażeń manekinowi treningowemu nad Wysoką Strażnicą.',
+    desc: 'Zadaj łącznie 1000 punktów obrażeń manekinowi treningowemu.',
   },
   chr_peaks_glimmer_cast: {
     name: 'Zimna woda, zimniejsze światło',
@@ -562,9 +568,9 @@ export const table: DeedLocaleTable = {
     desc: 'Osiągnij 1750 punktów rankingowych w arenowej lidze 1v1.',
   },
   pvp_arena_1v1_1900: {
-    name: 'Gladiator',
+    name: 'Gladiator areny',
     desc: 'Osiągnij 1900 punktów rankingowych w arenowej lidze 1v1.',
-    title: 'Gladiator',
+    title: 'Gladiator areny',
   },
   pvp_arena_2v2_1600: {
     name: 'W dwójce siła',
@@ -585,66 +591,51 @@ export const table: DeedLocaleTable = {
   },
   pvp_vcup_first_match: {
     name: 'Buty na murawie',
-    desc: 'Rozegraj pełny mecz Pucharu Doliny na Maciorowym Błoniu, wygrany czy przegrany.',
   },
-  pvp_vcup_first_win: { name: 'Pierwsze trofeum', desc: 'Wygraj rankingowy mecz Pucharu Doliny.' },
+  pvp_vcup_first_win: { name: 'Pierwsze trofeum' },
   pvp_vcup_wins_10: {
     name: 'Wyjadacz dziczego balonu',
-    desc: 'Wygraj 10 rankingowych meczów Pucharu Doliny.',
   },
   pvp_vcup_wins_25: {
     name: 'Legenda dziczego balonu',
-    desc: 'Wygraj 25 rankingowych meczów Pucharu Doliny.',
     title: 'Legenda dziczego balonu',
   },
   pvp_vcup_first_goal: {
     name: 'Na listę strzelców',
-    desc: 'Zdobądź gola w rankingowym meczu Pucharu Doliny.',
   },
   pvp_vcup_hat_trick: {
     name: 'Bohater hat-tricka',
-    desc: 'Zdobądź trzy gole w jednym rankingowym meczu Pucharu Doliny, w lidze 3v3 lub większej.',
   },
   pvp_vcup_golden_goal: {
     name: 'Złota chwila',
-    desc: 'Strzel złotego gola, który rozstrzyga rankingowy mecz Pucharu Doliny.',
   },
   pvp_vcup_first_save: {
     name: 'Pewne ręce',
-    desc: 'Obroń strzał jako bramkarz w rankingowym meczu Pucharu Doliny.',
   },
   pvp_vcup_clean_sheet: {
     name: 'Mur nie do przebicia',
-    desc: 'Wygraj rankingowy mecz Pucharu Doliny jako bramkarz, nie wpuszczając ani jednego gola.',
   },
   pvp_vcup_guild_win: {
     name: 'Za sztandar!',
-    desc: 'Wygraj rankingowy mecz Pucharu Doliny, grając pod sztandarem swojej gildii.',
   },
   pvp_fiesta_first_bout: {
     name: 'Nieproszony gość',
-    desc: 'Stocz pełne starcie Fiesty 2v2, wygrane czy przegrane.',
   },
-  pvp_fiesta_first_win: { name: 'Dusza Fiesty', desc: 'Wygraj starcie Fiesty 2v2.' },
+  pvp_fiesta_first_win: { name: 'Dusza Fiesty' },
   pvp_fiesta_double: {
     name: 'Podwójny kłopot',
-    desc: 'Zalicz dwa powalenia w Fieście w ciągu czterech sekund.',
   },
   pvp_fiesta_shutdown: {
     name: 'Koniec imprezy',
-    desc: 'Powal w Fieście przeciwnika, który ma serię trzech lub więcej powaleń.',
   },
   pvp_fiesta_full_build: {
     name: 'Strój na okazję',
-    desc: 'Wygraj starcie Fiesty, mając zatwierdzone ulepszenie z każdej z trzech fal.',
   },
   pvp_fiesta_powerups: {
     name: 'Po jednym z każdego',
-    desc: 'Podnieś przynajmniej raz każde z czterech wzmocnień ringu: Demona Prędkości, Kolosa, Księżycowe Buty i Berserkera.',
   },
   pvp_fiesta_five_kills: {
     name: 'Cała impreza na barkach',
-    desc: 'Zalicz pięć powaleń w jednym starciu Fiesty.',
   },
   soc_first_party: { name: 'Razem raźniej', desc: 'Dołącz do drużyny z innym graczem.' },
   soc_full_house: { name: 'Pełen skład', desc: 'Ukończ loch w pełnej, pięcioosobowej drużynie.' },
@@ -1040,27 +1031,113 @@ export const table: DeedLocaleTable = {
   },
   dgn_ignivar: {
     name: 'Herold Upada',
-    desc: 'Pokonaj Ignivar, Herald of the Last Flame, w Crucible of the Last Spring.',
+    desc: 'Pokonaj Ignivara, Herolda Ostatniego Płomienia, w Tyglu Ostatniego Źródła.',
   },
   dgn_ignivar_heroic: {
     name: 'Heroiczny: Herold Upada',
-    desc: 'Pokonaj Ignivar, Herald of the Last Flame, na heroicznym poziomie trudności.',
+    desc: 'Pokonaj Ignivara, Herolda Ostatniego Płomienia, na heroicznym poziomie trudności.',
   },
   dgn_varkhul: {
     name: 'Kuźnia Stygnie',
-    desc: 'Pokonaj Varkhul, Forgefather of the Last Flame, w Inner Crucible.',
+    desc: 'Pokonaj Varkhula, Ojca Kuźni Ostatniego Płomienia, w Wewnętrznym Tyglu.',
   },
   dgn_varkhul_heroic: {
     name: 'Heroiczna: Kuźnia Stygnie',
-    desc: 'Pokonaj Varkhul, Forgefather of the Last Flame, na heroicznym poziomie trudności.',
+    desc: 'Pokonaj Varkhula, Ojca Kuźni Ostatniego Płomienia, na heroicznym poziomie trudności.',
   },
   dgn_varkhul_flawless: {
     name: 'Ani Jednej Zgasłej Iskry',
-    desc: 'Pokonaj Varkhul, Forgefather of the Last Flame, na heroicznym poziomie trudności tak, by ani jeden rajdowiec nie zginął.',
+    desc: 'Pokonaj Varkhula, Ojca Kuźni Ostatniego Płomienia, na heroicznym poziomie trudności tak, by ani jeden rajdowiec nie zginął.',
     title: 'Niespalony',
   },
   col_set_bramblehide: {
     name: 'Cierniowa Skóra Rootsa',
     desc: 'Odkryj każdą część Cierniowej Skóry Rootsa.',
+  },
+  prog_jewelcrafting_rare: {
+    desc: 'Wykonaj swój pierwszy przedmiot rzadkiej jakości w Jubilerstwie.',
+
+    name: 'Wypolerowane do blasku',
+  },
+  prog_jewelcrafting_50: {
+    desc: 'Osiągnij 50 umiejętności w Jubilerstwie.',
+    name: 'Faset i filigran',
+  },
+  prog_grandmaster_jewelcrafting: {
+    desc: 'Osiągnij 125 umiejętności w Jubilerstwie, sam szczyt tego rzemiosła.',
+
+    name: 'Arcymistrzowskie jubilerstwo',
+    title: 'Arcymistrzowskie jubilerstwo',
+  },
+  prog_inscription_rare: {
+    desc: 'Wykonaj swój pierwszy przedmiot rzadkiej jakości w Inskrypcji.',
+
+    name: 'Zapisane szlachetnym atramentem',
+  },
+  prog_inscription_50: { desc: 'Osiągnij 50 umiejętności w Inskrypcji.', name: 'Pióro i pigment' },
+  prog_grandmaster_inscription: {
+    desc: 'Osiągnij 125 umiejętności w Inskrypcji, sam szczyt tego rzemiosła.',
+
+    name: 'Arcymistrzowska inskrypcja',
+    title: 'Arcymistrzowska inskrypcja',
+  },
+  col_deepest_cast: {
+    desc: 'Zdobądź wędkę Clockreel, jedyną, która sięga do najgłębszych połowów.',
+
+    name: 'Najgłębszy rzut',
+  },
+  prog_first_planting: {
+    desc: 'Posadź pierwszą uprawę na grządce ogrodowej.',
+    name: 'Od siewu się zaczyna',
+  },
+  chr_vale_first_harvest: {
+    desc: 'Zbierz pierwszą bujną uprawę z grządki w Dolinie Eastbrook.',
+
+    name: 'Pierwsze plony doliny',
+  },
+  chr_marsh_first_harvest: {
+    desc: 'Zbierz pierwszą bujną uprawę z grządki na Mokrzawym Bagnie.',
+
+    name: 'Pędy w torfie',
+  },
+  chr_peaks_first_harvest: {
+    desc: 'Zbierz pierwszą bujną uprawę z grządki na Wyżynach Ciernistego Szczytu.',
+
+    name: 'Uprawa wśród urwisk',
+  },
+  chr_evergarden_first_harvest: {
+    desc: 'Zbierz pierwszą bujną uprawę z grządki w Evergardenie.',
+
+    name: 'Działka w raju',
+  },
+  col_golden_harvest: {
+    desc: 'Zbierz złoty plon i pozwól, by usłyszała o nim cała strefa.',
+
+    name: 'Złote żniwa',
+  },
+  prog_farming_100: {
+    desc: 'Osiągnij biegłość 100 w Rolnictwie.',
+    name: 'Mistrz żniw',
+    title: 'Mistrz żniw',
+  },
+  col_farm_roster: {
+    desc: 'Zbierz każdą uprawę, którą rodzą cztery ogrody.',
+
+    name: 'Każda bruzda wypełniona',
+  },
+  prog_field_to_feast: {
+    desc: 'Ugotuj szczytową ucztę, stół, przy którym je cały rajd.',
+
+    name: 'Od pola do uczty',
+  },
+  prog_legendmaker: {
+    desc: 'Podnieś dzieło Perfected do rangi legendy za pomocą Czynu Tworzenia i nadaj mu własną nazwę.',
+
+    name: 'Twórca legend',
+  },
+  hid_forgebreaker: {
+    desc: 'Samodzielnie ukształtuj Łamacza Kuźni i wróć do Maelin z gotowym młotem.',
+
+    name: 'Źródło bez kajdan',
   },
 };

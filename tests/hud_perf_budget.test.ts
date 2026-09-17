@@ -115,6 +115,8 @@ import {
   type ActionBarWorldInput,
   createActionBarView,
 } from '../src/ui/hud/action_bar/action_bar_view';
+import { AURA_TRACKS } from '../src/ui/hud/aura_tracks/aura_track_descriptors';
+import { createAuraTrackView } from '../src/ui/hud/aura_tracks/aura_track_view';
 import { createTargetDotsView } from '../src/ui/hud/target_dots';
 import { makeWriterFacet, type PainterHostWriters } from '../src/ui/painter_host';
 import type { SwingTimerState } from '../src/ui/swing_timer';
@@ -563,6 +565,17 @@ interface ScannedPainter {
 // pooled node, both at build; fct also forces ONE documented offsetWidth reflow to restart
 // the float animation on a recycled node.
 const HOT_PAINTERS: ReadonlyArray<ScannedPainter> = [
+  { file: 'micro_menu_state_painter.ts', allow: {}, reflowAllow: {} },
+  // Both writes are build-time. The .className is the base class stamped on a tick
+  // as it is MINTED into the pool (the pool only grows to the high-water tick
+  // count), and the .setAttribute is the one aria-hidden on the ring root in
+  // buildRoot, which runs once at HUD construction. Every state write after that
+  // (angle, colour, lit, present) is facet-routed.
+  {
+    file: 'reticle_ticks_painter.ts',
+    allow: { '.className': 1, '.setAttribute': 1 },
+    reflowAllow: {},
+  },
   { file: 'xp_bar_painter.ts', allow: {}, reflowAllow: {} },
   { file: 'swing_timer_painter.ts', allow: {}, reflowAllow: {} },
   { file: 'proc_overlay_painter.ts', allow: {}, reflowAllow: {} },
@@ -590,6 +603,12 @@ const HOT_PAINTERS: ReadonlyArray<ScannedPainter> = [
     allow: { '.innerHTML': 1, '.setAttribute': 2 },
     reflowAllow: {},
   },
+  // The one painter behind all six aura tracks. Its skeleton (a fixed pool of
+  // AURA_TRACK_ROW_CAP rows plus the overflow line) is built in ONE constructor
+  // innerHTML write and never touched again: every refresh, including the two
+  // accessible-name attributes, routes through the elided facet, which is what
+  // lets six instances share the per-frame band the aura strips run on.
+  { file: 'hud/aura_tracks/aura_track_painter.ts', allow: { '.innerHTML': 1 }, reflowAllow: {} },
   { file: 'party_frames_painter.ts', allow: {}, reflowAllow: {} },
   // The portrait rest badge. Cold by cadence (the caller gates it on the
   // resting flag changing, and the language fan-out clears that memo so a
@@ -697,6 +716,14 @@ const HOT_PAINTERS: ReadonlyArray<ScannedPainter> = [
     allow: { '.innerHTML': 1, '.setAttribute': 3, '.removeAttribute': 3 },
     reflowAllow: {},
   },
+  // recipe_tracker is the same painter contract: ONE constructor innerHTML
+  // write for the whole skeleton (block pool times reagent pool), every refresh
+  // write facet-routed. No chip mode (hidden on touch), so no ARIA swap pairs.
+  {
+    file: 'recipe_tracker_painter.ts',
+    allow: { '.innerHTML': 1 },
+    reflowAllow: {},
+  },
   // The Thornhollow Fields scoreboard rebuilds its skeleton in ONE innerHTML write
   // only when the STRUCTURAL sig changes (new match / roster change). Every
   // per-frame write is facet-routed.
@@ -787,6 +814,9 @@ const CANVAS_PAINTERS: ReadonlyArray<ScannedPainter> = [
     allow: {},
     reflowAllow: { getComputedStyle: 1 },
   },
+  // the minimap rim day/night dial: canvas-only, self-throttled to ~1Hz off the
+  // caller's clock; like minimap it caches its one --color-daynight-* resolve
+  { file: 'day_night_dial_painter.ts', allow: {}, reflowAllow: { getComputedStyle: 1 } },
   { file: 'dungeon_map_painter.ts', allow: {}, reflowAllow: { getComputedStyle: 1 } },
   { file: 'lastkeep_map_painter.ts', allow: {}, reflowAllow: { getComputedStyle: 1 } },
   { file: 'map_window_painter.ts', allow: {}, reflowAllow: { getComputedStyle: 1 } },
@@ -1101,6 +1131,7 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
     ],
   },
   { file: 'reliquary_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
+  { file: 'hud/cosmetics/cosmetics_window.ts', reflowAllow: {}, driverAllow: {} },
   { file: 'dungeon_finder_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
   // The lockpick clock: a 100ms tick that repaints the remaining-time bar for the duration
   // of one attempt, generation-guarded and cleared on stop. The fastest module-owned driver
@@ -1175,6 +1206,15 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
   { file: 'hud/vendor/train_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
   { file: 'hud/vendor/unbind_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
   { file: 'hud/vendor/vendor_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
+  // The Loot Explorer body preserves scroll across an explicit body rebuild,
+  // the same read-before/write-after shape as the vendor and spellbook
+  // windows. It runs only when tab/search/filter state changes the panel
+  // contents, so the long source list stays anchored under the player.
+  {
+    file: 'hud/loot_explorer/loot_explorer_window.ts',
+    reflowAllow: { '.scrollTop': 2 },
+    driverAllow: {},
+  },
   {
     file: 'hud/vendor/warfare_vendor_window.ts',
     reflowAllow: { '.scrollTop': 2 },
@@ -1182,11 +1222,15 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
   },
   // A body/wrap rect pair, read once when the mail body is laid out to fit.
   { file: 'mailbox_window.ts', reflowAllow: { '.getBoundingClientRect': 2 }, driverAllow: {} },
-  // The trigger + popover rect pair that positions a filter popover, plus the two border
-  // widths its height clamp needs. Per open, not per row.
+  // The trigger + popover rect pair that positions a filter popover, the scrolling
+  // `.mkt-controls` rect the clamp intersects with (that column clips in its own right,
+  // and a menu placed against the window alone rendered above its top edge), plus the
+  // two border widths its height clamp needs and the controls column's own overflow
+  // (mobile gives that scroller up, so there it must not constrain the menu at all).
+  // Per open, not per row.
   {
     file: 'market_window.ts',
-    reflowAllow: { '.getBoundingClientRect': 2, getComputedStyle: 2, '.scrollTop': 2 },
+    reflowAllow: { '.getBoundingClientRect': 3, getComputedStyle: 3, '.scrollTop': 2 },
     driverAllow: {},
   },
   // The bug-report submit path schedules its screenshot capture off the critical
@@ -1231,6 +1275,20 @@ const COLD_PAINTER_ALLOWANCES: ReadonlyArray<ColdPainter> = [
   // countdown bucket change, once a second inside the anti-snipe window, so
   // without the pair the browse list yanks itself to the top while it is read.
   { file: 'woc_market_window.ts', reflowAllow: { '.scrollTop': 2 }, driverAllow: {} },
+  // The hub practice coach's mobile-control visibility probe: on a step that must
+  // glow a mobile-only control (the Meters entry under Actions > More, or the
+  // Spellbook fallback when the taught ability is not on the bar), it walks up to
+  // three fixed candidate ids (the control, then its More tray, then the menu
+  // anchor) and reads ONE rect per candidate to find the first one actually
+  // rendered. Entered at most once per `update()` call, itself throttled to a
+  // 250ms cadence (CHECK_INTERVAL_MS) and short-circuited to nothing while the
+  // player is outside the hub practice yard, so this never runs on the render or
+  // sim frame budget.
+  {
+    file: 'hud/practice/hub_lesson_controller.ts',
+    reflowAllow: { '.getClientRects': 1 },
+    driverAllow: {},
+  },
 ];
 
 function stripComments(src: string): string {
@@ -3088,6 +3146,54 @@ describe('hud_perf_budget ARM 2: per-frame allocation budget (Node, npm test)', 
       assertAllocationStable(() => tick().rows, 64, 'target_dots_view rows');
     }).not.toThrow();
   });
+  // The aura tracks ride the same per-frame band as the strips above, and SIX of
+  // them tick every frame, so a container minted per tick is six allocations per
+  // frame rather than one. The core claims its state, its row array and every row
+  // record are reused; this is what makes that claim load-bearing instead of
+  // hand-checked. Both the self scan and the ally scan run (the steady ally
+  // carries a row on both tracks), and the points track is driven too, because
+  // its peak map and the live-key set it prunes with are the per-row state that
+  // could grow.
+  for (const trackId of ['friendly', 'shields'] as const) {
+    it(`aura_track_view reuses its state container every tick (${trackId})`, () => {
+      const descriptor = AURA_TRACKS.find((t) => t.id === trackId);
+      if (!descriptor) throw new Error(`no such track: ${trackId}`);
+      const view = createAuraTrackView(descriptor, {
+        isOwn: () => true,
+        isMode: () => false,
+        auraName: (a) => a.id,
+        unitName: (e) => e.name,
+        iconKey: (a) => a.id,
+      });
+      const auras = [
+        {
+          id: trackId === 'shields' ? 'power_word_shield' : 'rejuvenation',
+          name: 'A',
+          kind: trackId === 'shields' ? 'absorb' : 'hot',
+          remaining: 8,
+          duration: 12,
+          sourceId: 1,
+          value: 600,
+        },
+      ];
+      const player = { id: 1, name: 'P', dead: false, auras };
+      const ally = { id: 2, name: 'B', dead: false, auras };
+      const allies = [ally];
+      const input = { player, allies, enabled: true, includeModes: true };
+      expect(() => {
+        assertAllocationStable(
+          () => view.tick(input),
+          64,
+          `aura_track_view (${trackId}) container`,
+        );
+        assertAllocationStable(
+          () => view.tick(input).rows,
+          64,
+          `aura_track_view (${trackId}) rows`,
+        );
+      }).not.toThrow();
+    });
+  }
 });
 
 // --------------------------------------------------------------------------

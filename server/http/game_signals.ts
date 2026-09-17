@@ -168,9 +168,15 @@ export const GUILD_BANK_INCIDENTS = [
   // creation commits the guild and fee in one transaction, so a new sample is
   // a single-sample mixed-release or invariant defect and remains page-worthy.
   'create_fee_unpaid',
+  // The dispatch-time unsettled gate (server/guild_bank_settle_gate.ts)
+  // refused a withdraw, gold withdraw, or rung purchase that would have
+  // consumed another session's not-yet-durable work, and flushed that
+  // session instead. Ordinary two-officer concurrency, like
+  // escrow_refused_retry before it: watch its RATE, never its presence.
+  'unsettled_refused',
 ] as const;
 
-/** One of the fixed eleven guild-bank incident kinds. */
+/** One of the fixed twelve guild-bank incident kinds. */
 export type GuildBankIncident = (typeof GUILD_BANK_INCIDENTS)[number];
 
 /** The marketplace escrow-queue outcomes (the per-character save FIFO's
@@ -219,11 +225,16 @@ export type WocEscrowQueueOutcome = (typeof WOC_ESCROW_QUEUE_OUTCOMES)[number];
  *   rejected, so the audit trail (scripts/bank_audit.mjs) has a hole its
  *   replay cannot see: that character's vault will reconcile as a permanent
  *   ledger_state_mismatch and a real investigation would come up clean.
+ * - `row_bound_exceeded`: a vault command whose pre-mutation ledger row bound
+ *   (server/vault_ledger_row_bound.ts) exceeds what the account row burst can
+ *   ever reserve, refused BEFORE mutation with the busy line. Nothing is lost,
+ *   but the refusal repeats deterministically for that inventory, so a rising
+ *   rate is a player stuck behind a sweep the guard cannot admit.
  * This closed set IS the kind label's whole vocabulary; it never grows
  * per-player (character id is NEVER a label; the log line beside each
  * increment carries the identifying detail).
  */
-export const VAULT_LEDGER_INCIDENTS = ['ledger_write_failed'] as const;
+export const VAULT_LEDGER_INCIDENTS = ['ledger_write_failed', 'row_bound_exceeded'] as const;
 
 /** One of the fixed vault-ledger incident kinds. */
 export type VaultLedgerIncident = (typeof VAULT_LEDGER_INCIDENTS)[number];

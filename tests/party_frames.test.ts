@@ -6,9 +6,11 @@ import {
   DEFAULT_PARTY_FRAME_DISPLAY,
   PARTY_FRAME_RANGE_YD,
   partyFrameAuraIsRelevant,
+  partyFrameHeaderState,
   partyFrameHealthText,
   partyFrameSignature,
   prioritizePartyFrameAuras,
+  readPartyFrameDisplayConfig,
   resolvePartyFrameStyle,
   selectPartyFrameMembers,
 } from '../src/ui/party_frames';
@@ -38,6 +40,14 @@ describe('party frame style resolution', () => {
     expect(resolvePartyFrameStyle(0, true)).toBe('raid');
     expect(resolvePartyFrameStyle(1, true)).toBe('classic');
     expect(resolvePartyFrameStyle(2, false)).toBe('raid');
+  });
+});
+
+describe('party frame header state', () => {
+  it('shows the member count and derives the disclosure state without DOM state', () => {
+    expect(partyFrameHeaderState(4, false)).toEqual({ visible: true, count: 4, collapsed: false });
+    expect(partyFrameHeaderState(4, true)).toEqual({ visible: true, count: 4, collapsed: true });
+    expect(partyFrameHeaderState(0, true)).toEqual({ visible: false, count: 0, collapsed: true });
   });
 });
 
@@ -194,6 +204,7 @@ describe('party frame health text and tactical information', () => {
     expect(partyFrameHealthText(75, 100, 1, format)).toBe('percent:0.75');
     expect(partyFrameHealthText(75, 100, 2, format)).toBe('number:75');
     expect(partyFrameHealthText(75, 100, 3, format)).toBe('number:75 / number:100');
+    expect(partyFrameHealthText(75, 100, 4, format)).toBe('number:75 / number:100 (percent:0.75)');
   });
 
   it('does not reveal Temporal Cascade target selection on party frames', () => {
@@ -228,6 +239,16 @@ describe('party frame signature (the per-frame short-circuit)', () => {
   it('is stable: the same party yields the same signature (so an unchanged party short-circuits)', () => {
     const pos = { x: 0, z: 0 };
     expect(partyFrameSignature(info(), 1, pos)).toBe(partyFrameSignature(info(), 1, pos));
+  });
+
+  it('changes when the selected party target changes so the raid halo repaints', () => {
+    const party = info();
+    const pos = { x: 0, z: 0 };
+    expect(
+      partyFrameSignature(party, 1, pos, undefined, DEFAULT_PARTY_FRAME_DISPLAY, undefined, 2),
+    ).not.toBe(
+      partyFrameSignature(party, 1, pos, undefined, DEFAULT_PARTY_FRAME_DISPLAY, undefined, 3),
+    );
   });
 
   it('skips the local player but encodes every other member + leader / raid / group', () => {
@@ -628,5 +649,40 @@ describe('party frame aura summary carries no flask marker', () => {
     // always ride, remaining always rides, and neg/poolPct are conditional on a
     // negative value and on Mending Current respectively (neither applies here).
     expect(Object.keys(summary).sort()).toEqual(['id', 'kind', 'remaining']);
+  });
+});
+
+describe('readPartyFrameDisplayConfig', () => {
+  it('falls back to the defaults before the settings store attaches', () => {
+    expect(readPartyFrameDisplayConfig(undefined)).toEqual(DEFAULT_PARTY_FRAME_DISPLAY);
+  });
+
+  it('keeps every default for a store whose keys are all missing', () => {
+    expect(readPartyFrameDisplayConfig({ get: () => undefined })).toEqual(
+      DEFAULT_PARTY_FRAME_DISPLAY,
+    );
+  });
+
+  it('reads every key from the store, rounding the choice values', () => {
+    const values: Record<string, number | boolean> = {
+      partyFrameShowSelf: true,
+      partyFrameShowResource: false,
+      partyFrameShowAbsorbs: true,
+      partyFrameShowAuras: false,
+      partyFrameShowPets: false,
+      partyFrameStyle: 2,
+      partyFrameHealthText: 4.2,
+      partyFrameSort: 1,
+    };
+    expect(readPartyFrameDisplayConfig({ get: (key) => values[key] })).toEqual({
+      showSelf: true,
+      showResource: false,
+      showAbsorbs: true,
+      showAuras: false,
+      showPets: false,
+      presentation: 2,
+      healthText: 4,
+      sort: 1,
+    });
   });
 });

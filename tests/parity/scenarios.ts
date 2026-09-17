@@ -48,18 +48,29 @@ import {
 } from '../../src/sim/ignivar_raid_ids';
 import { enterDungeon } from '../../src/sim/instances/dungeons';
 import { solveLockActions } from '../../src/sim/lockpick';
-import type { PendingLootRoll } from '../../src/sim/loot/loot_roll';
+import {
+  grantAwardedLootItem,
+  killSnapshotEligibility,
+  type PendingLootRoll,
+  rollLoot,
+} from '../../src/sim/loot/loot_roll';
 import { RIFT_MECHANIC_SPACING_SEC } from '../../src/sim/mob/mechanic_spacing';
-import { NYTHRAXIS_BONE_SPIKE_ID } from '../../src/sim/nythraxis_bone_spike';
+import {
+  NYTHRAXIS_BONE_SPIKE_HITS_NORMAL,
+  NYTHRAXIS_BONE_SPIKE_ID,
+} from '../../src/sim/nythraxis_bone_spike';
 import { NYTHRAXIS_GRAVE_ERUPTION_TELEGRAPH_SECONDS } from '../../src/sim/nythraxis_grave_eruption';
 import { PLAYER_BODY_RADIUS } from '../../src/sim/pathfind';
 import type { PlotState } from '../../src/sim/professions/farm_projection';
-import {
-  convertHusks,
-  FARM_PLANT_CAST_SEC,
-  harvestCrop,
-  plantCrop,
-} from '../../src/sim/professions/farming';
+import { convertHusks, harvestCrop, plantCrop } from '../../src/sim/professions/farming';
+
+// The 41-tick window the farming session used to spend riding out the plant
+// flavor cast (2 sec at DT plus one). The cast was retired by the farming-tools
+// report (planting is instant), but every "ride out the cast" beat below keeps
+// its window so the scenario's tick timeline, and every snapshot's tick, stays
+// exactly where the golden was minted.
+const FARM_PLANT_WINDOW_TICKS = 41;
+
 import { startFishing } from '../../src/sim/professions/fishing';
 import { gatherCastDurationSec, gatherNodeById } from '../../src/sim/professions/gathering';
 import {
@@ -2620,18 +2631,20 @@ function multiClassHeal(): Scenario {
       // A pet owned by the tank, so a mob holding threat on the PET (not the tank
       // directly) still counts the tank as aware via threatEntryMatchesEntity's
       // owner branch. Friendly + no threat of its own, so it is never an aware mob.
-      const pet = spawnMob(sim, 'forest_wolf', 5, 80, tank.pos.y, 80);
+      const pet = spawnMob(sim, 'forest_wolf', 5, 60, tank.pos.y, 0);
       pet.ownerId = tankPid;
       pet.hostile = false;
       pet.inCombat = false;
 
       // Three hostile mobs in combat on the tank, far enough that they do not engage
-      // within the short HoT tick window. m1/m2 hold the tank directly; m3 holds the
-      // tank's pet (the owner branch). Threat is seeded directly so the split is
-      // deterministic and re-derivable for QA.
-      const m1 = spawnMob(sim, 'forest_wolf', 5, 90, tank.pos.y, 90);
-      const m2 = spawnMob(sim, 'forest_wolf', 5, -90, tank.pos.y, 90);
-      const m3 = spawnMob(sim, 'forest_wolf', 5, 90, tank.pos.y, -90);
+      // within the short HoT tick window, yet inside THREAT_DROP_RANGE of the tank,
+      // the pet, and every healer (the engaged pass drops an out-of-reach attacker
+      // off a hate table, so a mob staged further away would forget them). m1/m2
+      // hold the tank directly; m3 holds the tank's pet (the owner branch). Threat is
+      // seeded directly so the split is deterministic and re-derivable for QA.
+      const m1 = spawnMob(sim, 'forest_wolf', 5, 90, tank.pos.y, -30);
+      const m2 = spawnMob(sim, 'forest_wolf', 5, -40, tank.pos.y, -30);
+      const m3 = spawnMob(sim, 'forest_wolf', 5, 60, tank.pos.y, 40);
       for (const m of [m1, m2, m3]) {
         beef(m, 50000);
         m.hostile = true;
@@ -3365,8 +3378,13 @@ function nythraxisFullPull(): Scenario {
       rec.notes.spikeIds = spikes.map((s) => s.id);
       step(20 * 1); // one impale drain tick on each victim
       rec.snapshot('bone-spike');
-      for (const spike of spikes)
-        sim.dealDamage(tank, spike, spike.hp + 1, false, 'physical', null, 'hit', true);
+      // A spike is a ward (v0.42.2): every player hit lands one point of its
+      // hit-count pool, so it takes the full count to shatter.
+      for (const spike of spikes) {
+        for (let hit = 0; hit < NYTHRAXIS_BONE_SPIKE_HITS_NORMAL; hit++) {
+          sim.dealDamage(tank, spike, spike.hp + 1, false, 'physical', null, 'hit', true);
+        }
+      }
       step(1); // updateNythraxisBoneSpikes -> victims freed, spikeBroken callouts
       // Spikes and eruptions never overlap in the live fight (the spike wave
       // holds the next eruption for a settle window); this scenario sequences
@@ -3438,15 +3456,15 @@ function nythraxisFullPull(): Scenario {
       step(20 * 6); // the 5s self-stun expires
 
       // ----- Slice 2, each fired once: Gravefire, then the Binding Sigil (bound) -----
-      // The Soul Rend detonation above already left Soulfire under the stacked
-      // mages, who have been standing in it since (the Soulfire ticks are in
-      // the trace). Gravefire: the one rng.int target pick, then the line runs
-      // at the mages 20 yd out and burns whoever it reaches.
+      // The Soul Rend detonation above left nothing behind (Soulfire retired
+      // in v0.42.2, so the trace carries no Soulfire ticks). Gravefire is
+      // retired too (v0.42.2): a due timer lights nothing and draws nothing,
+      // which the snapshot below pins as the absence of any Gravefire tick.
       nyx().majorGapTimer = 0;
       nyx().gravefireTimer = DT;
-      step(1); // castNythraxisGravefire -> rng.int pick, line ignites at the boss's feet
-      step(20 * 4); // the head passes the mages; their first Gravefire ticks land
-      rec.snapshot('gravefire');
+      step(1);
+      step(20 * 4);
+      rec.snapshot('gravefire-retired');
       // Binding Sigil: hash-placed (no shared rng), Ascension climbs two stacks,
       // then the tank "drags" him onto it (the parity fixture teleports the boss)
       // and he is Bound: purge, stun, the burn window.
@@ -3467,13 +3485,13 @@ function nythraxisFullPull(): Scenario {
       parkRedoCadences();
 
       // Bone Storm: hash-ranked charges (no shared rng), the whirl tick, a slam
-      // on arrival with its Gravefire line, the mid-storm Bone Spike (two rng.int
-      // victim picks), then the top-threat pickup when it ends.
+      // on arrival with its Gravefire line (no spike lands while he storms), then
+      // the top-threat pickup when it ends.
       nyx().boneStormTimer = DT;
       step(1); // startNythraxisBoneStorm -> boneStormBegins + boneStormCharge callouts
-      step(20 * 7); // charges, slams, the 6 s spike
+      step(20 * 8); // charges and slams, past the retired 6 s spike mark
       rec.snapshot('bone-storm');
-      step(20 * 6); // the storm ends: pickup, Gravebreaker re-arm, the major gap
+      step(20 * 5); // the storm ends: pickup, Gravebreaker re-arm, the major gap
       parkRedoCadences();
       nyx().boneStormTimer = 999;
 
@@ -5982,8 +6000,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       'class:warrior (farmer)',
       'plantCrop gate order passed: alive, range, bed free, crop known, skill, seed in bags',
       'plant pre-roll: exactly two contiguous rng draws per plant (survival, yield seed)',
-      'plant consumes the seed and starts the flavor cast (FARMING_CAST_ID)',
-      'busy gate: the second plant waits out the first plant cast',
+      'plant consumes the seed and starts NO cast (planting is instant; the flavor cast was retired)',
       'growth window: readyAtMs reached with ZERO rng draws and zero events',
       'harvestCrop survived path: TWO draws at tier 1 (the golden roll, a recorded loss, then the golden BONUS roll, spent and unread), produce granted from the stored yield seed',
       'harvestCrop withered path: TWO draws at tier 1 (the golden roll and the golden bonus roll, both spent and ignored), withered husks paid instead of produce',
@@ -6037,10 +6054,10 @@ function professionsFarmingSession(seed = 1): Scenario {
       // Plant one: the first two draws of the session.
       plantCrop(sim.ctx, p, meta, BED_READY, CROP);
       rec.snapshot('planted-first');
-      // Ride out the flavor cast. plantCrop's busy gate refuses a second plant
-      // while one runs, so this window is what makes the second plant land
-      // rather than emitting a busy error.
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      // Planting is instant (the farming-tools report retired the flavor
+      // cast); the window the old cast rode out is kept so the scenario's
+      // timeline, and every later snapshot's tick, stays put.
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       // Plant two: two more draws, and the plot map stays in sorted bed order.
       plantCrop(sim.ctx, p, meta, BED_WITHERED, CROP);
       rec.snapshot('planted');
@@ -6086,7 +6103,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       sim.addItem('vale_wheat', 2, pid);
       // Ride out the SECOND plant's flavor cast remainder (0.6 sec of its 2
       // sec still runs here), or the knobbed plant would deny busy.
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       plantCrop(sim.ctx, p, meta, BED_READY, CROP, { compost: true, watch: true, tonic: true });
       const knobbed = meta.farmPlots.get(BED_READY) as PlotState;
       // The stored knob flags, stashed for the coverage suite: farmPlanted is
@@ -6121,7 +6138,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       // plant's own flavor cast first (its 2 sec are untouched here), which
       // also drains the toniced harvest's queued gain BEFORE the proficiency
       // write below, so the write is the last word.
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       teleport(sim, p, -23, 685); // bed_thornpeak_1 (content/farm_patches.ts)
       meta.gatheringProficiency.farming = 75;
       sim.addItem('skysilver_hoe', 1, pid);
@@ -6153,10 +6170,10 @@ function professionsFarmingSession(seed = 1): Scenario {
       teleport(sim, p, -21.5, -84); // back to the freed Eastbrook bed (the pair's midpoint)
       // Ride out the t3 plant's flavor cast remainder (its harvest landed
       // mid-cast and tick(8) covers only 0.4 sec), or this plant denies busy.
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       // Two draws (the plant pre-roll), the extension's only randomness.
       plantCrop(sim.ctx, p, meta, BED_READY, CROP);
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       // The /dev farmgrow equivalence again: ripen in place, survived arm.
       const noticed = meta.farmPlots.get(BED_READY) as PlotState;
       noticed.readyAtMs = sim.ctx.lockoutNowMs();
@@ -6206,7 +6223,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       for (let cycle = 0; cycle < FARM_GOLDEN_PADDING_CYCLES; cycle++) {
         sim.addItem('vale_wheat_seed', 1, pid);
         // Clear the previous plant's flavor-cast busy gate (draw-free).
-        rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+        rec.tick(FARM_PLANT_WINDOW_TICKS);
         plantCrop(sim.ctx, p, meta, BED_WITHERED, CROP);
         const pad = meta.farmPlots.get(BED_WITHERED) as PlotState;
         pad.readyAtMs = sim.ctx.lockoutNowMs();
@@ -6225,7 +6242,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       // a golden digest for the first time.
       meta.gatheringProficiency.farming = 75; // the probed expansion's skill
       sim.addItem('vale_wheat_seed', 1, pid);
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       plantCrop(sim.ctx, p, meta, BED_READY, CROP);
       rec.snapshot('planted-golden');
       const goldenPlot = meta.farmPlots.get(BED_READY) as PlotState;
@@ -6245,7 +6262,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       // roll is a recorded loss, so no bonus rides this beat.
       meta.gatheringProficiency.farming = 0; // the padding wither window again
       sim.addItem('vale_wheat_seed', 1, pid);
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       plantCrop(sim.ctx, p, meta, BED_WITHERED, CROP);
       const padFinal = meta.farmPlots.get(BED_WITHERED) as PlotState;
       padFinal.readyAtMs = sim.ctx.lockoutNowMs();
@@ -6254,7 +6271,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       meta.gatheringProficiency.farming = 75; // restore for the tier-3 beat
       teleport(sim, p, -23, 685); // bed_thornpeak_1 (content/farm_patches.ts)
       sim.addItem('highland_barley_seed', 1, pid);
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       plantCrop(sim.ctx, p, meta, BED_T3, 'highland_barley');
       rec.snapshot('planted-t3-paying');
       const barleyPaying = meta.farmPlots.get(BED_T3) as PlotState;
@@ -6277,7 +6294,7 @@ function professionsFarmingSession(seed = 1): Scenario {
       // Wait out the tier-3 beat's still-running plant flavor cast first
       // (the drive's own busy-gate idiom): useItem refuses during a
       // non-spell cast, and rec.tick(8) above is shorter than the cast.
-      rec.tick(Math.ceil(FARM_PLANT_CAST_SEC / DT) + 1);
+      rec.tick(FARM_PLANT_WINDOW_TICKS);
       sim.addItem('evergarden_braised_greens', 1, pid);
       sim.useItem('evergarden_braised_greens', pid);
       rec.snapshot('wellfed-eating');
@@ -6726,7 +6743,7 @@ function grixRespawnWindow(): Scenario {
   };
 }
 
-// Wolf Form AUTO attacks, the arm druid_engines deliberately does not drive
+// Cat Form AUTO attacks, the arm druid_engines deliberately does not drive
 // (it scripts specials only): the fixed 1.0s cat cadence swings against a
 // bear-form control on the same staff swinging at the weapon speed. The cat
 // lane lands ~1.8x the swings (and rng draws) of the bear lane over the same
@@ -6737,7 +6754,7 @@ function catFormAutoSwing(): Scenario {
     name: 'cat_form_auto_swing',
     coverage: [
       'class:druid (Wildfang cat + Bruin control)',
-      'Wolf Form fixed-cadence auto-attack: 1.0s swing timer, normalized mainhand weapon roll',
+      'Cat Form fixed-cadence auto-attack: 1.0s swing timer, normalized mainhand weapon roll',
       'bear-form control swinging at the equipped weapon speed on the same loadout',
     ],
     sampleEvery: 5,
@@ -7215,48 +7232,18 @@ function perfectingWalk(seed = 1): Scenario {
 // re-pick is one edit.
 export const HEROIC_FIVE_MAN_DUNGEON_ID = 'gravewyrm_sanctum';
 export const HEROIC_FIVE_MAN_BOSS_ID = 'korzul_the_gravewyrm';
-// A HEROIC FIVE-MAN clear, closing a coverage boundary the phase 09 ledger
-// recorded honestly and never filled: the gate pins a heroic RAID claim
-// (nythraxis_heroic_claim above) and a heroic DELVE (drowned_litany), but
-// nothing walked a heroic five-man, whose reward arms are a different set. Two
-// things are only true here: HEROIC_DUNGEON_TUNING pays marksPerParticipant to
-// EVERY participant of a five-man final boss (the raid pays on its own table),
-// and the heroic loot swap on a five-man reads HEROIC_VARIANT_SOURCE_LEVEL,
-// where the raid's reads the raid tier. hollow_crypt is the model five-man:
-// the tuning names morthen its final boss, and HEROIC_BOSS_LOOT carries a
-// morthen table, so one kill drives all three heroic arms at once (the
-// appended heroic loot draws, the heroicItem variant swap, and
-// awardHeroicMarks with its per-difficulty daily lockout).
-//
-// DELIBERATELY LEAN, the nythraxis_heroic_claim discipline: the trash pull is
-// not the residual and the boss dies to one lethal hit, which is what the
-// heroic arms of tests/dungeons.test.ts do. Every member walks the door
-// (enterDungeon per member, the shared instanceKeyFor join) because the marks
-// arm pays the PARTICIPATION snapshot: a party left at the door would record a
-// one-player payout and stop being a representative clear.
-//
-// SEED 4520 WAS MEASURED, NOT PICKED, against both heroic loot arms at once,
-// and it is the first seed from 4520 satisfying both (the hunt drove this very
-// scenario body and swapped only the Sim seed):
-//   1. THE VARIANT SWAP FIRING. A base drop must actually come back as its
-//      heroic_ copy, or the coverage line would claim an arm the recording
-//      never reached (the professions_craft "proc missed for the pinned seed"
-//      doctrine). This seed swaps heroic_wildgrowth_leggings.
-//   2. AN APPENDED HEROIC-TABLE DROP. At least one item from
-//      HEROIC_BOSS_LOOT[korzul] must land, which is what pins the stream
-//      position a base-table tail append would shift. This seed sheds
-//      sanctum_prowlers_grips and gravewyrm_claws.
-// Measured over seeds 4520 to 4559: 32 of 40 swap a variant, 40 of 40 shed an
-// appended drop (the korzul_heroic group's chances sum to 1.0, so it always
-// pays), and 32 clear both.
+// A shared heroic five-man claim pins the combined equipment partition,
+// per-participant marks and daily lockout. The v0.42.0 budget replaces the
+// former base-gear swap plus two bonus epics with one equipment slot.
+// Seed 4520 is retained from the original recording; only loot behavior changes.
 function heroicFiveManClear(): Scenario {
   return {
     name: 'heroic_five_man_clear',
     coverage: [
       'a heroic FIVE-MAN claim: setDungeonDifficulty heroic + enterDungeon per member sharing one instance (instanceKeyFor), the five-man counterpart of the raid claim above',
       'rollLoot HEROIC arm on a five-man final boss: the base-table walk, then the appended HEROIC_BOSS_LOOT draws in the SAME call',
-      'heroicItem(): base drops swapped IN PLACE for their heroic variants at the FIVE-MAN tier (HEROIC_VARIANT_SOURCE_LEVEL), the arm the raid claim cannot reach',
-      'awardHeroicMarks on a five-man heroic kill: marksPerParticipant to every participant, plus the hollow_crypt:heroic daily lockout',
+      'Normal-only base equipment skipped; one combined heroic partition preserves the existing base-variant and bespoke item tiers',
+      'awardHeroicMarks on a five-man heroic kill: marksPerParticipant to every participant, plus the gravewyrm_sanctum:heroic daily lockout',
       'class:warrior',
     ],
     sampleEvery: 10,
@@ -7610,6 +7597,50 @@ function varkhulRaidTuning(): Scenario {
   };
 }
 
+// The bind-on-pickup party-trade eligibility snapshot (PR #3791): a soulbound
+// Crucible drop pins its kill-time trade group at roll time, so a member who
+// leaves before distribution stays on the awarded copy.
+function bopPartyTradeEligibility(): Scenario {
+  return {
+    name: 'bop_party_trade_eligibility',
+    coverage: [
+      'soulbound raid loot captures stable party-trade identity at roll time',
+      'a leaving member remains eligible during delayed distribution',
+      'class:warrior',
+      'class:mage',
+    ],
+    sampleEvery: 1,
+    build: () => new Sim({ seed: 1173, playerClass: 'warrior', noPlayer: true }),
+    drive(rec: Recorder) {
+      const sim = rec.sim;
+      const aliceId = sim.addPlayer('warrior', 'AliceParity', { characterId: 101 });
+      const bobId = sim.addPlayer('mage', 'BobParity', { characterId: 102 });
+      const alice = requireValue(sim.meta(aliceId), 'BoP parity Alice metadata');
+      const bob = requireValue(sim.meta(bobId), 'BoP parity Bob metadata');
+      const mob = createMob(sim.nextId++, MOBS.ignivar_herald_of_the_last_flame, 20, {
+        x: 20,
+        y: terrainHeight(20, 22, sim.cfg.seed),
+        z: 22,
+      }) as AnyEntity;
+      mob.lootRecipientIds = [aliceId, bobId];
+      sim.addEntity(mob);
+      rec.track(mob.id);
+
+      rollLoot(sim.ctx, mob, alice, [alice, bob]);
+      if (!mob.lootPartyTradeEligibility) {
+        throw new Error('BoP parity seed did not roll a soulbound Ignivar drop');
+      }
+      rec.snapshot('loot-identity-captured');
+
+      bob.leaving = true;
+      const eligibility = killSnapshotEligibility(sim.ctx, mob);
+      grantAwardedLootItem(sim.ctx, 'sigil_anvil_helmet', aliceId, eligibility);
+      rec.notes.eligibleCharacterIds = eligibility.characterIds;
+      rec.snapshot('leaver-remains-eligible');
+    },
+  };
+}
+
 export const SCENARIOS: Scenario[] = [
   soloWarrior(),
   soloMage(),
@@ -7716,4 +7747,5 @@ export const SCENARIOS: Scenario[] = [
   // between shards.
   heroicFiveManClear(),
   flaskConsumables(),
+  bopPartyTradeEligibility(),
 ];

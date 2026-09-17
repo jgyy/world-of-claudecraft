@@ -27,6 +27,7 @@ import {
   deedTitleText,
   deedTranslationManifest,
   ensureDeedLocalesLoaded,
+  RETIRED_DEED_DESCRIPTION_FALLBACK_IDS,
 } from '../src/ui/deed_i18n';
 import {
   assertEntityTranslationsReady,
@@ -71,6 +72,9 @@ import {
   zh_CN,
   zh_TW,
 } from '../src/ui/i18n';
+import { fr_FR as frenchSource } from '../src/ui/i18n.locales/fr_FR';
+import { it_IT as italianSource } from '../src/ui/i18n.locales/it_IT';
+import { nl_NL as dutchSource } from '../src/ui/i18n.locales/nl_NL';
 import {
   ensureReliquaryLocalesLoaded,
   reliquaryPageName,
@@ -408,6 +412,7 @@ describe('i18n Localization Key Coverage', () => {
     slots: 14,
     label: 'Wolf',
     level: 10,
+    listings: 3,
     losses: 4,
     loser: 'Mira',
     marker: 'Skull',
@@ -448,6 +453,7 @@ describe('i18n Localization Key Coverage', () => {
     wins: 9,
     winner: 'Rook',
     total: 125,
+    units: 30,
     used: 2,
     value: 9,
     xp: 450,
@@ -948,6 +954,17 @@ describe('i18n Localization Key Coverage', () => {
     expect(battleShoutDesc).not.toContain('{buff}');
   });
 
+  it('should explicitly provide the native Compost cognate in French, Italian, and Dutch', () => {
+    // French Canadian inherits the French source. Pin handwritten values so a
+    // removed translation cannot pass through the generated English fallback.
+    const key = 'entities.items.compost.name';
+    expect(ITEMS.compost.name).toBe('Compost');
+    for (const source of [frenchSource, italianSource, dutchSource]) {
+      expect(Object.hasOwn(source, key)).toBe(true);
+      expect(source[key]).toBe('Compost');
+    }
+  });
+
   it('should provide every item translation in every locale without canonical fallbacks', () => {
     const itemEntries = entityTranslationManifest().filter((entry) => entry.group === 'item');
     // Heroic upgraded variants (heroicOf) carry no name key: they share the base
@@ -968,6 +985,14 @@ describe('i18n Localization Key Coverage', () => {
         // for an untranslated item name, which is legal on a PR (a `pending` row)
         // and blocked only at the release gate (matches the world-content check below).
         if (RELEASE_TIER && lang !== 'en' && lang !== 'en_CA') {
+          if (
+            entry.key === 'entities.items.compost.name' &&
+            ['fr_FR', 'fr_CA', 'it_IT', 'nl_NL'].includes(lang)
+          ) {
+            expect(entry.source).toBe('Compost');
+            expect(rendered).toBe('Compost');
+            continue;
+          }
           expect(
             rendered,
             `${lang}.${entry.key} should not copy canonical English item text`,
@@ -1349,10 +1374,12 @@ describe('i18n Localization Key Coverage', () => {
 
   it('should provide deed content translations for every supported locale', () => {
     const deedEntries = deedTranslationManifest();
-    // name + desc per deed, plus one title entry per title deed (live count;
-    // tests/deeds_content.test.ts pins the catalog).
+    // name + release-filled desc per deed, plus one title entry per title
+    // deed (live count; tests/deeds_content.test.ts pins the catalog).
     const titleCount = Object.values(DEEDS).filter((d) => d.reward?.kind === 'title').length;
-    expect(deedEntries.length).toBe(Object.keys(DEEDS).length * 2 + titleCount);
+    expect(deedEntries.length).toBe(
+      Object.keys(DEEDS).length * 2 + titleCount - RETIRED_DEED_DESCRIPTION_FALLBACK_IDS.length,
+    );
 
     for (const lang of supportedLanguages) {
       setLanguage(lang);
@@ -1648,7 +1675,16 @@ describe('i18n Localization Key Coverage', () => {
     );
     expect(minimapPainterSource).toContain('this.writers.setText(zoneLabelEl, this.localizeZone(');
     expect(hudSource).toContain('zonePoiLabel');
-    expect(hudSource).toContain('dungeonDisplayNameFromSource');
+    // The dungeon party-size warning's name localization moved with the whole
+    // of localizeSystemText into src/ui/system_text_i18n.ts when hud.ts hit its
+    // monolith ceiling (PR #3925). The helper still renders the dungeon name,
+    // just from the extracted module, the minimap_painter shape above.
+    const systemTextSource = fs.readFileSync(
+      path.resolve(process.cwd(), 'src/ui/system_text_i18n.ts'),
+      'utf8',
+    );
+    expect(systemTextSource).toContain('dungeonDisplayNameFromSource(match[1])');
+    expect(hudSource).not.toContain('dungeonDisplayNameFromSource');
     expect(hudSource).not.toContain('zoneWelcomeText(');
 
     // The per-entity nameplate content (corpse/mob names) moved into the

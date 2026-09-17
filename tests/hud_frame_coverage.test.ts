@@ -156,6 +156,13 @@ const FRAME_EXEMPT: Record<string, string> = {
   'arena-status': 'match-scoped arena status strip, pointer-inert',
   'dfinder-proposal-popup': 'transient dungeon-finder proposal popup',
   'bg-proposal-popup': 'transient battleground proposal popup',
+  'raid-warning-banner': 'transient raid warning alert stack, pointer-inert and time-limited',
+  'ready-check-leader-window':
+    'transient party-leader status popup for an active ready check, hidden outside that check',
+  'practice-tracker':
+    'live DPS readout strip (src/ui/hud/practice/), read-only text: not yet promoted to a movable frame (pre-existing gap, not introduced by this change)',
+  'hub-lesson-coach':
+    'guided Meters coaching strip beside practice-tracker (src/ui/hud/practice/), read-only text plus its own small ack/replay buttons: same standing-tracker family, not yet promoted to a movable frame',
 };
 
 /** The FILES allowed to reach the #ui root (mount, re-home, or measure).
@@ -170,6 +177,8 @@ const UI_ROOT_TOUCHERS: Record<string, string> = {
   'src/ui/meters_frame.ts': 're-homes framed meter panels onto #ui',
   'src/ui/bootcamp.ts': 'world-anchored tutorial prompts, transient coachmarks',
   'src/ui/tutorial.ts': 'transient tutorial coachmarks',
+  'src/ui/window_open_state.ts':
+    'mounts nothing: toggles #ui.options-open (the Esc menu scrim state class that replaced a #ui-anchored :has())',
   'src/ui/noticeboard_popup.ts': 'transient noticeboard popup card',
   'src/ui/realm_builder_popup.ts': 'transient Realm Builder honour roll card',
   'src/ui/dev_command_window.ts': 'dev-only command window (a .window, window_drag governs it)',
@@ -179,6 +188,8 @@ const UI_ROOT_TOUCHERS: Record<string, string> = {
     'the keyboard overview pop-out (a .window, window_drag governs it; closeManagedWindow closes it)',
   'src/ui/hud/fiesta/fiesta_controller.ts': 'match-scoped fiesta strips and confetti',
   'src/ui/hud/loot/loot_roll_controller.ts': 'transient loot roll stack',
+  'src/ui/hud/practice/hub_lesson_controller.ts':
+    'world-anchored "target the dummy" coachmark bubble, transient (the bootcamp.ts pattern)',
 };
 
 /** Registry frames whose elements are minted at runtime rather than written

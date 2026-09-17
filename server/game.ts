@@ -8,6 +8,7 @@ import {
   hasStreamerLink,
   wireStreamerLinks,
 } from '../src/sim/account_flair';
+import type { AccountLedger } from '../src/sim/account_ledger';
 import { verifyChallenge } from '../src/sim/client_challenge';
 import { damageTakenWithin } from '../src/sim/combat/damage_history';
 import { wireParkedMana } from '../src/sim/combat/form_auto_unshift';
@@ -16,7 +17,6 @@ import { DEEDS } from '../src/sim/content/deeds';
 import { isFinderListingTag, isFinderRole } from '../src/sim/content/dungeon_finder';
 import { RELIQUARY_PAGES_BY_ID } from '../src/sim/content/reliquary';
 import { MECH_CHROMAS } from '../src/sim/content/skins';
-import { withWeaponSkinApplied } from '../src/sim/content/weapon_skin_rules';
 import { isWeaponSkinType, WEAPON_SKINS } from '../src/sim/content/weapon_skins';
 import {
   DELVES,
@@ -46,7 +46,7 @@ import {
 } from '../src/sim/jail';
 import type { PickAction } from '../src/sim/lockpick';
 import { lootHasGoneFfa } from '../src/sim/loot/loot_ffa';
-import { type MarketQuery, sanitizeMarketQuery } from '../src/sim/market_query';
+import type { MarketQuery } from '../src/sim/market_query';
 import { unequipWornMechChroma } from '../src/sim/mech_chroma_ownership';
 import {
   partyFrameAbsorb,
@@ -62,9 +62,10 @@ import { restoreToolEffectSlotAction } from '../src/sim/professions/tool_effect_
 import type { ToolEffectConfirmMode } from '../src/sim/professions/tools';
 import {
   catalogCharacterCompletion,
-  characterReliquaryOwnership,
   curatorRankFromOwned,
   reliquaryWireJson,
+  selfRelicKeys,
+  syncAccountRelicGrants,
 } from '../src/sim/reliquary';
 import { corpseHasDecayed } from '../src/sim/respawn_policy';
 import { loadRiftWorldState, serializeRiftWorldState } from '../src/sim/rift/persistence';
@@ -109,12 +110,16 @@ import {
   type StableTimerWireVersion,
 } from '../src/world_api';
 import { sameAppearance } from '../src/world_api/appearance';
+import { ownedWeaponSkinLoadout } from './account_cosmetics_live';
+import { AccountCosmeticsService } from './account_cosmetics_service';
+import { reconcileAccountRelics, recordRelicFinds } from './account_ledger_records';
+import { AccountLedgerService } from './account_ledger_service';
 import { type ActivityDetectDeps, detectActivityEvent } from './activity_detect';
 import { recordOnlineSample } from './admin_db';
 import { type AdminGuildBankView, adminGuildBankView } from './admin_guild_bank_view';
 import { offensiveName } from './auth';
 import type { BackgroundDbGate } from './background_db_gate';
-import { type GuildBankLedgerOp, recordGuildBankEscrowRollback } from './bank_ledger';
+import type { GuildBankLedgerOp } from './bank_ledger';
 import type { BankLedgerProjectionSurface } from './bank_ledger_admission';
 import { BankLedgerGrowthLimitExceeded } from './bank_ledger_growth_budget';
 import {
@@ -188,12 +193,14 @@ import {
   consumeCosmeticOpToken,
   createCosmeticOpGuard,
 } from './cosmetic_op_guard';
+import { stampCuratorStanding } from './curator_standing';
 import { dailyRewardService } from './daily_rewards';
 import type { AccountChatMuteStatus, AccountCosmetics, RequestMetadata } from './db';
 import {
   closePlaySession,
   GUILD_BANK_ROW_MAX_BYTES,
   grantAccountMechChroma,
+  grantAccountMountSkins,
   grantAccountWeaponSkins,
   heartbeatCharacterLeases,
   insertChatLogs,
@@ -226,9 +233,11 @@ import {
   reconcileCharacterDeeds,
   recordDeedUnlocks,
 } from './deeds_records';
+import { appendBookOfDeedsWire } from './deeds_wire';
 import { enqueueActivity } from './discord_activity';
 import { discordFlairForAccount, grantRewardPoints } from './discord_db';
 import { enqueueLinkChange } from './discord_link_changes';
+import { observeQueuePops, queuedPidsOf, queuePopDepsFor } from './discord_queue_pops';
 import { enqueueRelay } from './discord_relay';
 import { findDungeonDoorNear } from './dungeon_door';
 import * as entryFacing from './dungeon_entry_facing';
@@ -266,6 +275,11 @@ import { mergedPrsForLogin } from './github_contributors';
 import { githubForAccount } from './github_db';
 import { groundTelegraphWireJson, groundTelegraphWorld } from './ground_telegraph_wire';
 import { forEachGuarded, runGuarded } from './guarded_iter';
+import { handleGuildBankEscrowRefusal as handleEscrowRefusal } from './guild_bank_escrow_refusal';
+import {
+  broadcastGuildBankGoldNotice,
+  type GuildBankGoldNoticePort,
+} from './guild_bank_gold_notice';
 import { createGuildBankLazyLoader, type GuildBankLazyLoader } from './guild_bank_lazy_loader';
 import { bustGuildBankLog, GUILD_BANK_LOG_VISIBLE_OPS } from './guild_bank_log';
 import { deliverGuildBankLog } from './guild_bank_log_delivery';
@@ -280,6 +294,7 @@ import {
   createGuildBankOpGuard,
   type GuildBankOpGuardState,
 } from './guild_bank_op_guard';
+import type { GuildBankOpRequest, GuildBookDependency } from './guild_bank_settle_gate';
 import {
   collectGuildBankDeltas,
   // Imported from the module that DEFINES it, never through ./db: every test
@@ -289,6 +304,8 @@ import {
   type GuildBankWriteResult,
   loadGuildBanksIntoSim,
 } from './guild_bank_state';
+import { dispatchGuildBankCommand } from './guild_bank_wire';
+import { GuildBookHolderIndex, requestGuildBookFlush } from './guild_book_holders';
 import { createPaidGuildWithLeaderAtomic } from './guild_create_db';
 import { buyGuildRosterPageAtomic } from './guild_roster_page_db';
 import { guildRosterTransport } from './guild_roster_transport';
@@ -309,7 +326,7 @@ import {
 } from './interest_policy';
 import { IpBlockList } from './ip_block';
 import { loadActiveBlockedIps } from './ip_block_db';
-import { keepaliveSweepDelayed } from './keepalive_sweep';
+import { keepaliveSweepDelayed, shouldReapSession, WS_KEEPALIVE_PING_MS } from './keepalive_sweep';
 import { LINKDEAD_GRACE_MS, planJoin } from './linkdead';
 import {
   consumeListReadToken,
@@ -319,8 +336,7 @@ import {
 import { type LiveSharedIp, sharedIpsFromLiveSessions } from './live_shared_ips';
 import { mergeCustodyParcelOverlay } from './mail_custody_overlay';
 import { rearmMailPartitionsOnFailure, writeDirtyMailPartitions } from './mail_partition_rearm';
-import { buyWithSoldVolume } from './market_sold_volume';
-import { readMaterialSourceTransferWire } from './material_source_transfer_wire';
+import { dispatchMarketCommand } from './market_commands';
 import { dispatchInventoryGroupingCommand } from './material_stack_wire';
 import { EMPTY_ACCOUNT_COSMETICS, reconcileWornMechChromaForJoin } from './mech_chroma_reconcile';
 import {
@@ -340,6 +356,7 @@ import {
   type ModerationHost,
   ModerationService,
 } from './moderation_service';
+import { wornMountSkinAllowed } from './mount_skin_reconcile';
 import { MovementInputTimelineTickStats } from './movement_input_timeline_stats';
 import {
   applyMovementInputFrame,
@@ -383,6 +400,7 @@ import { runPeriodicSaveFlush } from './periodic_save_flush';
 
 export type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types';
 
+import { parseGuildPledgeSettingsCommand } from './guild_pledge_settings_cmd';
 import { recordFtueDeath, recordFtueQuest, recordLevelUp } from './progress_events';
 import { REALM, REALM_PUBLIC_ORIGIN, REALM_RESET_TIME_ZONE } from './realm';
 import { createRealmReadoutMemo, realmReadoutJson, realmReadoutObject } from './realm_readout_memo';
@@ -390,6 +408,7 @@ import { RiftAssetCoordinator, riftAssetConfigFromEnv } from './rift_assets';
 import { dispatchRiftCommand } from './rift_forge_dispatch';
 import { refusedRiftForgeCommand } from './rift_forge_gate';
 import { RiftUpgradeCoordinator, riftUpgraderConfigFromEnv } from './rift_upgrader';
+import { emitSelfScalarKeys } from './self_scalar_wire';
 import { duelWire, markersWire, tradeWire } from './self_social_wire';
 import {
   createDepthWarnedSerialWriter,
@@ -434,6 +453,16 @@ import { maybeTrackDay7Retained, trackLevelMilestoneCapi } from './ua_capi';
 import { recordUnstuckEvent } from './unstuck_records';
 import { buildVarkhulPortalReplayBatch, varkhulPortalReplayFrame } from './varkhul_portal_replay';
 import { dispatchVaultCommand, emitVaultSelfKeys } from './vault_wire';
+import {
+  buildWhoRosterEntries,
+  canShowInWho,
+  normalizeWhoFilter,
+  visibleWhoRows,
+  type WhoRosterEntry,
+  type WhoRosterRow,
+  whoChatLines,
+  whoFrame,
+} from './who_roster';
 import { holderInfoForPubkey } from './woc_balance';
 import type { CharacterSaveArgs } from './woc_market';
 import { isBackpressureExceeded } from './ws_backpressure';
@@ -479,13 +508,10 @@ const CHAT_RATE_REFILL_PER_SECOND = 1 / 3; // sustained 20 messages/minute
 const CHAT_RATE_ERROR_COOLDOWN_SECONDS = 4;
 const CHAT_COOLDOWN_SECONDS = 20;
 const CHAT_RATE_VIOLATIONS_FOR_COOLDOWN = 3;
-const WHO_RESULT_LIMIT = 50;
 // One live session per account: Ravenpost mail (v0.20.0) moves coin and goods
 // between an account's characters, so the old allowance of a second online
 // character (self-trade by dual-boxing) is no longer needed. GMs are exempt.
 const MAX_ACTIVE_SESSIONS_PER_ACCOUNT = 1;
-// WS protocol-level ping cadence; see the keepalive interval in start().
-const WS_KEEPALIVE_PING_MS = 30_000;
 const RESTART_COUNTDOWN_TOTAL_SECONDS = 600;
 const RESTART_COUNTDOWN_STEPS = [
   { atSeconds: 0, text: 'Server restart in 10 minutes.' },
@@ -678,6 +704,8 @@ const MARKET_WIRE_PROMPT_CMDS = new Set<string>([
   'market_list',
   'market_list_instance',
   'market_buy',
+  'market_sweep_quote',
+  'market_sweep',
   'market_cancel',
   'market_collect',
 ]);
@@ -992,6 +1020,9 @@ export interface ClientSession extends MovementInputSessionState, HotbarLayoutSt
   // marketQuery precedent: a primitive, so a plain !== value compare is its own
   // change signal (no identity trick needed).
   lastSellPriceItemIdRef: string | null;
+  // The Market Sweep quote request last built for, the marketQuery precedent: the
+  // sim replaces the object on every marketSweepQuote, so identity is the signal.
+  lastSweepQuoteRef: PlayerMeta['sweepQuote'];
   lastMarketRebuildTick: number;
   // Commission order board readout, same recipe at its own cadence
   // (CORDER_WIRE_HZ): the board revision last built for plus the backstop
@@ -1079,6 +1110,9 @@ export interface ClientSession extends MovementInputSessionState, HotbarLayoutSt
   // only bounds how long a session waits for the other officer's commit before
   // it is rolled back and disconnected instead.
   guildBankDeficitSkips: Map<number, number>;
+  // Coalesced holder flush state (server/guild_book_holders.ts).
+  guildBookFlushInFlight: boolean;
+  guildBookFlushRearm: boolean;
   // Set once this session's book work can never become durable and its live
   // state has therefore been abandoned. A quarantined session persists
   // NOTHING, ever again: its character half is the half that would carry the
@@ -1119,6 +1153,8 @@ export interface ClientSession extends MovementInputSessionState, HotbarLayoutSt
   // character does not have. Event-ordered; drained by saveCharacter up to
   // the count captured when the blob was serialized.
   pendingDeedRecords: string[];
+  // The Reliquary twin (relicRecorded keys), same durability ordering and drain.
+  pendingRelicRecords: string[];
   spectating: {
     characterId: number;
     name: string;
@@ -1212,14 +1248,6 @@ export interface RestartCountdownStatus {
   remainingSeconds: number;
 }
 
-interface WhoRosterRow {
-  name: string;
-  cls: string;
-  level: number;
-  zone: string;
-  status: PresenceStatus;
-}
-
 type RememberedChat =
   | {
       channel:
@@ -1249,6 +1277,7 @@ function identityFields(e: Entity): Record<string, unknown> {
   if (e.mainhandItemId) out.mh = e.mainhandItemId; // equipped mainhand → held weapon model (render-only)
   if (e.offhandItemId) out.oh = e.offhandItemId; // equipped offhand → held weapon model (render-only)
   if (e.weaponSkinId) out.wsk = e.weaponSkinId; // active weapon-skin cosmetic (render-only, like mh)
+  if (e.mountSkinId) out.msk = e.mountSkinId; // worn mount-skin cosmetic (render-only, like wsk)
   // Full worn set, for the inspect-another-player window. Players only and only
   // when something is equipped; rides the identity record (first appearance +
   // on change), never the per-tick dynamic fields. Render-only, like `mh`.
@@ -1407,13 +1436,13 @@ function dynamicFields(e: Entity, includeAuras = true): Record<string, unknown> 
   if (e.riftSliding) out.sld = 1; // ice-slide: render a frozen gliding pose
   // Ledge climb: quantized progress (1..99), not the arc. The client never
   // re-simulates the pull (the server owns it and streams the resulting
-  // positions); it needs to know a climb is running, to stop predicting a
-  // fall, and how far through it is so the pull-up pose tracks the motion.
-  // Any non-zero value reads as "climbing" on older clients.
+  // positions); it needs the movement bit to stop predicting a fall, plus
+  // progress so the pull-up pose tracks the motion.
   if (e.climb) {
     const t = e.climb.elapsed / e.climb.duration;
     out.cl = Math.max(1, Math.min(99, Math.round(t * 100)));
   }
+  if (e.leap) out.lp = 1; // Vaulting Charge: server-owned movement arc
   if (e.weaponStowed) out.ws = 1; // Z-key sheathe: weapons render on the back
   if (e.helmHidden) out.hh = 1; // paperdoll eye toggle: kit helm left off the composed body
   if (e.aggroTargetId !== null) out.aggro = e.aggroTargetId;
@@ -1574,7 +1603,16 @@ export class GameServer {
   private activityDeps: ActivityDetectDeps<ClientSession> | null = null; // built lazily once
   private readonly sessionsByCharacterId = new Map<number, ClientSession>();
   private readonly storageRecoverySweep = new RecoverySweep(this.sessionsByCharacterId);
-  private readonly accountCosmeticsByAccount = new Map<number, AccountCosmetics>();
+  private readonly cosmetics = new AccountCosmeticsService({
+    sim: () => this.sim,
+    sessions: () => this.clients.values(),
+    resyncQuests: (session) => this.resyncQuests(session as ClientSession),
+  });
+  private readonly ledger = new AccountLedgerService({
+    sim: () => this.sim,
+    sessions: () => this.clients.values(),
+    syncGrants: (pid, opts) => syncAccountRelicGrants(this.sim.ctx, this.sim.meta(pid), opts),
+  });
   private readonly bankVaultLedgerGuardCoordinator: BankVaultLedgerGuardCoordinator =
     createBankVaultLedgerGuardCoordinator(() => Date.now() / 1000, {
       // Sized from the resolved realm player cap; cap<=0 (disabled) keeps the floor.
@@ -1628,6 +1666,8 @@ export class GameServer {
   // rules call a defect. Built once per broadcast pass and handed to every
   // bgInfoFor call in that pass instead.
   private readonly bgLadderReadout = createRealmReadoutMemo<BgLadderEntry[]>();
+  // The /who roster (chat command and the Who tab), rebuilt at most once per tick.
+  private readonly whoRosterReadout = createRealmReadoutMemo<WhoRosterEntry<ClientSession>[]>();
   // When the realm-wide Vale Cup readout is next due, tracked realm-global (not
   // per session) so every viewer still gates together in one pass and the memo
   // above builds once. `>=` against this, never `tickCount % interval`:
@@ -1645,6 +1685,8 @@ export class GameServer {
   private lastPlaytimeGrantAt = new Map<number, number>(); // accountId -> sim time of last grant
   private dailyRewardActivityInterval: NodeJS.Timeout | null = null;
   private relayCooldown = new Map<number, number>(); // accountId -> last "!" relay post (ms)
+  // Queue-pop Discord DMs (server/discord_queue_pops.ts): the observer's deps, bound once.
+  private queuePopDeps = queuePopDepsFor((pid) => this.clients.get(pid), REALM);
   // pids whose holder tier was forced via the dev /woctier command — the chain
   // refresh leaves them alone so the override sticks during testing (dev only).
   private devTierPids = new Set<number>();
@@ -1654,10 +1696,12 @@ export class GameServer {
   // One FIFO per character id: every durable LIVE-SESSION character write
   // rides it, so commit order is enqueue order (exceptions: server/CLAUDE.md).
   readonly characterSaveQueues = createKeyedSerialWriter<number>();
+  // The per-guild holder index behind the unsettled gate
+  // (server/guild_book_holders.ts owns the maintenance contract).
+  private readonly guildBookHolders = new GuildBookHolderIndex<ClientSession>();
   // Weapon-skin loadouts are whole-record replacements in their dedicated paid
   // state row. Keep one FIFO per account so rapid apply/detach commands cannot
   // commit on separate pool clients in reverse order and resurrect stale state.
-  private readonly weaponSkinLoadoutSaveQueues = createKeyedSerialWriter<number>();
   // Action-bar layout is a whole-record replacement in its own character column.
   // One FIFO per character so a burst of debounced client saves cannot commit on
   // separate pool clients in reverse order and persist a stale layout.
@@ -2082,6 +2126,7 @@ export class GameServer {
     moderator.lastMarketBrowseRev = null;
     moderator.lastMarketQueryRef = null;
     moderator.lastSellPriceItemIdRef = null;
+    moderator.lastSweepQuoteRef = null;
     moderator.lastMarketRebuildTick = 0;
     moderator.lastCorderWireTick = -CORDER_WIRE_INTERVAL_TICKS;
     moderator.lastCorderBoardRev = null;
@@ -2429,6 +2474,7 @@ export class GameServer {
           s.unflushedGuildBankOps.delete(guildId);
           s.guildBankDeficitSkips.delete(guildId);
         }
+        this.guildBookHolders.dropGuild(guildId);
       },
       // The disband guard's read, and the OPEN of the guild-delete window it
       // has to hold. Returns the LIVE sim book's holdings, or null (the guard
@@ -2560,7 +2606,7 @@ export class GameServer {
         // membership), so this tracked id can stay in socialTrackedIds long
         // after a block either way. Refuse to leak live position across it,
         // the same bidirectional rule canShowInWho already applies to /who.
-        if (!this.canShowInWho(session, other)) continue;
+        if (!canShowInWho(session, other)) continue;
         const loc = this.presenceOf(other);
         if (loc.x === undefined || loc.z === undefined) continue;
         // The live Book of Deeds title (sim meta, no DB read); the `social`
@@ -2652,6 +2698,7 @@ export class GameServer {
             this.parseCapture.observe(events);
             this.routeEvents(events);
             this.detectActivity(events);
+            void observeQueuePops(events, queuedPidsOf(this.sim.ctx), this.queuePopDeps);
             lap('events');
             this.runAntibotTick();
             lap('antibot');
@@ -2806,6 +2853,8 @@ export class GameServer {
   // gives up on the dead socket, which can take minutes; with it, the
   // client's reconnect backoff resumes within a ping interval or two (the
   // client tolerates that rejection mid-reconnect, src/net/reconnect_policy.ts).
+  // shouldReapSession also applies the hard ten-minute silence deadline that
+  // holds even when the stall guard below pauses the pong verdict.
   pingLiveSessions(): void {
     const now = Date.now();
     // A sweep that fired far later than its interval proves the process stalled, so
@@ -2815,13 +2864,11 @@ export class GameServer {
     const delayed = keepaliveSweepDelayed(now, this.lastKeepaliveSweepAt, WS_KEEPALIVE_PING_MS);
     for (const session of this.clients.values()) {
       if (session.linkdead || session.ws.readyState !== 1) continue;
-      if (session.awaitingPong && !delayed) {
+      if (shouldReapSession(session, delayed, this.lastKeepaliveSweepAt)) {
         const ws = session.ws;
         try {
           ws.terminate();
-        } catch {
-          /* socket already torn down */
-        }
+        } catch {} // socket already torn down
         this.socketClosed(session, ws);
         continue;
       }
@@ -3108,54 +3155,15 @@ export class GameServer {
     }
   }
 
-  // Update one player's Curator standing (rank + the character-scoped completion
-  // pair) for the inspect card's Reliquary line and the rank-5 sigil. Cosmetic
-  // identity only: the sim never reads these back, and no client command can set
-  // them, so the numbers are server-computed or they do not exist.
-  //
-  // Unlike the three flair refreshers beside it this is pure CPU off the LIVE sim
-  // meta (one catalog walk, no DB row, no RPC), so it is synchronous and needs no
-  // "did the player leave mid-fetch" guard.
-  //
-  // What inspect and /c/ actually share: ONE formula (catalogCharacterCompletion)
-  // scored over EQUIVALENT ownership surfaces (items + marks + bags-AND-bank
-  // reins + earned deeds). Same inputs, same pair and same rank, with no second
-  // derivation to drift. That is NOT a promise the two agree at every instant.
-  // This reads LIVE meta; the public sheet reads the PERSISTED state blob, so /c/
-  // lags live meta until the next character save writes it. Join-time reconciles
-  // are the sharpest case: unionLegacyMilestones folds legacy milestone deeds
-  // into meta.deedsEarned at load, so a catalogued title relic behind one of them
-  // scores HERE the moment the character joins and only reaches the blob, and so
-  // /c/, at the save after that.
-  //
-  // Unranked reads as ABSENT, not zero: an owned count of 0 clears all three
-  // fields so a fresh character's identity record carries no standing at all.
+  // Update one player's Curator standing (rank + completion pair) for the
+  // inspect card's Reliquary line and the rank-5 sigil: pure CPU off the LIVE
+  // sim meta, synchronous (no leave-mid-fetch guard needed), and the doctrine
+  // (cosmetic only, account-wide union, absent-not-zero) lives with the stamp
+  // in server/curator_standing.ts.
   private refreshCuratorStanding(session: ClientSession): void {
     const e = this.sim.entities.get(session.pid);
     const meta = this.sim.meta(session.pid);
-    if (!e || !meta) return;
-    // Cleared BEFORE the walk so a throw inside the resolution fails to
-    // ABSENT, not to a stale stamp riding the wire (both call sites catch).
-    // The trade is explicit: a transient throw now hides a CORRECT standing
-    // for up to one sweep where the old code kept the last value; absent is
-    // the honest degraded state for a cosmetic, and the walk is pure CPU
-    // with no realistic throw path.
-    // Assigning unconditionally is free either way: wireCacheFor diffs the
-    // identity JSON, so an unchanged stamp re-broadcasts nothing and a changed
-    // one re-broadcasts itself, exactly like the flair refreshers above.
-    e.curatorRank = undefined;
-    e.relicsOwned = undefined;
-    e.relicsTotal = undefined;
-    const { owned, total } = catalogCharacterCompletion(characterReliquaryOwnership(meta));
-    const rank = curatorRankFromOwned(owned);
-    // Gated on the RANK, not the raw count, so all three move as one by
-    // construction: a raised rank-1 threshold could otherwise strand the pair
-    // on the wire with the rank absent. Today rank >= 1 iff owned >= 1.
-    if (rank > 0) {
-      e.curatorRank = rank;
-      e.relicsOwned = owned;
-      e.relicsTotal = total;
-    }
+    if (e && meta) stampCuratorStanding(e, meta);
   }
 
   // The periodic identity-flair cycle, in two halves that are deliberately NOT
@@ -3278,168 +3286,20 @@ export class GameServer {
 
   // -------------------------------------------------------------------------
 
-  private applyAccountQuestLockouts(pid: number, cosmetics: AccountCosmetics): void {
-    const meta = this.sim.meta(pid);
-    if (!meta) return;
-    for (const questId of cosmetics.completedQuestIds) {
-      meta.questsDone.add(questId);
-      meta.questLog.delete(questId);
-    }
-    // The bare adds bypass the quest-credit mark site, and the lockout quests
-    // can satisfy quest/meta deed triggers: request a full evaluator pass.
-    if (cosmetics.completedQuestIds.length > 0) this.sim.ctx.markDeedsDirty(pid);
-  }
-
-  private mergeAccountCosmetics(a: AccountCosmetics, b: AccountCosmetics): AccountCosmetics {
-    // The weapon-skin reads stay nullish-tolerant: pre-weapon-skin callers and
-    // test doubles still hand over the older two-field shape at runtime.
-    return {
-      completedQuestIds: [...new Set([...a.completedQuestIds, ...b.completedQuestIds])],
-      mechChromaIds: [...new Set([...a.mechChromaIds, ...b.mechChromaIds])],
-      // Ownership is additive (a purchase is never un-bought here); the applied
-      // loadout is last-write-wins so a detach (key removed in the fresh state)
-      // never resurrects from the stale side.
-      weaponSkinIds: [...new Set([...(a.weaponSkinIds ?? []), ...(b.weaponSkinIds ?? [])])],
-      weaponSkinLoadout: { ...(b.weaponSkinLoadout ?? {}) },
-    };
-  }
-
-  /** The account loadout filtered to owned skins, as the Sim seeds it. */
-  private ownedWeaponSkinLoadout(cosmetics: AccountCosmetics): Record<string, string> {
-    const out: Record<string, string> = {};
-    for (const [t, skinId] of Object.entries(cosmetics.weaponSkinLoadout ?? {})) {
-      if (skinId && (cosmetics.weaponSkinIds ?? []).includes(skinId)) out[t] = skinId;
-    }
-    return out;
-  }
-
-  private rememberAccountCosmetics(
-    accountId: number,
-    cosmetics: AccountCosmetics,
-  ): AccountCosmetics {
-    const merged = this.mergeAccountCosmetics(
-      this.accountCosmeticsByAccount.get(accountId) ?? {
-        completedQuestIds: [],
-        mechChromaIds: [],
-        weaponSkinIds: [],
-        weaponSkinLoadout: {},
-      },
-      cosmetics,
-    );
-    this.accountCosmeticsByAccount.set(accountId, merged);
-    return merged;
-  }
-
-  private updateLiveAccountCosmetics(accountId: number, cosmetics: AccountCosmetics): void {
-    const merged = this.rememberAccountCosmetics(accountId, cosmetics);
-    for (const live of this.clients.values()) {
-      if (live.accountId !== accountId) continue;
-      live.accountCosmetics = merged;
-      this.applyAccountQuestLockouts(live.pid, merged);
-      this.sim.setWeaponSkinLoadout(live.pid, this.ownedWeaponSkinLoadout(merged));
-      this.resyncQuests(live);
-    }
-  }
-
-  private noteAccountQuestComplete(session: ClientSession, questId: string): void {
-    const current = session.accountCosmetics;
-    const completedQuestIds = current.completedQuestIds.includes(questId)
-      ? current.completedQuestIds
-      : [...current.completedQuestIds, questId];
-    this.updateLiveAccountCosmetics(session.accountId, { ...current, completedQuestIds });
-    void markAccountQuestComplete(session.accountId, questId)
-      .then((cosmetics) => this.updateLiveAccountCosmetics(session.accountId, cosmetics))
-      .catch((err) => console.error('failed to save account quest cosmetic state:', err));
-  }
-
-  private noteAccountMechChroma(session: ClientSession, chromaId: string): void {
-    const current = session.accountCosmetics;
-    const mechChromaIds = current.mechChromaIds.includes(chromaId)
-      ? current.mechChromaIds
-      : [...current.mechChromaIds, chromaId];
-    this.updateLiveAccountCosmetics(session.accountId, { ...current, mechChromaIds });
-    void grantAccountMechChroma(session.accountId, chromaId)
-      .then((cosmetics) => this.updateLiveAccountCosmetics(session.accountId, cosmetics))
-      .catch((err) => console.error('failed to save account mech chroma:', err));
-  }
-
-  /**
-   * Grant a mech-chroma cosmetic to an account by id (a Discord swag claim, whose
-   * points/claim are already resolved durably server-side). Best-effort live update:
-   * persist the grant, then push the refreshed cosmetics to any online session on the
-   * account. The live push is a no-op when the account is offline. Injected into the
-   * ported Discord swag route via configureDiscordRuntime (server/discord.ts).
-   */
+  // Account-wide cosmetics (quest lockouts, mech chromas, weapon + mount skins)
+  // live in AccountCosmeticsService (server/account_cosmetics_service.ts); these
+  // three stay on GameServer as the hook surface server/main.ts injects into the
+  // Discord and Claudium routes.
   grantMechChromaToAccount(accountId: number, chromaId: string): void {
-    void grantAccountMechChroma(accountId, chromaId)
-      .then((cosmetics) => this.updateLiveAccountCosmetics(accountId, cosmetics))
-      .catch((err) => console.error('failed to grant swag mech chroma:', err));
+    this.cosmetics.grantMechChroma(accountId, chromaId);
   }
 
-  /**
-   * Mirror Season 1 Armory weapon-skin ownership into accounts.cosmetics and
-   * push it to any live session on the account. Injected into the Claudium
-   * spend/store routes via configureClaudiumRuntime (server/claudium.ts); the
-   * economy service's grant ledger stays the purchase source of truth.
-   */
   grantWeaponSkinsToAccount(accountId: number, skinIds: string[]): void {
-    const known = skinIds.filter((id) => WEAPON_SKINS[id]);
-    if (known.length === 0) return;
-    const current = this.accountCosmeticsByAccount.get(accountId);
-    if (current && known.every((id) => current.weaponSkinIds.includes(id))) return;
-    // Optimistic live union first (mirrors noteAccountMechChroma): the buyer can
-    // hit Apply the moment the spend response lands, without racing the write.
-    if (current) {
-      this.updateLiveAccountCosmetics(accountId, {
-        ...current,
-        weaponSkinIds: [...new Set([...current.weaponSkinIds, ...known])],
-      });
-    }
-    void grantAccountWeaponSkins(accountId, known)
-      .then((cosmetics) => this.updateLiveAccountCosmetics(accountId, cosmetics))
-      .catch((err) => console.error('failed to grant account weapon skins:', err));
+    this.cosmetics.grantWeaponSkins(accountId, skinIds);
   }
 
-  /** Apply (skinId set) or detach (skinId null + wtype) a Season 1 Armory weapon
-   *  skin. Server-authoritative: the account must own the skin, and the Sim
-   *  re-validates that a weapon of the skin's type is equipped right now. The
-   *  loadout is account state, so every session on the account updates live. */
-  private changeAccountWeaponSkin(
-    session: ClientSession,
-    skinId: string | null,
-    wtype?: string,
-  ): void {
-    const current = session.accountCosmetics;
-    let weaponSkinLoadout: Record<string, string>;
-    if (skinId !== null) {
-      const def = WEAPON_SKINS[skinId];
-      if (!def) return;
-      if (!current.weaponSkinIds.includes(skinId)) return; // must own it (anti-forge)
-      if (!this.sim.setWeaponSkin(session.pid, skinId)) return; // type-match gate
-      weaponSkinLoadout = withWeaponSkinApplied(current.weaponSkinLoadout, skinId) ?? {};
-    } else {
-      if (!wtype || !isWeaponSkinType(wtype)) return;
-      if (!current.weaponSkinLoadout[wtype]) return;
-      this.sim.setWeaponSkin(session.pid, null, wtype);
-      weaponSkinLoadout = { ...current.weaponSkinLoadout };
-      delete weaponSkinLoadout[wtype];
-    }
-    this.updateLiveAccountCosmetics(session.accountId, { ...current, weaponSkinLoadout });
-    this.enqueueWeaponSkinLoadoutSave(session.accountId, weaponSkinLoadout);
-  }
-
-  private enqueueWeaponSkinLoadoutSave(
-    accountId: number,
-    weaponSkinLoadout: Record<string, string>,
-  ): void {
-    const snapshot = { ...weaponSkinLoadout };
-    // Fire and forget BY CONTRACT: a failed save is a cosmetic loss the next
-    // apply overwrites, so it swallows to the log.
-    void this.weaponSkinLoadoutSaveQueues
-      .enqueue(accountId, () => setAccountWeaponSkinLoadout(accountId, snapshot))
-      .catch((err) => {
-        console.error('failed to save weapon skin loadout:', err);
-      });
+  grantMountSkinsToAccount(accountId: number, skinIds: string[]): void {
+    this.cosmetics.grantMountSkins(accountId, skinIds);
   }
 
   join(
@@ -3453,6 +3313,9 @@ export class GameServer {
     meta: RequestMetadata &
       Partial<AccountChatMuteStatus> & {
         accountCosmetics?: AccountCosmetics;
+        // The account ledger loaded for this account (server/account_ledger_db.ts);
+        // absent on the bare test join, which then fills a fresh ledger alone.
+        accountLedger?: AccountLedger;
         chatStrikes?: number;
         isAdmin?: boolean;
         adminPermissions?: readonly string[];
@@ -3514,6 +3377,7 @@ export class GameServer {
     const pid = this.sim.addPlayer(cls, name, {
       state: state ?? undefined,
       characterId,
+      accountLedger: meta.accountLedger,
       bankBonus: meta.bankBonus,
       appearance: meta.appearance ?? null,
       tutorialGreetingSent: state === null,
@@ -3553,14 +3417,20 @@ export class GameServer {
       accountCosmetics: meta.accountCosmetics ?? EMPTY_ACCOUNT_COSMETICS,
       catalog: player?.skinCatalog,
       skin: player?.skin ?? 0,
-      remember: (cosmetics) => this.rememberAccountCosmetics(accountId, cosmetics),
+      remember: (cosmetics) => this.cosmetics.remember(accountId, cosmetics),
       grant: (chromaId) => grantAccountMechChroma(accountId, chromaId),
-      updateLive: (cosmetics) => this.updateLiveAccountCosmetics(accountId, cosmetics),
+      updateLive: (cosmetics) => this.cosmetics.updateLive(accountId, cosmetics),
     });
-    this.applyAccountQuestLockouts(pid, accountCosmetics);
+    this.cosmetics.applyQuestLockouts(pid, accountCosmetics);
     // Seed the account-wide weapon-skin loadout onto the fresh sim entity so the
     // applied skin shows from the first snapshot (owned skins only).
-    this.sim.setWeaponSkinLoadout(pid, this.ownedWeaponSkinLoadout(accountCosmetics));
+    this.sim.setWeaponSkinLoadout(pid, ownedWeaponSkinLoadout(accountCosmetics));
+    // The worn mount skin rides the character save, ownership rides the
+    // account: a saved skin the account does not own comes off here (never
+    // healed into ownership; server/mount_skin_reconcile.ts).
+    if (!wornMountSkinAllowed(accountCosmetics, this.sim.meta(pid)?.mountSkinId)) {
+      this.sim.setMountSkin(pid, null);
+    }
     const sessionIp = meta.ip ?? '';
     const initialLevel = this.sim.entities.get(pid)?.level ?? state?.level ?? 1;
     const botTrackingContext = this.botDetector.createTrackingContext(
@@ -3645,6 +3515,8 @@ export class GameServer {
       bankLedgerSaveScheduled: false,
       unflushedGuildBankOps: new Map(),
       guildBankDeficitSkips: new Map(),
+      guildBookFlushInFlight: false,
+      guildBookFlushRearm: false,
       escrowQuarantined: false,
       inFlightGuildBankOps: new Map(),
       ignoredIds: new Set(),
@@ -3668,6 +3540,7 @@ export class GameServer {
       lastMarketBrowseRev: null,
       lastMarketQueryRef: null,
       lastSellPriceItemIdRef: null,
+      lastSweepQuoteRef: null,
       lastMarketRebuildTick: 0,
       lastCorderWireTick: -CORDER_WIRE_INTERVAL_TICKS,
       lastCorderBoardRev: null,
@@ -3701,6 +3574,7 @@ export class GameServer {
       leaseNonce: meta.leaseNonce,
       botTrackingContext,
       pendingDeedRecords: [],
+      pendingRelicRecords: [],
       spectating: null,
       jailed: state?.jail ?? null,
       jailVisit: null,
@@ -3735,6 +3609,12 @@ export class GameServer {
     reconcileCharacterDeeds({ characterId, accountId }, [
       ...(this.sim.meta(pid)?.deedsEarned.keys() ?? []),
     ]);
+    // The Reliquary twin of the heal above: replay the blob-proven relic finds.
+    const joinedMeta = this.sim.meta(pid);
+    if (joinedMeta) {
+      const who = { characterId, accountId, name, cls };
+      reconcileAccountRelics(who, selfRelicKeys(joinedMeta));
+    }
     // Storefront mirror drift heal (the steady-state counterpart to the
     // link-time reconcile): a live achievement push can exhaust its retry
     // ladder and drop, and an already-linked account never re-links, so the
@@ -4128,6 +4008,7 @@ export class GameServer {
     }
     session.bankLedgerJournal.outbox.discard();
     this.sessionsByCharacterId.delete(session.characterId);
+    this.guildBookHolders.dropSession(session);
     storageRecovery.offline(session.characterId);
     // Release the per-character load lease so a fresh login (here or on another
     // process) can reload the character without waiting out the TTL. Order
@@ -4181,7 +4062,7 @@ export class GameServer {
           LEAVE_SAVE_RETRY_MAX_MS,
         );
         console.error(`save on leave failed for ${session.name}; retrying in ${retryMs}ms:`, err);
-        await new Promise((resolve) => setTimeout(resolve, retryMs));
+        await delay(retryMs);
       }
     }
   }
@@ -4289,6 +4170,7 @@ export class GameServer {
     }
     if (!session.bankLedgerJournal.outbox.acknowledgeCommittedPrefix(snapshot, batches)) return;
     consumeCommittedGuildLedgerPrefix(session, guildCounts);
+    this.guildBookHolders.resync(session);
     visitGuildLedgerIdsForOps(batches, GUILD_BANK_LOG_VISIBLE_OPS, bustGuildBankLog);
   }
 
@@ -4342,6 +4224,7 @@ export class GameServer {
       // stays pending for the save queued behind it, so the character_deeds
       // index (and Steam, chained off it) never runs ahead of durable state.
       const recordUpTo = session.pendingDeedRecords.length;
+      const relicRecordUpTo = session.pendingRelicRecords.length;
       const storageEffectsAtT0 = snapshotStorageAppliedEffects(
         session.pendingStorageAppliedEffects,
       );
@@ -4622,6 +4505,7 @@ export class GameServer {
             session.guildBankDeficitSkips.delete(guildId);
           }
         }
+        this.guildBookHolders.resync(session);
         // The blob is durable: publish every unlock it contains. A rejected
         // save skips this (the throw propagates past it), leaving the ids
         // pending for the next save attempt (the 30s autosave, the next
@@ -4637,6 +4521,20 @@ export class GameServer {
           { characterId: session.characterId, accountId: session.accountId },
           session.pendingDeedRecords.splice(0, recordUpTo),
         );
+        // The Reliquary half drains on the same watermark rule; the finder's
+        // name and class ride each row so the find outlives the character.
+        const relicMeta = this.sim.meta(session.pid);
+        if (relicMeta) {
+          recordRelicFinds(
+            {
+              characterId: session.characterId,
+              accountId: session.accountId,
+              name: relicMeta.name,
+              cls: relicMeta.cls,
+            },
+            session.pendingRelicRecords.splice(0, relicRecordUpTo),
+          );
+        }
         // Same durability ordering as the deed publish above: the level the bot can
         // read only moved once this write landed. Delta-gated on the SERIALIZED level
         // (never e.level, which a Fiesta bout temporarily raises), so this covers the
@@ -4884,6 +4782,7 @@ export class GameServer {
   // Schedule a guild's book for the next fenced escrow save of this session.
   private markGuildBankDirty(session: ClientSession, guildId: number): void {
     session.dirtyGuildBanks.set(guildId, (session.dirtyGuildBanks.get(guildId) ?? 0) + 1);
+    this.guildBookHolders.touch(session, guildId);
   }
 
   // When this session's escrow can never commit again, its guild-book
@@ -4909,6 +4808,7 @@ export class GameServer {
       dead.dirtyGuildBanks.delete(guildId);
       dead.unflushedGuildBankOps.delete(guildId);
       dead.guildBankDeficitSkips.delete(guildId);
+      this.guildBookHolders.resync(dead);
       if (log.length === 0) continue;
       // Counted per GUILD, the unit the remedy applies to: reaching this at
       // all means a session that can never commit again held unflushed book
@@ -4933,135 +4833,47 @@ export class GameServer {
   // round trip instead of an autosave interval.
   static readonly GUILD_BANK_DEFICIT_MAX_SKIPS = 2;
 
-  // The escrow REFUSAL arm. The book half could not be replayed onto durable
-  // truth, so the whole transaction rolled back and this save persisted
-  // NOTHING: not the books, not the character. That is the invariant the
-  // feature rests on, stated as a rule rather than as a residue:
-  //
-  //   If the book half cannot be applied, the character half must not commit.
-  //
-  // Carrying the shortfall and recording it was the alternative, and it is a
-  // two-account money printer: officer A deposits without flushing, officer B
-  // withdraws, B's character half commits while the book half does not, then A
-  // gets itself fenced (an ordinary re-login) so nothing will ever make A's
-  // deposit durable. B keeps the copper, A's stake comes back, repeatable on
-  // demand. Refusing removes it: B's purse can never durably gain what the
-  // book never durably lost.
-  //
-  // Two outcomes:
-  // - RETRY, while another session still holds unflushed work for the guild:
-  //   their commit is what makes this replay applicable, and it lands within
-  //   an autosave interval. Nothing is consumed; the marks and the log are
-  //   exactly as they were.
-  // - ROLL BACK, when no other session holds unflushed work (so nothing will
-  //   ever make the missing value durable) or the retries ran out. This
-  //   session's live state is abandoned: its own book ops come back off the
-  //   live book, it is QUARANTINED so it can never persist again, one
-  //   aggregate anomaly row records the incident, and it is disconnected to
-  //   reload from its durable row. Everything it did since its last successful
-  //   save is lost, which is exactly what a lease fence-out already does, and
-  //   it conserves precisely because none of it was ever durable.
+  // The escrow REFUSAL arm (server/guild_bank_escrow_refusal.ts) behind its
+  // GameServer seam; it shares flushGuildBookHolders with the unsettled gate.
   private handleGuildBankEscrowRefusal(
     session: ClientSession,
     results: readonly GuildBankWriteResult[],
-    // True when this is the LAST save this session will ever get (the leave
-    // flush, or the shutdown flush's second pass). There is no later retry to
-    // wait for, so the refusal is resolved now rather than left to a save that
-    // will never come: otherwise the session would tear down with its progress
-    // discarded and no log line and no ledger row to say why.
     final = false,
   ): void {
-    let quarantine = false;
-    for (const result of results) {
-      if (result.written) continue;
-      const guildId = result.guildId;
-      let anotherSessionDirty = false;
-      for (const s of this.sessionsByCharacterId.values()) {
-        // A quarantined or departing session's marks are NOT a reason to wait:
-        // it will never commit them, so counting it would burn every retry
-        // (blocking this session's character saves the whole time) before
-        // reaching the same rollback.
-        if (s === session || s.escrowQuarantined || s.left) continue;
-        if (s.dirtyGuildBanks.has(guildId)) {
-          anotherSessionDirty = true;
-          break;
-        }
-      }
-      const skips = (session.guildBankDeficitSkips.get(guildId) ?? 0) + 1;
-      const canResolve =
-        !final &&
-        anotherSessionDirty &&
-        !result.rowUnusable &&
-        skips < GameServer.GUILD_BANK_DEFICIT_MAX_SKIPS;
-      if (canResolve) {
-        // ORDINARY CONCURRENCY, not a failure: another officer of this guild
-        // holds unflushed work, their commit is what makes this replay
-        // applicable, and the flush below makes that a round trip rather than
-        // an autosave interval. Nothing was consumed and nothing is lost, so
-        // it gets its own counter kind: sharing escrow_save_failed made that
-        // counter unusable for `> 0` alerting. Counted per GUILD, the unit the
-        // retry applies to.
-        gameMetricsCounters().guildBankIncident('escrow_refused_retry');
-        session.guildBankDeficitSkips.set(guildId, skips);
-        // Do not wait out an autosave interval: FLUSH the sessions whose
-        // unflushed work this replay is waiting on, so the retry lands a round
-        // trip later rather than 30 seconds later. This is what keeps the
-        // blocked window (during which THIS character persists nothing at all,
-        // including progress that has nothing to do with the guild bank) to
-        // the shortest it can be, and it is why the skip bound is small.
-        //
-        // Only on the FIRST refusal: if that flush is itself refused it will
-        // flush back, and an unbounded ping-pong of fire-and-forget saves
-        // between two mutually-stuck sessions is worse than the wait it saves.
-        if (skips > 1) continue;
-        for (const s of this.sessionsByCharacterId.values()) {
-          if (s === session || s.escrowQuarantined || s.left) continue;
-          if (!s.dirtyGuildBanks.has(guildId)) continue;
-          void this.saveCharacter(s).catch((err) =>
-            console.error(`guild bank deficit flush failed for ${s.name}:`, err),
-          );
-        }
-        continue;
-      }
-      const log = session.unflushedGuildBankOps.get(guildId) ?? [];
-      recordGuildBankEscrowRollback(session, guildId, log, result.deficit);
-      console.error(
-        `guild bank escrow rolled back for guild ${guildId} (character ${session.characterId}): ${
-          result.rowUnusable
-            ? 'the stored row is oversized or malformed, its live shadow vanished, or the merged book would cross the size bound, so it is preserved untouched'
-            : `${result.deficit?.kind} shortfall ${result.deficit?.shortfall} on ${result.deficit?.op}${result.deficit?.itemId ? ` (${result.deficit.itemId})` : ''}, and ${
-                anotherSessionDirty
-                  ? `it did not resolve within ${skips} escrow saves`
-                  : 'no other session holds unflushed work for this guild, so it never can'
-              }`
-        }. The session is quarantined and disconnected; nothing it did since its last save was durable, so nothing is lost that was.`,
+    handleEscrowRefusal(
+      {
+        maxDeficitSkips: GameServer.GUILD_BANK_DEFICIT_MAX_SKIPS,
+        holders: (guildId, except) =>
+          this.guildBookHolders.holders(guildId, except, { includeLeaving: false }),
+        flushHolders: (guildId, except, dependency) =>
+          this.flushGuildBookHolders(guildId, except, dependency),
+        revertOwnGuildBookOps: (s, guildIds) => this.revertOwnGuildBookOps(s, guildIds),
+        kickSession: (s) => {
+          void this.kickSession(s, 'character taken over', 'guild bank escrow rollback');
+        },
+        recordIncident: (kind) => gameMetricsCounters().guildBankIncident(kind),
+        logError: (message) => console.error(message),
+      },
+      session,
+      results,
+      final,
+    );
+  }
+
+  // Flush the holders feeding the named dependency, bounded and coalesced,
+  // through the background-permit save (server/guild_book_holders.ts): the
+  // gate's refusal and the escrow arm's retry both land here.
+  private flushGuildBookHolders(
+    guildId: number,
+    except: ClientSession,
+    dependency: GuildBookDependency | null,
+  ): void {
+    for (const holder of this.guildBookHolders.contributors(guildId, except, dependency)) {
+      requestGuildBookFlush(holder, (s) =>
+        this.saveCharacterWithBackgroundPermit(s).catch((err) =>
+          console.error(`guild bank deficit flush failed for ${s.name}:`, err),
+        ),
       );
-      quarantine = true;
-    }
-    if (!quarantine) return;
-    // TERMINAL: this refusal will never resolve, so the save really did fail
-    // for good (character half included, nothing durable). That is what
-    // escrow_save_failed means, and it is booked here rather than at the throw
-    // site so a refusal that merely RETRIES never reaches it. Counted once per
-    // SAVE, matching the db-threw arm above.
-    gameMetricsCounters().guildBankIncident('escrow_save_failed');
-    // The terminal arm of the escrow design and the one an operator should
-    // alert on: a live session is being abandoned because its book half can
-    // never be replayed onto durable truth. Counted once per SESSION (the unit
-    // the remedy applies to; the per-guild reverts it triggers are counted as
-    // 'reconcile' inside revertOwnGuildBookOps), beside the loud log that
-    // carries the guild id and the deficit.
-    gameMetricsCounters().guildBankIncident('escrow_quarantined');
-    // The character half is the half that would carry the value the book half
-    // could not, so this session must never save again.
-    session.escrowQuarantined = true;
-    // Undo EVERY book this session dirtied, not only the refused one: the
-    // session as a whole is abandoned, so its deltas in a second guild's book
-    // are live value nobody will ever make durable, and another officer
-    // withdrawing that phantom value would be refused in turn.
-    this.revertOwnGuildBookOps(session, [...session.dirtyGuildBanks.keys()]);
-    if (!session.left) {
-      void this.kickSession(session, 'character taken over', 'guild bank escrow rollback');
     }
   }
 
@@ -5074,6 +4886,7 @@ export class GameServer {
     target: { pid: number } | { guildId: number; actorAccountId: number },
     op: GuildBankLedgerOp,
     run: () => void,
+    request?: GuildBankOpRequest,
   ): void {
     coordinateGuildBankOp(
       {
@@ -5083,15 +4896,43 @@ export class GameServer {
         bankLedgerNeedsSave: () => bankLedgerJournalNeedsSave(session.bankLedgerJournal.outbox),
         scheduleBankLedgerHighWaterSave: () => this.scheduleBankLedgerHighWaterSave(session),
         markGuildBankDirty: (guildId) => this.markGuildBankDirty(session, guildId),
+        // The unsettled gate's inputs: every OTHER holder's cached
+        // contribution on this book (a departing session's included, its
+        // leave flush has not committed yet), and the flush a refusal fires.
+        unsettledGuildBook: (guildId) => this.guildBookHolders.unsettled(guildId, session),
+        flushUnsettledGuildBook: (guildId, dependency) =>
+          this.flushGuildBookHolders(guildId, session, dependency),
         recordGuildBankIncident: (kind) => gameMetricsCounters().guildBankIncident(kind),
         logError: (message) => console.error(message),
+        notifyGuildGoldMovement: (guildId, goldOp, copper) =>
+          void broadcastGuildBankGoldNotice(
+            this.guildBankGoldNoticePort,
+            guildId,
+            goldOp,
+            session.name,
+            copper,
+            (message, error) => console.error(message, error),
+          ),
       },
       session,
       target,
       op,
       run,
+      request,
     );
   }
+
+  /** The transport the guild gold notice fans out over: the cached per-guild
+   *  roster read, live presence, and the events frame (the same three closures
+   *  SocialTransport hands the social service). */
+  private readonly guildBankGoldNoticePort: GuildBankGoldNoticePort = {
+    guildMembers: (guildId) => this.socialDb.guildMembers(guildId),
+    isOnline: (id) => this.sessionsByCharacterId.has(id),
+    deliver: (id, events) => {
+      const s = this.sessionsByCharacterId.get(id);
+      if (s) this.send(s, { t: 'events', list: [...events] });
+    },
+  };
 
   /** Answer one history request; authority is re-checked after the awaited read. */
   private sendGuildBankLog(session: ClientSession, pid: number, request: unknown): void {
@@ -6634,7 +6475,7 @@ export class GameServer {
               })
               .catch((err) => console.error('daily reward quest task failed:', err));
             if (msg.quest === ALDRIC_METEOR_QUEST_ID) {
-              this.noteAccountQuestComplete(session, msg.quest);
+              this.cosmetics.noteQuestComplete(session, msg.quest);
             }
           }
           this.resyncQuests(session);
@@ -6687,7 +6528,8 @@ export class GameServer {
           // id-only path), never as index 0.
           const slot = Number.isInteger(msg.slot) ? Number(msg.slot) : undefined;
           const result = sim.useItem(msg.item, pid, slot);
-          if (result?.type === 'mechChroma') this.noteAccountMechChroma(session, result.chromaId);
+          if (result?.type === 'mechChroma')
+            this.cosmetics.noteMechChroma(session, result.chromaId);
         }
         break;
       case 'discard':
@@ -7049,9 +6891,16 @@ export class GameServer {
       case 'change_weapon_skin': {
         const skinId = typeof msg.skin === 'string' ? msg.skin : null;
         const wtype = typeof msg.wtype === 'string' ? msg.wtype : undefined;
-        if (skinId !== null || wtype) this.changeAccountWeaponSkin(session, skinId, wtype);
+        if (skinId !== null || wtype) this.cosmetics.changeWeaponSkin(session, skinId, wtype);
         break;
       }
+      // Mount skins: wear (skin: string) or take off (skin: null) an account
+      // mount skin on the acting character. Ownership is checked against the
+      // session's account cosmetics here; the Sim only validates the id.
+      case 'change_mount_skin':
+        if (!this.consumeCosmeticOp(session, receivedAtMs / 1000)) break;
+        this.cosmetics.changeMountSkin(session, msg.skin);
+        break;
       // Z-key sheathe toggle: cosmetic, no payload; the Sim owns the dead-gate
       // and the combat auto-unsheathe rule.
       case 'stow_weapon':
@@ -7077,7 +6926,7 @@ export class GameServer {
         if (typeof msg.skin === 'number') {
           const claim = sim.claimEventSkin(msg.skin, pid);
           if (claim?.catalog === 'mech' && claim.chromaId) {
-            this.noteAccountMechChroma(session, claim.chromaId);
+            this.cosmetics.noteMechChroma(session, claim.chromaId);
           }
         }
         break;
@@ -7154,17 +7003,10 @@ export class GameServer {
         if (!this.consumeChatToken(session)) break;
         const whoMatch = /^\/who(?:\s+([\s\S]+))?$/i.exec(text);
         if (whoMatch) {
-          // Optional filter: "/who Mr" lists only players whose name OR zone
-          // contains "Mr" (case-insensitive). Zone names carry spaces
-          // ("Thornpeak Heights"), so keep spaces: strip only double-quotes
-          // and control chars, collapse internal whitespace, and cap the
-          // length, so the echoed query stays a clean, single-line token.
-          const filter = (whoMatch[1] ?? '')
-            .replace(/[\p{Cc}"]/gu, '')
-            .trim()
-            .replace(/\s+/g, ' ')
-            .slice(0, 32);
-          this.sendWhoRoster(session, filter || undefined);
+          // Optional filter: "/who Mr" lists only players whose name, zone, or
+          // guild contains "Mr" (case-insensitive); server/who_roster.ts owns
+          // the sanitizer and the projection.
+          this.sendWhoRoster(session, normalizeWhoFilter(whoMatch[1]) || undefined);
           break;
         }
         // Hard-word + mute enforcement gate, applied to every channel before the
@@ -7389,6 +7231,15 @@ export class GameServer {
       case 'duel_decline':
         sim.duelDecline(pid);
         break;
+      // The Social window's Who tab: the /who roster as a structured frame
+      // (server/who_roster.ts), metered on the list-read guard (a readout, never
+      // the chat lane). Silent while the viewer's own block list is still
+      // loading: the client re-asks on its slow tick.
+      case 'who':
+        if (!this.consumeListRead(session, receivedAtMs / 1000)) break;
+        if (!session.blockListLoaded) break;
+        this.send(session, whoFrame(this.whoRosterFor(session), normalizeWhoFilter(msg.filter)));
+        break;
       // social: friends / ignore / guild (persistent, account-scoped)
       case 'friend_add':
         if (typeof msg.name === 'string')
@@ -7440,21 +7291,14 @@ export class GameServer {
             .guildPledgeDecide(this.actorFor(session), msg.name, msg.accept)
             .catch(logSocialErr);
         break;
-      case 'guild_pledge_settings':
-        if (
-          typeof msg.enabled === 'boolean' &&
-          typeof msg.minLevel === 'number' &&
-          Number.isFinite(msg.minLevel) &&
-          typeof msg.note === 'string'
-        )
+      case 'guild_pledge_settings': {
+        const settings = parseGuildPledgeSettingsCommand(msg);
+        if (settings)
           void this.social
-            .setGuildPledgeSettings(this.actorFor(session), {
-              enabled: msg.enabled,
-              minLevel: msg.minLevel,
-              note: msg.note,
-            })
+            .setGuildPledgeSettings(this.actorFor(session), settings)
             .catch(logSocialErr);
         break;
+      }
       case 'guild_decline':
         void this.social.guildDecline(this.actorFor(session)).catch(logSocialErr);
         break;
@@ -7721,60 +7565,24 @@ export class GameServer {
         if (index !== null) sim.deleteLoadout(index, pid);
         break;
       }
-      // World Market (the Merchant's auction house)
+      // World Market (the Merchant's auction house). The command bodies live
+      // whole in server/market_commands.ts (the farming_commands precedent);
+      // the labels stay HERE because the command-schema suite scans this
+      // switch for the dispatch universe.
       case 'market_search':
-        sim.marketSearch(
-          sanitizeMarketQuery({
-            search: typeof msg.q === 'string' ? msg.q : '',
-            itemType: msg.itemType,
-            subtype: msg.subtype,
-            armorClass: msg.armorClass,
-            primaryStat: msg.primaryStat,
-            rarity: msg.rarity,
-            sort: msg.sort,
-            page: typeof msg.page === 'number' ? msg.page : 0,
-            collapseLowest: msg.collapseLowest,
-          }),
-          pid,
-        );
-        break;
       case 'market_sell_price_check':
-        sim.marketSellPriceCheck(typeof msg.item === 'string' ? msg.item : null, pid);
-        break;
       case 'market_list':
-        if (
-          typeof msg.item === 'string' &&
-          typeof msg.count === 'number' &&
-          Number.isFinite(msg.count) &&
-          typeof msg.price === 'number' &&
-          Number.isFinite(msg.price)
-        ) {
-          sim.marketList(msg.item, msg.count, msg.price, pid);
-        }
-        break;
       case 'market_list_instance':
-        // The instance object is only an equality needle: the sim re-resolves
-        // it against the sender's own bags and escrows the actual held copy's
-        // payload, so no wire-supplied field ever enters the book directly.
-        if (
-          typeof msg.item === 'string' &&
-          typeof msg.price === 'number' &&
-          Number.isFinite(msg.price) &&
-          typeof msg.instance === 'object' &&
-          msg.instance !== null &&
-          !Array.isArray(msg.instance)
-        ) {
-          sim.marketListInstance(msg.item, msg.price, msg.instance as ItemInstancePayload, pid);
-        }
-        break;
       case 'market_buy':
-        if (typeof msg.id === 'number') buyWithSoldVolume(sim, msg.id, pid);
-        break;
+      case 'market_sweep_quote':
+      case 'market_sweep':
       case 'market_cancel':
-        if (typeof msg.id === 'number') sim.marketCancel(msg.id, pid);
-        break;
       case 'market_collect':
-        sim.marketCollect(pid);
+        // Arm-marked heavy-self members (market_sweep) mark only when the frame
+        // reached the sim, the farming precedent above.
+        if (dispatchMarketCommand(sim, msg, pid) && heavySelfMarkOnAccept(command)) {
+          session.selfHeavyDirty = true;
+        }
         break;
       case 'mail_send': {
         if (
@@ -7933,61 +7741,26 @@ export class GameServer {
           this.scheduleBankLedgerHighWaterSave(session);
         }
         break;
-      // Guild Bank: the officer-plus shared treasury + item store. Shape-only
-      // checks here (the bank_* idiom): the Sim owns every gameplay rule
-      // (banker proximity, officer-plus rank via the session membership stamp,
-      // quest-bind, treasury cap, table price, capacity). `slot` is a container
-      // index, `count` optional (omit = whole stack), `amount` copper. Every op
-      // runs through runGuildBankOp: the before/after guildBankInfoFor diff is
-      // the ONE success signal, pre-reserving the bank_ledger rows
-      // (container='guild') and marking the book dirty. The later fenced save
-      // commits those rows atomically with the character and book; a refusal
-      // diffs empty and stages neither row nor mark.
+      // Guild Bank: the five officer-plus book mutations, dispatched by
+      // server/guild_bank_wire.ts (shape checks) through runGuildBankOp
+      // (ledger evidence + the guild gold notice). The guard token is drawn
+      // here, once per frame, before the shape check.
       case 'guild_bank_deposit_gold':
-        if (!this.consumeGuildBankOp(session, receivedAtMs / 1000)) break;
-        if (typeof msg.amount === 'number') {
-          const amount = msg.amount;
-          this.runGuildBankOp(session, { pid }, 'deposit_gold', () =>
-            sim.guildBankDepositGoldFor(pid, amount),
-          );
-        }
-        break;
       case 'guild_bank_withdraw_gold':
-        if (!this.consumeGuildBankOp(session, receivedAtMs / 1000)) break;
-        if (typeof msg.amount === 'number') {
-          const amount = msg.amount;
-          this.runGuildBankOp(session, { pid }, 'withdraw_gold', () =>
-            sim.guildBankWithdrawGoldFor(pid, amount),
-          );
-        }
-        break;
       case 'guild_bank_deposit':
-        if (!this.consumeGuildBankOp(session, receivedAtMs / 1000)) break;
-        if (typeof msg.slot === 'number') {
-          const slot = msg.slot;
-          const transfer = readMaterialSourceTransferWire(msg, slot);
-          if (transfer === null) break;
-          const { count, selection } = transfer;
-          this.runGuildBankOp(session, { pid }, 'deposit', () =>
-            sim.guildBankDepositFor(pid, slot, count, selection),
-          );
-        }
-        break;
       case 'guild_bank_withdraw':
-        if (!this.consumeGuildBankOp(session, receivedAtMs / 1000)) break;
-        if (typeof msg.slot === 'number') {
-          const slot = msg.slot;
-          const transfer = readMaterialSourceTransferWire(msg, slot);
-          if (transfer === null) break;
-          const { count, selection } = transfer;
-          this.runGuildBankOp(session, { pid }, 'withdraw', () =>
-            sim.guildBankWithdrawFor(pid, slot, count, selection),
-          );
-        }
-        break;
       case 'guild_bank_buy_slots':
         if (!this.consumeGuildBankOp(session, receivedAtMs / 1000)) break;
-        this.runGuildBankOp(session, { pid }, 'buy_slots', () => sim.guildBankBuySlotsFor(pid));
+        dispatchGuildBankCommand(
+          {
+            sim,
+            run: (op, mutate, request) =>
+              this.runGuildBankOp(session, { pid }, op, mutate, request),
+          },
+          command,
+          msg,
+          pid,
+        );
         break;
       // The history READ (no mutation, no sim call), on its OWN read bucket:
       // a chip press or Show older is a request, and reads must never drain
@@ -8064,7 +7837,7 @@ export class GameServer {
           sim.completeQuestForDev(msg.quest, pid);
           const afterDone = sim.meta(pid)?.questsDone.has(msg.quest) ?? false;
           if (!beforeDone && afterDone && msg.quest === ALDRIC_METEOR_QUEST_ID) {
-            this.noteAccountQuestComplete(session, msg.quest);
+            this.cosmetics.noteQuestComplete(session, msg.quest);
           }
           this.resyncQuests(session);
         }
@@ -8076,7 +7849,7 @@ export class GameServer {
           sim.completeCurrentQuestsForDev(pid);
           const afterDone = sim.meta(pid)?.questsDone.has(ALDRIC_METEOR_QUEST_ID) ?? false;
           if (!beforeDone && afterDone) {
-            this.noteAccountQuestComplete(session, ALDRIC_METEOR_QUEST_ID);
+            this.cosmetics.noteQuestComplete(session, ALDRIC_METEOR_QUEST_ID);
           }
           this.resyncQuests(session);
         }
@@ -8707,29 +8480,12 @@ export class GameServer {
     };
     if (session.dungeonEntryFacing.enabled)
       maybeSerialized('de', `${this.sim.entities.get(session.pid)?.dungeonEntrySeq ?? 0}`);
-    // Static combat-rating/progression scalars: rarely change (gear/talent swap,
-    // level or XP gain, a copper transaction, a heroic-key toggle), unlike every
-    // other field on this record which was still being rebuilt and stringified
-    // every tick regardless. Delta-guarded like the rest of this record; the
-    // reconciliation-critical fields above (resource, gcd, swing, combo, target,
-    // auto, queued) stay unconditional since they change on most combat ticks.
-    maybe('xp', meta.xp);
-    maybe('lxp', meta.lifetimeXp);
-    maybe('rxp', Math.round(meta.restedXp));
-    maybe('prk', meta.prestigeRank);
-    maybe('copper', meta.copper);
-    maybe('ap', p.attackPower);
-    maybe('sp', p.spellPower);
-    maybe('hpw', p.healPower);
-    maybe('sh', p.spellHaste);
-    maybe('crit', p.critChance);
-    maybe('dodge', p.dodgeChance);
-    maybe('blk', p.blockChance);
-    maybe('bval', p.blockValue);
-    maybe('crat', p.critRating);
-    maybe('hrat', p.hasteRating);
-    maybe('hirat', p.hitRating);
-    maybe('ddiff', this.sim.dungeonDifficulty(anchorSession.pid));
+    // Static combat-rating/progression scalars plus the in-combat bit: rarely
+    // change, unlike every other field on this record which is rebuilt and
+    // stringified every tick. Delta-guarded like the rest of this record; the
+    // reconciliation-critical fields above stay unconditional since they change
+    // on most combat ticks. The cohort lives in server/self_scalar_wire.ts.
+    emitSelfScalarKeys(maybe, meta, p, this.sim.dungeonDifficulty(anchorSession.pid));
     // The viewer's OWN authored look. It cannot come from the entity list (the
     // broadcast loop skips `e.id === anchorEntity.id`), and it is exactly what
     // `maybeRaw` is for: heavy, already serialized once (appearanceWireJson),
@@ -8935,10 +8691,12 @@ export class GameServer {
         browseRev !== session.lastMarketBrowseRev ||
         meta.marketQuery !== session.lastMarketQueryRef ||
         meta.sellPriceItemId !== session.lastSellPriceItemIdRef ||
+        meta.sweepQuote !== session.lastSweepQuoteRef ||
         this.sim.tickCount - session.lastMarketRebuildTick >= MARKET_BROWSE_REFRESH_TICKS
       ) {
         session.lastMarketQueryRef = meta.marketQuery;
         session.lastSellPriceItemIdRef = meta.sellPriceItemId;
+        session.lastSweepQuoteRef = meta.sweepQuote;
         session.lastMarketRebuildTick = this.sim.tickCount;
         maybe('market', this.sim.marketInfoFor(anchorSession.pid));
         // Stamp AFTER the rebuild: marketInfoFor can advance the revision as a
@@ -9147,36 +8905,10 @@ export class GameServer {
       maybe('qlog', [...meta.questLog.values()]);
       maybe('qdone', [...meta.questsDone]);
       maybe('milestones', [...meta.unlockedMilestones]);
-      // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
-      // lifetime stat block. Maps and Sets do not survive JSON.stringify, so
-      // both wire as plain objects/arrays and ClientWorld rebuilds the Map
-      // and both Sets on apply. Heavy-gated: deedUnlocked is a
-      // HEAVY_SELF_EVENTS member, so an unlock re-diffs on the next snapshot.
-      // DELIBERATE freshness floor: a stat bump that crosses no unlock
-      // threshold re-wires only on the staggered safety refresh (<=2s), never
-      // per increment; flushing per kill would re-serialize every heavy field
-      // each combat tick, the exact cost this gate exists to avoid.
-      maybe('deeds', Object.fromEntries(meta.deedsEarned));
-      maybe('dstats', {
-        counters: meta.deedStats.counters,
-        itemsDiscovered: [...meta.deedStats.itemsDiscovered],
-        visited: [...meta.deedStats.visited],
-        dungeonClears: meta.deedStats.dungeonClears,
-      });
-      // Reliquary sparse blob only: firstFind (with its folded obtain tally) /
-      // illuminatedPages / marks / recent, omit-empty. Item ownership stays on
-      // dstats.itemsDiscovered; never a second full discovery array.
-      // Heavy-gated: reliquaryUnlock is a HEAVY_SELF_EVENTS member so a fill
-      // re-diffs on the next snapshot without saveCharacter.
-      // maybeRaw, not maybe: this is the same shape the realm readouts use, a
-      // value serialized ONCE by a memo instead of per session per tick.
-      // reliquaryWireJson caches on the state's own revision, so a staggered
-      // refresh for a player whose Reliquary has not moved (the overwhelming
-      // case) reuses the string rather than walking and re-stringifying the
-      // whole blob just to hand the delta gate bytes it already has. The output
-      // is byte-identical to the JSON.stringify path it replaces, so lastSent
-      // comparisons are unchanged across the swap.
-      maybeRaw('reliq', reliquaryWireJson(meta.reliquary));
+      // Book of Deeds (`deeds`/`dstats`), the Reliquary sparse blob (`reliq`),
+      // and the account ledger (`acct`): server/deeds_wire.ts owns the four
+      // keys and their heavy-gate doctrine.
+      appendBookOfDeedsWire(meta, maybe, maybeRaw);
       // talents/spec/loadouts: the client recomputes its known abilities from this.
       maybe('tal', {
         alloc: meta.talents,
@@ -9251,7 +8983,7 @@ export class GameServer {
             inCombat: e.inCombat ? 1 : 0,
             group: party.raidGroups.get(mPid) ?? 1,
             absorb: partyFrameAbsorb(e.auras),
-            role: partyFrameRole(meta.talentMods.role),
+            role: partyFrameRole(meta.talentMods.role, meta.cls, e.auras),
             // Effective health Rewind could currently restore to this member
             // (combat/rewind.ts); 0 for members with no recent recorded loss.
             rewind: rewindHealAmount(damageTakenWithin(e, this.sim.tickCount), e.hp, e.maxHp),
@@ -9318,12 +9050,23 @@ export class GameServer {
           const ids = deedUnlocks.get(s);
           if (ids) ids.push(ev.deedId);
           else deedUnlocks.set(s, [ev.deedId]);
+          // Account ledger fan-out to sibling sessions (retro included: still a fact).
+          this.ledger.noteDeedEarned(s, ev.deedId);
           // Marquee unlocks fan out to guildmates and followers, and
           // feed-worthy unlocks (titles, borders, the first koi) to the
           // Discord activity feed; retro unlocks NEVER fan out anywhere (a
           // veteran's first login after rollout must not spam their guild or
           // the feed).
           if (ev.retro !== true) this.fanOutDeedUnlock(s, ev.deedId, now);
+        }
+      }
+      // Account ledger relic record: stage the key for the post-save drain (the
+      // pendingDeedRecords rule) and fan it out to sibling sessions now.
+      if (ev.type === 'relicRecorded' && ev.pid !== undefined) {
+        const s = this.clients.get(ev.pid);
+        if (s) {
+          s.pendingRelicRecords.push(ev.key);
+          this.ledger.noteRelicFound(s, ev.key);
         }
       }
       // Reliquary first-ever page Illumination (Phase 18). The sim gates
@@ -9592,10 +9335,12 @@ export class GameServer {
               ) {
                 return;
               }
-              mine.push(fragments[i]);
               // a sim-driven change to a heavy self field (loot, level-up, quest
               // credit, ...) refreshes those fields on the next snapshot
               if (HEAVY_SELF_EVENTS.has(ev.type)) session.selfHeavyDirty = true;
+              // relicRecorded has no client consumer (the acct key is the authority): never ship it.
+              if (ev.type === 'relicRecorded') return;
+              mine.push(fragments[i]);
               // A match concluding (win, loss, draw, or forfeit) changes rating
               // and standings on the throttled `arena` self key (ARENA_WIRE_HZ):
               // force it fresh next snapshot instead of leaving the Arena
@@ -9836,7 +9581,7 @@ export class GameServer {
         if (sent.target) {
           this.rememberChatChannel(session, { channel: 'whisper', target: sent.target });
         }
-      } else {
+      } else if (sent.channel !== 'raidWarning') {
         this.rememberChatChannel(session, { channel: sent.channel });
       }
     }
@@ -10163,71 +9908,32 @@ export class GameServer {
       });
       return;
     }
-    let rows = this.whoRosterFor(session);
-    if (filter) {
-      const q = filter.toLowerCase();
-      rows = rows.filter(
-        (row) => row.name.toLowerCase().includes(q) || row.zone.toLowerCase().includes(q),
-      );
-    }
-    const total = rows.length;
-    const header = filter
-      ? `Who: ${total} ${total === 1 ? 'player' : 'players'} matching "${filter}" on ${REALM}.`
-      : `Who: ${total} ${total === 1 ? 'player' : 'players'} online on ${REALM}.`;
-    const list: { type: 'log'; text: string; color: string }[] = [
-      {
-        type: 'log',
-        text: header,
-        color: '#7fd4ff',
-      },
-    ];
-    for (const row of rows.slice(0, WHO_RESULT_LIMIT)) {
-      const status = row.status === 'online' ? '' : ` (${row.status})`;
-      list.push({
-        type: 'log',
-        text: `${row.name} - level ${row.level} ${row.cls} - ${row.zone}${status}`,
-        color: '#c9b27a',
-      });
-    }
-    if (total > WHO_RESULT_LIMIT) {
-      list.push({
-        type: 'log',
-        text: `...and ${total - WHO_RESULT_LIMIT} more.`,
-        color: '#998d6a',
-      });
-    }
-    this.send(session, { t: 'events', list });
+    this.send(session, {
+      t: 'events',
+      list: whoChatLines(this.whoRosterFor(session), filter ?? '', REALM),
+    });
   }
 
+  // The realm-wide roster, built and name-sorted at most ONCE per sim tick for
+  // every viewer (the realm-readout memo seam), each entry keeping a live
+  // session handle for the per-viewer visibility rule. Zone + status only:
+  // presenceOf also carries the live x/z, which the Who tab's frame must never
+  // ship realm-wide (positions stay friend/guild-gated on the socialpos frame).
+  private whoRosterEntries(): readonly WhoRosterEntry<ClientSession>[] {
+    return realmReadoutObject(this.whoRosterReadout, this.sim.tickCount, () =>
+      buildWhoRosterEntries(this.clients.values(), (session) => {
+        const e = this.sim.entities.get(session.pid);
+        const meta = this.sim.meta(session.pid);
+        if (!e || !meta) return null;
+        const { zone, status } = this.presenceOf(session);
+        return { name: session.name, cls: meta.cls, level: e.level, guild: e.guild, zone, status };
+      }),
+    );
+  }
+
+  // The rows THIS viewer may see (canShowInWho: bidirectional blocks, fail-closed).
   private whoRosterFor(viewer: ClientSession): WhoRosterRow[] {
-    const rows: WhoRosterRow[] = [];
-    for (const session of this.clients.values()) {
-      if (!this.canShowInWho(viewer, session)) continue;
-      const e = this.sim.entities.get(session.pid);
-      const meta = this.sim.meta(session.pid);
-      if (!e || !meta) continue;
-      rows.push({
-        name: session.name,
-        cls: meta.cls,
-        level: e.level,
-        ...this.presenceOf(session),
-      });
-    }
-    return rows.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  private canShowInWho(viewer: ClientSession, candidate: ClientSession): boolean {
-    // Fail closed while the candidate's block list is still loading: showing
-    // them in /who before we know their blocks could leak presence to
-    // someone they've blocked.
-    if (!candidate.blockListLoaded) return false;
-    if (viewer.blockedIds.has(candidate.characterId)) return false;
-    if (
-      candidate.characterId !== viewer.characterId &&
-      candidate.blockedIds.has(viewer.characterId)
-    )
-      return false;
-    return true;
+    return visibleWhoRows(this.whoRosterEntries(), viewer);
   }
 
   private broadcastSystem(text: string): void {

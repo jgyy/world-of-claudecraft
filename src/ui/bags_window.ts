@@ -67,8 +67,8 @@ import {
   buildBagGrid,
   buildBagListRows,
   carriedPools,
+  materialsOnlyEmptyCells,
   resolveDepositSubmit,
-  vendorSellIsInstant,
 } from './bags_view';
 import { showQuantityPrompt } from './bank_quantity_prompt';
 import { hasOpenBankSocket } from './bank_view';
@@ -104,6 +104,8 @@ import {
   appendMaterialSourcesActionAfter,
   closeMaterialSourcesDialogForOwner,
   type MaterialSourcesSelectionFactory,
+  materialSourcesButtonShown,
+  openMaterialSourcesForRow,
 } from './material_sources_dialog';
 import { materialSourcesForDisplay } from './material_sources_view';
 import type { PainterHostPresentation } from './painter_host';
@@ -116,6 +118,7 @@ import { tSim } from './sim_i18n';
 import { bindTouchItemDrag } from './touch_item_drag';
 import { svgIcon } from './ui_icons';
 import { unknownItemIconHtml } from './unknown_item_icon';
+import { type VendorSellConfirmPolicy, vendorSaleNeedsConfirm } from './vendor_sell_confirm_policy';
 import { totalHeldCount } from './vendor_sell_quantity';
 import { dropOnWorld } from './world_drop_target';
 import { wornItemCellParts } from './worn_item_cell_view';
@@ -289,10 +292,10 @@ export interface BagsWindowDeps extends PainterHostPresentation {
   dragState: ItemDragState;
   /** True on the touch HUD: the pointer drag replaces HTML5 drag-and-drop there. */
   isTouchHud(): boolean;
-  /** The confirmVendorSell setting (on by default): whether a vendor sale of
-   *  anything beyond true junk (vendorSellIsInstant) should confirm first.
-   *  False restores the classic one-click instant sale for every item. */
-  confirmVendorSell(): boolean;
+  /** The vendor sell-confirm policy (vendor_sell_confirm_policy.ts): the
+   *  confirmVendorSell master switch plus the lowest quality that confirms.
+   *  Read per click, never cached, so an Options change applies at once. */
+  sellConfirmPolicy(): VendorSellConfirmPolicy;
   /** Light up (or clear) the paperdoll sockets that accept the stack in flight, so
    *  the drag advertises where it can land. Cleared on every drag teardown.
    *  `slotIndex` names the drag source's bag cell, so the lit set judges the
@@ -429,6 +432,12 @@ export class BagsWindow {
    *  target-nearest, which means keyboard focus never lands in here to begin with. */
   private paintMoneyRow(row: HTMLElement, copper: number): void {
     row.innerHTML = `${this.deps.wocBalanceHtml()}${this.deps.claudiumLauncherHtml()}${this.deps.moneyHtml(copper)}`;
+    row
+      .querySelectorAll<HTMLElement>('[data-wallet-action], [data-claudium-launcher]')
+      .forEach((control) => {
+        control.classList.add('ui-btn');
+      });
+    row.querySelector<HTMLElement>('.woc-balance:not(button)')?.classList.add('ui-chip');
     row.querySelector('[data-claudium-launcher]')?.addEventListener('click', () => {
       this.deps.openClaudium();
     });
@@ -527,7 +536,7 @@ export class BagsWindow {
     // one on its own (that is a separate opt-in, see prompt_dialog.ts for the modal
     // recipe this window's own prompts use).
     markDialogRoot(el, { label: t('itemUi.bags.title') });
-    el.innerHTML = `<div class="panel-title"><span>${esc(t('itemUi.bags.title'))}</span><button type="button" class="x-btn" data-close data-focus-key="close" aria-label="${esc(t('itemUi.bags.close'))}">${svgIcon('close')}</button></div>`;
+    el.innerHTML = `<div class="panel-title ui-win-head"><img class="ui-win-art" src="/ui/chrome/bags.webp" alt="" draggable="false"><span class="ui-win-title">${esc(t('itemUi.bags.title'))}</span><button type="button" class="x-btn ui-x-btn" data-close data-focus-key="close" aria-label="${esc(t('itemUi.bags.close'))}">${svgIcon('close')}</button></div>`;
     el.appendChild(this.buildBagBar());
     // Skip the chip/search row entirely when the bag is empty: a full filter bar
     // above a grid of empty squares is just noise.
@@ -538,7 +547,7 @@ export class BagsWindow {
     el.appendChild(grid);
     grid.scrollTop = prevScrollTop;
     const moneyRow = document.createElement('div');
-    moneyRow.className = 'money';
+    moneyRow.className = 'money ui-money';
     el.appendChild(moneyRow);
     this.paintMoneyRow(moneyRow, world.copper);
     // The restore ladder (the vendor contract): the exact control when it
@@ -621,7 +630,7 @@ export class BagsWindow {
     // focusable no-op buttons (aria-disabled, cursor default via CSS).
     const backpack = document.createElement('button');
     backpack.type = 'button';
-    backpack.className = 'bag-socket backpack';
+    backpack.className = 'bag-socket backpack ui-socket ui-socket--bag';
     backpack.dataset.focusKey = 'bagsocket:backpack';
     backpack.setAttribute('aria-disabled', 'true');
     backpack.innerHTML = `<img class="item-icon q-common" src="${iconDataUrl('item', 'backpack')}" alt="" draggable="false">`;
@@ -645,7 +654,7 @@ export class BagsWindow {
       if (item) {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = `bag-socket q-${bagQualityKey(item)}`;
+        btn.className = `bag-socket ui-socket ui-socket--bag q-${bagQualityKey(item)}`;
         btn.dataset.focusKey = `bagsocket:${socket.socket}`;
         btn.innerHTML = this.deps.itemIcon(item);
         btn.setAttribute(
@@ -671,7 +680,7 @@ export class BagsWindow {
       } else {
         const emptySocket = document.createElement('button');
         emptySocket.type = 'button';
-        emptySocket.className = 'bag-socket empty';
+        emptySocket.className = 'bag-socket empty ui-socket ui-socket--bag';
         emptySocket.dataset.focusKey = `bagsocket:${socket.socket}`;
         emptySocket.setAttribute('aria-disabled', 'true');
         emptySocket.setAttribute('aria-label', t('hudChrome.bags.socketEmpty'));
@@ -684,6 +693,14 @@ export class BagsWindow {
     }
     const counter = document.createElement('span');
     counter.className = `bag-capacity${model.used > model.capacity ? ' over' : ''}`;
+    const split = carriedPools(world.bags, world.inventory);
+    // The general pool is the one an ITEM pickup needs; when it is full the
+    // summed pair can still read roomy (issue #3795), so the counter wears a
+    // general-full mark the CSS warms, and the inline text names both pools.
+    if (split.showMaterials) counter.classList.add('pools');
+    if (split.showMaterials && split.general.used >= split.general.capacity) {
+      counter.classList.add('general-full');
+    }
     // Focusable: the per-pool split lives only in the tooltip, whose host
     // serves hover, long-press, AND focusin; a keyboard-only user needs the
     // tab stop to reach it (the bank meter's twin, QA 08). The focus key
@@ -692,17 +709,23 @@ export class BagsWindow {
     counter.tabIndex = 0;
     counter.dataset.focusKey = 'bag-capacity';
     const fmt = (n: number): string => formatNumber(n, { maximumFractionDigits: 0 });
-    counter.textContent = t('hudChrome.bags.capacity', {
-      used: fmt(model.used),
-      total: fmt(model.capacity),
-    });
+    counter.textContent = split.showMaterials
+      ? t('hudChrome.bags.capacityPools', {
+          generalUsed: fmt(split.general.used),
+          generalTotal: fmt(split.general.capacity),
+          materialsUsed: fmt(split.materials.used),
+          materialsTotal: fmt(split.materials.capacity),
+        })
+      : t('hudChrome.bags.capacity', {
+          used: fmt(model.used),
+          total: fmt(model.capacity),
+        });
     // The per-pool truth behind the summed counter (Bank Storage phase 08):
     // with a materials-only bag equipped the summed pair can look roomy while
     // one pool refuses pickups, so the aria splits when the materials pool has
     // anything to say and the tooltip always names the pools. The split comes
     // from the shared carriedPools core (the sim's own helpers), never a
     // painter re-derivation. Non-actionable span: no click, no peek guard.
-    const split = carriedPools(world.bags, world.inventory);
     counter.setAttribute(
       'aria-label',
       split.showMaterials
@@ -764,7 +787,7 @@ export class BagsWindow {
     for (const category of BAG_CATEGORIES) {
       const chip = document.createElement('button');
       chip.type = 'button';
-      chip.className = `bag-chip${this.filter.category === category ? ' active' : ''}`;
+      chip.className = `bag-chip ui-chip${this.filter.category === category ? ' active' : ''}`;
       chip.dataset.focusKey = `bagchip:${category}`;
       const label = t(BAG_CATEGORY_LABEL_KEYS[category]);
       if (category === 'quest' && questCount > 0) {
@@ -794,7 +817,7 @@ export class BagsWindow {
 
     const search = document.createElement('input');
     search.type = 'search';
-    search.className = 'bag-search';
+    search.className = 'bag-search ui-input';
     search.dataset.focusKey = 'bag-search';
     search.placeholder = t('hudChrome.bags.searchPlaceholder');
     search.setAttribute('aria-label', t('hudChrome.bags.searchAria'));
@@ -807,7 +830,7 @@ export class BagsWindow {
     tools.appendChild(search);
 
     const sort = document.createElement('select');
-    sort.className = 'bag-sort';
+    sort.className = 'bag-sort ui-btn';
     // The one filter-bar control the ladder missed (the phase 14 QA): its
     // change handler rebuilds the window, and keyless it fell to <body>
     // mid-interaction (a closed select fires change per arrow press).
@@ -835,7 +858,7 @@ export class BagsWindow {
     // the press is seeing the tidied bag, and a derived list would hide it.
     const sortBtn = document.createElement('button');
     sortBtn.type = 'button';
-    sortBtn.className = 'bag-sort-btn';
+    sortBtn.className = 'bag-sort-btn ui-btn';
     sortBtn.dataset.focusKey = 'bag-sort-btn';
     sortBtn.innerHTML = `${svgIcon('sort')}<span>${esc(t('hudChrome.bags.sortButton'))}</span>`;
     sortBtn.setAttribute('aria-label', t('hudChrome.bags.sortButtonAria'));
@@ -927,6 +950,22 @@ export class BagsWindow {
     // and a header node in the cell stream would shift bagIndex drop targets
     // (state.md locked decision 7). Rim/seal alone marks quest stacks in this view.
     if (model.cells.length > 0) {
+      // The trailing empties past the general pool's headroom are painted as
+      // materials-only squares (issue #3795): counted down from the END so
+      // exactly generalFree plain empties remain, wherever the holes sit.
+      let materialsOnly = materialsOnlyEmptyCells(
+        world.bags,
+        world.inventory,
+        model.cells.filter((c) => c === null).length,
+      );
+      const materialsOnlyFrom: number[] = [];
+      for (let cell = model.cells.length - 1; cell >= 0 && materialsOnly > 0; cell--) {
+        if (model.cells[cell] === null) {
+          materialsOnlyFrom.push(cell);
+          materialsOnly--;
+        }
+      }
+      const materialsOnlyCells = new Set(materialsOnlyFrom);
       for (let cell = 0; cell < model.cells.length; cell++) {
         const stack = model.cells[cell];
         const item = stack ? knownItemDef(ITEMS, stack.itemId) : undefined;
@@ -938,7 +977,7 @@ export class BagsWindow {
             ? this.buildStackCell(stack, item, cell)
             : stack
               ? this.buildUnknownStackCell(stack, cell)
-              : this.buildEmptyCell(cell),
+              : this.buildEmptyCell(cell, materialsOnlyCells.has(cell)),
         );
       }
       if (settle) this.applySortSettle(grid);
@@ -1000,7 +1039,7 @@ export class BagsWindow {
       const questMark = bagQuestMarkKind(item, this.questMarkProgress(item));
       const questReady = questMark === 'questReady';
       const fineMark = bagFineMark(item.id);
-      row.className = `bag-item q-${bagQualityKey(item, s.instance)}${bagRimClasses(questMark, fineMark)}`;
+      row.className = `bag-item ui-socket ui-socket--bag q-${bagQualityKey(item, s.instance)}${bagRimClasses(questMark, fineMark)}`;
       // Item identity for the island coach's press-this-next glow
       // (bootcamp.ts; distinct from the focus-key namespace).
       row.dataset.coachItem = item.id;
@@ -1194,6 +1233,25 @@ export class BagsWindow {
           }
           return;
         }
+        // At an open storage pane (bank, guild bank, vault) a sourced material
+        // stack's right-click opens the exact-source deposit picker: the same
+        // session the touch-only Sources button opens, captured now, so the
+        // stack pin is fixed the moment the gesture fires. A sourceless stack
+        // keeps the whole-stack deposit the classic action runs below.
+        const storageSources = materialSourcesForDisplay(s);
+        const storageSelection = this.storageSourceSelection(s);
+        if (storageSources && storageSelection && this.deps.openMaterialSources) {
+          ev.preventDefault();
+          this.deps.hideTooltip();
+          openMaterialSourcesForRow(
+            this.deps.openMaterialSources,
+            itemName,
+            storageSources,
+            row,
+            storageSelection,
+          );
+          return;
+        }
         ev.preventDefault();
         // The action menu opens, whose FIRST row is the classic left-click
         // action so that binding survives (right-click never destroys;
@@ -1304,7 +1362,16 @@ export class BagsWindow {
       this.attachRowTooltip(row, item, s);
       const displayedSources = materialSourcesForDisplay(s);
       const sourceSelection = this.storageSourceSelection(s);
-      if (displayedSources && sourceSelection && this.deps.openMaterialSources) {
+      // Touch only (materialSourcesButtonShown): the per-cell button doubled
+      // every material cell's height at an open storage pane. Desktop reaches
+      // the same exact-source deposit picker through the cell's right-click
+      // (the contextmenu arm above), so it grows no button.
+      if (
+        displayedSources &&
+        sourceSelection &&
+        this.deps.openMaterialSources &&
+        materialSourcesButtonShown()
+      ) {
         const wrapper = document.createElement('div');
         wrapper.className = 'material-source-item material-source-item-cell';
         wrapper.appendChild(row);
@@ -1324,10 +1391,19 @@ export class BagsWindow {
   // One empty square: free space in the bag. In the pristine view it is a real CELL a
   // stack can be parked in (a hole, deliberately), so it accepts a drop; in a derived
   // list view it is decorative padding. Never focusable either way.
-  private buildEmptyCell(cell: number | null): HTMLElement {
+  private buildEmptyCell(cell: number | null, materialsOnly = false): HTMLElement {
     const el = document.createElement('div');
-    el.className = 'bag-item empty';
+    el.className = `bag-item empty ui-socket ui-socket--bag${materialsOnly ? ' materials-only' : ''}`;
     el.setAttribute('aria-hidden', 'true');
+    if (materialsOnly) {
+      // A square only a material may take (issue #3795): tinted by CSS and
+      // explained on hover. It stays aria-hidden like every empty square;
+      // the counter's split aria carries the pool truth for a reader.
+      this.deps.attachTooltip(
+        el,
+        () => `<div class="tt-sub">${esc(t('hudChrome.bags.emptyMaterialsOnly'))}</div>`,
+      );
+    }
     if (cell !== null) {
       el.dataset.bagIndex = String(cell);
       this.bindBagCellDrop(el, cell);
@@ -1375,7 +1451,7 @@ export class BagsWindow {
   private buildUnknownStackCell(s: InvSlot, cell: number | null): HTMLElement {
     const row = document.createElement('button');
     row.type = 'button';
-    row.className = 'bag-item q-common';
+    row.className = 'bag-item ui-socket ui-socket--bag q-common';
     row.dataset.focusKey = `bagu:${s.itemId}:${
       cell ?? this.stackOrdinal(this.deps.world().inventory, s)
     }`;
@@ -1663,6 +1739,7 @@ export class BagsWindow {
       this.bagMode(),
       s.instance,
       s.craftedRecipeId,
+      this.partyTradeWindowActive(s.instance),
     );
     switch (action) {
       case 'transferBlockedSoulbound':
@@ -1675,7 +1752,11 @@ export class BagsWindow {
         this.deps.showError(t('hudChrome.mailbox.cannotMail'));
         return;
       case 'mailAttachBlockedBound':
-        this.deps.showError(t('hudChrome.mailbox.cannotMail'));
+        // The specific "bound" reason (mirrors the sim's own noMailBound send-time
+        // refusal), not the generic cannotMail line: this copy is bind-on-trade
+        // or already stamped boundTo, so telling the player it is bound until
+        // traded in person is accurate where "cannot be mailed" reads as final.
+        this.deps.showError(t('hudChrome.mailbox.result.noMailBound'));
         return;
       case 'mailAttach':
         this.deps.stageMailParcel(s.itemId, s.instance);
@@ -1859,6 +1940,7 @@ export class BagsWindow {
         mode,
         s.instance,
         s.craftedRecipeId,
+        this.partyTradeWindowActive(s.instance),
       );
       const extra = key ? `<div class="tt-sub">${esc(t(key))}</div>` : '';
       // Advertise the shift-click partial deposit on a splittable stack, the bank
@@ -1987,6 +2069,19 @@ export class BagsWindow {
       vaultDeposit: this.deps.isVaultBankTab(),
       petFeed: this.deps.pendingPetFeed(),
     };
+  }
+
+  // Whether a bind-on-pickup party-trade marker on this copy is still live
+  // on the host clock (the world owns which clock stamped `untilMs`), so the
+  // bag click and hint stage a still-tradable soulbound copy instead of
+  // refusing it before the authoritative trade path ever sees it.
+  private partyTradeWindowActive(instance: ItemInstancePayload | undefined): boolean {
+    const untilMs = instance?.partyTrade?.untilMs;
+    return (
+      typeof untilMs === 'number' &&
+      Number.isFinite(untilMs) &&
+      this.deps.world().partyTradeMsRemaining(untilMs) > 0
+    );
   }
 
   // Whether the action menu should open for this item. Offered ONLY in
@@ -2142,15 +2237,18 @@ export class BagsWindow {
 
   private sellBagItem(item: ItemDef, slot: InvSlot, ev: MouseEvent): void {
     const count = Math.max(1, Math.floor(slot.count));
-    // The confirmVendorSell setting folds into the same instant gate
-    // vendorSellIsInstant already uses: turning it off (a player accepting the
-    // risk in exchange for speed) treats every item as instant for
-    // CONFIRMATION purposes, restoring the classic one-click sale. HOW MUCH
-    // sells is still decided below exactly as it already is for true junk
-    // (one unit on a plain click, the whole stack on ctrl/meta).
-    const instant =
-      !this.deps.confirmVendorSell() ||
-      vendorSellIsInstant(item, slot.instance, slot.craftedRecipeId);
+    // The sell-confirm policy (the confirmVendorSell switch and the quality
+    // threshold) folds into the same instant gate vendorSellIsInstant already
+    // draws around true junk: a sale the policy does not confirm is instant for
+    // CONFIRMATION purposes, the classic one-click sale. HOW MUCH sells is
+    // still decided below exactly as it already is for true junk (one unit on
+    // a plain click, the whole stack on ctrl/meta).
+    const instant = !vendorSaleNeedsConfirm(
+      item,
+      slot.instance,
+      slot.craftedRecipeId,
+      this.deps.sellConfirmPolicy(),
+    );
     if (ev.ctrlKey || ev.metaKey) {
       if (instant) {
         this.deps.world().sellItem(slot.itemId, count);
@@ -2214,7 +2312,15 @@ export class BagsWindow {
     for (const slot of this.deps.world().inventory) {
       if (slot.itemId !== itemId) continue;
       matched = true;
-      if (!vendorSellIsInstant(item, slot.instance, slot.craftedRecipeId)) return false;
+      if (
+        vendorSaleNeedsConfirm(
+          item,
+          slot.instance,
+          slot.craftedRecipeId,
+          this.deps.sellConfirmPolicy(),
+        )
+      )
+        return false;
     }
     return matched;
   }

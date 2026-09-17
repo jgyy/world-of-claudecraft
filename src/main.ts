@@ -1,3 +1,9 @@
+import { formatAbilityImbueDamage } from './ui/ability_imbue_text';
+import { bindChatComposerFocusState, resetChatComposer } from './ui/chat_composer_focus_controller';
+import { dispatchCollectionAction } from './ui/collection_actions_core';
+import { createInterfaceVisibility } from './ui/interface_visibility';
+import { dispatchInterfaceVisibilityAction } from './ui/interface_visibility_core';
+import { MOBILE_CHAT_REPLY_CLASS, START_SCREEN_OPEN_CLASS } from './ui/root_state_classes';
 // Game-client style barrel (declares the @layer order, loads tokens + base, etc.).
 // index.html and play.html both bootstrap through this module, so this one import
 // styles both game entries; admin/guide use their own entries and inline CSS.
@@ -44,8 +50,10 @@ import {
   resolveClickMoveAction,
   stepAngleToward,
 } from './game/click_move';
+import { paintClickMoveMarker } from './game/click_move_marker';
 import { clientEnvBits, installPageStateTracking, pageStateBits } from './game/client_env';
 import { getClientSeed } from './game/client_seed';
+import { buildContextRecoveryCallbacks } from './game/context_loss_diagnostics';
 import { localPartyMemberIds } from './game/corpse_loot_availability';
 import { createCrossHotbar, measureCrossHotbarLift } from './game/cross_hotbar_wiring';
 import { shouldClearAutorunOnDeath } from './game/death_input_reset';
@@ -86,6 +94,7 @@ import {
   suspendActiveEntryDiagnostics,
 } from './game/entry_diagnostics';
 import { ferryPrewarmTargetFor } from './game/ferry_prewarm';
+import { createGameRenderer, validateGameRenderer } from './game/game_renderer';
 import { GamepadManager } from './game/gamepad';
 import { createGamepadActivityNotifier } from './game/gamepad_activity_notify';
 import { GamepadBindings } from './game/gamepad_bindings';
@@ -98,6 +107,7 @@ import { gatherToolProfessionFor, nearestGatherNodeForProfession } from './game/
 import { publishGpuHitchRuntimeReceipt } from './game/gpu_hitch_receipt';
 import { GraphicsRebuildCoordinator } from './game/graphics_rebuild_coordinator';
 import {
+  captureGraphicsSettingsSnapshot,
   type GraphicsSettingsSnapshot,
   graphicsApplyMode,
   graphicsSettingsSnapshotsEqual,
@@ -111,7 +121,9 @@ import {
 } from './game/graphics_rebuild_crash_guard';
 import { Input } from './game/input';
 import { InputActivityMeter, installInputActivityTracking } from './game/input_activity';
+import { createGatherEffectConfirm, interactKeyGatherOptions } from './game/interact_key_gather';
 import { stopAutorunForInteraction } from './game/interaction_autorun';
+import { createBgFlagKey } from './game/interaction_input';
 import {
   activePvpOpponentIds,
   HoverPickGate,
@@ -153,6 +165,7 @@ import {
 } from './game/mobile_controls';
 import { applyMobileHudLayout } from './game/mobile_hud_layout_applier';
 import { watchMobileMoreState } from './game/mobile_more_diagnostics';
+import { mobilePlatform, mobilePreflightCopy } from './game/mobile_preflight';
 import { mouselookReleaseFacing } from './game/mouselook_release';
 import { diagonalMovementVisualFacing } from './game/movement_visual';
 import { music } from './game/music';
@@ -165,11 +178,13 @@ import { sendOnlineMovementFrame } from './game/online_movement_frame';
 import { padCastPress, padCastRelease } from './game/pad_cast_routing';
 import { createGroundAimReticleSync, padGroundAimCallbacks } from './game/pad_ground_aim_wiring';
 import { padReelItemId } from './game/pad_reel';
+import { dispatchPadSharedEdgeAction } from './game/pad_shared_edge_action';
 import { openTargetSubcommands } from './game/pad_subcommands';
 import { createPadTargetPick } from './game/pad_target_pick';
 import { createPerfMonitor } from './game/perf';
 import { initPerfNudge } from './game/perf_nudge';
 import { startPerfReporter } from './game/perf_reporter';
+import { runPetCommand } from './game/pet_commands';
 import { kickCharacterPreloadStream, runPostEntryWarmups } from './game/post_entry_warmups_core';
 import { newPresentationGateInput, presentationGate } from './game/presentation_gate';
 import { startRealmBuilderRollLoad } from './game/realm_builder_boot';
@@ -206,6 +221,7 @@ import {
 import { markSpawnIntroSeen, readSpawnIntroSeen } from './game/spawn_intro_seen';
 import { safeStartupGraphicsPreset } from './game/startup_graphics_safety';
 import { shouldClearTargetOnGroundClick } from './game/target_click';
+import { dispatchTargetingAction, targetingInputCallbacks } from './game/targeting_actions';
 import {
   type TeleportCameraArrival,
   teleportCameraArrivalAfterTick,
@@ -302,6 +318,7 @@ import {
 } from './render/assets/graphics_profile';
 import {
   enableKtx2MipRelease,
+  type Ktx2RestoreTarget,
   ktx2MipsOnContextLost,
   ktx2MipsRestored,
 } from './render/assets/ktx2_mip_release';
@@ -342,6 +359,7 @@ import {
   playerPortraitDataUrl,
   resetPortraitRendererForGraphicsRebuild,
 } from './render/characters/portrait';
+import { attachContextRecoveryHandlers } from './render/context_loss_recovery';
 import { type RecycledRendererContext, recycleWebGL2Context } from './render/context_recycle';
 import { installWebGLContextRelease } from './render/context_release';
 import {
@@ -355,7 +373,7 @@ import {
 } from './render/gfx';
 import { setNameplateDotScale } from './render/nameplate_dot_scale';
 import { createInitialPrewarmResumeStartGate } from './render/prewarm_resume_start_gate';
-import { Renderer } from './render/renderer';
+import type { Renderer } from './render/renderer';
 import { hasAuthoritativeSelfPositionDiscontinuity } from './render/self_motion';
 import { MovementPredictionPipeline } from './render/self_prediction';
 import { ensureSkyAssetsAt, navigatorSaveData } from './render/sky';
@@ -396,6 +414,7 @@ import {
 } from './sim/types';
 import { zoneBiomeAt } from './sim/world';
 import { startSitePresence } from './site_presence';
+import { applyAbsorbOverlayGate } from './ui/absorb_overlay_gate';
 import {
   accountPortalModel,
   deactivateConfirmReady,
@@ -419,6 +438,7 @@ import {
   relocalizeAppearancePanels,
 } from './ui/appearance_panel_locale';
 import { setThornhollowPrewarmHooks } from './ui/arena_window';
+import { applyAuraBarSide } from './ui/aura_bar_side';
 import {
   handleKeyboardActivation,
   syncInputAriaState,
@@ -429,8 +449,9 @@ import {
 import { BreathBar } from './ui/breath_bar';
 import { assembleBugReportMeta } from './ui/bug_report';
 import { cameraPromptOpen, dismissCameraPrompt } from './ui/camera_prompt';
-import { deleteCharButtonHtml } from './ui/char_delete_button';
+import { deleteCharButtonHtml, normalizeDeleteConfirmation } from './ui/char_delete_button';
 import { resetComposedRows, trackComposedChipRow } from './ui/charselect_composed_refresh';
+import { charselectHintsHtml } from './ui/charselect_hints';
 import { loadCharselectNews } from './ui/charselect_news';
 import { CharselectRedesignEditor } from './ui/charselect_redesign';
 import { ChatCommandMenu } from './ui/chat_command_menu';
@@ -474,7 +495,7 @@ import {
   setReferralProvider,
   setStandingProvider,
 } from './ui/hud/player_card/player_card_share';
-import { gatherEffectPrompt, gatherToolNoNodeKey } from './ui/hud/professions/gathering_view';
+import { gatherToolNoNodeKey } from './ui/hud/professions/gathering_view';
 import {
   ensureLocaleLoaded,
   formatNumber,
@@ -844,53 +865,6 @@ function requestMobileFullscreenLandscape(): void {
   }
 }
 
-function mobilePlatform(): 'ios' | 'android' | 'other' {
-  const ua = navigator.userAgent;
-  const platform = navigator.platform;
-  if (/iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-    return 'ios';
-  if (/Android/.test(ua)) return 'android';
-  return 'other';
-}
-
-function isStandaloneDisplay(): boolean {
-  return (
-    window.matchMedia('(display-mode: standalone)').matches ||
-    (navigator as Navigator & { standalone?: boolean }).standalone === true
-  );
-}
-
-function mobilePreflightCopy(): { detail: string; steps: string[] } {
-  const standalone = isStandaloneDisplay();
-  const base = [t('mobilePreflight.baseLandscape'), t('mobilePreflight.basePerformance')];
-  if (mobilePlatform() === 'ios') {
-    return {
-      detail: standalone
-        ? t('mobilePreflight.iosStandaloneDetail')
-        : t('mobilePreflight.iosInstallDetail'),
-      steps: standalone
-        ? base
-        : [t('mobilePreflight.iosShareStep'), t('mobilePreflight.iosOpenStep'), ...base],
-    };
-  }
-  if (mobilePlatform() === 'android') {
-    return {
-      detail: standalone
-        ? t('mobilePreflight.androidStandaloneDetail')
-        : t('mobilePreflight.androidInstallDetail'),
-      steps: standalone
-        ? base
-        : [t('mobilePreflight.androidInstallStep'), t('mobilePreflight.androidOpenStep'), ...base],
-    };
-  }
-  return {
-    detail: standalone
-      ? t('mobilePreflight.otherStandaloneDetail')
-      : t('mobilePreflight.otherInstallDetail'),
-    steps: base,
-  };
-}
-
 let mobilePreflightPromptPromise: Promise<void> | null = null;
 
 function showMobilePreflightPrompt(): Promise<void> {
@@ -1138,6 +1112,7 @@ function beginWorldEntry(): boolean {
 function enterLoadingState(statusText: string): void {
   hideMobilePreflightPrompt();
   showLoadingScreen(statusText);
+  document.body.classList.remove(START_SCREEN_OPEN_CLASS);
   $('#start-screen').style.display = 'none';
   releaseStartScreenPreview();
   // Landing-only advisory: never let it survive into the world on top of
@@ -1259,8 +1234,7 @@ async function startGame(
   // The world and socket stay live, but every client-frame owner pauses while
   // the renderer is recycled. The frame loop also clears its offline backlog.
   let graphicsRebuildPaused = false;
-  const ktx2RestoreUploadQueue =
-    createKtx2RestoreUploadQueueCoordinator<Renderer['backgroundGpuWork']>();
+  const ktx2RestoreUploadQueue = createKtx2RestoreUploadQueueCoordinator<Ktx2RestoreTarget>();
   let hud!: Hud;
   const baseEntryDiagnostics = (): EntryDiagnostics => {
     const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
@@ -1418,6 +1392,8 @@ async function startGame(
   const nameplates = $('#nameplates') as HTMLDivElement;
 
   const keybinds = new Keybinds(keybindScope);
+  // The Hide Interface toggle (Alt+Z by default): body.interface-hidden.
+  const interfaceVisibility = createInterfaceVisibility(document.body);
   // UI theming: apply the persisted theme's CSS variables to :root, then keep a
   // hook so the Options panel can switch preset / override colours live.
   const themeStore = new ThemeStore();
@@ -1458,18 +1434,17 @@ async function startGame(
   uiEffectsApplier.applyNow();
   const autoLoot = new AutoLoot();
   const perf = createPerfMonitor(null, DESKTOP_APP);
-  canvas.addEventListener('webglcontextlost', () => {
-    ktx2MipsOnContextLost(ktx2RestoreUploadQueue.current);
-    entryDiagnostics.checkpoint('webgl-context-lost', {
-      ...renderEntryDiagnostics(),
-      contextLost: rendererReady ? renderer.perfStats().contextLost + 1 : 1,
-    });
-    console.warn('[entry-diag] WebGL context lost during or after world entry');
-  });
-  canvas.addEventListener('webglcontextrestored', () => {
-    entryDiagnostics.checkpoint('webgl-context-restored');
-    console.info('[entry-diag] WebGL context restored during or after world entry');
-  });
+  attachContextRecoveryHandlers(
+    canvas,
+    buildContextRecoveryCallbacks({
+      entryDiagnostics,
+      renderEntryDiagnostics,
+      ktx2MipsOnContextLost: () => ktx2MipsOnContextLost(ktx2RestoreUploadQueue.current),
+      contextLostCount: () => (rendererReady ? renderer.perfStats().contextLost : 0),
+      showFatalOverlay: fatalOverlay,
+      stuckMessage: t('loading.rendererContextLost'),
+    }),
+  );
   // The probe was armed before the locale/asset awaits above; mark that the await
   // window ended and the synchronous scene build is what runs next.
   entryDiagnostics.checkpoint('scene-build-start', baseEntryDiagnostics());
@@ -1497,14 +1472,14 @@ async function startGame(
         ? inWorldLookFor(e, armorSetForEntity(e.id === world.playerId))
         : npcLookFor(e.templateId, e.kind),
     );
-    // No helmet re-assert here on purpose. The preference is per CHARACTER
-    // now: set from the creator's toggle at creation, changed by the paperdoll
-    // eye afterwards, and serialized into that character's own saved state.
-    // The device-global localStorage key this used to read forced ONE
-    // character's choice onto every character on the machine.
-    renderer = loadSpan('renderer-ctor', () => new Renderer(world, canvas, nameplates));
+    // Helmet visibility belongs to each character's saved state: creator
+    // toggle first, then paperdoll eye. Do not re-assert the old device-wide
+    // preference here and overwrite the current character's choice.
+    renderer = loadSpan('renderer-ctor', () =>
+      createGameRenderer(world, canvas, nameplates, settings),
+    );
     rendererReady = true;
-    ktx2RestoreUploadQueue.publish(renderer.backgroundGpuWork);
+    ktx2RestoreUploadQueue.publish({ queue: renderer.backgroundGpuWork, host: renderer.webgl });
     publishGpuHitchRuntimeReceipt({ search: location.search, renderer: renderer.perfStats() });
     renderer.setAudioSink(sfx);
     renderer.showDevBadges = settings.get('showDevBadges');
@@ -1676,7 +1651,7 @@ async function startGame(
     chatInput.blur();
     // Leave mobile reply mode when the composer closes (issue 1577 round 2 (8)),
     // so the in-log reply button reappears for the read state.
-    document.body.classList.remove('mobile-chat-reply');
+    resetChatComposer(document.body, document.getElementById('chatlog-wrap'));
     hud.clearPendingChatLinks();
     recoverFromMobileKeyboard();
   };
@@ -1707,7 +1682,7 @@ async function startGame(
     ensureMobileComposerInPanel();
     hud.applyChatInputPresentation();
     chatInput.style.display = 'block';
-    document.body.classList.remove('mobile-chat-reply');
+    document.body.classList.remove(MOBILE_CHAT_REPLY_CLASS);
     autosizeChat();
   }
   // Fired for every open path (keybind, whisper context menu, mobile toggle)
@@ -1717,16 +1692,13 @@ async function startGame(
     autosizeChat();
     anchorChatInput();
   });
-  chatInput.addEventListener('focus', () => {
-    // Actively replying (issue 1577 round 2 (7)/(8)): the composer is focused, so
-    // expand it and fade the chat window behind it. Class is mirror-tied to focus
-    // so it clears the moment the composer loses focus.
-    document.body.classList.add('mobile-chat-reply');
-    anchorChatInput();
-    autosizeChat();
-  });
-  chatInput.addEventListener('blur', () => {
-    document.body.classList.remove('mobile-chat-reply');
+  bindChatComposerFocusState(chatInput, {
+    body: document.body,
+    wrap: document.getElementById('chatlog-wrap'),
+    onFocus: () => {
+      anchorChatInput();
+      autosizeChat();
+    },
   });
   chatInput.addEventListener('input', () => {
     autosizeChat();
@@ -1759,10 +1731,10 @@ async function startGame(
         closeChat();
         return;
       }
-      // "/share" links the selected quest into party chat; skip the normal send path.
+      // Client-answered commands ("/share" quest link, "/who" Who tab online) skip the send.
       if (hud.devCommandsAvailable && isDevGuiCommand(raw)) {
         hud.toggleDevCommandWindow();
-      } else if (!hud.maybeHandleQuestShareCommand(raw)) {
+      } else if (!hud.maybeHandleLocalChatCommand(raw)) {
         const text = hud.composeChatSend(raw);
         if (text) {
           world.chat(text);
@@ -1811,21 +1783,11 @@ async function startGame(
   const input = new Input(
     canvas,
     {
-      onTab: () => world.tabTarget(),
-      onTabPrev: () => world.tabTargetPrev(),
-      onTargetFriendly: () => world.targetNearestFriendly(),
-      onCycleFriendly: () => world.friendlyTabTarget(),
-      // Pet bar (Ctrl+1..5 by default): drive the existing IWorld pet commands.
-      onPet: (action) => {
-        if (action === 'attack') world.petAttack();
-        else if (action === 'taunt') world.petTaunt();
-        else if (action === 'stop') world.setPetMode('passive');
-        else world.setPetMode(action); // 'defensive' | 'aggressive'
-      },
-      // Ctrl+6 by default: select your own pet, the keyboard route to what clicking
-      // the pet frame does (one implementation, on the Hud, which owns the roster
-      // scan that resolves the pet).
-      onTargetPet: () => hud.targetOwnPet(),
+      // The targeting slice (the Tab cycles, the friendly picks, Pet: Mark, the
+      // F-row party hotkeys): one implementation with the pad arm below.
+      ...targetingInputCallbacks(world, hud, settings),
+      // Pet bar (Ctrl+1..5 by default): the shared routing in pet_commands.ts.
+      onPet: (action) => runPetCommand(world, action),
       // slot 0 (key 1) is Attack for every class, auto-attack without needing
       // right-click; keys and clicks share the Hud's remappable slot layout
       onAbility: (slot) => hud.castSlot(slot),
@@ -1834,6 +1796,8 @@ async function startGame(
       onInputIntent: (kind) => perf.markInputIntent(kind),
       onUiKey: (key) => {
         if (key !== 'escape') hud.cancelGroundAim();
+        if (dispatchCollectionAction(key, hud)) return;
+        if (dispatchInterfaceVisibilityAction(key, interfaceVisibility)) return;
         switch (key) {
           case 'interact':
             interactKey();
@@ -1894,21 +1858,7 @@ async function startGame(
           case 'discord':
             toggleDiscordPanel();
             break;
-          case 'deeds':
-            hud.toggleDeeds();
-            break;
-          case 'professions':
-            hud.toggleProfessions();
-            break;
-          case 'reliquary':
-            hud.toggleReliquary();
-            break;
-          case 'harvestJournal':
-            hud.toggleHarvestJournal();
-            break;
-          case 'perfecting':
-            hud.togglePerfecting();
-            break;
+
           case 'sheathe':
             // Cosmetic sheathe toggle (Z): the cue-on-state-change rule lives
             // in sheathe_toggle.ts, shared with the gamepad dispatch below.
@@ -1918,6 +1868,9 @@ async function startGame(
             openChat();
             break;
           case 'escape':
+            // A hidden interface comes back first: Escape is the one key that
+            // can never be rebound away, so it is the guaranteed way out.
+            if (interfaceVisibility.show()) break;
             if (hud.cancelGroundAim()) break;
             // close the topmost panel; if nothing was open, open the game menu
             if (!hud.closeAll()) hud.toggleOptionsMenu();
@@ -2015,6 +1968,7 @@ async function startGame(
       syncCharacterOpenDiagnostics();
     },
     onBags: () => hud.toggleBags(),
+    onMeters: () => hud.toggleMeters(),
     onCrafting: () => hud.toggleCrafting(),
     onSpellbook: () => hud.toggleSpellbook(),
     onBarEditor: () => hud.toggleBarEditor(),
@@ -2025,6 +1979,7 @@ async function startGame(
     onDailyRewards: () => hud.toggleDailyRewards(),
     onDeeds: () => hud.toggleDeeds(),
     onReliquary: () => hud.toggleReliquary(),
+    onLootExplorer: () => hud.toggleLootExplorer(),
     onMountToggle: () => {
       // Dismount is the shared toggleMounted() path (unchanged); summoning an
       // owned mount from a single tap goes through its reins item directly,
@@ -2108,7 +2063,7 @@ async function startGame(
     });
   }, APM_BEAT_MS);
   const gamepadBindings = new GamepadBindings();
-  const crossHotbar = createCrossHotbar(() => hud, keybindScope);
+  const crossHotbar = createCrossHotbar(() => hud, keybindScope, gamepadBindings);
   const canUseGameKeysNow = () => !gameplayInputBlocked();
   function dispatchGamepadAction(id: string): void {
     // Cancel backs out one step at a time: the top window, then the target. Only
@@ -2124,26 +2079,22 @@ async function startGame(
       return;
     }
     if (id === 'escape') {
+      if (interfaceVisibility.show()) return;
       if (hud.cancelGroundAim()) return;
       if (!hud.closeAll()) hud.toggleOptionsMenu();
       return;
     }
     if (!canUseGameKeysNow()) return; // suppress play actions while a modal/chat is up
+    // Shared keyboard/controller arms: pet commands, hide-interface, camera zoom.
+    if (dispatchPadSharedEdgeAction(id, { input, interfaceVisibility, world })) return;
     if (id.startsWith('slot')) {
       hud.pressSlot(Number(id.slice(4)));
       return;
     }
     hud.cancelGroundAim();
+    if (dispatchCollectionAction(id, hud)) return;
+    if (dispatchTargetingAction(id, world, hud, settings)) return;
     switch (id) {
-      case 'target':
-        world.tabTarget();
-        break;
-      case 'targetPrev':
-        world.tabTargetPrev();
-        break;
-      case 'targetFriendly':
-        world.targetNearestFriendly();
-        break;
       // Selecting the people you talk to. The sim's friendly cycle answers heal
       // eligibility and so skips every quest giver, which left a pad player with
       // no way to pick one; targetEntity is the seam that already exists for it.
@@ -2158,9 +2109,6 @@ async function startGame(
         if (next !== null) world.targetEntity(next);
         break;
       }
-      case 'targetFriendlyNext':
-        world.friendlyTabTarget();
-        break;
       case 'interact': {
         // The pad reel (the UX pass): mid fishing cast, the interact press
         // answers the bite by re-using the rod (the sim's armed-window arm),
@@ -2232,47 +2180,11 @@ async function startGame(
       case 'discord':
         toggleDiscordPanel();
         break;
-      case 'deeds':
-        hud.toggleDeeds();
-        break;
-      case 'professions':
-        hud.toggleProfessions();
-        break;
-      case 'reliquary':
-        hud.toggleReliquary();
-        break;
-      case 'harvestJournal':
-        hud.toggleHarvestJournal();
-        break;
-      case 'perfecting':
-        hud.togglePerfecting();
-        break;
+
       case 'crafting':
         // The controller panel has always OFFERED this bind (it lists every
         // edge keybind action); the dispatch dropped it silently.
         hud.toggleCrafting();
-        break;
-      case 'petStop':
-        // The pet edges, the dungeon finder, and the sheathe toggle: the
-        // same offered-but-dropped sweep that found Crafting (the controller
-        // panel lists every edge keybind action), each wired to its exact
-        // keyboard handler.
-        world.setPetMode('passive');
-        break;
-      case 'petTaunt':
-        world.petTaunt();
-        break;
-      case 'petAttack':
-        world.petAttack();
-        break;
-      case 'petDefensive':
-        world.setPetMode('defensive');
-        break;
-      case 'petAggressive':
-        world.setPetMode('aggressive');
-        break;
-      case 'targetPet':
-        hud.targetOwnPet();
         break;
       case 'dungeonFinder':
         hud.toggleDungeonFinder();
@@ -2461,9 +2373,14 @@ async function startGame(
       renderer.setWaterRipples(settings.set('waterRipples', !!value));
       return;
     }
+    if (key === 'partyFrameShowAbsorbs') {
+      // Party rows read it live (Hud.updatePartyFrames); the player / target
+      // overlays are gated by one root class hud.css keys on.
+      applyAbsorbOverlayGate(document.documentElement, settings.set(key, !!value));
+      return;
+    }
     if (
       key === 'partyFrameShowResource' ||
-      key === 'partyFrameShowAbsorbs' ||
       key === 'partyFrameShowAuras' ||
       key === 'partyFrameShowPets' ||
       key === 'partyFrameShowSelf'
@@ -2750,14 +2667,19 @@ async function startGame(
       case 'partyFrameColumns':
         document.documentElement.style.setProperty('--party-frame-columns', String(Math.round(v)));
         break;
+      case 'playerFrameHealthText':
+      case 'targetFrameHealthText':
       case 'partyFrameHealthText':
       case 'partyFrameSort':
       case 'partyFrameStyle':
-        // Read live by Hud.updatePartyFrames; persistence above is the only
-        // page-level work needed.
+        // Read live by Hud.updatePartyFrames / the unit-frame paints; persistence
+        // above is the only page-level work needed.
         break;
       case 'aurasOnPlayerFrame':
         hud.setAurasOnPlayerFrame(!!v);
+        break;
+      case 'auraBarBelowFrame':
+        applyAuraBarSide(document.body, !!v);
         break;
       case 'alwaysShowAllBuffs':
         hud.setAlwaysShowAllBuffs(!!v);
@@ -2815,16 +2737,9 @@ async function startGame(
   // apply persisted settings to the freshly-built subsystems
   const saved = settings.all();
   for (const k of Object.keys(saved) as (keyof GameSettings)[]) applySetting(k, saved[k]);
-  const captureGraphicsSettings = (): GraphicsSettingsSnapshot =>
-    normalizeGraphicsSettingsSnapshot({
-      graphicsPreset: settings.get('graphicsPreset'),
-      terrainDetail: settings.get('terrainDetail'),
-      foliageDensity: settings.get('foliageDensity'),
-      surfaceDetail: settings.get('surfaceDetail'),
-      effectsQuality: settings.get('effectsQuality'),
-      shadowQuality: settings.get('shadowQuality'),
-    });
-  let appliedGraphicsSettings = captureGraphicsSettings();
+  let appliedGraphicsSettings: GraphicsSettingsSnapshot = captureGraphicsSettingsSnapshot((key) =>
+    settings.get(key),
+  );
   const graphicsCapabilities = captureGfxCapabilities(renderer.webgl);
   const configureRebuiltRenderer = (next: Renderer): void => {
     next.showNameplates = renderer.showNameplates;
@@ -2858,7 +2773,9 @@ async function startGame(
       graphicsRebuildPaused = paused;
       ktx2RestoreUploadQueue.setPaused(paused);
       if (paused) return;
-      ktx2RestoreUploadQueue.publish(rendererReady ? renderer.backgroundGpuWork : undefined);
+      ktx2RestoreUploadQueue.publish(
+        rendererReady ? { queue: renderer.backgroundGpuWork, host: renderer.webgl } : undefined,
+      );
       movementPrediction.resume();
       last = performance.now();
       acc = 0;
@@ -2918,12 +2835,12 @@ async function startGame(
       activateGfxProfile(resolveGfxProfile(graphicsCapabilities, target, location.search)).epoch,
     resetProfileResources: () => resetGraphicsProfileDerivedCaches(),
     buildRenderer: (_target, recycled) => {
-      const next = new Renderer(world, recycled.canvas, nameplates, {
+      const next = createGameRenderer(world, recycled.canvas, nameplates, settings, {
         context: recycled.context,
         initializeGfx: false,
       });
       configureRebuiltRenderer(next);
-      ktx2RestoreUploadQueue.publish(next.backgroundGpuWork);
+      ktx2RestoreUploadQueue.publish({ queue: next.backgroundGpuWork, host: next.webgl });
       return next;
     },
     prepareCurrentZone: (next) =>
@@ -2942,19 +2859,14 @@ async function startGame(
       await next.farVistaReady();
       await ktx2MipsRestored();
     },
-    validateRenderer: (next) => {
-      next.sync(1, 0, null, 0, null);
-      if (next.webgl.getContext().isContextLost()) {
-        throw new Error('WebGL2 context was lost while validating the rebuilt renderer');
-      }
-    },
+    validateRenderer: validateGameRenderer,
     commit: (next, target) => {
       settings.patch(target);
       configureRebuiltRenderer(next);
       next.setAudioSink(sfx);
       renderer = next;
       rendererReady = true;
-      ktx2RestoreUploadQueue.publish(next.backgroundGpuWork);
+      ktx2RestoreUploadQueue.publish({ queue: next.backgroundGpuWork, host: next.webgl });
       publishGpuHitchRuntimeReceipt({ search: location.search, renderer: next.perfStats() });
       hud.replaceRenderer(next);
       perf.setRenderer(next);
@@ -3067,13 +2979,18 @@ async function startGame(
     },
     changeLanguage: (lang, onStatus) => changeLanguage(lang, onStatus),
     refreshWocBalance: (force) => refreshWocBalanceOnDemand(force),
-    // Deed-broadcast opt-out: online only (an offline character has no account
-    // row); the options row hides itself when this seam is absent.
+    // Account toggles (deed-broadcast opt-out, queue-pop Discord DM opt-in):
+    // online only (an offline character has no account row); each options row
+    // hides itself when its seam is absent. The fallback is the column default.
     ...(online
       ? {
           deedBroadcasts: {
-            get: () => api.deedBroadcasts(),
-            set: (enabled: boolean) => api.setDeedBroadcasts(enabled),
+            get: () => api.accountToggle('/api/deeds/broadcasts', true),
+            set: (enabled: boolean) => api.setAccountToggle('/api/deeds/broadcasts', enabled),
+          },
+          discordQueuePings: {
+            get: () => api.accountToggle('/api/discord/queue-pings', false),
+            set: (enabled: boolean) => api.setAccountToggle('/api/discord/queue-pings', enabled),
           },
         }
       : {}),
@@ -3412,23 +3329,11 @@ async function startGame(
       }
     }
   }
-  // The deliberate Thornhollow Fields flag press: always attempted, the world
-  // owns every rule (radius, team, the return-beats-press race), so a stray
-  // press is a no-op.
-  function bgFlagKey(): void {
-    if (world.bgInfo?.match) world.bgFlagAction();
-  }
+  const bgFlagKey = createBgFlagKey(world);
 
-  // The R40 per-use effect confirm gate, shared by the explicit gather entry
-  // points (world click, gathering-tool use): the pure question from the view
-  // core, the ask through the HUD's confirm-dialog family. The harvest
-  // proceeds on either answer; only the charge follows it. The generic
-  // interact key never gathers, so it takes no part in this.
-  const gatherEffectConfirm = {
-    needed: (nodeId: string) => gatherEffectPrompt(world, nodeId),
-    ask: (prompt: { effectId: string; charges: number }, proceed: (confirmed: boolean) => void) =>
-      hud.confirmToolEffectUse(prompt, proceed),
-  };
+  // The R40 per-use effect confirm gate, shared by every gather entry point
+  // (world click, interact key, gathering-tool use).
+  const gatherEffectConfirm = createGatherEffectConfirm(world, hud);
   function interactKey(preferNpcId?: number | null): void {
     if (shouldRouteInteractToBgFlag(world.bgInfo, world.player, world.entities)) {
       world.bgFlagAction();
@@ -3442,14 +3347,13 @@ async function startGame(
         t('errors.nothingInteract'),
         undefined,
         preferNpcId,
+        interactKeyGatherOptions(world, gatherEffectConfirm),
       ),
       input,
       mobileControls,
     );
   }
 
-  // The pad's own selection rules (which npc a talk press addresses, which enemy
-  // a cast picks) live in src/game/pad_target_pick.ts; this carries the calls.
   const padTargetPick = createPadTargetPick({ world, interactKey });
 
   function attackNearest(): void {
@@ -3755,7 +3659,7 @@ async function startGame(
       !world.player.dead &&
       (!!input.clickMoveTarget || nowMs < clickMoveMarkerHideAt);
     if (!show) {
-      clickMoveMarker.classList.remove('active', 'entity', 'pulse', 'blocked');
+      paintClickMoveMarker(clickMoveMarker, 'hidden');
       return;
     }
     const screen = renderer.worldToScreen(target.x, world.player.pos.y + 0.05, target.z);
@@ -3766,21 +3670,19 @@ async function startGame(
       screen.y < -80 ||
       screen.y > window.innerHeight + 80;
     if (offscreen) {
-      clickMoveMarker.classList.remove('active', 'pulse', 'blocked');
+      paintClickMoveMarker(clickMoveMarker, 'offscreen');
       return;
     }
-    clickMoveMarker.style.transform = `translate(${screen.x.toFixed(0)}px, ${screen.y.toFixed(0)}px) translate(-50%, -50%)`;
-    clickMoveMarker.classList.toggle('entity', input.clickMoveEntityId !== null);
-    // Only meaningful for a live destination you're still trying to reach (not the
-    // brief post-arrival fade), so gate on an active target.
-    clickMoveMarker.classList.toggle('blocked', !!input.clickMoveTarget && playerImmobilized());
-    clickMoveMarker.classList.add('active');
-    if (pulseChanged || clickMoveMarker.dataset.pulse !== String(input.clickMovePulse)) {
-      clickMoveMarker.dataset.pulse = String(input.clickMovePulse);
-      clickMoveMarker.classList.remove('pulse');
-      void clickMoveMarker.offsetWidth;
-      clickMoveMarker.classList.add('pulse');
-    }
+    paintClickMoveMarker(clickMoveMarker, {
+      x: screen.x,
+      y: screen.y,
+      entity: input.clickMoveEntityId !== null,
+      // Only meaningful for a live destination you're still trying to reach (not the
+      // brief post-arrival fade), so gate on an active target.
+      blocked: !!input.clickMoveTarget && playerImmobilized(),
+      pulse: input.clickMovePulse,
+      pulseChanged,
+    });
   }
 
   let last = performance.now();
@@ -3972,6 +3874,7 @@ async function startGame(
     playerImmobilized: false,
     posX: 0,
     climbing: undefined,
+    leaping: undefined,
     riftFloor: null,
   };
   function updateCamera(frameDt: number, interpFacing: number): void {
@@ -4655,6 +4558,7 @@ async function startGame(
     selfMotionGateArgs.playerImmobilized = playerImmobilized();
     selfMotionGateArgs.posX = pe.pos.x;
     selfMotionGateArgs.climbing = pe.climbing;
+    selfMotionGateArgs.leaping = pe.leaping;
     selfMotionGateArgs.riftFloor = net.riftFloor;
     const selfPredictionEnabled =
       !SELF_MOTION_DISABLED && selfMotionPredictionEnabled(selfMotionGateArgs);
@@ -5096,7 +5000,7 @@ async function startGame(
         loadPhaseEnd('settle-cover');
         loadPhaseStart('curtain-fade');
         renderer.markGpuHitchReveal();
-        finishShaderWarmup(renderer.webgl);
+        finishShaderWarmup(renderer.webgl, { queue: renderer.backgroundGpuWork });
         hideLoadingScreen();
         // Start the intro clock as the loading screen begins to fade: the camera
         // holds the opening pose until now, so the fade doubles as the cut in.
@@ -6695,10 +6599,6 @@ function closeDeleteCharacterDialog(): void {
   setDeleteCharacterError('');
 }
 
-function normalizeDeleteConfirmation(name: string): string {
-  return name.trim().toLowerCase();
-}
-
 function openDeleteCharacterDialog(character: CharacterSummary): void {
   pendingDeleteCharacter = character;
   const modal = $('#delete-character-modal');
@@ -6772,13 +6672,9 @@ async function refreshCharacters(): Promise<void> {
       row.dataset.class = c.class;
       row.dataset.skin = String(c.skin ?? 0);
       const className = classDisplayName(c.class);
-      // Online characters explain themselves on their own hint line (below the
-      // class) instead of the terse "(in world)" suffix, so the reason for the
-      // Take Over button is unmissable.
       const statusText = c.online ? '' : c.forceRename ? ` (${t('character.renameRequired')})` : '';
-      const inWorldHint = c.online
-        ? `<span class="char-inworld-hint">${esc(t('character.inWorldHint'))}</span>`
-        : '';
+      // Zone line plus the in-world notice (src/ui/charselect_hints.ts).
+      const hintsHtml = charselectHintsHtml(c);
       // One-shot redesign token (server-decided: pre-creator character, token
       // unspent). Rendered on every action arm; gone for good once spent.
       const rerollBtn = c.appearanceRerollAvailable
@@ -6803,7 +6699,7 @@ async function refreshCharacters(): Promise<void> {
         <div class="char-id">
           <span class="char-name">${esc(c.name)}</span>
           <span class="char-sub">${esc(t('character.levelClass', { level: c.level, className }))}${esc(statusText)}</span>
-          ${inWorldHint}
+          ${hintsHtml}
         </div>
         ${
           c.forceRename
@@ -7373,7 +7269,7 @@ function renderClassDetails(
           } else if (secondaryEffect.type === 'absorb') {
             dmgText = formatClassDetailNumber(secondaryEffect.amount);
           } else if (secondaryEffect.type === 'imbue') {
-            dmgText = formatClassDetailNumber(secondaryEffect.bonus);
+            dmgText = formatAbilityImbueDamage(secondaryEffect);
           }
         }
       }

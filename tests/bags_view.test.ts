@@ -183,6 +183,11 @@ describe('bagDestroyAction', () => {
 });
 
 describe('bagItemAction priority order', () => {
+  it('uses the Forgefather Ember on click instead of offering to destroy it', () => {
+    const ember = CATALOG_ITEMS.forgefathers_ember;
+    expect(bagItemAction(ember, NO_MODE)).toBe('use');
+    expect(bagTooltipHintKey(ember, NO_MODE)).toBe('itemUi.tooltip.clickUse');
+  });
   it('honors trade > market-sell > vendor > pet-feed > quest > use', () => {
     expect(bagItemAction(ITEMS.sword, { ...NO_MODE, tradeOpen: true })).toBe('trade');
     expect(bagItemAction(ITEMS.sword, { ...NO_MODE, marketSell: true })).toBe('marketSell');
@@ -458,12 +463,19 @@ describe('transfer-locked instanced copies (issue 1165)', () => {
     );
   });
 
-  it('the tooltip hint mirrors the block: cannot-market / cannot-mail for locked copies', () => {
+  it('the tooltip hint mirrors the block: cannot-market for locked copies, the specific bound reason for mail', () => {
     expect(bagTooltipHintKey(ITEMS.sword, { ...NO_MODE, marketSell: true }, STAMPED)).toBe(
       'itemUi.tooltip.cannotMarket',
     );
+    // Mail-attach names the SPECIFIC reason (bound, not generically unmailable),
+    // for both an armed grant and an already-stamped copy: a disenchant typed
+    // secondary (e.g. resonant_thread) reads this same reason, distinguishing
+    // "bound until traded in person" from the def-level cannotMail line below.
     expect(bagTooltipHintKey(ITEMS.sword, { ...NO_MODE, mailAttach: true }, ARMED)).toBe(
-      'hudChrome.mailbox.cannotMail',
+      'hudChrome.mailbox.result.noMailBound',
+    );
+    expect(bagTooltipHintKey(ITEMS.sword, { ...NO_MODE, mailAttach: true }, STAMPED)).toBe(
+      'hudChrome.mailbox.result.noMailBound',
     );
     expect(bagTooltipHintKey(ITEMS.sword, { ...NO_MODE, marketSell: true }, SIGNED)).toBe(
       'itemUi.tooltip.clickMarketList',
@@ -472,9 +484,69 @@ describe('transfer-locked instanced copies (issue 1165)', () => {
       'hudChrome.mailbox.clickAttach',
     );
   });
+
+  it('a def-level mail block (quest/noMarketList) keeps the generic reason, distinct from a per-copy lock', () => {
+    // A def-level refusal has no "trade it once and it clears" story (the item
+    // itself is quest-bound or unlistable), so it must NOT read the specific
+    // noMailBound line the per-copy lock earns above: they are different reasons
+    // and the generic line stays correct for this one.
+    expect(bagTooltipHintKey(ITEMS.questItem, { ...NO_MODE, mailAttach: true })).toBe(
+      'hudChrome.mailbox.cannotMail',
+    );
+    expect(bagTooltipHintKey(ITEMS.bound, { ...NO_MODE, mailAttach: true })).toBe(
+      'hudChrome.mailbox.cannotMail',
+    );
+    // Even carrying a per-copy lock on top, the def-level gate still outranks it
+    // (bagItemAction's own priority, mirrored here): still the generic reason.
+    expect(bagTooltipHintKey(ITEMS.bound, { ...NO_MODE, mailAttach: true }, STAMPED)).toBe(
+      'hudChrome.mailbox.cannotMail',
+    );
+  });
 });
 
 describe('soulbound transfer affordances', () => {
+  const PARTY_WINDOW = {
+    partyTrade: { untilMs: 10_000, eligible: ['Alice', 'Bob'] },
+  };
+
+  it('stages a marked soulbound copy for player trade while keeping every anonymous pipe blocked', () => {
+    expect([
+      bagItemAction(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, PARTY_WINDOW),
+      bagItemAction(ITEMS.mark, { ...NO_MODE, mailAttach: true }, PARTY_WINDOW),
+      bagItemAction(ITEMS.mark, { ...NO_MODE, marketSell: true }, PARTY_WINDOW),
+      bagItemAction(ITEMS.mark, { ...NO_MODE, vendorOpen: true }, PARTY_WINDOW),
+    ]).toEqual([
+      'trade',
+      'transferBlockedSoulbound',
+      'transferBlockedSoulbound',
+      'transferBlockedSoulbound',
+    ]);
+  });
+
+  it('advertises player trade only for a marked soulbound copy', () => {
+    expect([
+      bagTooltipHintKey(ITEMS.mark, { ...NO_MODE, tradeOpen: true }, PARTY_WINDOW),
+      bagTooltipHintKey(ITEMS.mark, { ...NO_MODE, mailAttach: true }, PARTY_WINDOW),
+      bagTooltipHintKey(ITEMS.mark, { ...NO_MODE, marketSell: true }, PARTY_WINDOW),
+      bagTooltipHintKey(ITEMS.mark, { ...NO_MODE, vendorOpen: true }, PARTY_WINDOW),
+    ]).toEqual([
+      'itemUi.tooltip.clickTradeOffer',
+      'hudChrome.itemSoulbound',
+      'hudChrome.itemSoulbound',
+      'hudChrome.itemSoulbound',
+    ]);
+  });
+
+  it('blocks the trade action and hint once the host clock says the marker expired', () => {
+    const tradeMode = { ...NO_MODE, tradeOpen: true };
+    expect(bagItemAction(ITEMS.mark, tradeMode, PARTY_WINDOW, undefined, false)).toBe(
+      'transferBlockedSoulbound',
+    );
+    expect(bagTooltipHintKey(ITEMS.mark, tradeMode, PARTY_WINDOW, undefined, false)).toBe(
+      'hudChrome.itemSoulbound',
+    );
+  });
+
   it('blocks trade, mail, market, and vendor clicks instead of staging a Heroic Mark transfer', () => {
     expect([
       bagItemAction(ITEMS.mark, { ...NO_MODE, tradeOpen: true }),
