@@ -708,6 +708,10 @@ export interface Aura {
   // Encounter-authored control that must land through immunity and cannot be
   // removed by player counters. Natural expiry and encounter cleanup still own it.
   unbreakableControl?: true;
+  // Suspends the carrier's natural out-of-combat health regen while it stands
+  // (combat/auras.ts updateRegen). The Hellgate toll; mirrored on the wire so
+  // the tooltip can say so.
+  noRegen?: true;
   // Encounter-authored mechanic that ordinary dispels and broad self-cleanses
   // cannot remove. Death, natural expiry, and the encounter script still clear it.
   // Server-internal by qr-19-encounter-owned-aura-wire (Phase 19): no aura snapshot
@@ -3570,6 +3574,10 @@ export type AbilityEffect =
       damage: number;
     }
   | { type: 'selfHotPctMax'; pct: number; duration: number; interval: number }
+  // The mirror of selfHotPctMax: a plain self 'dot' whose per-tick value is a
+  // fraction of the caster's MAXIMUM health; `noRegen` also suspends natural
+  // health regen for the aura's life (the Hellgate toll).
+  | { type: 'selfDotPctMax'; pct: number; duration: number; interval: number; noRegen?: true }
   | { type: 'aoeAllyMaxHp'; pct: number; duration: number; radius: number }
   | {
       type: 'partyMeleeBuff';
@@ -3623,6 +3631,12 @@ export type AbilityEffect =
   | { type: 'summonPet'; templateId: string } // warlock demon summon: creates/replaces a controlled pet
   | { type: 'summonDemon'; mobId: string } // warlock: summon a demon pet (emberkin/gloomshade)
   | { type: 'summonSoulwell'; duration: number }
+  // Mage Grand Teleport: a party-gated portal object to an authored destination
+  // (content/grand_teleports.ts), open for `duration` seconds.
+  | { type: 'summonGrandPortal'; destination: string; duration: number }
+  // Warlock Hellgate: a party-gated summoning gate at the caster's feet, open
+  // for `duration` seconds, that bleeds the caster while it stands.
+  | { type: 'summonHellgate'; duration: number }
   | { type: 'destructionConflagrate' }
   | { type: 'ruinousBrand'; duration: number; charges: number }
   | { type: 'duskfireClaim'; duration: number }
@@ -3828,6 +3842,10 @@ export interface AbilityDef {
   // the quest is turned in (abilitiesKnownAt reads questsDone). Used by the paladin
   // resurrection chain (recall_the_fallen <- q_rite_of_redemption).
   requiresQuest?: string;
+  // Consumable reagent: the cast refuses without `count` of `itemId` in the bags
+  // and removes them beside the resource cost at the one spend site (instant,
+  // timed-cast completion or channel start). The Grand Teleport's rune.
+  reagent?: { itemId: string; count: number };
   effects: AbilityEffect[];
   ranks?: AbilityRank[]; // later ranks (sorted by level)
   description: string; // tooltip text, $d = damage placeholder
@@ -5449,6 +5467,17 @@ export interface Entity extends ClientMirroredEntityFields {
     eligiblePlayerIds: number[];
     wardAbsorbPctMax: number;
     wardedPlayerIds: number[];
+  };
+  // Runtime-only party gate for the two summoned travel objects (the mage
+  // Grand Portal and the warlock Hellgate): the same soulwell doctrine, the
+  // object is wired through objectItemId and this authority data stays server
+  // side. `destination` is the grand-teleport destination id for a portal and
+  // absent for a Hellgate (a gate pulls people TO itself).
+  partyGate?: {
+    ownerId: number;
+    partyId: number | null;
+    eligiblePlayerIds: number[];
+    destination?: string;
   };
   dungeonId: string | null; // set on dungeon door/exit portals
   /** Claim-local identity for authored dungeon packs. Sim authority only; the

@@ -783,7 +783,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     pos: { ...FENBRIDGE_NPC_PLACEMENTS_BY_ID.scout_maren.position },
     facing: FENBRIDGE_NPC_PLACEMENTS_BY_ID.scout_maren.facing,
     color: 0x7d6608,
-    questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen'],
+    questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen', 'q_hellgate_rite'],
     greeting:
       'Quiet feet and a short blade keep you breathing out here. Speak quick, for I am due back in the reeds.',
   },
@@ -826,7 +826,14 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     // tanning staple. thorium_ore, the premium reagent recipe_duskhide_wraps
     // consumes, is NOT here: it is a node yield, and no NPC stocks a gathered
     // material (professions.md, Locked rulings).
-    vendorItems: ['travelers_knapsack', 'tough_jerky', 'smoked_eel', 'tanning_agent'],
+    // rune_of_passage: the mage Grand Teleport reagent (content/grand_teleports.ts).
+    vendorItems: [
+      'travelers_knapsack',
+      'tough_jerky',
+      'smoked_eel',
+      'tanning_agent',
+      'rune_of_passage',
+    ],
     greeting: 'A hide is only as good as its tanning, $C. The vats are ready when you are.',
   },
   // The farming go-live: the tier-2 farmer at the Fenbridge raised beds

@@ -23,7 +23,6 @@ import type {
   ToolEffectSlotView,
 } from '../world_api';
 import type { GroundAimPointXZ } from '../world_api/combat';
-import { abilityNeedsLineOfSight } from './ability_line_of_sight';
 import type { AbilityOutputScaling } from './ability_output_scaling';
 import { autoEquipFamilyConflict } from './auto_equip_gate';
 import * as bagsMod from './bags';
@@ -308,7 +307,10 @@ import {
   paginateGuildLeaderboard,
   paginateLeaderboard,
 } from './leaderboard_page';
-import { entityLineOfSightClear } from './line_of_sight_elevation';
+import {
+  hasLineOfSight as hasLineOfSightImpl,
+  lineOfSightBlocked as lineOfSightBlockedImpl,
+} from './line_of_sight_gate';
 import type { Ante, PickAction } from './lockpick';
 import { retirePartyTradeOnLoad, retirePartyTradeOnSave } from './loot/bop_trade_persistence';
 import { withoutPartyTradeMarker } from './loot/bop_trade_window';
@@ -412,6 +414,7 @@ import {
   MAX_DEVOTION,
   updatePaladinDevotion,
 } from './paladin_devotion';
+import { updatePartyGates } from './party_gate';
 import {
   findPlayerPath,
   PLAYER_BODY_RADIUS,
@@ -6097,6 +6100,7 @@ export class Sim {
     lap?.('frozenOrbs');
 
     runDespawnDecay(this.ctx);
+    updatePartyGates(this.ctx);
     lap?.('despawnDecay');
     // Step in-flight projectiles toward their live targets before this tick's casts and
     // swings, so a homing bolt resolves on a fixed, deterministic phase boundary.
@@ -6933,32 +6937,14 @@ export class Sim {
     cancelCastImpl(this.ctx, p);
   }
 
+  // Line of sight: bodies in line_of_sight_gate.ts; thin delegates because
+  // SimContext binds them and the on-cast AoE path calls them on `this`.
   private hasLineOfSight(source: Entity, target: Entity): boolean {
-    // The delve-run lookup is O(active runs x mobs per run) and allocates a
-    // party key per call, and this method sits on every ranged auto-attack,
-    // AoE pulse, and LOS-gated cast. Only a sight line with an endpoint
-    // inside the delve band can ever consume run.modules (the collider LOS
-    // delve arm keys off from.x), so every other combat sight check skips
-    // all four lookups. Mirrors the movement path's isDelvePos guard.
-    const inDelve = isDelvePos(source.pos.x) || isDelvePos(target.pos.x);
-    const run = inDelve
-      ? (this.delveRunForMob(source.id) ??
-        this.delveRunForMob(target.id) ??
-        this.delveRunForPlayer(source.id) ??
-        this.delveRunForPlayer(target.id))
-      : undefined;
-    return entityLineOfSightClear(
-      this.cfg.seed,
-      source,
-      target,
-      0.05,
-      run?.modules,
-      this.riftCollisionToken,
-    );
+    return hasLineOfSightImpl(this.ctx, source, target);
   }
 
   private lineOfSightBlocked(source: Entity, target: Entity, ability: AbilityDef): boolean {
-    return abilityNeedsLineOfSight(ability, source) && !this.hasLineOfSight(source, target);
+    return lineOfSightBlockedImpl(this.ctx, source, target, ability);
   }
 
   private pushbackCast(p: Entity): void {
