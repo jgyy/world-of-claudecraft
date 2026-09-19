@@ -26,7 +26,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "es_ES": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -45,7 +55,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "fr_FR": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -64,7 +84,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "fr_CA": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -83,7 +113,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "en_CA": [],
   "it_IT": [
@@ -103,7 +143,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "de_DE": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -122,12 +172,34 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
-  "zh_CN": [],
-  "zh_TW": [],
-  "ko_KR": [],
-  "ja_JP": [],
+  "zh_CN": [
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapThirty"
+  ],
+  "zh_TW": [
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapThirty"
+  ],
+  "ko_KR": [
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapThirty"
+  ],
+  "ja_JP": [
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapThirty"
+  ],
   "pt_BR": [
     "entities.abilities.grand_teleport_highwatch.description",
     "entities.abilities.grand_teleport_highwatch.name",
@@ -145,9 +217,22 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
-  "ru_RU": [],
+  "ru_RU": [
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapThirty"
+  ],
   "cs_CZ": [
     "entities.abilities.grand_teleport_highwatch.description",
     "entities.abilities.grand_teleport_highwatch.name",
@@ -165,7 +250,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "nl_NL": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -184,7 +279,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "pl_PL": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -203,7 +308,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "id_ID": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -222,7 +337,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "tr_TR": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -241,7 +366,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "sv_SE": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -260,7 +395,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "vi_VN": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -279,7 +424,17 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ],
   "da_DK": [
     "entities.abilities.grand_teleport_highwatch.description",
@@ -298,6 +453,16 @@ export const pending: Record<string, readonly string[]> = {
     "entities.quests.q_hellgate_rite.completion",
     "entities.quests.q_hellgate_rite.objectives.0.label",
     "entities.quests.q_hellgate_rite.text",
-    "entities.quests.q_hellgate_rite.title"
+    "entities.quests.q_hellgate_rite.title",
+    "guide.settingsPage.rowFrameRateCap",
+    "hudChrome.options.frameRateCap",
+    "hudChrome.options.frameRateCapAuto",
+    "hudChrome.options.frameRateCapDisplay",
+    "hudChrome.options.frameRateCapNote",
+    "hudChrome.options.frameRateCapSixty",
+    "hudChrome.options.frameRateCapStatusInert",
+    "hudChrome.options.frameRateCapStatusPaced",
+    "hudChrome.options.frameRateCapStatusUnpaced",
+    "hudChrome.options.frameRateCapThirty"
   ]
 };
