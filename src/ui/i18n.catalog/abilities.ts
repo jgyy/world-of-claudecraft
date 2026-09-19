@@ -2148,9 +2148,7 @@ const classAbilityNamesEn = {
         'Choir of Deliverance',
         'Channel for 6 sec, healing party members within 30 yards for {damage} every 2 sec. Healing increases with Spell Power.',
       ],
-      // Fast travel (content/grand_teleports.ts, content/hellgate.ts): the
-      // mage's Grand Teleport and the warlock's Hellgate. Descriptions are
-      // byte-identical to the AbilityDef source.
+      // Fast travel (content/grand_teleports.ts, content/hellgate.ts).
       [
         'grand_teleport_highwatch',
         'Grand Teleport: Highwatch',

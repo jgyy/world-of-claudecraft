@@ -731,7 +731,6 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     color: 0x1e8449,
     questIds: ['q_prowler_pelts', 'q_fen_supplies', 'q_the_codfather', 'q_grubjaw'],
     vendorItems: [
-      // The mage Grand Teleport reagent (content/grand_teleports.ts): 1 gold.
       'rune_of_passage',
       'fenbridge_rye',
       'marsh_mint_tea',

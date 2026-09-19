@@ -3429,8 +3429,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   soulwell: r('shadow', 'venom', ['gem', { p: 'heart', ...BR }], ['glow']),
   // The Hellgate: the warlock's summoning gate, a cracked fel maw with a demon watching.
   hellgate: r('shadow', 'venom', ['tendrils', { p: 'imp_head', ...BR }], ['crack']),
-  // Grand Teleport: the mage's party portal to Highwatch, an arcane sigil badged
-  // with the peak shield.
+  // Grand Teleport: an arcane sigil badged with Highwatch's peak shield.
   grand_teleport_highwatch: r(
     'arcane',
     'silverWhite',

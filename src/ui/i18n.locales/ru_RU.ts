@@ -17353,8 +17353,7 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   "devCommand.actions.town.description": "Телепортируйтесь в центр города по имени.",
   "devCommand.actions.town.label": "Городской центр",
   "devCommand.fields.town": "Город",
-  // Fast travel (#3932): the Hellgate pact quests, the Rune of Passage, and the
-  // two travel spells (M16 non-Latin fills).
+  // Fast travel (#3932): the pact quests, the rune and the two spells (M16).
   'entities.quests.q_hellgate_pact.title': 'Беспокойный договор',
   'entities.quests.q_hellgate_pact.text':
     'Вы водите демона на поводке, {playerName}, и думаете, что это делает вас его хозяином. Старые договоры говорят иное: врата всегда открывают лишь с той стороны. Если хотите научиться рвать их сами, для начала докажите, что мёртвые церковного двора вас не удержат. Упокойте 8 Беспокойных костей и принесите мне то, что узнаете.',

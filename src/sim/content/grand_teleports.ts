@@ -1,12 +1,7 @@
-// Grand Teleport: the mage's party portal to Highwatch. Data only; the portal
-// object and its party gate live in src/sim/party_gate.ts.
-//
-// One ordinary mage class spell, learned at level 20 like the rest of the kit
-// (no tome, no quest unlock, no per-city variants: the maintainer's ruling on
-// #3932). The cast burns one Rune of Passage (AbilityDef.reagent, sold by the
-// hub general-goods vendors) and opens a portal only the caster's group at the
-// moment of casting can step through. The destination table is kept as a list
-// so a second destination is a data row, never a new code path.
+// Grand Teleport: the mage's party portal to Highwatch. Data only; the object
+// and its party gate live in src/sim/party_gate.ts. One ordinary level 20
+// class spell (no tome, no quest unlock, no per-city variants: the ruling on
+// #3932); the destination table stays a list so a second city is a data row.
 
 import type { AbilityDef, ItemDef } from '../types';
 

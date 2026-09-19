@@ -16254,8 +16254,7 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'devCommand.actions.town.description': '按名字传送到城镇中心。',
   'devCommand.actions.town.label': '城镇中心',
   'devCommand.fields.town': '镇',
-  // Fast travel (#3932): the Hellgate pact quests, the Rune of Passage, and the
-  // two travel spells (M16 non-Latin fills).
+  // Fast travel (#3932): the pact quests, the rune and the two spells (M16).
   'entities.quests.q_hellgate_pact.title': '不安的契约',
   'entities.quests.q_hellgate_pact.text':
     '你牵着一只恶魔的链子，{playerName}，就以为自己是它的主人。古老的契约却说，门永远只能从另一边打开。你若想学会亲手撕开一道门，先证明礼拜堂墓地里的亡者困不住你。让8具不宁骸骨安息，再把你学到的东西告诉我。',

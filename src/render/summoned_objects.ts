@@ -1,10 +1,6 @@
-// Summoned world objects: the registry the renderer consults for every ground
-// object a player ability summons (Soulwell, Grand Portal, Hellgate). Each
-// entry owns its own build/sync/dispose trio behind one seam, keyed by the
-// entity's objectItemId (which the sim also uses as templateId), so renderer.ts
-// adds a new summoned prop by registering it here rather than growing another
-// objectItemId branch. Materials: the shared surfaceMat instances are never
-// disposed; only the per-instance materials each build lists as owned.
+// Summoned world objects (Soulwell, Grand Portal, Hellgate): one build/sync/
+// dispose trio per objectItemId, so renderer.ts registers a prop here instead
+// of growing another branch. Shared surfaceMat instances are never disposed.
 
 import type * as THREE from 'three';
 import { buildGrandPortal, disposeGrandPortalVisual, syncGrandPortalVisual } from './grand_portal';

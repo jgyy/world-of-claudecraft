@@ -980,9 +980,7 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // reproduces a prior hash); the frozen literal below is MEASURED directly
   // off the merged DEED_ORDER/DEEDS table instead. No shipped TRIGGER changed
   // on either side; only those eighteen renown values moved.
-  // Re-baselined for the fast-travel content (#3932): one appended deed
-  // (prog_hellgate_pact, keyed on the warlock chain's final quest); no shipped
-  // trigger or renown changed.
+  // Re-baselined for #3932: prog_hellgate_pact appended, nothing retro-edited.
   const FROZEN_CATALOG_SHA256 = '3ea3687059ae958fa292826d360cfc84117a62f857b69d4033c28aaf6d6229ee';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
@@ -1267,8 +1265,6 @@ describe('table shape', () => {
     // final entry). The Roots' Bramblehide set collection appends behind the
     // raid block (whose flawless task was the previous final entry).
     // The one-time Forgebreaker quest's hidden celebration appends after it.
-    // The Hellgate pact deed closes the tail (appended behind hid_forgebreaker,
-    // the previous final entry).
     expect(DEED_ORDER[DEED_ORDER.length - 1]).toBe('prog_hellgate_pact');
   });
 

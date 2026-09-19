@@ -2036,9 +2036,8 @@ function spendAbilityCost(
   _target: Entity | null = null,
 ): void {
   if (isToggleBuff(res.def) && p.auras.some((a) => a.id === res.def.id)) return;
-  // A consumable reagent (AbilityDef.reagent, the Grand Teleport rune) leaves
-  // the bags at the SAME moment the resource cost is spent: this is the one
-  // spend site for instants, timed-cast completions and channel starts.
+  // A reagent (AbilityDef.reagent) leaves the bags with the resource cost: the
+  // one spend site for instants, timed-cast completions and channel starts.
   if (res.def.reagent) ctx.removeItem(res.def.reagent.itemId, res.def.reagent.count, p.id);
   if (res.def.devotionCost) spendDevotion(p, res.def.devotionCost);
   const spentRage = p.resourceType === 'rage' ? res.cost : 0;
@@ -2571,8 +2570,7 @@ function applyAbility(
   // passes nothing). Cleared here so it can never leak into a later cast.
   const castTarget = castTargetId ?? p.castTargetId;
   p.castTargetId = null;
-  // The bags can change during a timed cast: re-check the reagent at
-  // completion so a rune sold or traded mid-cast refuses instead of firing free.
+  // Re-check at completion: a reagent sold mid-cast refuses, never fires free.
   if (!hasAbilityReagent(ctx, p, res.def)) {
     ctx.error(p.id, 'You do not have the required reagent.');
     return;

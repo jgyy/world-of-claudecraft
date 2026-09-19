@@ -17113,8 +17113,7 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'devCommand.actions.town.description': '名前を指定して町の中心部にテレポートします。',
   'devCommand.actions.town.label': 'タウンハブ',
   'devCommand.fields.town': '町',
-  // Fast travel (#3932): the Hellgate pact quests, the Rune of Passage, and the
-  // two travel spells (M16 non-Latin fills).
+  // Fast travel (#3932): the pact quests, the rune and the two spells (M16).
   'entities.quests.q_hellgate_pact.title': '安らがぬ契約',
   'entities.quests.q_hellgate_pact.text':
     'あなたは悪魔を鎖につないで、{playerName}、それで自分が主人だと思っている。古い契約は違うと言う。門は常に向こう側からしか開かれない。自らの手で門を裂く術を学びたいなら、まず礼拝堂の墓地の死者があなたを止められないことを証明しなさい。安らがぬ骨を8体眠らせ、学んだことを持ち帰りなさい。',

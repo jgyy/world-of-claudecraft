@@ -17074,8 +17074,7 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'devCommand.actions.town.description': '이름을 사용하여 타운 허브로 순간이동합니다.',
   'devCommand.actions.town.label': '타운 허브',
   'devCommand.fields.town': '도시',
-  // Fast travel (#3932): the Hellgate pact quests, the Rune of Passage, and the
-  // two travel spells (M16 non-Latin fills).
+  // Fast travel (#3932): the pact quests, the rune and the two spells (M16).
   'entities.quests.q_hellgate_pact.title': '불안한 계약',
   'entities.quests.q_hellgate_pact.text':
     '당신은 악마를 사슬에 매어 끌고 다니면서, {playerName}, 그것으로 자신이 주인이 되었다고 여기는군요. 옛 계약은 달리 말합니다. 문은 언제나 저편에서만 열리는 법이지요. 스스로 문을 찢어 여는 법을 배우고 싶다면, 먼저 예배당 묘지의 죽은 자들이 당신을 붙들지 못한다는 것을 증명하십시오. 불안한 뼈무더기 8구를 잠재우고, 배운 것을 가져오십시오.',

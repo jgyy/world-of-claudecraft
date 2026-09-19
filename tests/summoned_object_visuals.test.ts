@@ -10,6 +10,7 @@ import {
   SUMMONED_OBJECT_VISUALS,
   syncSummonedObjectVisual,
 } from '../src/render/summoned_objects';
+import { OWNED_MATERIALS_KEY } from '../src/render/summoned_prop_kit';
 import { createGroundObject } from '../src/sim/entity';
 import { setLanguage } from '../src/ui/i18n';
 
@@ -43,7 +44,7 @@ describe('summoned object visual registry', () => {
     expect(isSummonedObjectItem('__proto__')).toBe(false);
   });
 
-  it('names each root by item and entity id and reports its authored height', () => {
+  it('names each root by item and entity id, reports its height, builds deterministically', () => {
     const portal = buildSummonedObject('grand_portal', 7);
     expect(portal.group.name).toBe('grand_portal_7');
     expect(portal.height).toBe(GRAND_PORTAL_VISUAL_SPEC.height);
@@ -54,9 +55,6 @@ describe('summoned object visual registry', () => {
       HELLGATE_VISUAL_SPEC.emberCount,
     );
     expect(buildSummonedObject('soulwell', 11).group.name).toBe('soulwell_11');
-  });
-
-  it('builds deterministically: the same entity id gives the same ember scatter', () => {
     const a = buildSummonedObject('hellgate', 21).group.userData.hellgateEmbers as THREE.Group;
     const b = buildSummonedObject('hellgate', 21).group.userData.hellgateEmbers as THREE.Group;
     const c = buildSummonedObject('hellgate', 22).group.userData.hellgateEmbers as THREE.Group;
@@ -79,10 +77,9 @@ describe('summoned object visual registry', () => {
       expect(shared.length).toBeGreaterThanOrEqual(3);
       expect(owned.length).toBeGreaterThanOrEqual(4);
       for (const material of owned) expect(material).toBeInstanceOf(THREE.MeshBasicMaterial);
-      const ownedList = groupA.userData[
-        itemId === 'grand_portal' ? 'grandPortalOwnedMaterials' : 'hellgateOwnedMaterials'
-      ] as THREE.Material[];
-      expect(new Set(ownedList)).toEqual(new Set(owned));
+      expect(new Set(groupA.userData[OWNED_MATERIALS_KEY] as THREE.Material[])).toEqual(
+        new Set(owned),
+      );
 
       const sharedSpies = shared.map((material) => vi.spyOn(material, 'dispose'));
       const ownedSpies = owned.map((material) => vi.spyOn(material, 'dispose'));
@@ -92,10 +89,6 @@ describe('summoned object visual registry', () => {
       for (const spy of ownedSpies) expect(spy).toHaveBeenCalledTimes(1);
     },
   );
-
-  it('dispose is a no-op on a root no entry owns', () => {
-    expect(() => disposeSummonedObjectVisual(new THREE.Group())).not.toThrow();
-  });
 
   it('sync animates the swirl, embers and light without throwing', () => {
     for (const itemId of ['soulwell', 'grand_portal', 'hellgate']) {
@@ -116,8 +109,9 @@ describe('summoned object visual registry', () => {
     const base = light.intensity;
     syncSummonedObjectVisual('grand_portal', portal, 0.7, 5);
     expect(light.intensity).not.toBe(base);
-    // An unregistered item id is ignored, never a throw.
+    // An unregistered item id, or a root no entry owns, is ignored, never a throw.
     expect(() => syncSummonedObjectVisual('mailbox', portal, 1, 5)).not.toThrow();
+    expect(() => disposeSummonedObjectVisual(new THREE.Group())).not.toThrow();
   });
 
   it('labels the Hellgate by its ability name and the Grand Portal by its object name', () => {

@@ -605,7 +605,6 @@ const QUEST_IDS = [
   // the Eastbrook hub dummy lesson (content/practice_dummies.ts)
   'q_hub_know_your_numbers',
   'q_hub_healing_numbers',
-  // the Hellgate pact (content/hellgate.ts), the warlock-only chain
   'q_hellgate_pact',
   'q_hellgate_rite',
   'q_hellgate_gate',

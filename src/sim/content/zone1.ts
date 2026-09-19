@@ -723,7 +723,6 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
       'tough_jerky',
       'minor_healing_potion',
       'minor_mana_potion',
-      // The mage Grand Teleport reagent (content/grand_teleports.ts): 1 gold.
       'rune_of_passage',
       'linen_pouch',
       'travelers_knapsack',

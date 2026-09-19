@@ -36,10 +36,8 @@ const baseEnTable = {
   'log.deathwardSaves': 'A deathward saves you!',
   'error.lineOfSight': 'Line of sight.',
   'error.notInGroup': 'That ally is not in your group.',
-  // The fast-travel party gates (src/sim/party_gate.ts) and the reagent gate
-  // (combat/casting_lifecycle.ts): the refusals register in EXACT; the {town}
-  // line is a RULES entry below (town names are content text and splice
-  // verbatim).
+  // The party gates (src/sim/party_gate.ts) and the reagent gate: EXACT rows,
+  // plus the {town} RULES entry below (town names are content text).
   'log.portalStep': 'You step through the portal to {town}.',
   'log.hellgatePulled': 'You are pulled through the Hellgate.',
   'error.portalCannotStepFrom': 'You cannot step through from here.',
@@ -48,7 +46,6 @@ const baseEnTable = {
   'error.summonAllyUnreachable': 'That ally cannot be summoned from where they are.',
   'error.missingReagent': 'You do not have the required reagent.',
   'error.noRoomHere': 'There is not enough room here.',
-  // The Grand Portal object's world label (party_gate.ts names the object).
   'entityName.grandPortal': 'Grand Portal',
   'error.noDeadAlly': 'You must target a dead ally in your group.',
   'error.noDeadGroupMembers': 'There are no dead group members to resurrect.',

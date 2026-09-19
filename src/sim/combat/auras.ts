@@ -146,8 +146,7 @@ export function updateRegen(ctx: SimContext, p: Entity, meta: PlayerMeta): void 
   // === 0): that shape heals nothing itself and is the sim's documented dev
   // freeze idiom (see startCascadePlaytest/startDevSandbox in sim.ts), which
   // still needs natural regen suppressed to hold a scripted hp bar in place.
-  // A `noRegen` aura (the Hellgate toll) suspends natural HEALTH regen only;
-  // mana and the other bars above are untouched.
+  // A `noRegen` aura (the Hellgate toll) suspends natural HEALTH regen only.
   if (!p.inCombat && p.hp < p.maxHp && p.eating?.hpPer2s !== 0 && !p.auras.some((a) => a.noRegen)) {
     const regen = p.stats.sta * 0.3 + 2;
     p.hp = Math.min(p.maxHp, p.hp + Math.round(regen));
@@ -333,13 +332,10 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
         } else if (a.kind === 'affliction_violence') {
           tickHexOfViolence(ctx, e, a);
         } else if (a.kind === 'dot' && a.id === HELLGATE_BLEED_AURA_ID) {
-          // The Hellgate toll (selfDotPctMax keyed by HELLGATE_BLEED_AURA_ID) is
-          // a plain hp toll, not an attack: it never enters combat, never
-          // threatens, and never kills (floored at 1 hp), so the death path
-          // stays owned by real attackers. Keyed on the aura ID, never on
-          // "any self-sourced dot": the delve Bad Air affix is also a
-          // self-sourced dot and must keep running through dealDamage.
-          // Emits the tick fx and a damage event for the FCT and combat log only.
+          // The Hellgate toll is a plain hp toll, not an attack: no combat entry,
+          // no threat, floored at 1 hp so real attackers own the death path.
+          // Keyed on the aura id, never "any self-sourced dot": the delve Bad
+          // Air affix is one too and must stay on dealDamage below.
           const toll = Math.min(a.value, Math.max(0, e.hp - 1));
           if (toll > 0) {
             e.hp -= toll;

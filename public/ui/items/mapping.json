@@ -407,7 +407,7 @@
       "itemId": "rune_of_passage",
       "name": "Rune of Passage",
       "sourcePack": "project-authored",
-      "sourceFile": "glowing rune stone, hand-authored SVG scene rasterized by scripts/render_travel_item_icons.mjs (sharp: 512px master over the item-icon vignette, downscaled to the 128px opaque woc-item-icon-v1 shipping format)",
+      "sourceFile": "glowing rune stone, hand-authored SVG scene rasterized offline (sharp: 512px master over the item-icon vignette, downscaled to the 128px opaque woc-item-icon-v1 shipping format)",
       "confidence": "high",
       "license": "World of ClaudeCraft original art (project-owned, created for this game)"
     }

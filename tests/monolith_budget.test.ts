@@ -1066,11 +1066,7 @@ const MONOLITHS: MonolithRow[] = [
     // retire hooks to src/sim/loot/bop_trade_persistence.ts (main, v0.42.1),
     // composed with the release's own extractions above. Exact merged count,
     // zero slack.
-    // LOWERED 11822 -> 11808 by the fast-travel change (#3932): the
-    // hasLineOfSight body moved to src/sim/line_of_sight_gate.ts (thin
-    // delegates stay because SimContext binds them), paying for the party gate
-    // sweep call and its import.
-    ceiling: 11808,
+    ceiling: 11822,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {

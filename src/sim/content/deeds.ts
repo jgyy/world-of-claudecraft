@@ -3393,11 +3393,8 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: { kind: 'quest', questId: 'q_requiem_at_the_forge' },
     hidden: true,
   },
-  // The Hellgate pact (content/hellgate.ts): the warlock-only three-zone
-  // quest chain that teaches the Hellgate. Standard renown, keyed on the
-  // chain's final quest so the whole pact must be walked; the class gate is
-  // the quest's own (requiredClass), never the deed's. The Grand Teleport
-  // authors no deed: it is an ordinary level-up spell.
+  // The Hellgate pact (content/hellgate.ts): keyed on the warlock chain's final
+  // quest so the whole pact must be walked; the class gate is the quest's own.
   prog_hellgate_pact: {
     id: 'prog_hellgate_pact',
     name: 'The Unquiet Pact',

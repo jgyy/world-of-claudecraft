@@ -1,11 +1,7 @@
-// The Hellgate: the warlock's summoning gate, and the three-zone pact that
-// teaches it. Data only; the gate object and its party gate live in
-// src/sim/party_gate.ts.
-//
-// The gate stands for HELLGATE_DURATION seconds. While it stands the demons on
-// the far side drag at the warlock: a bleed of HELLGATE_BLEED_PCT of maximum
-// health every second and no natural health regen. Clicking the gate while
-// targeting a group member pulls that member to the gate.
+// The Hellgate: the warlock's summoning gate and the three-zone pact that
+// teaches it. Data only; the object lives in src/sim/party_gate.ts. While the
+// gate stands the warlock bleeds HELLGATE_BLEED_PCT of max health a second with
+// no natural regen; clicking it while targeting a group member pulls them to it.
 
 import type { AbilityDef, QuestDef } from '../types';
 
@@ -22,7 +18,6 @@ export const HELLGATE_ABILITY: AbilityDef = {
   id: HELLGATE_ABILITY_ID,
   name: 'Hellgate',
   class: 'warlock',
-  // The real gate is requiresQuest; the level mirrors the chain's final floor.
   learnLevel: 13,
   cost: 150,
   castTime: HELLGATE_CAST_TIME,

@@ -452,13 +452,9 @@ function advanceSunGodVerdictForHit(
   advanceSunGodVerdict(ctx, caster, target, abilityId, mark, verdict.effect, verdict.name);
 }
 
-/**
- * A party gate that found no footprint (party_gate.ts gateSpawnPosition) or a
- * corrupt destination: the cost site already spent the reagent and armed the
- * cooldown before the effects ran, so both are handed back here. The mana is
- * not (the classic rule: a resolved cast keeps its mana), and the refusal
- * names the real reason, never a sight line.
- */
+/** A gate with no footprint or a corrupt destination: the cost site already
+ *  spent the reagent and armed the cooldown, so both come back (the mana does
+ *  not: a resolved cast keeps its mana). */
 function refundFailedSummon(ctx: SimContext, p: Entity, ability: AbilityDef): void {
   if (ability.reagent) ctx.addItem(ability.reagent.itemId, ability.reagent.count, p.id);
   p.cooldowns.delete(ability.id);
@@ -4283,12 +4279,9 @@ export function runEffects(
         break;
       }
       case 'selfDotPctMax': {
-        // The mirror of selfHotPctMax: a self 'dot' whose per-tick value is a
-        // fraction of the caster's MAXIMUM health. combat/auras.ts ticks a
-        // self-sourced dot as a plain hp toll floored at 1 (never lethal, no
-        // combat entry); `noRegen` also suspends natural health regen there.
-        // The Hellgate keys its aura by HELLGATE_BLEED_AURA_ID so the gate
-        // sweep (party_gate.ts updatePartyGates) can end the toll with the gate.
+        // selfHotPctMax's mirror: a self dot valued off MAXIMUM health. Keyed by
+        // HELLGATE_BLEED_AURA_ID so auras.ts ticks it as a non-lethal toll and
+        // the gate sweep (party_gate.ts) can end it with the gate.
         ctx.applyAura(p, {
           id: ability.id === HELLGATE_ABILITY_ID ? HELLGATE_BLEED_AURA_ID : ability.id,
           name: ability.name,

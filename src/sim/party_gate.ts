@@ -1,11 +1,8 @@
-// Party gates: the mage Grand Portal and the warlock Hellgate. One module for
-// both because they share the Soulwell doctrine (soulwell.ts): a temporary
-// summoned interactable whose eligible roster is captured at cast time and
-// widened by later party joins, with the server owning every membership,
-// combat and placement decision. A Grand Portal moves an eligible clicker to
-// its destination; a Hellgate moves the owner's eligible TARGET to the gate.
-//
-// Pure sim module (src/sim/CLAUDE.md): no rng, no clock, no DOM.
+// Party gates: the mage Grand Portal and the warlock Hellgate, on the Soulwell
+// doctrine (soulwell.ts): a summoned interactable whose eligible roster is
+// captured at cast and widened by later joins, the server owning every
+// decision. A portal moves an eligible clicker; a gate pulls the owner's
+// eligible TARGET to it. Pure sim module: no rng, no clock, no DOM.
 
 import { isBlocked } from './colliders';
 import { GRAND_PORTAL_OBJECT_ITEM_ID, grandTeleportDestination } from './content/grand_teleports';
@@ -16,13 +13,10 @@ import type { SimContext } from './sim_context';
 import type { Entity, Vec3 } from './types';
 import { vaultDrawBlocked } from './vault_craft_gate';
 
-/**
- * Is this player standing on an instanced plane (dungeon, raid room, arena,
- * battleground, delve)? A party gate never carries anyone INTO or OUT OF one.
- * vault_craft_gate.ts owns the one plane classifier in the sim (built for the
- * vault-draw question, but the plane test is the same); this wrapper names the
- * travel question so the two rules can part ways deliberately, never by drift.
- */
+/** On an instanced plane (dungeon, arena, battleground, delve)? A gate never
+ *  carries anyone into or out of one. vault_craft_gate.ts owns the sim's one
+ *  plane classifier; this wrapper names the travel question so the two rules
+ *  can part ways deliberately, never by drift. */
 function onInstancedPlane(ctx: SimContext, pid: number): boolean {
   return vaultDrawBlocked(ctx, pid);
 }
@@ -33,19 +27,10 @@ export const PARTY_GATE_FOOTPRINT_RADIUS = 1.6;
 
 type PartyGateState = NonNullable<Entity['partyGate']>;
 
-// The Soulwell placement fan, parameterised by footprint: front first, then a
-// fixed ring of offsets at growing distances. Deterministic order for parity.
+// The Soulwell placement fan: front first, then a fixed ring of offsets at
+// growing distances, in a deterministic order for parity.
 const SPAWN_DISTANCES = [2.6, 3.4, 4.2, 4.8] as const;
-const SPAWN_ANGLE_OFFSETS = [
-  0,
-  Math.PI / 2,
-  -Math.PI / 2,
-  Math.PI,
-  Math.PI / 4,
-  -Math.PI / 4,
-  (Math.PI * 3) / 4,
-  (-Math.PI * 3) / 4,
-] as const;
+const SPAWN_ANGLE_OFFSETS = [0, 0.5, -0.5, 1, 0.25, -0.25, 0.75, -0.75].map((k) => k * Math.PI);
 
 function overlapsGroundObject(
   ctx: SimContext,
@@ -75,8 +60,8 @@ function gateSpawnPosition(ctx: SimContext, caster: Entity, footprint: number): 
       }
     }
   }
-  // A fully enclosed position has no reachable footprint: refuse rather than
-  // intersect scenery (the caller reports 'Line of sight.').
+  // No reachable footprint: refuse rather than intersect scenery (the caller
+  // refunds the cast and reports the missing room).
   return null;
 }
 
@@ -157,9 +142,7 @@ export function rememberPartyGateEligibility(
   ctx: SimContext,
   party: { members: readonly number[] },
 ): void {
-  const entities = ctx.entities;
-  if (!entities || typeof entities.values !== 'function') return;
-  for (const entity of entities.values()) {
+  for (const entity of ctx.entities.values()) {
     const state = entity.partyGate;
     if (!state || !party.members.includes(state.ownerId)) continue;
     for (const memberId of party.members) rememberEligiblePlayer(state, memberId);

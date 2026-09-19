@@ -441,7 +441,7 @@
     {
       "abilityId": "hellgate",
       "sourcePack": "project-authored",
-      "sourceFile": "hand-authored SVG fel gate rasterized by scripts/render_travel_item_icons.mjs (sharp: 512px master, downscaled to the 128px opaque WebP)",
+      "sourceFile": "hand-authored SVG fel gate rasterized offline (sharp, 512px master downscaled to 128px)",
       "output": "hellgate.webp",
       "source": "World of ClaudeCraft hand-authored vector art",
       "owner": "World of ClaudeCraft",
