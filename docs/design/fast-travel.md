@@ -20,7 +20,8 @@ cosmetic obligation this content authored.
   code path.
 - **Cast:** `GRAND_TELEPORT_CAST_TIME` seconds, out of combat, consumes one
   Rune of Passage (`RUNE_OF_PASSAGE_ITEM_ID`, vendor-bought at
-  `RUNE_BUY_COPPER` from the Eastbrook and Fenbridge general-goods vendors).
+  `RUNE_BUY_COPPER` from Trader Wilkes in Eastbrook and Provisioner Hale in
+  Fenbridge).
   Opens a Grand Portal that stands for `GRAND_PORTAL_DURATION` seconds and
   admits only members of the mage's group at the moment of casting
   (`src/sim/party_gate.ts`); a member who steps through lands at the authored
@@ -58,8 +59,11 @@ cosmetic obligation this content authored.
 only, server side) records the owner, the party at cast time and the eligible
 member ids; `rememberPartyGateEligibility` (called from the party machine on
 every join) lets a late joiner use a standing gate; `updatePartyGates` runs
-in the tick after despawn decay and ends a gate (and the Hellgate toll) when
-its owner dies or its timer lapses. The renderer draws both through
+in the tick after despawn decay and ends a Hellgate (and its toll) when its
+warlock dies; a Grand Portal deliberately outlives its mage, since the group it
+was opened for keeps the exit until the timer lapses. A summon that finds no
+footprint refunds the rune and clears the cooldown (`refundFailedSummon` in
+`combat/effect_dispatch.ts`). The renderer draws both through
 `src/render/summoned_objects.ts` (the Soulwell registry, one procedural prop
 per `objectItemId`).
 

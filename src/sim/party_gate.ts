@@ -16,6 +16,17 @@ import type { SimContext } from './sim_context';
 import type { Entity, Vec3 } from './types';
 import { vaultDrawBlocked } from './vault_craft_gate';
 
+/**
+ * Is this player standing on an instanced plane (dungeon, raid room, arena,
+ * battleground, delve)? A party gate never carries anyone INTO or OUT OF one.
+ * vault_craft_gate.ts owns the one plane classifier in the sim (built for the
+ * vault-draw question, but the plane test is the same); this wrapper names the
+ * travel question so the two rules can part ways deliberately, never by drift.
+ */
+function onInstancedPlane(ctx: SimContext, pid: number): boolean {
+  return vaultDrawBlocked(ctx, pid);
+}
+
 export const GRAND_PORTAL_TEMPLATE_ID = 'grand_portal';
 export const HELLGATE_TEMPLATE_ID = 'hellgate';
 export const PARTY_GATE_FOOTPRINT_RADIUS = 1.6;
@@ -187,7 +198,7 @@ function interactGrandPortal(
   }
   // The portal only carries people OUT of the open world: an instance,
   // arena, battleground or delve never gets a free exit (or entry) this way.
-  if (vaultDrawBlocked(ctx, actorId)) {
+  if (onInstancedPlane(ctx, actorId)) {
     ctx.error(actorId, 'You cannot step through from here.');
     return;
   }
@@ -222,7 +233,7 @@ function interactHellgate(
     ctx.error(actorId, 'Target a group member to summon them.');
     return;
   }
-  if (target.dead || vaultDrawBlocked(ctx, target.id)) {
+  if (target.dead || onInstancedPlane(ctx, target.id)) {
     ctx.error(actorId, 'That ally cannot be summoned from where they are.');
     return;
   }
@@ -255,8 +266,12 @@ export function interactPartyGate(ctx: SimContext, object: Entity, actorId: numb
 /**
  * Per-tick sweep (sim.ts, right after runDespawnDecay): a Hellgate dies with
  * its warlock. When the owner is gone, dead, or otherwise out of the world
- * the gate drops and the owner's toll aura ends early with it. Cheap: only
- * Hellgate objects are inspected. Draws no rng.
+ * the gate drops and the owner's toll aura ends early with it. A Grand Portal
+ * deliberately outlives its mage: the group it was opened for keeps the exit.
+ * Cost: one pass over the entity map (the same walk runDespawnDecay just made)
+ * with a two-field reject per entity and no allocation until a gate is doomed;
+ * a standing Hellgate is rare, so the owner lookup is the only extra read.
+ * Draws no rng.
  */
 export function updatePartyGates(ctx: SimContext): void {
   const doomed: Entity[] = [];

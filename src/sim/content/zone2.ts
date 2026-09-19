@@ -731,6 +731,8 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     color: 0x1e8449,
     questIds: ['q_prowler_pelts', 'q_fen_supplies', 'q_the_codfather', 'q_grubjaw'],
     vendorItems: [
+      // The mage Grand Teleport reagent (content/grand_teleports.ts): 1 gold.
+      'rune_of_passage',
       'fenbridge_rye',
       'marsh_mint_tea',
       'smoked_eel',
@@ -826,14 +828,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     // tanning staple. thorium_ore, the premium reagent recipe_duskhide_wraps
     // consumes, is NOT here: it is a node yield, and no NPC stocks a gathered
     // material (professions.md, Locked rulings).
-    // rune_of_passage: the mage Grand Teleport reagent (content/grand_teleports.ts).
-    vendorItems: [
-      'travelers_knapsack',
-      'tough_jerky',
-      'smoked_eel',
-      'tanning_agent',
-      'rune_of_passage',
-    ],
+    vendorItems: ['travelers_knapsack', 'tough_jerky', 'smoked_eel', 'tanning_agent'],
     greeting: 'A hide is only as good as its tanning, $C. The vats are ready when you are.',
   },
   // The farming go-live: the tier-2 farmer at the Fenbridge raised beds

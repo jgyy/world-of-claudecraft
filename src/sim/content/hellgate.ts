@@ -22,7 +22,8 @@ export const HELLGATE_ABILITY: AbilityDef = {
   id: HELLGATE_ABILITY_ID,
   name: 'Hellgate',
   class: 'warlock',
-  learnLevel: 10,
+  // The real gate is requiresQuest; the level mirrors the chain's final floor.
+  learnLevel: 13,
   cost: 150,
   castTime: HELLGATE_CAST_TIME,
   cooldown: HELLGATE_COOLDOWN,

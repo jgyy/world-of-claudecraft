@@ -47,6 +47,9 @@ const baseEnTable = {
   'error.summonTargetGroupMember': 'Target a group member to summon them.',
   'error.summonAllyUnreachable': 'That ally cannot be summoned from where they are.',
   'error.missingReagent': 'You do not have the required reagent.',
+  'error.noRoomHere': 'There is not enough room here.',
+  // The Grand Portal object's world label (party_gate.ts names the object).
+  'entityName.grandPortal': 'Grand Portal',
   'error.noDeadAlly': 'You must target a dead ally in your group.',
   'error.noDeadGroupMembers': 'There are no dead group members to resurrect.',
   'error.bagsFull': 'Your bags are full.',

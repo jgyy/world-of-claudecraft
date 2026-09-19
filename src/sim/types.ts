@@ -709,8 +709,8 @@ export interface Aura {
   // removed by player counters. Natural expiry and encounter cleanup still own it.
   unbreakableControl?: true;
   // Suspends the carrier's natural out-of-combat health regen while it stands
-  // (combat/auras.ts updateRegen). The Hellgate toll; mirrored on the wire so
-  // the tooltip can say so.
+  // (combat/auras.ts updateRegen). The Hellgate toll. Sim-side only: the
+  // client mirror does not carry it, the ability tooltip states the rule.
   noRegen?: true;
   // Encounter-authored mechanic that ordinary dispels and broad self-cleanses
   // cannot remove. Death, natural expiry, and the encounter script still clear it.

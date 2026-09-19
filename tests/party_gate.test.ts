@@ -18,10 +18,11 @@ import {
   HELLGATE_FINAL_QUEST_ID,
   HELLGATE_OBJECT_ITEM_ID,
 } from '../src/sim/content/hellgate';
-import { ABILITIES } from '../src/sim/data';
+import { ABILITIES, arenaOrigin } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import type { SimContext } from '../src/sim/sim_context';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { localizeSimText } from '../src/ui/sim_i18n';
 
 const PORTAL_ID = 'grand_teleport_highwatch';
 
@@ -207,6 +208,46 @@ describe('Grand Teleport (mage party gate to Highwatch)', () => {
     ticks(sim, 20 * 2);
     expect(gates(sim, GRAND_PORTAL_OBJECT_ITEM_ID)).toHaveLength(0);
   });
+
+  it('hands the rune and the cooldown back when the summon cannot land', () => {
+    const { sim, mageId, mage } = mageWorld();
+    sim.addItem(RUNE_OF_PASSAGE_ITEM_ID, 1, mageId);
+    const effect = ABILITIES[PORTAL_ID].effects[0];
+    if (effect.type !== 'summonGrandPortal') throw new Error('unexpected effect shape');
+    const real = effect.destination;
+    // A destination the content table cannot resolve is the one summon
+    // failure a test can force without crowding a hub with 32 objects.
+    effect.destination = 'nowhere';
+    try {
+      sim.castAbility(PORTAL_ID, mageId);
+      const emitted = ticks(sim, 20 * 11);
+      expect(gates(sim, GRAND_PORTAL_OBJECT_ITEM_ID)).toHaveLength(0);
+      expect(errorTexts(emitted, mageId)).toContain('There is not enough room here.');
+      expect(sim.countItem(RUNE_OF_PASSAGE_ITEM_ID, mageId)).toBe(1);
+      expect(mage.cooldowns.has(PORTAL_ID)).toBe(false);
+    } finally {
+      effect.destination = real;
+    }
+  });
+
+  it('outlives its mage: the group keeps the exit after the caster dies', () => {
+    const { sim, mageId, mage } = mageWorld();
+    sim.addItem(RUNE_OF_PASSAGE_ITEM_ID, 1, mageId);
+    sim.castAbility(PORTAL_ID, mageId);
+    ticks(sim, 20 * 11);
+    ctx(sim).handleDeath(mage, null);
+    ticks(sim, 2);
+    expect(gates(sim, GRAND_PORTAL_OBJECT_ITEM_ID)).toHaveLength(1);
+  });
+
+  it('labels the portal through the sim text matcher, never a bare English fallback', () => {
+    const { sim, mageId } = mageWorld();
+    sim.addItem(RUNE_OF_PASSAGE_ITEM_ID, 1, mageId);
+    sim.castAbility(PORTAL_ID, mageId);
+    ticks(sim, 20 * 11);
+    const [portal] = gates(sim, GRAND_PORTAL_OBJECT_ITEM_ID);
+    expect(localizeSimText(portal.name)).not.toBeNull();
+  });
 });
 
 function warlockWorld() {
@@ -266,6 +307,30 @@ describe('Hellgate (warlock party gate)', () => {
     expect(before - owner.hp).toBeLessThanOrEqual(expectedLoss + 2);
   });
 
+  it('leaves every OTHER self-sourced dot on the real damage path: Bad Air still kills', () => {
+    // The delve Bad Air affix (delves/runs.ts tickDelveBadAir) is also a
+    // self-sourced player dot. The toll branch is keyed on the Hellgate aura
+    // id, so Bad Air keeps running through dealDamage and can be lethal.
+    const { sim, ownerId, owner } = warlockWorld();
+    ctx(sim).applyAura(owner, {
+      id: 'bad_air',
+      name: 'Bad Air',
+      kind: 'dot',
+      school: 'nature',
+      remaining: 4,
+      duration: 4,
+      // Authored Bad Air ticks for 3; sized to the health pool here so the
+      // out-of-combat regen between ticks cannot mask the lethal path.
+      value: owner.maxHp,
+      tickInterval: 2,
+      tickTimer: 2,
+      sourceId: ownerId,
+    });
+    owner.hp = 2;
+    ticks(sim, 20 * 3);
+    expect(owner.dead).toBe(true);
+  });
+
   it('never kills the warlock: the toll floors at 1 hp', () => {
     const { sim, ownerId, owner } = warlockWorld();
     openGate(sim, ownerId);
@@ -309,6 +374,19 @@ describe('Hellgate (warlock party gate)', () => {
     owner.targetId = allyId;
     expect(sim.pickUpObject(gate.id, ownerId)).toBe(true);
     expect(errorsFor(sim, ownerId)).toContain('That ally cannot be summoned from where they are.');
+  });
+
+  it('refuses to pull an ally standing on an instanced plane (the arena)', () => {
+    const { sim, ownerId, allyId, owner } = warlockWorld();
+    const gate = openGate(sim, ownerId);
+    const ally = entity(sim, allyId);
+    const pit = arenaOrigin(0);
+    ally.pos = { x: pit.x, y: ally.pos.y, z: pit.z };
+    sim.events.length = 0;
+    owner.targetId = allyId;
+    expect(sim.pickUpObject(gate.id, ownerId)).toBe(true);
+    expect(errorsFor(sim, ownerId)).toContain('That ally cannot be summoned from where they are.');
+    expect(ally.pos.x).toBeCloseTo(pit.x, 5);
   });
 
   it('lasts its duration and the toll ends with it', () => {

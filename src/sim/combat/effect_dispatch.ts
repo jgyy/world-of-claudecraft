@@ -452,6 +452,19 @@ function advanceSunGodVerdictForHit(
   advanceSunGodVerdict(ctx, caster, target, abilityId, mark, verdict.effect, verdict.name);
 }
 
+/**
+ * A party gate that found no footprint (party_gate.ts gateSpawnPosition) or a
+ * corrupt destination: the cost site already spent the reagent and armed the
+ * cooldown before the effects ran, so both are handed back here. The mana is
+ * not (the classic rule: a resolved cast keeps its mana), and the refusal
+ * names the real reason, never a sight line.
+ */
+function refundFailedSummon(ctx: SimContext, p: Entity, ability: AbilityDef): void {
+  if (ability.reagent) ctx.addItem(ability.reagent.itemId, ability.reagent.count, p.id);
+  p.cooldowns.delete(ability.id);
+  ctx.error(p.id, 'There is not enough room here.');
+}
+
 export function runEffects(
   ctx: SimContext,
   p: Entity,
@@ -4259,13 +4272,13 @@ export function runEffects(
       }
       case 'summonGrandPortal': {
         if (!summonGrandPortal(ctx, p, eff.destination, eff.duration)) {
-          ctx.error(p.id, 'Line of sight.');
+          refundFailedSummon(ctx, p, ability);
         }
         break;
       }
       case 'summonHellgate': {
         if (!summonHellgate(ctx, p, eff.duration)) {
-          ctx.error(p.id, 'Line of sight.');
+          refundFailedSummon(ctx, p, ability);
         }
         break;
       }

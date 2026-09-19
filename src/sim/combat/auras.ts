@@ -37,6 +37,7 @@
 // (enforced by tests/architecture.test.ts).
 
 import { shouldFireConsumeTickSfx } from '../consume_sfx';
+import { HELLGATE_BLEED_AURA_ID } from '../content/hellgate';
 import { pctValue, recalcPlayerStats } from '../entity';
 import { manaRegenPer2s } from '../mana_regen';
 import { CHEATER_MARK_AURA_ID } from '../moderation';
@@ -331,12 +332,14 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
           tickMaledictGaze(ctx, e, a);
         } else if (a.kind === 'affliction_violence') {
           tickHexOfViolence(ctx, e, a);
-        } else if (a.kind === 'dot' && a.sourceId === e.id && e.kind === 'player') {
-          // A SELF-sourced player dot (selfDotPctMax, the Hellgate toll) is a
-          // plain hp toll, not an attack: it never enters combat, never
+        } else if (a.kind === 'dot' && a.id === HELLGATE_BLEED_AURA_ID) {
+          // The Hellgate toll (selfDotPctMax keyed by HELLGATE_BLEED_AURA_ID) is
+          // a plain hp toll, not an attack: it never enters combat, never
           // threatens, and never kills (floored at 1 hp), so the death path
-          // stays owned by real attackers. Emits the tick fx and a damage
-          // event for the FCT and combat log only.
+          // stays owned by real attackers. Keyed on the aura ID, never on
+          // "any self-sourced dot": the delve Bad Air affix is also a
+          // self-sourced dot and must keep running through dealDamage.
+          // Emits the tick fx and a damage event for the FCT and combat log only.
           const toll = Math.min(a.value, Math.max(0, e.hp - 1));
           if (toll > 0) {
             e.hp -= toll;
