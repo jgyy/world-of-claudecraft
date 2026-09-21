@@ -477,7 +477,6 @@ describe('crowd-influx run reset', () => {
         `mount reins ${target.mountItem} were not in bags`,
       ],
       ['sickness', { auraIds: ['resurrection_sickness'] }, 'recovery sickness remained'],
-      ['unstuck sickness', { auraIds: ['unstuck_sickness'] }, 'recovery sickness remained'],
     ];
     for (const [label, patch, expected] of cases) {
       const verdict = validateCrowdRecoveryState([target], [{ ...valid, ...patch }]);

@@ -1183,6 +1183,50 @@ async function stageWheelBinds(page) {
 
 export const TARGETS = [
   {
+    key: 'unstuck-no-sickness',
+    label:
+      'A completed /unstuck: on the base the debuff bar gains Unstuck Sickness (-75% all attributes) and the banner announces it; on the fix the player lands at the graveyard with no debuff and the banner just reports the move',
+    when: ['sim/unstuck', 'sim/spirit', 'ui/unstuck_feedback', 'sim/resurrection'],
+    variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
+    async capture(page) {
+      await page.evaluate(() => {
+        document.querySelector('.camera-prompt-confirm')?.click();
+        document.querySelector('.tut-skip')?.click();
+        document.querySelector('.gpu-notice-dismiss')?.click();
+        document.querySelector('#gpu-notice')?.remove();
+        document.getElementById('tutorial-greeting')?.remove();
+      });
+      await wait(300);
+      const setup = await page.evaluate(() => {
+        const sim = window.__game?.sim;
+        if (!sim?.player) return { ok: false, reason: 'no sim' };
+        // Level 20: the old sickness scaled with level and was zero below 10, so
+        // a fresh level-1 character would never have shown the difference.
+        sim.setPlayerLevel(20);
+        sim.player.hp = sim.player.maxHp;
+        if (!sim.unstuck(sim.player.id)) return { ok: false, reason: 'unstuck refused' };
+        return { ok: true };
+      });
+      if (!setup.ok) throw new Error(`unstuck setup failed: ${setup.reason}`);
+      // The stationary countdown is UNSTUCK_COUNTDOWN_SECONDS (10 s) of real
+      // sim time offline. Starting it already stamps the 15 s retry cooldown
+      // on the same id, so completion is the 5 minute success cooldown
+      // (UNSTUCK_SUCCESS_COOLDOWN_SECONDS) landing, the one durable sign it
+      // finished on either checkout.
+      await page.waitForFunction(
+        () => {
+          const sim = window.__game?.sim;
+          return (sim?.player?.cooldowns?.get('system_unstuck') ?? 0) > 60;
+        },
+        { timeout: 40000, polling: 250 },
+      );
+      // The graveyard move can re-raise the loading veil (asset streaming).
+      await awaitWorldPainted(page);
+      await wait(1200);
+      return null;
+    },
+  },
+  {
     key: 'fen-features-cull',
     label:
       'Willowfen dressing under the per-cell cull: expected visually identical on both tiers, judged on the census readout',

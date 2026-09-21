@@ -107,7 +107,8 @@ export function restoreArenaReturnPools(ctx: SimContext, e: Entity, pools: Arena
       : undefined;
   e.ccDr = cloneCcDr(pools.ccDr);
   // SICKNESS_AURA_IDS has one member (The Keeper's Toll) since Unstuck Sickness retired,
-  // so the captured id can only be that one; the id stays in the record for the wire.
+  // so the captured id can only be that one. The record keeps its id field as headroom
+  // for a second sickness; pools live in memory only and never cross a wire or the DB.
   if (pools.sickness) applyResurrectionSickness(ctx, e, pools.sickness.remaining);
   e.hp = Math.max(0, Math.min(pools.hp, e.maxHp));
   e.resource = Math.max(0, Math.min(pools.resource, e.maxResource));

@@ -563,9 +563,8 @@ export function auraEffectDescriptor(a: AuraEffectInput): AuraEffectDescriptor |
     case 'buff_allstats':
       return flatStat('allStats', a.value);
     case 'buff_allstats_pct':
-      // Percentage drain on the whole stat block (The Keeper's Toll / Resurrection
-      // Sickness (The Keeper's Toll) carries value -0.75 -> "Reduces all attributes
-      // by 75%"). Always a drain.
+      // Percentage drain on the whole stat block (Resurrection Sickness, The Keeper's
+      // Toll, carries value -0.75 -> "Reduces all attributes by 75%"). Always a drain.
       return { key: `${KEY}.allStatsPctReduce`, nums: { pct: pctFromFrac(a.value) } };
     // Percent raid buffs: value is integer percent POINTS (5 = +5%), rendered directly.
     case 'buff_stats_pct':

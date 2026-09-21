@@ -68,7 +68,8 @@ const RATE_LIMITER_ERROR_PATTERN =
   /sending messages too quickly|chat locked for|chat is on cooldown/i;
 
 const FRESH_AURAS_BY_CLASS = Object.freeze({ warrior: Object.freeze(['battle_stance']) });
-const RECOVERY_SICKNESS_AURA_IDS = new Set(['resurrection_sickness', 'unstuck_sickness']);
+// Unstuck Sickness retired in v0.44.0; only The Keeper's Toll is a recovery sickness now.
+const RECOVERY_SICKNESS_AURA_IDS = new Set(['resurrection_sickness']);
 
 export function buildCrowdInfluxPositions(botCount) {
   if (!Number.isInteger(botCount) || botCount <= 0) {

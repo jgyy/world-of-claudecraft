@@ -24,7 +24,8 @@
 // Sitting beside that loop but NOT part of it: the two /unstuck outcomes
 // (moveToGraveyardForUnstuck / reviveAtGraveyardForUnstuck). Unstuck never kills and never
 // leaves a corpse; it moves the player to the nearest graveyard, raises them if they were
-// down, and charges Unstuck Sickness instead of routing them through the Pale Keeper.
+// down, and charges nothing but the /unstuck success cooldown (Unstuck Sickness retired in
+// v0.44.0), never routing them through the Pale Keeper.
 //
 // `src/sim`-pure: no DOM/Three/render/ui/game/net imports, no Math.random/Date.now.
 
@@ -78,10 +79,9 @@ export const RES_HP_FRACTION = 0.5;
 // hp/mana AND inflicts Resurrection Sickness, so the penalty-free corpse run is the
 // reward for running your spirit all the way back.
 export const RES_HEALER_HP_FRACTION = 0.2;
-// Resurrection Sickness (display "The Keeper's Toll"), Unstuck Sickness, their
-// level-scaled durations, and the "survives death" predicate live in ./resurrection (a leaf
-// module shared by every death/respawn site). Re-export the ids so they stay importable
-// from here.
+// Resurrection Sickness (display "The Keeper's Toll"), its level-scaled duration, and the
+// "survives death" predicate live in ./resurrection (a leaf module shared by every
+// death/respawn site). Re-export the id so it stays importable from here.
 export { RESURRECTION_SICKNESS_ID };
 
 // --- graveyard selection ----------------------------------------------------
