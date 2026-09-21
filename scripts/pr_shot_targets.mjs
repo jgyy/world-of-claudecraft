@@ -1186,7 +1186,7 @@ export const TARGETS = [
     key: 'unstuck-no-sickness',
     label:
       'A completed /unstuck: on the base the debuff bar gains Unstuck Sickness (-75% all attributes) and the banner announces it; on the fix the player lands at the graveyard with no debuff and the banner just reports the move',
-    when: ['sim/unstuck', 'sim/spirit', 'ui/unstuck_feedback', 'sim/resurrection'],
+    when: ['sim/unstuck', 'ui/unstuck_feedback'],
     variants: [{ key: 'desktop' }, { key: 'mobile', mobile: true }],
     async capture(page) {
       await page.evaluate(() => {
