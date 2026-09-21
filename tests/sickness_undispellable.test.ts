@@ -1,4 +1,4 @@
-// The two recovery sicknesses (The Keeper's Toll and Unstuck Sickness) are the one
+// The recovery sickness (The Keeper's Toll; Unstuck Sickness retired in v0.44.0) is the one
 // debuff class no player counter may shed. They already survive dying and relogging
 // (aurasSurvivingDeath in src/sim/resurrection.ts); before this suite they were still
 // ordinary dispel food, so a warlock Voidfeast, a paladin Cleansing Verdict, or a mage
@@ -18,11 +18,10 @@ import {
   RES_SICKNESS_STAT_MULT,
   RESURRECTION_SICKNESS_ID,
   SICKNESS_AURA_IDS,
-  UNSTUCK_SICKNESS_ID,
 } from '../src/sim/resurrection';
 import { Sim } from '../src/sim/sim';
 import { ARENA_MIN_LEVEL } from '../src/sim/social/arena';
-import { applyResurrectionSickness, applyUnstuckSickness } from '../src/sim/spirit';
+import { applyResurrectionSickness } from '../src/sim/spirit';
 import type { Aura, Entity, PlayerClass } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 import { bareClient } from './helpers/bare_client';
@@ -46,14 +45,13 @@ function witheringWail(sourceId: number): Aura {
   };
 }
 
-function sicknessAura(p: Entity, which: 'resurrection' | 'unstuck'): Aura {
+function sicknessAura(p: Entity, which: 'resurrection'): Aura {
   const aura = p.auras.find((a) => a.id === idOf(which));
   if (!aura) throw new Error(`no ${which} sickness applied`);
   return aura;
 }
 
-const idOf = (which: 'resurrection' | 'unstuck') =>
-  which === 'resurrection' ? RESURRECTION_SICKNESS_ID : UNSTUCK_SICKNESS_ID;
+const idOf = (_which: 'resurrection') => RESURRECTION_SICKNESS_ID;
 
 // A single-player rig at a level where the sickness has a real duration (both
 // sicknesses are zero-length below level 10), with the row-8 talent allocated.
@@ -77,16 +75,15 @@ function rig(
   return { sim, p, events };
 }
 
-const sicken = (sim: AnySim, p: Entity, which: 'resurrection' | 'unstuck') => {
-  if (which === 'resurrection') applyResurrectionSickness(sim.ctx, p);
-  else applyUnstuckSickness(sim.ctx, p);
+const sicken = (sim: AnySim, p: Entity, which: 'resurrection') => {
+  applyResurrectionSickness(sim.ctx, p);
   expect(p.auras.some((a) => a.id === idOf(which))).toBe(true);
 };
 
 const has = (p: Entity, id: string) => p.auras.some((a) => a.id === id);
 
 describe('the recovery sicknesses carry the undispellable flag', () => {
-  it.each(['resurrection', 'unstuck'] as const)('%s sickness is flagged on apply', (which) => {
+  it.each(['resurrection'] as const)('%s sickness is flagged on apply', (which) => {
     const { sim, p } = rig('warlock', 'wlk_r8_voidfeast');
     sicken(sim, p, which);
     expect(sicknessAura(p, which).undispellable).toBe(true);
@@ -248,7 +245,7 @@ function finishArenaBout(sim: AnySim, winnerPid: number, loserPid: number): void
 }
 
 describe('an arena bout is a parenthesis, not a way to shed a sickness', () => {
-  it.each(['resurrection', 'unstuck'] as const)(
+  it.each(['resurrection'] as const)(
     'clears %s sickness for the bout and hands it back on return',
     (which) => {
       const { sim, a, b } = seatArenaBout();
@@ -291,7 +288,7 @@ describe('an arena bout is a parenthesis, not a way to shed a sickness', () => {
 // today, so no paladin arm exists for this invariant.
 
 describe('mage Cold Coffin (cleanseSelf) cannot strip a sickness', () => {
-  it.each(['resurrection', 'unstuck'] as const)('leaves %s sickness on the caster', (which) => {
+  it.each(['resurrection'] as const)('leaves %s sickness on the caster', (which) => {
     // Cold Coffin is a base mage ability at level 12, so no talent row is needed;
     // the row-8 allocation just keeps the rig helper uniform.
     const { sim, p } = rig('mage', 'mag_r8_warded');
@@ -322,12 +319,12 @@ describe('the sickness drain survives every counter', () => {
   // applySickness funnel, so the flag cannot be lost across a relog by construction.
   // This pins that construction: a future refactor that rebuilds the aura literal at
   // the restore site instead of calling applySickness fails here.
-  it.each(['resurrection', 'unstuck'] as const)(
+  it.each(['resurrection'] as const)(
     'restores %s sickness flagged when a saved remaining is replayed',
     (which) => {
       const { sim, p } = rig('mage', 'mag_r8_warded');
-      const restore = which === 'resurrection' ? applyResurrectionSickness : applyUnstuckSickness;
-      restore(sim.ctx, p, 42);
+      expect(which).toBe('resurrection');
+      applyResurrectionSickness(sim.ctx, p, 42);
       const aura = sicknessAura(p, which);
       expect(aura.remaining).toBe(42);
       expect(aura.undispellable).toBe(true);

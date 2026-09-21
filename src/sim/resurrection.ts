@@ -1,47 +1,38 @@
-// The two post-recovery sicknesses and the rules they share.
+// The post-recovery sickness and the rules around it.
 //
 //  - Resurrection Sickness (player-facing display name "The Keeper's Toll"): the debuff a
 //    Pale Keeper resurrection inflicts, up to 10 minutes.
-//  - Unstuck Sickness: the debuff a completed /unstuck inflicts, up to 5 minutes. Unstuck
-//    no longer kills or routes through the Pale Keeper, so this is the whole price it
-//    charges for skipping the walk.
 //
-// Both are the same mechanic (a level-scaled whole-stat-block drain that cannot be shed by
-// dying or relogging) with different ceilings, so they share one leaf module. It imports
-// only ./types and the ./moderation leaf, so every death and respawn site (combat/damage,
-// spirit, entity_roster, delves/runs) plus the two clean-slate wipes (social/arena,
-// social/fiesta) can share the "which auras survive this wipe" predicates and the
-// level-scaled duration WITHOUT an import cycle (spirit <-> entity_roster both need it).
+// Unstuck Sickness (the debuff a completed /unstuck used to inflict, v0.32.1 to v0.44.0)
+// is retired: a stuck player is a victim of a bug, not a fast traveller, and the /unstuck
+// success cooldown alone is the anti-fast-travel arm now. Its aura id is gone from the sim;
+// a saved `unstuckSickness` remaining is ignored on load (see character_state.ts).
+//
+// This is a leaf module (a level-scaled whole-stat-block drain that cannot be shed by
+// dying or relogging). It imports only ./types and the ./moderation leaf, so every death
+// and respawn site (combat/damage, spirit, entity_roster, delves/runs) plus the two
+// clean-slate wipes (social/arena, social/fiesta) can share the "which auras survive this
+// wipe" predicates and the level-scaled duration WITHOUT an import cycle (spirit <->
+// entity_roster both need it).
 
 import { CHEATER_MARK_AURA_ID } from './moderation';
 import { type Aura, MAX_LEVEL } from './types';
 
 export const RESURRECTION_SICKNESS_ID = 'resurrection_sickness';
-export const UNSTUCK_SICKNESS_ID = 'unstuck_sickness';
-// Classic-era rule: no resurrection sickness below this level. Unstuck Sickness follows it,
-// so a brand-new character is never punished for using the recovery command.
+// Classic-era rule: no resurrection sickness below this level.
 export const RES_SICKNESS_MIN_LEVEL = 10;
-export const UNSTUCK_SICKNESS_MIN_LEVEL = RES_SICKNESS_MIN_LEVEL;
 // Duration bounds (seconds): the shortest drain at the minimum level, up to the full drain
 // at max level. Classic scales the duration with level.
 export const RES_SICKNESS_MIN_DURATION = 60;
 export const RES_SICKNESS_DURATION = 600;
-export const UNSTUCK_SICKNESS_MIN_DURATION = RES_SICKNESS_MIN_DURATION;
-// Half the Pale Keeper's ceiling: 5 minutes at max level, which is exactly the /unstuck
-// success cooldown, so the debuff runs out as the command becomes available again.
-export const UNSTUCK_SICKNESS_DURATION = 300;
-// The drain: all attributes to a quarter (a signed fraction; -0.75 = -75%). Shared, so the
-// two sicknesses always weigh the same and differ only in how long they last.
+// The drain: all attributes to a quarter (a signed fraction; -0.75 = -75%).
 export const RES_SICKNESS_STAT_MULT = -0.75;
-export const UNSTUCK_SICKNESS_STAT_MULT = RES_SICKNESS_STAT_MULT;
 
-// The two sickness aura ids. They are mutually exclusive on a player (see
-// applySickness in ./spirit): both are `buff_allstats_pct`, and the stat block
-// multiplies every such aura in turn, so two at once would compound to -93.75%.
-export const SICKNESS_AURA_IDS: ReadonlySet<string> = new Set([
-  RESURRECTION_SICKNESS_ID,
-  UNSTUCK_SICKNESS_ID,
-]);
+// The sickness aura ids (one today). Kept as a set because every death and clean-slate
+// site reads it as a set, and because applySickness in ./spirit still displaces any other
+// member before applying: both would be `buff_allstats_pct`, and the stat block multiplies
+// every such aura in turn, so two at once would compound to -93.75%.
+export const SICKNESS_AURA_IDS: ReadonlySet<string> = new Set([RESURRECTION_SICKNESS_ID]);
 
 // Seconds of sickness for a character of the given level. Zero below minLevel (classic
 // exempts low levels); otherwise scales linearly from minDuration at that level to
@@ -68,18 +59,7 @@ export function resSicknessDuration(level: number): number {
   );
 }
 
-/** Seconds of Unstuck Sickness for a character of this level. */
-export function unstuckSicknessDuration(level: number): number {
-  return levelScaledSicknessDuration(
-    level,
-    UNSTUCK_SICKNESS_MIN_LEVEL,
-    UNSTUCK_SICKNESS_MIN_DURATION,
-    UNSTUCK_SICKNESS_DURATION,
-  );
-}
-
-// Auras that survive a death / respawn reset: both sicknesses (The Keeper's Toll
-// and Unstuck Sickness), the Cauterize lockout ('cauterize_fatigue',
+// Auras that survive a death / respawn reset: The Keeper's Toll, the Cauterize lockout ('cauterize_fatigue',
 // combat/fire_mage.ts), the operator-applied Cheater mark (src/sim/moderation/),
 // encounter-owned unbreakable control, and FLASK auras (Aura.flask, the alchemy
 // apex consumable): a flask survives DEATH, which is what makes it worth

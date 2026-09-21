@@ -41,15 +41,16 @@ describe('unstuck feedback', () => {
       distance: 1,
     });
     expect(completed).toEqual({
-      key: 'hudChrome.unstuck.movedToGraveyard',
+      key: 'hudChrome.unstuck.movedToGraveyardNoSickness',
       kind: 'success',
       banner: true,
       log: true,
       clearBanner: true,
     });
     // A living player was moved, not killed: nothing may send them to the Pale Keeper,
-    // and the debuff named must be the shorter Unstuck one.
-    expect(t(completed.key)).toContain('Unstuck Sickness');
+    // and (Unstuck Sickness retired in v0.44.0) no debuff may be announced either.
+    expect(t(completed.key)).not.toContain('Sickness');
+    expect(t(completed.key)).not.toContain('weighs on you');
     expect(t(completed.key)).not.toContain('Pale Keeper');
     expect(t(completed.key)).not.toContain("Keeper's Toll");
   });
@@ -66,17 +67,17 @@ describe('unstuck feedback', () => {
       distance: 1,
     });
     expect(revived).toEqual({
-      key: 'hudChrome.unstuck.revivedAtGraveyardUnstuck',
+      key: 'hudChrome.unstuck.revivedAtGraveyardNoSickness',
       kind: 'success',
       banner: true,
       log: true,
       clearBanner: true,
     });
     // Only this outcome raised the player, so only it says so; and like the move above
-    // it charges Unstuck Sickness rather than routing anyone to the Pale Keeper.
+    // it names no debuff and routes nobody to the Pale Keeper.
     expect(t(revived.key)).toContain('revived');
-    expect(t('hudChrome.unstuck.movedToGraveyard')).not.toContain('revived');
-    expect(t(revived.key)).toContain('Unstuck Sickness');
+    expect(t('hudChrome.unstuck.movedToGraveyardNoSickness')).not.toContain('revived');
+    expect(t(revived.key)).not.toContain('Sickness');
     expect(t(revived.key)).not.toContain('Pale Keeper');
   });
 

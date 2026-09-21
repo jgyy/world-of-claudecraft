@@ -131,6 +131,11 @@ export const hudChromeStrings = {
     // still promise the old outcome.
     helpUnstuckSickness:
       'Recovery: /unstuck starts a stationary countdown, then moves you to the nearest graveyard, reviving you if you had fallen. It leaves you with Unstuck Sickness for up to 5 minutes.',
+    // v0.44.0: Unstuck Sickness is retired; the success cooldown is the whole price. New
+    // key again, because the shipped rows for the one above promise a debuff that no
+    // longer exists.
+    helpUnstuckNoSickness:
+      'Recovery: /unstuck starts a stationary countdown, then moves you to the nearest graveyard, reviving you if you had fallen. It costs nothing but a short cooldown before you can use it again.',
     started:
       'Unstuck in {seconds} seconds. Moving, fighting, taking damage, or starting another action cancels it.',
     countdown: 'Unstuck: {seconds}',
@@ -145,6 +150,10 @@ export const hudChromeStrings = {
       'You have been moved to the nearest graveyard. Unstuck Sickness weighs on you.',
     revivedAtGraveyardUnstuck:
       'You have been moved to the nearest graveyard and revived. Unstuck Sickness weighs on you.',
+    // The two v0.44.0 outcomes, once Unstuck Sickness retired: same events, no debuff, so
+    // the shipped rows above (which announce one) may not be shown again.
+    movedToGraveyardNoSickness: 'You have been moved to the nearest graveyard.',
+    revivedAtGraveyardNoSickness: 'You have been moved to the nearest graveyard and revived.',
     cancelledMoved: 'Unstuck cancelled because you moved.',
     cancelledDamaged: 'Unstuck cancelled because you took damage.',
     cancelledCombat: 'Unstuck cancelled because you entered combat.',

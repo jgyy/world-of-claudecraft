@@ -26,7 +26,6 @@ import {
   BATTLEGROUND_LOSS_HONOR,
   BATTLEGROUND_WIN_HONOR,
 } from '../src/sim/pvp';
-import { UNSTUCK_SICKNESS_ID } from '../src/sim/resurrection';
 import { eloDelta, Sim } from '../src/sim/sim';
 import {
   BG_CAPS_TO_WIN,
@@ -1280,7 +1279,8 @@ describe('Thornhollow Fields: the graveyard rite', () => {
     expect(e.prevPos).toEqual(e.pos);
     expect(e.facing).toBe(0);
     expect(e.prevFacing).toBe(e.facing);
-    expect(e.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
+    // Unstuck Sickness retired in v0.44.0: the relocation charges no debuff.
+    expect(e.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
   });
 
   it('Unstuck accepts a wall-trapped fighter while movement input is still held', () => {
@@ -1490,7 +1490,8 @@ describe('Thornhollow Fields: the graveyard rite', () => {
         ),
       ).toBe(true);
       expect(e.prevPos).toEqual(e.pos);
-      expect(e.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
+      // Unstuck Sickness retired in v0.44.0: the relocation charges no debuff.
+      expect(e.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
     } finally {
       Object.assign(BG_GRAVEYARDS[0], originalPlot);
     }
@@ -1521,7 +1522,8 @@ describe('Thornhollow Fields: the graveyard rite', () => {
     expectClearPlayerPosition(sim, e);
     expect(Math.hypot(e.pos.x - before.x, e.pos.z - before.z)).toBeGreaterThan(10);
     expect(completed?.distance).toBeGreaterThan(10);
-    expect(e.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
+    // Unstuck Sickness retired in v0.44.0: the relocation charges no debuff.
+    expect(e.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
   });
 
   it('refuses Unstuck for an alive flag carrier before the completion teleport can run', () => {

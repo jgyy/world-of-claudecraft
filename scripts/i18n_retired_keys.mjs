@@ -53,6 +53,14 @@ export const RETIRED_KEYS = [
   // -> guide.profPages.gatherDeeds.farmingSown (farming gained its own deeds at D13)
   'guide.profPages.gatherDeeds.farming',
 
+  // Unstuck Sickness retired in v0.44.0 (a stuck player is not a fast traveller; the
+  // success cooldown is the whole price). Each old value promises a debuff that no longer
+  // lands, so a NEW key replaced it rather than a reword.
+  'guide.combat.unstuckBody', // -> guide.combat.unstuckBodyNoSickness
+  'guide.commandsPage.unstuck', // -> guide.commandsPage.unstuckNoSickness
+  'guide.glossary.unstuckTerm', // -> guide.glossary.unstuckCommandTerm (the command itself)
+  'guide.glossary.unstuckDef', // -> guide.glossary.unstuckCommandDef
+
   // -- Content the game no longer has, so the wiki must not define it.
   // The glossary defined Augment as a draft pick in a two-on-two Fiesta match.
   // Fiesta is retired and is not among the tabs the PvP window offers, so the term

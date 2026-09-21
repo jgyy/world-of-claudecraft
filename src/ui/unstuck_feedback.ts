@@ -29,18 +29,20 @@ const error = (key: TranslationKey): UnstuckFeedback => ({
 const seconds = (value: number): string => formatNumber(value, { maximumFractionDigits: 0 });
 
 /**
- * The two live outcomes both end at the graveyard under Unstuck Sickness and differ only in
- * whether a revive happened, so they get their own keys. The retired reasons keep their
- * shipped keys: 'nearest_safe_position' (short-range teleport, historical telemetry) and
+ * The two live outcomes both end at the graveyard with no debuff (Unstuck Sickness retired
+ * in v0.44.0) and differ only in whether a revive happened, so they get their own keys,
+ * new ones: the v0.32.1 keys ('movedToGraveyard', 'revivedAtGraveyardUnstuck') announce a
+ * sickness that no longer lands. The retired reasons keep their shipped keys:
+ * 'nearest_safe_position' (short-range teleport, historical telemetry) and
  * 'nearest_graveyard' (the pre-0.32.1 kill-and-release outcome, still emitted by a
  * not-yet-updated server when an OTA bundle runs ahead of it).
  */
 function completedKey(reason: Extract<Event, { phase: 'completed' }>['reason']): TranslationKey {
   switch (reason) {
     case 'moved_to_graveyard':
-      return 'hudChrome.unstuck.movedToGraveyard';
+      return 'hudChrome.unstuck.movedToGraveyardNoSickness';
     case 'revived_at_graveyard':
-      return 'hudChrome.unstuck.revivedAtGraveyardUnstuck';
+      return 'hudChrome.unstuck.revivedAtGraveyardNoSickness';
     case 'nearest_graveyard':
       return 'hudChrome.unstuck.completedAtGraveyard';
     case 'nearest_safe_position':

@@ -669,14 +669,12 @@ import * as chatMod from './social/chat';
 import * as tradeMod from './social/trade';
 import {
   applyResurrectionSickness,
-  applyUnstuckSickness,
   RESURRECTION_SICKNESS_ID,
   releasePlayerSpirit,
   resurrectAtCorpse,
   resurrectAtSpiritHealer,
   revivePlayerAt,
   spawnOverworldSpiritHealers,
-  UNSTUCK_SICKNESS_ID,
 } from './spirit';
 import { resolveStoragePrices, type StoragePrices } from './storage_prices';
 import { repairTalentLoadouts } from './talent_loadouts';
@@ -3529,12 +3527,9 @@ export class Sim {
       applyResurrectionSickness(this.ctx, player, savedState.resSickness);
       player.hp = Math.min(player.hp, player.maxHp);
     }
-    // Unstuck Sickness restores the same way. The two are mutually exclusive (see
-    // applySickness in spirit.ts), so a save carrying both resolves to this one.
-    if (savedState?.unstuckSickness && savedState.unstuckSickness > 0) {
-      applyUnstuckSickness(this.ctx, player, savedState.unstuckSickness);
-      player.hp = Math.min(player.hp, player.maxHp);
-    }
+    // A saved `unstuckSickness` remaining (v0.32.1 to v0.44.0 rows) is deliberately NOT
+    // restored: the debuff is retired, so a relog simply sheds what a live world no
+    // longer applies (character_state.ts).
     // Resume a ghost: a player who logged out as a released spirit comes back as a
     // ghost at the graveyard (corpse still marked), not freely resurrected. dead stays
     // unset for a non-ghost logout (the pre-existing revive-on-relog behavior).
@@ -4057,8 +4052,6 @@ export class Sim {
       corpsePos: e.corpsePos ? { x: e.corpsePos.x, z: e.corpsePos.z } : null,
       // The Keeper's Toll persists across logout (it cannot be shed by relogging).
       resSickness: e.auras.find((a) => a.id === RESURRECTION_SICKNESS_ID)?.remaining ?? null,
-      // Unstuck Sickness persists across logout for the same reason.
-      unstuckSickness: e.auras.find((a) => a.id === UNSTUCK_SICKNESS_ID)?.remaining ?? null,
       equipment: { ...meta.equipment },
       equipmentInstance: Object.fromEntries(
         Object.entries(meta.equipmentInstance).map(([slot, inst]) => [

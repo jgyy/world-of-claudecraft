@@ -183,8 +183,9 @@ export interface CharacterState {
   // The Keeper's Toll (Resurrection Sickness) remaining seconds (JSONB; optional/null when
   // none). Persisted so the penalty cannot be shed by logging out and back in.
   resSickness?: number | null;
-  // Unstuck Sickness remaining seconds, same contract as resSickness above (JSONB;
-  // optional/null when none, so pre-feature saves stay byte-equal and load clean).
+  // RETIRED (v0.44.0): Unstuck Sickness remaining seconds, written from v0.32.1 until the
+  // debuff was removed. Still declared so a stored row that carries it loads clean; the
+  // loader ignores it (the aura is never re-applied) and the writer no longer emits it.
   unstuckSickness?: number | null;
   jail?: JailState;
   // Z-key sheathed-weapon toggle (JSONB; written only while sheathed, so pre-feature

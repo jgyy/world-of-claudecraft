@@ -669,9 +669,13 @@ export const guideStrings = {
     allyRezBody:
       "You do not always have to walk back. An ally with a resurrection spell can raise you instead, and it comes to you as a prompt you accept or decline; leave it sitting and it expires, so answer it while it is there. Accept and you rise beside the friend who cast it with part of your health and mana back. Some healers can offer the whole downed party at once, though each of you still answers your own prompt. Thornhollow Fields is the exception: no resurrection spell reaches you there, and you wait for your team's next wave.",
     // The /unstuck recovery command and Unstuck Sickness.
+    // unstuckBody is RETIRED (scripts/i18n_retired_keys.mjs): the v0.44.0 successor below
+    // drops the sickness the old body promises.
     unstuckTitle: 'When you are truly stuck',
     unstuckBody:
       "If the world traps you somewhere you cannot get out of, type /unstuck. You need to be out of combat and standing still, not held by a stun or a root, and not in a duel or an arena match: a short countdown runs, and moving or taking damage cancels it. When it finishes you are set down at the nearest graveyard. It never kills you and it leaves no corpse, and if you were already down it raises you there instead. The price is Unstuck Sickness, a temporary weakening of all you are that has worn off by the time you could use the command again, and like the Keeper's Toll it spares brand-new characters entirely.",
+    unstuckBodyNoSickness:
+      'If the world traps you somewhere you cannot get out of, type /unstuck. You need to be out of combat and standing still, not held by a stun or a root, and not in a duel or an arena match: a short countdown runs, and moving or taking damage cancels it. When it finishes you are set down at the nearest graveyard. It never kills you and it leaves no corpse, and if you were already down it raises you there instead. It costs you nothing but a short cooldown before you can use it again: being stuck is never your fault, so there is no debuff to wait out.',
     // The ledge climb (src/sim/climb.ts): the scripted pull-up that ends a jump on a
     // lip above the head. A movement MODE, so it owns motion while it runs, a stun
     // drops it, and a stunned or rooted body cannot start one.
@@ -1026,6 +1030,9 @@ export const guideStrings = {
     groupRecovery: 'Recovery and presence',
     unstuck:
       'The way out when the world has trapped you. Stand still through a short countdown and you are moved to the nearest graveyard, and raised there if you had already fallen. It leaves you weakened by Unstuck Sickness for a while afterwards, so it is a last resort rather than a shortcut.',
+    // v0.44.0 successor (Unstuck Sickness retired); `unstuck` above is RETIRED.
+    unstuckNoSickness:
+      'The way out when the world has trapped you. Stand still through a short countdown and you are moved to the nearest graveyard, and raised there if you had already fallen. It costs nothing but a short cooldown before you can use it again.',
     afk: 'Mark yourself Away From Keyboard, with an optional message that anyone who whispers you gets as an automatic reply. Repeat it with no message to clear it; any other chat clears it too.',
     dnd: 'Do Not Disturb: like away, except whispers sent to you are held back instead of delivered.',
     sit: 'Sit down where you are, and stand back up. You stand automatically the moment you move, cast, or take a hit.',
@@ -1198,6 +1205,11 @@ export const guideStrings = {
     unstuckTerm: 'Unstuck Sickness',
     unstuckDef:
       'The price of using Unstuck from the game menu. Stand still through the countdown and it sets you down at the nearest graveyard, and you carry a temporary weakness for a while afterwards.',
+    // v0.44.0: Unstuck Sickness retired, so the glossary defines the command itself
+    // (src/sim/unstuck.ts). unstuckTerm / unstuckDef above are RETIRED.
+    unstuckCommandTerm: 'Unstuck',
+    unstuckCommandDef:
+      'The way out of the game menu when the world has trapped you. Stand still through the countdown and it sets you down at the nearest graveyard, raising you there if you had fallen. It costs nothing but a short cooldown before you can use it again.',
     itemLevelTerm: 'Item level',
     itemLevelDef:
       'One number summing up how strong a piece of gear is, handy when you want to compare two pieces quickly. Turn on Show Item Level in the options to see it on tooltips. Only gear with a known source carries one, so plain vendor basics and starter gear show nothing, and a missing figure is normal rather than a fault.',

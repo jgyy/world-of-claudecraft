@@ -11832,6 +11832,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   // Unstuck recovery (M16 non-Latin fills).
   'hudChrome.unstuck.helpUnstuckSickness':
     '復帰：/unstuck はその場でカウントダウンを開始し、完了すると最寄りの墓地へ移動します。倒れていた場合は蘇生します。スタック解除の後遺症が最大5分間残ります。',
+  'hudChrome.unstuck.helpUnstuckNoSickness':
+    '復帰：/unstuck はその場でカウントダウンを開始し、完了すると最寄りの墓地へ移動します。倒れていた場合は蘇生します。代償はなく、再使用までの短いクールダウンだけです。',
   'hudChrome.unstuck.menuButton': 'スタック解除',
   'hudChrome.unstuck.help':
     '復帰：/unstuck はその場でカウントダウンを開始し、近くの到達可能な安全地点へ移動します。',
@@ -11841,6 +11843,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
     '最寄りの墓地へ移動しました。スタック解除の後遺症があなたにのしかかっています。',
   'hudChrome.unstuck.revivedAtGraveyardUnstuck':
     '最寄りの墓地へ移動し、蘇生しました。スタック解除の後遺症があなたにのしかかっています。',
+  'hudChrome.unstuck.movedToGraveyardNoSickness': '最寄りの墓地へ移動しました。',
+  'hudChrome.unstuck.revivedAtGraveyardNoSickness': '最寄りの墓地へ移動し、蘇生しました。',
   'hudChrome.unstuck.started':
     '{seconds}秒後にスタックを解除します。移動、戦闘、被ダメージ、別の行動を始めるとキャンセルされます。',
   'hudChrome.unstuck.countdown': 'スタック解除：{seconds}',
@@ -14734,6 +14738,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'guide.combat.threatTitle': '敵は誰を殴るのか',
   'guide.combat.unstuckBody':
     '世界に閉じ込められて抜け出せなくなったら、/unstuck と入力しましょう。戦闘外で静止していること、スタンや根縛りで拘束されていないこと、決闘中でもアリーナ試合中でもないことが条件です。短いカウントダウンが走り、移動するかダメージを受けると中断されます。終われば最寄りの墓地に下ろされます。これで死ぬことはなく、亡骸も残りません。すでに倒れていた場合は、そこで蘇生されます。代償はスタック解除の後遺症です。あなたのすべてが一時的に弱まる効果ですが、次にこのコマンドを使えるようになる頃には切れています。そして復活の後遺症と同じく、生まれたてのキャラクターは完全に免除されます。',
+  'guide.combat.unstuckBodyNoSickness':
+    '世界に閉じ込められて抜け出せなくなったら、/unstuck と入力しましょう。戦闘外で静止していること、スタンや根縛りで拘束されていないこと、決闘中でもアリーナ試合中でもないことが条件です。短いカウントダウンが走り、移動するかダメージを受けると中断されます。終われば最寄りの墓地に下ろされます。これで死ぬことはなく、亡骸も残りません。すでに倒れていた場合は、そこで蘇生されます。代償はなく、再使用までの短いクールダウンだけです。閉じ込められたのはあなたのせいではないので、耐えるべき弱体効果はありません。',
   'guide.combat.unstuckTitle': '本当に動けなくなったとき',
   'guide.commandsPage.abilities': '習得済みのアビリティを表示します。',
   'guide.commandsPage.afk':
@@ -14885,6 +14891,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.unknownHeading': 'コマンドが働かないとき',
   'guide.commandsPage.unstuck':
     '世界に閉じ込められたときの出口です。短いカウントダウンのあいだ静止していれば最寄りの墓地へ移され、すでに倒れていた場合はそこで蘇生されます。その後しばらくスタック解除の後遺症で弱ったままになるので、近道ではなく最後の手段と考えましょう。',
+  'guide.commandsPage.unstuckNoSickness':
+    '世界に閉じ込められたときの出口です。短いカウントダウンのあいだ静止していれば最寄りの墓地へ移され、すでに倒れていた場合はそこで蘇生されます。代償はなく、再使用までの短いクールダウンだけです。',
   'guide.commandsPage.where': '今立っている地方、そのレベル帯、そしてあなたの座標を表示します。',
   'guide.commandsPage.whisper':
     'オンラインのプレイヤー1人に非公開のメッセージを送ります。該当する人が1人しかいなければ、名前の大文字小文字は入力したとおりで一致します。',
@@ -15075,6 +15083,9 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'guide.glossary.unstuckDef':
     'ゲームメニューのスタック解除を使った代償です。カウントダウンのあいだ動かずにいると最寄りの墓地へ降ろされ、その後しばらく一時的な衰弱を背負います。',
   'guide.glossary.unstuckTerm': 'スタック解除の後遺症',
+  'guide.glossary.unstuckCommandTerm': 'スタック解除',
+  'guide.glossary.unstuckCommandDef':
+    '世界に閉じ込められたときの、ゲームメニューにある出口です。カウントダウンのあいだ動かずにいると最寄りの墓地へ降ろされ、倒れていた場合はそこで蘇生されます。代償はなく、再使用までの短いクールダウンだけです。',
   'guide.glossary.warfareDef':
     '対人戦の装備側の仕組みです。需品係が名誉と引き換えにウォーフェアの防具セットを売り、それらが持つウォーフェアレーティングは、ほかのプレイヤーとの戦いでのみ効果があります。',
   'guide.glossary.warfareTerm': 'ウォーフェア',

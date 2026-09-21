@@ -190,7 +190,6 @@ const NON_PROFESSIONS_BLOB_FIELDS = [
   'ghost',
   'corpsePos',
   'resSickness',
-  'unstuckSickness',
   'equipment',
   'inventory',
   'bags',
@@ -2318,8 +2317,17 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     // q_hub_healing_numbers) joining questsDone in this maximal fixture: 23 and
     // 21 characters as `"<id>",` in the sorted array (26 + 24 bytes). MEASURED,
     // not inferred, same as every other row this equation names.
+    // Minus 23 for the retired Unstuck Sickness field (v0.44.0): serializeCharacter no
+    // longer writes `"unstuckSickness":null,` (15 characters plus the quotes, colon,
+    // null and comma), so every blob shrinks by exactly that much. MEASURED, same as
+    // the rows above.
     expect(counterfactualBytes - 156144).toBe(
-      Object.values(fixtureDelta).reduce((sum, value) => sum + value, 0) + 183 + 1548 + 50 + 49,
+      Object.values(fixtureDelta).reduce((sum, value) => sum + value, 0) +
+        183 +
+        1548 +
+        50 +
+        49 -
+        23,
     );
     const forgeBaseline = {
       questsDone: 4606,
@@ -2350,11 +2358,13 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     // after the real merge settle: 209,474. RE-MEASURED at 209,524 once the
     // hub training dummy and hub healing dummy PRs landed their two guided
     // practice quests (+50, attributed above; neither dummy nor its NPC touches
-    // any other field this fixture tracks).
+    // any other field this fixture tracks). RE-MEASURED at 209,750 once Unstuck
+    // Sickness retired (v0.44.0): the -23 bytes of the dropped `unstuckSickness`
+    // row, attributed above, and nothing else moved.
     expect(
       Buffer.byteLength(JSON.stringify(preReleaseCounterfactual), 'utf8'),
       'field_kit and the Bramblehide release content removed, must reproduce the recorded pre-field-kit Crucible+hammer baseline',
-    ).toBe(209773);
+    ).toBe(209750);
     // Removing ONLY field_kit (the Bramblehide release content and the two
     // dev-mount reins items still present, current staged tree) reproduces
     // 209,524 plus the 1,548-byte Bramblehide delta plus the 49-byte
@@ -2365,7 +2375,7 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     expect(
       counterfactualBytes,
       'field_kit removed, must reproduce the current staged Crucible+hammer+Bramblehide+dev-mount baseline',
-    ).toBe(211370);
+    ).toBe(211347);
     const priorContent = withoutCrucibleContent(s2);
     const contentDelta = Object.fromEntries(
       (['knownRecipes', 'deedStats', 'reliquary'] as const).map((key) => [

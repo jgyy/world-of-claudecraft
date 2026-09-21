@@ -34,10 +34,10 @@ import {
 import { releaseCorpseHarvest } from '../professions/corpse_harvest_session';
 import { removeMatchFeasts } from '../professions/feast_lifecycle';
 import { awardFiestaCompletionHonor, awardRankedArenaResultHonor, honorTeamIdentity } from '../pvp';
-import { aurasSurvivingCleanSlate, SICKNESS_AURA_IDS, UNSTUCK_SICKNESS_ID } from '../resurrection';
+import { aurasSurvivingCleanSlate, SICKNESS_AURA_IDS } from '../resurrection';
 import type { ArenaMatch, ArenaQueueUnit, ArenaReturnPools, PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
-import { applyResurrectionSickness, applyUnstuckSickness } from '../spirit';
+import { applyResurrectionSickness } from '../spirit';
 import { settleTeleportArrival } from '../teleport_arrival';
 import {
   type ArenaCombatant,
@@ -106,11 +106,9 @@ export function restoreArenaReturnPools(ctx: SimContext, e: Entity, pools: Arena
       ? cloneAbilityCharges(pools.abilityCharges)
       : undefined;
   e.ccDr = cloneCcDr(pools.ccDr);
-  if (pools.sickness) {
-    const { id, remaining } = pools.sickness;
-    if (id === UNSTUCK_SICKNESS_ID) applyUnstuckSickness(ctx, e, remaining);
-    else applyResurrectionSickness(ctx, e, remaining);
-  }
+  // SICKNESS_AURA_IDS has one member (The Keeper's Toll) since Unstuck Sickness retired,
+  // so the captured id can only be that one; the id stays in the record for the wire.
+  if (pools.sickness) applyResurrectionSickness(ctx, e, pools.sickness.remaining);
   e.hp = Math.max(0, Math.min(pools.hp, e.maxHp));
   e.resource = Math.max(0, Math.min(pools.resource, e.maxResource));
 }

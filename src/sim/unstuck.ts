@@ -9,9 +9,10 @@
 //  - dead or a ghost: they are moved there and raised on the Pale Keeper's hp
 //    terms (a fifth of their pools). This is the escape hatch for a spirit that
 //    cannot reach its corpse or an angel.
-// Either way the price is Unstuck Sickness (all attributes -75%, level-scaled up
-// to 5 minutes), and neither outcome can be reached by an attempt that started on
-// the other side of the life/death line (see cancelReason).
+// Neither outcome charges a debuff (Unstuck Sickness was retired in v0.44.0: a
+// stuck player is a victim of a bug, not a fast traveller); the success cooldown
+// below is the whole anti-fast-travel arm. Neither outcome can be reached by an
+// attempt that started on the other side of the life/death line (see cancelReason).
 
 import { BG_HALF_X, BG_HALF_Z, battlegroundColliders } from './battleground_layout';
 import { moverHeight, resolvePosition } from './colliders';
@@ -37,11 +38,7 @@ import {
   bgTeamOf,
   bgUnstuckDestination,
 } from './social/battleground';
-import {
-  applyUnstuckSickness,
-  moveToGraveyardForUnstuck,
-  reviveAtGraveyardForUnstuck,
-} from './spirit';
+import { moveToGraveyardForUnstuck, reviveAtGraveyardForUnstuck } from './spirit';
 import { settleTeleportArrival } from './teleport_arrival';
 import {
   DT,
@@ -602,7 +599,6 @@ function completeBattlegroundUnstuck(
   p.queuedCastAim = null;
   p.queuedCastTargetId = null;
   settleTeleportArrival(p);
-  if (!p.dead && !p.ghost) applyUnstuckSickness(ctx, p);
   return battlegroundLocation(match, p.pos)?.point ?? null;
 }
 
@@ -613,8 +609,9 @@ function completeUnstuck(
   pending: PendingUnstuck,
 ): void {
   meta.pendingUnstuck = null;
-  // Both outcomes land on the same graveyard and charge the same Unstuck Sickness; they
-  // differ only in whether a revive is needed on arrival. A living player is never killed.
+  // Both outcomes land on the same graveyard and charge nothing but the success cooldown;
+  // they differ only in whether a revive is needed on arrival. A living player is never
+  // killed.
   const wasDead = p.dead || p.ghost;
   const battlegroundDestination =
     pending.area.kind === 'battleground' ? completeBattlegroundUnstuck(ctx, meta, p) : null;

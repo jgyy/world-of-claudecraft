@@ -20,13 +20,7 @@ import { delveModuleEntry } from '../src/sim/delves/runs';
 import { DUNGEON_WALL_X } from '../src/sim/dungeon_layout';
 import { PLAYER_BODY_RADIUS } from '../src/sim/pathfind';
 import { swimSurfaceY } from '../src/sim/player_motion';
-import {
-  RES_SICKNESS_STAT_MULT,
-  RESURRECTION_SICKNESS_ID,
-  UNSTUCK_SICKNESS_DURATION,
-  UNSTUCK_SICKNESS_ID,
-  unstuckSicknessDuration,
-} from '../src/sim/resurrection';
+import { RESURRECTION_SICKNESS_ID } from '../src/sim/resurrection';
 import { Sim } from '../src/sim/sim';
 import {
   applyResurrectionSickness,
@@ -52,6 +46,9 @@ import {
 type Event = Extract<SimEvent, { type: 'unstuck' }>;
 
 const SEED = 42;
+// The retired aura id (v0.32.1 to v0.44.0), spelled here as a literal because the sim no
+// longer exports it: the pins below prove no path mints it any more.
+const LEGACY_UNSTUCK_SICKNESS_ID = 'unstuck_sickness';
 const START = { x: 0, z: -40 };
 const WEDGE_WALL_Z = START.z + 0.4;
 // A deep point inside Mirror Lake where the normal swim kernel can move.
@@ -572,79 +569,47 @@ describe('unstuck graveyard move while alive', () => {
     expect(player.ghost).toBe(false);
   });
 
-  it('charges Unstuck Sickness rather than The Keeper’s Toll, and clears momentum', () => {
+  // Unstuck Sickness (v0.32.1 to v0.44.0) is retired: being stuck is a bug the player
+  // ran into, not a shortcut they took, so the success cooldown is the whole price.
+  it('charges no sickness at all, and clears momentum', () => {
     const { player } = runCompletion();
 
     expect(player.auras.some((aura) => aura.id === RESURRECTION_SICKNESS_ID)).toBe(false);
-    const sickness = required(
-      player.auras.find((aura) => aura.id === UNSTUCK_SICKNESS_ID),
-      'unstuck sickness aura',
-    );
-    expect(sickness.kind).toBe('buff_allstats_pct');
-    expect(sickness.value).toBe(RES_SICKNESS_STAT_MULT);
-    expect(sickness.remaining).toBe(unstuckSicknessDuration(player.level));
+    expect(player.auras.some((aura) => aura.id === LEGACY_UNSTUCK_SICKNESS_ID)).toBe(false);
+    expect(player.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
     expect([player.vx, player.vy, player.vz]).toEqual([0, 0, 0]);
     expect(player.targetId).toBeNull();
     expect(player.autoAttack).toBe(false);
   });
 
-  it('caps the sickness at five minutes and exempts characters below level 10', () => {
-    const { player: capped } = runCompletion(MAX_LEVEL);
-    expect(
-      required(
-        capped.auras.find((aura) => aura.id === UNSTUCK_SICKNESS_ID),
-        'max-level unstuck sickness',
-      ).duration,
-    ).toBe(UNSTUCK_SICKNESS_DURATION);
-    expect(UNSTUCK_SICKNESS_DURATION).toBe(5 * 60);
-
-    const { player: exempt } = runCompletion(9);
-    expect(exempt.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(false);
-    expect(exempt.dead).toBe(false);
+  it('stays debuff-free at max level, where the old sickness peaked, and at level 9', () => {
+    for (const level of [MAX_LEVEL, 9]) {
+      const { player } = runCompletion(level);
+      expect(player.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
+      expect(player.hp).toBe(player.maxHp);
+      expect(player.dead).toBe(false);
+    }
   });
 
-  it('never stacks a second whole-stat drain on top of The Keeper’s Toll', () => {
+  it('leaves an existing Keeper’s Toll exactly as it was', () => {
     const sim = makeWorld();
     sim.setPlayerLevel(MAX_LEVEL);
     const { player } = accepted(sim);
     applyResurrectionSickness(sim.ctx, player);
     const drained = player.stats.str;
     expect(drained).toBeGreaterThan(0);
-
-    tickMany(sim, UNSTUCK_COUNTDOWN_SECONDS * 20);
-
-    // The Toll is displaced rather than compounded: two -75% drains would leave
-    // strength at a sixteenth of the base block instead of a quarter.
-    expect(player.auras.filter((aura) => aura.kind === 'buff_allstats_pct')).toHaveLength(1);
-    expect(player.auras.some((aura) => aura.id === RESURRECTION_SICKNESS_ID)).toBe(false);
-    expect(player.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
-    expect(player.stats.str).toBe(drained);
-  });
-
-  it('logs the displaced Keeper’s Toll fading, which no snapshot would reveal', () => {
-    const sim = makeWorld();
-    sim.setPlayerLevel(MAX_LEVEL);
-    const { player } = accepted(sim);
-    applyResurrectionSickness(sim.ctx, player);
     sim.drainEvents();
 
     const auraEvents = tickMany(sim, UNSTUCK_COUNTDOWN_SECONDS * 20).filter(
       (event): event is Extract<SimEvent, { type: 'aura' }> => event.type === 'aura',
     );
 
-    // objectContaining: fade sites may gain attribution fields over time and
-    // this assertion cares only about the fade itself.
-    expect(auraEvents).toContainEqual(
-      expect.objectContaining({
-        type: 'aura',
-        targetId: player.id,
-        name: 'Resurrection Sickness',
-        gained: false,
-      }),
-    );
-    expect(auraEvents).toContainEqual(
-      expect.objectContaining({ name: 'Unstuck Sickness', gained: true }),
-    );
+    // Nothing is displaced and nothing is added: the Toll neither fades nor gains a
+    // sibling, and strength stays at the quarter the Toll alone produces.
+    expect(player.auras.filter((aura) => aura.kind === 'buff_allstats_pct')).toHaveLength(1);
+    expect(player.auras.some((aura) => aura.id === RESURRECTION_SICKNESS_ID)).toBe(true);
+    expect(player.stats.str).toBe(drained);
+    expect(auraEvents.filter((event) => event.targetId === player.id)).toEqual([]);
   });
 
   it('uses the same graveyard move for an idle swimmer', () => {
@@ -711,51 +676,39 @@ describe('unstuck graveyard move while alive', () => {
     expect(player.onGround).toBe(true);
   });
 
-  it("swaps Unstuck Sickness for The Keeper's Toll at a Spirit Healer, never stacking them", () => {
+  it("still owes The Keeper's Toll at a Spirit Healer after a free unstuck", () => {
     const { sim, player } = runCompletion(MAX_LEVEL);
-    const drained = player.stats.str;
-    expect(player.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
+    const healthy = player.stats.str;
 
     sim.ctx.dealDamage(null, player, player.maxHp * 10, false, 'physical', null, 'hit');
     expect(player.dead).toBe(true);
     sim.releaseSpirit();
     expect(player.ghost).toBe(true);
-    // Dying sheds nothing: the unstuck drain survives to the healer.
-    expect(player.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
-
     sim.resurrectAtSpiritHealer();
     expect(player.dead).toBe(false);
 
-    // The healer's Toll displaces the Unstuck drain rather than compounding with it:
-    // strength stays at the quarter either drain produces alone, not a sixteenth.
+    // The Pale Keeper's price is untouched by the unstuck change: one drain, the Toll.
     expect(player.auras.filter((aura) => aura.kind === 'buff_allstats_pct')).toHaveLength(1);
     expect(player.auras.some((aura) => aura.id === RESURRECTION_SICKNESS_ID)).toBe(true);
-    expect(player.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(false);
-    expect(player.stats.str).toBe(drained);
+    expect(player.stats.str).toBeLessThan(healthy);
   });
 
-  it('resumes the sickness with its saved remaining after a relog', () => {
+  it('no longer writes unstuckSickness, and sheds a saved one on load', () => {
     const { sim, player } = runCompletion(MAX_LEVEL);
-    tickMany(sim, 40); // burn two seconds off the debuff
-    const remaining = required(
-      player.auras.find((aura) => aura.id === UNSTUCK_SICKNESS_ID),
-      'unstuck sickness aura',
-    ).remaining;
-    expect(remaining).toBeLessThan(UNSTUCK_SICKNESS_DURATION);
     const state = required(sim.serializeCharacter(player.id), 'serialized character');
-    expect(state.unstuckSickness).toBe(remaining);
+    expect('unstuckSickness' in state).toBe(false);
 
+    // A row written between v0.32.1 and v0.44.0 can still carry a remaining; the
+    // retired debuff is dropped rather than re-applied, so a relog is a clean start.
     const restored = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const restoredPid = restored.addPlayer('warrior', 'Wayfinder', { state });
+    const restoredPid = restored.addPlayer('warrior', 'Wayfinder', {
+      state: { ...state, unstuckSickness: 120 },
+    });
     const restoredPlayer = required(restored.entities.get(restoredPid), 'restored player');
 
-    expect(
-      required(
-        restoredPlayer.auras.find((aura) => aura.id === UNSTUCK_SICKNESS_ID),
-        'restored unstuck sickness',
-      ).remaining,
-    ).toBe(remaining);
-    expect(restoredPlayer.hp).toBeLessThanOrEqual(restoredPlayer.maxHp);
+    expect(restoredPlayer.auras.some((aura) => aura.id === LEGACY_UNSTUCK_SICKNESS_ID)).toBe(false);
+    expect(restoredPlayer.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
+    expect(restoredPlayer.hp).toBe(restoredPlayer.maxHp);
   });
 });
 
@@ -776,7 +729,7 @@ describe('unstuck while dead', () => {
     );
   }
 
-  it('revives an unreleased body at the nearest graveyard under Unstuck Sickness', () => {
+  it('revives an unreleased body at the nearest graveyard, debuff-free', () => {
     const sim = makeWorld();
     sim.setPlayerLevel(10);
     const player = killed(sim);
@@ -794,7 +747,8 @@ describe('unstuck while dead', () => {
     expect(player.dead).toBe(false);
     expect(player.ghost).toBe(false);
     expect(player.corpsePos).toBeNull();
-    expect(player.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
+    // Reduced pools and the cooldown are the price; no sickness of either kind.
+    expect(player.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
     expect(player.auras.some((aura) => aura.id === RESURRECTION_SICKNESS_ID)).toBe(false);
     expect(player.hp).toBe(Math.max(1, Math.round(player.maxHp * RES_HEALER_HP_FRACTION)));
     expect(player.cooldowns.get(UNSTUCK_COOLDOWN_ID)).toBe(UNSTUCK_SUCCESS_COOLDOWN_SECONDS);
@@ -830,7 +784,7 @@ describe('unstuck while dead', () => {
     expect(player.dead).toBe(false);
     expect(player.ghost).toBe(false);
     expect(player.corpsePos).toBeNull();
-    expect(player.auras.some((aura) => aura.id === UNSTUCK_SICKNESS_ID)).toBe(true);
+    expect(player.auras.some((aura) => aura.kind === 'buff_allstats_pct')).toBe(false);
   });
 
   it('accepts a body frozen mid-fall, whose physics fields never tick again', () => {

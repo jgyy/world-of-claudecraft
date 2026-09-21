@@ -11242,6 +11242,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   // Unstuck recovery (M16 non-Latin fills).
   'hudChrome.unstuck.helpUnstuckSickness':
     '脫困：/unstuck 會啟動原地倒數，結束後將你移動到最近的墓地，若你已倒下則會復活你。你將帶著脫困虛弱，最多持續 5 分鐘。',
+  'hudChrome.unstuck.helpUnstuckNoSickness':
+    '脫困：/unstuck 會啟動原地倒數，結束後將你移動到最近的墓地，若你已倒下則會復活你。它沒有任何代價，只需等待一段短短的冷卻才能再次使用。',
   'hudChrome.unstuck.menuButton': '脫困',
   'hudChrome.unstuck.help': '脫困：/unstuck 會啟動原地倒數，之後將你移動到附近可到達的安全位置。',
   'hudChrome.unstuck.helpAtGraveyard':
@@ -11249,6 +11251,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'hudChrome.unstuck.movedToGraveyard': '你已被移動到最近的墓地。脫困虛弱正壓在你身上。',
   'hudChrome.unstuck.revivedAtGraveyardUnstuck':
     '你已被移動到最近的墓地並復活。脫困虛弱正壓在你身上。',
+  'hudChrome.unstuck.movedToGraveyardNoSickness': '你已被移動到最近的墓地。',
+  'hudChrome.unstuck.revivedAtGraveyardNoSickness': '你已被移動到最近的墓地並復活。',
   'hudChrome.unstuck.started':
     '將在 {seconds} 秒後脫困。移動、戰鬥、受到傷害或開始其他動作都會取消。',
   'hudChrome.unstuck.countdown': '脫困：{seconds}',
@@ -14040,6 +14044,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'guide.combat.threatTitle': '敵人會打誰',
   'guide.combat.unstuckBody':
     '若這個世界把你困在某個出不去的地方，請輸入 /unstuck。你必須脫離戰鬥並原地站定，不能被昏迷或定身控制，也不能身處決鬥或競技場對戰中：接著會跑一段短短的倒數，移動或受到傷害都會中斷它。倒數結束後，你會被放置在最近的墓地。它從不會殺死你，也不會留下屍體，而若你當時已經倒下，它會就地將你扶起。代價是脫困虛弱：一種對你全身上下的暫時削弱，等到你能再次使用這道指令時它早已消退，而且和守護者的代價一樣，全新的角色可完全免除。',
+  'guide.combat.unstuckBodyNoSickness':
+    '若這個世界把你困在某個出不去的地方，請輸入 /unstuck。你必須脫離戰鬥並原地站定，不能被昏迷或定身控制，也不能身處決鬥或競技場對戰中：接著會跑一段短短的倒數，移動或受到傷害都會中斷它。倒數結束後，你會被放置在最近的墓地。它從不會殺死你，也不會留下屍體，而若你當時已經倒下，它會就地將你扶起。它沒有任何代價，只需等待一段短短的冷卻才能再次使用：卡住從來不是你的錯，所以沒有任何減益需要熬過。',
   'guide.combat.unstuckTitle': '當你真的卡住時',
   'guide.commandsPage.abilities': '你已學會的技能。',
   'guide.commandsPage.afk':
@@ -14166,6 +14172,8 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'guide.commandsPage.unknownHeading': '如果某道指令沒有作用',
   'guide.commandsPage.unstuck':
     '當這個世界把你困住時的出路。原地站定撐過一段短短的倒數，你就會被移動到最近的墓地，若你已經倒下，還會在那裡被扶起。之後你會帶著脫困虛弱一陣子，所以它是最後手段，而不是抄近路的辦法。',
+  'guide.commandsPage.unstuckNoSickness':
+    '當這個世界把你困住時的出路。原地站定撐過一段短短的倒數，你就會被移動到最近的墓地，若你已經倒下，還會在那裡被扶起。它沒有任何代價，只需等待一段短短的冷卻才能再次使用。',
   'guide.commandsPage.where': '你所站的區域、它的等級範圍，以及你的座標。',
   'guide.commandsPage.whisper':
     '向一位在線的玩家發送私訊。只要不會與別人混淆，你輸入的大小寫怎麼寫都能對上他的名字。',
@@ -14351,6 +14359,9 @@ export const zh_TW: Partial<Record<TranslationKey, string>> = {
   'guide.glossary.unstuckDef':
     '從遊戲選單使用「脫困」所付出的代價。在倒數期間站著不動，它就會把你放到最近的墓地，而此後一段時間你會帶著一份暫時的虛弱。',
   'guide.glossary.unstuckTerm': '脫困虛弱',
+  'guide.glossary.unstuckCommandTerm': '脫困',
+  'guide.glossary.unstuckCommandDef':
+    '當這個世界把你困住時，遊戲選單裡的那條出路。在倒數期間站著不動，它就會把你放到最近的墓地，若你已經倒下，還會在那裡將你扶起。它沒有任何代價，只需等待一段短短的冷卻才能再次使用。',
   'guide.glossary.warfareDef':
     '玩家對戰的裝備那一面。軍需官以榮譽販售整套戰爭護甲，而它們所帶的戰爭等級，只在對抗其他玩家的戰鬥中計算。',
   'guide.glossary.warfareTerm': '戰爭',
