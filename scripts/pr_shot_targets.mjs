@@ -9105,14 +9105,18 @@ export const TARGETS = [
           sim.honeItem('mainhand', 'str');
         }
         sim.drainEvents();
-        window.__game?.hud?.toggleChar?.();
+        // Idempotent open: an earlier target may have left the sheet up, and a
+        // toggle would close it.
+        const open = document.querySelector('#char-window');
+        if (!open || getComputedStyle(open).display === 'none') window.__game?.hud?.toggleChar?.();
       })()`);
       const opened = await pollForSize(page, '#char-window');
       if (!opened) throw new Error('char window did not open');
       await page.evaluate(() => {
         document.querySelector('#char-sidebar-tab-progression')?.click();
       });
-      await wait(500);
+      const progression = await pollForSize(page, '#char-window .char-progression');
+      if (!progression) throw new Error('char sheet progression tab did not open');
       await page.evaluate(() => {
         const card =
           document.querySelector('#char-window .cp-honing') ??

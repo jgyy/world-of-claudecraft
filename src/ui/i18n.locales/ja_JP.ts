@@ -1954,7 +1954,8 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'game.honing.maxed': '研磨上限',
   'game.honing.nothingWorn': '装備なし',
   'game.honing.needCap': '装備を研磨するにはレベル上限に到達する必要があります。',
-  'game.honing.hint': '各ランクで選んだステータスが +1 されます。研磨するとアイテムはあなたに帰属し、失敗してもレベルとゴールドは消費されます。',
+  'game.honing.hint':
+    '各ランクで選んだステータスが +1 されます。研磨するとアイテムはあなたに帰属し、失敗してもレベルとゴールドは消費されます。',
   'game.honing.hintReset': '失敗するとアイテムの研磨ランクもすべて失われます。',
   'game.settings.showOverflowXp': '超過経験値を表示',
   'game.settings.weather': '天候エフェクト',

@@ -1944,7 +1944,8 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'game.honing.maxed': '연마 완료',
   'game.honing.nothingWorn': '착용한 장비 없음',
   'game.honing.needCap': '장비를 연마하려면 최대 레벨에 도달해야 합니다.',
-  'game.honing.hint': '단계마다 선택한 능력치가 +1 오릅니다. 연마하면 아이템이 귀속되며, 실패해도 레벨과 골드는 소모됩니다.',
+  'game.honing.hint':
+    '단계마다 선택한 능력치가 +1 오릅니다. 연마하면 아이템이 귀속되며, 실패해도 레벨과 골드는 소모됩니다.',
   'game.honing.hintReset': '실패하면 아이템의 모든 연마 단계도 사라집니다.',
   'game.settings.showOverflowXp': '초과 경험치 표시',
   'game.settings.weather': '날씨 효과',
