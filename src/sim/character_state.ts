@@ -45,6 +45,10 @@ export interface CharacterState {
   lifetimeHonor?: number;
   honorArenaDaily?: HonorArenaDailyState;
   prestigeRank?: number;
+  // Virtual levels burned on honing (progression/honing.ts); the spendable
+  // pool is virtualLevel(lifetimeXp) - MAX_LEVEL - this. Optional so
+  // pre-honing saves load at zero.
+  virtualLevelsSpent?: number;
   unlockedMilestones?: string[];
   // Rested XP pool. Optional so pre-rested-XP saves load cleanly (defaults to 0).
   restedXp?: number;

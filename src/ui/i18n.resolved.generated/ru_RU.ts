@@ -248,6 +248,22 @@ export const ru_RU: EnTranslations = {
       "needCap": "Для престижа нужен максимальный уровень.",
       "needXp": "еще общего опыта до престижа"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Показывать лишний опыт",
       "weather": "Погодные эффекты"
@@ -3622,6 +3638,7 @@ export const ru_RU: EnTranslations = {
       "enchantedFallback": "Зачаровано",
       "partyTradeWindow": "Вы можете передать этот предмет игрокам, разделившим эту добычу, ещё в течение {time}. Надев предмет, вы завершите период обмена.",
       "perfectedBadge": "Доведён до совершенства",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Совершенствование: ранг {rank} из {ranks}",
       "materialSourceGatherer": "{count} × Сборщик: {name}",
       "materialSourceGathererSigned": "{count} × Сборщик: {name}, подпись: {signer}",

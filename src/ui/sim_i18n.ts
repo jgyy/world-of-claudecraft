@@ -233,6 +233,18 @@ const baseEnTable = {
   'log.perfectAdvance': 'Perfecting: {item} advances to rank {n} of {total}.',
   'log.perfectFail': 'The perfecting attempt fails; the materials are spent.',
   'log.perfectDone': '{item} is now Perfected!',
+  // Honing (src/sim/progression/honing.ts): the deny ladder and the three
+  // attempt outcomes. The levels/money lines carry a numeric or money capture.
+  'error.honeInvalid': 'You cannot hone that.',
+  'error.honeNeedCap': 'You must be at the level cap to hone gear.',
+  'error.honeNothingWorn': 'You have nothing worn in that slot to hone.',
+  'error.honeMaxed': 'That item is already fully honed.',
+  'error.honeNeedLevels': 'You need {n} unspent virtual levels to hone that.',
+  'error.honeNeedMoney': 'You need {money} to hone that.',
+  'log.honeBind': 'Honing begins: {item} is now bound to you.',
+  'log.honeLanded': 'Honing: {item} is now honed +{rank}.',
+  'log.honeFailReset': 'The honing fails and {item} loses every hone.',
+  'log.honeFail': 'The honing fails; the virtual levels and gold are spent.',
   // The orange promotion's deny ladder (Masterwrought phase 13,
   // src/sim/professions/perfecting.ts: resolvePerfectingAttempt's internal
   // promotion arm stamps the copy via promotePerfectedCopy). Four
@@ -16840,6 +16852,28 @@ const RULES: Rule[] = [
   {
     re: /^(.+) is now Perfected!$/,
     build: (m) => tSim('log.perfectDone', { item: locItem(m[1]) }),
+  },
+  // Honing (src/sim/progression/honing.ts): the bind, landed, and reset lines
+  // carry the item name; the two need lines carry a count or a money fragment.
+  {
+    re: /^Honing begins: (.+) is now bound to you\.$/,
+    build: (m) => tSim('log.honeBind', { item: locItem(m[1]) }),
+  },
+  {
+    re: /^Honing: (.+) is now honed \+(\d+)\.$/,
+    build: (m) => tSim('log.honeLanded', { item: locItem(m[1]), rank: m[2] }),
+  },
+  {
+    re: /^The honing fails and (.+) loses every hone\.$/,
+    build: (m) => tSim('log.honeFailReset', { item: locItem(m[1]) }),
+  },
+  {
+    re: /^You need (\d+) unspent virtual levels to hone that\.$/,
+    build: (m) => tSim('error.honeNeedLevels', { n: m[1] }),
+  },
+  {
+    re: /^You need (.+) to hone that\.$/,
+    build: (m) => tSim('error.honeNeedMoney', { money: m[1] }),
   },
   {
     re: /^(.+) is now (.+)\.$/,

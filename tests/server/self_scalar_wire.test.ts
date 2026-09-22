@@ -15,7 +15,15 @@ function collect(p: Partial<Entity>, meta: Partial<PlayerMeta>): Record<string, 
     (key, value) => {
       out[key] = value;
     },
-    { xp: 10, lifetimeXp: 20, restedXp: 30.6, prestigeRank: 1, copper: 40, ...meta } as PlayerMeta,
+    {
+      xp: 10,
+      lifetimeXp: 20,
+      restedXp: 30.6,
+      prestigeRank: 1,
+      virtualLevelsSpent: 2,
+      copper: 40,
+      ...meta,
+    } as PlayerMeta,
     {
       attackPower: 1,
       spellPower: 2,
@@ -45,6 +53,7 @@ describe('emitSelfScalarKeys', () => {
       lxp: 20,
       rxp: 31, // rounded
       prk: 1,
+      vls: 2,
       copper: 40,
       ap: 1,
       sp: 2,

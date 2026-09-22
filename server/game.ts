@@ -14,7 +14,7 @@ import { damageTakenWithin } from '../src/sim/combat/damage_history';
 import { wireParkedMana } from '../src/sim/combat/form_auto_unshift';
 import { rewindHealAmount } from '../src/sim/combat/rewind';
 import { DEEDS } from '../src/sim/content/deeds';
-import { isFinderListingTag, isFinderRole } from '../src/sim/content/dungeon_finder';
+import { isFinderRole } from '../src/sim/content/dungeon_finder';
 import { RELIQUARY_PAGES_BY_ID } from '../src/sim/content/reliquary';
 import { MECH_CHROMAS } from '../src/sim/content/skins';
 import { isWeaponSkinType, WEAPON_SKINS } from '../src/sim/content/weapon_skins';
@@ -241,6 +241,7 @@ import { observeQueuePops, queuedPidsOf, queuePopDepsFor } from './discord_queue
 import { enqueueRelay } from './discord_relay';
 import { findDungeonDoorNear } from './dungeon_door';
 import * as entryFacing from './dungeon_entry_facing';
+import { parseFinderListingCreate } from './dungeon_finder_listing_command';
 import { formatDuration } from './duration';
 import {
   copperFlowSourceForCommand,
@@ -398,6 +399,7 @@ import type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types'
 import { dispatchPerfectItemCommand } from './perfect_item_command';
 import { parsePerfectingSwapCommand } from './perfecting_swap_command';
 import { runPeriodicSaveFlush } from './periodic_save_flush';
+import { dispatchProgressionCommand } from './progression_commands';
 
 export type { PerfCaptureResult, PerfCaptureStatus } from './perf_capture_types';
 
@@ -7459,16 +7461,8 @@ export class GameServer {
         sim.dungeonFinderRespond(msg.accept === true, pid);
         break;
       case 'df_list_create': {
-        if (
-          typeof msg.activity === 'string' &&
-          msg.activity.length <= 64 &&
-          Array.isArray(msg.tags) &&
-          msg.tags.length <= 8
-        ) {
-          const tags = msg.tags.filter(isFinderListingTag);
-          if (tags.length === msg.tags.length)
-            sim.dungeonFinderListingCreate(msg.activity, tags, pid);
-        }
+        const listing = parseFinderListingCreate(msg);
+        if (listing) sim.dungeonFinderListingCreate(listing.activity, listing.tags, pid);
         break;
       }
       case 'df_list_close':
@@ -7486,9 +7480,10 @@ export class GameServer {
           sim.dungeonFinderApplicationRespond(msg.applicant, msg.accept === true, pid);
         break;
 
-      // post-cap cosmetic prestige (Max-Level XP Overflow)
+      // post-cap progression (server/progression_commands.ts): prestige + honing
       case 'prestige':
-        sim.prestige(pid);
+      case 'hone_item':
+        dispatchProgressionCommand(command, msg, sim, pid);
         break;
 
       // Talents & Specializations — every allocation re-validated in the Sim.

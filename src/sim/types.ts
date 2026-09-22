@@ -1673,6 +1673,16 @@ export interface ItemInstancePayload {
      *  read; the load rebuild drops it. */
     enchant?: { stat: string; value: number };
   };
+  /** Honing (progression/honing.ts): virtual levels spent on this worn copy,
+   *  one rank per landed attempt, each rank a +1 on one chosen primary stat
+   *  (`stats`, keyed by stat; `rank` is their sum). A SEPARATE additive
+   *  channel from rolled.stats, folded in by item_instance_stats.ts
+   *  activeItemInstanceStats so combat, tooltips, compare, and auto-equip all
+   *  read it, while the Rift rebuild and the enchant replace-arm (both
+   *  rolled.stats writers) never see it. JOINS the peer eqi wire and
+   *  publicInstanceView (the glow and the inspect tooltip are the point).
+   *  Absent = never honed; a legal writer never stores rank 0. */
+  honing?: { rank: number; stats: Partial<Record<'str' | 'agi' | 'sta' | 'int' | 'spi', number>> };
 }
 
 // A shallow `{ ...instance }` aliases the mutable `charges`/`rolled.stats`/`rift`
@@ -1713,6 +1723,9 @@ export function cloneItemInstancePayload(src: ItemInstancePayload): ItemInstance
       ...(src.rift.enchant && { enchant: { ...src.rift.enchant } }),
       ...(Array.isArray(src.rift.gems) ? { gems: [...src.rift.gems] } : {}),
     };
+  }
+  if (src.honing && typeof src.honing === 'object' && !Array.isArray(src.honing)) {
+    instance.honing = { ...src.honing, stats: { ...src.honing.stats } };
   }
   if (src.partyTrade) {
     const { eligible, eligibleIds } = src.partyTrade;
@@ -6315,6 +6328,14 @@ export type SimEvent = { pid?: number } & (
   // character sheet WHEN to repaint, the same job the honor event does for the
   // Honor row. Text-free: the chat line is the 'log' event.
   | { type: 'prestige'; rank: number }
+  // one resolved honing attempt (always personal: emitted with pid), fired by
+  // progression/honing.ts after the roll: the worn slot, the copy's rank
+  // after the attempt, and whether the rank landed. Text-free (the notice
+  // lines are the chat text); like the prestige event it exists to tell an
+  // open character sheet WHEN to repaint its honing card, and it is a
+  // HEAVY_SELF_EVENTS member so the spent purse and the mutated einst mirror
+  // re-diff on the next snapshot.
+  | { type: 'honed'; slot: EquipSlot; rank: number; landed: boolean; spent: number }
   // post-cap cosmetic progression (Max-Level XP Overflow): crossing a virtual
   // level past the cap (milestone unlocks ride the deedUnlocked event since
   // the milestone unification; the legacy milestoneUnlocked emit is gone)

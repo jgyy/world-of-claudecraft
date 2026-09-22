@@ -840,6 +840,11 @@ export const COMMAND_NAMES = [
   // The Social window's Who tab: ask for the realm roster (answered by the
   // `who` frame, mirrored as IWorldSocialGraph.whoInfo).
   'who',
+  // Honing (progression/honing.ts, IWorldProgressionXp.honeItem): one attempt
+  // to spend virtual levels on the worn `slot`, raising `stat` by one. The
+  // server validates the two token shapes; the sim resolves every gate and
+  // the one roll. Appended at the END because wire tokens are never reordered.
+  'hone_item',
 ] as const;
 
 // The union both the send path (`online.ts`) and the dispatch switch
@@ -975,6 +980,7 @@ export const COMMAND_FACETS = {
   // IWorldProgressionXp: opt-in cosmetic prestige (leaderboard is a REST GET, no
   // wire command; the XP/milestone reads ride the self-snapshot, not a send).
   prestige: 'IWorldProgressionXp',
+  hone_item: 'IWorldProgressionXp',
   // IWorldTalents: allocation commits + loadout edits (talentPoints is a local
   // compute with no send; the server re-validates every allocation).
   applyTalents: 'IWorldTalents',

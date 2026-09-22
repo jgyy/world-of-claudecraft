@@ -248,6 +248,22 @@ export const sv_SE: EnTranslations = {
       "needCap": "Du måste vara på maxnivå för att ta prestige.",
       "needXp": "mer livstids-XP för att ta prestige"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Visa överflöds-XP",
       "weather": "Vädereffekter"
@@ -3622,6 +3638,7 @@ export const sv_SE: EnTranslations = {
       "enchantedFallback": "Förtrollad",
       "partyTradeWindow": "Du kan överlåta det här föremålet till spelare som delade bytet i {time} till. Att ta på det avslutar handelsfönstret.",
       "perfectedBadge": "Förfinad",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Förfining: rang {rank} av {ranks}",
       "materialSourceGatherer": "{count} × samlad av {name}",
       "materialSourceGathererSigned": "{count} × samlad av {name}, signerad av {signer}",

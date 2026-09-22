@@ -35,6 +35,8 @@ import { classDisplayName, itemDisplayName } from './entity_i18n';
 import { draggedCopySlotIndex, dropRequiredLevel, paperdollDropAction } from './equip_drop_core';
 import { esc } from './esc';
 import { focusedWithin, restoreFirstEnabled } from './focus_restore';
+import { wireHoningCard } from './honing_sheet_controller';
+import { buildHoningSheetModel, type HoningPick, honingSheetHtml } from './honing_sheet_view';
 import { craftNameText } from './hud/professions/craft_name_view';
 import { gatheringProfessionNameKey } from './hud/professions/gathering_profession_name';
 import { buildGatheringProficiencyRows } from './hud/professions/gathering_view';
@@ -219,6 +221,9 @@ const SHARE_GLYPH =
 export class CharWindow {
   private openerFocus: HTMLElement | null = null;
   private sidebarTab: CharacterSidebarTab = 'stats';
+  // The Honing card's picks (honing_sheet_view.ts), kept across the innerHTML
+  // rebuilds a repaint performs; the slot defaults to the first worn piece.
+  private readonly honingPick: HoningPick = { stat: 'str' };
 
   constructor(private readonly deps: CharWindowDeps) {
     this.watchComposedPortrait();
@@ -346,6 +351,12 @@ export class CharWindow {
     el.querySelector('[data-act="prestige"]')?.addEventListener('click', () =>
       this.deps.openPrestige(),
     );
+    wireHoningCard(el, {
+      world: () => this.deps.world(),
+      pick: this.honingPick,
+      repaint: () => this.render(),
+      click: () => audio.click(),
+    });
     el.querySelector('[data-act="open-deeds"]')?.addEventListener('click', () => {
       audio.click();
       this.deps.openDeeds();
@@ -434,7 +445,14 @@ export class CharWindow {
   }
 
   private sidebarHtml(world: IWorld, selected: CharacterSidebarTab): string {
-    if (selected === 'progression') return this.deps.progressionHtml(world.player.level);
+    if (selected === 'progression') {
+      // The Honing card rides the Progression tab below the HUD-supplied block
+      // (honing_sheet_view.ts, wired by wireHoningCard after the paint).
+      return (
+        this.deps.progressionHtml(world.player.level) +
+        honingSheetHtml(buildHoningSheetModel(world, this.honingPick))
+      );
+    }
     if (selected === 'skills') return this.skillsHtml(world);
     const stats = `<div class="stat-panels">${STAT_PANELS.map((panel) => {
       const cellClasses = panel.kind === 'tiles' ? 'ui-stat-row ui-card' : 'ui-stat-row';

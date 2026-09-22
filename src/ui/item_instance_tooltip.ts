@@ -17,6 +17,7 @@ import type { MaterialComposition } from '../sim/material_sources';
 import { isCommissionEligibleKind } from '../sim/professions/commission';
 import { isEnchantedInstance } from '../sim/professions/enchanting';
 import { LEGENDARY_PROMOTION_COST, PERFECTING_RANKS } from '../sim/professions/perfecting';
+import { honingRankOf } from '../sim/progression/honing';
 import type { ItemDef, ItemInstancePayload, Stats } from '../sim/types';
 import { durationText } from './duration_text';
 import { esc } from './esc';
@@ -111,6 +112,9 @@ export function wornTooltipInstance(
   if (instance.perfected !== undefined) worn.perfected = instance.perfected;
   if (instance.rift !== undefined) worn.rift = instance.rift;
   if (instance.lootQuality !== undefined) worn.lootQuality = instance.lootQuality;
+  // The honing record rides the eqi wire (the glow and the inspect badge are
+  // the point), so the worn projection carries it in both hosts.
+  if (instance.honing !== undefined) worn.honing = instance.honing;
   return worn;
 }
 
@@ -258,6 +262,15 @@ export function instanceBadgeLines(instance?: ItemInstancePayload): string {
         rank: itemNumber(instance.perfecting),
         ranks: itemNumber(PERFECTING_RANKS),
       }),
+    )}</div>`;
+  }
+  // Honing (src/sim/progression/honing.ts): the rank badge, in the honing
+  // blue; the +1s themselves render as ordinary per-copy bonus stat lines
+  // (instanceBonusStatLines, through activeItemInstanceStats).
+  const honed = honingRankOf(instance);
+  if (honed > 0) {
+    html += `<div class="tt-sub tt-honed">${esc(
+      t('hudChrome.itemTooltip.honedBadge', { rank: itemNumber(honed) }),
     )}</div>`;
   }
   return html;

@@ -41,6 +41,7 @@ import { PERFECTING_RANKS } from './professions/perfecting';
 import { isValidPerfectingBonus } from './professions/perfecting_bonus';
 import { isLegalCrafterName } from './professions/tools';
 import { MAX_KNOWN_RECIPE_ID_LENGTH } from './professions/training';
+import { isValidHoningRecord } from './progression/honing_record';
 import type { ItemInstancePayload } from './types';
 
 /**
@@ -307,6 +308,18 @@ export function sanitizeItemInstancePayloadOnLoad(payload: unknown): SanitizedIt
     }
     if (key === 'perfectingBonus') {
       if (!isValidPerfectingBonus(value)) {
+        delete record[key];
+        dropped.push(key);
+      }
+      continue;
+    }
+    if (key === 'honing') {
+      // The honing record (progression/honing.ts): kept only as the exact
+      // legal shape, a rank in [1, HONING_MAX_RANK] whose stats are known
+      // primary-stat keys with positive integers summing to the rank;
+      // anything else drops whole (drop-only doctrine: a corrupt row loses
+      // only ranks it could never legally have carried).
+      if (!isValidHoningRecord(value)) {
         delete record[key];
         dropped.push(key);
       }

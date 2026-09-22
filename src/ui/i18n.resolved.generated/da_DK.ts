@@ -248,6 +248,22 @@ export const da_DK: EnTranslations = {
       "needCap": "Du skal være på maksniveau for at kunne prestige.",
       "needXp": "mere samlet XP for at kunne prestige"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Vis Overskuds-XP",
       "weather": "Vejreffekter"
@@ -3622,6 +3638,7 @@ export const da_DK: EnTranslations = {
       "enchantedFallback": "Fortryllet",
       "partyTradeWindow": "Du kan handle denne genstand til spillere, der delte dens bytte, i de næste {time}. Udstyrer du den, afsluttes handelsvinduet.",
       "perfectedBadge": "Forædlet",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Forædling: rang {rank} af {ranks}",
       "materialSourceGatherer": "{count} × samlet af {name}",
       "materialSourceGathererSigned": "{count} × samlet af {name}, signeret af {signer}",

@@ -8,7 +8,8 @@ import type {
 export type { GuildRosterEntry, GuildRosterInfo } from '../sim/leaderboard_page';
 
 import type { GuildBoardCategory } from '../sim/guild_board_category';
-import type { PlayerClass } from '../sim/types';
+import type { HoningStat } from '../sim/progression/honing_policy';
+import type { EquipSlot, PlayerClass } from '../sim/types';
 
 export type { GuildBoardCategory } from '../sim/guild_board_category';
 
@@ -140,4 +141,14 @@ export interface IWorldProgressionXp {
   // every realm; the offline Sim resolves an empty page.
   devLeaderboard(page?: number, pageSize?: number): Promise<DevLeaderboardPage>;
   prestige(): void;
+  // Honing (src/sim/progression/honing.ts): virtual levels as an enchanting
+  // resource. `virtualLevelsSpent` is the persisted ledger the spendable pool
+  // is derived from (honing_policy.ts unspentVirtualLevels over lifetimeXp);
+  // the offline Sim reads its PlayerMeta, the online ClientWorld mirrors the
+  // `vls` self-scalar. `honeItem` sends one attempt on the worn slot for the
+  // chosen primary stat; the server re-validates both tokens and the sim owns
+  // every gate, the cost, and the one roll. The outcome reaches the client as
+  // the notice lines plus the text-free `honed` event.
+  virtualLevelsSpent: number;
+  honeItem(slot: EquipSlot, stat: HoningStat): void;
 }

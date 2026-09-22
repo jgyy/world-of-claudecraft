@@ -248,6 +248,22 @@ export const zh_CN: EnTranslations = {
       "needCap": "你必须达到等级上限才能进行声望晋升。",
       "needXp": "更多终身经验才可声望晋升"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "显示溢出经验",
       "weather": "天气效果"
@@ -3622,6 +3638,7 @@ export const zh_CN: EnTranslations = {
       "enchantedFallback": "已附魔",
       "partyTradeWindow": "在接下来的{time}内，你可以将此物品交易给共同获得该掉落的玩家。装备后交易期限即告结束。",
       "perfectedBadge": "臻至完美",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "完美化：第{rank}阶，共{ranks}阶",
       "materialSourceGatherer": "{count} × 由{name}采集",
       "materialSourceGathererSigned": "{count} × 由{name}采集，由{signer}签名",

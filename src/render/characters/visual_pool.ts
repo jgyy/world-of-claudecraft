@@ -31,6 +31,15 @@ export interface PoolableVisual {
  *   the per-frame diff only reacts to live changes, so a cross-skin reuse
  *   would keep the wrong atlas. The skin set is small and static, so keys
  *   stay bounded.
+ *
+ * NPCs are skinned characters too: they pool like mobs so their Skeleton (and
+ * its bone-matrix DataTexture) survives interest churn instead of being
+ * disposed and re-uploaded every time one streams out and back into view;
+ * that dispose + re-upload cycle is the open-world "asset-upload" travel hitch
+ * (Skeleton.dispose via CharacterVisual.dispose in the renderer's removeView,
+ * pinned by GPU-upload profiling). The renderer's view-create path and the
+ * zone_prewarm_groups builders both call this function directly, so there is
+ * exactly one key rule to keep in sync.
  */
 export function characterVisualPoolKey(
   e: Pick<Entity, 'kind' | 'templateId' | 'skin'>,

@@ -11464,10 +11464,10 @@ export class Hud {
           }
           break;
         }
-        // The rank itself already rides every self snapshot; the open character
-        // sheet is only repainted on an explicit trigger, so without this it
-        // keeps showing the pre-prestige rank until closed and reopened. Same
-        // job the 'honor' case below does for the sheet's Honor balance.
+        // The rank (and the honing ledger) already ride every self snapshot; the
+        // open character sheet is only repainted on an explicit trigger, so without
+        // this it keeps showing the stale value until closed and reopened.
+        case 'honed':
         case 'prestige': {
           this.renderCharIfOpen();
           break;

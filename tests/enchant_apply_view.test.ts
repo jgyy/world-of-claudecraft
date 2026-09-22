@@ -829,9 +829,11 @@ describe('enchant_apply_view: preservedReplaceTraits (#2421)', () => {
     // collection item levels, plus the Riftbound band payload. Nothing that
     // carries bind state or partial ranks. Confirmed against the resolved
     // server/game.ts projection loop (signer, enchant, rolled, name,
-    // perfected, rift).
+    // perfected, rift), plus the honing record (progression/honing.ts): the
+    // glow tier and the inspect badge are its point, and it carries no bind.
     expect(projected.sort()).toEqual([
       'enchant',
+      'honing',
       'lootQuality',
       'name',
       'perfected',

@@ -248,6 +248,22 @@ export const ko_KR: EnTranslations = {
       "needCap": "명예 승급을 하려면 최대 레벨이어야 합니다.",
       "needXp": "명예 승급까지 필요한 추가 누적 경험치"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "초과 경험치 표시",
       "weather": "날씨 효과"
@@ -3622,6 +3638,7 @@ export const ko_KR: EnTranslations = {
       "enchantedFallback": "마법부여됨",
       "partyTradeWindow": "앞으로 {time} 동안 이 아이템을 같은 전리품을 함께 획득한 플레이어와 거래할 수 있습니다. 착용하면 거래 기간이 끝납니다.",
       "perfectedBadge": "완전해짐",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "완전화: {ranks}단계 중 {rank}단계",
       "materialSourceGatherer": "{count} × {name} 채집",
       "materialSourceGathererSigned": "{count} × {name} 채집, {signer} 서명",

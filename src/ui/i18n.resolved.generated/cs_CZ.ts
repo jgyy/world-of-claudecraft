@@ -248,6 +248,22 @@ export const cs_CZ: EnTranslations = {
       "needCap": "Pro prestiž musíš být na maximální úrovni.",
       "needXp": "dalších celoživotních XP do prestiže"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Zobrazit přebytečné XP",
       "weather": "Efekty počasí"
@@ -3622,6 +3638,7 @@ export const cs_CZ: EnTranslations = {
       "enchantedFallback": "Okouzlený",
       "partyTradeWindow": "Tento předmět můžeš dalších {time} směňovat s hráči, kteří sdíleli jeho kořist. Nasazení předmětu okno pro směnu ukončí.",
       "perfectedBadge": "Zdokonalené",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Zdokonalování: hodnost {rank} z {ranks}",
       "materialSourceGatherer": "{count} × sebral(a) {name}",
       "materialSourceGathererSigned": "{count} × sebral(a) {name}, podepsal(a) {signer}",

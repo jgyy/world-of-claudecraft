@@ -19,6 +19,7 @@ export const SELF_SCALAR_KEYS = [
   'lxp',
   'rxp',
   'prk',
+  'vls',
   'copper',
   'ap',
   'sp',
@@ -47,6 +48,7 @@ export function emitSelfScalarKeys(
   emit('lxp', meta.lifetimeXp);
   emit('rxp', Math.round(meta.restedXp));
   emit('prk', meta.prestigeRank);
+  emit('vls', meta.virtualLevelsSpent);
   emit('copper', meta.copper);
   emit('ap', p.attackPower);
   emit('sp', p.spellPower);

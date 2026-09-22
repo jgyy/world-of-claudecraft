@@ -98,6 +98,16 @@ COSMETIC (may be tiered down on lower presets):
   pooled cloud's own governor quality floor. Suppressed under the viewer's
   prefers-reduced-motion setting, the lich-aura precedent (an accessibility choice by the
   viewer, not a graphics shed).
+- The honed-gear shimmer (`src/render/honing_glow_core.ts` plus the `Vfx.honingGlow` pooled
+  emitter): the tier-colored motes rising off a wearer whose worn set carries a highly honed
+  copy (`src/sim/progression/honing.ts`; the rank thresholds live in the sim's
+  `HONING_GLOW_RANKS`). Worn-gear PRESTIGE display, not actionable state: the predicate reads
+  only the `honing` record on the eqi wire allowlist (never hp, auras, or target state), so
+  shedding it hides nothing a player acts on. It rides the regalia bullet's exact shed: gated
+  at the medium effects tier by the STATIC preset stamp (`gfxTierAtLeast(GFX.effectsTier)`,
+  never the FPS governor), faded by the same `legendaryRegaliaEmitDt` decision against the
+  fixed `CHARACTER_LOD_RANGE_SQ` anchor, floored above zero, and suppressed under the viewer's
+  prefers-reduced-motion setting.
 - Ambient plant motion in the world: the foliage wind sway on canopies, bushes and grass
   cards, and the farm crops' idle lean (`src/render/farm_patches.ts`). This is the class
   boundary for the reduced-motion clause directly above, which is about a CHARACTER-borne

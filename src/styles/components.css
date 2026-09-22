@@ -2329,6 +2329,35 @@
     font-size: 11px;
     color: #b9ac82;
   }
+  /* Honing card (character sheet, Progression tab): the unspent pool, two
+     picks, the next rank's cost and chance, and the Hone button. */
+  .cp-honing .cp-honing-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .cp-honing label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #b9ac82;
+    min-width: 0;
+    flex: 1 1 160px;
+  }
+  .cp-honing .hud-select {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .cp-honing .cp-honing-pool {
+    color: var(--gold);
+  }
+  .cp-honing .cp-honing-rank,
+  .tt-honed {
+    color: #7fd4ff;
+  }
 
   /* ---------- leaderboard ---------- */
   /* lifetime-XP leaderboard panel (modeled on the quest-log window) */

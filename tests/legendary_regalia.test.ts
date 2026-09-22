@@ -386,6 +386,7 @@ describe('legendary regalia graphics fairness (sheddable prestige cosmetic)', ()
     const projected = assigns.map((m) => m[1]).sort();
     expect(projected).toEqual([
       'enchant',
+      'honing',
       'lootQuality',
       'name',
       'perfected',
@@ -400,7 +401,7 @@ describe('legendary regalia graphics fairness (sheddable prestige cosmetic)', ()
     // predicate above never reads it either. lootQuality (the permanent
     // quality descriptor) is public so an inspected copy's resolved stats
     // match its owner's tooltip; the predicate never reads it either.
-    // The pub block itself carries exactly the seven assignment-shaped writes
+    // The pub block itself carries exactly the eight assignment-shaped writes
     // and no spread, so a widened wire SHAPE (a spread, a conditional copy in
     // another form) reds this alarm instead of slipping past the scrape above.
     const pubAt = wire.indexOf('let eqi: Record<string, unknown> | undefined;');
@@ -408,8 +409,8 @@ describe('legendary regalia graphics fairness (sheddable prestige cosmetic)', ()
     const pubEnd = wire.indexOf('return eqi;', pubAt);
     expect(pubEnd).toBeGreaterThan(pubAt);
     const pubBlock = wire.slice(pubAt, pubEnd);
-    expect([...pubBlock.matchAll(/pub\.(\w+) = inst\.(\w+);/g)]).toHaveLength(7);
-    expect(pubBlock.match(/\bpub\.\w+\s*=/g) ?? []).toHaveLength(7);
+    expect([...pubBlock.matchAll(/pub\.(\w+) = inst\.(\w+);/g)]).toHaveLength(8);
+    expect(pubBlock.match(/\bpub\.\w+\s*=/g) ?? []).toHaveLength(8);
     expect(pubBlock).not.toContain('...');
     // game.ts still owns the one call site and the wire write.
     const game = read('server/game.ts');

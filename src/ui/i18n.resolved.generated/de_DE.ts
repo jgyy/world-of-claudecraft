@@ -248,6 +248,22 @@ export const de_DE: EnTranslations = {
       "needCap": "Ihr müsst die Maximalstufe erreicht haben, um Prestige zu erhalten.",
       "needXp": "mehr Lebenszeit-EP für Prestige"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Überschuss-EP anzeigen",
       "weather": "Wettereffekte"
@@ -3622,6 +3638,7 @@ export const de_DE: EnTranslations = {
       "enchantedFallback": "Verzaubert",
       "partyTradeWindow": "Du kannst diesen Gegenstand noch {time} lang an Spieler weitergeben, die denselben Beutefund erhalten haben. Das Anlegen beendet dieses Handelsfenster.",
       "perfectedBadge": "Perfektioniert",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Perfektionierung: Rang {rank} von {ranks}",
       "materialSourceGatherer": "{count} × Gesammelt von {name}",
       "materialSourceGathererSigned": "{count} × Gesammelt von {name}, signiert von {signer}",

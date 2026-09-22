@@ -248,6 +248,22 @@ export const ja_JP: EnTranslations = {
       "needCap": "威信を得るにはレベル上限に達している必要があります。",
       "needXp": "威信までに必要な追加累計経験値"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "超過経験値を表示",
       "weather": "天候エフェクト"
@@ -3622,6 +3638,7 @@ export const ja_JP: EnTranslations = {
       "enchantedFallback": "エンチャント済み",
       "partyTradeWindow": "このアイテムはあと{time}の間、同じドロップを分かち合ったプレイヤーと取引できます。装備すると取引期間は終了します。",
       "perfectedBadge": "完全化済み",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "完全化：ランク{rank}／{ranks}",
       "materialSourceGatherer": "{count} × {name}が採集",
       "materialSourceGathererSigned": "{count} × {name}が採集、{signer}が署名",

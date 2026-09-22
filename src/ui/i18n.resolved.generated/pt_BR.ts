@@ -248,6 +248,22 @@ export const pt_BR: EnTranslations = {
       "needCap": "Você precisa estar no nível máximo para prestigiar.",
       "needXp": "mais EXP vitalícia para prestigiar"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Mostrar EXP excedente",
       "weather": "Efeitos Climáticos"
@@ -3622,6 +3638,7 @@ export const pt_BR: EnTranslations = {
       "enchantedFallback": "Encantado",
       "partyTradeWindow": "Você pode negociar este item com jogadores que compartilharam esse saque pelos próximos {time}. Equipá-lo encerra a janela de troca.",
       "perfectedBadge": "Aperfeiçoado",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Aperfeiçoamento: ranque {rank} de {ranks}",
       "materialSourceGatherer": "{count} × Coletado por {name}",
       "materialSourceGathererSigned": "{count} × Coletado por {name}, assinado por {signer}",

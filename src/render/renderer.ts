@@ -400,6 +400,7 @@ import { buildHauntFeatures, type HauntFeaturesView } from './haunt_features';
 import { usedJsHeapMb } from './heap_sample';
 import { createHitchFrameAligner } from './hitch_frame_align_core';
 import { buildHollowGates, type HollowGatesView } from './hollow_gates';
+import { honingGlowEmitDt, honingGlowTierOf } from './honing_glow_core';
 import { type IceBlockVisual, syncIceBlockVisual } from './ice_block_visual';
 import { idleSlot } from './idle_queue';
 import {
@@ -1203,9 +1204,11 @@ export interface EntityView extends RickshawMountViewState {
   formCompilePending: THREE.Object3D | null;
   lastOverheadEmoteKey: string | null;
   recklessSkullsSpawned?: boolean;
-  // orange worn-gear glow, recomputed only on equippedInstances identity change
+  // orange worn-gear glow + the honed-gear tier, recomputed only on
+  // equippedInstances identity change (one ref gates both)
   legendaryRegalia?: boolean;
   legendaryRegaliaRef?: unknown;
+  honingGlowTier?: number;
   // render-space position last frame, for true u/s locomotion speed
   lastX: number;
   lastZ: number;
@@ -5054,22 +5057,6 @@ export class Renderer {
     };
   }
 
-  private visualPoolKeyFor(e: Entity): string | null {
-    // Normalized per-TEMPLATE key (characters/visual_pool.ts): per-instance
-    // color/scale (rift spawns re-grade both per mob) is applied at acquire
-    // time instead of partitioning the key, so rift visuals pool and reuse
-    // like everything else instead of minting dead never-matching entries.
-    // NPCs are skinned characters too: pool them like mobs so their Skeleton
-    // (and its bone-matrix DataTexture) survives interest churn instead of
-    // being disposed and re-uploaded every time one streams out and back into
-    // view - that dispose + re-upload cycle is the open-world "asset-upload"
-    // travel hitch (Skeleton.dispose via CharacterVisual.dispose in
-    // removeView, pinned by GPU-upload profiling). Players never pool (A6).
-    // The extracted zone_prewarm_groups builders call characterVisualPoolKey
-    // directly: mirror any logic added here, or re-point them at this wrapper.
-    return characterVisualPoolKey(e);
-  }
-
   private storePooledObject(key: string, object: PooledObjectView): void {
     // Unlike the character-visual pool, an overflow view has nothing to .dispose(): its
     // geometry/materials are shared per-item-template references (owned elsewhere), so
@@ -8065,7 +8052,7 @@ export class Renderer {
         this.viewCreateRetry.markFailed(e.id, 'view', performance.now());
         return;
       }
-      visualPoolKey = this.visualPoolKeyFor(e);
+      visualPoolKey = characterVisualPoolKey(e);
       visual = visualPoolKey ? this.pooledVisuals.take(visualPoolKey, e.color) : null;
       if (!visual) {
         // Pool MISS: build a fresh visual but KEEP its pool key so removeView returns
@@ -11324,9 +11311,12 @@ export class Renderer {
             if (v.legendaryRegaliaRef !== e.equippedInstances) {
               v.legendaryRegaliaRef = e.equippedInstances;
               v.legendaryRegalia = legendaryRegaliaActive(e.equippedInstances);
+              v.honingGlowTier = honingGlowTierOf(e.equippedInstances);
             }
             const emitDt = legendaryRegaliaEmitDt(v.legendaryRegalia, this.reducedMotion(), dt, d2);
             if (emitDt > 0) this.vfx.legendaryRegalia(e.id, emitDt);
+            const honeDt = honingGlowEmitDt(v.honingGlowTier, this.reducedMotion(), dt, d2);
+            if (honeDt > 0) this.vfx.honingGlow(e.id, honeDt, v.honingGlowTier ?? 0);
           }
         }
         // The graveyard angel: a soft, constant golden shimmer rising off the Spirit Healer.

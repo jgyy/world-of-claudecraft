@@ -248,6 +248,22 @@ export const vi_VN: EnTranslations = {
       "needCap": "Bạn phải đạt cấp tối đa để phong danh.",
       "needXp": "XP trọn đời nữa để phong danh"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Hiện XP Dư Thừa",
       "weather": "Hiệu Ứng Thời Tiết"
@@ -3622,6 +3638,7 @@ export const vi_VN: EnTranslations = {
       "enchantedFallback": "Đã Pháp Khắc",
       "partyTradeWindow": "Bạn có thể giao dịch vật phẩm này cho những người chơi đã cùng nhận nó rơi ra, trong {time} tới. Trang bị nó sẽ kết thúc khoảng thời gian giao dịch này.",
       "perfectedBadge": "Đã hoàn thiện",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Hoàn thiện: bậc {rank} trên {ranks}",
       "materialSourceGatherer": "{count} × Được {name} thu thập",
       "materialSourceGathererSigned": "{count} × Được {name} thu thập, có chữ ký của {signer}",

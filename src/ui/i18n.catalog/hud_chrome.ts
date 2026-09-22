@@ -5092,6 +5092,7 @@ export const hudChromeStrings = {
     // full-payload surfaces. {rank}/{ranks} interpolate from the payload and
     // the sim's PERFECTING_RANKS, never literals in copy.
     perfectedBadge: 'Perfected',
+    honedBadge: 'Honed +{rank}',
     perfectingRank: 'Perfecting: rank {rank} of {ranks}',
     // Per-unit material provenance (item_instance_tooltip.ts
     // materialSourceLines over the pure material_sources_view.ts model): one

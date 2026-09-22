@@ -306,6 +306,7 @@ import {
   paginateGuildLeaderboard,
   paginateLeaderboard,
 } from './leaderboard_page';
+import { offlineLeaderboardRows } from './leaderboard_rows';
 import { entityLineOfSightClear } from './line_of_sight_elevation';
 import type { Ante, PickAction } from './lockpick';
 import { retirePartyTradeOnLoad, retirePartyTradeOnSave } from './loot/bop_trade_persistence';
@@ -614,6 +615,8 @@ import {
   gainCraftSkill,
   normalizeCraftSkills,
 } from './professions/wheel';
+import { resolveHoningAttempt } from './progression/honing';
+import type { HoningStat } from './progression/honing_policy';
 import {
   applyTalentAllocation,
   deleteTalentLoadout,
@@ -888,7 +891,6 @@ import {
   steadyAngleTo,
   swingMissChance,
   type Vec3,
-  virtualLevel,
   type WeaponSkinLoadout,
   type WeaponSkinType,
   type WorldContent,
@@ -1436,6 +1438,7 @@ export interface PlayerMeta {
   // Persisted per-day, per-opponent ranked-win accounting for honor DR.
   honorArenaDaily?: HonorArenaDailyState;
   prestigeRank: number;
+  virtualLevelsSpent: number; // honing ledger (progression/honing.ts)
   unlockedMilestones: Set<string>;
   // Classic Rested XP pool (copper-less XP units). Accrues while resting in an
   // inn, spent to double kill XP. Persisted in CharacterState.
@@ -2883,6 +2886,7 @@ export class Sim {
       honor: 0,
       lifetimeHonor: 0,
       prestigeRank: 0,
+      virtualLevelsSpent: 0,
       unlockedMilestones: new Set(),
       restedXp: 0,
       gatheringProficiency: emptyGatheringProficiency(),
@@ -3036,6 +3040,7 @@ export class Sim {
       );
       meta.honorArenaDaily = honorMod.normalizeHonorDailyState(s.honorArenaDaily);
       meta.prestigeRank = s.prestigeRank ?? 0;
+      meta.virtualLevelsSpent = Math.max(0, Math.floor(s.virtualLevelsSpent ?? 0));
       meta.restedXp = Math.max(0, s.restedXp ?? 0);
       // `s.professions` is the legacy pre-rename field (#1119); `s.gatheringProficiency`
       // is the current one. Prefer the current field, fall back to the legacy one so
@@ -4019,6 +4024,7 @@ export class Sim {
           }
         : {}),
       prestigeRank: meta.prestigeRank,
+      virtualLevelsSpent: meta.virtualLevelsSpent,
       unlockedMilestones: [...meta.unlockedMilestones],
       restedXp: meta.restedXp,
       // Fold this session's elapsed time into the persisted baseline (see
@@ -4679,40 +4685,17 @@ export class Sim {
   get prestigeRank(): number {
     return this.primary.prestigeRank;
   }
+  get virtualLevelsSpent(): number {
+    return this.primary.virtualLevelsSpent;
+  }
   get unlockedMilestones(): string[] {
     return [...this.primary.unlockedMilestones];
   }
   // Offline leaderboard: rank the players the local sim knows about by lifetime
-  // XP. Online play overrides this with the cached, realm-scoped server query.
-  // Paged through the same helper the server uses so both worlds behave alike.
+  // XP (leaderboard_rows.ts). Online play overrides this with the cached,
+  // realm-scoped server query. Paged through the same helper the server uses.
   leaderboard(page = 0, pageSize = LEADERBOARD_PAGE_SIZE): Promise<LeaderboardPage> {
-    const rows = [...this.players.values()]
-      .map((m) => {
-        const e = this.entities.get(m.entityId);
-        return e ? { meta: m, e } : null;
-      })
-      .filter((x): x is { meta: PlayerMeta; e: Entity } => x !== null)
-      .sort(
-        (a, b) =>
-          b.meta.lifetimeXp - a.meta.lifetimeXp ||
-          b.e.level - a.e.level ||
-          a.meta.name.localeCompare(b.meta.name),
-      )
-      .map(({ meta, e }, i) => ({
-        rank: i + 1,
-        name: meta.name,
-        cls: meta.cls,
-        level: e.level,
-        virtualLevel: virtualLevel(meta.lifetimeXp),
-        lifetimeXp: meta.lifetimeXp,
-        prestigeRank: meta.prestigeRank,
-        // the selected Book of Deeds title (a deed id), like the server fill
-        title: meta.activeTitle,
-        // The guild tag beside the name, read off the passive display field the
-        // host stamps (setPlayerGuild). Omitted rather than empty, like the server
-        // fill; offline that is always the case, since guilds are server-only.
-        ...(e.guild ? { guild: e.guild } : {}),
-      }));
+    const rows = offlineLeaderboardRows(this.players.values(), (id) => this.entities.get(id));
     return Promise.resolve(paginateLeaderboard(rows, page, pageSize));
   }
   // Guilds are a server-only social system (they live in the server's social DB,
@@ -7591,6 +7574,10 @@ export class Sim {
   // abilities untouched — strictly cosmetic, zero power change (FR-6.1/6.3).
   prestige(pid?: number): boolean {
     return prestigeImpl(this.ctx, pid);
+  }
+  // Honing: virtual levels as an enchanting resource (progression/honing.ts).
+  honeItem(slot: EquipSlot, stat: HoningStat, pid?: number): boolean {
+    return resolveHoningAttempt(this.ctx, pid, slot, stat);
   }
 
   // L1 loot distribution (party-loot strategy, rollLoot, copper split, need-greed

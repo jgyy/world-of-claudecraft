@@ -248,6 +248,22 @@ export const pl_PL: EnTranslations = {
       "needCap": "Aby osiągnąć prestiż, musisz być na maksymalnym poziomie.",
       "needXp": "więcej łącznych PD do prestiżu"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Pokaż nadmiarowe PD",
       "weather": "Efekty pogodowe"
@@ -3622,6 +3638,7 @@ export const pl_PL: EnTranslations = {
       "enchantedFallback": "Zaklęty",
       "partyTradeWindow": "Możesz wymienić ten przedmiot z graczami, z którymi wypadł, jeszcze przez {time}. Założenie go kończy okno wymiany.",
       "perfectedBadge": "Udoskonalone",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Doskonalenie: ranga {rank} z {ranks}",
       "materialSourceGatherer": "{count} × zebrane przez {name}",
       "materialSourceGathererSigned": "{count} × zebrane przez {name}, podpisane przez {signer}",

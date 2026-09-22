@@ -7,6 +7,7 @@ import {
   DrainLifeVfx,
 } from './drain_life_vfx';
 import { GFX } from './gfx';
+import { honingGlowStyle } from './honing_glow_core';
 import {
   type IgnivarJudgmentFireSample,
   ignivarJudgmentFireAllowsSmoke,
@@ -2118,6 +2119,37 @@ export class Vfx {
         1.1 + Math.random() * 0.5,
         -0.15,
         star ? SPR.star : SPR.sparkBurst,
+      );
+    }
+  }
+
+  /** Honed worn-gear identity (honing_glow_core.ts): a slow, tier-colored
+   *  shimmer of soft motes rising close around a living wearer, sparse like
+   *  the regalia drift and brighter per tier. Same pooled cloud, no light, no
+   *  visibility writes; the tier and the distance shed are decided upstream. */
+  honingGlow(entityId: number, dt: number, tier: number): void {
+    const style = honingGlowStyle(tier);
+    const n = this.emitCount(style.ratePerSec, dt);
+    if (!n) return;
+    const at = this.anchor(entityId, 0.5);
+    if (!at) return;
+    const color = new THREE.Color(style.color).multiplyScalar(hdr(1.8));
+    for (let k = 0; k < n; k++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = 0.25 + Math.random() * 0.25;
+      const star = Math.random() < 0.3;
+      this.spawn(
+        at.x + Math.sin(a) * r,
+        at.y + (Math.random() - 0.3) * 1.0,
+        at.z + Math.cos(a) * r,
+        Math.sin(a) * 0.03,
+        0.18 + Math.random() * 0.22,
+        Math.cos(a) * 0.03,
+        color,
+        star ? 0.16 : 0.22,
+        1.3 + Math.random() * 0.6,
+        -0.1,
+        star ? SPR.star : SPR.glowSoft,
       );
     }
   }

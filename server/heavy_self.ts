@@ -104,6 +104,12 @@ export const HEAVY_SELF_CMDS = new Set<string>([
   'mount_toggle',
   'change_weapon_skin',
   'prestige',
+  // Honing (progression/honing.ts): every resolved attempt moves the purse
+  // and the virtual-level ledger and mutates the worn copy's payload in place
+  // (the einst mirror); no loot event fires, so membership here is what
+  // re-diffs the self mirrors on the next snapshot (the sim's wireRev bump
+  // covers the same path). Marks on receipt, like prestige.
+  'hone_item',
   'market_list',
   'market_list_instance',
   'market_buy',
@@ -197,6 +203,9 @@ export const HEAVY_SELF_EVENTS = new Set<string>([
   'mailResult',
   'levelup',
   'virtualLevelUp',
+  // one resolved honing attempt: the spent purse and ledger plus the mutated
+  // worn payload ride the heavy self keys (progression/honing.ts).
+  'honed',
   'deedUnlocked', // the earned map + stat block ride the heavy-gated deeds/dstats keys
   // The Reliquary sparse blob (firstFind / illuminatedPages / marks / recent)
   // rides the heavy-gated `reliq` key. No saveCharacter on pure fill; since

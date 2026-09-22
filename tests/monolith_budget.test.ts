@@ -931,7 +931,9 @@ const MONOLITHS: MonolithRow[] = [
     // 12790 -> 12789 when the Warrior kit textures moved to demand loading
     // (the boot-time sheet upload loop and its comment went, the kit host
     // gained its assets line). Exact count.
-    ceiling: 12789,
+    // Lowered 12789 -> 12779 at the honing landing: the visualPoolKeyFor
+    // forwarder retired (characters/visual_pool.ts is called directly).
+    ceiling: 12779,
     seam: 'a new src/render/<thing>.ts module the renderer calls (src/render/CLAUDE.md)',
   },
   {
@@ -1125,7 +1127,9 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    ceiling: 11750,
+    // Lowered 11750 -> 11738 at the honing landing: the offline leaderboard
+    // row build moved to src/sim/leaderboard_rows.ts (the ratchet's own rule).
+    ceiling: 11738,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1565,7 +1569,10 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the equipped-instance wire
     // projection moved to server/equipped_instance_wire.ts, composed with the
     // release extractions above. Exact merged count, zero slack.
-    ceiling: 9979,
+    // Lowered 9979 -> 9974 at the honing landing: the df_list_create parse
+    // moved to server/dungeon_finder_listing_command.ts and the progression
+    // dispatch to server/progression_commands.ts.
+    ceiling: 9974,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -1720,7 +1727,9 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
-    ceiling: 5426,
+    // Lowered 5426 -> 5417 at the honing landing: the daily-reward page
+    // normalization moved to src/net/daily_reward_leaderboard_page.ts.
+    ceiling: 5417,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

@@ -248,6 +248,22 @@ export const tr_TR: EnTranslations = {
       "needCap": "Prestij yapmak için seviye üst sınırında olmalısın.",
       "needXp": "prestij için daha fazla ömür boyu XP"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Taşan XP'yi Göster",
       "weather": "Hava Durumu Efektleri"
@@ -3622,6 +3638,7 @@ export const tr_TR: EnTranslations = {
       "enchantedFallback": "Büyülü",
       "partyTradeWindow": "Bu eşyayı, düşüşünü paylaşan oyunculara önümüzdeki {time} boyunca takas edebilirsin. Kuşanmak takas penceresini sona erdirir.",
       "perfectedBadge": "Kusursuzlaştırılmış",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Kusursuzlaştırma: {ranks} içinden {rank}. kademe",
       "materialSourceGatherer": "{count} × {name} tarafından toplandı",
       "materialSourceGathererSigned": "{count} × {name} tarafından toplandı, {signer} imzalı",

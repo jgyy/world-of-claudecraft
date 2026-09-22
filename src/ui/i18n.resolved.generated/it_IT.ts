@@ -248,6 +248,22 @@ export const it_IT: EnTranslations = {
       "needCap": "Devi essere al livello massimo per ottenere prestigio.",
       "needXp": "PE totali in più per il prestigio"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Mostra PE eccedenti",
       "weather": "Effetti meteo"
@@ -3622,6 +3638,7 @@ export const it_IT: EnTranslations = {
       "enchantedFallback": "Incantato",
       "partyTradeWindow": "Puoi scambiare questo oggetto con i giocatori che hanno condiviso il suo bottino per i prossimi {time}. Indossarlo pone fine alla finestra di scambio.",
       "perfectedBadge": "Perfezionato",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Perfezionamento: grado {rank} di {ranks}",
       "materialSourceGatherer": "{count} × Raccolto da {name}",
       "materialSourceGathererSigned": "{count} × Raccolto da {name}, firmato da {signer}",

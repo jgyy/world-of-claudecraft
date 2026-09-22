@@ -59,6 +59,7 @@ import type { MaterialRarity } from '../sim/professions/gathering';
 import type { HarvestPreference } from '../sim/professions/harvest_preference';
 import type { PerfectingSwapRequest } from '../sim/professions/perfecting_swap';
 import { emptyCraftSkills } from '../sim/professions/wheel';
+import type { HoningStat } from '../sim/progression/honing_policy';
 import {
   accountReliquaryOwnershipOpts,
   catalogRankOwned,
@@ -205,6 +206,10 @@ import {
 } from './civic_service_placements';
 import { applySelfCombatScalars } from './combat_scalar_wire';
 import { decodeMobileStationCrafts, EMPTY_MST_CRAFTS } from './crafting_wire';
+import {
+  dailyRewardLeaderboardPageFrom,
+  emptyDailyRewardLeaderboardPage,
+} from './daily_reward_leaderboard_page';
 import {
   type DesktopWalletBrowserAction,
   type DesktopWalletStatus,
@@ -1243,6 +1248,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
   // Post-cap progression (Max-Level XP Overflow), mirrored from snapshot self.
   lifetimeXp = 0;
   prestigeRank = 0;
+  virtualLevelsSpent = 0; // the honing ledger (vls), mirrored from snapshot self
   // Rested XP pool, mirrored from snapshot self.
   restedXp = 0;
   // Lifetime played seconds, mirrored from snapshot self (`ptime`, quantized
@@ -3199,6 +3205,7 @@ export class ClientWorld extends ReconWireState implements IWorld {
       this.lifetimeXp = s.lxp ?? this.lifetimeXp;
       this.restedXp = s.rxp ?? this.restedXp;
       this.prestigeRank = s.prk ?? this.prestigeRank;
+      this.virtualLevelsSpent = s.vls ?? this.virtualLevelsSpent;
       if (s.milestones !== undefined) this.unlockedMilestones = s.milestones;
       // IWorldInventory facet (W2) self-decode: copper is delta-guarded like
       // inv/buyback/equip (a missing field keeps the prior mirror). Terse keys
@@ -4594,18 +4601,15 @@ export class ClientWorld extends ReconWireState implements IWorld {
     // never trust the wire: re-sanitize the links, same as the identity decode
     this.rememberFlair(ev.from, ev.flair.ai === true, normalizeStreamerLinks(ev.flair.links));
   }
-  // Mirror the authoritative prestige rank into this.prestigeRank the moment
-  // the event lands (issue #2137). The self snapshot's `prk` field is the
-  // convergence arm (same pattern as applyCraftResultEvent above), but the
-  // server sends this tick's `events` frame BEFORE the next `snap` frame that
-  // carries the bumped rank: without this immediacy arm, an already-open
-  // character sheet's renderCharIfOpen() (triggered by this very event) reads
-  // the STALE prestigeRank still on the mirror, so the sheet freezes one rank
-  // behind the chat line's "Prestige Rank N" until an unrelated repaint (or
-  // the next snapshot) catches it up.
+  // Mirror the prestige rank (issue #2137) and the honing ledger the moment
+  // their event lands: the `prk`/`vls` self scalars are the convergence arm,
+  // but this tick's `events` frame precedes the `snap` that carries the new
+  // value, so the character sheet's renderCharIfOpen() (triggered by these
+  // very events) would otherwise read the STALE mirror and freeze one step
+  // behind the chat line until an unrelated repaint caught it up.
   private applyPrestigeEvent(ev: SimEvent): void {
-    if (ev.type !== 'prestige') return;
-    this.prestigeRank = ev.rank;
+    if (ev.type === 'prestige') this.prestigeRank = ev.rank;
+    else if (ev.type === 'honed') this.virtualLevelsSpent = ev.spent;
   }
   // --- IWorldMarket: World Market browse/list/buy/cancel/collect command sends
   // (snake_case wire strings). marketInfo is a snapshot read (mirror field above). ---
@@ -5322,31 +5326,15 @@ export class ClientWorld extends ReconWireState implements IWorld {
     page = 0,
     pageSize = LEADERBOARD_PAGE_SIZE,
   ): Promise<DailyRewardLeaderboardPage> {
-    const empty: DailyRewardLeaderboardPage = {
-      day: '',
-      leaders: [],
-      page: 0,
-      pageCount: 1,
-      total: 0,
-      pageSize,
-    };
     try {
       const res = await fetch(
         apiUrl(`/api/daily-rewards/leaderboard?page=${page}&pageSize=${pageSize}`, this.base),
         { headers: { Authorization: `Bearer ${this.token}` } },
       );
-      if (!res.ok) return empty;
-      const data = await res.json();
-      return {
-        day: data.day ?? '',
-        leaders: data.leaders ?? [],
-        page: data.page ?? page,
-        pageCount: data.pageCount ?? 1,
-        total: data.total ?? data.leaders?.length ?? 0,
-        pageSize: data.pageSize ?? pageSize,
-      };
+      if (!res.ok) return emptyDailyRewardLeaderboardPage(pageSize);
+      return dailyRewardLeaderboardPageFrom(await res.json(), page, pageSize);
     } catch {
-      return empty;
+      return emptyDailyRewardLeaderboardPage(pageSize);
     }
   }
 
@@ -5377,6 +5365,9 @@ export class ClientWorld extends ReconWireState implements IWorld {
 
   prestige(): void {
     this.cmd({ cmd: 'prestige' });
+  }
+  honeItem(slot: EquipSlot, stat: HoningStat): void {
+    this.cmd({ cmd: 'hone_item', slot, stat });
   }
   // --- IWorldTalents: talentPoints is a local display compute; every mutation
   // is sent to the authoritative server and mirrors only from a later snapshot. ---

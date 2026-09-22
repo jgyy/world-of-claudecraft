@@ -29,5 +29,15 @@ export function activeItemInstanceStats(
     for (const [stat, value] of Object.entries(lootQualityBonuses(item, instance)))
       active[stat] = (active[stat] ?? 0) + value;
   }
+  // Honing (progression/honing.ts): the copy's own +1-per-rank primary-stat
+  // line, a separate channel from rolled.stats, summed on top here so every
+  // consumer of the active projection (recalcPlayerStats, the tooltip bonus
+  // lines, compare, auto-equip) reads it without knowing the field.
+  if (instance?.honing) {
+    active = { ...active };
+    for (const [stat, value] of Object.entries(instance.honing.stats)) {
+      if (typeof value === 'number' && value > 0) active[stat] = (active[stat] ?? 0) + value;
+    }
+  }
   return active;
 }

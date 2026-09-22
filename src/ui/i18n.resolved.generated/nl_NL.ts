@@ -248,6 +248,22 @@ export const nl_NL: EnTranslations = {
       "needCap": "Je moet op het levelplafond zitten om te prestigen.",
       "needXp": "meer levenslange XP om te prestigen"
     },
+    "honing": {
+      "title": "Honing",
+      "unspent": "Unspent Virtual Levels",
+      "item": "Item",
+      "stat": "Stat",
+      "cost": "Cost",
+      "chance": "Chance",
+      "action": "Hone",
+      "rank": "Honed +{rank}",
+      "maxed": "Fully honed",
+      "levels": "{count} virtual levels",
+      "nothingWorn": "Nothing worn",
+      "needCap": "Reach the level cap to hone gear.",
+      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
+      "hintReset": "A failed attempt also strips every rank from the item."
+    },
     "settings": {
       "showOverflowXp": "Overschot-XP tonen",
       "weather": "Weereffecten"
@@ -3622,6 +3638,7 @@ export const nl_NL: EnTranslations = {
       "enchantedFallback": "Betoverd",
       "partyTradeWindow": "Je kunt dit voorwerp de komende {time} ruilen met spelers die deze buit deelden. Uitrusten beëindigt het ruilvenster.",
       "perfectedBadge": "Geperfectioneerd",
+      "honedBadge": "Honed +{rank}",
       "perfectingRank": "Perfecteren: rang {rank} van {ranks}",
       "materialSourceGatherer": "{count} × Verzameld door {name}",
       "materialSourceGathererSigned": "{count} × Verzameld door {name}, gesigneerd door {signer}",

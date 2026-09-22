@@ -74,6 +74,9 @@ export function publicInstanceView(instance: ItemInstancePayload): ItemInstanceP
   }
   if (instance.name !== undefined) pub.name = instance.name;
   if (instance.perfected === true) pub.perfected = instance.perfected;
+  if (instance.honing !== undefined) {
+    pub.honing = { ...instance.honing, stats: { ...instance.honing.stats } };
+  }
   // Guard on the validated clone, not the source: a present-but-malformed
   // descriptor must not materialize `lootQuality: undefined` as an own key,
   // since itemInstancePayloadsEqual compares every present key and the

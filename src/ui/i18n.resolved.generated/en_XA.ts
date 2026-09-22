@@ -248,6 +248,22 @@ export const en_XA: EnTranslations = {
       "needCap": "[Ýóú ɱúšţ ƀé áţ ţĥé ļéʋéļ çáþ ţó þŕéšţíĝé.]",
       "needXp": "[ɱóŕé ļíƒéţíɱé ẊÞ ţó þŕéšţíĝé]"
     },
+    "honing": {
+      "title": "[Ĥóñíñĝ]",
+      "unspent": "[Úñšþéñţ Ʋíŕţúáļ Ļéʋéļš]",
+      "item": "[Íţéɱ]",
+      "stat": "[Šţáţ]",
+      "cost": "[Çóšţ]",
+      "chance": "[Çĥáñçé]",
+      "action": "[Ĥóñé]",
+      "rank": "[Ĥóñéð +{rank}]",
+      "maxed": "[Ƒúļļý ĥóñéð]",
+      "levels": "[{count} ʋíŕţúáļ ļéʋéļš]",
+      "nothingWorn": "[Ñóţĥíñĝ ŵóŕñ]",
+      "needCap": "[Ŕéáçĥ ţĥé ļéʋéļ çáþ ţó ĥóñé ĝéáŕ.]",
+      "hint": "[Éáçĥ ŕáñķ áððš +1 ţó ţĥé çĥóšéñ šţáţ. Ĥóñíñĝ ƀíñðš ţĥé íţéɱ ţó ýóú, áñð á ƒáíļéð áţţéɱþţ šţíļļ šþéñðš ţĥé ļéʋéļš áñð ĝóļð.]",
+      "hintReset": "[Á ƒáíļéð áţţéɱþţ áļšó šţŕíþš éʋéŕý ŕáñķ ƒŕóɱ ţĥé íţéɱ.]"
+    },
     "settings": {
       "showOverflowXp": "[Šĥóŵ Óʋéŕƒļóŵ ẊÞ]",
       "weather": "[Ŵéáţĥéŕ Éƒƒéçţš]"
@@ -3622,6 +3638,7 @@ export const en_XA: EnTranslations = {
       "enchantedFallback": "[Éñçĥáñţéð]",
       "partyTradeWindow": "[Ýóú ɱáý ţŕáðé ţĥíš íţéɱ ţó þļáýéŕš ŵĥó šĥáŕéð íţš ðŕóþ ƒóŕ ţĥé ñéẋţ {time}. Éɋúíþþíñĝ íţ éñðš ţĥé ţŕáðé ŵíñðóŵ.]",
       "perfectedBadge": "[Þéŕƒéçţéð]",
+      "honedBadge": "[Ĥóñéð +{rank}]",
       "perfectingRank": "[Þéŕƒéçţíñĝ: ŕáñķ {rank} óƒ {ranks}]",
       "materialSourceGatherer": "[{count} × Çóļļéçţéð ƀý {name}]",
       "materialSourceGathererSigned": "[{count} × Çóļļéçţéð ƀý {name}, šíĝñéð ƀý {signer}]",
