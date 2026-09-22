@@ -11,13 +11,14 @@ import {
   HONING_MAX_RANK,
   HONING_MIN_CHANCE,
   HONING_STATS,
+  type HoningStat,
   honingChance,
   honingCost,
   honingGlowTier,
   isHoningStat,
   unspentVirtualLevels,
 } from '../src/sim/progression/honing_policy';
-import { MAX_LEVEL, xpToReachLevel } from '../src/sim/types';
+import { type ItemInstancePayload, MAX_LEVEL, xpToReachLevel } from '../src/sim/types';
 
 describe('honingCost', () => {
   it('burns rank + 1 virtual levels and a quadratic fee', () => {
@@ -97,5 +98,15 @@ describe('isHoningStat', () => {
     expect(isHoningStat('critRating')).toBe(false);
     expect(isHoningStat(1)).toBe(false);
     expect(isHoningStat(undefined)).toBe(false);
+  });
+});
+
+describe('the payload stat union', () => {
+  it('types.ts inlines exactly HONING_STATS (a content -> sim import cycle keeps it inline)', () => {
+    const stats: Partial<Record<HoningStat, number>> = {};
+    // Compile-time pin: a stat missing from the inlined union would fail to assign.
+    const record: NonNullable<ItemInstancePayload['honing']> = { rank: 0, stats };
+    for (const stat of HONING_STATS) record.stats[stat] = 1;
+    expect(Object.keys(record.stats).sort()).toEqual([...HONING_STATS].sort());
   });
 });

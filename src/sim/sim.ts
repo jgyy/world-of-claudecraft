@@ -615,7 +615,7 @@ import {
   gainCraftSkill,
   normalizeCraftSkills,
 } from './professions/wheel';
-import { resolveHoningAttempt } from './progression/honing';
+import { loadedVirtualLevelsSpent, resolveHoningAttempt } from './progression/honing';
 import type { HoningStat } from './progression/honing_policy';
 import {
   applyTalentAllocation,
@@ -3040,7 +3040,7 @@ export class Sim {
       );
       meta.honorArenaDaily = honorMod.normalizeHonorDailyState(s.honorArenaDaily);
       meta.prestigeRank = s.prestigeRank ?? 0;
-      meta.virtualLevelsSpent = Math.max(0, Math.floor(s.virtualLevelsSpent ?? 0));
+      meta.virtualLevelsSpent = loadedVirtualLevelsSpent(s.virtualLevelsSpent);
       meta.restedXp = Math.max(0, s.restedXp ?? 0);
       // `s.professions` is the legacy pre-rename field (#1119); `s.gatheringProficiency`
       // is the current one. Prefer the current field, fall back to the legacy one so

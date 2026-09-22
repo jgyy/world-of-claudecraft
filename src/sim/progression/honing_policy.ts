@@ -35,8 +35,9 @@ export const HONING_COPPER_BASE = 5_000;
 
 /** Success chance for the first rank, the step it loses per rank already on
  *  the piece, and the floor it never falls under. Rank 1 always lands (the
- *  first honing is a sure thing, so the sink has an on-ramp); rank 10 sits at
- *  the floor once the step has eaten the rest. */
+ *  first honing is a sure thing, so the sink has an on-ramp); the tenth
+ *  attempt sits at 28%, so the floor is headroom for a steeper retune, not a
+ *  value the shipped ladder reaches. */
 export const HONING_BASE_CHANCE = 1;
 export const HONING_CHANCE_STEP = 0.08;
 export const HONING_MIN_CHANCE = 0.2;

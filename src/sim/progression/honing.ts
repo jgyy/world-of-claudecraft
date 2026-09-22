@@ -62,6 +62,13 @@ export interface HoningInfo {
   stats: Partial<Record<HoningStat, number>>;
 }
 
+/** The persisted ledger's load bound: a finite, non-negative integer, else 0
+ *  (a NaN ledger would make the pool gate pass forever). */
+export function loadedVirtualLevelsSpent(value: unknown): number {
+  const n = Number(value ?? 0);
+  return Number.isFinite(n) ? Math.max(0, Math.floor(n)) : 0;
+}
+
 export function honingRankOf(instance: { honing?: HoningRecord } | undefined): number {
   const rank = instance?.honing?.rank;
   return typeof rank === 'number' && Number.isFinite(rank) ? Math.max(0, Math.floor(rank)) : 0;
@@ -115,7 +122,9 @@ export function honingInfoFor(
  *   7. not enough gold
  * Then: spend both, bind on the first attempt, THE ONE DRAW, and either
  * write the rank (+1 stat) or, on a miss, keep the piece (or reset it whole
- * when HONING_FAIL_RESETS). Every resolved attempt re-bakes the wearer's
+ * when `policy.failResets`, which defaults to HONING_FAIL_RESETS; the Sim
+ * delegate never passes it, the parameter exists so the shipped-off reset arm
+ * stays tested). Every resolved attempt re-bakes the wearer's
  * derived stats (the worn-mutation recipe: recalcPlayerStats is also the one
  * site the peer eqi mirror is rebuilt) and bumps wireRev so the owner's
  * heavy self mirrors re-diff. Returns true only on a landed rank.

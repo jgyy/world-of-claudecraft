@@ -74,6 +74,11 @@ export function publicInstanceView(instance: ItemInstancePayload): ItemInstanceP
   }
   if (instance.name !== undefined) pub.name = instance.name;
   if (instance.perfected === true) pub.perfected = instance.perfected;
+  // The honing record (progression/honing.ts) JOINS the allowlist like
+  // `name` did: it is what a peer's glow tier and inspect badge are built
+  // from, and it carries no bind state (the bind itself stays private; a
+  // honed copy is bound on its first attempt, so it never reaches a market
+  // row anyway). Deep-copied, never aliased.
   if (instance.honing !== undefined) {
     pub.honing = { ...instance.honing, stats: { ...instance.honing.stats } };
   }

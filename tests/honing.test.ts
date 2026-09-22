@@ -12,7 +12,12 @@ import { sanitizeItemInstancePayloadOnLoad } from '../src/sim/item_instance_load
 import { activeItemInstanceStats } from '../src/sim/item_instance_stats';
 import { publicInstanceView } from '../src/sim/item_instance_transfer';
 import { enchantedPayloadFor, replacedEnchantPayloadFor } from '../src/sim/professions/enchanting';
-import { honingInfoFrom, honingRankOf, resolveHoningAttempt } from '../src/sim/progression/honing';
+import {
+  honingInfoFrom,
+  honingRankOf,
+  loadedVirtualLevelsSpent,
+  resolveHoningAttempt,
+} from '../src/sim/progression/honing';
 import {
   HONING_MAX_RANK,
   honingChance,
@@ -455,5 +460,31 @@ describe('the record survives every other payload writer', () => {
     const events = sim.drainEvents();
     expect(texts(events)).toEqual([`The honing fails and ${ITEMS[SWORD].name} loses every hone.`]);
     expect(honedEvents(events)[0]).toMatchObject({ rank: 0, landed: false, spent: 6 });
+  });
+});
+
+describe('the ledger load bound', () => {
+  it('reads a finite non-negative integer and nothing else', () => {
+    expect(loadedVirtualLevelsSpent(undefined)).toBe(0);
+    expect(loadedVirtualLevelsSpent(7)).toBe(7);
+    expect(loadedVirtualLevelsSpent(7.9)).toBe(7);
+    expect(loadedVirtualLevelsSpent(-3)).toBe(0);
+    expect(loadedVirtualLevelsSpent(Number.NaN)).toBe(0);
+    expect(loadedVirtualLevelsSpent('lots')).toBe(0);
+    expect(loadedVirtualLevelsSpent(Number.POSITIVE_INFINITY)).toBe(0);
+  });
+
+  it('a corrupt persisted ledger loads as zero and never unlocks the pool gate', () => {
+    const { sim, pid } = capped(61);
+    const state = sim.serializeCharacter(pid);
+    if (!state) throw new Error('no state');
+    (state as { virtualLevelsSpent?: unknown }).virtualLevelsSpent = 'NaN';
+    const fresh = new Sim({ seed: 61, playerClass: 'warrior', noPlayer: true });
+    const loadedPid = fresh.addPlayer('warrior', 'Corrupt', { state });
+    const meta = fresh.players.get(loadedPid) as PlayerMeta;
+    expect(meta.virtualLevelsSpent).toBe(0);
+    meta.lifetimeXp = xpToReachLevel(MAX_LEVEL);
+    expect(fresh.honeItem('mainhand', 'str', loadedPid)).toBe(false);
+    expect(texts(fresh.drainEvents())).toContain('You need 1 unspent virtual levels to hone that.');
   });
 });
