@@ -1373,6 +1373,8 @@ const ACCEPTED_POLISH_V2_METADATA_PATH = path.join(REPO_ROOT, POLISH_SEAL_PATH);
 // CPU-hygiene renderer leaf and the druid Cat Form renderer leaf compose in
 // one tree. No capture was retaken.
 const ACCEPTED_POLISH_V2_METADATA_SHA256 =
+  // Re-minted for honing (PR #4160): the renderer leaf gained the honed-gear
+  // glow wiring beside the regalia motes. No capture was retaken.
   // Re-minted for the Frame Rate Limit: the renderer leaf gained the chosen-cadence feeds (frame load readings, governor signals). No capture was retaken.
   // Re-minted for the Eastbrook handoff merge with release/v0.43.0: the merged renderer leaf and the moved NPC layout match neither parent. No capture was retaken.
   // Re-minted for the v0.43.0 batch base merge (ossbrain-release/v0.43.0 taking
@@ -1383,7 +1385,7 @@ const ACCEPTED_POLISH_V2_METADATA_SHA256 =
   // plateau-aware ground cues over the release's CPU-hygiene and Cat Form
   // leaves) matches neither parent. No capture was retaken.
   // Re-minted for the devalue audit floor: pnpm-lock.yaml moved (devalue 5.8.1 to 5.9.4), no renderer input changed. No capture was retaken.
-  'd8d1ff3e12d29df640618feb3c4b4fcbc77eb65b6ae9224620f9977d33230778';
+  'ee82ae46efb86990bbcb6e0dfdd6d5c9d6df9472aba48ea50106510ad4455fe5';
 const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
   // Re-minted for the Frame Rate Limit: the renderer leaf gained the chosen-cadence feeds (frame load readings, governor signals). No capture was retaken.
   // Re-minted for the Eastbrook handoff merge with release/v0.43.0: the merged renderer leaf and the moved NPC layout match neither parent. No capture was retaken.
@@ -1395,7 +1397,9 @@ const ACCEPTED_POLISH_V2_COMPOSITE_PROVENANCE =
   // plateau-aware ground cues over the release's CPU-hygiene and Cat Form
   // leaves) matches neither parent. No capture was retaken.
   // Re-minted for the devalue audit floor: pnpm-lock.yaml moved (devalue 5.8.1 to 5.9.4), no renderer input changed. No capture was retaken.
-  'e651995fbf1ac8413176d75b35b5da91b9a241918ea183430642a9c6b51d3fd5';
+  // Re-minted for honing (PR #4160): the renderer leaf gained the honed-gear
+  // glow wiring beside the regalia motes. No capture was retaken.
+  'f4035ec499321dec2fc83fe4b94d112298eb6b0aedc38e5e1a07c602c3804e9c';
 const ACCEPTED_POLISH_V2_METADATA = readJsonFile<CaptureMetadata>(ACCEPTED_POLISH_V2_METADATA_PATH);
 const ACCEPTED_POLISH_V2_PROVENANCE = ACCEPTED_POLISH_V2_METADATA.polishProvenance;
 const ACCEPTED_POLISH_V2_TOWN_CONTRACT = ACCEPTED_POLISH_V2_METADATA.records[0]?.townContract;
@@ -2772,7 +2776,9 @@ describe('Eastbrook polish performance and contact evidence', () => {
       // capture was retaken.
       // devalue audit floor: recomputed LAST again over the re-swept evidence. No
       // capture was retaken.
-    ).toBe('7c84c7c53ca7d33345e15966eda0f4e73b8c6cfdba707b4f26aa04db5fe37065');
+      // honing (PR #4160): recomputed LAST again over the re-swept evidence. No
+      // capture was retaken.
+    ).toBe('3b12f12c4f71f51611929e3a48d55df373e630f7fcae957e1e2f80db7d8b96fc');
   });
 
   it('binds every historical after record to its accepted source and asset provenance', () => {

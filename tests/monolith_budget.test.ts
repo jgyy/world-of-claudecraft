@@ -932,8 +932,8 @@ const MONOLITHS: MonolithRow[] = [
     // (the boot-time sheet upload loop and its comment went, the kit host
     // gained its assets line). Exact count.
     // Lowered 12789 -> 12779 at the honing landing: the visualPoolKeyFor
-    // forwarder retired (characters/visual_pool.ts is called directly).
-    ceiling: 12779,
+    // forwarder's rationale comment moved onto characters/visual_pool.ts.
+    ceiling: 12785,
     seam: 'a new src/render/<thing>.ts module the renderer calls (src/render/CLAUDE.md)',
   },
   {

@@ -1136,6 +1136,7 @@ describe('static combat-rating/progression scalars ride the delta gate', () => {
     'lxp',
     'rxp',
     'prk',
+    'vls',
     'copper',
     'ddiff',
   ] as const;
@@ -5303,6 +5304,7 @@ const ALL_DELTA_KEYS = [
   'trade',
   'tslot',
   'vault',
+  'vls',
   'weapon',
   'xp',
 ] as const;
@@ -6560,8 +6562,10 @@ describe('delta-key contract pins (anti-drift)', () => {
     // full-view key ggoal (its own leaf, gathering_goal_wire.ts, not folded
     // into the gprof/tfocus/tslot/hpref cluster), for 94. The account ledger
     // (src/sim/account_ledger.ts) adds the heavy self key acct, for 95.
-    expect(ALL_DELTA_KEYS).toHaveLength(95);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(95);
+    // Honing (src/sim/progression/honing.ts) adds the self scalar vls (the
+    // virtual-level ledger, server/self_scalar_wire.ts), for 96.
+    expect(ALL_DELTA_KEYS).toHaveLength(96);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(96);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -6724,7 +6728,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     // sibling, likewise inside the recursive scrape) makes 93.
     // The candidate self in-combat key cbt brings the combined inventory to 94;
     // the account ledger's acct key (server/deeds_wire.ts) makes it 95.
-    expect(scraped.size).toBe(95);
+    expect(scraped.size).toBe(96);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 

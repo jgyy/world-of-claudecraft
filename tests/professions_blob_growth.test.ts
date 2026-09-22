@@ -178,6 +178,7 @@ const NON_PROFESSIONS_BLOB_FIELDS = [
   'lifetimeHonor',
   'honorArenaDaily',
   'prestigeRank',
+  'virtualLevelsSpent',
   'unlockedMilestones',
   'restedXp',
   'totalPlayedSeconds',
@@ -2319,7 +2320,14 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     // 21 characters as `"<id>",` in the sorted array (26 + 24 bytes). MEASURED,
     // not inferred, same as every other row this equation names.
     expect(counterfactualBytes - 156144).toBe(
-      Object.values(fixtureDelta).reduce((sum, value) => sum + value, 0) + 183 + 1548 + 50 + 49,
+      // Plus 23 for the honing ledger (`"virtualLevelsSpent":0,`, src/sim/
+      // progression/honing.ts), always written by serializeCharacter. MEASURED.
+      Object.values(fixtureDelta).reduce((sum, value) => sum + value, 0) +
+        183 +
+        1548 +
+        50 +
+        49 +
+        23,
     );
     const forgeBaseline = {
       questsDone: 4606,
@@ -2354,7 +2362,8 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     expect(
       Buffer.byteLength(JSON.stringify(preReleaseCounterfactual), 'utf8'),
       'field_kit and the Bramblehide release content removed, must reproduce the recorded pre-field-kit Crucible+hammer baseline',
-    ).toBe(209773);
+      // 209773 + 23: the honing ledger (`"virtualLevelsSpent":0,`) is always written.
+    ).toBe(209796);
     // Removing ONLY field_kit (the Bramblehide release content and the two
     // dev-mount reins items still present, current staged tree) reproduces
     // 209,524 plus the 1,548-byte Bramblehide delta plus the 49-byte
@@ -2365,7 +2374,8 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     expect(
       counterfactualBytes,
       'field_kit removed, must reproduce the current staged Crucible+hammer+Bramblehide+dev-mount baseline',
-    ).toBe(211370);
+      // 211370 + 23: the honing ledger is always written (see the counterfactual above).
+    ).toBe(211393);
     const priorContent = withoutCrucibleContent(s2);
     const contentDelta = Object.fromEntries(
       (['knownRecipes', 'deedStats', 'reliquary'] as const).map((key) => [
@@ -2415,8 +2425,16 @@ describe('the whole-character gear-heavy maximal blob (Phase 18 U-MEASURE)', () 
     // the zero-valued Spirit keys the old normaliser wrote (-8). Re-based per
     // the standing rule (floor measurement minus 380, edge measurement plus
     // one, band width unchanged at 381): 211,002..211,383.
-    expect(bytes, reMint).toBeGreaterThan(211002);
-    expect(bytes, reMint).toBeLessThan(211383);
+    //
+    // RE-BASED 2026-09-22 for honing (PR 4160): 211,405 bytes, +23 over the
+    // 211,382 above. What moved it: serializeCharacter always writes the
+    // honing ledger (`"virtualLevelsSpent":0,`, src/sim/progression/honing.ts),
+    // 23 bytes on every character, honed or not; nothing else in the maximal
+    // fixture changed (the counterfactual pins above carry the same +23).
+    // Re-based per the standing rule (floor measurement minus 380, edge
+    // measurement plus one, band width unchanged at 381): 211,025..211,406.
+    expect(bytes, reMint).toBeGreaterThan(211025);
+    expect(bytes, reMint).toBeLessThan(211406);
 
     // The Crucible database review approved 229,376 bytes (224 KiB), the first
     // 32-KiB step above the corrected 209,261-byte pre-field-kit fixture it was

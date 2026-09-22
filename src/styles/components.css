@@ -2347,7 +2347,7 @@
     min-width: 0;
     flex: 1 1 160px;
   }
-  .cp-honing .hud-select {
+  .cp-honing label > select {
     flex: 1 1 auto;
     min-width: 0;
   }

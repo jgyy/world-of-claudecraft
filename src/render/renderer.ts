@@ -5057,6 +5057,12 @@ export class Renderer {
     };
   }
 
+  /** Pure delegation, pinned by tests/zone_prewarm_groups.test.ts: the key rule
+   *  and its rationale live on characterVisualPoolKey (characters/visual_pool.ts). */
+  private visualPoolKeyFor(e: Entity): string | null {
+    return characterVisualPoolKey(e);
+  }
+
   private storePooledObject(key: string, object: PooledObjectView): void {
     // Unlike the character-visual pool, an overflow view has nothing to .dispose(): its
     // geometry/materials are shared per-item-template references (owned elsewhere), so
@@ -8052,7 +8058,7 @@ export class Renderer {
         this.viewCreateRetry.markFailed(e.id, 'view', performance.now());
         return;
       }
-      visualPoolKey = characterVisualPoolKey(e);
+      visualPoolKey = this.visualPoolKeyFor(e);
       visual = visualPoolKey ? this.pooledVisuals.take(visualPoolKey, e.color) : null;
       if (!visual) {
         // Pool MISS: build a fresh visual but KEEP its pool key so removeView returns
