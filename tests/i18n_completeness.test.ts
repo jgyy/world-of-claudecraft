@@ -447,8 +447,6 @@ describe('i18n CLDR pluralization', () => {
       // The signpost guild board's live count line (guild board categories).
       'guildBoardShown',
       'guildMembers',
-      // The Honing card's cost line (honing_sheet_view.ts).
-      'honingLevels',
       'playersMatching',
       'playersOnline',
       'playtimeDays',

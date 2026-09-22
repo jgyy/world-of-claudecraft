@@ -8,7 +8,6 @@
 import { ITEMS } from '../sim/data';
 import { type HoningInfo, honingInfoFrom, honingRankOf } from '../sim/progression/honing';
 import {
-  HONING_FAIL_RESETS,
   HONING_STATS,
   type HoningStat,
   unspentVirtualLevels,
@@ -17,7 +16,7 @@ import { ALL_EQUIP_SLOTS, type EquipSlot, MAX_LEVEL } from '../sim/types';
 import type { IWorld } from '../world_api';
 import { itemDisplayName } from './entity_i18n';
 import { esc } from './esc';
-import { formatMoney, formatNumber, type TranslationKey, t, tPlural } from './i18n';
+import { formatMoney, formatNumber, type TranslationKey, t } from './i18n';
 
 /** The player's current picks, owned by the character window across repaints
  *  (the sheet rebuilds its innerHTML on every render). A missing slot means
@@ -103,7 +102,7 @@ export function honingSheetHtml(model: HoningSheetModel): string {
   }
   const slotOptions =
     model.slots.length === 0
-      ? `<option value="">${esc(t('game.honing.nothingWorn'))}</option>`
+      ? ''
       : model.slots
           .map(
             (s) =>
@@ -119,10 +118,9 @@ export function honingSheetHtml(model: HoningSheetModel): string {
   if (model.info) {
     const rankLine = model.info.maxed
       ? `<b class="cp-honing-rank">${esc(t('game.honing.maxed'))}</b>`
-      : `<span class="cp-hint">${esc(t('game.honing.cost'))}: ${esc(tPlural('hudChrome.plurals.honingLevels', model.info.cost.levels, { count: whole(model.info.cost.levels) }))}, ${formatMoney(model.info.cost.copper)}</span>` +
-        `<span class="cp-hint">${esc(t('game.honing.chance'))}: ${formatNumber(model.info.chance, { style: 'percent', maximumFractionDigits: 0 })}</span>`;
+      : `<span class="cp-hint">${esc(t('game.honing.costLine', { count: whole(model.info.cost.levels), money: formatMoney(model.info.cost.copper), chance: formatNumber(model.info.chance, { style: 'percent', maximumFractionDigits: 0 }) }))}</span>`;
     html += `<div class="cp-actions cp-honing-row">${rankLine}<button type="button" class="ui-btn ui-btn--gold" data-act="hone"${model.canHone ? '' : ' disabled'}>${esc(t('game.honing.action'))}</button></div>`;
   }
-  html += `<span class="cp-hint">${esc(t('game.honing.hint'))}${HONING_FAIL_RESETS ? ` ${esc(t('game.honing.hintReset'))}` : ''}</span></div>`;
+  html += `<span class="cp-hint">${esc(t('game.honing.hint'))}</span></div>`;
   return html;
 }

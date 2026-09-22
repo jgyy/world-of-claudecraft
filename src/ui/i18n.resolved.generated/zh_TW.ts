@@ -253,15 +253,12 @@ export const zh_TW: EnTranslations = {
       "unspent": "未使用的虛擬等級",
       "item": "物品",
       "stat": "屬性",
-      "cost": "費用",
-      "chance": "成功率",
       "action": "淬鍊",
       "rank": "淬鍊 +{rank}",
       "maxed": "已淬鍊至滿級",
-      "nothingWorn": "未裝備任何物品",
       "needCap": "達到等級上限後才能淬鍊裝備。",
       "hint": "每一級為所選屬性 +1。淬鍊會將物品綁定給你，失敗的嘗試同樣會消耗等級與金幣。",
-      "hintReset": "失敗的嘗試還會清除物品上的全部淬鍊等級。"
+      "costLine": "費用：{count} 個虛擬等級與 {money}。成功率：{chance}"
     },
     "settings": {
       "showOverflowXp": "顯示溢出經驗",
@@ -2410,12 +2407,6 @@ export const zh_TW: EnTranslations = {
         "few": "顯示 {count} 個公會",
         "many": "顯示 {count} 個公會",
         "other": "顯示 {count} 個公會"
-      },
-      "honingLevels": {
-        "one": "{count} 個虛擬等級",
-        "few": "{count} 個虛擬等級",
-        "many": "{count} 個虛擬等級",
-        "other": "{count} 個虛擬等級"
       },
       "commissionMasterworks": {
         "one": "{count}件傑作",

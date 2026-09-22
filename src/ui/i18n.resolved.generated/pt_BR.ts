@@ -253,15 +253,12 @@ export const pt_BR: EnTranslations = {
       "unspent": "Unspent Virtual Levels",
       "item": "Item",
       "stat": "Stat",
-      "cost": "Cost",
-      "chance": "Chance",
       "action": "Hone",
       "rank": "Honed +{rank}",
       "maxed": "Fully honed",
-      "nothingWorn": "Nothing worn",
       "needCap": "Reach the level cap to hone gear.",
       "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
-      "hintReset": "A failed attempt also strips every rank from the item."
+      "costLine": "Cost: {count} in virtual levels and {money}. Chance: {chance}"
     },
     "settings": {
       "showOverflowXp": "Mostrar EXP excedente",
@@ -2410,12 +2407,6 @@ export const pt_BR: EnTranslations = {
         "few": "{count} guildas mostradas",
         "many": "{count} guildas mostradas",
         "other": "{count} guildas mostradas"
-      },
-      "honingLevels": {
-        "one": "{count} virtual level",
-        "few": "{count} virtual levels",
-        "many": "{count} virtual levels",
-        "other": "{count} virtual levels"
       },
       "commissionMasterworks": {
         "one": "{count} obra-prima",

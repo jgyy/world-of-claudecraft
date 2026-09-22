@@ -1,25 +1,13 @@
-// The honed-gear world-space identity (src/sim/progression/honing.ts): which
+// The honed-gear world-space identity (src/sim/progression/honing.ts): the
 // glow tier a worn set earns, its palette, and how strongly to emit it at a
-// viewer distance. The Lineage-style "wow" for highly honed gear: a piece
-// starts to shine at rank 4, brightens at 7, and blazes at the cap
-// (HONING_GLOW_RANKS in the sim's honing_policy.ts, the ONE source of the
-// thresholds; this module only maps a rank to a tier through it).
+// viewer distance. Rank thresholds live in the sim's HONING_GLOW_RANKS.
 //
-// THE PREDICATE IS A PURE FUNCTION OF THE PEER-WIRE `honing` FIELD ONLY: the
-// record deliberately JOINS the eqi allowlist (server/equipped_instance_wire.ts
-// and publicInstanceView), so self, peer, offline, and online all compute the
-// same tier from the same bytes (the legendary_regalia_core host-parity
-// doctrine). Nothing else on the payload is read.
-//
-// The emit decision reuses the regalia shed verbatim (legendaryRegaliaEmitDt:
-// the fixed CHARACTER_LOD_RANGE_SQ anchor, eased, quantized, floored, never 0,
-// suppressed under the viewer's prefers-reduced-motion), so the two worn-gear
-// identities fade together and the fairness contract is stated once. The
-// renderer gates BOTH at the medium effects tier by the STATIC preset stamp,
-// never the FPS governor; a honed wearer under the tier is simply unlit,
-// which hides nothing a player acts on.
-//
-// Three/DOM-free and deterministic (a registered RENDER_PURE_CORE).
+// THE PREDICATE READS ONLY THE PEER-WIRE `honing` FIELD (it joins the eqi
+// allowlist), so self, peer, offline, and online compute the same tier. The
+// emit decision reuses the regalia shed verbatim (legendaryRegaliaEmitDt:
+// fixed anchor, floored, reduced-motion suppressed) and the renderer gates
+// both at the medium effects tier by the STATIC preset stamp, never the FPS
+// governor. Three/DOM-free (a registered RENDER_PURE_CORE).
 
 import { honingGlowTier } from '../sim/progression/honing_policy';
 import type { ItemInstancePayload } from '../sim/types';

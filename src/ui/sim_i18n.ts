@@ -243,7 +243,6 @@ const baseEnTable = {
   'error.honeNeedMoney': 'You need {money} to hone that.',
   'log.honeBind': 'Honing begins: {item} is now bound to you.',
   'log.honeLanded': 'Honing: {item} is now honed +{rank}.',
-  'log.honeFailReset': 'The honing fails and {item} loses every hone.',
   'log.honeFail': 'The honing fails; the virtual levels and gold are spent.',
   // The orange promotion's deny ladder (Masterwrought phase 13,
   // src/sim/professions/perfecting.ts: resolvePerfectingAttempt's internal
@@ -16862,10 +16861,6 @@ const RULES: Rule[] = [
   {
     re: /^Honing: (.+) is now honed \+(\d+)\.$/,
     build: (m) => tSim('log.honeLanded', { item: locItem(m[1]), rank: m[2] }),
-  },
-  {
-    re: /^The honing fails and (.+) loses every hone\.$/,
-    build: (m) => tSim('log.honeFailReset', { item: locItem(m[1]) }),
   },
   {
     re: /^You need (\d+) unspent virtual levels to hone that\.$/,

@@ -253,15 +253,12 @@ export const zh_CN: EnTranslations = {
       "unspent": "未使用的虚拟等级",
       "item": "物品",
       "stat": "属性",
-      "cost": "费用",
-      "chance": "成功率",
       "action": "淬炼",
       "rank": "淬炼 +{rank}",
       "maxed": "已淬炼至满级",
-      "nothingWorn": "未装备任何物品",
       "needCap": "达到等级上限后才能淬炼装备。",
       "hint": "每一级为所选属性 +1。淬炼会将物品绑定给你，失败的尝试同样会消耗等级和金币。",
-      "hintReset": "失败的尝试还会清除物品上的全部淬炼等级。"
+      "costLine": "费用：{count} 个虚拟等级和 {money}。成功率：{chance}"
     },
     "settings": {
       "showOverflowXp": "显示溢出经验",
@@ -2410,12 +2407,6 @@ export const zh_CN: EnTranslations = {
         "few": "显示 {count} 个公会",
         "many": "显示 {count} 个公会",
         "other": "显示 {count} 个公会"
-      },
-      "honingLevels": {
-        "one": "{count} 个虚拟等级",
-        "few": "{count} 个虚拟等级",
-        "many": "{count} 个虚拟等级",
-        "other": "{count} 个虚拟等级"
       },
       "commissionMasterworks": {
         "one": "{count}件杰作",

@@ -1,19 +1,6 @@
 // Honing (virtual levels as an enchanting resource): the pure tuning leaf.
-//
-// Past the level cap a character keeps earning virtual levels off lifetime XP
-// (types.ts virtualLevel), but those levels never meant anything. Honing gives
-// them a use: a worn piece of gear can be honed, one rank at a time, and each
-// rank adds +1 to ONE primary stat the player chooses. Every attempt burns
-// virtual levels (progressively more per rank, the Rift essence-ladder idea)
-// plus a gold fee (the economy sink), and rolls against a success chance that
-// falls with every rank already on the piece (the "progressively lower"
-// option the request offered; the "reset on fail" option is the
-// HONING_FAIL_RESETS knob below, off by default so the default stays the
-// grindy, not the gambly, shape).
-//
-// This file holds NUMBERS and PURE FUNCTIONS only: no SimContext, no state.
-// progression/honing.ts owns the attempt itself. Pinned by
-// tests/honing_policy.test.ts.
+// Numbers and pure functions only; progression/honing.ts owns the attempt.
+// Pinned by tests/honing_policy.test.ts.
 import { MAX_LEVEL, virtualLevel } from '../types';
 
 /** The primary stats a honing rank may raise (CoreStats minus armor, which is
@@ -41,12 +28,6 @@ export const HONING_COPPER_BASE = 5_000;
 export const HONING_BASE_CHANCE = 1;
 export const HONING_CHANCE_STEP = 0.08;
 export const HONING_MIN_CHANCE = 0.2;
-
-/** Option 1 of the request ("failing enchant drops the item back to 0"):
- *  when true a failed roll clears every rank and its stats; when false (the
- *  default, option 2) a failed roll only spends the levels and the fee and
- *  the piece keeps what it had. Data, so a maintainer flips one literal. */
-export const HONING_FAIL_RESETS = false;
 
 /** Glow tier for the worn-gear VFX (src/render/honing_glow_core.ts): 0 is no
  *  glow; a piece starts to shine at rank 4, brightens at 7, and blazes at the

@@ -253,15 +253,12 @@ export const en_XA: EnTranslations = {
       "unspent": "[Úñšþéñţ Ʋíŕţúáļ Ļéʋéļš]",
       "item": "[Íţéɱ]",
       "stat": "[Šţáţ]",
-      "cost": "[Çóšţ]",
-      "chance": "[Çĥáñçé]",
       "action": "[Ĥóñé]",
       "rank": "[Ĥóñéð +{rank}]",
       "maxed": "[Ƒúļļý ĥóñéð]",
-      "nothingWorn": "[Ñóţĥíñĝ ŵóŕñ]",
       "needCap": "[Ŕéáçĥ ţĥé ļéʋéļ çáþ ţó ĥóñé ĝéáŕ.]",
       "hint": "[Éáçĥ ŕáñķ áððš +1 ţó ţĥé çĥóšéñ šţáţ. Ĥóñíñĝ ƀíñðš ţĥé íţéɱ ţó ýóú, áñð á ƒáíļéð áţţéɱþţ šţíļļ šþéñðš ţĥé ļéʋéļš áñð ĝóļð.]",
-      "hintReset": "[Á ƒáíļéð áţţéɱþţ áļšó šţŕíþš éʋéŕý ŕáñķ ƒŕóɱ ţĥé íţéɱ.]"
+      "costLine": "[Çóšţ: {count} íñ ʋíŕţúáļ ļéʋéļš áñð {money}. Çĥáñçé: {chance}]"
     },
     "settings": {
       "showOverflowXp": "[Šĥóŵ Óʋéŕƒļóŵ ẊÞ]",
@@ -2410,12 +2407,6 @@ export const en_XA: EnTranslations = {
         "few": "[{count} ĝúíļðš šĥóŵñ]",
         "many": "[{count} ĝúíļðš šĥóŵñ]",
         "other": "[{count} ĝúíļðš šĥóŵñ]"
-      },
-      "honingLevels": {
-        "one": "[{count} ʋíŕţúáļ ļéʋéļ]",
-        "few": "[{count} ʋíŕţúáļ ļéʋéļš]",
-        "many": "[{count} ʋíŕţúáļ ļéʋéļš]",
-        "other": "[{count} ʋíŕţúáļ ļéʋéļš]"
       },
       "commissionMasterworks": {
         "one": "[{count} ɱášţéŕŵóŕķ]",
