@@ -9074,6 +9074,56 @@ export const TARGETS = [
     },
   },
   {
+    key: 'char-sheet-honing',
+    label: 'Character sheet Progression tab: the Honing card',
+    when: [
+      'ui/honing_sheet_view',
+      'ui/honing_sheet_controller',
+      'sim/progression/honing',
+      'i18n.catalog/game',
+    ],
+    variants: [
+      { key: 'desktop', beforeLoad: seedLowGraphicsPreset },
+      { key: 'mobile', mobile: true, beforeLoad: seedLowGraphicsPreset },
+    ],
+    // A capped character with unspent virtual levels and a full purse, the
+    // worn weapon already honed twice (so the pick label and the tooltip
+    // badge have a rank to show), framed on the Progression tab. The honing
+    // call is guarded so the same recipe shoots the BEFORE tree.
+    async capture(page) {
+      await page.evaluate(`(async () => {
+        document.querySelector('#gpu-notice')?.remove();
+        document.querySelector('.camera-prompt-confirm')?.click();
+        const sim = window.__game?.sim;
+        if (!sim) return;
+        const types = await import('/src/sim/types.ts');
+        sim.setPlayerLevel(types.MAX_LEVEL);
+        sim.primary.lifetimeXp = types.xpToReachLevel(types.MAX_LEVEL + 8);
+        sim.primary.copper = 60 * 10000;
+        if (typeof sim.honeItem === 'function') {
+          sim.honeItem('mainhand', 'str');
+          sim.honeItem('mainhand', 'str');
+        }
+        sim.drainEvents();
+        window.__game?.hud?.toggleChar?.();
+      })()`);
+      const opened = await pollForSize(page, '#char-window');
+      if (!opened) throw new Error('char window did not open');
+      await page.evaluate(() => {
+        document.querySelector('#char-sidebar-tab-progression')?.click();
+      });
+      await wait(500);
+      await page.evaluate(() => {
+        const card =
+          document.querySelector('#char-window .cp-honing') ??
+          document.querySelector('#char-window .cp-actions');
+        card?.scrollIntoView({ block: 'center' });
+      });
+      await wait(300);
+      return { clip: '#char-window' };
+    },
+  },
+  {
     key: 'char-sheet-reliquary',
     label: 'Character sheet framed on the Reliquary progression row',
     when: ['ui/reliquary_sheet_view', 'ui/char_view', 'reliquary_phase22_closeout'],

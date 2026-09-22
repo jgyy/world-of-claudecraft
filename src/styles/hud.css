@@ -7126,6 +7126,11 @@
     color: var(--color-text-muted);
     font-size: 11px;
   }
+  /* The "Honed +N" badge (item_instance_tooltip.ts instanceBadgeLines), in
+     the honing accent the character sheet's rank readout shares. */
+  #tooltip .tt-honed {
+    color: var(--color-honing);
+  }
   #tooltip .tt-masterwork-seal,
   #tooltip .tt-makers-mark {
     display: flex;

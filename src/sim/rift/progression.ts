@@ -16,6 +16,7 @@ import { selectedInventorySlot } from '../item_copy_ref';
 import { isEligibleEnemyQualitySource, rollEnemyLootQuality } from '../loot/enemy_quality';
 import { createLootQuality, isEligibleLootQualityItem } from '../loot_quality/core';
 import { cloneLootQuality } from '../loot_quality/types';
+import { isValidHoningRecord } from '../progression/honing_record';
 import type { PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
 import type { Entity, ItemInstancePayload, PlayerClass, RiftTier } from '../types';
@@ -168,6 +169,12 @@ export function sanitizeRiftGearInstance(
     // The ring enchant (if any) rides the rebuild; its bonus is re-priced on
     // top of the ladder line by rebuildRolledStats below.
     ...(riftBandEnchant(itemId, input) && { enchant: input.enchant }),
+    // The honing record (progression/honing.ts) rides the rebuild VALIDATED
+    // and copied: it is its own additive channel (item_instance_stats.ts),
+    // never part of the rolled line rebuilt below, so a honed band keeps its
+    // ranks across every load and forge op.
+    ...(isValidHoningRecord(input.honing) &&
+      input.honing && { honing: { rank: input.honing.rank, stats: { ...input.honing.stats } } }),
     rolled: { quality: 'epic', stats: {} },
     rift: {
       sourceEventId: source.sourceEventId,

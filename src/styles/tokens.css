@@ -152,6 +152,9 @@
 
     --color-text-light: #f0ebd8;
     --color-text-muted: #998d6a;
+    /* The honing accent (src/sim/progression/honing.ts): the card's rank
+       readout and the item tooltip's "Honed +N" badge share it. */
+    --color-honing: #7fd4ff;
     /* Accent/gold for text on panel surfaces, and overlay text that floats
        over the 3D world. The theme system (src/ui/theme.ts) recomputes
        --color-accent/--color-gold per preset so they stay AA-readable on a

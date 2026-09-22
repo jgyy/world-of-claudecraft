@@ -3119,6 +3119,14 @@ export const hudChromeStrings = {
       many: '{count} guilds shown',
       other: '{count} guilds shown',
     },
+    // The Honing card's cost line (honing_sheet_view.ts): how many virtual
+    // levels the next rank burns ({count} pre-formatted).
+    honingLevels: {
+      one: '{count} virtual level',
+      few: '{count} virtual levels',
+      many: '{count} virtual levels',
+      other: '{count} virtual levels',
+    },
     // The commission board's crafter's-record counts (Masterwrought phase
     // 14): lifetime masterworks crafted and legendaries forged, off the
     // accepter's deed stat counters.

@@ -249,20 +249,19 @@ export const zh_TW: EnTranslations = {
       "needXp": "更多終身經驗才可威望晉升"
     },
     "honing": {
-      "title": "Honing",
-      "unspent": "Unspent Virtual Levels",
-      "item": "Item",
-      "stat": "Stat",
-      "cost": "Cost",
-      "chance": "Chance",
-      "action": "Hone",
-      "rank": "Honed +{rank}",
-      "maxed": "Fully honed",
-      "levels": "{count} virtual levels",
-      "nothingWorn": "Nothing worn",
-      "needCap": "Reach the level cap to hone gear.",
-      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
-      "hintReset": "A failed attempt also strips every rank from the item."
+      "title": "淬鍊",
+      "unspent": "未使用的虛擬等級",
+      "item": "物品",
+      "stat": "屬性",
+      "cost": "費用",
+      "chance": "成功率",
+      "action": "淬鍊",
+      "rank": "淬鍊 +{rank}",
+      "maxed": "已淬鍊至滿級",
+      "nothingWorn": "未裝備任何物品",
+      "needCap": "達到等級上限後才能淬鍊裝備。",
+      "hint": "每一級為所選屬性 +1。淬鍊會將物品綁定給你，失敗的嘗試同樣會消耗等級與金幣。",
+      "hintReset": "失敗的嘗試還會清除物品上的全部淬鍊等級。"
     },
     "settings": {
       "showOverflowXp": "顯示溢出經驗",
@@ -2412,6 +2411,12 @@ export const zh_TW: EnTranslations = {
         "many": "顯示 {count} 個公會",
         "other": "顯示 {count} 個公會"
       },
+      "honingLevels": {
+        "one": "{count} 個虛擬等級",
+        "few": "{count} 個虛擬等級",
+        "many": "{count} 個虛擬等級",
+        "other": "{count} 個虛擬等級"
+      },
       "commissionMasterworks": {
         "one": "{count}件傑作",
         "few": "{count}件傑作",
@@ -3638,7 +3643,7 @@ export const zh_TW: EnTranslations = {
       "enchantedFallback": "已附魔",
       "partyTradeWindow": "在接下來的{time}內，你可以將此物品交易給共同獲得該掉落的玩家。裝備後交易期限即告結束。",
       "perfectedBadge": "臻至完美",
-      "honedBadge": "Honed +{rank}",
+      "honedBadge": "淬鍊 +{rank}",
       "perfectingRank": "完美化：第{rank}階，共{ranks}階",
       "materialSourceGatherer": "{count} × 由{name}採集",
       "materialSourceGathererSigned": "{count} × 由{name}採集，由{signer}簽名",

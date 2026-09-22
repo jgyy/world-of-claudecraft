@@ -6,10 +6,12 @@
 // addPlayer, the load bound, the public projections, and determinism.
 import { describe, expect, it } from 'vitest';
 import { equippedInstanceWire } from '../server/equipped_instance_wire';
+import { ENCHANTS } from '../src/sim/content/enchants';
 import { ITEMS } from '../src/sim/data';
 import { sanitizeItemInstancePayloadOnLoad } from '../src/sim/item_instance_load';
 import { activeItemInstanceStats } from '../src/sim/item_instance_stats';
 import { publicInstanceView } from '../src/sim/item_instance_transfer';
+import { enchantedPayloadFor, replacedEnchantPayloadFor } from '../src/sim/professions/enchanting';
 import { honingInfoFrom, honingRankOf, resolveHoningAttempt } from '../src/sim/progression/honing';
 import {
   HONING_MAX_RANK,
@@ -18,6 +20,7 @@ import {
   unspentVirtualLevels,
 } from '../src/sim/progression/honing_policy';
 import { isValidHoningRecord } from '../src/sim/progression/honing_record';
+import { createRiftGearInstance, sanitizeRiftGearInstance } from '../src/sim/rift/progression';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
 import {
   cloneItemInstancePayload,
@@ -387,5 +390,70 @@ describe('persistence and projections', () => {
     expect(instance.rolled?.stats).toEqual({ str: 2, spellPower: 5 });
     expect(activeItemInstanceStats({ honing: { rank: 1, stats: { int: 1 } } })).toEqual({ int: 1 });
     expect(activeItemInstanceStats(undefined)).toBeUndefined();
+  });
+});
+
+describe('the record survives every other payload writer', () => {
+  it('rides the Rift load rebuild (a fresh payload minted from named inputs)', () => {
+    const band = createRiftGearInstance('survive', 'S', 'warrior', 1, 2);
+    band.instance.honing = { rank: 4, stats: { str: 3, sta: 1 } };
+    const clean = sanitizeRiftGearInstance(band.itemId, band.instance, 1);
+    expect(clean?.honing).toEqual({ rank: 4, stats: { str: 3, sta: 1 } });
+    expect(clean?.honing).not.toBe(band.instance.honing);
+    // and a corrupt record is dropped by the rebuild exactly as the load bound drops it
+    band.instance.honing = { rank: 2, stats: { str: 9 } };
+    expect(sanitizeRiftGearInstance(band.itemId, band.instance, 1)?.honing).toBeUndefined();
+  });
+
+  it('rides an enchant apply and an enchant replace untouched', () => {
+    const enchant = ENCHANTS.enchant_weapon_might;
+    const honed: ItemInstancePayload = { honing: { rank: 2, stats: { agi: 2 } } };
+    const enchanted = enchantedPayloadFor(honed, enchant);
+    expect(enchanted.enchant).toBe(enchant.id);
+    expect(enchanted.honing).toEqual({ rank: 2, stats: { agi: 2 } });
+    const replaced = replacedEnchantPayloadFor(enchanted, ENCHANTS.enchant_weapon_lastflame_zeal);
+    expect(replaced.honing).toEqual({ rank: 2, stats: { agi: 2 } });
+    // the fold reads both channels: the enchant's share plus the honing +2
+    expect(activeItemInstanceStats(replaced)?.agi).toBe(
+      2 + (ENCHANTS.enchant_weapon_lastflame_zeal.statBonus.agi ?? 0),
+    );
+  });
+
+  it('rides unequip to the bags and back, and the stats follow', () => {
+    const { sim, pid, meta, e } = capped(51, 20);
+    const base = e.stats.str;
+    withForcedRoll(sim, 0, () => {
+      sim.honeItem('mainhand', 'str');
+      sim.honeItem('mainhand', 'str');
+    });
+    expect(e.stats.str).toBe(base + 2);
+    expect(sim.unequipItem('mainhand', pid)).toBe(true);
+    expect(e.stats.str).toBe(base);
+    const bagged = meta.inventory.find((s) => s.itemId === SWORD);
+    expect(bagged?.instance?.honing).toEqual({ rank: 2, stats: { str: 2 } });
+    sim.equipItem(SWORD, pid);
+    expect(meta.equipmentInstance.mainhand?.honing).toEqual({ rank: 2, stats: { str: 2 } });
+    expect(e.stats.str).toBe(base + 2);
+  });
+
+  it('the reset option (HONING_FAIL_RESETS) strips every rank on a miss', () => {
+    const { sim, pid, meta, e } = capped(52, 20);
+    const base = e.stats.str;
+    withForcedRoll(sim, 0, () => {
+      sim.honeItem('mainhand', 'str');
+      sim.honeItem('mainhand', 'str');
+    });
+    sim.drainEvents();
+    let landed = true;
+    withForcedRoll(sim, 0.999, () => {
+      landed = resolveHoningAttempt(sim.ctx, pid, 'mainhand', 'str', { failResets: true });
+    });
+    expect(landed).toBe(false);
+    expect(meta.equipmentInstance.mainhand?.honing).toBeUndefined();
+    expect(e.stats.str).toBe(base);
+    expect(meta.virtualLevelsSpent).toBe(1 + 2 + 3);
+    const events = sim.drainEvents();
+    expect(texts(events)).toEqual([`The honing fails and ${ITEMS[SWORD].name} loses every hone.`]);
+    expect(honedEvents(events)[0]).toMatchObject({ rank: 0, landed: false, spent: 6 });
   });
 });

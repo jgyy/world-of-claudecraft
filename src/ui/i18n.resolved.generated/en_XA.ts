@@ -258,7 +258,6 @@ export const en_XA: EnTranslations = {
       "action": "[Ĥóñé]",
       "rank": "[Ĥóñéð +{rank}]",
       "maxed": "[Ƒúļļý ĥóñéð]",
-      "levels": "[{count} ʋíŕţúáļ ļéʋéļš]",
       "nothingWorn": "[Ñóţĥíñĝ ŵóŕñ]",
       "needCap": "[Ŕéáçĥ ţĥé ļéʋéļ çáþ ţó ĥóñé ĝéáŕ.]",
       "hint": "[Éáçĥ ŕáñķ áððš +1 ţó ţĥé çĥóšéñ šţáţ. Ĥóñíñĝ ƀíñðš ţĥé íţéɱ ţó ýóú, áñð á ƒáíļéð áţţéɱþţ šţíļļ šþéñðš ţĥé ļéʋéļš áñð ĝóļð.]",
@@ -2411,6 +2410,12 @@ export const en_XA: EnTranslations = {
         "few": "[{count} ĝúíļðš šĥóŵñ]",
         "many": "[{count} ĝúíļðš šĥóŵñ]",
         "other": "[{count} ĝúíļðš šĥóŵñ]"
+      },
+      "honingLevels": {
+        "one": "[{count} ʋíŕţúáļ ļéʋéļ]",
+        "few": "[{count} ʋíŕţúáļ ļéʋéļš]",
+        "many": "[{count} ʋíŕţúáļ ļéʋéļš]",
+        "other": "[{count} ʋíŕţúáļ ļéʋéļš]"
       },
       "commissionMasterworks": {
         "one": "[{count} ɱášţéŕŵóŕķ]",

@@ -7,7 +7,7 @@ import {
   DrainLifeVfx,
 } from './drain_life_vfx';
 import { GFX } from './gfx';
-import { honingGlowStyle } from './honing_glow_core';
+import { HONING_GLOW_COLORS, honingGlowStyle } from './honing_glow_core';
 import {
   type IgnivarJudgmentFireSample,
   ignivarJudgmentFireAllowsSmoke,
@@ -107,6 +107,19 @@ function legendaryRegaliaColors(): { ember: THREE.Color; gold: THREE.Color } {
     };
   }
   return regaliaColors;
+}
+
+// The honing tiers' HDR-scaled mote colors, cached like the regalia pair (the
+// emitter is continuous, so its emit path allocates nothing); keyed on
+// GFX.composer because hdr() bakes into the cached values.
+let honingColorComposer: boolean | null = null;
+let honingColors: THREE.Color[] | null = null;
+function honingGlowColor(tier: number): THREE.Color {
+  if (honingColors === null || honingColorComposer !== GFX.composer) {
+    honingColorComposer = GFX.composer;
+    honingColors = HONING_GLOW_COLORS.map((c) => new THREE.Color(c).multiplyScalar(hdr(1.8)));
+  }
+  return honingColors[Math.max(0, Math.min(honingColors.length - 1, Math.floor(tier) - 1))];
 }
 
 // ---------------------------------------------------------------------------
@@ -2133,7 +2146,7 @@ export class Vfx {
     if (!n) return;
     const at = this.anchor(entityId, 0.5);
     if (!at) return;
-    const color = new THREE.Color(style.color).multiplyScalar(hdr(1.8));
+    const color = honingGlowColor(tier);
     for (let k = 0; k < n; k++) {
       const a = Math.random() * Math.PI * 2;
       const r = 0.25 + Math.random() * 0.25;

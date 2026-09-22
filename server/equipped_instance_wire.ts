@@ -1,4 +1,5 @@
 import { isValidLootQuality } from '../src/sim/loot_quality/types';
+import { isValidHoningRecord } from '../src/sim/progression/honing_record';
 import type { Entity } from '../src/sim/types';
 
 /** Inspect-only projection, serialized immediately by the identity wire.
@@ -19,7 +20,7 @@ export function equippedInstanceWire(e: Pick<Entity, 'equippedInstances'>) {
     if (inst.rolled !== undefined) pub.rolled = inst.rolled;
     if (inst.name !== undefined) pub.name = inst.name;
     if (inst.perfected === true) pub.perfected = inst.perfected;
-    if (inst.honing !== undefined) pub.honing = inst.honing;
+    if (isValidHoningRecord(inst.honing)) pub.honing = inst.honing;
     if (inst.rift !== undefined) pub.rift = inst.rift;
     // Validated like publicInstanceView, so a malformed descriptor never rides
     // the wire; copied by reference (not cloned) because the projection is

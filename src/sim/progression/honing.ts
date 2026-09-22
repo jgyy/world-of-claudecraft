@@ -125,6 +125,7 @@ export function resolveHoningAttempt(
   pid: number | undefined,
   slot: string,
   stat: string,
+  policy: { failResets: boolean } = { failResets: HONING_FAIL_RESETS },
 ): boolean {
   const r = ctx.resolve(pid);
   if (!r) return false;
@@ -187,7 +188,7 @@ export function resolveHoningAttempt(
     landed = true;
     const next = record.rank;
     ctx.notice(meta.entityId, `Honing: ${def.name} is now honed +${next}.`, '#ffd100');
-  } else if (HONING_FAIL_RESETS && payload.honing) {
+  } else if (policy.failResets && payload.honing) {
     delete payload.honing;
     ctx.notice(meta.entityId, `The honing fails and ${def.name} loses every hone.`);
   } else {

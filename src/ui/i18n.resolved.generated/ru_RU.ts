@@ -249,20 +249,19 @@ export const ru_RU: EnTranslations = {
       "needXp": "еще общего опыта до престижа"
     },
     "honing": {
-      "title": "Honing",
-      "unspent": "Unspent Virtual Levels",
-      "item": "Item",
-      "stat": "Stat",
-      "cost": "Cost",
-      "chance": "Chance",
-      "action": "Hone",
-      "rank": "Honed +{rank}",
-      "maxed": "Fully honed",
-      "levels": "{count} virtual levels",
-      "nothingWorn": "Nothing worn",
-      "needCap": "Reach the level cap to hone gear.",
-      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
-      "hintReset": "A failed attempt also strips every rank from the item."
+      "title": "Заточка",
+      "unspent": "Непотраченные виртуальные уровни",
+      "item": "Предмет",
+      "stat": "Характеристика",
+      "cost": "Стоимость",
+      "chance": "Шанс",
+      "action": "Заточить",
+      "rank": "Заточка +{rank}",
+      "maxed": "Заточка максимальна",
+      "nothingWorn": "Ничего не надето",
+      "needCap": "Достигните максимального уровня, чтобы затачивать снаряжение.",
+      "hint": "Каждый ранг даёт +1 к выбранной характеристике. Заточка привязывает предмет к вам, а неудачная попытка всё равно тратит уровни и золото.",
+      "hintReset": "Неудачная попытка также снимает с предмета все ранги."
     },
     "settings": {
       "showOverflowXp": "Показывать лишний опыт",
@@ -2412,6 +2411,12 @@ export const ru_RU: EnTranslations = {
         "many": "Показано {count} гильдий",
         "other": "Показано {count} гильдии"
       },
+      "honingLevels": {
+        "one": "{count} виртуальный уровень",
+        "few": "{count} виртуальных уровня",
+        "many": "{count} виртуальных уровней",
+        "other": "{count} виртуальных уровней"
+      },
       "commissionMasterworks": {
         "one": "{count} шедевр",
         "few": "{count} шедевра",
@@ -3638,7 +3643,7 @@ export const ru_RU: EnTranslations = {
       "enchantedFallback": "Зачаровано",
       "partyTradeWindow": "Вы можете передать этот предмет игрокам, разделившим эту добычу, ещё в течение {time}. Надев предмет, вы завершите период обмена.",
       "perfectedBadge": "Доведён до совершенства",
-      "honedBadge": "Honed +{rank}",
+      "honedBadge": "Заточка +{rank}",
       "perfectingRank": "Совершенствование: ранг {rank} из {ranks}",
       "materialSourceGatherer": "{count} × Сборщик: {name}",
       "materialSourceGathererSigned": "{count} × Сборщик: {name}, подпись: {signer}",

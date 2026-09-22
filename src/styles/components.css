@@ -2343,7 +2343,7 @@
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    color: #b9ac82;
+    color: var(--color-text-muted);
     min-width: 0;
     flex: 1 1 160px;
   }
@@ -2354,9 +2354,8 @@
   .cp-honing .cp-honing-pool {
     color: var(--gold);
   }
-  .cp-honing .cp-honing-rank,
-  .tt-honed {
-    color: #7fd4ff;
+  .cp-honing .cp-honing-rank {
+    color: var(--color-honing);
   }
 
   /* ---------- leaderboard ---------- */

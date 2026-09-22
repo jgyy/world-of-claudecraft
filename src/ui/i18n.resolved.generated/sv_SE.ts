@@ -258,7 +258,6 @@ export const sv_SE: EnTranslations = {
       "action": "Hone",
       "rank": "Honed +{rank}",
       "maxed": "Fully honed",
-      "levels": "{count} virtual levels",
       "nothingWorn": "Nothing worn",
       "needCap": "Reach the level cap to hone gear.",
       "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
@@ -2411,6 +2410,12 @@ export const sv_SE: EnTranslations = {
         "few": "{count} gillen visas",
         "many": "{count} gillen visas",
         "other": "{count} gillen visas"
+      },
+      "honingLevels": {
+        "one": "{count} virtual level",
+        "few": "{count} virtual levels",
+        "many": "{count} virtual levels",
+        "other": "{count} virtual levels"
       },
       "commissionMasterworks": {
         "one": "{count} mästerverk",

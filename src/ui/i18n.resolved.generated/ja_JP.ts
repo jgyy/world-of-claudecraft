@@ -249,20 +249,19 @@ export const ja_JP: EnTranslations = {
       "needXp": "威信までに必要な追加累計経験値"
     },
     "honing": {
-      "title": "Honing",
-      "unspent": "Unspent Virtual Levels",
-      "item": "Item",
-      "stat": "Stat",
-      "cost": "Cost",
-      "chance": "Chance",
-      "action": "Hone",
-      "rank": "Honed +{rank}",
-      "maxed": "Fully honed",
-      "levels": "{count} virtual levels",
-      "nothingWorn": "Nothing worn",
-      "needCap": "Reach the level cap to hone gear.",
-      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
-      "hintReset": "A failed attempt also strips every rank from the item."
+      "title": "研磨",
+      "unspent": "未使用の仮想レベル",
+      "item": "アイテム",
+      "stat": "ステータス",
+      "cost": "費用",
+      "chance": "成功率",
+      "action": "研磨する",
+      "rank": "研磨 +{rank}",
+      "maxed": "研磨上限",
+      "nothingWorn": "装備なし",
+      "needCap": "装備を研磨するにはレベル上限に到達する必要があります。",
+      "hint": "各ランクで選んだステータスが +1 されます。研磨するとアイテムはあなたに帰属し、失敗してもレベルとゴールドは消費されます。",
+      "hintReset": "失敗するとアイテムの研磨ランクもすべて失われます。"
     },
     "settings": {
       "showOverflowXp": "超過経験値を表示",
@@ -2412,6 +2411,12 @@ export const ja_JP: EnTranslations = {
         "many": "{count} 件のギルドを表示中",
         "other": "{count} 件のギルドを表示中"
       },
+      "honingLevels": {
+        "one": "仮想レベル {count}",
+        "few": "仮想レベル {count}",
+        "many": "仮想レベル {count}",
+        "other": "仮想レベル {count}"
+      },
       "commissionMasterworks": {
         "one": "傑作{count}点",
         "few": "傑作{count}点",
@@ -3638,7 +3643,7 @@ export const ja_JP: EnTranslations = {
       "enchantedFallback": "エンチャント済み",
       "partyTradeWindow": "このアイテムはあと{time}の間、同じドロップを分かち合ったプレイヤーと取引できます。装備すると取引期間は終了します。",
       "perfectedBadge": "完全化済み",
-      "honedBadge": "Honed +{rank}",
+      "honedBadge": "研磨 +{rank}",
       "perfectingRank": "完全化：ランク{rank}／{ranks}",
       "materialSourceGatherer": "{count} × {name}が採集",
       "materialSourceGathererSigned": "{count} × {name}が採集、{signer}が署名",

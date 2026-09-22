@@ -249,20 +249,19 @@ export const ko_KR: EnTranslations = {
       "needXp": "명예 승급까지 필요한 추가 누적 경험치"
     },
     "honing": {
-      "title": "Honing",
-      "unspent": "Unspent Virtual Levels",
-      "item": "Item",
-      "stat": "Stat",
-      "cost": "Cost",
-      "chance": "Chance",
-      "action": "Hone",
-      "rank": "Honed +{rank}",
-      "maxed": "Fully honed",
-      "levels": "{count} virtual levels",
-      "nothingWorn": "Nothing worn",
-      "needCap": "Reach the level cap to hone gear.",
-      "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
-      "hintReset": "A failed attempt also strips every rank from the item."
+      "title": "연마",
+      "unspent": "미사용 가상 레벨",
+      "item": "아이템",
+      "stat": "능력치",
+      "cost": "비용",
+      "chance": "성공 확률",
+      "action": "연마",
+      "rank": "연마 +{rank}",
+      "maxed": "연마 완료",
+      "nothingWorn": "착용한 장비 없음",
+      "needCap": "장비를 연마하려면 최대 레벨에 도달해야 합니다.",
+      "hint": "단계마다 선택한 능력치가 +1 오릅니다. 연마하면 아이템이 귀속되며, 실패해도 레벨과 골드는 소모됩니다.",
+      "hintReset": "실패하면 아이템의 모든 연마 단계도 사라집니다."
     },
     "settings": {
       "showOverflowXp": "초과 경험치 표시",
@@ -2412,6 +2411,12 @@ export const ko_KR: EnTranslations = {
         "many": "길드 {count}개 표시 중",
         "other": "길드 {count}개 표시 중"
       },
+      "honingLevels": {
+        "one": "가상 레벨 {count}개",
+        "few": "가상 레벨 {count}개",
+        "many": "가상 레벨 {count}개",
+        "other": "가상 레벨 {count}개"
+      },
       "commissionMasterworks": {
         "one": "걸작 {count}점",
         "few": "걸작 {count}점",
@@ -3638,7 +3643,7 @@ export const ko_KR: EnTranslations = {
       "enchantedFallback": "마법부여됨",
       "partyTradeWindow": "앞으로 {time} 동안 이 아이템을 같은 전리품을 함께 획득한 플레이어와 거래할 수 있습니다. 착용하면 거래 기간이 끝납니다.",
       "perfectedBadge": "완전해짐",
-      "honedBadge": "Honed +{rank}",
+      "honedBadge": "연마 +{rank}",
       "perfectingRank": "완전화: {ranks}단계 중 {rank}단계",
       "materialSourceGatherer": "{count} × {name} 채집",
       "materialSourceGathererSigned": "{count} × {name} 채집, {signer} 서명",

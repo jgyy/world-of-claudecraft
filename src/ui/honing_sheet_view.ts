@@ -17,7 +17,7 @@ import { ALL_EQUIP_SLOTS, type EquipSlot, MAX_LEVEL } from '../sim/types';
 import type { IWorld } from '../world_api';
 import { itemDisplayName } from './entity_i18n';
 import { esc } from './esc';
-import { formatMoney, formatNumber, type TranslationKey, t } from './i18n';
+import { formatMoney, formatNumber, type TranslationKey, t, tPlural } from './i18n';
 
 /** The player's current picks, owned by the character window across repaints
  *  (the sheet rebuilds its innerHTML on every render). A missing slot means
@@ -114,12 +114,12 @@ export function honingSheetHtml(model: HoningSheetModel): string {
     (stat) =>
       `<option value="${stat}"${stat === model.stat ? ' selected' : ''}>${esc(t(STAT_LABEL_KEYS[stat]))}</option>`,
   ).join('');
-  html += `<div class="cp-honing-row"><label>${esc(t('game.honing.item'))} <select class="hud-select" data-honing="slot"${model.slots.length === 0 ? ' disabled' : ''}>${slotOptions}</select></label>`;
-  html += `<label>${esc(t('game.honing.stat'))} <select class="hud-select" data-honing="stat">${statOptions}</select></label></div>`;
+  html += `<div class="cp-honing-row"><label>${esc(t('game.honing.item'))} <select class="hud-select" data-act="hone-slot" data-honing="slot"${model.slots.length === 0 ? ' disabled' : ''}>${slotOptions}</select></label>`;
+  html += `<label>${esc(t('game.honing.stat'))} <select class="hud-select" data-act="hone-stat" data-honing="stat">${statOptions}</select></label></div>`;
   if (model.info) {
     const rankLine = model.info.maxed
       ? `<b class="cp-honing-rank">${esc(t('game.honing.maxed'))}</b>`
-      : `<span class="cp-hint">${esc(t('game.honing.cost'))}: ${esc(t('game.honing.levels', { count: whole(model.info.cost.levels) }))}, ${formatMoney(model.info.cost.copper)}</span>` +
+      : `<span class="cp-hint">${esc(t('game.honing.cost'))}: ${esc(tPlural('hudChrome.plurals.honingLevels', model.info.cost.levels, { count: whole(model.info.cost.levels) }))}, ${formatMoney(model.info.cost.copper)}</span>` +
         `<span class="cp-hint">${esc(t('game.honing.chance'))}: ${formatNumber(model.info.chance, { style: 'percent', maximumFractionDigits: 0 })}</span>`;
     html += `<div class="cp-actions cp-honing-row">${rankLine}<button type="button" class="ui-btn ui-btn--gold" data-act="hone"${model.canHone ? '' : ' disabled'}>${esc(t('game.honing.action'))}</button></div>`;
   }

@@ -139,3 +139,21 @@ describe('the renderer and emitter wiring', () => {
     }
   });
 });
+
+describe('the emitter allocates nothing per frame', () => {
+  it('caches the HDR-scaled tier colors keyed on the composer, like the regalia pair', () => {
+    const vfx = read('src/render/vfx.ts');
+    const body = vfx.slice(
+      vfx.indexOf('honingGlow(entityId: number, dt: number, tier: number): void {'),
+      vfx.indexOf('mountSlimeTrail('),
+    );
+    expect(body).not.toContain('new THREE.Color');
+    expect(body).toContain('honingGlowColor(tier)');
+    const cache = vfx.slice(
+      vfx.indexOf('function honingGlowColor('),
+      vfx.indexOf('honingGlow(entityId'),
+    );
+    expect(cache).toContain('GFX.composer');
+    expect(cache).toContain('multiplyScalar(hdr(');
+  });
+});

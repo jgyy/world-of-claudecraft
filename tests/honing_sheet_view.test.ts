@@ -111,3 +111,33 @@ describe('honingSheetHtml', () => {
     expect(html).not.toContain('data-act="hone"');
   });
 });
+
+describe('host parity: a ClientWorld-shaped mirror yields the same model', () => {
+  it('reads the mirror fields (equipment, einst, lxp, vls, copper) exactly like the Sim', () => {
+    const { sim } = rig(6);
+    const fromSim = buildHoningSheetModel(sim, { slot: 'mainhand', stat: 'agi' });
+    // The online mirror: plain fields filled from the snapshot keys, an ABSENT
+    // instance for the plain worn copy (einst is sparse), and the ledger off
+    // the vls scalar.
+    const mirror = {
+      player: { level: MAX_LEVEL },
+      equipment: { mainhand: SWORD },
+      equipmentInstances: {},
+      lifetimeXp: xpToReachLevel(MAX_LEVEL + 6),
+      virtualLevelsSpent: 0,
+      copper: 100 * 10_000,
+    } as unknown as Parameters<typeof buildHoningSheetModel>[0];
+    expect(buildHoningSheetModel(mirror, { slot: 'mainhand', stat: 'agi' })).toEqual(fromSim);
+    // a mirrored honed copy (the eqi/einst record) reads its rank the same way
+    const honedMirror = {
+      ...mirror,
+      equipmentInstances: { mainhand: { honing: { rank: 3, stats: { agi: 3 } } } },
+      virtualLevelsSpent: 6,
+    } as unknown as Parameters<typeof buildHoningSheetModel>[0];
+    const model = buildHoningSheetModel(honedMirror, { stat: 'agi' });
+    expect(model.slots[0].rank).toBe(3);
+    expect(model.unspent).toBe(0);
+    expect(model.info).toMatchObject({ rank: 3, cost: honingCost(3), chance: honingChance(3) });
+    expect(model.canHone).toBe(false);
+  });
+});

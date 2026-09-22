@@ -258,7 +258,6 @@ export const pt_BR: EnTranslations = {
       "action": "Hone",
       "rank": "Honed +{rank}",
       "maxed": "Fully honed",
-      "levels": "{count} virtual levels",
       "nothingWorn": "Nothing worn",
       "needCap": "Reach the level cap to hone gear.",
       "hint": "Each rank adds +1 to the chosen stat. Honing binds the item to you, and a failed attempt still spends the levels and gold.",
@@ -2411,6 +2410,12 @@ export const pt_BR: EnTranslations = {
         "few": "{count} guildas mostradas",
         "many": "{count} guildas mostradas",
         "other": "{count} guildas mostradas"
+      },
+      "honingLevels": {
+        "one": "{count} virtual level",
+        "few": "{count} virtual levels",
+        "many": "{count} virtual levels",
+        "other": "{count} virtual levels"
       },
       "commissionMasterworks": {
         "one": "{count} obra-prima",
