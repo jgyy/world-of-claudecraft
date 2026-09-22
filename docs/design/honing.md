@@ -39,18 +39,20 @@ chance that falls with the rank already on the piece. Highly honed gear glows.
 
 ```mermaid
 sequenceDiagram
-    participant UI as Character sheet (Progression tab)
+    participant UI as Character sheet
     participant CW as ClientWorld
     participant GS as GameServer
-    participant Sim as Sim (progression/honing.ts)
-    UI->>CW: honeItem(slot, stat)
-    CW->>GS: cmd hone_item {slot, stat}
-    GS->>Sim: honeItem(slot, stat, pid) after the shape-only parse
-    Sim->>Sim: deny ladder (dead, cap, worn, maxed, pool, purse): 0 draws
-    Sim->>Sim: spend levels + fee, bind on first attempt, THE ONE DRAW
-    Sim-->>GS: notice lines + honed event {slot, rank, landed, spent}
-    GS-->>CW: events frame, then snapshot (vls, einst, eqi)
-    CW-->>UI: repaint the honing card
+    participant Sim as Sim honing module
+    UI->>CW: honeItem slot, stat
+    CW->>GS: cmd hone_item slot, stat
+    GS->>GS: parseHoneItemCommand, shape only
+    GS->>Sim: honeItem slot, stat, pid
+    Sim->>Sim: deny ladder, dead cap worn maxed pool purse, zero draws
+    Sim->>Sim: spend levels and fee, bind on first attempt
+    Sim->>Sim: the one draw vs honingChance rank
+    Sim-->>GS: notice lines and honed event
+    GS-->>CW: events frame, then snapshot vls einst eqi
+    CW-->>UI: repaint the honing card and light the glow tier
 ```
 
 ## Surfaces and tests
