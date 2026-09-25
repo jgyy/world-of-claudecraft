@@ -511,13 +511,21 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    // Plus 30 for the Crucible sigil trade: the import, the onTrade wiring
-    // through renderCrucibleVendor, and the requestCrucibleSigilTrade confirm
-    // dialog (the requestCrucibleVendorPurchase shape exactly). The pure view
-    // model and the window markup live in crucible_vendor_view.ts /
+    // LOWERED 18276 -> 18220 by extracting the HUD frame registry wiring.
+    // LOWERED 18220 -> 18201 by extracting editor menu dependencies.
+    // LOWERED 18201 -> 18191 by extracting chat frame context and focus mouseover routing.
+    // LOWERED 18191 -> 18186 by sharing unit dimensions and pet frame input.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 18186 / 18235.
+    // Exact merged line count, preserving both extraction sets.
+    // Plus 29 (net) for the Crucible sigil trade: the import, the onTrade
+    // wiring through renderCrucibleVendor, and the requestCrucibleSigilTrade
+    // confirm dialog (the requestCrucibleVendorPurchase shape exactly). The
+    // pure view model and the window markup live in crucible_vendor_view.ts /
     // crucible_vendor_window.ts; this is the thin orchestration Hud already
-    // keeps for every service window. Exact count, zero slack.
-    ceiling: 18265,
+    // keeps for every service window. Re-measured at the release/v0.44.0 sync
+    // (18140 + 29) by wc -l on the merged tree. Exact count, zero slack.
+    ceiling: 18169,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -547,7 +555,12 @@ const MONOLITHS: MonolithRow[] = [
     // (src/ui/host_diag_section_controller.ts over the pure
     // src/ui/host_diag_view.ts), not a sub-view of this window. Exact count,
     // zero slack.
-    ceiling: 2821,
+    // LOWERED 2830 -> 2829 by extracting shared frame settings and reset-key scope.
+    // LOWERED 2829 -> 2827 by extracting menu placement into OptionsWindowLayout.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 2827 / 2821.
+    // Exact merged line count, preserving both extraction sets.
+    ceiling: 2818,
     seam: 'a pure view model (src/ui/options_view.ts) painted with the shared settings_controls.ts builders; sub-panels as sibling modules',
   },
   {
@@ -1131,12 +1144,15 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
+    // Frame layout restore extraction: bank the reduced coordinator size.
     // Plus 10 for the Crucible sigil trade (feature request: trade a
     // duplicate slot sigil for a different slot of the same flavor): the
     // import plus the thin tradeCrucibleSigil delegation to
     // instances/crucible_vendor.ts (the buyCrucibleVendorItem shape exactly);
-    // the logic itself lives in the instances module. Exact count, zero slack.
-    ceiling: 11760,
+    // the logic itself lives in the instances module. Re-measured at the
+    // release/v0.44.0 sync (11746 + 10) by wc -l on the merged tree. Exact
+    // count, zero slack.
+    ceiling: 11756,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1348,7 +1364,8 @@ const MONOLITHS: MonolithRow[] = [
     // click / Enter-Space / double-click wiring moved into wireCharselectRow
     // (src/ui/charselect_hints.ts), which skips activations from inside the
     // lockout disclosure instead of stopping propagation there.
-    ceiling: 11276,
+    // Frame layout extraction: bank the reduced coordinator size.
+    ceiling: 11260,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {
@@ -1737,9 +1754,11 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
+    // LOWERED 5426 -> 5421 by extracting first-snapshot action bar restore resolution.
     // Plus 3 for the tradeCrucibleSigil command mirror (the
-    // buyCrucibleVendorItem shape exactly). Exact count, zero slack.
-    ceiling: 5429,
+    // buyCrucibleVendorItem shape exactly). Re-measured at the release/v0.44.0
+    // sync (5421 + 3) by wc -l on the merged tree. Exact count, zero slack.
+    ceiling: 5424,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
