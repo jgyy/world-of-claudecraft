@@ -539,6 +539,13 @@ export const IWORLD_MEMBERS = [
   // data member exists for it.
   { name: 'placeFeast', kind: 'method' },
   { name: 'consumeFeast', kind: 'method' },
+  // Profession Schools (rank-gated crafting institutions, IWorldProfessions;
+  // first implementation: the Enchanters School). The viewer's own membership
+  // read is data; the three membership/task actions are methods.
+  { name: 'professionSchools', kind: 'data' },
+  { name: 'joinProfessionSchool', kind: 'method' },
+  { name: 'swearSchoolAllegiance', kind: 'method' },
+  { name: 'submitSchoolTask', kind: 'method' },
 ] as const satisfies readonly IWorldMember[];
 
 const DATA_MEMBERS = IWORLD_MEMBERS.filter((m) => m.kind === 'data');
@@ -865,9 +872,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // methods, the Who tab data and method, CPU-hygiene entityRosterVersion,
     // and the account-wide Book of Deeds / Reliquary read halves. Counted
     // directly off the resolved IWORLD_MEMBERS literal.
-    expect(IWORLD_MEMBERS.length).toBe(378);
-    expect(DATA_MEMBERS.length).toBe(107);
-    expect(METHOD_MEMBERS.length).toBe(271);
+    // Profession Schools adds professionSchools (data) plus
+    // joinProfessionSchool/swearSchoolAllegiance/submitSchoolTask (methods):
+    // 382 members, 108 data, 274 methods.
+    expect(IWORLD_MEMBERS.length).toBe(382);
+    expect(DATA_MEMBERS.length).toBe(108);
+    expect(METHOD_MEMBERS.length).toBe(274);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -1064,6 +1074,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'interact',
       'inventory',
       'joinCardDuelQueue',
+      'joinProfessionSchool',
       'known',
       'lastCraftResult',
       'lastDisenchantResult',
@@ -1142,6 +1153,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'playtimeSeconds',
       'prestige',
       'prestigeRank',
+      'professionSchools',
       'professionsState',
       'questLog',
       'questState',
@@ -1213,7 +1225,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'stationPlacements',
       'stopAutoAttack',
       'submitLootRoll',
+      'submitSchoolTask',
       'swapPerfectingRanks',
+      'swearSchoolAllegiance',
       'switchLoadout',
       'tabTarget',
       'tabTargetPrev',
@@ -1340,6 +1354,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'playerId',
       'playtimeSeconds',
       'prestigeRank',
+      'professionSchools',
       'professionsState',
       'questLog',
       'questsDone',
@@ -1502,6 +1517,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'ignoreRemove',
       'interact',
       'joinCardDuelQueue',
+      'joinProfessionSchool',
       'leaderboard',
       'learnRiding',
       'leaveCardDuelQueue',
@@ -1612,7 +1628,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'startAutoAttack',
       'stopAutoAttack',
       'submitLootRoll',
+      'submitSchoolTask',
       'swapPerfectingRanks',
+      'swearSchoolAllegiance',
       'switchLoadout',
       'tabTarget',
       'tabTargetPrev',
@@ -2207,6 +2225,10 @@ const FACET_PROFESSIONS = [
   'clearGatheringGoal',
   'swapPerfectingRanks',
   'perfectingSwapInfo',
+  'professionSchools',
+  'joinProfessionSchool',
+  'swearSchoolAllegiance',
+  'submitSchoolTask',
 ] as const satisfies readonly (keyof IWorldProfessions)[];
 type _ExhaustProfessions = AssertNever<
   Exclude<keyof IWorldProfessions, (typeof FACET_PROFESSIONS)[number]>
@@ -2391,8 +2413,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
     // Mirrors the IWORLD_MEMBERS.length pin above; this pin and the one above
     // must always agree.
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(378);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(378);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(382);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(382);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

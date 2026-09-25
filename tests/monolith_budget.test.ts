@@ -1125,7 +1125,19 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    ceiling: 11750,
+    // Raised 11750 -> 11806 (+56) for Profession Schools (rank-gated crafting
+    // institutions, first implementation: the Enchanters School). Every new
+    // line is irreducible facade glue that genuinely cannot land behind the
+    // SimContext seam: the mechanics themselves live in the new siblings
+    // professions/schools.ts, professions/school_persist.ts, and content/
+    // profession_schools.ts, but Sim itself must still declare the
+    // PlayerMeta.professionSchool field, its addPlayer restore and
+    // serializeCharacter save-fragment calls, and the four thin IWorld facade
+    // delegates (professionSchools/joinProfessionSchool/
+    // swearSchoolAllegiance/submitSchoolTask), the exact shape every other
+    // profession mechanic's Sim-facade glue already takes (trainRecipe,
+    // slotToolEffect). Small, justified raise per this file's own header.
+    ceiling: 11806,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1569,7 +1581,16 @@ const MONOLITHS: MonolithRow[] = [
     // quest/death record arms of the event drain moved to
     // server/event_record_observers.ts (which also hosts the new craftRoll
     // arm), so the audit landed as a net shrink. Exact count, zero slack.
-    ceiling: 9965,
+    // Raised 9965 -> 9989 (+24) for Profession Schools (rank-gated crafting
+    // institutions, first implementation: the Enchanters School). The three
+    // dispatch cases (join_profession_school/swear_school_allegiance/
+    // submit_school_task) and the one `schools` selfWireJson maybe(...) line
+    // are irreducible dispatch-onion glue, the trainRecipe/prof precedent
+    // above: every gameplay rule lives in the new sibling
+    // professions/schools.ts, this file only type-checks fields and forwards
+    // to the sim method it owns. Small, justified raise per this file's own
+    // header.
+    ceiling: 9989,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -1724,7 +1745,15 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
-    ceiling: 5426,
+    // Raised 5426 -> 5447 (+21) for Profession Schools (rank-gated crafting
+    // institutions, first implementation: the Enchanters School). The self-
+    // mirror decode itself lives in the existing professions_self_mirror.ts
+    // sibling (widened, not grown here); this file only adds the
+    // professionSchools field declaration and the three thin command
+    // senders (joinProfessionSchool/swearSchoolAllegiance/
+    // submitSchoolTask), the trainRecipe/placeMobileStation precedent.
+    // Small, justified raise per this file's own header.
+    ceiling: 5447,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
