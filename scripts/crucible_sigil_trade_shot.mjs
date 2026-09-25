@@ -127,8 +127,8 @@ console.log('first trade row:', res.firstTradeRowName, '|', res.firstTradeRowAri
 // 15 rows); scroll the new Trade Sigils section into view so the shot
 // actually shows the feature, not the goods grid above it.
 await page.evaluate(() => {
-  const title = [...document.querySelectorAll('#vendor-window .vendor-section-title')].find(
-    (el) => el.textContent.includes('Trade Sigils'),
+  const title = [...document.querySelectorAll('#vendor-window .vendor-section-title')].find((el) =>
+    el.textContent.includes('Trade Sigils'),
   );
   title?.scrollIntoView({ block: 'start' });
 });
