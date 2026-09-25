@@ -30,6 +30,13 @@
 // recipe-gating extensibility point on ProfessionRecipeRecord
 // (../professions/types.ts schoolId/schoolRankReq), which no shipped recipe
 // uses yet.
+//
+// Naming audit (the IP rule): "Enchanters School" and its six rank names
+// (Initiate/Apprentice/Journeyman/Adept/Master/Grandmaster) were web-verified
+// against the seven wikis, verdict CLEAR/GENERIC, no collision; full verdict
+// and recorded neighbours (WoW's own profession-tier ladder, Ultima Online's
+// near-identical rank set) in docs/design/naming-audit.md, "Profession
+// Schools: the Enchanters School".
 
 import type { StationType } from '../types';
 
