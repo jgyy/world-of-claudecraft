@@ -530,18 +530,24 @@ describe('elision key composition stays banished (hud.ts + painter_host.ts sourc
     );
     expect(forwarding, 'the six adapter arrows all forward the quality').toHaveLength(6);
     expect(hud).not.toMatch(/itemIcon: \(item\) =>/);
-    // The adapters outside the Hud (the bank window wiring its two panes).
-    // The guild tab forwards the quality the same way; it is the same
-    // 1-ary-swallow class one file over. The vault pane (release/v0.41.0,
-    // Bank Storage) is DIFFERENT by design: its dep declares NO quality
-    // parameter (vault rows are materials; the icon is quality-independent
-    // there), so its adapter is 1-ary against a 1-ary dep, not a swallow.
-    // Both shapes are pinned exactly, plus the vault dep's own declaration,
-    // so a quality-carrying dep can never silently gain a swallowing adapter.
+    // The adapters outside the Hud (the bank window wiring its three panes).
+    // The guild and account tabs forward the quality the same way; both are
+    // the same 2-ary class one file over (account bank items carry quality
+    // exactly like guild bank items). The vault pane (release/v0.41.0, Bank
+    // Storage) is DIFFERENT by design: its dep declares NO quality parameter
+    // (vault rows are materials; the icon is quality-independent there), so
+    // its adapter is 1-ary against a 1-ary dep, not a swallow. Both shapes
+    // are pinned exactly, plus the vault dep's own declaration, so a
+    // quality-carrying dep can never silently gain a swallowing adapter.
     const bank = strip(read('../src/ui/bank_window.ts'));
     expect(bank).toContain('itemIcon: (item, quality) => this.deps.itemIcon(item, quality),');
     expect(bank).toContain('itemIcon: (item) => this.deps.itemIcon(item),');
-    expect(bank.match(/\bitemIcon:/g), 'two adapter keys in the bank window').toHaveLength(2);
+    expect(
+      (bank.match(/itemIcon: \(item, quality\) => this\.deps\.itemIcon\(item, quality\),/g) ?? [])
+        .length,
+      'the guild and account panes both carry the 2-ary quality-forwarding adapter',
+    ).toBe(2);
+    expect(bank.match(/\bitemIcon:/g), 'three adapter keys in the bank window').toHaveLength(3);
     expect(
       strip(read('../src/ui/vault_window.ts')),
       'the vault dep really declares no quality parameter',

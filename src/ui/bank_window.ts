@@ -121,9 +121,10 @@ const BANK_PROMPT_SELECTOR = '.bank-quantity-prompt, .bank-buy-prompt';
 // attempt themselves through BankRungPurchase.endPrompt().
 //
 // The other call sites deliberately do not, and the premise is load-bearing: the
-// guild and vault panes' dismissPrompts deps and the dismissSiblings wirings all
-// run while some OTHER prompt is being opened, and no other prompt can be opened
-// while a rung confirm stands, because the confirm sets #bank-window inert.
+// guild, vault, and account panes' dismissPrompts deps and the dismissSiblings
+// wirings all run while some OTHER prompt is being opened, and no other prompt
+// can be opened while a rung confirm stands, because the confirm sets
+// #bank-window inert.
 // tests/bank_rung_purchase.test.ts pins that inert. showBuySlotsPrompt's own
 // dismissSiblings is the one site that must NEVER end the attempt, because it
 // runs immediately after arming it.

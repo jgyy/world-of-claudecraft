@@ -3,11 +3,12 @@
 // while the character is resident (src/sim/bank.ts bankPurchasedSlotsFor
 // documents the property and the store's fit gate rests on it), so every
 // write to `purchasedSlots` across the sim and server must be either an
-// increment (`+=`) or one of the exact allowlisted statements below: the two
-// load-normalization floors (which run at join, before any reader exists) and
-// the guild gold CAS pair (the guild BOOK is the documented exception whose
-// escrow revert legitimately decreases). Any new write shape fails here and
-// must argue its case against docs/claudium-store.md.
+// increment (`+=`) or one of the exact allowlisted statements below: the
+// three load-normalization floors, one per bank kind (which run at join,
+// before any reader exists) and the guild gold CAS pair (the guild BOOK is
+// the documented exception whose escrow revert legitimately decreases). Any
+// new write shape fails here and must argue its case against
+// docs/claudium-store.md.
 //
 // Source-scan guard on the COMMENT-STRIPPED tree (tests/helpers): recursive
 // (ts_files_under, so a module moved into a subdirectory never leaves the
@@ -45,6 +46,17 @@ const ALLOWLIST: readonly { file: string; statement: string }[] = [
   {
     file: 'src/sim/bank.ts',
     statement: 'purchasedSlots-=purchasedSlots%BANK_EXPANSION_SLOTS;',
+  },
+  // The account-bank load floor (sanitizeAccountBankState): the same
+  // join-time rule, one copy per bank kind (personal, guild, account).
+  {
+    file: 'src/sim/account_bank.ts',
+    statement:
+      'letpurchasedSlots=Math.max(0,Math.min(ACCOUNT_BANK_PURCHASED_SLOTS_MAX,Math.floor(Number(r.purchasedSlots))||0),);',
+  },
+  {
+    file: 'src/sim/account_bank.ts',
+    statement: 'purchasedSlots-=purchasedSlots%ACCOUNT_BANK_EXPANSION_SLOTS;',
   },
   // The guild-book load floor (sanitizeGuildBankBook): the same join-time rule.
   {
@@ -121,12 +133,14 @@ describe('storage grants are monotonic: purchasedSlots never decreases', () => {
   });
 
   it('self-audit: the census still sees the known writers and no allowlist row is stale', () => {
-    // The two personal-bank grant rails plus the two guild rung buys: if the
-    // census stops finding increments, the scanner (not the code) broke.
+    // The two personal-bank grant rails, the two guild rung buys, and the
+    // account bank's own expansion buy: if the census stops finding
+    // increments, the scanner (not the code) broke.
     const increments = writes.filter((write) => write.op === '+=');
     expect(increments.map((w) => w.file)).toContain('src/sim/bank.ts');
     expect(increments.map((w) => w.file)).toContain('src/sim/guild_bank.ts');
-    expect(increments.length).toBeGreaterThanOrEqual(4);
+    expect(increments.map((w) => w.file)).toContain('src/sim/account_bank.ts');
+    expect(increments.length).toBeGreaterThanOrEqual(5);
 
     // Every allowlisted statement must still exist verbatim: a moved or
     // reworded sanctioned write retires its row in the same change, so the

@@ -317,6 +317,7 @@ describe('CI workflow parity', () => {
       '          sparse-checkout: |',
       '            /*',
       '            !/docs/screenshots/*/',
+      '            /docs/screenshots/account-bank-tab/',
       '            /docs/screenshots/admin-cheater-mark/',
       '            /docs/screenshots/admin-guild-bank-panel/',
       '            /docs/screenshots/aura-tracks/',

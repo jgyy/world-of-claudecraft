@@ -1531,14 +1531,15 @@ describe('a repaint that tears the confirm prompt down ENDS the attempt (phase 1
     // The two PAIRED sites are close() and render(): both can tear down a prompt
     // the PLAYER left standing, so both end the attempt.
     // The UNPAIRED sites are safe for one stated reason each, and the reason is
-    // never "it does not matter": the two `dismissPrompts` deps are handed to the
-    // guild and vault panes, and every one of the panes' own call sites runs while
-    // that pane is OPENING a prompt of its own, reachable only from a click on a
-    // control inside #bank-window; the three `dismissSiblings` wirings are the
-    // same shape one level in. No such click can happen while a rung confirm
-    // stands, because the confirm sets #bank-window inert, which is what the arm
-    // below drives. showBuySlotsPrompt's own dismissSiblings is the one site that
-    // must NEVER end the attempt, because it runs immediately after arming it.
+    // never "it does not matter": the three `dismissPrompts` deps are handed to
+    // the guild, vault, and account panes, and every one of the panes' own call
+    // sites runs while that pane is OPENING a prompt of its own, reachable only
+    // from a click on a control inside #bank-window; the three `dismissSiblings`
+    // wirings are the same shape one level in. No such click can happen while a
+    // rung confirm stands, because the confirm sets #bank-window inert, which is
+    // what the arm below drives. showBuySlotsPrompt's own dismissSiblings is the
+    // one site that must NEVER end the attempt, because it runs immediately
+    // after arming it.
     // resolve(process.cwd(), ...), not import.meta.url: this file runs under jsdom,
     // where import.meta.url is not a file: URL and readFileSync throws.
     const src = readFileSync(resolve(process.cwd(), 'src/ui/bank_window.ts'), 'utf8');
@@ -1547,7 +1548,7 @@ describe('a repaint that tears the confirm prompt down ENDS the attempt (phase 1
     const decl = 'export function dismissBankPrompts';
     const body = src.slice(src.indexOf(decl) + decl.length);
     const sites = [...body.matchAll(/dismissBankPrompts[(,]/g)].map((m) => m.index ?? 0);
-    expect(sites.length, 'a NEW dismissBankPrompts site: classify it in the comment above').toBe(7);
+    expect(sites.length, 'a NEW dismissBankPrompts site: classify it in the comment above').toBe(8);
     // The attempt is ended in exactly THREE places, and they are classified by
     // NAME below rather than by proximity: a character-budget or next-site window
     // reads showBuySlotsPrompt's own dismissSiblings as paired, because the
@@ -1591,9 +1592,9 @@ describe('a repaint that tears the confirm prompt down ENDS the attempt (phase 1
     expect(dismissHook, 'the hook must not raw-remove the node it is reporting on').not.toContain(
       'dismissBankPrompts(',
     );
-    // ...and the two dep injections, which are call sites the panes make on our
-    // behalf, are counted separately so a THIRD pane cannot arrive unnoticed.
-    expect((src.match(/dismissPrompts: \(\) => dismissBankPrompts\(\)/g) ?? []).length).toBe(2);
+    // ...and the three dep injections, which are call sites the panes make on our
+    // behalf, are counted separately so a FOURTH pane cannot arrive unnoticed.
+    expect((src.match(/dismissPrompts: \(\) => dismissBankPrompts\(\)/g) ?? []).length).toBe(3);
     // THE IDIOM, not only the NAME. Counting one identifier is blind to the thing
     // dismissBankPrompts itself does: find the prompt nodes and .remove() them. A
     // second place that raw-removes a prompt, or a wrapper spelled differently, is

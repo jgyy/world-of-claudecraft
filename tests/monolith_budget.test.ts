@@ -1130,15 +1130,16 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    // Raised 11750 -> 11821 (+71, a maintainer decision) for the Account Bank
+    // Raised 11750 -> 11824 (+74, a maintainer decision) for the Account Bank
     // feature (src/sim/account_bank.ts): the ctx-held accountBanks map field
     // plus its SimContext getter, the inert offline IWorld arms, and the
     // pid+accountId server entry points (accountBank*For), all thin
     // delegates to the new sibling module, could not land behind the seam any
     // thinner (the same shape the guild bank's own addition already pays
     // here). No behavior moved out to buy the raise back; justified in the PR
-    // body per the ratchet's own rule.
-    ceiling: 11821,
+    // body per the ratchet's own rule. Exact merged count against
+    // origin/release/v0.44.0 (wc -l < src/sim/sim.ts), zero slack.
+    ceiling: 11824,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -2263,7 +2264,7 @@ const MONOLITHS: MonolithRow[] = [
     // exact `wc -l < src/ui/bank_window.ts` measurement on the resolved tree.
     // RE-CONFIRMED at the final line-budget reconciliation: still 1810,
     // below both parent pins. Exact merged count, zero slack.
-    // Raised 1810 -> 1859 (+49, a maintainer decision) for the Account Bank
+    // Raised 1810 -> 1866 (+56, a maintainer decision) for the Account Bank
     // tab: the BankTabId variant, the accountPane field and constructor wiring,
     // the accountTabActive getter, the tab-strip entry, and the render/branch
     // wiring are each a thin addition beside the guild/vault tabs' own
@@ -2271,8 +2272,9 @@ const MONOLITHS: MonolithRow[] = [
     // logic lives entirely in the new account_bank_view.ts / account_bank_window.ts
     // sibling pair (the seam this ceiling names); no behavior moved out of
     // THIS file to buy the raise back. Justified in the PR body per the
-    // ratchet's own rule.
-    ceiling: 1859,
+    // ratchet's own rule. Exact merged count against origin/release/v0.44.0
+    // (wc -l < src/ui/bank_window.ts), zero slack.
+    ceiling: 1866,
     seam: 'a pure view-core plus a thin painter sibling (src/ui/CLAUDE.md)',
   },
   {
