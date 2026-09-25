@@ -511,20 +511,29 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    // RAISED 18235 -> 18237 (+2) for the "Attack (go to attack distance)"
-    // feature request: activateFixedAttackSlot (the fixed action-bar Attack
-    // slot's single choke point for keybind, click, and pad presses alike)
-    // gained one more branch to delegate to the new optional
-    // OptionsHooks.attackCurrentTarget seam (src/game/attack_current_target.ts,
-    // wired from main.ts) before falling back to the plain toggle, so pressing
-    // Attack with an out-of-range target now walks into melee range and
-    // engages instead of silently arming a swing. Both the new interface
-    // field and the new branch are one line each and could not be extracted
-    // further: the decision and chase logic already live in the sibling
-    // module (driveAttackCurrentTarget/planAttackCurrentTarget), this is only
-    // the irreducible wiring at the one call site every input path shares.
-    // Exact count, zero slack.
-    ceiling: 18237,
+    // LOWERED 18276 -> 18220 by extracting the HUD frame registry wiring.
+    // LOWERED 18220 -> 18201 by extracting editor menu dependencies.
+    // LOWERED 18201 -> 18191 by extracting chat frame context and focus mouseover routing.
+    // LOWERED 18191 -> 18186 by sharing unit dimensions and pet frame input.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 18186 / 18235.
+    // Exact merged line count, preserving both extraction sets.
+    // RAISED 18140 -> 18142 (+2) for the "Attack (go to attack distance)"
+    // feature request, re-measured at the release/v0.44.0 sync (the branch
+    // first raised 18235 -> 18237 on the older base): activateFixedAttackSlot
+    // (the fixed action-bar Attack slot's single choke point for keybind,
+    // click, and pad presses alike) gained one more branch to delegate to the
+    // new optional OptionsHooks.attackCurrentTarget seam
+    // (src/game/attack_current_target.ts, wired from main.ts) before falling
+    // back to the plain toggle, so pressing Attack with an out-of-range target
+    // now walks into melee range and engages instead of silently arming a
+    // swing. Both the new interface field and the new branch are one line each
+    // and could not be extracted further: the decision and chase logic already
+    // live in the sibling module (driveAttackCurrentTarget /
+    // planAttackCurrentTarget), this is only the irreducible wiring at the one
+    // call site every input path shares. wc -l on the merged tree. Exact
+    // count, zero slack.
+    ceiling: 18142,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -554,7 +563,12 @@ const MONOLITHS: MonolithRow[] = [
     // (src/ui/host_diag_section_controller.ts over the pure
     // src/ui/host_diag_view.ts), not a sub-view of this window. Exact count,
     // zero slack.
-    ceiling: 2821,
+    // LOWERED 2830 -> 2829 by extracting shared frame settings and reset-key scope.
+    // LOWERED 2829 -> 2827 by extracting menu placement into OptionsWindowLayout.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 2827 / 2821.
+    // Exact merged line count, preserving both extraction sets.
+    ceiling: 2818,
     seam: 'a pure view model (src/ui/options_view.ts) painted with the shared settings_controls.ts builders; sub-panels as sibling modules',
   },
   {
@@ -1138,7 +1152,8 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    ceiling: 11750,
+    // Frame layout restore extraction: bank the reduced coordinator size.
+    ceiling: 11746,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1350,10 +1365,13 @@ const MONOLITHS: MonolithRow[] = [
     // click / Enter-Space / double-click wiring moved into wireCharselectRow
     // (src/ui/charselect_hints.ts), which skips activations from inside the
     // lockout disclosure instead of stopping propagation there.
-    // RAISED 11276 -> 11289 (+13) for the "Attack (go to attack distance)"
-    // feature request. This change extracts clickMovePathTo/resolvedClickMoveTarget's
-    // bodies to src/game/click_move_target.ts (thin wrappers remain, -15) and
-    // the attack-current-target decision/branching to
+    // Frame layout extraction: bank the reduced coordinator size.
+    // RAISED 11260 -> 11273 (+13) for the "Attack (go to attack distance)"
+    // feature request, re-measured at the release/v0.44.0 sync (the branch
+    // first raised 11276 -> 11289 on the older base). This change extracts
+    // clickMovePathTo/resolvedClickMoveTarget's bodies to
+    // src/game/click_move_target.ts (thin wrappers remain, -15) and the
+    // attack-current-target decision/branching to
     // src/game/attack_current_target.ts (driveAttackCurrentTarget), but main.ts
     // still needs one function to gather the current target and bind main.ts's
     // own click-to-move/Input state into that module's injected actions (the
@@ -1361,8 +1379,9 @@ const MONOLITHS: MonolithRow[] = [
     // one-line OptionsHooks wire-up hud.ts's activateFixedAttackSlot calls
     // through, and one more OR clause + comment in resolveMove's click-to-move
     // enabled gate so the chase works with the click-to-move/Attack Move QoL
-    // settings both off. Net after the extraction, +13. Exact count, zero slack.
-    ceiling: 11289,
+    // settings both off. Net after the extraction, +13. wc -l on the merged
+    // tree. Exact count, zero slack.
+    ceiling: 11273,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {
@@ -1749,7 +1768,8 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
-    ceiling: 5426,
+    // LOWERED 5426 -> 5421 by extracting first-snapshot action bar restore resolution.
+    ceiling: 5421,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
