@@ -83,6 +83,7 @@ function harness(inventory: InvSlot[]): {
     dropOnEquipSlot: noop,
     isGuildBankTab: () => false,
     isVaultBankTab: () => false,
+    isAccountBankTab: () => false,
     dropOnActionSlot: noop,
     dropOnActionRingSlot: noop,
     openItemActionMenu: noop,
@@ -168,6 +169,7 @@ describe('bagUnknownAction mirrors the bagItemAction ladder', () => {
       bankSocketable: false,
       guildBankDeposit: false,
       vaultDeposit: false,
+      accountBankDeposit: false,
       petFeed: false,
     },
   };
@@ -197,6 +199,13 @@ describe('bagUnknownAction mirrors the bagItemAction ladder', () => {
     expect(bagUnknownAction({ ...MODES.none, guildBankDeposit: true })).toBe('none');
     // Even if a future mode build set both, the guild tab still wins as none.
     expect(bagUnknownAction({ ...MODES.none, guildBankDeposit: true, bankDeposit: true })).toBe(
+      'none',
+    );
+  });
+
+  it('offers NOTHING on the account tab either, for the same reason', () => {
+    expect(bagUnknownAction({ ...MODES.none, accountBankDeposit: true })).toBe('none');
+    expect(bagUnknownAction({ ...MODES.none, accountBankDeposit: true, bankDeposit: true })).toBe(
       'none',
     );
   });

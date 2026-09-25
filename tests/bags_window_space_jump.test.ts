@@ -56,6 +56,7 @@ function harness(inventory: InvSlot[]): {
     renderCharIfOpen: noop,
     vendorOpen: () => false,
     isVaultBankTab: () => false,
+    isAccountBankTab: () => false,
     sellConfirmPolicy: () => ({ enabled: true, minQualityRank: 1 }),
     tradeOpen: () => false,
     isMarketSell: () => false,

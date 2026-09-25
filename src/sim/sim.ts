@@ -51,6 +51,8 @@ import type { ItemCopyAnchor } from './item_copy_anchor';
 
 export type { CharacterState, PetState } from './character_state';
 
+import type { AccountBankState } from './account_bank';
+import * as accountBankMod from './account_bank';
 import { type AccountEarner, type AccountLedger, freshAccountLedger } from './account_ledger';
 import { buildCivicServicePlacements } from './civic_service_placements';
 import { advanceClimb, tryStartClimb } from './climb';
@@ -2100,6 +2102,11 @@ export class Sim {
   // DB) and exposed as a live SimContext view. Always empty offline: guilds are
   // a server social system, so the offline sim never creates a book.
   guildBanks: Map<number, GuildBankState> = new Map();
+  // Account Bank books: account id -> live AccountBankState, loaded by the
+  // server per session join through loadAccountBank and evicted at leave
+  // (account_bank.ts owns the shape). Always empty offline: accounts are a
+  // server concept, so the offline sim never creates a book.
+  accountBanks: Map<number, AccountBankState> = new Map();
   /** [dev] /dev freezemobs: while true, every mob skips its AI update and
    *  acquires no aggro, so the placer works among live packs without
    *  scattering them. Set via setDevMobsFrozen; never persisted. */
@@ -5333,6 +5340,11 @@ export class Sim {
       // through the guild_bank.ts helpers. Sim-owned, never reassigned.
       get guildBanks() {
         return sim.guildBanks;
+      },
+      // Account Bank book map: account id -> live book, read and written only
+      // through the account_bank.ts helpers. Sim-owned, never reassigned.
+      get accountBanks() {
+        return sim.accountBanks;
       },
       // Book of Deeds live views (all mutated in place, never reassigned).
       get deedDirtyPids() {
@@ -9671,6 +9683,15 @@ export class Sim {
   guildBankDeposit(_slotIndex: number, _count?: number): void {}
   guildBankWithdraw(_slotIndex: number, _count?: number): void {}
   guildBankBuySlots(): void {}
+  // The Account Bank is an ACCOUNT feature, and accounts live on the server,
+  // so offline play never has one: the read is null and the commands are
+  // inert (the socialInfo idiom), forever. The online path is live:
+  // ClientWorld sends the account_bank_* tokens and the server acts for an
+  // explicit pid + accountId through the accountBank*For entry points below.
+  accountBankInfo: null = null;
+  accountBankDeposit(_slotIndex: number, _count?: number): void {}
+  accountBankWithdraw(_slotIndex: number, _count?: number): void {}
+  accountBankBuySlots(): void {}
   /** Offline has no guild and no bank_ledger, so the log is EMPTY and READY,
    *  never 'loading' (nothing is ever in flight) and never 'refused' (nothing
    *  declined it). The Guild pane never renders offline anyway, so this is the
@@ -10446,6 +10467,59 @@ export class Sim {
 
   guildBankInfoFor(pid: number): import('../world_api').GuildBankInfo | null {
     return guildBankMod.guildBankInfoFor(this.ctx, pid);
+  }
+
+  // The Account Bank: three op bodies + the gated info read, as pid+accountId
+  // SERVER entry points (the guildBank*For pattern above). Deliberately
+  // distinct from the IWorld facet members (accountBankDeposit etc. in the
+  // inert block above): the offline facet arm is inert forever because
+  // offline play never has an account, while the authoritative server acts
+  // for an explicit pid through these, passing the accountId its own session
+  // auth already resolved (never client-supplied). All gameplay rules
+  // (proximity, item policy, price, capacity) live in account_bank.ts; the
+  // server validates shape only.
+
+  loadAccountBank(accountId: number, raw: unknown): void {
+    accountBankMod.loadAccountBank(this.ctx, accountId, raw);
+  }
+
+  serializeAccountBank(accountId: number): AccountBankState | null {
+    return accountBankMod.serializeAccountBank(this.ctx, accountId);
+  }
+
+  evictAccountBank(accountId: number): void {
+    accountBankMod.evictAccountBank(this.ctx, accountId);
+  }
+
+  accountBankDepositFor(
+    pid: number,
+    accountId: number,
+    slotIndex: number,
+    count?: number,
+    selection?: MaterialSourceTransferSelection,
+  ): void {
+    accountBankMod.accountBankDeposit(this.ctx, accountId, slotIndex, count, pid, selection);
+  }
+
+  accountBankWithdrawFor(
+    pid: number,
+    accountId: number,
+    slotIndex: number,
+    count?: number,
+    selection?: MaterialSourceTransferSelection,
+  ): void {
+    accountBankMod.accountBankWithdraw(this.ctx, accountId, slotIndex, count, pid, selection);
+  }
+
+  accountBankBuySlotsFor(pid: number, accountId: number): void {
+    accountBankMod.accountBankBuySlots(this.ctx, accountId, pid);
+  }
+
+  accountBankInfoFor(
+    pid: number,
+    accountId: number,
+  ): import('../world_api').AccountBankInfo | null {
+    return accountBankMod.accountBankInfoFor(this.ctx, accountId, pid);
   }
 
   // The OPERATOR pair (server-only, never IWorld): the ungated guild-id-scoped

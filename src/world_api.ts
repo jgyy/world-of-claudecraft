@@ -45,6 +45,9 @@
 //   guild_bank.ts       IWorldGuildBank      shared guild treasury + item store (guild-wide view
 //                                            with canEdit marking officer-plus EDITS,
 //                                            proximity-gated info + gold/item/buy-slots commands)
+//   account_bank.ts     IWorldAccountBank    account-wide item store shared across every
+//                                            character on the account, proximity-gated info +
+//                                            deposit/withdraw/buy-slots commands
 //   mounts.ts           IWorldMounts         rideable ground mounts: pick + mount/dismount
 //   dungeon_finder.ts   IWorldDungeonFinder  Dungeon Finder queue/proposals/premade board
 //   deeds.ts            IWorldDeeds          earned deeds, lifetime stats, renown, active title,
@@ -64,6 +67,7 @@
 //                                          union of the facets.
 // ---------------------------------------------------------------------------
 
+import type { IWorldAccountBank } from './world_api/account_bank';
 import type { IWorldActionBar } from './world_api/action_bar';
 import type { IWorldBank } from './world_api/bank';
 import type { IWorldBattleground } from './world_api/battleground';
@@ -242,6 +246,7 @@ export type StableCooldownWire =
   | readonly [expiresAt: number, recoveryRate: number, acceleratedUntil: number];
 
 // --- facet aux-type + value re-exports (each travels with its facet file) ---
+export type { AccountBankInfo } from './world_api/account_bank';
 export type {
   ActionBarFormLayout,
   ActionBarLayout,
@@ -425,6 +430,7 @@ export interface IWorld
     IWorldProfessions,
     IWorldBank,
     IWorldGuildBank,
+    IWorldAccountBank,
     IWorldDungeonFinder,
     IWorldActionBar,
     IWorldDeeds,
@@ -840,6 +846,17 @@ export const COMMAND_NAMES = [
   // The Social window's Who tab: ask for the realm roster (answered by the
   // `who` frame, mirrored as IWorldSocialGraph.whoInfo).
   'who',
+  // The Account Bank cluster: an account-wide item store shared across every
+  // character on the account (src/sim/account_bank.ts). Its own account_bank_*
+  // tokens forever, never a reuse of the personal bank_* or guild_bank_*
+  // strings (the guild bank's own state.md decision, mirrored here). `slot` is
+  // a container index and `count` optional (the bank_* wire idiom). The Sim
+  // owns every gameplay rule (banker proximity, the anonymous-pipe item
+  // policy, price, capacity); the server validates shape only. Appended at
+  // the END because wire tokens are never reordered.
+  'account_bank_deposit',
+  'account_bank_withdraw',
+  'account_bank_buy_slots',
 ] as const;
 
 // The union both the send path (`online.ts`) and the dispatch switch
@@ -923,6 +940,7 @@ export type WorldFacet =
   | 'IWorldTelemetry'
   | 'IWorldBank'
   | 'IWorldGuildBank'
+  | 'IWorldAccountBank'
   | 'IWorldDungeonFinder'
   | 'IWorldActionBar'
   | 'IWorldDeeds'
@@ -1151,6 +1169,13 @@ export const COMMAND_FACETS = {
   guild_bank_withdraw: 'IWorldGuildBank',
   guild_bank_buy_slots: 'IWorldGuildBank',
   guild_bank_log: 'IWorldGuildBank',
+  // IWorldAccountBank: the account-wide item store shared across every
+  // character on the account (snake_case wire strings, by design; its OWN
+  // tokens, never a bank_* or guild_bank_* reuse). accountBankInfo is a
+  // proximity-gated snapshot read (no send, untagged).
+  account_bank_deposit: 'IWorldAccountBank',
+  account_bank_withdraw: 'IWorldAccountBank',
+  account_bank_buy_slots: 'IWorldAccountBank',
   // IWorldMounts: pick + mount/dismount (snake_case wire strings, by design).
   // The active mount is a self-snapshot read (terse `mnt`, no send, untagged);
   // summoning one is an item use (use_item), not a mount command.

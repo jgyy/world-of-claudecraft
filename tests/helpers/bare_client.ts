@@ -246,6 +246,7 @@ export function bareClient(pid: number, overrides: BareClientOverrides = {}): Cl
   // `!== null` gates, where undefined would behave differently.
   c.guildBankInfo = null;
   c.guildBankLogMirror = new GuildBankLogMirror();
+  c.accountBankInfo = null;
   c.toolEffectSlots = [];
   c.commissionOrders = [];
   c.socialDirty = false;

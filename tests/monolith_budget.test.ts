@@ -511,7 +511,12 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    ceiling: 18235,
+    // Raised 18235 -> 18236 (+1, a maintainer decision) for the Account Bank
+    // feature: one BagsWindowDeps wiring line (isAccountBankTab), the same
+    // shape isGuildBankTab/isVaultBankTab already pay here. No behavior moved
+    // out to buy the raise back; justified in the PR body per the ratchet's
+    // own rule.
+    ceiling: 18236,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -1125,7 +1130,15 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    ceiling: 11750,
+    // Raised 11750 -> 11821 (+71, a maintainer decision) for the Account Bank
+    // feature (src/sim/account_bank.ts): the ctx-held accountBanks map field
+    // plus its SimContext getter, the inert offline IWorld arms, and the
+    // pid+accountId server entry points (accountBank*For), all thin
+    // delegates to the new sibling module, could not land behind the seam any
+    // thinner (the same shape the guild bank's own addition already pays
+    // here). No behavior moved out to buy the raise back; justified in the PR
+    // body per the ratchet's own rule.
+    ceiling: 11821,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1569,7 +1582,15 @@ const MONOLITHS: MonolithRow[] = [
     // quest/death record arms of the event drain moved to
     // server/event_record_observers.ts (which also hosts the new craftRoll
     // arm), so the audit landed as a net shrink. Exact count, zero slack.
-    ceiling: 9965,
+    // Raised 9965 -> 10011 (+46, a maintainer decision) for the Account Bank
+    // feature: the join-time loadAccountBank call, the saveCharacter-cadence
+    // persist (server/account_bank_db.ts), the leave-time evict, the
+    // accountBank wire snapshot key, and the three account_bank_* dispatch
+    // cases (server/account_bank_wire.ts) are each a thin one- or two-line
+    // call into a sibling module, the same shape the guild bank's own
+    // dispatch/save/wire wiring already pays here. No behavior moved out to
+    // buy the raise back; justified in the PR body per the ratchet's own rule.
+    ceiling: 10011,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -1724,7 +1745,13 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
-    ceiling: 5426,
+    // Raised 5426 -> 5450 (+24, a maintainer decision) for the Account Bank
+    // IWorldAccountBank mirror: the field, the snapshot decode, and the three
+    // command sends are each a thin one- or two-line addition beside the
+    // guild bank's own equivalent lines, the same shape already paid here.
+    // No behavior moved out to buy the raise back; justified in the PR body
+    // per the ratchet's own rule.
+    ceiling: 5450,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
@@ -2236,7 +2263,16 @@ const MONOLITHS: MonolithRow[] = [
     // exact `wc -l < src/ui/bank_window.ts` measurement on the resolved tree.
     // RE-CONFIRMED at the final line-budget reconciliation: still 1810,
     // below both parent pins. Exact merged count, zero slack.
-    ceiling: 1810,
+    // Raised 1810 -> 1859 (+49, a maintainer decision) for the Account Bank
+    // tab: the BankTabId variant, the accountPane field and constructor wiring,
+    // the accountTabActive getter, the tab-strip entry, and the render/branch
+    // wiring are each a thin addition beside the guild/vault tabs' own
+    // equivalent lines, the same shape already paid here. The pane's own
+    // logic lives entirely in the new account_bank_view.ts / account_bank_window.ts
+    // sibling pair (the seam this ceiling names); no behavior moved out of
+    // THIS file to buy the raise back. Justified in the PR body per the
+    // ratchet's own rule.
+    ceiling: 1859,
     seam: 'a pure view-core plus a thin painter sibling (src/ui/CLAUDE.md)',
   },
   {

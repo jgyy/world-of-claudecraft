@@ -9,6 +9,7 @@ import { sanitizeRemovedZone1Content } from '../src/sim/removed_zone1_content';
 import type { CharacterState, MailSave, MarketSave } from '../src/sim/sim';
 import type { ArenaFormat, PlayerClass } from '../src/sim/types';
 import type { ActionBarLayoutProfiles, StoredActionBarLayout } from '../src/world_api/action_bar';
+import { ACCOUNT_BANK_SCHEMA } from './account_bank_db';
 import { projectAccountExportState } from './account_export_state';
 import { ACCOUNT_LEDGER_SCHEMA } from './account_ledger_db';
 import { ACCOUNT_WEALTH_SCHEMA } from './account_wealth_db';
@@ -1343,6 +1344,9 @@ export async function ensureSchema(): Promise<void> {
     // characters(id) and accounts(id), so they run after SCHEMA.
     await client.query(DEEDS_SCHEMA);
     await client.query(ACCOUNT_LEDGER_SCHEMA);
+    // The Account Bank (server/account_bank_db.ts): FK-references accounts(id),
+    // so it runs after SCHEMA, like ACCOUNT_WEALTH_SCHEMA above.
+    await client.query(ACCOUNT_BANK_SCHEMA);
     // The $WOC custody mail overlay (server/mail_custody_overlay.ts): one
     // durable row per booked parcel until the next full mail-book write
     // bakes it. No FK on purpose: rows must survive character deletion long

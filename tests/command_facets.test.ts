@@ -419,6 +419,45 @@ describe('command facet tags (guild bank)', () => {
   });
 });
 
+// Account Bank: an account-wide item store shared across every character on
+// the account (src/sim/account_bank.ts), its OWN account_bank_* tokens, never
+// a bank_* or guild_bank_* reuse. The table-consistency invariants in the W6
+// block above already cover these new entries; this block pins the exact
+// facet per command, keyed on the WIRE strings, and that the proximity-gated
+// accountBankInfo read stays untagged (no wire send). Append-only: never edit
+// a tag.
+const ACCOUNT_BANK_TAGS: Readonly<Record<string, string>> = {
+  account_bank_deposit: 'IWorldAccountBank',
+  account_bank_withdraw: 'IWorldAccountBank',
+  account_bank_buy_slots: 'IWorldAccountBank',
+};
+
+describe('command facet tags (account bank)', () => {
+  const tags = COMMAND_FACETS as Readonly<Record<string, string>>;
+
+  it('tags every account-bank command with the IWorldAccountBank facet', () => {
+    for (const [cmd, facet] of Object.entries(ACCOUNT_BANK_TAGS)) {
+      expect(tags[cmd], `facet tag for '${cmd}'`).toBe(facet);
+    }
+  });
+
+  it('keeps the account-bank cluster distinct from the personal and guild bank tokens', () => {
+    expect(Object.keys(ACCOUNT_BANK_TAGS).sort()).toEqual([
+      'account_bank_buy_slots',
+      'account_bank_deposit',
+      'account_bank_withdraw',
+    ]);
+    for (const cmd of Object.keys(ACCOUNT_BANK_TAGS)) {
+      expect(BANK_TAGS[cmd]).toBeUndefined();
+      expect(GUILD_BANK_TAGS[cmd]).toBeUndefined();
+    }
+  });
+
+  it('does not tag accountBankInfo (proximity-gated snapshot read, no wire command)', () => {
+    expect('accountBankInfo' in tags).toBe(false);
+  });
+});
+
 // Deeds: append the Book of Deeds cluster's tags. The table-consistency
 // invariants in the W6 block above (no orphan tag, no dispatch-only leak)
 // already cover the new entries; this block pins the exact facet for the two

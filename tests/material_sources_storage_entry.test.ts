@@ -164,6 +164,7 @@ function bagsAtBank(inventory: InvSlot[], tab: StorageTab = 'bank'): BagsHarness
     isPersonalBankTab: () => tab === 'bank',
     isGuildBankTab: () => tab === 'guild',
     isVaultBankTab: () => tab === 'vault',
+    isAccountBankTab: () => false,
     pendingPetFeed: () => false,
     closeVendor: noop,
     closeBank: noop,

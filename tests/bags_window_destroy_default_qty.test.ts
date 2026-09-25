@@ -56,6 +56,7 @@ function harness(inventory: InvSlot[]): { root: HTMLElement } {
     onClosed: noop,
     sellConfirmPolicy: () => ({ enabled: true, minQualityRank: 1 }),
     isVaultBankTab: () => false,
+    isAccountBankTab: () => false,
     addItemToTrade: noop,
     tradeOfferHeadroom: () => 0,
     stageMarketSell: noop,

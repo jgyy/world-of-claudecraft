@@ -143,6 +143,25 @@ const baseEnTable = {
   'log.guildBankWithdrawGold': 'You withdraw {money} from the guild treasury.',
   'log.guildBankDepositItem': 'You deposit {item} into the guild bank.',
   'log.guildBankWithdrawItem': 'You withdraw {item} from the guild bank.',
+  // The Account Bank (src/sim/account_bank.ts): an account-wide item store
+  // shared across every character on the account. "You are too far from the
+  // banker." and the withdraw-side bags-full line reuse the existing
+  // error.bankTooFar / error.bagsStackIndivisible rows verbatim (exact-string
+  // match, source-module-agnostic); only the account-worded strings below are
+  // new. The anonymous-pipe item policy shares its WHETHER with the guild
+  // bank (anonymousPipeRefused) but never its GUILD-worded strings.
+  'error.accountBankFull': 'Your account bank is full.',
+  'error.accountBankStackIndivisible':
+    'That stack cannot be split to fit the space left in your account bank.',
+  'error.accountBankQuestItem': 'You cannot store quest items in the account bank.',
+  'error.accountBankSoulbound': 'You cannot store soulbound items in the account bank.',
+  'error.accountBankNoTransfer': 'That item cannot be stored in the account bank.',
+  'error.accountBankWithdrawRefused': 'That item cannot be withdrawn from the account bank.',
+  'error.accountBankCannotAfford': 'You cannot afford that account bank expansion.',
+  'error.accountBankMaxSlots': 'Your account bank cannot be expanded further.',
+  'log.accountBankSlotsPurchased': 'You purchase additional account bank slots.',
+  'log.accountBankDepositItem': 'You deposit {item} into the account bank.',
+  'log.accountBankWithdrawItem': 'You withdraw {item} from the account bank.',
   'error.specLevel': 'You may choose a specialization at level {level}.',
   'error.equipLevel': 'You must be level {level} to equip that.',
   'error.mountLevel': 'You must be level {level} to ride that mount.',
@@ -17820,6 +17839,17 @@ const RULES: Rule[] = [
   {
     re: /^You withdraw (.+) from the guild bank\.$/,
     build: (m) => tSim('log.guildBankWithdrawItem', { item: locItem(m[1]) }),
+  },
+  // Account Bank success notices (src/sim/account_bank.ts), the guild bank's
+  // twin pair above minus the treasury forms (the account bank moves items
+  // only, never copper).
+  {
+    re: /^You deposit (.+) into the account bank\.$/,
+    build: (m) => tSim('log.accountBankDepositItem', { item: locItem(m[1]) }),
+  },
+  {
+    re: /^You withdraw (.+) from the account bank\.$/,
+    build: (m) => tSim('log.accountBankWithdrawItem', { item: locItem(m[1]) }),
   },
 ];
 

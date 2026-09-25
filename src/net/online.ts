@@ -97,6 +97,7 @@ import {
 import type { VendorBuyOptions } from '../sim/vendor_buy_stack';
 import { WORLD_SEED } from '../sim/world_seed';
 import {
+  type AccountBankInfo,
   type AccountCosmetics,
   type ActiveConsecration,
   type ActiveFrostRing,
@@ -1350,6 +1351,12 @@ export class ClientWorld extends ReconWireState implements IWorld {
   // per-TTL request gate, and the merge rules; this class only puts the
   // requests it hands back on the wire.
   private guildBankLogMirror = new GuildBankLogMirror();
+  // --- IWorldAccountBank: an account-wide item store shared across every
+  // character on the account, mirrored from the snapshot self (`s.accountBank`,
+  // delta-omitted). Null away from a banker or while dead, exactly like
+  // bankInfo, since (unlike guildBankInfo) it never depends on any OTHER
+  // account's actions. ---
+  accountBankInfo: AccountBankInfo | null = null;
   // --- IWorldDeeds: the Book of Deeds self mirror, from the snapshot self
   // (`s.deeds`/`s.dstats` heavy-gated, `s.renown`/`s.atitle`/`s.aborder`
   // per-tick diffed).
@@ -3301,6 +3308,11 @@ export class ClientWorld extends ReconWireState implements IWorld {
         this.guildBankInfo = s.guildBank;
         if (hadGate !== (this.guildBankInfo !== null)) this.guildBankLogMirror.reset();
       }
+      // `accountBank` follows the same delta contract as `guildBank`: the
+      // server encodes null away from a banker or on death (sim
+      // accountBankInfoFor). No activity-log mirror to reset on the gate
+      // transition (the account bank keeps none).
+      if (s.accountBank !== undefined) this.accountBankInfo = s.accountBank;
       // --- IWorldDeeds / IWorldReliquary / account-ledger self-decode
       // (`deeds`/`dstats`/`reliq`/`acct` heavy-gated, `renown`/`atitle`/
       // `aborder` per-tick diffed, all delta-omitted): src/net/book_wire.ts. ---
@@ -4772,6 +4784,18 @@ export class ClientWorld extends ReconWireState implements IWorld {
   guildBankLogOlder(): void {
     const request = this.guildBankLogMirror.requestOlder(Date.now());
     if (request !== null) this.cmd(request);
+  }
+  // --- IWorldAccountBank: an account-wide item store shared across every
+  // character on the account. accountBankInfo arrives beside the guild bank's
+  // pair, mirrored above; no activity log to fetch. ---
+  accountBankDeposit(...args: Parameters<typeof materialStorageTransferPayload>): void {
+    this.cmd({ cmd: 'account_bank_deposit', ...materialStorageTransferPayload(...args) });
+  }
+  accountBankWithdraw(...args: Parameters<typeof materialStorageTransferPayload>): void {
+    this.cmd({ cmd: 'account_bank_withdraw', ...materialStorageTransferPayload(...args) });
+  }
+  accountBankBuySlots(): void {
+    this.cmd({ cmd: 'account_bank_buy_slots' });
   }
   // --- IWorldDeeds: title selection. No optimistic local write (the bank
   // precedent): the mirror updates from the `atitle` snapshot echo once the

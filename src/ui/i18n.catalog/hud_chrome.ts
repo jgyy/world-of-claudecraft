@@ -5819,6 +5819,20 @@ export const hudChromeStrings = {
     // M16: the five non-Latin fills land in this same change.)
     tabsAria: 'Bank tabs',
     personalTab: 'Personal',
+    // The Account tab (account bank): an account-wide item store shared
+    // across every character on the account. The strip renders only while
+    // accountBankInfo is non-null (standing at a banker, online); every
+    // character on the account may deposit/withdraw (no officer/read-only
+    // concept, unlike the guild tab below). Withdraw prompt bodies reuse the
+    // personal keys above.
+    accountTab: 'Account',
+    accountEmpty: 'The account bank is empty.',
+    accountBuyConfirm: 'Purchase {count} additional account bank slots for {price}?',
+    // Bags-side hints while the ACCOUNT tab is active: its own pair, distinct
+    // from the guild pair below (the consequences differ: only this player's
+    // own characters can ever touch this book).
+    accountDepositHint: 'Click to deposit into the account bank',
+    accountCannotDeposit: 'Cannot go in the account bank',
     guildTab: 'Guild',
     guildCapacityAria: 'Guild bank slots used: {used} of {total}',
     guildEmpty: 'The guild bank is empty.',

@@ -22,6 +22,7 @@ import { ITEMS } from '../sim/data';
 import { guildBankRungsBought } from '../sim/guild_bank';
 import { vaultMaterialIds } from '../sim/materials_vault';
 import type { IWorld } from '../world_api';
+import { ACCOUNT_PANEL_ID, ACCOUNT_TAB_ID, AccountBankTab } from './account_bank_window';
 import {
   BAG_CATEGORIES,
   BAG_SORTS,
@@ -216,7 +217,7 @@ export interface BankWindowDeps extends PainterHostPresentation, Partial<Claudiu
  *  non-null (any guild member at a banker, online with the book loaded;
  *  canEdit gates the actions); the Vault tab exists only while vaultInfo is
  *  non-null (standing at a banker, both hosts). */
-export type BankTabId = 'personal' | 'vault' | 'guild';
+export type BankTabId = 'personal' | 'vault' | 'guild' | 'account';
 
 export class BankWindow {
   private opened = false;
@@ -243,6 +244,10 @@ export class BankWindow {
   // The Materials Vault pane (vault_view.ts core + vault_window.ts), on the
   // same composition terms.
   private readonly vaultPane: VaultTab;
+  // The Account Bank pane (account_bank_view.ts core + account_bank_window.ts):
+  // an account-wide item store shared across every character on the account,
+  // on the same composition terms.
+  private readonly accountPane: AccountBankTab;
 
   // Window-local filter state: category chips + sort persist across sessions under
   // BANK_FILTER_KEY; the live search is per-visit and starts empty even when a
@@ -394,6 +399,24 @@ export class BankWindow {
         if (this.opened) this.render();
       },
     });
+    this.accountPane = new AccountBankTab({
+      root: () => this.deps.root(),
+      world: () => this.deps.world(),
+      itemIcon: (item, quality) => this.deps.itemIcon(item, quality),
+      moneyHtml: (copper) => this.deps.moneyHtml(copper),
+      itemTooltip: (item, instance, materialSources) =>
+        this.deps.itemTooltip(item, instance, materialSources),
+      attachTooltip: (el, html) => this.deps.attachTooltip(el, html),
+      hideTooltip: () => this.deps.hideTooltip(),
+      consumePeek: () => this.deps.consumePeek(),
+      onInventoryChanged: () => this.deps.onInventoryChanged(),
+      installPromptDialog: (prompt, opener, close) =>
+        this.installPromptDialog(prompt, opener, close),
+      dismissPrompts: () => dismissBankPrompts(),
+      requestRender: () => {
+        if (this.opened) this.render();
+      },
+    });
   }
 
   get isOpen(): boolean {
@@ -444,6 +467,16 @@ export class BankWindow {
    *  and the slow-band repaint, the guildTabActive rule. */
   get vaultTabActive(): boolean {
     return this.opened && this.tab === 'vault' && this.vaultPane.unlocked;
+  }
+
+  /** True while the window is open on the Account pane: the bags companion
+   *  reads this (via Hud) to route a bag click to accountBankDeposit. Also
+   *  requires accountBankInfo to be live RIGHT NOW, the guildTabActive /
+   *  vaultTabActive rule: it closes the one-frame window between the mirror
+   *  nulling (walk-away, death) and the slow-band repaint. No read-only
+   *  concept here (every character on the account may deposit). */
+  get accountTabActive(): boolean {
+    return this.opened && this.tab === 'account' && this.deps.world().accountBankInfo != null;
   }
 
   /** Observe raw authoritative refusals before Hud translates their text. */
@@ -627,11 +660,17 @@ export class BankWindow {
     // a strict !== null renders a spurious tab for undefined.
     const vaultAvailable = this.deps.world().vaultInfo != null;
     if (!vaultAvailable && this.tab === 'vault') this.tab = 'personal';
+    // The Account tab follows the same collapse rule: it exists only while
+    // accountBankInfo is non-null (nearBanker in both hosts, the personal
+    // bank's own gate; offline it is always null, since accounts do not exist
+    // there), and the active tab snaps back to Personal when it disappears.
+    const accountAvailable = this.deps.world().accountBankInfo != null;
+    if (!accountAvailable && this.tab === 'account') this.tab = 'personal';
     el.innerHTML =
       `<div class="panel-title ui-win-head"><span class="ui-win-title">${esc(t('hudChrome.bank.title'))} <span class="panel-subtitle ui-win-sub">${esc(t('hudChrome.bank.subtitle'))}</span></span>` +
       `<button type="button" class="x-btn ui-x-btn" data-close aria-label="${esc(t('hudChrome.bank.close'))}">${svgIcon('close')}</button></div>`;
     el.querySelector('[data-close]')?.addEventListener('click', () => this.close());
-    if (guildAvailable || vaultAvailable) {
+    if (guildAvailable || vaultAvailable || accountAvailable) {
       // The shared WAI-ARIA tab strip (tab_strip_view core + wireTabStrip),
       // the social/talents idiom. The PERSONAL pane's sections still mount
       // directly on the window root (wrapping them would disturb the flex
@@ -650,10 +689,19 @@ export class BankWindow {
             selectedClass: 'on is-on',
             tabs: [
               { id: 'personal', label: t('hudChrome.bank.personalTab') },
-              // The two conditional tabs carry stable button ids so their
-              // panels can point aria-labelledby back at them. The vault sits
-              // between Personal and Guild: both personal stores first, the
-              // shared one last.
+              // The conditional tabs carry stable button ids so their panels
+              // can point aria-labelledby back at them. Account sits right
+              // after Personal (both are single-owner stores); the vault
+              // follows; the shared guild store sits last.
+              ...(accountAvailable
+                ? [
+                    {
+                      id: 'account',
+                      label: t('hudChrome.bank.accountTab'),
+                      buttonId: ACCOUNT_TAB_ID,
+                    },
+                  ]
+                : []),
               ...(vaultAvailable
                 ? [{ id: 'vault', label: t('hudChrome.bank.vaultTab'), buttonId: VAULT_TAB_ID }]
                 : []),
@@ -666,7 +714,7 @@ export class BankWindow {
         ),
       );
       wireTabStrip(el, 'bank-tab', (id, focusFollow) => {
-        if (id !== 'personal' && id !== 'guild' && id !== 'vault') return;
+        if (id !== 'personal' && id !== 'guild' && id !== 'vault' && id !== 'account') return;
         if (this.tab !== id) audio.click();
         this.tab = id;
         this.render();
@@ -677,6 +725,16 @@ export class BankWindow {
       for (const tab of el.querySelectorAll<HTMLElement>('.bank-tab')) {
         tab.dataset.focusKey = `tab:${tab.dataset.tab}`;
       }
+    }
+    if (this.tab === 'account') {
+      this.accountPane.renderInto(el, this.accountPane.model());
+      const accountTab = el.querySelector<HTMLElement>(`#${ACCOUNT_TAB_ID}`);
+      if (accountTab && el.querySelector(`#${ACCOUNT_PANEL_ID}`)) {
+        accountTab.setAttribute('aria-controls', ACCOUNT_PANEL_ID);
+      }
+      this.restoreScroll(el, prevScroll);
+      if (hadFocus) this.restoreControlFocus(el, focusKey);
+      return;
     }
     // A status timer armed while the vault pane was showing must not outlive
     // the pane onto another tab, where its firing would rebuild the whole

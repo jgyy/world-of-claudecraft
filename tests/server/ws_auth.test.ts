@@ -120,6 +120,7 @@ function setup() {
     metaRequestUserData: vi.fn(() => ({ fbp: null, fbc: null })),
     metaEventSourceUrl: vi.fn(() => undefined as string | undefined),
     loadAccountLedger: async () => freshAccountLedger(),
+    loadAccountBankRow: async () => null,
     loadAccountCosmetics: vi.fn(async () => ({
       completedQuestIds: [],
       mechChromaIds: [],

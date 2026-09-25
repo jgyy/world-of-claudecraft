@@ -1051,17 +1051,30 @@ function requireOfficerBook(ctx: SimContext, meta: PlayerMeta): GuildBankState |
  *  this and the client-side dormant predicate over the whole item table so a
  *  new refusal dimension cannot silently desync the Guild tab's rendering);
  *  no host calls it directly. */
+/** The anonymous-pipe policy's WHETHER, shared by every pipe this dimension
+ *  set guards (the guild bank here; the account bank, src/sim/account_bank.ts,
+ *  which reuses this boolean but never this file's GUILD-worded strings):
+ *  def-level quest / soulbound / noMarketList, plus the per-copy transfer
+ *  lock. Direction-independent, exactly like guildBankPipeRefusal's own
+ *  WHETHER (see its doc comment): the same four dimensions refuse both ways. */
+export function anonymousPipeRefused(slot: InvSlot): boolean {
+  const def = ITEMS[slot.itemId];
+  return (
+    def?.kind === 'quest' ||
+    !!def?.soulbound ||
+    !!def?.noMarketList ||
+    isTransferLockedInstance(slot.instance)
+  );
+}
+
 export function guildBankPipeRefusal(
   slot: InvSlot,
   dir: 'deposit' | 'withdraw' = 'deposit',
 ): string | null {
+  if (!anonymousPipeRefused(slot)) return null;
   const def = ITEMS[slot.itemId];
-  const quest = def?.kind === 'quest';
-  const refused =
-    quest || !!def?.soulbound || !!def?.noMarketList || isTransferLockedInstance(slot.instance);
-  if (!refused) return null;
   if (dir === 'withdraw') return 'That item cannot be withdrawn from the guild bank.';
-  if (quest) return 'You cannot store quest items in the guild bank.';
+  if (def?.kind === 'quest') return 'You cannot store quest items in the guild bank.';
   if (def?.soulbound) return 'You cannot store soulbound items in the guild bank.';
   return 'That item cannot be stored in the guild bank.';
 }

@@ -48,6 +48,7 @@ import {
   handleEmailUnsubscribe,
   verifyLoginTwoFactor,
 } from './account';
+import { loadAccountBankRow } from './account_bank_db';
 import { loadAccountLedger } from './account_ledger_db';
 import { accountLedgerKeysFor } from './account_ledger_keys_cache';
 import { relicRecordsIdle } from './account_ledger_records';
@@ -3830,6 +3831,7 @@ export async function startServer(): Promise<http.Server> {
     metaEventSourceUrl,
     loadAccountCosmetics,
     loadAccountLedger,
+    loadAccountBankRow,
     isConnectionRefused,
     bufferHandshakeMessages,
     requestMetadata,

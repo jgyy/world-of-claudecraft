@@ -76,6 +76,7 @@ function renderBagsHarness(
     isPersonalBankTab: () => false,
     isGuildBankTab: () => false,
     isVaultBankTab: () => false,
+    isAccountBankTab: () => false,
     sellConfirmPolicy: () => ({ enabled: true, minQualityRank: 1 }),
     pendingPetFeed: () => false,
     closeVendor: noop,

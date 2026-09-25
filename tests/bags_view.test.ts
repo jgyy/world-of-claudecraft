@@ -44,6 +44,7 @@ const NO_MODE: BagMode = {
   bankSocketable: false,
   guildBankDeposit: false,
   vaultDeposit: false,
+  accountBankDeposit: false,
   petFeed: false,
 };
 
@@ -665,13 +666,14 @@ describe('bag mode chain order pin (insertion guard)', () => {
     bankSocketable: true,
     guildBankDeposit: true,
     // ON, like every other rung: the guard's whole job is to walk EVERY rung
-    // in ladder order (an off flag would let the vault rung move without a
-    // red, defeating the insertion guard by value).
+    // in ladder order (an off flag would let the account or vault rung move
+    // without a red, defeating the insertion guard by value).
+    accountBankDeposit: true,
     vaultDeposit: true,
     petFeed: true,
   };
 
-  it('peels the action ladder one rung at a time: trade > mail-attach > market-sell > vendor > guild-bank-deposit > bank-deposit > vault-deposit > bank-open-no-target > pet-feed > kind fallbacks', () => {
+  it('peels the action ladder one rung at a time: trade > mail-attach > market-sell > vendor > guild-bank-deposit > account-bank-deposit > bank-deposit > vault-deposit > bank-open-no-target > pet-feed > kind fallbacks', () => {
     let mode = { ...ALL_MODES };
     expect(bagItemAction(ITEMS.sword, mode)).toBe('trade');
     mode = { ...mode, tradeOpen: false };
@@ -684,6 +686,9 @@ describe('bag mode chain order pin (insertion guard)', () => {
     expect(bagItemAction(ITEMS.sword, mode)).toBe('guildBankDeposit');
     expect(bagItemAction(ITEMS.questItem, mode)).toBe('guildBankDepositBlockedQuest');
     mode = { ...mode, guildBankDeposit: false };
+    expect(bagItemAction(ITEMS.sword, mode)).toBe('accountBankDeposit');
+    expect(bagItemAction(ITEMS.questItem, mode)).toBe('accountBankDepositBlockedQuest');
+    mode = { ...mode, accountBankDeposit: false };
     expect(bagItemAction(ITEMS.sword, mode)).toBe('bankDeposit');
     expect(bagItemAction(ITEMS.questItem, mode)).toBe('bankDepositBlockedQuest');
     // The bankDeposit rung's bag arm (phase 07): socket while a payload-free
@@ -800,7 +805,7 @@ describe('bag mode chain order pin (insertion guard)', () => {
       'marketSellBlockedNoMarket',
     );
     // A quest item blocks in place at the GUILD bank rung; it must NOT fall
-    // through to the personal bank rung or pet-feed.
+    // through to the account rung, the personal bank rung, or pet-feed.
     expect(
       bagItemAction(ITEMS.questItem, {
         ...ALL_MODES,
@@ -810,6 +815,18 @@ describe('bag mode chain order pin (insertion guard)', () => {
         vendorOpen: false,
       }),
     ).toBe('guildBankDepositBlockedQuest');
+    // A quest item blocks in place at the ACCOUNT bank rung; it must NOT fall
+    // through to the personal bank rung either.
+    expect(
+      bagItemAction(ITEMS.questItem, {
+        ...ALL_MODES,
+        tradeOpen: false,
+        mailAttach: false,
+        marketSell: false,
+        vendorOpen: false,
+        guildBankDeposit: false,
+      }),
+    ).toBe('accountBankDepositBlockedQuest');
     // A quest item blocks in place at the bank; it must NOT fall through to pet-feed.
     expect(
       bagItemAction(ITEMS.questItem, {
@@ -819,6 +836,7 @@ describe('bag mode chain order pin (insertion guard)', () => {
         marketSell: false,
         vendorOpen: false,
         guildBankDeposit: false,
+        accountBankDeposit: false,
         vaultDeposit: false,
       }),
     ).toBe('bankDepositBlockedQuest');
@@ -846,6 +864,10 @@ describe('bag mode chain order pin (insertion guard)', () => {
       'hudChrome.bank.guildCannotDeposit',
     );
     mode = { ...mode, guildBankDeposit: false };
+    // The account tab's own pair, distinct from the guild's.
+    expect(bagTooltipHintKey(ITEMS.sword, mode)).toBe('hudChrome.bank.accountDepositHint');
+    expect(bagTooltipHintKey(ITEMS.questItem, mode)).toBe('hudChrome.bank.accountCannotDeposit');
+    mode = { ...mode, accountBankDeposit: false };
     expect(bagTooltipHintKey(ITEMS.sword, mode)).toBe('hudChrome.bank.depositHint');
     expect(bagTooltipHintKey(ITEMS.questItem, mode)).toBe('hudChrome.bank.cannotDeposit');
     // The bag arm's hint, then its peel (the action cascade's twin).
@@ -872,7 +894,7 @@ describe('bag mode chain order pin (insertion guard)', () => {
 
   it('shift-to-chat-link stays vendor- and bank-owned even with every mode on', () => {
     expect(bagShiftLinks(ALL_MODES)).toBe(false);
-    // Vendor AND both bank modes each own shift; turning off only some keeps it owned.
+    // Vendor AND every bank mode each own shift; turning off only some keeps it owned.
     expect(bagShiftLinks({ ...ALL_MODES, vendorOpen: false })).toBe(false);
     expect(bagShiftLinks({ ...ALL_MODES, bankDeposit: false })).toBe(false);
     expect(bagShiftLinks({ ...ALL_MODES, vendorOpen: false, bankDeposit: false })).toBe(false);
@@ -882,6 +904,7 @@ describe('bag mode chain order pin (insertion guard)', () => {
         vendorOpen: false,
         bankDeposit: false,
         guildBankDeposit: false,
+        accountBankDeposit: false,
         vaultDeposit: false,
       }),
     ).toBe(true);

@@ -50,6 +50,7 @@ const LOG_VIEW_MODE: BagMode = {
   bankSocketable: false,
   guildBankDeposit: false,
   vaultDeposit: false,
+  accountBankDeposit: false,
   petFeed: false,
 };
 
@@ -143,6 +144,7 @@ function harness(
     isPersonalBankTab: () => personalTab,
     isGuildBankTab: () => guildTab,
     isVaultBankTab: () => vaultTab,
+    isAccountBankTab: () => false,
     pendingPetFeed: () => false,
     closeVendor: noop,
     closeBank: noop,

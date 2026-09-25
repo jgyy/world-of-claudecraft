@@ -110,6 +110,8 @@ import {
   type StableTimerWireVersion,
 } from '../src/world_api';
 import { sameAppearance } from '../src/world_api/appearance';
+import { saveAccountBankState } from './account_bank_db';
+import { dispatchAccountBankCommand } from './account_bank_wire';
 import { ownedWeaponSkinLoadout } from './account_cosmetics_live';
 import { AccountCosmeticsService } from './account_cosmetics_service';
 import { reconcileAccountRelics, recordRelicFinds } from './account_ledger_records';
@@ -3303,6 +3305,10 @@ export class GameServer {
         // The account ledger loaded for this account (server/account_ledger_db.ts);
         // absent on the bare test join, which then fills a fresh ledger alone.
         accountLedger?: AccountLedger;
+        // The account bank row loaded for this account (server/account_bank_db.ts),
+        // raw JSONB sanitized by sim.loadAccountBank below; absent on the bare
+        // test join, which then fills an empty book (sanitizeAccountBankState(undefined)).
+        accountBank?: unknown;
         chatStrikes?: number;
         isAdmin?: boolean;
         adminPermissions?: readonly string[];
@@ -3369,6 +3375,12 @@ export class GameServer {
       appearance: meta.appearance ?? null,
       tutorialGreetingSent: state === null,
     });
+    // Account Bank: a separate book keyed by account id, not a PlayerMeta
+    // field (see src/sim/account_bank.ts), so it loads through its own call
+    // rather than an addPlayer opt. LOAD-ONCE (a resume's same accountId is
+    // already loaded, so this is a no-op): MAX_ACTIVE_SESSIONS_PER_ACCOUNT
+    // guarantees no other session could have raced it in.
+    this.sim.loadAccountBank(accountId, meta.accountBank);
     const player = this.sim.entities.get(pid);
     if (player) {
       player.petSpecialCommandsSupported = meta.petSpecialWireVersion === PET_SPECIAL_WIRE_VERSION;
@@ -4016,6 +4028,13 @@ export class GameServer {
       console.error('lease release failed:', err),
     );
     this.sim.removePlayer(session.pid);
+    // Account Bank: evict the book once no OTHER session for this account
+    // remains online (a GM exemption to MAX_ACTIVE_SESSIONS_PER_ACCOUNT is the
+    // only way a second one exists), so the still-connected sibling keeps
+    // reading it. saveCharacterOnLeave above already persisted it.
+    if (![...this.clients.values()].some((live) => live.accountId === session.accountId)) {
+      this.sim.evictAccountBank(session.accountId);
+    }
     // Departures are no longer broadcast to the realm — the leaving player has
     // already disconnected, so there is no one to show their own notice to.
   }
@@ -4541,6 +4560,20 @@ export class GameServer {
           // should mint.
           enqueueLinkChange({ accountId: session.accountId, kinds: ['flex'] }, Date.now());
         }
+      }
+      // The Account Bank rides the SAME save cadence as the character row
+      // (autosave + leave), but as its OWN write to its OWN table: unlike the
+      // guild bank it needs no escrow-merge (MAX_ACTIVE_SESSIONS_PER_ACCOUNT
+      // means this session is the only writer for its account), and unlike
+      // the character blob it must not be duplicated per character. A no-op
+      // when the account never loaded a book this session (never near a
+      // banker) or the write fails; a failure here must never fail the
+      // character save that already committed above.
+      const accountBank = this.sim.serializeAccountBank(session.accountId);
+      if (accountBank) {
+        saveAccountBankState(session.accountId, accountBank).catch((err) =>
+          console.error(`account bank save failed for account ${session.accountId}:`, err),
+        );
       }
       return true;
     };
@@ -7746,6 +7779,11 @@ export class GameServer {
           pid,
         );
         break;
+      case 'account_bank_deposit':
+      case 'account_bank_withdraw':
+      case 'account_bank_buy_slots':
+        dispatchAccountBankCommand(sim, command, msg, pid, session.accountId);
+        break;
       // The history READ (no mutation, no sim call), on its OWN read bucket:
       // a chip press or Show older is a request, and reads must never drain
       // the op bucket a deposit draws from (guild_bank_log_read_guard.ts).
@@ -8735,6 +8773,11 @@ export class GameServer {
     // bank: it can change from OTHER members' deposits, not just this
     // session's own commands.
     maybe('guildBank', this.sim.guildBankInfoFor(anchorSession.pid));
+    // Account bank info follows the same pattern: null unless the player is
+    // alive and at a banker (sim accountBankInfoFor), so it never depends on
+    // any OTHER account's actions the way guildBank does on fellow members'.
+    // accountId comes from the session's own auth, never the client.
+    maybe('accountBank', this.sim.accountBankInfoFor(anchorSession.pid, anchorSession.accountId));
     selfLap?.('self.bank');
     // open need-greed rolls this player can still answer, so a client that
     // missed the transient lootRoll event re-shows the prompt from state. Stays

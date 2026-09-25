@@ -13,6 +13,7 @@
 // the browser, and the headless RL env (enforced by tests/architecture.test.ts).
 
 import type { AccountCosmetics } from '../world_api';
+import type { AccountBankState } from './account_bank';
 import type { FrozenOrbState } from './combat/frozen_orb';
 import type { LetterDef } from './content/letters';
 import type { TalentModifiers } from './content/talents';
@@ -357,6 +358,13 @@ export interface SimContextPrimitives {
   // reassigned, so a live read-only view like bankerIds. Always empty offline
   // (guilds are a server social system).
   readonly guildBanks: Map<number, GuildBankState>;
+  // Account Bank books: account id -> live AccountBankState, owned by Sim and
+  // fed by the server per session join/leave through account_bank.ts
+  // loadAccountBank/evictAccountBank (unlike guildBanks, evicted when the
+  // account's one live session leaves: MAX_ACTIVE_SESSIONS_PER_ACCOUNT means
+  // there is never a second reader to keep the book loaded for). Always empty
+  // offline (accounts are a server concept).
+  readonly accountBanks: Map<number, AccountBankState>;
   // Book of Deeds: players whose deed-relevant state changed this tick,
   // evaluated and cleared at the tick tail (deeds.ts updateDeeds). Sim-owned
   // Set mutated in place, so a read-only live view.
@@ -1500,6 +1508,9 @@ export function createSimContext(host: SimContextHost): SimContext {
     },
     get guildBanks() {
       return host.guildBanks;
+    },
+    get accountBanks() {
+      return host.accountBanks;
     },
     get deedDirtyPids() {
       return host.deedDirtyPids;

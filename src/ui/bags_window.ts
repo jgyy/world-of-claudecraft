@@ -260,6 +260,10 @@ export interface BagsWindowDeps extends PainterHostPresentation {
    *  unlocked: a click deposits the material into the vault. The locked
    *  offer pane arms nothing (a purchase surface, the guild Log rule). */
   isVaultBankTab(): boolean;
+  /** The bank window is open ON ITS ACCOUNT TAB: a click deposits into the
+   *  account-wide item store instead. No read-only concept (every character
+   *  on the account may deposit), unlike the guild tab. */
+  isAccountBankTab(): boolean;
   pendingPetFeed(): boolean;
   // Cross-window commands the bag click fans out to.
   closeVendor(): void;
@@ -1863,6 +1867,21 @@ export class BagsWindow {
         }
         break;
       }
+      case 'accountBankDeposit': {
+        // The account twin of guildBankDeposit: same reference-resolved
+        // index, same shift split prompt, sent through the IWorldAccountBank
+        // facet.
+        const index = bagStackIndex(this.deps.world().inventory, s);
+        if (index < 0) break;
+        if (ev.shiftKey && bankDepositOpensPrompt(s)) {
+          this.showDepositQuantityPrompt(index, s, Math.max(1, Math.floor(s.count)), 'account');
+        } else {
+          this.deps.world().accountBankDeposit(index);
+          this.deps.hideTooltip();
+          this.render();
+        }
+        break;
+      }
       case 'vaultDeposit': {
         // The vault twin of bankDeposit: same reference-resolved index, same
         // shift split prompt, sent through the IWorldBank vault facet (the
@@ -1897,6 +1916,17 @@ export class BagsWindow {
         return;
       case 'guildBankDepositBlockedNoTransfer':
         this.deps.showError(tSim('error.guildBankNoTransfer'));
+        return;
+      // The account pipe's pre-empt denies, its own account-worded sim_i18n
+      // keys (never the guild's GUILD-worded strings).
+      case 'accountBankDepositBlockedQuest':
+        this.deps.showError(tSim('error.accountBankQuestItem'));
+        return;
+      case 'accountBankDepositBlockedSoulbound':
+        this.deps.showError(tSim('error.accountBankSoulbound'));
+        return;
+      case 'accountBankDepositBlockedNoTransfer':
+        this.deps.showError(tSim('error.accountBankNoTransfer'));
         return;
       case 'petFeedBlocked':
         this.deps.showError(t('hud.pet.petEatsFoodOnly'));
@@ -2099,6 +2129,7 @@ export class BagsWindow {
         this.deps.isPersonalBankTab() && hasOpenBankSocket(this.deps.world().bankInfo),
       guildBankDeposit: this.deps.isGuildBankTab(),
       vaultDeposit: this.deps.isVaultBankTab(),
+      accountBankDeposit: this.deps.isAccountBankTab(),
       petFeed: this.deps.pendingPetFeed(),
     };
   }
@@ -2151,6 +2182,7 @@ export class BagsWindow {
       !mode.bankOpen &&
       !mode.bankDeposit &&
       !mode.guildBankDeposit &&
+      !mode.accountBankDeposit &&
       !mode.vaultDeposit &&
       !mode.petFeed;
     return inDefaultMode && bagItemHasContextActions(item, itemId, instance, materialSources, true);
@@ -2590,14 +2622,15 @@ export class BagsWindow {
   // owns the bags closures: the stale-slot re-resolve (resolveDepositSubmit
   // refuses on an itemId mismatch, else clamps to the live stack) and the send.
   // `target` picks which facet command the submit sends: the personal pane's
-  // bankDeposit (default), the Guild tab's guildBankDeposit, or the Vault
-  // tab's vaultDeposit (the sim clamps a partial fill to the material's
-  // headroom silently); everything else is identical across the three.
+  // bankDeposit (default), the Guild tab's guildBankDeposit, the Account
+  // tab's accountBankDeposit, or the Vault tab's vaultDeposit (the sim clamps
+  // a partial fill to the material's headroom silently); everything else is
+  // identical across the four.
   private showDepositQuantityPrompt(
     index: number,
     captured: InvSlot,
     maxCount: number,
-    target: 'bank' | 'guild' | 'vault' = 'bank',
+    target: 'bank' | 'guild' | 'vault' | 'account' = 'bank',
   ): void {
     // knownItemDef, not a raw ITEMS index: the release's stale-client sweep
     // made every bags item read tolerate an id this client does not know.
@@ -2625,6 +2658,7 @@ export class BagsWindow {
         },
         send: (count) => {
           if (target === 'guild') this.deps.world().guildBankDeposit(index, count);
+          else if (target === 'account') this.deps.world().accountBankDeposit(index, count);
           else if (target === 'vault') this.deps.world().vaultDeposit(index, count);
           else this.deps.world().bankDeposit(index, count);
         },

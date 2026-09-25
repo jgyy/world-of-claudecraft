@@ -100,6 +100,11 @@ export interface BagMode {
    *  active tab); the LOCKED vault pane arms none of them, so its clicks fall
    *  to the bankOpen no-target rung like the guild Log view's. */
   vaultDeposit: boolean;
+  /** The bank window is open ON ITS ACCOUNT TAB: a click deposits into the
+   *  account-wide item store instead. The wiring sets at most ONE of the four
+   *  bank deposit modes (keyed off the bank window's active tab); no
+   *  read-only concept (every character on the account may deposit). */
+  accountBankDeposit: boolean;
   /** Pet-feed cursor mode is armed. */
   petFeed: boolean;
 }
@@ -128,6 +133,10 @@ export type BagAction =
   | 'guildBankDepositBlockedQuest'
   | 'guildBankDepositBlockedSoulbound'
   | 'guildBankDepositBlockedNoTransfer'
+  | 'accountBankDeposit'
+  | 'accountBankDepositBlockedQuest'
+  | 'accountBankDepositBlockedSoulbound'
+  | 'accountBankDepositBlockedNoTransfer'
   | 'vaultDeposit'
   /** Not in the honest material set: the vault stores materials only. */
   | 'vaultDepositBlockedNotMaterial'
@@ -152,6 +161,8 @@ export type BagTooltipHintKey =
   | 'hudChrome.bank.socketHint'
   | 'hudChrome.bank.guildDepositHint'
   | 'hudChrome.bank.guildCannotDeposit'
+  | 'hudChrome.bank.accountDepositHint'
+  | 'hudChrome.bank.accountCannotDeposit'
   | 'hudChrome.bank.vaultDepositHint'
   | 'hudChrome.bank.vaultCannotDeposit'
   | 'itemUi.tooltip.clickDestroy'
@@ -235,6 +246,20 @@ export function bagItemAction(
       return 'guildBankDepositBlockedNoTransfer';
     return 'guildBankDeposit';
   }
+  // The ACCOUNT tab carries the identical anonymous-pipe policy as the guild
+  // tab above (src/sim/guild_bank.ts anonymousPipeRefused, reused by
+  // src/sim/account_bank.ts): a bind-on-pickup or quest-bound copy must never
+  // leave the character that earned it, even through a container this same
+  // player owns end to end. No soulbound top-of-function gate covers this
+  // mode either, so it owns its own soulbound deny with the account-worded
+  // sim line.
+  if (mode.accountBankDeposit) {
+    if (item.kind === 'quest') return 'accountBankDepositBlockedQuest';
+    if (item.soulbound) return 'accountBankDepositBlockedSoulbound';
+    if (item.noMarketList || isTransferLockedInstance(instance))
+      return 'accountBankDepositBlockedNoTransfer';
+    return 'accountBankDeposit';
+  }
   if (mode.bankDeposit) {
     if (item.kind === 'quest') return 'bankDepositBlockedQuest';
     // The socket arm (Bank Storage phase 07): a payload-free bag with an open
@@ -303,6 +328,11 @@ export function bagUnknownAction(mode: BagMode): 'bankDeposit' | 'none' {
   // no player action can clear. The personal pane keeps its deposit: its only
   // refusal is quest, and its owner can always withdraw again.
   if (mode.guildBankDeposit) return 'none';
+  // The ACCOUNT tab offers nothing on an unknown cell either, for the same
+  // reason: it carries the identical anonymous-pipe policy a client cannot
+  // evaluate without a def, and a refused copy would strand in the book with
+  // no action to clear it (the withdraw side re-checks the same policy).
+  if (mode.accountBankDeposit) return 'none';
   // The VAULT tab likewise offers nothing on an unknown cell: the honest
   // material set is derived from THIS bundle's content tables, so a def-less
   // id is never a member and the sim would refuse the deposit anyway.
@@ -348,7 +378,13 @@ export function vendorSellIsInstant(
  *  Linking a stack into chat is inert and available on every other surface, so
  *  the reading view keeps it. */
 export function bagShiftLinks(mode: BagMode): boolean {
-  return !mode.vendorOpen && !mode.bankDeposit && !mode.guildBankDeposit && !mode.vaultDeposit;
+  return (
+    !mode.vendorOpen &&
+    !mode.bankDeposit &&
+    !mode.guildBankDeposit &&
+    !mode.accountBankDeposit &&
+    !mode.vaultDeposit
+  );
 }
 
 /** Whether a click in trade mode opens the offer-quantity prompt (the bank
@@ -452,6 +488,7 @@ export function bagDestroyAction(item: BagItemInfo, mode: BagMode): BagDestroyAc
     mode.bankOpen ||
     mode.bankDeposit ||
     mode.guildBankDeposit ||
+    mode.accountBankDeposit ||
     mode.vaultDeposit
   )
     return 'none';
@@ -525,6 +562,16 @@ export function bagTooltipHintKey(
       isTransferLockedInstance(instance)
       ? 'hudChrome.bank.guildCannotDeposit'
       : 'hudChrome.bank.guildDepositHint';
+  }
+  if (mode.accountBankDeposit) {
+    // The account tab's own pair, distinct from the guild's: the same four
+    // pipe-policy dimensions, worded for the account bank.
+    return item.kind === 'quest' ||
+      item.soulbound ||
+      item.noMarketList ||
+      isTransferLockedInstance(instance)
+      ? 'hudChrome.bank.accountCannotDeposit'
+      : 'hudChrome.bank.accountDepositHint';
   }
   if (mode.bankDeposit) {
     if (item.kind === 'quest') return 'hudChrome.bank.cannotDeposit';

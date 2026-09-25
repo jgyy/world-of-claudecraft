@@ -40,6 +40,7 @@ import { OVERHEAD_EMOTE_IDS, type PlayerClass } from '../src/sim/types';
 // The 27 facet interfaces the W1 split produced (src/world_api/<facet>.ts), plus the
 // bank facet added in the bank-system feature and the Book of Deeds facet. Imported
 // type-only to pin each facet's runtime member array to its interface key-set below.
+import type { IWorldAccountBank } from '../src/world_api/account_bank';
 import type { IWorldActionBar } from '../src/world_api/action_bar';
 import type { IWorldBank } from '../src/world_api/bank';
 import type { IWorldBattleground } from '../src/world_api/battleground';
@@ -355,6 +356,13 @@ export const IWORLD_MEMBERS = [
   { name: 'guildBankBuySlots', kind: 'method' },
   { name: 'guildBankLog', kind: 'method' },
   { name: 'guildBankLogOlder', kind: 'method' },
+  // --- account bank: an account-wide item store shared across every
+  //     character on the account, proximity-gated read + deposit/withdraw/
+  //     buy-slots commands ---
+  { name: 'accountBankInfo', kind: 'data' },
+  { name: 'accountBankDeposit', kind: 'method' },
+  { name: 'accountBankWithdraw', kind: 'method' },
+  { name: 'accountBankBuySlots', kind: 'method' },
   // --- dungeons + delves commands and reads ---
   { name: 'enterDungeon', kind: 'method' },
   { name: 'leaveDungeon', kind: 'method' },
@@ -865,9 +873,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // methods, the Who tab data and method, CPU-hygiene entityRosterVersion,
     // and the account-wide Book of Deeds / Reliquary read halves. Counted
     // directly off the resolved IWORLD_MEMBERS literal.
-    expect(IWORLD_MEMBERS.length).toBe(378);
-    expect(DATA_MEMBERS.length).toBe(107);
-    expect(METHOD_MEMBERS.length).toBe(271);
+    expect(IWORLD_MEMBERS.length).toBe(382);
+    expect(DATA_MEMBERS.length).toBe(108);
+    expect(METHOD_MEMBERS.length).toBe(274);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -884,6 +892,10 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'acceptLinkedQuest',
       'acceptQuest',
       'accountAdmin',
+      'accountBankBuySlots',
+      'accountBankDeposit',
+      'accountBankInfo',
+      'accountBankWithdraw',
       'accountCosmetics',
       'accountDeeds',
       'accountFlair',
@@ -1262,6 +1274,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
   it('the sorted data-kind set is exactly the pinned contract', () => {
     expect(DATA_MEMBERS.map((m) => m.name).sort()).toEqual([
       'accountAdmin',
+      'accountBankInfo',
       'accountCosmetics',
       'accountDeeds',
       'activeBorder',
@@ -1378,6 +1391,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'acceptCommissionOrder',
       'acceptLinkedQuest',
       'acceptQuest',
+      'accountBankBuySlots',
+      'accountBankDeposit',
+      'accountBankWithdraw',
       'accountFlair',
       'activeLootRolls',
       'activeMasterLootRolls',
@@ -2085,6 +2101,16 @@ type _ExhaustGuildBank = AssertNever<
   Exclude<keyof IWorldGuildBank, (typeof FACET_GUILD_BANK)[number]>
 >;
 
+const FACET_ACCOUNT_BANK = [
+  'accountBankInfo',
+  'accountBankDeposit',
+  'accountBankWithdraw',
+  'accountBankBuySlots',
+] as const satisfies readonly (keyof IWorldAccountBank)[];
+type _ExhaustAccountBank = AssertNever<
+  Exclude<keyof IWorldAccountBank, (typeof FACET_ACCOUNT_BANK)[number]>
+>;
+
 const FACET_DUNGEONS = [
   'enterDungeon',
   'leaveDungeon',
@@ -2287,6 +2313,7 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   mail: FACET_MAIL,
   bank: FACET_BANK,
   guildBank: FACET_GUILD_BANK,
+  accountBank: FACET_ACCOUNT_BANK,
   dungeons: FACET_DUNGEONS,
   delves: FACET_DELVES,
   dailyRewards: FACET_DAILY_REWARDS,
@@ -2309,8 +2336,9 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
     // own count: +1 Reliquary facet, 33 total; -1 for the New Eastbrook
     // program's Vale Cup retirement, 32 total. The v0.41.0 sync carries both
     // arms (farming in, vale_cup out): 33 total, measured as the facet files
-    // on disk minus appearance.ts (the sweep below).
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(33);
+    // on disk minus appearance.ts (the sweep below). The Account Bank feature
+    // adds the accountBank facet (src/world_api/account_bank.ts), 34 total.
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(34);
   });
 
   it('every facet FILE on disk is a FACET_MEMBER_ARRAYS key (none can go silently unpartitioned)', () => {
@@ -2334,9 +2362,9 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
       .map((k) => k.replace(/[A-Z]/g, (c) => `_${c.toLowerCase()}`))
       .sort();
     expect(keys).toEqual(facetFiles);
-    // Floor: the sweep walked a real directory, not an empty one. (34 until
-    // the Vale Cup facet retired with release/v0.41.0.)
-    expect(facetFiles.length).toBeGreaterThanOrEqual(33);
+    // Floor: the sweep walked a real directory, not an empty one. (34 again
+    // as of the Account Bank feature's accountBank facet.)
+    expect(facetFiles.length).toBeGreaterThanOrEqual(34);
   });
 
   it('scans only through the shared walkers (self-audit)', () => {
@@ -2391,8 +2419,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
     // Mirrors the IWORLD_MEMBERS.length pin above; this pin and the one above
     // must always agree.
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(378);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(378);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(382);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(382);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

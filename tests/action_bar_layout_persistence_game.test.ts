@@ -474,6 +474,7 @@ describe('the auth handshake: a queued write that settles between the row reads 
       metaRequestUserData: () => ({}),
       metaEventSourceUrl: () => undefined,
       loadAccountLedger: async () => freshAccountLedger(),
+      loadAccountBankRow: async () => null,
       loadAccountCosmetics: async () => ({ completedQuestIds: [], mechChromaIds: [] }),
       isConnectionRefused: () => false,
       bufferHandshakeMessages: () => () => {},

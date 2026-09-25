@@ -92,6 +92,7 @@ function makeDeps(opts: { joinResult?: any; hasSession?: boolean; acquireResult?
     metaRequestUserData: () => ({}),
     metaEventSourceUrl: () => undefined,
     loadAccountLedger: async () => freshAccountLedger(),
+    loadAccountBankRow: async () => null,
     loadAccountCosmetics: vi.fn(async () => ({ completedQuestIds: [], mechChromaIds: [] })),
     isConnectionRefused: () => false,
     bufferHandshakeMessages: () => () => {},

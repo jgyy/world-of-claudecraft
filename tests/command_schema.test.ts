@@ -170,8 +170,12 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // realm roster answered by the `who` frame; the chat /who stays as it was).
 // Market Sweep composes on top of it with `market_sweep_quote` and
 // `market_sweep`, both client-sent and server-dispatched.
-const EXPECTED_SEND_COUNT = 225;
-const EXPECTED_DISPATCH_COUNT = 239;
+// +3 send / +3 dispatch for the Account Bank cluster (account_bank_deposit/
+// _withdraw/_buy_slots, src/sim/account_bank.ts): an account-wide item store
+// shared across every character on the account, its own tokens forever,
+// never a bank_* or guild_bank_* reuse.
+const EXPECTED_SEND_COUNT = 228;
+const EXPECTED_DISPATCH_COUNT = 242;
 const EXPECTED_DISPATCH_ONLY_COUNT = 14;
 
 // The chat sub-channel routing switch (server/game.ts `switch

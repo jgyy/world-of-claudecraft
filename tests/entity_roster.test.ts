@@ -283,6 +283,7 @@ function makeCtx() {
     nextCommissionOrderId: 1,
     bankerIds: [],
     guildBanks: new Map(),
+    accountBanks: new Map(),
     deedDirtyPids: new Set<number>(),
     deedDirtyKeys: new Map<number, Set<string>>(),
     worldBossEntityIds: [],

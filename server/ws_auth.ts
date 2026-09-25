@@ -118,6 +118,10 @@ export interface WsAuthDeps {
   /** The account ledger load (server/account_ledger_db.ts): which characters
    *  on the account earned each deed and found each relic. */
   loadAccountLedger: (accountId: number) => Promise<AccountLedger>;
+  /** The account bank row load (server/account_bank_db.ts): the raw JSONB
+   *  book shared across every character on the account, sanitized by
+   *  sim.loadAccountBank. */
+  loadAccountBankRow: (accountId: number) => Promise<unknown>;
   isConnectionRefused: (input: {
     blocked: boolean;
     isAdmin: boolean;
@@ -176,6 +180,7 @@ export function createWsAuth(deps: WsAuthDeps): WsAuthHandlers {
     metaEventSourceUrl,
     loadAccountCosmetics,
     loadAccountLedger,
+    loadAccountBankRow,
     isConnectionRefused,
     bufferHandshakeMessages,
     requestMetadata,
@@ -359,11 +364,15 @@ export function createWsAuth(deps: WsAuthDeps): WsAuthHandlers {
       }
       // The account ledger rides beside the cosmetics: both are account-wide
       // state the join hands the sim, so one round trip covers the pair.
-      const [accountCosmetics, accountLedger] = await Promise.all([
+      const [accountCosmetics, accountLedger, accountBank] = await Promise.all([
         loadAccountCosmetics(accountId),
         // A cosmetic table must never gate login: a failed read joins with a
         // fresh ledger (the sim's own default) and the next join retries.
         loadAccountLedger(accountId).catch(() => freshAccountLedger()),
+        // A failed read joins with an empty book (sim.loadAccountBank sanitizes
+        // `null` the same way it sanitizes any other malformed raw value) rather
+        // than blocking login; the next join retries.
+        loadAccountBankRow(accountId).catch(() => null),
       ]);
       const joinMeta = {
         ...meta,
@@ -371,6 +380,7 @@ export function createWsAuth(deps: WsAuthDeps): WsAuthHandlers {
         sourceUrl: metaEventSourceUrl(req),
         accountCosmetics,
         accountLedger,
+        accountBank,
         isAdmin,
         adminPermissions,
         clientSeed,
