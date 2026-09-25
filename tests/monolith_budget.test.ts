@@ -511,7 +511,20 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    ceiling: 18235,
+    // RAISED 18235 -> 18237 (+2) for the "Attack (go to attack distance)"
+    // feature request: activateFixedAttackSlot (the fixed action-bar Attack
+    // slot's single choke point for keybind, click, and pad presses alike)
+    // gained one more branch to delegate to the new optional
+    // OptionsHooks.attackCurrentTarget seam (src/game/attack_current_target.ts,
+    // wired from main.ts) before falling back to the plain toggle, so pressing
+    // Attack with an out-of-range target now walks into melee range and
+    // engages instead of silently arming a swing. Both the new interface
+    // field and the new branch are one line each and could not be extracted
+    // further: the decision and chase logic already live in the sibling
+    // module (driveAttackCurrentTarget/planAttackCurrentTarget), this is only
+    // the irreducible wiring at the one call site every input path shares.
+    // Exact count, zero slack.
+    ceiling: 18237,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -1337,7 +1350,19 @@ const MONOLITHS: MonolithRow[] = [
     // click / Enter-Space / double-click wiring moved into wireCharselectRow
     // (src/ui/charselect_hints.ts), which skips activations from inside the
     // lockout disclosure instead of stopping propagation there.
-    ceiling: 11276,
+    // RAISED 11276 -> 11289 (+13) for the "Attack (go to attack distance)"
+    // feature request. This change extracts clickMovePathTo/resolvedClickMoveTarget's
+    // bodies to src/game/click_move_target.ts (thin wrappers remain, -15) and
+    // the attack-current-target decision/branching to
+    // src/game/attack_current_target.ts (driveAttackCurrentTarget), but main.ts
+    // still needs one function to gather the current target and bind main.ts's
+    // own click-to-move/Input state into that module's injected actions (the
+    // seam every other click-to-move caller here already goes through), the
+    // one-line OptionsHooks wire-up hud.ts's activateFixedAttackSlot calls
+    // through, and one more OR clause + comment in resolveMove's click-to-move
+    // enabled gate so the chase works with the click-to-move/Attack Move QoL
+    // settings both off. Net after the extraction, +13. Exact count, zero slack.
+    ceiling: 11289,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {

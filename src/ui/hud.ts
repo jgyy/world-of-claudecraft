@@ -966,6 +966,7 @@ export interface OptionsHooks {
   // without the HUD importing the manager.
   gamepad: GamepadBindingsHooks;
   groundAimTargetAttackable?: (targetId: number) => boolean;
+  attackCurrentTarget?: () => void;
 }
 
 export type GraphicsApplyOutcome = 'applied' | 'saved' | 'failed' | 'fatal';
@@ -7381,6 +7382,7 @@ export class Hud {
 
   private activateFixedAttackSlot(): void {
     if (this.sim.player.autoAttack) this.sim.stopAutoAttack();
+    else if (this.optionsHooks?.attackCurrentTarget) this.optionsHooks.attackCurrentTarget();
     else this.sim.startAutoAttack();
     this.flashActionSlot(0);
   }

@@ -23,6 +23,7 @@ import {
   stepArrivalCinematic,
 } from './game/arrival_cinematic';
 import { runBlockingArrivalWarmup, settleWorldEntryCover } from './game/arrival_warmup';
+import { driveAttackCurrentTarget } from './game/attack_current_target';
 import { audio } from './game/audio';
 import { AutoLoot } from './game/autoloot';
 import { shouldRouteInteractToBgFlag } from './game/bg_flag_interact';
@@ -51,6 +52,10 @@ import {
   stepAngleToward,
 } from './game/click_move';
 import { paintClickMoveMarker } from './game/click_move_marker';
+import {
+  clickMovePathTo as clickMovePathToPure,
+  resolvedClickMoveTarget as resolvedClickMoveTargetPure,
+} from './game/click_move_target';
 import { clientEnvBits, installPageStateTracking, pageStateBits } from './game/client_env';
 import { getClientSeed } from './game/client_seed';
 import { buildContextRecoveryCallbacks } from './game/context_loss_diagnostics';
@@ -400,7 +405,7 @@ import {
 import { canEquipItem } from './sim/equipment_rules';
 import { MARKET_HOUSE_STOCK } from './sim/market';
 import { bagOwnedMounts } from './sim/mounts';
-import { findPlayerPath, resolvePlayerDestination } from './sim/pathfind';
+import { findPlayerPath } from './sim/pathfind';
 import { isSubmerged } from './sim/player_motion';
 import { Sim } from './sim/sim';
 import { TAB_NEAR_RADIUS, TAB_QUERY_RADIUS, tabConeHalfAt } from './sim/tab_target';
@@ -2940,6 +2945,7 @@ async function startGame(
     settings,
     groundAimTargetAttackable: (targetId) =>
       isAttackableEntity(world.entities.get(targetId), world.playerId, activePvpOpponentIds(world)),
+    attackCurrentTarget: () => attackCurrentTarget(),
     onSettingChange: (key, value) => applySetting(key, value),
     graphicsApplied: () => appliedGraphicsSettings,
     applyGraphics: async (draft) => {
@@ -3378,26 +3384,11 @@ async function startGame(
   }
 
   function clickMovePathTo(target: { x: number; z: number }): { x: number; z: number }[] {
-    // ignoreFences: the player can hop fences, so route straight over them
-    // instead of around, resolveMove fires the jump as we reach the rail.
-    // swim: the player can swim, so let the route cross/enter water.
-    return findPlayerPath(
-      world.cfg.seed,
-      world.player.pos,
-      target,
-      undefined,
-      true,
-      true,
-      world.riftCollisionToken,
-    );
+    return clickMovePathToPure(world, target);
   }
 
-  function resolvedClickMoveTarget(target: { x: number; z: number }): {
-    x: number;
-    z: number;
-  } {
-    // swim: keep a clicked water destination instead of snapping it to shore.
-    return resolvePlayerDestination(world.cfg.seed, target, true, world.riftCollisionToken);
+  function resolvedClickMoveTarget(target: { x: number; z: number }): { x: number; z: number } {
+    return resolvedClickMoveTargetPure(world, target);
   }
 
   function syncGroundAimReticle(): void {
@@ -3545,6 +3536,25 @@ async function startGame(
       const target = resolvedClickMoveTarget(g);
       input.setClickMoveTarget(target, 0.5, null, clickMovePathTo(target), true);
     }
+  }
+
+  // Attack (hud.ts activateFixedAttackSlot): the current target, not the cursor
+  // handleAttackMove reads above; the plan lives in game/attack_current_target.ts.
+  function attackCurrentTarget(): void {
+    const p = world.player;
+    const t = p.targetId !== null ? world.entities.get(p.targetId) : null;
+    const target =
+      t && !t.dead && isAttackableEntity(t, world.playerId, activePvpOpponentIds(world))
+        ? { id: t.id, pos: t.pos }
+        : null;
+    driveAttackCurrentTarget(p.autoAttack, target, {
+      stopAutoAttack: () => world.stopAutoAttack(),
+      startAutoAttack: () => world.startAutoAttack(),
+      chaseToMelee: (id, pos) => {
+        const dest = resolvedClickMoveTarget(pos);
+        input.setClickMoveTarget(dest, ATTACK_MOVE_MELEE_STOP, id, clickMovePathTo(dest), true);
+      },
+    });
   }
 
   // Per-tick attack-move driving: acquire a hostile near a ground attack-move, and
@@ -3953,7 +3963,10 @@ async function startGame(
         mouselook,
         movementSuspended: input.suspendMovement,
         playerDead: movementFrozen(),
-        enabled: settings.get('clickToMove') > 0 || settings.get('attackMove'),
+        // clickMoveAttack: always allowed, so Attack's current-target chase
+        // (game/attack_current_target.ts) works with both QoL settings off.
+        enabled:
+          settings.get('clickToMove') > 0 || settings.get('attackMove') || input.clickMoveAttack,
       });
       if (action === 'cancel') {
         input.clearClickMove();
