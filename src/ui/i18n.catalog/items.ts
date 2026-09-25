@@ -39,6 +39,16 @@ const itemStringsEn = {
       epic: 'Epic',
       legendary: 'Legendary',
     },
+    // Suffix names for a rolled affix (content/item_affixes.ts,
+    // src/ui/item_affix_name.ts): appended to the base item's own name, e.g.
+    // "Platinum Sword" + affixSuffix.bear -> "Platinum Sword of the Bear".
+    affixSuffix: {
+      bear: 'of the Bear',
+      wolf: 'of the Wolf',
+      ox: 'of the Ox',
+      warlord: 'of the Warlord',
+      predator: 'of the Predator',
+    },
     kind: {
       weapon: 'Weapon',
       armor: 'Armor',

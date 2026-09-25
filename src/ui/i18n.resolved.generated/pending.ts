@@ -75,7 +75,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "es_ES": [
     "abilityUi.forms.bearOrCat",
@@ -143,7 +148,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "fr_FR": [
     "abilityUi.forms.bearOrCat",
@@ -211,7 +221,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "fr_CA": [
     "abilityUi.forms.bearOrCat",
@@ -279,7 +294,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "en_CA": [],
   "it_IT": [
@@ -348,7 +368,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "de_DE": [
     "abilityUi.forms.bearOrCat",
@@ -416,7 +441,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "zh_CN": [
     "hudChrome.lootQuality.itemName",
@@ -504,7 +534,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "ru_RU": [
     "hudChrome.lootQuality.itemName",
@@ -577,7 +612,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "nl_NL": [
     "abilityUi.forms.bearOrCat",
@@ -645,7 +685,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "pl_PL": [
     "abilityUi.forms.bearOrCat",
@@ -713,7 +758,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "id_ID": [
     "abilityUi.forms.bearOrCat",
@@ -781,7 +831,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "tr_TR": [
     "abilityUi.forms.bearOrCat",
@@ -849,7 +904,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "sv_SE": [
     "abilityUi.forms.bearOrCat",
@@ -917,7 +977,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "vi_VN": [
     "abilityUi.forms.bearOrCat",
@@ -985,7 +1050,12 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ],
   "da_DK": [
     "abilityUi.forms.bearOrCat",
@@ -1053,6 +1123,11 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.trade.offerRemoveTitle",
     "hudChrome.unstuck.helpUnstuckWindow",
     "hudChrome.unstuck.movedToGraveyardFree",
-    "hudChrome.unstuck.revivedAtGraveyardFree"
+    "hudChrome.unstuck.revivedAtGraveyardFree",
+    "itemUi.affixSuffix.bear",
+    "itemUi.affixSuffix.ox",
+    "itemUi.affixSuffix.predator",
+    "itemUi.affixSuffix.warlord",
+    "itemUi.affixSuffix.wolf"
   ]
 };

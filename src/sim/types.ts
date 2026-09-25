@@ -1167,6 +1167,12 @@ interface BaseItemDef {
   // worn, at most one of them with effective legendary quality
   // (src/sim/equipment_rules.ts masterwroughtConflictSlot).
   masterwrought?: boolean;
+  // Stat-free shell eligible for the loot-time affix roll (item_affix_roll.ts,
+  // content/item_affixes.ts): every stat the copy carries comes from the rolled
+  // affix in ItemInstancePayload.rolled.stats, the same "static def is a shell,
+  // the copy carries the numbers" shape rift/band_ladder.ts uses for bands. An
+  // affixable def normally omits `stats` entirely.
+  affixable?: boolean;
 }
 
 // Item-set bonuses (classic "tier set" style). Flat effects fold into
@@ -1572,6 +1578,13 @@ export interface ItemInstancePayload {
     stats?: Record<string, number>;
     masterwork?: boolean;
   };
+  /** Id of the content/item_affixes.ts affix rolled onto this specific copy of
+   *  an `affixable` item (item_affix_roll.ts, drawn once at loot time by
+   *  loot/item_affix_loot.ts). Names WHICH affix rolled; the stat magnitudes
+   *  it rolled live in `rolled.stats` above, and a blue-tier affix also stamps
+   *  `rolled.quality = 'rare'`. Purely presentational plus the stat source: the
+   *  client composes the copy's display name from it (src/ui/item_affix_name.ts). */
+  affixId?: string;
   /** Id of the enchant applied to this specific copy (content/enchants.ts):
    *  the authoritative already-enchanted marker (professions/enchanting.ts
    *  isEnchantedInstance). Legacy enchanted copies predate this field and are

@@ -11034,6 +11034,13 @@ export const cs_CZ: EnTranslations = {
       "epic": "Epické",
       "legendary": "Legendární"
     },
+    "affixSuffix": {
+      "bear": "of the Bear",
+      "wolf": "of the Wolf",
+      "ox": "of the Ox",
+      "warlord": "of the Warlord",
+      "predator": "of the Predator"
+    },
     "kind": {
       "weapon": "Zbraň",
       "armor": "Brnění",

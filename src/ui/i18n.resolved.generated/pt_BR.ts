@@ -11034,6 +11034,13 @@ export const pt_BR: EnTranslations = {
       "epic": "Épico",
       "legendary": "Lendário"
     },
+    "affixSuffix": {
+      "bear": "of the Bear",
+      "wolf": "of the Wolf",
+      "ox": "of the Ox",
+      "warlord": "of the Warlord",
+      "predator": "of the Predator"
+    },
     "kind": {
       "weapon": "Arma",
       "armor": "Armadura",

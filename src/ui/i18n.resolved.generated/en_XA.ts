@@ -11034,6 +11034,13 @@ export const en_XA: EnTranslations = {
       "epic": "[Éþíç]",
       "legendary": "[Ļéĝéñðáŕý]"
     },
+    "affixSuffix": {
+      "bear": "[óƒ ţĥé Ɓéáŕ]",
+      "wolf": "[óƒ ţĥé Ŵóļƒ]",
+      "ox": "[óƒ ţĥé Óẋ]",
+      "warlord": "[óƒ ţĥé Ŵáŕļóŕð]",
+      "predator": "[óƒ ţĥé Þŕéðáţóŕ]"
+    },
     "kind": {
       "weapon": "[Ŵéáþóñ]",
       "armor": "[Áŕɱóŕ]",

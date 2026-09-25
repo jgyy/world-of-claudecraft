@@ -11034,6 +11034,13 @@ export const ru_RU: EnTranslations = {
       "epic": "Эпическое",
       "legendary": "Легендарное"
     },
+    "affixSuffix": {
+      "bear": "медведя",
+      "wolf": "волка",
+      "ox": "быка",
+      "warlord": "полководца",
+      "predator": "хищника"
+    },
     "kind": {
       "weapon": "Оружие",
       "armor": "Броня",

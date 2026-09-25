@@ -5,6 +5,7 @@
 // string-builder side of hud.itemTooltip's instance composition.
 import { describe, expect, it } from 'vitest';
 import { ENCHANTS } from '../src/sim/content/enchants';
+import { ITEM_AFFIXES_GREEN } from '../src/sim/content/item_affixes';
 import {
   HARVEST_COMPONENT_ITEMS,
   HARVEST_COMPONENT_SPECIMENS,
@@ -14,7 +15,7 @@ import { ITEMS } from '../src/sim/data';
 import { isSignableMaterialRarity, NODE_MATERIAL_TABLE } from '../src/sim/professions/gathering';
 import { masterworkBonusStats } from '../src/sim/professions/masterwork';
 import { LEGENDARY_PROMOTION_COST } from '../src/sim/professions/perfecting';
-import { t } from '../src/ui/i18n';
+import { type TranslationKey, t } from '../src/ui/i18n';
 import {
   instanceBadgeLines,
   instanceBindingLines,
@@ -218,6 +219,16 @@ describe('item_instance_tooltip', () => {
       expect(html).not.toContain('(Enchanted)');
       expect(html).toContain(`+${itemNumber(2)} ${itemStatName('str')}<`);
       expect(html).toContain(`+${itemNumber(1)} ${itemStatName('sta')}<`);
+    });
+
+    it('an affix-rolled copy (item_affix_roll.ts) is untouched: bare rolled.stats plus affixId never reads as a legacy enchant', () => {
+      const html = instanceBonusStatLines({
+        affixId: 'green_bear',
+        rolled: { stats: { str: 6, sta: 5 } },
+      });
+      expect(html).not.toContain('(Enchanted)');
+      expect(html).toContain(`+${itemNumber(6)} ${itemStatName('str')}<`);
+      expect(html).toContain(`+${itemNumber(5)} ${itemStatName('sta')}<`);
     });
 
     it('an unknown enchant id keeps its stat line plain but still states the enchant', () => {
@@ -479,6 +490,17 @@ describe('tooltipEffectiveQuality and instanceTitleHtml (Masterwrought phase 13)
     const questDef = { ...def, kind: 'quest' } as import('../src/sim/types').ItemDef;
     const html = instanceTitleHtml(questDef, { rolled: { quality: 'legendary' } }, 'Sealed Writ');
     expect(html).toContain('var(--color-quest)');
+  });
+
+  it('a copy carrying a rolled affix appends its suffix to the def-name line', () => {
+    const [affix] = ITEM_AFFIXES_GREEN;
+    const html = instanceTitleHtml(def, { affixId: affix.id }, 'Platinum Sword');
+    expect(html).toContain(`Platinum Sword ${t(affix.nameKey as TranslationKey)}`);
+  });
+
+  it('an unknown affixId never breaks the title (falls back to the plain def name)', () => {
+    const html = instanceTitleHtml(def, { affixId: 'not_a_real_affix' }, 'Test Apex Ring');
+    expect(html).toContain('>Test Apex Ring<');
   });
 });
 

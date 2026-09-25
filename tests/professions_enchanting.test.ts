@@ -856,6 +856,12 @@ describe('isEnchantedInstance (the masterwork guard predicate)', () => {
     ).toBe(false);
     // Crafted rare signed copy (legacy rolled.quality shape): never enchanted.
     expect(isEnchantedInstance({ signer: 'Tester', rolled: { quality: 'rare' } })).toBe(false);
+    // Affix-rolled copy (item_affix_roll.ts): rolled.stats WITH affixId is the
+    // loot-time affix roll, not an enchant, so it must stay enchantable and
+    // never render the "(Enchanted)" attribution on its own stat lines.
+    expect(isEnchantedInstance({ affixId: 'green_bear', rolled: { stats: { str: 6 } } })).toBe(
+      false,
+    );
     // Empty payload: not enchanted.
     expect(isEnchantedInstance({})).toBe(false);
   });

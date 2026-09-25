@@ -11034,6 +11034,13 @@ export const vi_VN: EnTranslations = {
       "epic": "Sử Thi",
       "legendary": "Huyền Thoại"
     },
+    "affixSuffix": {
+      "bear": "of the Bear",
+      "wolf": "of the Wolf",
+      "ox": "of the Ox",
+      "warlord": "of the Warlord",
+      "predator": "of the Predator"
+    },
     "kind": {
       "weapon": "Vũ Khí",
       "armor": "Giáp",

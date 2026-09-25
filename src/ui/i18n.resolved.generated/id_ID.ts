@@ -11034,6 +11034,13 @@ export const id_ID: EnTranslations = {
       "epic": "Epik",
       "legendary": "Legendaris"
     },
+    "affixSuffix": {
+      "bear": "of the Bear",
+      "wolf": "of the Wolf",
+      "ox": "of the Ox",
+      "warlord": "of the Warlord",
+      "predator": "of the Predator"
+    },
     "kind": {
       "weapon": "Senjata",
       "armor": "Zirah",

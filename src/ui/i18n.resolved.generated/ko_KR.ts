@@ -11034,6 +11034,13 @@ export const ko_KR: EnTranslations = {
       "epic": "영웅",
       "legendary": "전설"
     },
+    "affixSuffix": {
+      "bear": "의 곰",
+      "wolf": "의 늑대",
+      "ox": "의 황소",
+      "warlord": "의 군벌",
+      "predator": "의 포식자"
+    },
     "kind": {
       "weapon": "무기",
       "armor": "방어구",

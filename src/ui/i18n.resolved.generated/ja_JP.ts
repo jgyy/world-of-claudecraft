@@ -11034,6 +11034,13 @@ export const ja_JP: EnTranslations = {
       "epic": "エピック",
       "legendary": "伝説"
     },
+    "affixSuffix": {
+      "bear": "の熊",
+      "wolf": "の狼",
+      "ox": "の牡牛",
+      "warlord": "の将軍",
+      "predator": "の捕食者"
+    },
     "kind": {
       "weapon": "武器",
       "armor": "防具",

@@ -23,6 +23,7 @@ import { esc } from './esc';
 import { MASTERWORK_SEAL_IMAGE_URL } from './hud/professions/profession_art';
 import { formatMoney, formatNumber, type TranslationKey, t } from './i18n';
 import { QUALITY_COLOR } from './icons';
+import { affixSuffixedName } from './item_affix_name';
 import { ITEM_QUALITY_LABEL_KEYS } from './item_kind_label';
 import { itemNameColor } from './item_name_color';
 import { lootQualityTooltipLine } from './loot_quality_view';
@@ -143,19 +144,22 @@ export function tooltipEffectiveQuality(
  *  keeps the classic one-line title. The chosen name is PLAYER-AUTHORED text:
  *  esc'd raw (the entity-name path), never through t(). `defName` is the
  *  caller's already-localized def name (itemDisplayName), passed in so this
- *  module stays a pure string builder. */
+ *  module stays a pure string builder; `affixSuffixedName` (item_affix_name.ts)
+ *  appends a rolled affix's suffix (content/item_affixes.ts) onto it when the
+ *  copy carries one, a no-op for every copy that does not. */
 export function instanceTitleHtml(
   def: ItemDef,
   instance: ItemInstancePayload | undefined,
   defName: string,
 ): string {
   const color = itemNameColor({ kind: def.kind, quality: tooltipEffectiveQuality(def, instance) });
+  const resolvedName = affixSuffixedName(defName, instance);
   if (instance?.name === undefined) {
-    return `<div class="tt-title" style="color:${color}">${esc(defName)}</div>`;
+    return `<div class="tt-title" style="color:${color}">${esc(resolvedName)}</div>`;
   }
   return (
     `<div class="tt-title" style="color:${color}">${esc(instance.name)}</div>` +
-    `<div class="tt-sub">${esc(defName)}</div>`
+    `<div class="tt-sub">${esc(resolvedName)}</div>`
   );
 }
 

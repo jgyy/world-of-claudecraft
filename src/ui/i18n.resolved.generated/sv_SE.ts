@@ -11034,6 +11034,13 @@ export const sv_SE: EnTranslations = {
       "epic": "Episk",
       "legendary": "Legendarisk"
     },
+    "affixSuffix": {
+      "bear": "of the Bear",
+      "wolf": "of the Wolf",
+      "ox": "of the Ox",
+      "warlord": "of the Warlord",
+      "predator": "of the Predator"
+    },
     "kind": {
       "weapon": "Vapen",
       "armor": "Rustning",

@@ -28,6 +28,10 @@
 //    A `normalOnly` entry draws NOTHING on a heroic claim (loot_difficulty_gate.ts):
 //    the normal trace is unchanged, the heroic trace simply omits those draws.
 //  - quality: one tier draw per eligible copy, then enhanced allocation draws.
+//  - affix (item_affix_loot.ts): appended AFTER quality, one tier-chance draw
+//    plus one magnitude draw per stat, per eligible `affixable` copy; zero
+//    draws for every def without that flag, so existing content's trace is
+//    byte-identical.
 //  - consumer: tryAwardCopperByFairSplit's Fisher-Yates ctx.rng.int(i, len-1) on the
 //    remainder, and submitLootRoll's ctx.rng.int(1, 100) for need/greed (null for pass).
 //
@@ -63,6 +67,7 @@ import type {
 import { cloneItemInstancePayload, dist2d, PARTY_XP_RANGE } from '../types';
 import { grantAwardedLootItem, grantOrHoldAwardedLoot } from './awarded_loot_hold';
 import { rollEnemyLootQuality } from './enemy_quality';
+import { rollItemAffixes } from './item_affix_loot';
 import { lootEntryRollsOnClaim } from './loot_difficulty_gate';
 import { isTapGroupMember, LOOT_FFA_DELAY } from './loot_ffa';
 
@@ -382,7 +387,21 @@ export function rollLoot(
         ),
       };
     }
-    mob.loot = { copper, items: rollEnemyLootQuality(ctx.rng, mob, items, questSlots) };
+    // Affix roll runs AFTER the quality-tier roll (both are per-copy, one
+    // rng draw or none, applied only to items the two systems flag: an
+    // `affixable` shell never carries an authored `stats` block, so the two
+    // never fight over the same field, and neither draws for a def the other
+    // does not touch). Appended-only ordering: every existing draw above
+    // keeps its stream position.
+    mob.loot = {
+      copper,
+      items: rollItemAffixes(
+        ctx.rng,
+        mob,
+        rollEnemyLootQuality(ctx.rng, mob, items, questSlots),
+        questSlots,
+      ),
+    };
     mob.lootable = true;
     // start the owner-lock countdown: after LOOT_FFA_DELAY the tap opens to all.
     mob.lootFfaTimer = LOOT_FFA_DELAY;

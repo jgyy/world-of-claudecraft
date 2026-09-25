@@ -166,7 +166,11 @@ export { DISENCHANT_MATERIAL_BY_QUALITY };
  *  real Perfected copy and let a confirmed replace wipe the bonus). This is
  *  what the countEnchantableItem/removeEnchantableItem guards (sim.ts) key
  *  on, so double-enchant prevention holds for both legacy and
- *  marker-carrying copies. */
+ *  marker-carrying copies. A THIRD non-enchant writer of bare rolled.stats
+ *  (item_affix_roll.ts, Masterwrought-adjacent): the loot-time affix roll on
+ *  an `affixable` shell stamps `affixId` alongside `rolled.stats`, so an
+ *  affixed copy with no `enchant` field is unenchanted by construction, the
+ *  same reasoning as `rift`/`perfected`/`perfectingBonus` below. */
 export function isEnchantedInstance(instance: ItemInstancePayload): boolean {
   // A Riftbound band's bare rolled.stats are its ladder-priced stat line
   // (rift/band_ladder.ts), not an enchant; the rift record is what explains
@@ -179,7 +183,8 @@ export function isEnchantedInstance(instance: ItemInstancePayload): boolean {
     (!!instance.rolled?.stats &&
       !instance.rolled.masterwork &&
       instance.perfected !== true &&
-      instance.perfectingBonus === undefined)
+      instance.perfectingBonus === undefined &&
+      instance.affixId === undefined)
   );
 }
 

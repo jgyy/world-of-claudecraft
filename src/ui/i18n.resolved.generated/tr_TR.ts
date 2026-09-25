@@ -11034,6 +11034,13 @@ export const tr_TR: EnTranslations = {
       "epic": "Destansı",
       "legendary": "Efsanevi"
     },
+    "affixSuffix": {
+      "bear": "of the Bear",
+      "wolf": "of the Wolf",
+      "ox": "of the Ox",
+      "warlord": "of the Warlord",
+      "predator": "of the Predator"
+    },
     "kind": {
       "weapon": "Silah",
       "armor": "Zırh",

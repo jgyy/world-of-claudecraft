@@ -11034,6 +11034,13 @@ export const zh_TW: EnTranslations = {
       "epic": "史詩",
       "legendary": "傳說"
     },
+    "affixSuffix": {
+      "bear": "之熊",
+      "wolf": "之狼",
+      "ox": "之牛",
+      "warlord": "之軍閥",
+      "predator": "之掠食者"
+    },
     "kind": {
       "weapon": "武器",
       "armor": "護甲",
