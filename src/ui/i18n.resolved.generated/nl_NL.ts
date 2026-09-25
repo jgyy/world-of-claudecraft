@@ -9374,7 +9374,14 @@ export const nl_NL: EnTranslations = {
     "buyConfirmTitle": "Inwisseling bevestigen",
     "buyConfirmBody": "Je {sigil} inwisselen voor {item}? Een gebruikt zegel kan niet worden terugbetaald.",
     "buyConfirmAccept": "Inwisselen",
-    "buyConfirmCancel": "Annuleren"
+    "buyConfirmCancel": "Annuleren",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Kaartduel",

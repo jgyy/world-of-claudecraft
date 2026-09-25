@@ -10,6 +10,7 @@ import type { ItemDef } from '../src/sim/types';
 import type {
   CrucibleShopView,
   CrucibleSigilBalance,
+  CrucibleSigilTradeRow,
 } from '../src/ui/hud/vendor/crucible_vendor_view';
 import {
   type CrucibleVendorWindowDeps,
@@ -25,6 +26,7 @@ function deps(): CrucibleVendorWindowDeps {
     attachTooltip: () => {},
     hideTooltip: () => {},
     onBuy: () => {},
+    onTrade: () => {},
     onClose: () => {},
   };
 }
@@ -35,10 +37,21 @@ function balance(sigilId: string, count: number): CrucibleSigilBalance {
   return { sigilId, sigil, count };
 }
 
-function paint(balances: CrucibleSigilBalance[]): HTMLElement {
-  const view: CrucibleShopView = { rows: [], balances };
+function trade(fromSigilId: string, toSigilId: string): CrucibleSigilTradeRow {
+  const fromSigil = ITEMS[fromSigilId] as ItemDef | undefined;
+  const toSigil = ITEMS[toSigilId] as ItemDef | undefined;
+  if (!fromSigil || !toSigil) throw new Error('unknown sigil id in fixture');
+  return { fromSigilId, fromSigil, toSigilId, toSigil };
+}
+
+function paint(
+  balances: CrucibleSigilBalance[],
+  trades: CrucibleSigilTradeRow[] = [],
+  depsOverride?: Partial<CrucibleVendorWindowDeps>,
+): HTMLElement {
+  const view: CrucibleShopView = { rows: [], balances, trades };
   const el = document.createElement('div');
-  renderCrucibleVendorWindow(el, 'Quartermaster', view, deps());
+  renderCrucibleVendorWindow(el, 'Quartermaster', view, { ...deps(), ...depsOverride });
   return el;
 }
 
@@ -95,5 +108,34 @@ describe('renderCrucibleVendorWindow: the sigil balance line', () => {
     expect(line).toContain('金床の篭手の印章');
     expect(line).toContain('2');
     expect(line).toContain('1');
+  });
+});
+
+describe('renderCrucibleVendorWindow: Trade Sigils section', () => {
+  it('renders nothing when there are no eligible trades', () => {
+    const el = paint([], []);
+    expect(el.textContent).not.toContain('Trade Sigils');
+    expect(el.querySelectorAll('button.vendor-item').length).toBe(0);
+  });
+
+  it('renders one row per trade, priced in the source sigil, and reports the click', () => {
+    let clicked: [string, string] | null = null;
+    const el = paint(
+      [balance('sigil_anvil_helmet', 1)],
+      [trade('sigil_anvil_helmet', 'sigil_anvil_chest')],
+      { onTrade: (from, to) => (clicked = [from, to]) },
+    );
+    expect(el.textContent).toContain('Trade Sigils');
+    const rows = [...el.querySelectorAll<HTMLButtonElement>('button.vendor-item')];
+    expect(rows).toHaveLength(1);
+    const row = rows[0];
+    expect(row.disabled).toBe(false);
+    expect(row.querySelector('.vi-name')?.textContent).toBe('Robe Sigil of the Anvil');
+    expect(row.querySelector('.vi-price')?.textContent).toBe('1 Helm Sigil of the Anvil');
+    expect(row.getAttribute('aria-label')).toBe(
+      'Trade Helm Sigil of the Anvil for Robe Sigil of the Anvil',
+    );
+    row.click();
+    expect(clicked).toEqual(['sigil_anvil_helmet', 'sigil_anvil_chest']);
   });
 });

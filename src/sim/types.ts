@@ -6515,7 +6515,10 @@ export type SimEvent = { pid?: number } & (
   | UnstuckEvent
   // itemId names the single item for buy/sell/buyback; it is omitted for the
   // bulk "sell all junk" sweep, which the client treats as a plain refresh signal.
-  | { type: 'vendor'; action: 'buy' | 'sell' | 'buyback'; itemId?: string }
+  // 'trade' is the Crucible Quartermaster sigil-for-sigil exchange
+  // (instances/crucible_vendor.ts tradeCrucibleSigil); itemId names the sigil
+  // received.
+  | { type: 'vendor'; action: 'buy' | 'sell' | 'buyback' | 'trade'; itemId?: string }
   // Ravenpost mail. Structured data only, the client builds every visible
   // string (the lockpick convention). `mailbox` asks the client to open the
   // mail window (the interact path at a mailbox object); `mailArrived` is the

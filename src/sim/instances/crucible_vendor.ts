@@ -7,9 +7,14 @@
 // buyer only redeems pieces their class can wear (the per-spec choice moment
 // the plan authored: one token serves three classes).
 //
+// Also owns the sigil-for-sigil trade (feature request: swap a spare slot
+// sigil for a different slot of the same flavor at the same counter), on the
+// exact same range/dead/space validation ladder as the redemption buy.
+//
 // `src/sim`-pure (no DOM/Three, no wall-clock, draws no rng).
 
 import { bagsFullError } from '../bags';
+import { CRUCIBLE_SIGIL_TRADES } from '../content/crucible_sigil_trades';
 import { CRUCIBLE_VENDOR_STOCK } from '../content/ignivar_loot';
 import { ITEMS, NPCS } from '../data';
 import type { SimContext } from '../sim_context';
@@ -73,4 +78,54 @@ export function buyCrucibleVendorItem(ctx: SimContext, itemId: string, pid?: num
   // Feedback rides the 'vendor' event (the shop window re-renders), matching
   // buyHeroicVendorItem: no raw English log emitted from the sim.
   ctx.emit({ type: 'vendor', action: 'buy', itemId, pid: meta.entityId });
+}
+
+export function tradeCrucibleSigil(
+  ctx: SimContext,
+  fromSigilId: string,
+  toSigilId: string,
+  pid?: number,
+): void {
+  const r = ctx.resolve(pid);
+  if (!r) return;
+  const { meta, e: p } = r;
+  const offer = CRUCIBLE_SIGIL_TRADES.find(
+    (o) => o.fromSigilId === fromSigilId && o.toSigilId === toSigilId,
+  );
+  if (!offer) {
+    ctx.error(meta.entityId, 'That trade is not offered here.');
+    return;
+  }
+  const fromSigil = ITEMS[fromSigilId];
+  const toSigil = ITEMS[toSigilId];
+  if (!fromSigil || !toSigil) {
+    ctx.error(meta.entityId, 'That item is not for sale.');
+    return;
+  }
+  if (p.dead) {
+    ctx.error(meta.entityId, "You can't do that while dead.");
+    return;
+  }
+  if (!crucibleVendorInRange(ctx, p)) {
+    ctx.error(meta.entityId, 'Too far away.');
+    return;
+  }
+  // No class gate needed: every trade is restricted to the SAME flavor
+  // (CRUCIBLE_SIGIL_TRADES), and flavor is what fixes a sigil's eligible
+  // classes, so the result is always redeemable by the exact classes the
+  // source sigil was.
+  if (ctx.countItem(fromSigilId, meta.entityId) < 1) {
+    ctx.error(meta.entityId, `You need a ${fromSigil.name} to trade for a ${toSigil.name}.`);
+    return;
+  }
+  // Check space BEFORE the debit so a full-bags refusal never eats the sigil.
+  if (!ctx.canAddItem(toSigilId, 1, meta.entityId)) {
+    bagsFullError(ctx, meta.entityId, toSigilId);
+    return;
+  }
+  ctx.removeItem(fromSigilId, 1, meta.entityId);
+  ctx.addItem(toSigilId, 1, meta.entityId);
+  // Rides the same 'vendor' event as a redemption buy so the open shop window
+  // re-renders (balances and affordability both move).
+  ctx.emit({ type: 'vendor', action: 'trade', itemId: toSigilId, pid: meta.entityId });
 }

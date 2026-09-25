@@ -610,6 +610,7 @@ export const COMMAND_NAMES = [
   'set_dungeon_difficulty',
   'heroic_buy',
   'crucible_buy',
+  'crucible_trade',
   'mount_toggle',
   'mount_train_begin',
   'mount_train_answer',

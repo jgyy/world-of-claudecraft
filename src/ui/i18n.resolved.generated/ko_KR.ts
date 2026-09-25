@@ -9374,7 +9374,14 @@ export const ko_KR: EnTranslations = {
     "buyConfirmTitle": "교환 확인",
     "buyConfirmBody": "{sigil}(을)를 {item}(으)로 교환하시겠습니까? 소모된 인장은 환불되지 않습니다.",
     "buyConfirmAccept": "교환",
-    "buyConfirmCancel": "취소"
+    "buyConfirmCancel": "취소",
+    "tradeSectionTitle": "인장 교환",
+    "tradeAria": "{from}(을)를 {to}(으)로 교환",
+    "tradeHint": "클릭하여 교환",
+    "tradeConfirmTitle": "교환 확인",
+    "tradeConfirmBody": "{from}(을)를 {to}(으)로 교환하시겠습니까? 소모된 인장은 환불되지 않습니다.",
+    "tradeConfirmAccept": "교환",
+    "tradeConfirmCancel": "취소"
   },
   "cardDuel": {
     "title": "카드 대결",

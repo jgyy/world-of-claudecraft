@@ -9374,7 +9374,14 @@ export const ja_JP: EnTranslations = {
     "buyConfirmTitle": "交換の確認",
     "buyConfirmBody": "{sigil}を{item}と交換しますか？消費した印章は払い戻せません。",
     "buyConfirmAccept": "交換",
-    "buyConfirmCancel": "キャンセル"
+    "buyConfirmCancel": "キャンセル",
+    "tradeSectionTitle": "印章を交換する",
+    "tradeAria": "{from}を{to}と交換する",
+    "tradeHint": "クリックして交換",
+    "tradeConfirmTitle": "交換の確認",
+    "tradeConfirmBody": "{from}を{to}と交換しますか？消費した印章は払い戻せません。",
+    "tradeConfirmAccept": "交換",
+    "tradeConfirmCancel": "キャンセル"
   },
   "cardDuel": {
     "title": "カードデュエル",

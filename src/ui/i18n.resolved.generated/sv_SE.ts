@@ -9374,7 +9374,14 @@ export const sv_SE: EnTranslations = {
     "buyConfirmTitle": "Bekräfta inlösen",
     "buyConfirmBody": "Byt in ditt {sigil} mot {item}? Ett förbrukat sigill kan inte återbetalas.",
     "buyConfirmAccept": "Byt in",
-    "buyConfirmCancel": "Avbryt"
+    "buyConfirmCancel": "Avbryt",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Kortduell",

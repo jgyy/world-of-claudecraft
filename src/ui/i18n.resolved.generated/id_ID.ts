@@ -9374,7 +9374,14 @@ export const id_ID: EnTranslations = {
     "buyConfirmTitle": "Konfirmasi Penukaran",
     "buyConfirmBody": "Tukar {sigil} Anda dengan {item}? Sigil yang telah digunakan tidak dapat dikembalikan.",
     "buyConfirmAccept": "Tukar",
-    "buyConfirmCancel": "Batal"
+    "buyConfirmCancel": "Batal",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Duel Kartu",

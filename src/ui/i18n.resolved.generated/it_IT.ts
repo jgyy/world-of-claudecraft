@@ -9374,7 +9374,14 @@ export const it_IT: EnTranslations = {
     "buyConfirmTitle": "Conferma riscatto",
     "buyConfirmBody": "Riscattare il tuo {sigil} per {item}? Un glifo consumato non può essere rimborsato.",
     "buyConfirmAccept": "Riscatta",
-    "buyConfirmCancel": "Annulla"
+    "buyConfirmCancel": "Annulla",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Duello di Carte",

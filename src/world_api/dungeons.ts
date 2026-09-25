@@ -97,4 +97,8 @@ export interface IWorldDungeons {
   // paying its matching-slot sigil from the buyer's bags. Server-validated,
   // class-gated sim-side.
   buyCrucibleVendorItem(itemId: string): void;
+  // Trade a duplicate Crucible sigil for a different slot of the same flavor
+  // (src/sim/content/crucible_sigil_trades.ts), at the same Quartermaster.
+  // Server-validated.
+  tradeCrucibleSigil(fromSigilId: string, toSigilId: string): void;
 }

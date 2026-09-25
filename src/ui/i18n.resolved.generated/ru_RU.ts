@@ -9374,7 +9374,14 @@ export const ru_RU: EnTranslations = {
     "buyConfirmTitle": "Подтверждение обмена",
     "buyConfirmBody": "Обменять {sigil} на {item}? Потраченную печать нельзя вернуть.",
     "buyConfirmAccept": "Обменять",
-    "buyConfirmCancel": "Отмена"
+    "buyConfirmCancel": "Отмена",
+    "tradeSectionTitle": "Обменять печати",
+    "tradeAria": "Обменять {from} на {to}",
+    "tradeHint": "Нажмите, чтобы обменять",
+    "tradeConfirmTitle": "Подтверждение обмена",
+    "tradeConfirmBody": "Обменять {from} на {to}? Потраченную печать нельзя вернуть.",
+    "tradeConfirmAccept": "Обменять",
+    "tradeConfirmCancel": "Отмена"
   },
   "cardDuel": {
     "title": "Карточная дуэль",

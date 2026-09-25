@@ -9374,7 +9374,14 @@ export const en: EnTranslations = {
     "buyConfirmTitle": "Confirm Redemption",
     "buyConfirmBody": "Redeem your {sigil} for {item}? A consumed sigil cannot be refunded.",
     "buyConfirmAccept": "Redeem",
-    "buyConfirmCancel": "Cancel"
+    "buyConfirmCancel": "Cancel",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Card Duel",

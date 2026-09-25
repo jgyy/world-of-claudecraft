@@ -9374,7 +9374,14 @@ export const vi_VN: EnTranslations = {
     "buyConfirmTitle": "Xác nhận đổi",
     "buyConfirmBody": "Đổi {sigil} của bạn lấy {item}? Ấn hiệu đã sử dụng không thể hoàn lại.",
     "buyConfirmAccept": "Đổi",
-    "buyConfirmCancel": "Hủy"
+    "buyConfirmCancel": "Hủy",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Đấu Bài",

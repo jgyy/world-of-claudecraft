@@ -9374,7 +9374,14 @@ export const fr_FR: EnTranslations = {
     "buyConfirmTitle": "Confirmer l’échange",
     "buyConfirmBody": "Échanger votre {sigil} contre {item} ? Un sceau consommé ne peut pas être remboursé.",
     "buyConfirmAccept": "Échanger",
-    "buyConfirmCancel": "Annuler"
+    "buyConfirmCancel": "Annuler",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Duel de cartes",

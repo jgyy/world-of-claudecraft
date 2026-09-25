@@ -4911,6 +4911,9 @@ export class ClientWorld extends ReconWireState implements IWorld {
   buyCrucibleVendorItem(itemId: string): void {
     this.cmd({ cmd: 'crucible_buy', itemId });
   }
+  tradeCrucibleSigil(fromSigilId: string, toSigilId: string): void {
+    this.cmd({ cmd: 'crucible_trade', fromSigilId, toSigilId });
+  }
   // Live lethal death zones on the current rift boss floor. Mirrored from
   // riftDeathZoneSpawn events emitted at zone-placement time; the client counts
   // each zone down locally and drops it when remaining falls to zero.

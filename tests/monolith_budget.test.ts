@@ -511,7 +511,13 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    ceiling: 18235,
+    // Plus 30 for the Crucible sigil trade: the import, the onTrade wiring
+    // through renderCrucibleVendor, and the requestCrucibleSigilTrade confirm
+    // dialog (the requestCrucibleVendorPurchase shape exactly). The pure view
+    // model and the window markup live in crucible_vendor_view.ts /
+    // crucible_vendor_window.ts; this is the thin orchestration Hud already
+    // keeps for every service window. Exact count, zero slack.
+    ceiling: 18265,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -1125,7 +1131,12 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    ceiling: 11750,
+    // Plus 10 for the Crucible sigil trade (feature request: trade a
+    // duplicate slot sigil for a different slot of the same flavor): the
+    // import plus the thin tradeCrucibleSigil delegation to
+    // instances/crucible_vendor.ts (the buyCrucibleVendorItem shape exactly);
+    // the logic itself lives in the instances module. Exact count, zero slack.
+    ceiling: 11760,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1569,7 +1580,9 @@ const MONOLITHS: MonolithRow[] = [
     // quest/death record arms of the event drain moved to
     // server/event_record_observers.ts (which also hosts the new craftRoll
     // arm), so the audit landed as a net shrink. Exact count, zero slack.
-    ceiling: 9965,
+    // Plus 9 for the crucible_trade command arm: the dispatch case is the
+    // crucible_buy shape exactly; validation lives sim-side. Exact count.
+    ceiling: 9974,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -1724,7 +1737,9 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
-    ceiling: 5426,
+    // Plus 3 for the tradeCrucibleSigil command mirror (the
+    // buyCrucibleVendorItem shape exactly). Exact count, zero slack.
+    ceiling: 5429,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {

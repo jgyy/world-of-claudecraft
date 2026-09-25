@@ -9374,7 +9374,14 @@ export const cs_CZ: EnTranslations = {
     "buyConfirmTitle": "Potvrdit výměnu",
     "buyConfirmBody": "Vyměnit svůj sigil {sigil} za {item}? Spotřebovaný sigil nelze vrátit.",
     "buyConfirmAccept": "Vyměnit",
-    "buyConfirmCancel": "Zrušit"
+    "buyConfirmCancel": "Zrušit",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Karetní souboj",

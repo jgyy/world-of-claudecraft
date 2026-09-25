@@ -9374,7 +9374,14 @@ export const de_DE: EnTranslations = {
     "buyConfirmTitle": "Einlösung bestätigen",
     "buyConfirmBody": "Dein {sigil} gegen {item} einlösen? Ein verbrauchtes Siegel kann nicht erstattet werden.",
     "buyConfirmAccept": "Einlösen",
-    "buyConfirmCancel": "Abbrechen"
+    "buyConfirmCancel": "Abbrechen",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Kartenkampf",

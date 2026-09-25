@@ -442,6 +442,7 @@ export const IWORLD_MEMBERS = [
   { name: 'setDungeonDifficulty', kind: 'method' },
   { name: 'buyHeroicVendorItem', kind: 'method' },
   { name: 'buyCrucibleVendorItem', kind: 'method' },
+  { name: 'tradeCrucibleSigil', kind: 'method' },
   { name: 'leaderboard', kind: 'method' }, // async
   { name: 'guildLeaderboard', kind: 'method' }, // async
   { name: 'guildRoster', kind: 'method' }, // async
@@ -865,9 +866,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // methods, the Who tab data and method, CPU-hygiene entityRosterVersion,
     // and the account-wide Book of Deeds / Reliquary read halves. Counted
     // directly off the resolved IWORLD_MEMBERS literal.
-    expect(IWORLD_MEMBERS.length).toBe(378);
+    //
+    // Plus 1 for tradeCrucibleSigil (the Crucible Quartermaster sigil-for-sigil
+    // trade): a new IWorldDungeons method.
+    expect(IWORLD_MEMBERS.length).toBe(379);
     expect(DATA_MEMBERS.length).toBe(107);
-    expect(METHOD_MEMBERS.length).toBe(271);
+    expect(METHOD_MEMBERS.length).toBe(272);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -1234,6 +1238,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tradeCancel',
       'tradeClose',
       'tradeConfirm',
+      'tradeCrucibleSigil',
       'tradeInfo',
       'tradeRequest',
       'tradeSetOffer',
@@ -1628,6 +1633,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tradeCancel',
       'tradeClose',
       'tradeConfirm',
+      'tradeCrucibleSigil',
       'tradeRequest',
       'tradeSetOffer',
       'trainRecipe',
@@ -2097,6 +2103,7 @@ const FACET_DUNGEONS = [
   'setDungeonDifficulty',
   'buyHeroicVendorItem',
   'buyCrucibleVendorItem',
+  'tradeCrucibleSigil',
 ] as const satisfies readonly (keyof IWorldDungeons)[];
 type _ExhaustDungeons = AssertNever<Exclude<keyof IWorldDungeons, (typeof FACET_DUNGEONS)[number]>>;
 
@@ -2391,8 +2398,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the facet
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
     // Mirrors the IWORLD_MEMBERS.length pin above; this pin and the one above
     // must always agree.
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(378);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(378);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(379);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(379);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

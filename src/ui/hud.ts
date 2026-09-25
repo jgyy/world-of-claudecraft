@@ -56,6 +56,7 @@ import {
 import { isOwnAura } from '../sim/aura_classify';
 import { bagPools } from '../sim/bags';
 import { warriorParryChance } from '../sim/combat/warrior_hit_table';
+import { CRUCIBLE_SIGIL_TRADES } from '../sim/content/crucible_sigil_trades';
 import { DEEDS } from '../sim/content/deeds';
 import { HEROIC_MARK_ITEM_ID } from '../sim/content/dungeon_difficulty';
 import { HEROIC_VENDOR_STOCK } from '../sim/content/heroic_vendor';
@@ -14924,11 +14925,18 @@ export class Hud {
     renderCrucibleVendorWindow(
       $('#vendor-window'),
       entityDisplayName(npc),
-      buildCrucibleVendorView(CRUCIBLE_VENDOR_STOCK, ITEMS, this.sim.cfg.playerClass, sigilCount),
+      buildCrucibleVendorView(
+        CRUCIBLE_VENDOR_STOCK,
+        CRUCIBLE_SIGIL_TRADES,
+        ITEMS,
+        this.sim.cfg.playerClass,
+        sigilCount,
+      ),
       {
         ...this.presentationBag,
         hideTooltip: () => this.hideTooltip(),
         onBuy: (itemId) => this.requestCrucibleVendorPurchase(itemId),
+        onTrade: (fromSigilId, toSigilId) => this.requestCrucibleSigilTrade(fromSigilId, toSigilId),
         onClose: () => this.closeCrucibleVendor(),
       },
     );
@@ -16628,6 +16636,27 @@ export class Hud {
       t('crucibleShop.buyConfirmAccept'),
       t('crucibleShop.buyConfirmCancel'),
       () => this.sim.buyCrucibleVendorItem(itemId),
+    );
+  }
+
+  // Sigil trades consume the source sigil with no buyback recorded either:
+  // confirm before sending, the exact buy-confirm contract above.
+  private requestCrucibleSigilTrade(fromSigilId: string, toSigilId: string): void {
+    const offer = CRUCIBLE_SIGIL_TRADES.find(
+      (candidate) => candidate.fromSigilId === fromSigilId && candidate.toSigilId === toSigilId,
+    );
+    const fromSigil = ITEMS[fromSigilId];
+    const toSigil = ITEMS[toSigilId];
+    if (!offer || !fromSigil || !toSigil) return;
+    this.confirmDialog(
+      t('crucibleShop.tradeConfirmTitle'),
+      t('crucibleShop.tradeConfirmBody', {
+        from: itemDisplayName(fromSigil),
+        to: itemDisplayName(toSigil),
+      }),
+      t('crucibleShop.tradeConfirmAccept'),
+      t('crucibleShop.tradeConfirmCancel'),
+      () => this.sim.tradeCrucibleSigil(fromSigilId, toSigilId),
     );
   }
 

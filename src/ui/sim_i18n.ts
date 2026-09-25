@@ -599,6 +599,10 @@ const baseEnTable = {
   'log.dungeonDifficultyIsNormal': 'Dungeon difficulty: Normal. Use /dungeon heroic to change it.',
   'error.heroicMarksNeeded': 'You need {marks} Heroic Marks to buy {name}.',
   'error.sigilNeeded': 'You need a {sigil} to buy {name}.',
+  // The Crucible Quartermaster sigil-for-sigil trade
+  // (instances/crucible_vendor.ts tradeCrucibleSigil).
+  'error.sigilTradeNotOffered': 'That trade is not offered here.',
+  'error.sigilTradeNeeded': 'You need a {sigil} to trade for a {name}.',
   'error.channelUsage': 'Usage: /{action} <channel>. Channels: {list}.',
   'error.generalAlwaysOn': 'The General channel is always on - just use /general.',
   'error.noSuchChannel': "There is no channel named '{name}'. Channels: {list}.",
@@ -17591,6 +17595,13 @@ const RULES: Rule[] = [
     // "You need a X to buy Y." emit cannot be shadowed by this rule.
     re: /^You need a (.+ Sigil of the .+) to buy (.+)\.$/,
     build: (m) => tSim('error.sigilNeeded', { sigil: locItem(m[1]), name: locItem(m[2]) }),
+  },
+  {
+    // The Crucible Quartermaster sigil-for-sigil trade's insufficient-balance
+    // refusal: distinct wording ("to trade for a") from the buy rule above, so
+    // the two never shadow each other.
+    re: /^You need a (.+ Sigil of the .+) to trade for a (.+)\.$/,
+    build: (m) => tSim('error.sigilTradeNeeded', { sigil: locItem(m[1]), name: locItem(m[2]) }),
   },
   {
     re: /^All instances have been reset\.$/,

@@ -5,6 +5,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { CRUCIBLE_COLLECTIONS } from '../src/sim/content/crucible_collections';
+import { CRUCIBLE_SIGIL_TRADES } from '../src/sim/content/crucible_sigil_trades';
 import {
   CRUCIBLE_VENDOR_ENTITY_ID,
   CRUCIBLE_VENDOR_ENTRANCE_POS,
@@ -182,6 +183,97 @@ describe('crucible quartermaster: buy path', () => {
   });
 });
 
+describe('crucible quartermaster: sigil trade path', () => {
+  it('debits the source sigil and grants the different-slot, same-flavor sigil', () => {
+    const sim = vendorSim('warrior');
+    standAtVendor(sim);
+    sim.addItem('sigil_anvil_helmet', 2, sim.playerId);
+    sim.drainEvents();
+
+    sim.tradeCrucibleSigil('sigil_anvil_helmet', 'sigil_anvil_chest', sim.playerId);
+
+    expect(sim.countItem('sigil_anvil_helmet', sim.playerId)).toBe(1);
+    expect(sim.countItem('sigil_anvil_chest', sim.playerId)).toBe(1);
+    expect(
+      (sim.drainEvents() as any[]).some(
+        (e) => e.type === 'vendor' && e.action === 'trade' && e.itemId === 'sigil_anvil_chest',
+      ),
+    ).toBe(true);
+  });
+
+  it('refuses a cross-flavor trade (never offered, whatever slot)', () => {
+    const sim = vendorSim('warrior');
+    standAtVendor(sim);
+    sim.addItem('sigil_anvil_helmet', 1, sim.playerId);
+    sim.drainEvents();
+
+    sim.tradeCrucibleSigil('sigil_anvil_helmet', 'sigil_ember_helmet', sim.playerId);
+
+    expect(sim.countItem('sigil_anvil_helmet', sim.playerId)).toBe(1);
+    expect(sim.countItem('sigil_ember_helmet', sim.playerId)).toBe(0);
+    expect(errorTexts(sim)).toContain('That trade is not offered here.');
+  });
+
+  it('refuses a same-id "trade" (no slot actually changes)', () => {
+    const sim = vendorSim('warrior');
+    standAtVendor(sim);
+    sim.addItem('sigil_anvil_helmet', 1, sim.playerId);
+    sim.drainEvents();
+
+    sim.tradeCrucibleSigil('sigil_anvil_helmet', 'sigil_anvil_helmet', sim.playerId);
+
+    expect(sim.countItem('sigil_anvil_helmet', sim.playerId)).toBe(1);
+    expect(errorTexts(sim)).toContain('That trade is not offered here.');
+  });
+
+  it('refuses without the source sigil in hand', () => {
+    const sim = vendorSim('warrior');
+    standAtVendor(sim);
+    sim.drainEvents();
+
+    sim.tradeCrucibleSigil('sigil_anvil_helmet', 'sigil_anvil_chest', sim.playerId);
+
+    expect(sim.countItem('sigil_anvil_chest', sim.playerId)).toBe(0);
+    expect(errorTexts(sim).join(' ')).toContain(
+      'You need a Helm Sigil of the Anvil to trade for a Robe Sigil of the Anvil',
+    );
+  });
+
+  it('refuses out of range, before any debit', () => {
+    const sim = vendorSim('warrior');
+    const npc = vendorEntity(sim);
+    const p = sim.player as AnyEntity;
+    p.pos = { x: npc.pos.x + 40, y: npc.pos.y, z: npc.pos.z };
+    p.prevPos = { ...p.pos };
+    sim.rebucket(p);
+    sim.addItem('sigil_anvil_helmet', 1, sim.playerId);
+    sim.drainEvents();
+
+    sim.tradeCrucibleSigil('sigil_anvil_helmet', 'sigil_anvil_chest', sim.playerId);
+
+    expect(sim.countItem('sigil_anvil_chest', sim.playerId)).toBe(0);
+    expect(sim.countItem('sigil_anvil_helmet', sim.playerId)).toBe(1);
+    expect(errorTexts(sim)).toContain('Too far away.');
+  });
+
+  it('checks bag space BEFORE the debit so a full-bags refusal keeps the source sigil', () => {
+    const sim = vendorSim('warrior');
+    standAtVendor(sim);
+    sim.addItem('sigil_anvil_helmet', 1, sim.playerId);
+    for (let filled = 0; sim.canAddItem('sigil_anvil_chest', 1, sim.playerId); filled++) {
+      sim.addItem('slagbreaker_chest', 1, sim.playerId);
+      if (filled > 200) throw new Error('bags never filled');
+    }
+    sim.drainEvents();
+
+    sim.tradeCrucibleSigil('sigil_anvil_helmet', 'sigil_anvil_chest', sim.playerId);
+
+    expect(sim.countItem('sigil_anvil_chest', sim.playerId)).toBe(0);
+    expect(sim.countItem('sigil_anvil_helmet', sim.playerId)).toBe(1);
+    expect(errorTexts(sim).length).toBeGreaterThan(0);
+  });
+});
+
 describe('crucible vendor view (pure core)', () => {
   const count = (held: Record<string, number>) => (sigilId: string) => held[sigilId] ?? 0;
   const scrollIds = [
@@ -192,6 +284,7 @@ describe('crucible vendor view (pure core)', () => {
   it('filters the stock to the viewer class and prices rows by sigil possession', () => {
     const view = buildCrucibleVendorView(
       CRUCIBLE_VENDOR_STOCK,
+      CRUCIBLE_SIGIL_TRADES,
       ITEMS,
       'warrior',
       count({ sigil_anvil_helmet: 1 }),
@@ -217,11 +310,43 @@ describe('crucible vendor view (pure core)', () => {
     expect(view.balances).toEqual([
       expect.objectContaining({ sigilId: 'sigil_anvil_helmet', count: 1 }),
     ]);
+    // Trades: the four other Anvil slots the held helm sigil can become, and
+    // nothing cross-flavor.
+    expect(view.trades.map((t) => t.toSigilId).sort()).toEqual([
+      'sigil_anvil_chest',
+      'sigil_anvil_gloves',
+      'sigil_anvil_legs',
+      'sigil_anvil_shoulder',
+    ]);
+    expect(view.trades.every((t) => t.fromSigilId === 'sigil_anvil_helmet')).toBe(true);
+  });
+
+  it('trades hide entirely for a sigil the viewer does not hold', () => {
+    const view = buildCrucibleVendorView(
+      CRUCIBLE_VENDOR_STOCK,
+      CRUCIBLE_SIGIL_TRADES,
+      ITEMS,
+      'warrior',
+      count({}),
+    );
+    expect(view.trades).toEqual([]);
   });
 
   it('druid and shaman see four sets (the hybrid tank lane)', () => {
-    const druid = buildCrucibleVendorView(CRUCIBLE_VENDOR_STOCK, ITEMS, 'druid', count({}));
-    const shaman = buildCrucibleVendorView(CRUCIBLE_VENDOR_STOCK, ITEMS, 'shaman', count({}));
+    const druid = buildCrucibleVendorView(
+      CRUCIBLE_VENDOR_STOCK,
+      CRUCIBLE_SIGIL_TRADES,
+      ITEMS,
+      'druid',
+      count({}),
+    );
+    const shaman = buildCrucibleVendorView(
+      CRUCIBLE_VENDOR_STOCK,
+      CRUCIBLE_SIGIL_TRADES,
+      ITEMS,
+      'shaman',
+      count({}),
+    );
     for (const view of [druid, shaman]) {
       expect(view.rows.length).toBe(32);
       expect(view.rows.filter((row) => row.item.kind !== 'recipe')).toHaveLength(20);
@@ -238,6 +363,7 @@ describe('crucible vendor view (pure core)', () => {
   it('drops rows whose item or sigil id does not resolve', () => {
     const view = buildCrucibleVendorView(
       [{ itemId: 'no_such_piece', sigilId: 'sigil_anvil_helmet' }, ...CRUCIBLE_VENDOR_STOCK],
+      CRUCIBLE_SIGIL_TRADES,
       ITEMS,
       'mage',
       count({}),
@@ -249,6 +375,7 @@ describe('crucible vendor view (pure core)', () => {
   it('one core makes every collection manual and the Zeal formula affordable, not raid sigil gear', () => {
     const view = buildCrucibleVendorView(
       CRUCIBLE_VENDOR_STOCK,
+      CRUCIBLE_SIGIL_TRADES,
       ITEMS,
       'warrior',
       count({ lastflame_core: 1 }),

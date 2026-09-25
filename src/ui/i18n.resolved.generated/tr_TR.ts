@@ -9374,7 +9374,14 @@ export const tr_TR: EnTranslations = {
     "buyConfirmTitle": "Bozdurmayı onayla",
     "buyConfirmBody": "{sigil} karşılığında {item} alınsın mı? Harcanan mühür iade edilemez.",
     "buyConfirmAccept": "Bozdur",
-    "buyConfirmCancel": "İptal"
+    "buyConfirmCancel": "İptal",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Kart Düellosu",

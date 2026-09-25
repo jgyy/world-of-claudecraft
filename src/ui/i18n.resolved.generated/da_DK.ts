@@ -9374,7 +9374,14 @@ export const da_DK: EnTranslations = {
     "buyConfirmTitle": "Bekræft indløsning",
     "buyConfirmBody": "Indløs dit {sigil} for {item}? Et forbrugt segl kan ikke refunderes.",
     "buyConfirmAccept": "Indløs",
-    "buyConfirmCancel": "Annuller"
+    "buyConfirmCancel": "Annuller",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Kortduel",

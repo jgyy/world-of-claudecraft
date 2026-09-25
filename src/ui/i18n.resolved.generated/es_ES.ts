@@ -9374,7 +9374,14 @@ export const es_ES: EnTranslations = {
     "buyConfirmTitle": "Confirmar canje",
     "buyConfirmBody": "¿Canjear tu {sigil} por {item}? Un sigilo consumido no se puede reembolsar.",
     "buyConfirmAccept": "Canjear",
-    "buyConfirmCancel": "Cancelar"
+    "buyConfirmCancel": "Cancelar",
+    "tradeSectionTitle": "Trade Sigils",
+    "tradeAria": "Trade {from} for {to}",
+    "tradeHint": "Click to trade",
+    "tradeConfirmTitle": "Confirm Trade",
+    "tradeConfirmBody": "Trade your {from} for {to}? A consumed sigil cannot be refunded.",
+    "tradeConfirmAccept": "Trade",
+    "tradeConfirmCancel": "Cancel"
   },
   "cardDuel": {
     "title": "Duelo de Cartas",

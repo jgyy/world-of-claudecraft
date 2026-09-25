@@ -9374,7 +9374,14 @@ export const en_XA: EnTranslations = {
     "buyConfirmTitle": "[Çóñƒíŕɱ Ŕéðéɱþţíóñ]",
     "buyConfirmBody": "[Ŕéðééɱ ýóúŕ {sigil} ƒóŕ {item}? Á çóñšúɱéð šíĝíļ çáññóţ ƀé ŕéƒúñðéð.]",
     "buyConfirmAccept": "[Ŕéðééɱ]",
-    "buyConfirmCancel": "[Çáñçéļ]"
+    "buyConfirmCancel": "[Çáñçéļ]",
+    "tradeSectionTitle": "[Ţŕáðé Šíĝíļš]",
+    "tradeAria": "[Ţŕáðé {from} ƒóŕ {to}]",
+    "tradeHint": "[Çļíçķ ţó ţŕáðé]",
+    "tradeConfirmTitle": "[Çóñƒíŕɱ Ţŕáðé]",
+    "tradeConfirmBody": "[Ţŕáðé ýóúŕ {from} ƒóŕ {to}? Á çóñšúɱéð šíĝíļ çáññóţ ƀé ŕéƒúñðéð.]",
+    "tradeConfirmAccept": "[Ţŕáðé]",
+    "tradeConfirmCancel": "[Çáñçéļ]"
   },
   "cardDuel": {
     "title": "[Çáŕð Ðúéļ]",

@@ -192,3 +192,79 @@ describe('crucible_buy over the GameServer wire', () => {
     expect(errorTexts).toContain('Too far away.');
   });
 });
+
+// crucible_trade: the same wire and dispatch-guard shape, one field pair.
+const TO_SIGIL = 'sigil_anvil_chest';
+
+function sendTrade(
+  server: GameServer,
+  session: ClientSession,
+  fromSigilId: unknown,
+  toSigilId: unknown,
+): void {
+  server.handleMessage(
+    session,
+    JSON.stringify({ t: 'cmd', cmd: 'crucible_trade', fromSigilId, toSigilId }),
+  );
+}
+
+describe('crucible_trade over the GameServer wire', () => {
+  it('debits the source sigil, grants the traded sigil, routes the vendor frame, and mirrors the bags', () => {
+    const server = new GameServer();
+    const fc = fakeWs();
+    const session = joinAtQuartermaster(server, fc);
+    server.sim.addItem(SIGIL, 2, session.pid);
+    routeTick(server);
+    broadcast(server);
+    fc.sent.length = 0;
+
+    sendTrade(server, session, SIGIL, TO_SIGIL);
+
+    expect(server.sim.countItem(SIGIL, session.pid)).toBe(1);
+    expect(server.sim.countItem(TO_SIGIL, session.pid)).toBe(1);
+
+    routeTick(server);
+    const vendorEvents = fc.sent
+      .flatMap((msg: { t: string; list?: SimEvent[] }) =>
+        msg.t === 'events' ? (msg.list ?? []) : [],
+      )
+      .filter((ev) => ev.type === 'vendor');
+    expect(vendorEvents).toEqual([
+      { type: 'vendor', action: 'trade', itemId: TO_SIGIL, pid: session.pid },
+    ]);
+
+    broadcast(server);
+    const client = bareClient(session.pid);
+    (client as unknown as { applySnapshot(snap: unknown): void }).applySnapshot(lastSnap(fc.sent));
+    expect(client.inventory).toEqual(
+      expect.arrayContaining([
+        { itemId: SIGIL, count: 1 },
+        { itemId: TO_SIGIL, count: 1 },
+      ]),
+    );
+  });
+
+  it('rejects non-string payloads at the dispatch guard, before the sim handler', () => {
+    const server = new GameServer();
+    const fc = fakeWs();
+    const session = joinAtQuartermaster(server, fc);
+    server.sim.addItem(SIGIL, 1, session.pid);
+    routeTick(server);
+
+    const handler = vi.spyOn(server.sim, 'tradeCrucibleSigil');
+    sendTrade(server, session, 7, TO_SIGIL);
+    sendTrade(server, session, SIGIL, null);
+    sendTrade(server, session, { fromSigilId: SIGIL }, TO_SIGIL);
+    sendTrade(server, session, SIGIL, undefined);
+    server.handleMessage(session, 'not json at all');
+    expect(handler).not.toHaveBeenCalled();
+    expect(server.sim.countItem(TO_SIGIL, session.pid)).toBe(0);
+    expect(server.sim.countItem(SIGIL, session.pid)).toBe(1);
+
+    sendTrade(server, session, SIGIL, TO_SIGIL);
+    expect(handler).toHaveBeenCalledExactlyOnceWith(SIGIL, TO_SIGIL, session.pid);
+    expect(server.sim.countItem(TO_SIGIL, session.pid)).toBe(1);
+    expect(server.sim.countItem(SIGIL, session.pid)).toBe(0);
+    handler.mockRestore();
+  });
+});

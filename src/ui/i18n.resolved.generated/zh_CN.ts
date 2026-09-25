@@ -9374,7 +9374,14 @@ export const zh_CN: EnTranslations = {
     "buyConfirmTitle": "确认兑换",
     "buyConfirmBody": "用{sigil}兑换{item}？印记消耗后无法退还。",
     "buyConfirmAccept": "兑换",
-    "buyConfirmCancel": "取消"
+    "buyConfirmCancel": "取消",
+    "tradeSectionTitle": "交换印记",
+    "tradeAria": "用{from}交换{to}",
+    "tradeHint": "点击交换",
+    "tradeConfirmTitle": "确认交换",
+    "tradeConfirmBody": "用你的{from}交换{to}？消耗的印记无法退还。",
+    "tradeConfirmAccept": "交换",
+    "tradeConfirmCancel": "取消"
   },
   "cardDuel": {
     "title": "纸牌对决",

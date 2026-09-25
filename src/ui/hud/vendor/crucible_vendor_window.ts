@@ -20,6 +20,7 @@ import type { CrucibleShopView } from './crucible_vendor_view';
 export interface CrucibleVendorWindowDeps extends PainterHostPresentation {
   hideTooltip(): void;
   onBuy(itemId: string): void;
+  onTrade(fromSigilId: string, toSigilId: string): void;
   onClose(): void;
 }
 
@@ -99,6 +100,37 @@ export function renderCrucibleVendorWindow(
     empty.className = 'vendor-section-title';
     empty.textContent = t('crucibleShop.empty');
     el.appendChild(empty);
+  }
+
+  // Trade Sigils: same-flavor, different-slot swaps for sigils the viewer
+  // currently holds (feature request: a spare Helm Sigil of the Anvil for a
+  // Chest Sigil of the Anvil). Hidden entirely while the viewer holds none.
+  if (view.trades.length > 0) {
+    const tradeTitle = document.createElement('div');
+    tradeTitle.className = 'vendor-section-title';
+    tradeTitle.textContent = t('crucibleShop.tradeSectionTitle');
+    el.appendChild(tradeTitle);
+
+    const tradeGrid = document.createElement('div');
+    tradeGrid.className = 'vendor-goods-grid';
+    for (const { fromSigilId, fromSigil, toSigilId, toSigil } of view.trades) {
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'vendor-item ui-card';
+      row.dataset.focusKey = `trade:${fromSigilId}:${toSigilId}`;
+      const fromName = itemDisplayName(fromSigil);
+      const toName = itemDisplayName(toSigil);
+      row.setAttribute('aria-label', t('crucibleShop.tradeAria', { from: fromName, to: toName }));
+      row.innerHTML = `<span class="ui-socket ui-socket--bag">${deps.itemIcon(toSigil)}</span><span class="vi-name" style="color:${itemNameColor(toSigil)}">${esc(toName)}</span><span class="vi-price ui-money">${esc(t('crucibleShop.price', { sigil: fromName }))}</span>`;
+      row.addEventListener('click', () => deps.onTrade(fromSigilId, toSigilId));
+      deps.attachTooltip(
+        row,
+        () =>
+          `${deps.itemTooltip(toSigil)}<div class="tt-sub">${esc(t('crucibleShop.tradeHint'))}</div>`,
+      );
+      tradeGrid.appendChild(row);
+    }
+    el.appendChild(tradeGrid);
   }
 
   el.querySelector('[data-close]')?.addEventListener('click', () => deps.onClose());

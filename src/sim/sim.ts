@@ -704,7 +704,10 @@ export type { MarketSave } from './market';
 import { updateBreath } from './breath';
 import { updateSwimFatigue } from './fatigue';
 import { chainPullInstanceOnBossAggro } from './instances/boss_chain_pull';
-import { buyCrucibleVendorItem as buyCrucibleVendorItemImpl } from './instances/crucible_vendor';
+import {
+  buyCrucibleVendorItem as buyCrucibleVendorItemImpl,
+  tradeCrucibleSigil as tradeCrucibleSigilImpl,
+} from './instances/crucible_vendor';
 import {
   awardHeroicMarks as awardHeroicMarksImpl,
   DEFAULT_RAID_LOCKOUT_MS,
@@ -10769,6 +10772,13 @@ export class Sim {
   // the crucible_buy command dispatch and the offline HUD resolve it here.
   buyCrucibleVendorItem(itemId: string, pid?: number): void {
     buyCrucibleVendorItemImpl(this.ctx, itemId, pid);
+  }
+
+  // Crucible Quartermaster sigil-for-sigil trade (owned by
+  // instances/crucible_vendor.ts): the crucible_trade command dispatch and the
+  // offline HUD resolve it here.
+  tradeCrucibleSigil(fromSigilId: string, toSigilId: string, pid?: number): void {
+    tradeCrucibleSigilImpl(this.ctx, fromSigilId, toSigilId, pid);
   }
 
   private dungeonDifficultyForPid(pid: number): DungeonDifficulty {

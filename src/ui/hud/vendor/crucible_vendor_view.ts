@@ -7,6 +7,7 @@
 // crucible_vendor_window.ts. DOM-free and i18n-free so
 // tests/crucible_vendor.test.ts can drive it directly.
 
+import type { SigilTradeOffer } from '../../../sim/content/crucible_sigil_trades';
 import type { CrucibleVendorOffer } from '../../../sim/content/ignivar_loot';
 import type { ItemDef, PlayerClass } from '../../../sim/types';
 
@@ -25,10 +26,20 @@ export interface CrucibleSigilBalance {
   count: number;
 }
 
+export interface CrucibleSigilTradeRow {
+  fromSigilId: string;
+  fromSigil: ItemDef;
+  toSigilId: string;
+  toSigil: ItemDef;
+}
+
 export interface CrucibleShopView {
   rows: CrucibleShopRow[];
   /** The viewer's held sigils (only kinds with a positive count). */
   balances: CrucibleSigilBalance[];
+  /** Same-flavor, different-slot trades for sigils the viewer currently
+   * holds (a sigil not held has nothing to trade away, so it stays hidden). */
+  trades: CrucibleSigilTradeRow[];
 }
 
 /** Build the structured shop view: stock filtered to the viewer's class,
@@ -36,6 +47,7 @@ export interface CrucibleShopView {
  * are dropped (never render a row the sim would refuse to sell). */
 export function buildCrucibleVendorView(
   stock: readonly CrucibleVendorOffer[],
+  sigilTrades: readonly SigilTradeOffer[],
   items: Record<string, ItemDef>,
   viewerClass: PlayerClass,
   sigilCount: (sigilId: string) => number,
@@ -59,5 +71,13 @@ export function buildCrucibleVendorView(
       balanceById.set(offer.sigilId, { sigilId: offer.sigilId, sigil, count });
     }
   }
-  return { rows, balances: [...balanceById.values()] };
+  const trades: CrucibleSigilTradeRow[] = [];
+  for (const offer of sigilTrades) {
+    if (sigilCount(offer.fromSigilId) < 1) continue;
+    const fromSigil = items[offer.fromSigilId];
+    const toSigil = items[offer.toSigilId];
+    if (!fromSigil || !toSigil) continue;
+    trades.push({ fromSigilId: offer.fromSigilId, fromSigil, toSigilId: offer.toSigilId, toSigil });
+  }
+  return { rows, balances: [...balanceById.values()], trades };
 }

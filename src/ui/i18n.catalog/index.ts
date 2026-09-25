@@ -1161,6 +1161,19 @@ export const en = {
     buyConfirmBody: 'Redeem your {sigil} for {item}? A consumed sigil cannot be refunded.',
     buyConfirmAccept: 'Redeem',
     buyConfirmCancel: 'Cancel',
+    // Trade Sigils: a same-flavor, different-slot swap for a sigil the viewer
+    // already holds (feature request: a spare Helm Sigil of the Anvil for a
+    // Chest Sigil of the Anvil). {from}/{to} are the sigil names; {sigil} in
+    // tradeHint's price reuses the shared price key above.
+    tradeSectionTitle: 'Trade Sigils',
+    tradeAria: 'Trade {from} for {to}',
+    tradeHint: 'Click to trade',
+    // Confirm dialog gating each trade: a consumed sigil records no buyback,
+    // the same unrefundable-mis-tap reasoning as a redemption.
+    tradeConfirmTitle: 'Confirm Trade',
+    tradeConfirmBody: 'Trade your {from} for {to}? A consumed sigil cannot be refunded.',
+    tradeConfirmAccept: 'Trade',
+    tradeConfirmCancel: 'Cancel',
   },
   // The Card Master window (Card Duel minigame): queue join/leave affordance
   // plus the in-match hand strip + round-score panel.
