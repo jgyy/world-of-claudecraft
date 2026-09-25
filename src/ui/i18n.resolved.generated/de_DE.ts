@@ -5016,6 +5016,50 @@ export const de_DE: EnTranslations = {
       "denyOutOfRange": "Du musst in der Nähe des Auftraggebers sein, um einen Auftrag zu liefern.",
       "denyNoSpace": "Der Auftraggeber hat keinen Platz in den Taschen."
     },
+    "school": {
+      "openButton": "School",
+      "openButtonAria": "Open the Profession Schools board",
+      "title": "Profession Schools",
+      "close": "Close Profession Schools",
+      "intro": "Join a profession school and complete its rotating tasks for points toward rank.",
+      "name": {
+        "enchantersSchool": "Enchanters School"
+      },
+      "rank": {
+        "enchantersSchool": {
+          "initiate": "Initiate",
+          "apprentice": "Apprentice",
+          "journeyman": "Journeyman",
+          "adept": "Adept",
+          "master": "Master",
+          "grandmaster": "Grandmaster"
+        }
+      },
+      "taskKind": {
+        "daily": "Daily Contract",
+        "contract": "Contract",
+        "materials": "Materials Contract",
+        "weeklyGroup": "Weekly Group Contract"
+      },
+      "rankLine": "{rank}, {points} points",
+      "nextRankLine": "{points} of {nextPoints} points to the next rank",
+      "swearToProgress": "Swear allegiance to progress further.",
+      "qualifyHint": "Requires {skill} {profession} skill (you have {current}).",
+      "joinButton": "Join",
+      "swearButton": "Swear Allegiance",
+      "swornBadge": "Sworn",
+      "taskRequirement": "{item} x{count}",
+      "taskPoints": "{points} points",
+      "submitButton": "Submit",
+      "readyIn": "Ready in {duration}",
+      "taskSubmitted": "You complete a task for the {school} (+{points} points).",
+      "denyUnknownTask": "That task no longer exists.",
+      "denyNotAMember": "You are not a member of the {school}.",
+      "denyOutOfRange": "You must be near the schoolmaster to submit a task.",
+      "denyOnCooldown": "That task is not ready yet.",
+      "denyPartyRequired": "That task requires a party.",
+      "denyInsufficientMaterials": "You do not have the materials for that task."
+    },
     "bgOffer": {
       "title": "Thornhollow-Felder ist bereit",
       "backfillTitle": "Thornhollow-Felder braucht einen Kämpfer",

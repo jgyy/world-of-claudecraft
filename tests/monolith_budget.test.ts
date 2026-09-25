@@ -511,7 +511,22 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    ceiling: 18235,
+    // Raised 18235 -> 18317 (+82) for Profession Schools (rank-gated crafting
+    // institutions, first implementation: the Enchanters School). Every new
+    // line is irreducible Hud-coordinator glue that cannot land behind the
+    // pure-core + thin-painter seam: the school board is its own module pair
+    // (profession_school_view.ts / profession_school_window.ts) exactly like
+    // the commission order board, but opening/closing a THIRD title-bar
+    // window still needs its own open/render/close trio (the
+    // openCommissionBoard/renderCommissionBoard/closeCommissionBoard shape),
+    // its own closeAll switch arm, its own three state fields (open flag,
+    // focus pair, opener), the pendingSend Set the professions family's
+    // aria-busy convention asks for on submitSchoolTask (join/swear carry no
+    // answering event and take no busy state), the schoolTaskResult event
+    // arm, and the crafting window's onOpenSchool wiring: the same shape
+    // every prior title-bar opener (Orders, Perfecting) already takes here.
+    // Small, justified raise per this file's own header.
+    ceiling: 18317,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {

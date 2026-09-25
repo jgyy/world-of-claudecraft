@@ -5016,6 +5016,50 @@ export const en_XA: EnTranslations = {
       "denyOutOfRange": "[Ýóú ɱúšţ ƀé ñéáŕ ţĥé ŕéɋúéšţéŕ ţó ðéļíʋéŕ á çóɱɱíššíóñ.]",
       "denyNoSpace": "[Ţĥé ŕéɋúéšţéŕ ĥáš ñó ŕóóɱ íñ ţĥéíŕ ƀáĝš.]"
     },
+    "school": {
+      "openButton": "[Šçĥóóļ]",
+      "openButtonAria": "[Óþéñ ţĥé Þŕóƒéššíóñ Šçĥóóļš ƀóáŕð]",
+      "title": "[Þŕóƒéššíóñ Šçĥóóļš]",
+      "close": "[Çļóšé Þŕóƒéššíóñ Šçĥóóļš]",
+      "intro": "[Ĵóíñ á þŕóƒéššíóñ šçĥóóļ áñð çóɱþļéţé íţš ŕóţáţíñĝ ţášķš ƒóŕ þóíñţš ţóŵáŕð ŕáñķ.]",
+      "name": {
+        "enchantersSchool": "[Éñçĥáñţéŕš Šçĥóóļ]"
+      },
+      "rank": {
+        "enchantersSchool": {
+          "initiate": "[Íñíţíáţé]",
+          "apprentice": "[Áþþŕéñţíçé]",
+          "journeyman": "[Ĵóúŕñéýɱáñ]",
+          "adept": "[Áðéþţ]",
+          "master": "[Ɱášţéŕ]",
+          "grandmaster": "[Ĝŕáñðɱášţéŕ]"
+        }
+      },
+      "taskKind": {
+        "daily": "[Ðáíļý Çóñţŕáçţ]",
+        "contract": "[Çóñţŕáçţ]",
+        "materials": "[Ɱáţéŕíáļš Çóñţŕáçţ]",
+        "weeklyGroup": "[Ŵééķļý Ĝŕóúþ Çóñţŕáçţ]"
+      },
+      "rankLine": "[{rank}, {points} þóíñţš]",
+      "nextRankLine": "[{points} óƒ {nextPoints} þóíñţš ţó ţĥé ñéẋţ ŕáñķ]",
+      "swearToProgress": "[Šŵéáŕ áļļéĝíáñçé ţó þŕóĝŕéšš ƒúŕţĥéŕ.]",
+      "qualifyHint": "[Ŕéɋúíŕéš {skill} {profession} šķíļļ (ýóú ĥáʋé {current}).]",
+      "joinButton": "[Ĵóíñ]",
+      "swearButton": "[Šŵéáŕ Áļļéĝíáñçé]",
+      "swornBadge": "[Šŵóŕñ]",
+      "taskRequirement": "[{item} ẋ{count}]",
+      "taskPoints": "[{points} þóíñţš]",
+      "submitButton": "[Šúƀɱíţ]",
+      "readyIn": "[Ŕéáðý íñ {duration}]",
+      "taskSubmitted": "[Ýóú çóɱþļéţé á ţášķ ƒóŕ ţĥé {school} (+{points} þóíñţš).]",
+      "denyUnknownTask": "[Ţĥáţ ţášķ ñó ļóñĝéŕ éẋíšţš.]",
+      "denyNotAMember": "[Ýóú áŕé ñóţ á ɱéɱƀéŕ óƒ ţĥé {school}.]",
+      "denyOutOfRange": "[Ýóú ɱúšţ ƀé ñéáŕ ţĥé šçĥóóļɱášţéŕ ţó šúƀɱíţ á ţášķ.]",
+      "denyOnCooldown": "[Ţĥáţ ţášķ íš ñóţ ŕéáðý ýéţ.]",
+      "denyPartyRequired": "[Ţĥáţ ţášķ ŕéɋúíŕéš á þáŕţý.]",
+      "denyInsufficientMaterials": "[Ýóú ðó ñóţ ĥáʋé ţĥé ɱáţéŕíáļš ƒóŕ ţĥáţ ţášķ.]"
+    },
     "bgOffer": {
       "title": "[Ţĥóŕñĥóļļóŵ Ƒíéļðš íš ŕéáðý]",
       "backfillTitle": "[Ţĥóŕñĥóļļóŵ Ƒíéļðš ñééðš á ƒíĝĥţéŕ]",
