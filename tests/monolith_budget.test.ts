@@ -511,7 +511,14 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    // Raised 18235 -> 18317 (+82) for Profession Schools (rank-gated crafting
+    // LOWERED 18276 -> 18220 by extracting the HUD frame registry wiring.
+    // LOWERED 18220 -> 18201 by extracting editor menu dependencies.
+    // LOWERED 18201 -> 18191 by extracting chat frame context and focus mouseover routing.
+    // LOWERED 18191 -> 18186 by sharing unit dimensions and pet frame input.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 18186 / 18235.
+    // Exact merged line count, preserving both extraction sets.
+    // Raised 18140 -> 18222 (+82) for Profession Schools (rank-gated crafting
     // institutions, first implementation: the Enchanters School). Every new
     // line is irreducible Hud-coordinator glue that cannot land behind the
     // pure-core + thin-painter seam: the school board is its own module pair
@@ -526,7 +533,11 @@ const MONOLITHS: MonolithRow[] = [
     // arm, and the crafting window's onOpenSchool wiring: the same shape
     // every prior title-bar opener (Orders, Perfecting) already takes here.
     // Small, justified raise per this file's own header.
-    ceiling: 18317,
+    // Re-based at the release/v0.44.0 sync (tip 08691cd907): the branch first
+    // raised 18235 -> 18317 on the older tip; the same +82 now composes onto
+    // upstream's lowered 18140. wc -l on the merged tree. Exact count, zero
+    // slack.
+    ceiling: 18222,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -556,7 +567,12 @@ const MONOLITHS: MonolithRow[] = [
     // (src/ui/host_diag_section_controller.ts over the pure
     // src/ui/host_diag_view.ts), not a sub-view of this window. Exact count,
     // zero slack.
-    ceiling: 2821,
+    // LOWERED 2830 -> 2829 by extracting shared frame settings and reset-key scope.
+    // LOWERED 2829 -> 2827 by extracting menu placement into OptionsWindowLayout.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 2827 / 2821.
+    // Exact merged line count, preserving both extraction sets.
+    ceiling: 2818,
     seam: 'a pure view model (src/ui/options_view.ts) painted with the shared settings_controls.ts builders; sub-panels as sibling modules',
   },
   {
@@ -1140,7 +1156,8 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    // Raised 11750 -> 11806 (+56) for Profession Schools (rank-gated crafting
+    // Frame layout restore extraction: bank the reduced coordinator size.
+    // Raised 11746 -> 11802 (+56) for Profession Schools (rank-gated crafting
     // institutions, first implementation: the Enchanters School). Every new
     // line is irreducible facade glue that genuinely cannot land behind the
     // SimContext seam: the mechanics themselves live in the new siblings
@@ -1152,7 +1169,10 @@ const MONOLITHS: MonolithRow[] = [
     // swearSchoolAllegiance/submitSchoolTask), the exact shape every other
     // profession mechanic's Sim-facade glue already takes (trainRecipe,
     // slotToolEffect). Small, justified raise per this file's own header.
-    ceiling: 11806,
+    // Re-based at the release/v0.44.0 sync (tip 08691cd907): the branch first
+    // raised 11750 -> 11806 on the older tip; the same +56 now composes onto
+    // upstream's 11746. wc -l on the merged tree. Exact count, zero slack.
+    ceiling: 11802,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1364,7 +1384,8 @@ const MONOLITHS: MonolithRow[] = [
     // click / Enter-Space / double-click wiring moved into wireCharselectRow
     // (src/ui/charselect_hints.ts), which skips activations from inside the
     // lockout disclosure instead of stopping propagation there.
-    ceiling: 11276,
+    // Frame layout extraction: bank the reduced coordinator size.
+    ceiling: 11260,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {
@@ -1760,7 +1781,8 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
-    // Raised 5426 -> 5447 (+21) for Profession Schools (rank-gated crafting
+    // LOWERED 5426 -> 5421 by extracting first-snapshot action bar restore resolution.
+    // Raised 5421 -> 5442 (+21) for Profession Schools (rank-gated crafting
     // institutions, first implementation: the Enchanters School). The self-
     // mirror decode itself lives in the existing professions_self_mirror.ts
     // sibling (widened, not grown here); this file only adds the
@@ -1768,7 +1790,11 @@ const MONOLITHS: MonolithRow[] = [
     // senders (joinProfessionSchool/swearSchoolAllegiance/
     // submitSchoolTask), the trainRecipe/placeMobileStation precedent.
     // Small, justified raise per this file's own header.
-    ceiling: 5447,
+    // Re-based at the release/v0.44.0 sync (tip 08691cd907): the branch first
+    // raised 5426 -> 5447 on the older tip; the same +21 now composes onto
+    // upstream's lowered 5421. wc -l on the merged tree. Exact count, zero
+    // slack.
+    ceiling: 5442,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
