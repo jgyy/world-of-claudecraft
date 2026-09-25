@@ -511,12 +511,21 @@ const MONOLITHS: MonolithRow[] = [
     // Regeneration exemption) moved out of the heal2 arm into
     // combat_sfx.healAudioPlan (18253 - 18). wc -l on the merged tree. Exact
     // count, zero slack.
-    // Raised 18235 -> 18236 (+1, a maintainer decision) for the Account Bank
+    // LOWERED 18276 -> 18220 by extracting the HUD frame registry wiring.
+    // LOWERED 18220 -> 18201 by extracting editor menu dependencies.
+    // LOWERED 18201 -> 18191 by extracting chat frame context and focus mouseover routing.
+    // LOWERED 18191 -> 18186 by sharing unit dimensions and pet frame input.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 18186 / 18235.
+    // Exact merged line count, preserving both extraction sets.
+    // RAISED 18140 -> 18141 (+1, a maintainer decision) for the Account Bank
     // feature: one BagsWindowDeps wiring line (isAccountBankTab), the same
     // shape isGuildBankTab/isVaultBankTab already pay here. No behavior moved
     // out to buy the raise back; justified in the PR body per the ratchet's
-    // own rule.
-    ceiling: 18236,
+    // own rule. Re-pinned at the release/v0.44.0 sync at 08691cd907 (parent
+    // pins 18236 / 18140): wc -l < src/ui/hud.ts on the merged tree. Exact
+    // count, zero slack.
+    ceiling: 18141,
     seam: 'pure view core + thin painter on PainterHost (src/ui/CLAUDE.md)',
   },
   {
@@ -546,7 +555,12 @@ const MONOLITHS: MonolithRow[] = [
     // (src/ui/host_diag_section_controller.ts over the pure
     // src/ui/host_diag_view.ts), not a sub-view of this window. Exact count,
     // zero slack.
-    ceiling: 2821,
+    // LOWERED 2830 -> 2829 by extracting shared frame settings and reset-key scope.
+    // LOWERED 2829 -> 2827 by extracting menu placement into OptionsWindowLayout.
+
+    // Release/v0.44.0 sync at ee8883fa4f: compose parent pins 2827 / 2821.
+    // Exact merged line count, preserving both extraction sets.
+    ceiling: 2818,
     seam: 'a pure view model (src/ui/options_view.ts) painted with the shared settings_controls.ts builders; sub-panels as sibling modules',
   },
   {
@@ -1130,16 +1144,18 @@ const MONOLITHS: MonolithRow[] = [
     // Permanent loot quality (PR 4054) base merge: the loot identity receipt
     // and projection helpers moved to dedicated siblings, composed with the
     // release extractions above. Exact merged count, zero slack.
-    // Raised 11750 -> 11824 (+74, a maintainer decision) for the Account Bank
+    // Frame layout restore extraction: bank the reduced coordinator size.
+    // RAISED 11746 -> 11820 (+74, a maintainer decision) for the Account Bank
     // feature (src/sim/account_bank.ts): the ctx-held accountBanks map field
     // plus its SimContext getter, the inert offline IWorld arms, and the
     // pid+accountId server entry points (accountBank*For), all thin
     // delegates to the new sibling module, could not land behind the seam any
     // thinner (the same shape the guild bank's own addition already pays
     // here). No behavior moved out to buy the raise back; justified in the PR
-    // body per the ratchet's own rule. Exact merged count against
-    // origin/release/v0.44.0 (wc -l < src/sim/sim.ts), zero slack.
-    ceiling: 11824,
+    // body per the ratchet's own rule. Re-pinned at the release/v0.44.0 sync
+    // at 08691cd907 (parent pins 11824 / 11746): wc -l < src/sim/sim.ts on the
+    // merged tree. Exact count, zero slack.
+    ceiling: 11820,
     seam: 'a sim system module behind SimContext (src/sim/CLAUDE.md)',
   },
   {
@@ -1351,7 +1367,8 @@ const MONOLITHS: MonolithRow[] = [
     // click / Enter-Space / double-click wiring moved into wireCharselectRow
     // (src/ui/charselect_hints.ts), which skips activations from inside the
     // lockout disclosure instead of stopping propagation there.
-    ceiling: 11276,
+    // Frame layout extraction: bank the reduced coordinator size.
+    ceiling: 11260,
     seam: 'a src/game/ or src/ui/ sibling module; main.ts is a firewall, not a home',
   },
   {
@@ -1583,7 +1600,7 @@ const MONOLITHS: MonolithRow[] = [
     // quest/death record arms of the event drain moved to
     // server/event_record_observers.ts (which also hosts the new craftRoll
     // arm), so the audit landed as a net shrink. Exact count, zero slack.
-    // Raised 9965 -> 10011 (+46, a maintainer decision) for the Account Bank
+    // Raised 9965 -> 10008 (+43, a maintainer decision) for the Account Bank
     // feature: the join-time loadAccountBank call, the saveCharacter-cadence
     // persist (server/account_bank_db.ts), the leave-time evict, the
     // accountBank wire snapshot key, and the three account_bank_* dispatch
@@ -1591,7 +1608,10 @@ const MONOLITHS: MonolithRow[] = [
     // call into a sibling module, the same shape the guild bank's own
     // dispatch/save/wire wiring already pays here. No behavior moved out to
     // buy the raise back; justified in the PR body per the ratchet's own rule.
-    ceiling: 10011,
+    // Tightened from the branch's 10011 at the release/v0.44.0 sync at
+    // 08691cd907: wc -l < server/game.ts on the merged tree. Exact count,
+    // zero slack.
+    ceiling: 10008,
     seam: 'a sibling server module; see the hot-path seams in server/CLAUDE.md',
   },
   {
@@ -1746,13 +1766,16 @@ const MONOLITHS: MonolithRow[] = [
     // src/net/target_echo.ts, banking the 52 lines of slack the row already
     // carried with it. Measured with wc -l < src/net/online.ts after biome.
     // Exact count, zero slack.
-    // Raised 5426 -> 5450 (+24, a maintainer decision) for the Account Bank
+    // LOWERED 5426 -> 5421 by extracting first-snapshot action bar restore resolution.
+    // RAISED 5421 -> 5445 (+24, a maintainer decision) for the Account Bank
     // IWorldAccountBank mirror: the field, the snapshot decode, and the three
     // command sends are each a thin one- or two-line addition beside the
     // guild bank's own equivalent lines, the same shape already paid here.
     // No behavior moved out to buy the raise back; justified in the PR body
-    // per the ratchet's own rule.
-    ceiling: 5450,
+    // per the ratchet's own rule. Re-pinned at the release/v0.44.0 sync at
+    // 08691cd907 (parent pins 5450 / 5421): wc -l < src/net/online.ts on the
+    // merged tree. Exact count, zero slack.
+    ceiling: 5445,
     seam: 'a src/net sibling module (the refactor/net-online split is the template)',
   },
   {
