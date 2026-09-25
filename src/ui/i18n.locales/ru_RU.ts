@@ -11385,6 +11385,12 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.vaultCannotDeposit': 'Нельзя поместить в хранилище',
   'hudChrome.bank.tabsAria': 'Вкладки банка',
   'hudChrome.bank.personalTab': 'Личный',
+  'hudChrome.bank.accountTab': 'Аккаунт',
+  'hudChrome.bank.accountEmpty': 'Банк аккаунта пуст.',
+  'hudChrome.bank.accountBuyConfirm':
+    'Купить {count} дополнительных ячеек банка аккаунта за {price}?',
+  'hudChrome.bank.accountDepositHint': 'Нажмите, чтобы положить в банк аккаунта',
+  'hudChrome.bank.accountCannotDeposit': 'Нельзя положить в банк аккаунта',
   'hudChrome.bank.guildTab': 'Гильдия',
   'hudChrome.bank.guildCapacityAria': 'Занято ячеек банка гильдии: {used} из {total}',
   'hudChrome.bank.guildEmpty': 'Банк гильдии пуст.',

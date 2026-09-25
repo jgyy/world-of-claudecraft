@@ -11253,6 +11253,12 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'hudChrome.bank.vaultCannotDeposit': '保管庫には預けられません',
   'hudChrome.bank.tabsAria': '銀行タブ',
   'hudChrome.bank.personalTab': '個人',
+  'hudChrome.bank.accountTab': 'アカウント',
+  'hudChrome.bank.accountEmpty': 'アカウント銀行は空です。',
+  'hudChrome.bank.accountBuyConfirm':
+    '{price}でアカウント銀行スロットを追加で{count}個購入しますか？',
+  'hudChrome.bank.accountDepositHint': 'クリックでアカウント銀行に預ける',
+  'hudChrome.bank.accountCannotDeposit': 'アカウント銀行には入れられません',
   'hudChrome.bank.guildTab': 'ギルド',
   'hudChrome.bank.guildCapacityAria': '使用中のギルド銀行スロット: {total}個中{used}個',
   'hudChrome.bank.guildEmpty': 'ギルド銀行は空です。',

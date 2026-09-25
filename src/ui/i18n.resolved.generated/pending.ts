@@ -449,41 +449,21 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.unstuck.revivedAtGraveyardFree"
   ],
   "zh_CN": [
-    "hudChrome.bank.accountBuyConfirm",
-    "hudChrome.bank.accountCannotDeposit",
-    "hudChrome.bank.accountDepositHint",
-    "hudChrome.bank.accountEmpty",
-    "hudChrome.bank.accountTab",
     "hudChrome.lootQuality.itemName",
     "hudChrome.options.frameRateCapSixty",
     "hudChrome.options.frameRateCapThirty"
   ],
   "zh_TW": [
-    "hudChrome.bank.accountBuyConfirm",
-    "hudChrome.bank.accountCannotDeposit",
-    "hudChrome.bank.accountDepositHint",
-    "hudChrome.bank.accountEmpty",
-    "hudChrome.bank.accountTab",
     "hudChrome.lootQuality.itemName",
     "hudChrome.options.frameRateCapSixty",
     "hudChrome.options.frameRateCapThirty"
   ],
   "ko_KR": [
-    "hudChrome.bank.accountBuyConfirm",
-    "hudChrome.bank.accountCannotDeposit",
-    "hudChrome.bank.accountDepositHint",
-    "hudChrome.bank.accountEmpty",
-    "hudChrome.bank.accountTab",
     "hudChrome.lootQuality.itemName",
     "hudChrome.options.frameRateCapSixty",
     "hudChrome.options.frameRateCapThirty"
   ],
   "ja_JP": [
-    "hudChrome.bank.accountBuyConfirm",
-    "hudChrome.bank.accountCannotDeposit",
-    "hudChrome.bank.accountDepositHint",
-    "hudChrome.bank.accountEmpty",
-    "hudChrome.bank.accountTab",
     "hudChrome.lootQuality.itemName",
     "hudChrome.options.frameRateCapSixty",
     "hudChrome.options.frameRateCapThirty"
@@ -562,11 +542,6 @@ export const pending: Record<string, readonly string[]> = {
     "hudChrome.unstuck.revivedAtGraveyardFree"
   ],
   "ru_RU": [
-    "hudChrome.bank.accountBuyConfirm",
-    "hudChrome.bank.accountCannotDeposit",
-    "hudChrome.bank.accountDepositHint",
-    "hudChrome.bank.accountEmpty",
-    "hudChrome.bank.accountTab",
     "hudChrome.lootQuality.itemName",
     "hudChrome.options.frameRateCapSixty",
     "hudChrome.options.frameRateCapThirty"
